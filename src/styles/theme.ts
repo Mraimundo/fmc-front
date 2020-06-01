@@ -11,6 +11,7 @@ export default {
     filledIconColor: '#ff9000',
     filledBorderColor: '#ff9000',
     labelFontColor: '#c53030',
+    borderRadius: '10px',
   },
   tooltip: {
     error: {
