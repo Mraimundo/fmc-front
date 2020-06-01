@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
+import numbersOnly from 'util/numbersOnly';
 import signInService, {
   SignInResponse,
   Participant,
@@ -19,8 +20,8 @@ const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<SignInResponse>(() => {
-    const token = localStorage.getItem('@GoBarber:token');
-    const participant = localStorage.getItem('@GoBarber:participant');
+    const token = localStorage.getItem('@Vendavall:token');
+    const participant = localStorage.getItem('@Vendavall:participant');
 
     if (token && participant) {
       return { token, participant: JSON.parse(participant) };
@@ -30,7 +31,10 @@ export const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ cpf, password }: Credentials) => {
-    const { token, participant } = await signInService({ cpf, password });
+    const { token, participant } = await signInService({
+      cpf: numbersOnly(cpf),
+      password,
+    });
 
     localStorage.setItem('@Vendavall:token', token);
     localStorage.setItem('@Vendavall:participant', JSON.stringify(participant));

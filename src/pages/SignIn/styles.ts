@@ -20,7 +20,7 @@ export const Content = styled.div`
   max-width: 700px;
 
   form {
-    margin: 80px 0;
+    margin: 20px 0;
     width: 100%;
     max-width: 340px;
     text-align: center;
@@ -30,21 +30,19 @@ export const Content = styled.div`
     }
 
     a {
-      color: #f4ede8;
+      color: ${({ theme }) => theme.link.fontColor};
       display: block;
       margin-top: 24px;
-      text-decoration: none;
 
       transition: color 0.2s;
       will-change: color;
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
       }
     }
   }
 
   > button {
-    color: #ff9000;
     display: flex;
     align-items: center;
     margin-top: 24px;
@@ -57,7 +55,5 @@ export const Content = styled.div`
       margin-right: 6px;
       margin-top: 2px;
     }
-
-    transition: color 0.2s;
   }
 `;

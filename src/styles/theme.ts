@@ -46,4 +46,7 @@ export default {
       borderRadius: '10px',
     },
   },
+  link: {
+    fontColor: '#f4ede8',
+  },
 };
