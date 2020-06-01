@@ -1,22 +1,22 @@
 export default {
   input: {
-    borderColor: '#232129',
-    backgroundColor: '#232129',
-    fontColor: '#f4ede8',
-    iconColor: '#666360',
-    placeholderColor: '#666360',
-    errorIconColor: '#c53030',
-    errorBorderColor: '#c53030',
-    focusedBorderColor: '#ff9000',
-    filledIconColor: '#ff9000',
-    filledBorderColor: '#ff9000',
-    labelFontColor: '#c53030',
-    borderRadius: '10px',
+    borderColor: '#e63027',
+    backgroundColor: '#fff',
+    fontColor: '#808285',
+    iconColor: '#808285',
+    placeholderColor: '#808285',
+    errorIconColor: '#e63027',
+    errorBorderColor: '#e63027',
+    focusedBorderColor: '#e63027',
+    filledIconColor: '#e63027',
+    filledBorderColor: '#e63027',
+    labelFontColor: '#e63027',
+    borderRadius: '0px',
   },
   tooltip: {
     error: {
-      borderColor: '#c53030',
-      backgroundColor: '#c53030',
+      borderColor: '#e63027',
+      backgroundColor: '#e63027',
       fontColor: '#f4ede8',
     },
     success: {
@@ -32,8 +32,8 @@ export default {
   },
   button: {
     primary: {
-      backgroundColor: '#ff9000',
-      fontColor: '#312e38',
+      backgroundColor: '#e63027',
+      fontColor: '#fff',
     },
     secondary: {
       backgroundColor: '#ff9000',
