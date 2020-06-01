@@ -47,6 +47,6 @@ export default {
     },
   },
   link: {
-    fontColor: '#f4ede8',
+    fontColor: '#808285',
   },
 };

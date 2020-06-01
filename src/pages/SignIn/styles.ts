@@ -15,12 +15,13 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  padding: 25px 0;
 
   width: 100%;
   max-width: 460px;
 
   form {
-    margin: 20px 0;
+    margin: 10px 0;
     width: 100%;
     max-width: 340px;
     text-align: center;
@@ -36,12 +37,13 @@ export const Content = styled.div`
     a {
       color: ${({ theme }) => theme.link.fontColor};
       display: block;
-      margin-top: 24px;
+      margin-top: 6px;
+      font-size: 12px;
 
       transition: color 0.2s;
       will-change: color;
       &:hover {
-        color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
+        color: ${({ theme }) => shade(0.3, theme.link.fontColor)};
       }
     }
 
@@ -55,6 +57,10 @@ export const Content = styled.div`
     ._inputContainer {
       height: 40px;
       width: 100%;
+    }
+
+    & + h3 {
+      margin-top: 20px;
     }
   }
 
@@ -78,4 +84,6 @@ export const Title = styled.h3`
   font-size: 18px;
   font-weight: 500;
   color: #808285;
+  width: 100%;
+  max-width: 340px;
 `;
