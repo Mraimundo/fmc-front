@@ -16,7 +16,7 @@ import { Container, InputContainer, Error, Label } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  type: 'text' | 'password';
+  type?: 'text' | 'password';
   icon?: React.ComponentType<IconBaseProps>;
   label?: string;
   numbersOnly?: boolean;
@@ -33,6 +33,7 @@ const Input: React.FC<InputProps> = ({
   label,
   numbersOnly = false,
   pattern = '',
+  type = 'text',
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -103,6 +104,7 @@ const Input: React.FC<InputProps> = ({
           <input
             autoComplete="off"
             name={name}
+            type={type}
             ref={(e: HTMLInputElement) => {
               register(e);
               inputRef.current = e;
@@ -129,10 +131,11 @@ const Input: React.FC<InputProps> = ({
       onInputBlur,
       onInputFocus,
       register,
-      rest,
       error,
       label,
       handleChange,
+      type,
+      rest,
     ],
   );
 };

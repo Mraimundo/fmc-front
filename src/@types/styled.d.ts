@@ -49,5 +49,8 @@ declare module 'styled-components' {
         borderRadius: string;
       };
     };
+    link: {
+      fontColor: string;
+    };
   }
 }
