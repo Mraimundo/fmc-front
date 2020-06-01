@@ -5,7 +5,9 @@ import React, {
   useCallback,
   useMemo,
   useEffect,
+  ChangeEvent,
 } from 'react';
+import formatString from 'format-string-by-pattern';
 import { useFormContext } from 'react-hook-form';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
@@ -17,6 +19,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: 'text' | 'password';
   icon?: React.ComponentType<IconBaseProps>;
   label?: string;
+  numbersOnly?: boolean;
+  pattern?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,13 +28,16 @@ const Input: React.FC<InputProps> = ({
   icon: Icon,
   onBlur,
   onFocus,
+  onChange,
   className,
   label,
+  numbersOnly = false,
+  pattern = '',
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const { register, errors } = useFormContext();
+  const { register, errors, setValue } = useFormContext();
   const inputRef = useRef<HTMLInputElement>();
   const [error, setError] = useState('');
 
@@ -60,6 +67,28 @@ const Input: React.FC<InputProps> = ({
     setError(internalErrorControl?.message || '');
   }, [internalErrorControl]);
 
+  const formatNumbersOnly = useCallback(
+    (str: string): string => str.replace(/[^\d]/g, ''),
+    [],
+  );
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void | Promise<void> => {
+      let formattedValue = event.target.value;
+      if (numbersOnly) {
+        formattedValue = formatNumbersOnly(formattedValue);
+      }
+      if (pattern) {
+        formattedValue = formatString(pattern, formattedValue);
+      }
+      setValue(name, formattedValue);
+      if (typeof onChange === 'function') {
+        onChange(event);
+      }
+    },
+    [onChange, name, formatNumbersOnly, numbersOnly, setValue, pattern],
+  );
+
   return useMemo(
     () => (
       <Container className={className}>
@@ -80,6 +109,7 @@ const Input: React.FC<InputProps> = ({
             }}
             onBlur={onInputBlur}
             onFocus={onInputFocus}
+            onChange={handleChange}
             {...rest}
           />
           {!!error && (
@@ -102,6 +132,7 @@ const Input: React.FC<InputProps> = ({
       rest,
       error,
       label,
+      handleChange,
     ],
   );
 };

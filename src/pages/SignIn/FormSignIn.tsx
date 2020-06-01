@@ -52,7 +52,14 @@ const FormSignIn: React.FC = () => {
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <Input name="cpf" type="text" icon={FiUser} label="CPF" />
+        <Input
+          name="cpf"
+          type="text"
+          icon={FiUser}
+          label="CPF"
+          numbersOnly
+          pattern="XXX.XXX.XXX-XX"
+        />
         <PasswordInput name="password" icon={FiLock} label="Senha" />
         <Button type="submit" buttonRole="primary" loading={loading}>
           Entrar
