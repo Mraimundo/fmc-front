@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const InputContainer = styled.div<InputContainerProps>`
 
   background: ${({ theme }) => theme.input.backgroundColor};
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0 16px;
   width: 100%;
   height: 57px;
@@ -40,6 +40,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   ${({ isFilled, theme }) =>
     isFilled &&
     css`
+      border-color: ${theme.input.filledBorderColor};
       color: ${theme.input.filledIconColor};
     `}
 
