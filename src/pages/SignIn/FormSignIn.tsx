@@ -5,8 +5,7 @@ import * as Yup from 'yup';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 
-import { Input, Button, PasswordInput } from 'components/shared';
-
+import { Button, PasswordInput, Input } from 'components/shared';
 import { FiUser, FiLock } from 'react-icons/fi';
 
 interface SignInFormData {

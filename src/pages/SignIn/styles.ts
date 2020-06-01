@@ -17,13 +17,17 @@ export const Content = styled.div`
   background-color: #fff;
 
   width: 100%;
-  max-width: 700px;
+  max-width: 460px;
 
   form {
     margin: 20px 0;
     width: 100%;
     max-width: 340px;
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
       margin-bottom: 24px;
@@ -39,6 +43,18 @@ export const Content = styled.div`
       &:hover {
         color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
       }
+    }
+
+    button {
+      height: 40px;
+      width: 180px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    ._inputContainer {
+      height: 40px;
+      width: 100%;
     }
   }
 
@@ -56,4 +72,10 @@ export const Content = styled.div`
       margin-top: 2px;
     }
   }
+`;
+
+export const Title = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  color: #808285;
 `;
