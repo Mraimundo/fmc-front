@@ -38,10 +38,12 @@ export default {
     primary: {
       backgroundColor: '#ff9000',
       fontColor: '#312e38',
+      borderRadius: '10px',
     },
     secondary: {
       backgroundColor: '#ff9000',
       fontColor: '#312e38',
+      borderRadius: '10px',
     },
   },
 };

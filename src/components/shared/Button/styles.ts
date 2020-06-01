@@ -8,8 +8,9 @@ interface ContainerProps {
 export const Container = styled.button<ContainerProps>`
   background-color: ${({ theme, buttonRole }) =>
     theme.button[buttonRole].backgroundColor};
+  border-radius: ${({ theme, buttonRole }) =>
+    theme.button[buttonRole].borderRadius};
   height: 56px;
-  border-radius: 10px;
   border: 0;
   padding: 0 16px;
   width: 100%;

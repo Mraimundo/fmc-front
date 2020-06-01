@@ -41,10 +41,12 @@ declare module 'styled-components' {
       primary: {
         backgroundColor: string;
         fontColor: string;
+        borderRadius: string;
       };
       secondary: {
         backgroundColor: string;
         fontColor: string;
+        borderRadius: string;
       };
     };
   }
