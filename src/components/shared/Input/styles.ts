@@ -20,7 +20,8 @@ export const InputContainer = styled.div<InputContainerProps>`
   height: 57px;
   display: flex;
   align-items: center;
-  border: 2px solid ${({ theme }) => theme.input.borderColor};
+  border: ${({ theme }) => theme.input.borderWidth} solid
+    ${({ theme }) => theme.input.borderColor};
   color: ${({ theme }) => theme.input.iconColor};
   margin-bottom: 8px;
 
@@ -28,6 +29,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     hasError &&
     css`
       border-color: ${theme.input.errorBorderColor};
+      border-width: ${theme.input.errorBorderWidth};
     `};
 
   ${({ isFocused, theme }) =>
@@ -35,6 +37,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     css`
       border-color: ${theme.input.focusedBorderColor};
       color: ${theme.input.filledIconColor};
+      border-width: ${theme.input.focusedBorderWidth};
     `};
 
   ${({ isFilled, theme }) =>
@@ -42,6 +45,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     css`
       border-color: ${theme.input.filledBorderColor};
       color: ${theme.input.filledIconColor};
+      border-width: ${theme.input.filledBorderWidth};
     `};
 
   input {

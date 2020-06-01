@@ -12,6 +12,10 @@ export default {
     filledBorderColor: '#e63027',
     labelFontColor: '#e63027',
     borderRadius: '0px',
+    borderWidth: '1px',
+    errorBorderWidth: '1px',
+    focusedBorderWidth: '2px',
+    filledBorderWidth: '1px',
   },
   tooltip: {
     error: {

@@ -15,6 +15,10 @@ declare module 'styled-components' {
       placeholderColor: string;
       labelFontColor: string;
       borderRadius: string;
+      borderWidth: string;
+      errorBorderWidth: string;
+      focusedBorderWidth: string;
+      filledBorderWidth: string;
     };
     tooltip: {
       error: {
