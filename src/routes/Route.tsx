@@ -17,12 +17,12 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { participant } = useAuth();
   return (
     <DefaultRoute
       {...rest}
       render={({ location }) =>
-        isPrivate === !!user ? (
+        isPrivate === !!participant ? (
           <Component />
         ) : (
           <Redirect
@@ -31,8 +31,7 @@ const Route: React.FC<RouteProps> = ({
               state: { from: location },
             }}
           />
-        )
-      }
+        )}
     />
   );
 };

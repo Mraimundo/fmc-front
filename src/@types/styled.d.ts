@@ -13,6 +13,7 @@ declare module 'styled-components' {
       errorIconColor: string;
       filledIconColor: string;
       placeholderColor: string;
+      labelFontColor: string;
     };
     tooltip: {
       error: {

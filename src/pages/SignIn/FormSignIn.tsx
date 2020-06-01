@@ -1,46 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 
-import { useForm, FormContext } from 'react-hook-form';
-import Input from 'components/shared/Input';
-import Button from 'components/shared/Button';
-import Password from 'components/shared/PasswordInput';
+import { Input, Button, PasswordInput } from 'components/shared';
 
-import { FiMail, FiLock } from 'react-icons/fi';
+import { FiUser, FiLock } from 'react-icons/fi';
 
 interface SignInFormData {
-  email: string;
+  cpf: string;
   password: string;
 }
 
 const FormSignIn: React.FC = () => {
-  const schema = Yup.object().shape({
-    email: Yup.string().email('Email inválido').required('Email é obrigatório'),
-    password: Yup.string().required('Mínimo de 6 caracteres'),
-  });
+  const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
 
-  const initialValues = {
-    email: '',
-    password: '',
-  };
+  const schema = Yup.object().shape({
+    cpf: Yup.string().required('Cpf é obrigatório'),
+    password: Yup.string().required('Senha é obrigatória'),
+  });
 
   const methods = useForm<SignInFormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onBlur',
-    defaultValues: initialValues,
   });
+
   const { handleSubmit } = methods;
+  const onSubmit = handleSubmit(async ({ cpf, password }) => {
+    setLoading(true);
+    try {
+      await signIn({ cpf, password });
+      addToast({
+        title: 'Login realizado com sucesso!',
+        type: 'success',
+      });
+    } catch (e) {
+      addToast({
+        description: e.response?.data?.message || 'Falha ao fazer login',
+        type: 'error',
+        title: 'Erro',
+      });
+    }
+    setLoading(false);
+  });
 
   return (
     <FormContext {...methods}>
-      <form onSubmit={handleSubmit(data => console.log(data))}>
-        <Input name="email" type="text" icon={FiMail} />
-        <Password name="password" icon={FiLock} />
-        <Button type="submit" buttonRole="primary">
+      <form onSubmit={onSubmit}>
+        <Input name="cpf" type="text" icon={FiUser} label="CPF" />
+        <PasswordInput name="password" icon={FiLock} label="Senha" />
+        <Button type="submit" buttonRole="primary" loading={loading}>
           Entrar
         </Button>
       </form>

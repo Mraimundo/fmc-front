@@ -1,13 +1,18 @@
 import styled, { css } from 'styled-components';
 import Tooltip from 'components/shared/Tooltip';
 
-interface ContainerProps {
+interface InputContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   hasError: boolean;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const InputContainer = styled.div<InputContainerProps>`
 
   background: ${({ theme }) => theme.input.backgroundColor};
   border-radius: 10px;
@@ -63,6 +68,7 @@ export const Error = styled(Tooltip)`
   padding-left: 5px;
 
   svg {
+    color: ${({ theme }) => theme.input.errorIconColor};
     margin: 0;
   }
 `;
@@ -81,6 +87,14 @@ export const EyeContainer = styled(IconContainer)`
   margin-left: 14px;
   margin-right: 0px;
   svg {
+    color: ${({ theme }) => theme.input.iconColor};
     cursor: pointer;
   }
+`;
+
+export const Label = styled.span`
+  font-size: 14px;
+  align-self: flex-start;
+  margin-left: 4px;
+  color: ${({ theme }) => theme.input.labelFontColor};
 `;

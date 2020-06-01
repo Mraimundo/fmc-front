@@ -8,8 +8,8 @@ import { Container, Content } from './styles';
 const SignIn: React.FC = () => {
   return (
     <Container>
+      <img src={logoImg} alt="Logo GoBarber" />
       <Content>
-        <img src={logoImg} alt="Logo GoBarber" />
         <FormSignIn />
       </Content>
     </Container>

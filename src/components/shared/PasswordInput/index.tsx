@@ -3,21 +3,29 @@ import React, {
   useRef,
   useState,
   useCallback,
-  useContext,
   useMemo,
+  useEffect,
 } from 'react';
-import { ThemeContext } from 'styled-components';
+
 import { useFormContext } from 'react-hook-form';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Container, Error, EyeContainer, IconContainer } from './styles';
+import {
+  Container,
+  InputContainer,
+  Error,
+  EyeContainer,
+  IconContainer,
+  Label,
+} from './styles';
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
+  label?: string;
 }
 
 const PasswordInput: React.FC<InputProps> = ({
@@ -26,15 +34,15 @@ const PasswordInput: React.FC<InputProps> = ({
   onBlur,
   onFocus,
   className,
+  label,
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [type, setType] = useState('text');
+  const [type, setType] = useState('password');
   const { register, errors } = useFormContext();
   const inputRef = useRef<HTMLInputElement>();
-
-  const theme = useContext(ThemeContext);
+  const [error, setError] = useState('');
 
   const onInputFocus = useCallback(
     e => {
@@ -61,51 +69,54 @@ const PasswordInput: React.FC<InputProps> = ({
     setType(isVisible ? 'text' : 'password');
   }, []);
 
+  const internalErrorControl = errors[name];
+  useEffect(() => {
+    setError(internalErrorControl?.message || '');
+  }, [internalErrorControl]);
+
   return useMemo(
     () => (
-      <Container
-        hasError={!!errors[name]}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        className={className}
-      >
-        {Icon && (
-          <IconContainer>
-            <Icon size={20} />
-          </IconContainer>
-        )}
-        <input
-          name={name}
-          ref={(e: HTMLInputElement) => {
-            register(e);
-            inputRef.current = e;
-          }}
-          onBlur={onInputBlur}
-          onFocus={onInputFocus}
-          type={type}
-          autoComplete="off"
-          {...rest}
-        />
-        <EyeContainer>
-          {type === 'text' ? (
-            <AiFillEye
-              size={26}
-              color={theme.input.iconColor}
-              onClick={() => handleEyeClick(false)}
-            />
-          ) : (
-            <AiFillEyeInvisible
-              size={26}
-              color={theme.input.iconColor}
-              onClick={() => handleEyeClick(true)}
-            />
+      <Container className={className}>
+        {!!label && <Label>{label}</Label>}
+        <InputContainer
+          hasError={!!error}
+          isFilled={isFilled}
+          isFocused={isFocused}
+          className="_inputContainer"
+        >
+          {Icon && (
+            <IconContainer>
+              <Icon size={20} />
+            </IconContainer>
           )}
-        </EyeContainer>
-        {!!errors[name] && (
-          <Error title={errors[name].message} type="error">
-            <FiAlertCircle color={theme.input.errorIconColor} size={20} />
-          </Error>
-        )}
+          <input
+            name={name}
+            ref={(e: HTMLInputElement) => {
+              register(e);
+              inputRef.current = e;
+            }}
+            onBlur={onInputBlur}
+            onFocus={onInputFocus}
+            type={type}
+            autoComplete="off"
+            {...rest}
+          />
+          <EyeContainer>
+            {type === 'text' ? (
+              <AiFillEye size={26} onClick={() => handleEyeClick(false)} />
+            ) : (
+              <AiFillEyeInvisible
+                size={26}
+                onClick={() => handleEyeClick(true)}
+              />
+            )}
+          </EyeContainer>
+          {!!error && (
+            <Error title={error} type="error">
+              <FiAlertCircle size={20} />
+            </Error>
+          )}
+        </InputContainer>
       </Container>
     ),
     [
@@ -116,12 +127,12 @@ const PasswordInput: React.FC<InputProps> = ({
       Icon,
       onInputBlur,
       onInputFocus,
-      theme.input,
       register,
       rest,
-      errors,
+      error,
       type,
       handleEyeClick,
+      label,
     ],
   );
 };

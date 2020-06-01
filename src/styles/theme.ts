@@ -10,6 +10,7 @@ export default {
     focusedBorderColor: '#ff9000',
     filledIconColor: '#ff9000',
     filledBorderColor: '#ff9000',
+    labelFontColor: '#c53030',
   },
   tooltip: {
     error: {

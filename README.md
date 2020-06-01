@@ -1,1 +1,1 @@
-# GoBarber React
+# Vendavall React

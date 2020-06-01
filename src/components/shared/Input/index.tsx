@@ -3,20 +3,20 @@ import React, {
   useRef,
   useState,
   useCallback,
-  useContext,
   useMemo,
+  useEffect,
 } from 'react';
-import { ThemeContext } from 'styled-components';
 import { useFormContext } from 'react-hook-form';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
-import { Container, Error } from './styles';
+import { Container, InputContainer, Error, Label } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type: 'text' | 'password';
   icon?: React.ComponentType<IconBaseProps>;
+  label?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -25,14 +25,14 @@ const Input: React.FC<InputProps> = ({
   onBlur,
   onFocus,
   className,
+  label,
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const { register, errors } = useFormContext();
   const inputRef = useRef<HTMLInputElement>();
-
-  const theme = useContext(ThemeContext);
+  const [error, setError] = useState('');
 
   const onInputFocus = useCallback(
     e => {
@@ -55,31 +55,39 @@ const Input: React.FC<InputProps> = ({
     [onBlur],
   );
 
+  const internalErrorControl = errors[name];
+  useEffect(() => {
+    setError(internalErrorControl?.message || '');
+  }, [internalErrorControl]);
+
   return useMemo(
     () => (
-      <Container
-        hasError={!!errors[name]}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        className={className}
-      >
-        {Icon && <Icon size={20} />}
-        <input
-          autoComplete="off"
-          name={name}
-          ref={(e: HTMLInputElement) => {
-            register(e);
-            inputRef.current = e;
-          }}
-          onBlur={onInputBlur}
-          onFocus={onInputFocus}
-          {...rest}
-        />
-        {!!errors[name] && (
-          <Error title={errors[name].message} type="error">
-            <FiAlertCircle color={theme.input.errorIconColor} size={20} />
-          </Error>
-        )}
+      <Container className={className}>
+        {!!label && <Label>{label}</Label>}
+        <InputContainer
+          hasError={!!error}
+          isFilled={isFilled}
+          isFocused={isFocused}
+          className="_inputContainer"
+        >
+          {Icon && <Icon size={20} />}
+          <input
+            autoComplete="off"
+            name={name}
+            ref={(e: HTMLInputElement) => {
+              register(e);
+              inputRef.current = e;
+            }}
+            onBlur={onInputBlur}
+            onFocus={onInputFocus}
+            {...rest}
+          />
+          {!!error && (
+            <Error title={error} type="error">
+              <FiAlertCircle size={20} />
+            </Error>
+          )}
+        </InputContainer>
       </Container>
     ),
     [
@@ -90,10 +98,10 @@ const Input: React.FC<InputProps> = ({
       Icon,
       onInputBlur,
       onInputFocus,
-      theme.input,
       register,
       rest,
-      errors,
+      error,
+      label,
     ],
   );
 };

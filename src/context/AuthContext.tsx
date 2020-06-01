@@ -1,66 +1,54 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
-import api from 'services/api';
+import signInService, {
+  SignInResponse,
+  Participant,
+} from 'services/auth/signIn';
 
 interface Credentials {
-  email: string;
+  cpf: string;
   password: string;
 }
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar_id: string;
-}
-
 interface AuthContextState {
-  user: User;
+  participant: Participant;
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
-}
-
-interface AuthResponse {
-  token: string;
-  user: User;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AuthResponse>(() => {
+  const [data, setData] = useState<SignInResponse>(() => {
     const token = localStorage.getItem('@GoBarber:token');
-    const user = localStorage.getItem('@GoBarber:user');
+    const participant = localStorage.getItem('@GoBarber:participant');
 
-    if (token && user) {
-      return { token, user: JSON.parse(user) };
+    if (token && participant) {
+      return { token, participant: JSON.parse(participant) };
     }
 
-    return {} as AuthResponse;
+    return {} as SignInResponse;
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
-    const {
-      data: { token, user },
-    } = await api.post<AuthResponse>('sessions', {
-      email,
-      password,
-    });
+  const signIn = useCallback(async ({ cpf, password }: Credentials) => {
+    const { token, participant } = await signInService({ cpf, password });
 
-    localStorage.setItem('@GoBarber:token', token);
-    localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+    localStorage.setItem('@Vendavall:token', token);
+    localStorage.setItem('@Vendavall:participant', JSON.stringify(participant));
 
-    setData({ token, user });
+    setData({ token, participant });
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@GoBarber:token');
-    localStorage.removeItem('@GoBarber:user');
+    localStorage.removeItem('@Vendavall:token');
+    localStorage.removeItem('@Vendavall:participant');
 
-    setData({} as AuthResponse);
+    setData({} as SignInResponse);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ participant: data.participant, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
