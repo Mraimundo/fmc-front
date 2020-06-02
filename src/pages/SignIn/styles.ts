@@ -41,20 +41,4 @@ export const Content = styled.div`
       }
     }
   }
-
-  > button {
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
-    text-decoration: none;
-    text-transform: uppercase;
-    border: none;
-    background: transparent;
-
-    svg {
-      margin-left: 6px;
-      margin-right: 6px;
-      margin-top: 2px;
-    }
-  }
 `;
