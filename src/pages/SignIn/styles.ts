@@ -69,6 +69,7 @@ export const Content = styled.div`
     align-items: center;
     margin-top: 24px;
     text-decoration: none;
+    text-transform: uppercase;
     border: none;
     background: transparent;
 
