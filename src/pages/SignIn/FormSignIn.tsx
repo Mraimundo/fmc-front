@@ -54,11 +54,11 @@ const FormSignIn: React.FC = () => {
         <Input
           name="cpf"
           icon={FiUser}
-          label="CPF"
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
+          placeholder="CPF"
         />
-        <PasswordInput name="password" icon={FiLock} label="Senha" />
+        <PasswordInput name="password" icon={FiLock} placeholder="Senha" />
         <Button type="submit" buttonRole="primary" loading={loading}>
           Entrar
         </Button>

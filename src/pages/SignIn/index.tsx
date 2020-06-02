@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logoImg from 'assets/images/logo.png';
+import logoImg from 'assets/images/logo.svg';
 
 import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';
