@@ -61,7 +61,7 @@ export const Content = styled.div`
 
     ._inputContainer {
       height: 32px;
-      svg {
+      ._iconContainer svg {
         width: 16px;
       }
     }
