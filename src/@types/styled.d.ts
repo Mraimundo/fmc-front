@@ -2,6 +2,12 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    font: {
+      color: {
+        primary: string;
+        secondary: string;
+      };
+    };
     input: {
       borderColor: string;
       backgroundColor: string;

@@ -1,4 +1,10 @@
 export default {
+  font: {
+    color: {
+      primary: '#f4ede8',
+      secondary: '#312e38',
+    },
+  },
   input: {
     borderColor: '#e63027',
     backgroundColor: '#fff',
