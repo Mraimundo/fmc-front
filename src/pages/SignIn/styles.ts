@@ -52,6 +52,7 @@ export const Content = styled.div`
       width: 180px;
       margin-left: 50%;
       transform: translateX(-50%);
+      text-transform: uppercase;
     }
 
     ._inputContainer {
