@@ -53,7 +53,7 @@ const FormSignUp: React.FC = () => {
           pattern="XXX.XXX.XXX-XX"
         />
         <Button type="submit" buttonRole="primary" loading={loading}>
-          Entrar
+          Cadastrar
         </Button>
       </form>
     </FormContext>
