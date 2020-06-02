@@ -54,7 +54,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   }
 
   input {
-    flex: 1;
+    width: 100%;
     background-color: transparent;
     border: 0;
     color: ${({ theme }) => theme.input.fontColor};

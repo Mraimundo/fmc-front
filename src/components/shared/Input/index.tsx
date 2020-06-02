@@ -12,7 +12,13 @@ import { useFormContext } from 'react-hook-form';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
-import { Container, InputContainer, Error, Label } from './styles';
+import {
+  Container,
+  InputContainer,
+  Error,
+  Label,
+  IconContainer,
+} from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -100,7 +106,11 @@ const Input: React.FC<InputProps> = ({
           isFocused={isFocused}
           className="_inputContainer"
         >
-          {Icon && <Icon size={20} />}
+          {Icon && (
+            <IconContainer>
+              <Icon size={20} />
+            </IconContainer>
+          )}
           <input
             autoComplete="off"
             name={name}

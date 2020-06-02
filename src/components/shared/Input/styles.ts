@@ -50,7 +50,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     `};
 
   input {
-    flex: 1;
+    width: 100%;
     background-color: transparent;
     border: 0;
     color: ${({ theme }) => theme.input.fontColor};
@@ -80,4 +80,14 @@ export const Label = styled.span`
   align-self: flex-start;
   margin-left: 4px;
   color: ${({ theme }) => theme.input.labelFontColor};
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 8px;
+  svg {
+    margin: 0;
+  }
 `;
