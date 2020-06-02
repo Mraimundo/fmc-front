@@ -8,7 +8,12 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
 
-  padding: 40px 20px;
+  padding: 70px 20px;
+
+  > img {
+    width: 100%;
+    max-width: 500px;
+  }
 `;
 
 export const Content = styled.div`
@@ -23,8 +28,6 @@ export const Content = styled.div`
 
   form {
     margin: 10px 0;
-    width: 100%;
-    max-width: 300px;
     text-align: center;
 
     display: flex;
@@ -58,7 +61,7 @@ export const Content = styled.div`
 
     ._inputContainer {
       height: 40px;
-      width: 100%;
+      width: 230px;
     }
 
     & + h3 {
