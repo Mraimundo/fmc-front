@@ -18,12 +18,12 @@ export const Content = styled.div`
   padding: 25px 0;
 
   width: 100%;
-  max-width: 460px;
+  max-width: 400px;
 
   form {
     margin: 10px 0;
     width: 100%;
-    max-width: 340px;
+    max-width: 300px;
     text-align: center;
 
     display: flex;
@@ -60,7 +60,7 @@ export const Content = styled.div`
     }
 
     & + h3 {
-      margin-top: 20px;
+      margin-top: 25px;
     }
   }
 
@@ -85,11 +85,12 @@ export const Title = styled.h3`
   font-weight: 500;
   color: ${({ theme }) => theme.font.color.primary};
   width: 100%;
-  max-width: 340px;
+  max-width: 300px;
 `;
 
 export const MenuList = styled.ul`
   list-style: none;
+  margin: 15px 0;
 `;
 
 interface ItemListProps {
@@ -101,16 +102,18 @@ export const ItemList = styled.li<ItemListProps>`
   color: ${({ theme }) => theme.font.color.primary};
   cursor: pointer;
   padding: 8px 20px;
+  font-size: 14px;
 
   & + li {
     margin-left: 20px;
   }
 
+  background-color: ${({ theme }) => theme.menu.inactiveBackgroundColor};
   transition: background-color 0.2s ease;
   will-change: background-color;
   ${({ active }) =>
     active &&
     css`
-      background-color: #b1b1b1;
+      background-color: ${({ theme }) => theme.menu.activeBackgroundColor};
     `}
 `;

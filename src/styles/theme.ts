@@ -6,7 +6,7 @@ export default {
     },
   },
   menu: {
-    activeBackgroundColor: '#f4ede8',
+    activeBackgroundColor: '#efeff0',
     inactiveBackgroundColor: '#fff',
   },
   input: {
