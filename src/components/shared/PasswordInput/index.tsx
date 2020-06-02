@@ -85,7 +85,7 @@ const PasswordInput: React.FC<InputProps> = ({
           className="_inputContainer"
         >
           {Icon && (
-            <IconContainer>
+            <IconContainer className="_iconContainer">
               <Icon size={20} />
             </IconContainer>
           )}
