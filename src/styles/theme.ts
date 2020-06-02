@@ -5,6 +5,10 @@ export default {
       secondary: '#e63027',
     },
   },
+  menu: {
+    activeBackgroundColor: '#f4ede8',
+    inactiveBackgroundColor: '#fff',
+  },
   input: {
     borderColor: '#e63027',
     backgroundColor: '#fff',

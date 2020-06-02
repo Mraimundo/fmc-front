@@ -2,6 +2,10 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    menu: {
+      activeBackgroundColor: string;
+      inactiveBackgroundColor: string;
+    };
     font: {
       color: {
         primary: string;
