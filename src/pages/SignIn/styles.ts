@@ -24,12 +24,12 @@ export const Content = styled.div`
   padding: 25px 0;
 
   width: 100%;
-  max-width: 400px;
+  max-width: 230px;
 
   form {
     margin: 10px 0;
     text-align: center;
-
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,8 +60,10 @@ export const Content = styled.div`
     }
 
     ._inputContainer {
-      height: 40px;
-      width: 230px;
+      height: 32px;
+      svg {
+        width: 16px;
+      }
     }
 
     & + h3 {
@@ -75,7 +77,6 @@ export const Title = styled.h3`
   font-weight: 500;
   color: ${({ theme }) => theme.font.color.primary};
   width: 100%;
-  max-width: 300px;
 `;
 
 export const MenuList = styled.ul`
