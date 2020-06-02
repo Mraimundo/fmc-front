@@ -12,8 +12,11 @@ interface SignUpFormData {
   cpf: string;
 }
 
+type TypeSelect = 'fmc' | 'revenda';
+
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [typeSelected, setTypeSelected] = useState<TypeSelect>('fmc');
   const { addToast } = useToast();
 
   const schema = Yup.object().shape({
@@ -45,6 +48,10 @@ const FormSignUp: React.FC = () => {
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
+        <ul>
+          <li>Revendas/Cooperativas</li>
+          <li>FMC</li>
+        </ul>
         <Input
           name="cpf_first_access"
           icon={FiUser}
