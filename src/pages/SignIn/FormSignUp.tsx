@@ -5,8 +5,9 @@ import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
 import { Input, Button } from 'components/shared';
-
 import { FiUser } from 'react-icons/fi';
+
+import { MenuList, ItemList } from './styles';
 
 interface SignUpFormData {
   cpf: string;
@@ -48,10 +49,20 @@ const FormSignUp: React.FC = () => {
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <ul>
-          <li>Revendas/Cooperativas</li>
-          <li>FMC</li>
-        </ul>
+        <MenuList>
+          <ItemList
+            active={typeSelected === 'revenda'}
+            onClick={() => setTypeSelected('revenda')}
+          >
+            Revendas/Cooperativas
+          </ItemList>
+          <ItemList
+            active={typeSelected === 'fmc'}
+            onClick={() => setTypeSelected('fmc')}
+          >
+            FMC
+          </ItemList>
+        </MenuList>
         <Input
           name="cpf_first_access"
           icon={FiUser}

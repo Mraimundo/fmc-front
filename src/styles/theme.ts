@@ -1,8 +1,8 @@
 export default {
   font: {
     color: {
-      primary: '#f4ede8',
-      secondary: '#312e38',
+      primary: '#808285',
+      secondary: '#e63027',
     },
   },
   input: {

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
@@ -83,7 +83,34 @@ export const Content = styled.div`
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: 500;
-  color: #808285;
+  color: ${({ theme }) => theme.font.color.primary};
   width: 100%;
   max-width: 340px;
+`;
+
+export const MenuList = styled.ul`
+  list-style: none;
+`;
+
+interface ItemListProps {
+  active: boolean;
+}
+
+export const ItemList = styled.li<ItemListProps>`
+  display: inline;
+  color: ${({ theme }) => theme.font.color.primary};
+  cursor: pointer;
+  padding: 8px 20px;
+
+  & + li {
+    margin-left: 20px;
+  }
+
+  transition: background-color 0.2s ease;
+  will-change: background-color;
+  ${({ active }) =>
+    active &&
+    css`
+      background-color: #b1b1b1;
+    `}
 `;
