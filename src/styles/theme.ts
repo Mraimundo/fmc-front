@@ -3,6 +3,7 @@ export default {
     color: {
       primary: '#f4ede8',
       secondary: '#312e38',
+      tertiary: '#fff',
     },
   },
   menu: {
