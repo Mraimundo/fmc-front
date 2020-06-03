@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 import { shade } from 'polished';
 import background from 'assets/images/background.svg';
 
@@ -25,7 +26,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled(animated.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -168,3 +169,13 @@ export const ItemList = styled.li<ItemListProps>`
     padding: 8px 40px;
   }
 `;
+
+export const contentAnimation = {
+  from: { marginRight: '-250px', marginTop: '250px', opacity: 0 },
+  to: { marginRight: '0', marginTop: '0', opacity: 1 },
+};
+
+export const logoAnimation = {
+  from: { marginTop: '-250px', opacity: 0 },
+  to: { marginTop: '0', opacity: 1 },
+};

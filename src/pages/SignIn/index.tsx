@@ -1,17 +1,21 @@
 import React from 'react';
-
-import logoImg from 'assets/images/logo.png';
+import { useSpring } from 'react-spring';
 
 import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';
-import { Container, Content, Title } from './styles';
+import Logo from './Logo';
+
+import { Container, Content, Title, contentAnimation } from './styles';
 
 const SignIn: React.FC = () => {
+  const props = useSpring(contentAnimation);
+
   return (
     <Container>
-      <img src={logoImg} alt="Logo GoBarber" />
-      <Content>
+      <Logo />
+      <Content style={props}>
         <Title>Já sou cadastrado</Title>
+
         <FormSignIn />
         <Title>Primeiro acesso?</Title>
         <FormSignUp />
