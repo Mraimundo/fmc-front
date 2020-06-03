@@ -24,6 +24,10 @@ export const Container = styled.div`
       max-width: none;
     }
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 35px 20px;
+  }
 `;
 
 export const Content = styled(animated.div)`
