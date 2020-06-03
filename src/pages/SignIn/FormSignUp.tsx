@@ -13,7 +13,7 @@ interface SignUpFormData {
   cpf: string;
 }
 
-type TypeSelect = 'fmc' | 'revenda';
+type TypeSelect = 'fmc' | 'participant';
 
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -51,10 +51,10 @@ const FormSignUp: React.FC = () => {
       <form onSubmit={onSubmit}>
         <MenuList>
           <ItemList
-            active={typeSelected === 'revenda'}
-            onClick={() => setTypeSelected('revenda')}
+            active={typeSelected === 'participant'}
+            onClick={() => setTypeSelected('participant')}
           >
-            Revendas/Cooperativas
+            Participante
           </ItemList>
           <ItemList
             active={typeSelected === 'fmc'}
@@ -66,7 +66,7 @@ const FormSignUp: React.FC = () => {
         <Input
           name="cpf_first_access"
           icon={FiUser}
-          label="CPF"
+          placeholder="CPF"
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
         />

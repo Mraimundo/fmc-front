@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+import background from 'assets/images/background.svg';
 
 export const Container = styled.div`
   height: 100vh;
@@ -7,12 +8,20 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: url(${background});
 
   padding: 70px 20px;
 
   > img {
     width: 100%;
     max-width: 500px;
+  }
+
+  @media screen and (min-width: 1367px) {
+    > img {
+      width: auto;
+      max-width: none;
+    }
   }
 `;
 
@@ -27,7 +36,7 @@ export const Content = styled.div`
   max-width: 230px;
 
   form {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     text-align: center;
     width: 100%;
     display: flex;
@@ -39,7 +48,7 @@ export const Content = styled.div`
     }
 
     a {
-      color: ${({ theme }) => theme.link.fontColor};
+      color: ${({ theme }) => theme.font.color.tertiary};
       display: block;
       margin-top: 6px;
       font-size: 12px;
@@ -47,20 +56,27 @@ export const Content = styled.div`
       transition: color 0.2s;
       will-change: color;
       &:hover {
-        color: ${({ theme }) => shade(0.3, theme.link.fontColor)};
+        color: ${({ theme }) => shade(0.2, theme.font.color.tertiary)};
+      }
+    }
+
+    input {
+      &::placeholder {
+        font-size: 14px;
+        color: ${({ theme }) => theme.font.color.primary};
       }
     }
 
     button {
-      height: 40px;
-      width: 180px;
-      margin-left: 50%;
-      transform: translateX(-50%);
+      height: 38px;
+      width: 160px;
       text-transform: uppercase;
+      font-size: 12px;
     }
 
     ._inputContainer {
       height: 32px;
+      margin-top: 12px;
       ._iconContainer svg {
         width: 16px;
       }
@@ -70,13 +86,44 @@ export const Content = styled.div`
       margin-top: 25px;
     }
   }
+
+  @media screen and (min-width: 1367px) {
+    max-width: 325px;
+
+    form {
+      ._inputContainer {
+        height: 44px;
+        ._iconContainer svg {
+          width: 20px;
+        }
+      }
+
+      a {
+        font-size: 16px;
+      }
+
+      button {
+        height: 48px;
+        width: 217px;
+        font-size: 16px;
+      }
+
+      & + h3 {
+        margin-top: 45px;
+      }
+    }
+  }
 `;
 
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: 500;
-  color: ${({ theme }) => theme.font.color.primary};
+  color: ${({ theme }) => theme.font.color.tertiary};
   width: 100%;
+  @media screen and (min-width: 1367px) {
+    font-size: 24px;
+    margin-top: 20px;
+  }
 `;
 
 export const MenuList = styled.ul`
@@ -90,7 +137,7 @@ interface ItemListProps {
 
 export const ItemList = styled.li<ItemListProps>`
   display: inline;
-  color: ${({ theme }) => theme.font.color.primary};
+  color: ${({ theme }) => theme.font.color.tertiary};
   cursor: pointer;
   padding: 8px 20px;
   font-size: 14px;
@@ -100,11 +147,24 @@ export const ItemList = styled.li<ItemListProps>`
   }
 
   background-color: ${({ theme }) => theme.menu.inactiveBackgroundColor};
-  transition: background-color 0.2s ease;
-  will-change: background-color;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  will-change: background-color, color;
   ${({ active }) =>
     active &&
     css`
       background-color: ${({ theme }) => theme.menu.activeBackgroundColor};
     `}
+
+  ${({ active }) =>
+    !active &&
+    css`
+      &:hover {
+        color: ${({ theme }) => shade(0.3, theme.font.color.tertiary)};
+      }
+    `}
+
+  @media screen and (min-width: 1367px) {
+    font-size: 18px;
+    padding: 8px 40px;
+  }
 `;

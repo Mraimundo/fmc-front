@@ -1,13 +1,16 @@
+import { shade, rgba } from 'polished';
+
 export default {
   font: {
     color: {
       primary: '#808285',
       secondary: '#e63027',
+      tertiary: '#fff',
     },
   },
   menu: {
-    activeBackgroundColor: '#efeff0',
-    inactiveBackgroundColor: '#fff',
+    activeBackgroundColor: rgba(255, 255, 255, 0.3),
+    inactiveBackgroundColor: rgba(255, 255, 255, 0),
   },
   input: {
     borderColor: '#e63027',
@@ -17,14 +20,14 @@ export default {
     placeholderColor: '#808285',
     errorIconColor: '#e63027',
     errorBorderColor: '#e63027',
-    focusedBorderColor: '#e63027',
+    focusedBorderColor: shade(0.3, '#e63027'),
     filledIconColor: '#e63027',
     filledBorderColor: '#e63027',
     labelFontColor: '#e63027',
     borderRadius: '0px',
     borderWidth: '1px',
     errorBorderWidth: '1px',
-    focusedBorderWidth: '2px',
+    focusedBorderWidth: '1px',
     filledBorderWidth: '1px',
   },
   tooltip: {
