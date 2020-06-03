@@ -17,7 +17,7 @@ type TypeSelect = 'fmc' | 'participant';
 
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [typeSelected, setTypeSelected] = useState<TypeSelect>('fmc');
+  const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
 
   const schema = Yup.object().shape({
@@ -63,13 +63,17 @@ const FormSignUp: React.FC = () => {
             FMC
           </ItemList>
         </MenuList>
-        <Input
-          name="cpf_first_access"
-          icon={FiUser}
-          placeholder="CPF"
-          numbersOnly
-          pattern="XXX.XXX.XXX-XX"
-        />
+        {typeSelected === 'participant' ? (
+          <Input
+            name="cpf_first_access"
+            icon={FiUser}
+            placeholder="CPF"
+            numbersOnly
+            pattern="XXX.XXX.XXX-XX"
+          />
+        ) : (
+          <Input name="upn_first_access" icon={FiUser} placeholder="UPN" />
+        )}
         <Button type="submit" buttonRole="primary" loading={loading}>
           Cadastrar
         </Button>
