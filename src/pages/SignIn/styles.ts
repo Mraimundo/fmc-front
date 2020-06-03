@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 import { shade } from 'polished';
 
 export const Container = styled.div`
@@ -9,12 +10,11 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Content = styled.div`
+export const Content = styled(animated.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
 
   width: 100%;
   max-width: 700px;
@@ -42,3 +42,8 @@ export const Content = styled.div`
     }
   }
 `;
+
+export const contentAnimation = {
+  from: { marginRight: '-250px', opacity: 0 },
+  to: { marginRight: '0', opacity: 1 },
+};
