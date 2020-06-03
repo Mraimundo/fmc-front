@@ -4,7 +4,7 @@ import { shade } from 'polished';
 import background from 'assets/images/background.svg';
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -114,6 +114,26 @@ export const Content = styled(animated.div)`
       }
     }
   }
+
+  @media screen and (max-width: 500px) {
+    form {
+      ._inputContainer {
+        height: 44px;
+        ._iconContainer svg {
+          width: 20px;
+        }
+      }
+      button {
+        height: 48px;
+        width: 100%;
+        font-size: 16px;
+      }
+      a {
+        font-size: 16px;
+      }
+    }
+    max-width: none;
+  }
 `;
 
 export const Title = styled.h3`
@@ -125,11 +145,19 @@ export const Title = styled.h3`
     font-size: 24px;
     margin-top: 20px;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 export const MenuList = styled.ul`
   list-style: none;
   margin: 15px 0;
+
+  @media screen and (max-width: 500px) {
+    display: flex;
+    width: 100%;
+  }
 `;
 
 interface ItemListProps {
@@ -167,6 +195,11 @@ export const ItemList = styled.li<ItemListProps>`
   @media screen and (min-width: 1367px) {
     font-size: 18px;
     padding: 8px 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+    width: 100%;
   }
 `;
 
