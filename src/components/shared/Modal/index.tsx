@@ -19,10 +19,18 @@ const Modal: React.FC<Props> = ({
       if (isOpen) {
         (document.getElementById('root') as HTMLInputElement).style.overflowY =
           'auto';
+        const div = document.getElementsByTagName('body')[0];
+        const hasVerticalScrollbar = div.scrollHeight > window.innerHeight;
+        if (hasVerticalScrollbar) {
+          div.style.marginRight = '15px';
+        }
+        div.style.overflowY = 'hidden';
         return;
       }
       (document.getElementById('root') as HTMLInputElement).style.overflowY =
         'auto';
+      document.getElementsByTagName('body')[0].style.overflowY = 'auto';
+      document.getElementsByTagName('body')[0].style.marginRight = '0';
     }
   }, [isOpen]);
 
