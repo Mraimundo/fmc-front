@@ -27,7 +27,7 @@ const FormSignIn: React.FC = () => {
   const methods = useForm<SignInFormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   const { handleSubmit } = methods;
