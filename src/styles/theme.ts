@@ -10,6 +10,11 @@ export default {
     activeBackgroundColor: '#f4ede8',
     inactiveBackgroundColor: '#fff',
   },
+  contact: {
+    ballon: {
+      backgroundColor: '#c53030',
+    },
+  },
   input: {
     borderColor: '#232129',
     backgroundColor: '#232129',

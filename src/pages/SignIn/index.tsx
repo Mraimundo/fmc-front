@@ -5,7 +5,7 @@ import logoImg from 'assets/images/logo.svg';
 
 import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';
-import { Container, Content, contentAnimation } from './styles';
+import { Container, Content, contentAnimation, Contact } from './styles';
 
 const SignIn: React.FC = () => {
   const props = useSpring(contentAnimation);
@@ -17,6 +17,7 @@ const SignIn: React.FC = () => {
         <FormSignIn />
         <FormSignUp />
       </Content>
+      <Contact initialPosition="right-bottom" />
     </Container>
   );
 };

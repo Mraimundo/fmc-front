@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ContactBallon from 'components/Contact';
 import { animated } from 'react-spring';
 import { shade } from 'polished';
 
@@ -47,3 +48,9 @@ export const contentAnimation = {
   from: { marginRight: '-250px', opacity: 0 },
   to: { marginRight: '0', opacity: 1 },
 };
+
+export const Contact = styled(ContactBallon)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;

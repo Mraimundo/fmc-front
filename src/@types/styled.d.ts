@@ -13,6 +13,11 @@ declare module 'styled-components' {
         tertiary: string;
       };
     };
+    contact: {
+      ballon: {
+        backgroundColor: string;
+      };
+    };
     input: {
       borderColor: string;
       backgroundColor: string;
