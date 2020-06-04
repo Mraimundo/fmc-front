@@ -12,6 +12,11 @@ export default {
     activeBackgroundColor: rgba(255, 255, 255, 0.3),
     inactiveBackgroundColor: rgba(255, 255, 255, 0),
   },
+  contact: {
+    ballon: {
+      backgroundColor: '#e63027',
+    },
+  },
   input: {
     borderColor: '#e63027',
     backgroundColor: '#fff',

@@ -6,7 +6,7 @@ import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';
 import Logo from './Logo';
 
-import { Container, Content, Title, contentAnimation } from './styles';
+import { Container, Content, Title, contentAnimation, Contact } from './styles';
 
 const SignIn: React.FC = () => {
   const props = useSpring(contentAnimation);
@@ -28,6 +28,7 @@ const SignIn: React.FC = () => {
       <Modal isOpen={opened} onRequestClose={() => setOpened(false)}>
         <h1>Ola</h1>
       </Modal>
+      <Contact initialPosition="right-bottom" />
     </Container>
   );
 };
