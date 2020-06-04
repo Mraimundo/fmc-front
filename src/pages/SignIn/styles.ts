@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
 import { shade } from 'polished';
-import background from 'assets/images/background.svg';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -9,7 +8,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: url(${background});
+  background: linear-gradient(
+    90deg,
+    rgba(4, 36, 44, 1) 0%,
+    rgba(56, 77, 85, 1) 100%
+  );
 
   padding: 70px 20px;
 
