@@ -7,9 +7,9 @@ import { ToastProvider } from './ToastContext';
 
 const AppProvider: React.FC = ({ children }) => (
   <ThemeContext.Provider value={theme}>
-    <AuthProvider>
-      <ToastProvider>{children}</ToastProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </ToastProvider>
   </ThemeContext.Provider>
 );
 

@@ -1,9 +1,19 @@
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import numbersOnly from 'util/numbersOnly';
-import signInService, {
-  SignInResponse,
+import signInService from 'services/auth/signIn';
+import isTokenValid from 'services/auth/isTokenValid';
+
+import getLoggedParticipant, {
   Participant,
-} from 'services/auth/signIn';
+} from 'services/auth/getLoggedParticipant';
+import { setToken } from 'services/api';
+import { useToast } from './ToastContext';
 
 interface Credentials {
   cpf: string;
@@ -12,6 +22,7 @@ interface Credentials {
 
 interface AuthContextState {
   participant: Participant;
+  signed: boolean;
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
 }
@@ -19,39 +30,73 @@ interface AuthContextState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<SignInResponse>(() => {
+  const [participant, setParticipant] = useState<Participant>(
+    {} as Participant,
+  );
+  const [apiToken, setApiToken] = useState<string>(() => {
     const token = localStorage.getItem('@Vendavall:token');
-    const participant = localStorage.getItem('@Vendavall:participant');
 
-    if (token && participant) {
-      return { token, participant: JSON.parse(participant) };
+    if (token) {
+      setToken(token);
+      return token;
     }
 
-    return {} as SignInResponse;
+    return '';
   });
 
   const signIn = useCallback(async ({ cpf, password }: Credentials) => {
-    const { token, participant } = await signInService({
+    const { token } = await signInService({
       cpf: numbersOnly(cpf),
       password,
     });
 
     localStorage.setItem('@Vendavall:token', token);
-    localStorage.setItem('@Vendavall:participant', JSON.stringify(participant));
-
-    setData({ token, participant });
+    setToken(token);
+    setApiToken(token);
   }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Vendavall:token');
-    localStorage.removeItem('@Vendavall:participant');
 
-    setData({} as SignInResponse);
+    setToken('');
+    setApiToken('');
   }, []);
+
+  const updateParticipantData = useCallback(async () => {
+    const data = await getLoggedParticipant();
+    if (!data.id) {
+      setTimeout(() => {
+        updateParticipantData();
+      }, 200000);
+      return;
+    }
+    setParticipant(data);
+  }, []);
+
+  const { addToast } = useToast();
+  useEffect(() => {
+    if (!apiToken) return;
+    isTokenValid().then(isValid => {
+      if (!isValid) {
+        signOut();
+        addToast({
+          title: 'Sua Sessão expirou, por favor refaça seu login',
+          type: 'error',
+        });
+        return;
+      }
+      updateParticipantData();
+    });
+  }, [apiToken, signOut, addToast, updateParticipantData]);
 
   return (
     <AuthContext.Provider
-      value={{ participant: data.participant, signIn, signOut }}
+      value={{
+        participant,
+        signed: !!apiToken,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

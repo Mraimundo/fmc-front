@@ -23,4 +23,9 @@ const storageApi = axios.create({
   },
 });
 
-export { pluginApi, vendavallApi, storageApi };
+const setToken = (token: string): void => {
+  vendavallApi.defaults.headers.authorization = token;
+  pluginApi.defaults.headers.authorization = token;
+};
+
+export { pluginApi, vendavallApi, storageApi, setToken };

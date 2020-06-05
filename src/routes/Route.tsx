@@ -17,12 +17,12 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { participant } = useAuth();
+  const { signed } = useAuth();
   return (
     <DefaultRoute
       {...rest}
       render={({ location }) =>
-        isPrivate === !!participant ? (
+        isPrivate === signed ? (
           <Component />
         ) : (
           <Redirect
