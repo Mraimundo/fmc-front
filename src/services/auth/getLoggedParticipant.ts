@@ -40,6 +40,16 @@ export interface Participant {
   address: Address[];
   role: Role;
   establishment: Establishment;
+
+  upn: string;
+  rg_emitter: string;
+  rg_emitter_uf: string;
+  pis_nis: string;
+  graduation: string;
+  nationality: string;
+  company: string;
+  filial: string;
+  department: string;
 }
 
 export default async (): Promise<Participant> => {
