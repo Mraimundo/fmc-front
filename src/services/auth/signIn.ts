@@ -1,4 +1,4 @@
-import { vendavallApi } from 'services/api';
+import { pluginApi } from 'services/api';
 
 interface SignInParams {
   cpf: string;
@@ -15,7 +15,7 @@ export default async ({
 }: SignInParams): Promise<SignInResponse> => {
   const {
     data: { token },
-  } = await vendavallApi.post<SignInResponse>('login', {
+  } = await pluginApi.post<SignInResponse>('participants/login', {
     identifier: cpf,
     password,
   });
