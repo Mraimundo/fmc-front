@@ -3,6 +3,7 @@ import DefaultReactModal from 'react-modal';
 
 interface ContainerProps {
   closing: boolean;
+  type: 'primary' | 'secondary';
 }
 
 export const ReactModal = styled(DefaultReactModal)`
@@ -32,7 +33,26 @@ export const Container = styled.div<ContainerProps>`
   top: 50%;
   transform: translate(-50%, -50%);
 
-  animation: openModal 0.3s both ease-in;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background-color: ${({ theme, type }) => theme.modal[type].backgroundColor};
+
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme, type }) =>
+      theme.modal[type].scrollBarBackgroundColor};
+  }
+  padding-right: 12px;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: ${({ theme, type }) => theme.modal[type].scrollBarColor};
+  }
+
+  animation: openModal 0.3s ease-in;
 
   ${({ closing }) =>
     closing &&
