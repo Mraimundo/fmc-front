@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Draggable from 'react-draggable';
 import { Container, Content } from './styles';
+import Modal from './Modal/Disconnected';
 
 type Position = 'left-bottom' | 'right-bottom' | 'left-top' | 'right-top';
 
@@ -18,15 +19,24 @@ const style = {
 
 const Contact: React.FC<ContactProps> = ({ initialPosition }) => {
   const defaultPosition = style[initialPosition];
+  const [modalOpened, setModalOpened] = useState(false);
 
   return (
-    <Container style={defaultPosition}>
-      <Draggable>
-        <Content>
-          <span>?</span>
-        </Content>
-      </Draggable>
-    </Container>
+    <>
+      <Container style={defaultPosition}>
+        <Draggable>
+          <div>
+            <Content onClick={() => setModalOpened(true)}>
+              <span>?</span>
+            </Content>
+          </div>
+        </Draggable>
+      </Container>
+      <Modal
+        isOpen={modalOpened}
+        onRequestClose={() => setModalOpened(false)}
+      />
+    </>
   );
 };
 

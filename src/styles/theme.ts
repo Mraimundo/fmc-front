@@ -15,6 +15,18 @@ export default {
       backgroundColor: '#c53030',
     },
   },
+  modal: {
+    primary: {
+      backgroundColor: '#312e38',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
+    },
+    secondary: {
+      backgroundColor: '#312e38',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
+    },
+  },
   input: {
     borderColor: '#232129',
     backgroundColor: '#232129',

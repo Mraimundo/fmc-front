@@ -24,7 +24,7 @@ export const Container = styled.div<ContainerProps>`
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s, visibility 0.4s;
-    will-change: opacity visibility;
+    will-change: opacity, visibility;
 
     &::before {
       content: '';

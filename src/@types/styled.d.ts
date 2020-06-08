@@ -18,6 +18,18 @@ declare module 'styled-components' {
         backgroundColor: string;
       };
     };
+    modal: {
+      primary: {
+        backgroundColor: string;
+        scrollBarColor: string;
+        scrollBarBackgroundColor: string;
+      };
+      secondary: {
+        backgroundColor: string;
+        scrollBarColor: string;
+        scrollBarBackgroundColor: string;
+      };
+    };
     input: {
       borderColor: string;
       backgroundColor: string;

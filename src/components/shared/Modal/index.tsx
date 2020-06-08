@@ -3,12 +3,17 @@ import { Props } from 'react-modal';
 
 import { Container, ReactModal } from './styles';
 
+interface ModalProps extends Props {
+  type?: 'primary' | 'secondary';
+}
+
 ReactModal.setAppElement('#root');
 
-const Modal: React.FC<Props> = ({
+const Modal: React.FC<ModalProps> = ({
   children,
   isOpen,
   onRequestClose,
+  type = 'primary',
   ...rest
 }) => {
   const [closing, setClosing] = useState(false);
@@ -67,7 +72,7 @@ const Modal: React.FC<Props> = ({
       }}
       {...rest}
     >
-      <Container className="_modalContainer" closing={closing}>
+      <Container type={type} className="_modalContainer" closing={closing}>
         {children}
       </Container>
     </ReactModal>
