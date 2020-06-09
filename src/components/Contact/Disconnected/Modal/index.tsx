@@ -160,7 +160,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             )}
 
             <Button type="submit" buttonRole="primary" loading={loading}>
-              Cadastrar
+              Enviar
             </Button>
           </form>
         </FormContext>
