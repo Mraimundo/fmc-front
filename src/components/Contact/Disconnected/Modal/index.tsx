@@ -9,7 +9,7 @@ import openTicket from 'services/contact/openTicket';
 import SubjectSelect from '../PublicSubjectsSelect';
 import schemaValidation from './schemaValidation';
 
-import { Container } from './styles';
+import { Container, Title, BoxPhone } from './styles';
 
 interface ModalProps {
   isOpen: boolean;
@@ -71,15 +71,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
+        <Title>Fale conosco</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
             <Input name="name" icon={FiUser} label="Nome" />
             <Input name="cpf" icon={FiUser} label="Cpf" />
             <Input name="email" icon={FiUser} label="Email" />
-            <div>
+            <BoxPhone>
               <Input name="dddMobile" icon={FiUser} label="Celular" />
               <Input name="mobile" icon={FiUser} />
-            </div>
+            </BoxPhone>
             <SubjectSelect name="subject" />
             <Input name="message" icon={FiUser} label="Mensagem" />
             <Button type="submit" buttonRole="primary" loading={loading}>
