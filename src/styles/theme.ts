@@ -48,7 +48,7 @@ export default {
       focusedBorderWidth: '1px',
       filledBorderWidth: '1px',
       scrollBarColor: '#c6c6c6',
-      scrollBarBackgroundColor: '#312e38',
+      scrollBarBackgroundColor: '#fff',
     },
     secondary: {
       borderColor: '#808285',
@@ -68,7 +68,7 @@ export default {
       focusedBorderWidth: '1px',
       filledBorderWidth: '1px',
       scrollBarColor: '#c6c6c6',
-      scrollBarBackgroundColor: '#312e38',
+      scrollBarBackgroundColor: '#fff',
     },
   },
   tooltip: {
