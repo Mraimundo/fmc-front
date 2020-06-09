@@ -55,6 +55,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         subjectId: parseInt(data.subject, 0),
       });
       addToast({ title: message });
+      onRequestClose();
     } catch (e) {
       addToast({
         description:
