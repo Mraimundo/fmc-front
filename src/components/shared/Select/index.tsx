@@ -28,6 +28,7 @@ interface SelectProps {
   label?: string;
   className?: string;
   loadItems(search: string): Option[] | Promise<Option[]>;
+  inputRole?: 'primary' | 'secondary';
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -36,32 +37,33 @@ const Select: React.FC<SelectProps> = ({
   className,
   label,
   loadItems,
+  inputRole = 'primary',
 }) => {
   const theme = useContext(ThemeContext);
   const useStyles = makeStyles({
     listbox: {
-      background: theme.input.backgroundColor,
+      background: theme.input[inputRole].backgroundColor,
     },
     option: {
-      color: theme.input.fontColor,
+      color: theme.input[inputRole].fontColor,
     },
     noOptions: {
-      background: theme.input.backgroundColor,
-      color: theme.input.fontColor,
+      background: theme.input[inputRole].backgroundColor,
+      color: theme.input[inputRole].fontColor,
     },
     input: {
       border: 'none',
     },
     popupIndicator: {
-      color: theme.input.iconColor,
+      color: theme.input[inputRole].iconColor,
     },
     clearIndicator: {
-      color: theme.input.iconColor,
+      color: theme.input[inputRole].iconColor,
     },
     root: {
       background: 'transparent',
       width: '100%',
-      borderRadius: theme.input.borderRadius,
+      borderRadius: theme.input[inputRole].borderRadius,
       border: 'none',
     },
   });
@@ -111,7 +113,7 @@ const Select: React.FC<SelectProps> = ({
   return useMemo(
     () => (
       <Container className={className}>
-        {!!label && <Label>{label}</Label>}
+        {!!label && <Label inputRole={inputRole}>{label}</Label>}
         <input
           type="hidden"
           name={name}
@@ -125,6 +127,7 @@ const Select: React.FC<SelectProps> = ({
           isFilled={isFilled}
           isFocused={open}
           className="_inputContainer"
+          inputRole={inputRole}
         >
           <UiAutocomplete<Option>
             open={open}
@@ -176,7 +179,11 @@ const Select: React.FC<SelectProps> = ({
                         ) : null}
                         {params.InputProps.endAdornment}
                         {!!error && (
-                          <Error title={error} type="error">
+                          <Error
+                            title={error}
+                            type="error"
+                            inputRole={inputRole}
+                          >
                             <FiAlertCircle size={20} />
                           </Error>
                         )}
@@ -204,6 +211,7 @@ const Select: React.FC<SelectProps> = ({
       register,
       setValue,
       triggerValidation,
+      inputRole,
     ],
   );
 };

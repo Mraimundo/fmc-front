@@ -68,21 +68,47 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     setLoading(false);
   });
 
+  const inputRole = 'secondary';
+
   return (
-    <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose}>
+    <DefaultModal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      type="primary"
+    >
       <Container>
         <Title>Fale conosco</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
-            <Input name="name" icon={FiUser} label="Nome" />
-            <Input name="cpf" icon={FiUser} label="Cpf" />
-            <Input name="email" icon={FiUser} label="Email" />
+            <Input
+              name="name"
+              icon={FiUser}
+              label="Nome"
+              inputRole={inputRole}
+            />
+            <Input name="cpf" icon={FiUser} label="Cpf" inputRole={inputRole} />
+            <Input
+              name="email"
+              icon={FiUser}
+              label="Email"
+              inputRole={inputRole}
+            />
             <BoxPhone>
-              <Input name="dddMobile" icon={FiUser} label="Celular" />
-              <Input name="mobile" icon={FiUser} />
+              <Input
+                name="dddMobile"
+                icon={FiUser}
+                label="Celular"
+                inputRole={inputRole}
+              />
+              <Input name="mobile" icon={FiUser} inputRole={inputRole} />
             </BoxPhone>
-            <SubjectSelect name="subject" />
-            <Input name="message" icon={FiUser} label="Mensagem" />
+            <SubjectSelect name="subject" inputRole={inputRole} />
+            <Input
+              name="message"
+              icon={FiUser}
+              label="Mensagem"
+              inputRole={inputRole}
+            />
             <Button type="submit" buttonRole="primary" loading={loading}>
               Cadastrar
             </Button>
