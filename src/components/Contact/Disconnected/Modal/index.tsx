@@ -41,13 +41,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const { addToast } = useToast();
 
   const methods = useForm<ContactFormData>({
-    validationSchema: schemaValidation,
+    // validationSchema: schemaValidation,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
   });
 
   const { handleSubmit, register, setValue } = methods;
   const onSubmit = handleSubmit(async data => {
+    console.log(data);
+    return;
     setLoading(true);
     try {
       const { message } = await openTicket({
@@ -74,6 +76,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       if (e && e.target && e.target.files && e.target.files.length > 0) {
         setAttaching(true);
         const { url } = await sendFile(e.target.files[0], 'avatar');
+        console.log(url);
         setValue('fileUrl', url);
         setFileAttached(true);
         setAttaching(false);
@@ -137,6 +140,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               inputRole={inputRole}
             />
 
+            <input type="hidden" name="fileUrl" ref={register} />
             {attaching ? (
               <AttachFile>Anexando...</AttachFile>
             ) : (
@@ -152,7 +156,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                       style={{ display: 'none' }}
                       onChange={handleAttachFile}
                     />
-                    <input type="hidden" name="fileUrl" ref={register()} />
                     <AttachFile>Anexar arquivo</AttachFile>
                   </label>
                 )}
