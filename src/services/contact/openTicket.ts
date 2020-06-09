@@ -30,6 +30,7 @@ export default async (contact: Contact): Promise<ContactResponse> => {
           text: contact.message,
         },
       ],
+      file: contact.fileUrl || '',
     };
     const { data } = await vendavallApi.post<ContactResponse>(
       'contacts/unlogged',

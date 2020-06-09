@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button as DefaultButton } from 'components/shared';
 
 export const Container = styled.div`
   display: flex;
@@ -40,4 +41,21 @@ export const BoxPhone = styled.div`
       width: 100%;
     }
   }
+`;
+
+export const Button = styled(DefaultButton)`
+  align-self: center;
+  width: 200px;
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+  }
+`;
+
+export const AttachFile = styled.span`
+  color: ${({ theme }) => theme.font.color.primary};
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
