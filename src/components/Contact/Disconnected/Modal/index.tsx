@@ -3,8 +3,14 @@ import DefaultModal from 'components/shared/Modal';
 import { useForm, FormContext } from 'react-hook-form';
 
 import { useToast } from 'context/ToastContext';
-import { Input, Button } from 'components/shared';
-import { FiUser } from 'react-icons/fi';
+import { Input, Button, TextArea } from 'components/shared';
+import {
+  FiUser,
+  FiMail,
+  FiSmartphone,
+  FiArchive,
+  FiMessageCircle,
+} from 'react-icons/fi';
 import openTicket from 'services/contact/openTicket';
 import SubjectSelect from '../PublicSubjectsSelect';
 import schemaValidation from './schemaValidation';
@@ -35,16 +41,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     validationSchema: schemaValidation,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
-    defaultValues: {
-      cpf: '12345678909',
-      dddMobile: '43',
-      email: 'test@test.com',
-      fileUrl: '',
-      message: 'teste',
-      mobile: '999001234',
-      name: 'Teste',
-      subject: 'test',
-    },
   });
 
   const { handleSubmit } = methods;
@@ -75,14 +71,31 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
             <Input name="name" icon={FiUser} label="Nome" />
-            <Input name="cpf" icon={FiUser} label="Cpf" />
-            <Input name="email" icon={FiUser} label="Email" />
+            <Input
+              name="cpf"
+              icon={FiArchive}
+              label="Cpf"
+              numbersOnly
+              pattern="XXX.XXX.XXX-XX"
+            />
+            <Input name="email" icon={FiMail} label="Email" />
             <BoxPhone>
-              <Input name="dddMobile" icon={FiUser} label="Celular" />
-              <Input name="mobile" icon={FiUser} />
+              <Input
+                name="dddMobile"
+                icon={FiSmartphone}
+                label="Celular"
+                numbersOnly
+                pattern="(XX)"
+              />
+              <Input
+                name="mobile"
+                icon={FiSmartphone}
+                numbersOnly
+                pattern="X XXXX-XXXX"
+              />
             </BoxPhone>
             <SubjectSelect name="subject" />
-            <Input name="message" icon={FiUser} label="Mensagem" />
+            <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
             <Button type="submit" buttonRole="primary" loading={loading}>
               Cadastrar
             </Button>

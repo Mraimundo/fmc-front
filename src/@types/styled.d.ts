@@ -48,6 +48,8 @@ declare module 'styled-components' {
         errorBorderWidth: string;
         focusedBorderWidth: string;
         filledBorderWidth: string;
+        scrollBarBackgroundColor: string;
+        scrollBarColor: string;
       };
       secondary: {
         borderColor: string;
@@ -66,6 +68,8 @@ declare module 'styled-components' {
         errorBorderWidth: string;
         focusedBorderWidth: string;
         filledBorderWidth: string;
+        scrollBarBackgroundColor: string;
+        scrollBarColor: string;
       };
     };
     tooltip: {

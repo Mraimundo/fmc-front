@@ -19,7 +19,7 @@ export const BoxPhone = styled.div`
   display: flex;
   > div {
     justify-content: flex-end;
-    width: 121px;
+    width: 130px;
     margin-right: 20px;
     & + div {
       margin-right: 0;
