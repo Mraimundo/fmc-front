@@ -15,6 +15,11 @@ export const Container = styled.div`
   @media screen and (max-width: 520px) {
     width: 320px;
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Title = styled.h3`
