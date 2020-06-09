@@ -2,7 +2,7 @@ import { vendavallApi } from 'services/api';
 
 interface Subject {
   id: string;
-  name: string;
+  title: string;
 }
 
 interface ApiResponse {
@@ -29,7 +29,7 @@ const getPublicSubjectsForSelect = async (): Promise<Option[]> => {
   const subjects = await getPublicSubjects();
   return subjects.map(item => ({
     value: item.id,
-    title: item.name,
+    title: item.title,
   }));
 };
 
