@@ -6,6 +6,11 @@ export const Container = styled.div`
   flex-direction: column;
 
   padding: 20px 40px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Title = styled.h3`
