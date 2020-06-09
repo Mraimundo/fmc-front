@@ -26,6 +26,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   numbersOnly?: boolean;
   pattern?: string;
+  inputRole?: 'primary' | 'secondary';
 }
 
 const Input: React.FC<InputProps> = ({
@@ -39,6 +40,7 @@ const Input: React.FC<InputProps> = ({
   numbersOnly = false,
   pattern = '',
   type = 'text',
+  inputRole = 'primary',
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -98,12 +100,13 @@ const Input: React.FC<InputProps> = ({
   return useMemo(
     () => (
       <Container className={className}>
-        {!!label && <Label>{label}</Label>}
+        {!!label && <Label inputRole={inputRole}>{label}</Label>}
         <InputContainer
           hasError={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
           className="_inputContainer"
+          inputRole={inputRole}
         >
           {Icon && (
             <IconContainer className="_iconContainer">
@@ -124,7 +127,7 @@ const Input: React.FC<InputProps> = ({
             {...rest}
           />
           {!!error && (
-            <Error title={error} type="error">
+            <Error title={error} type="error" inputRole={inputRole}>
               <FiAlertCircle size={20} />
             </Error>
           )}
@@ -145,6 +148,7 @@ const Input: React.FC<InputProps> = ({
       handleChange,
       type,
       rest,
+      inputRole,
     ],
   );
 };

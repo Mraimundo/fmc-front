@@ -26,6 +26,7 @@ interface InputProps
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
   label?: string;
+  inputRole?: 'primary' | 'secondary';
 }
 
 const PasswordInput: React.FC<InputProps> = ({
@@ -35,6 +36,7 @@ const PasswordInput: React.FC<InputProps> = ({
   onFocus,
   className,
   label,
+  inputRole = 'primary',
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -77,12 +79,13 @@ const PasswordInput: React.FC<InputProps> = ({
   return useMemo(
     () => (
       <Container className={className}>
-        {!!label && <Label>{label}</Label>}
+        {!!label && <Label inputRole={inputRole}>{label}</Label>}
         <InputContainer
           hasError={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
           className="_inputContainer"
+          inputRole={inputRole}
         >
           {Icon && (
             <IconContainer className="_iconContainer">
@@ -101,7 +104,7 @@ const PasswordInput: React.FC<InputProps> = ({
             autoComplete="off"
             {...rest}
           />
-          <EyeContainer>
+          <EyeContainer inputRole={inputRole}>
             {type === 'text' ? (
               <AiFillEye size={26} onClick={() => handleEyeClick(false)} />
             ) : (
@@ -112,7 +115,7 @@ const PasswordInput: React.FC<InputProps> = ({
             )}
           </EyeContainer>
           {!!error && (
-            <Error title={error} type="error">
+            <Error title={error} type="error" inputRole={inputRole}>
               <FiAlertCircle size={20} />
             </Error>
           )}
@@ -133,6 +136,7 @@ const PasswordInput: React.FC<InputProps> = ({
       type,
       handleEyeClick,
       label,
+      inputRole,
     ],
   );
 };

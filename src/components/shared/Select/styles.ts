@@ -5,6 +5,15 @@ interface InputContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   hasError: boolean;
+  inputRole: 'primary' | 'secondary';
+}
+
+interface ErrorProps {
+  inputRole: 'primary' | 'secondary';
+}
+
+interface LabelProps {
+  inputRole: 'primary' | 'secondary';
 }
 
 export const Container = styled.div`
@@ -24,51 +33,53 @@ export const IconContainer = styled.div`
 `;
 
 export const InputContainer = styled.div<InputContainerProps>`
-  background: ${({ theme }) => theme.input.backgroundColor};
-  border-radius: ${({ theme }) => theme.input.borderRadius};
+  background: ${({ theme, inputRole }) =>
+    theme.input[inputRole].backgroundColor};
+  border-radius: ${({ theme, inputRole }) =>
+    theme.input[inputRole].borderRadius};
   padding: 0;
   width: 100%;
   height: 57px;
   display: flex;
   align-items: center;
-  border: ${({ theme }) => theme.input.borderWidth} solid
-    ${({ theme }) => theme.input.borderColor};
-  color: ${({ theme }) => theme.input.iconColor};
+  border: ${({ theme, inputRole }) => theme.input[inputRole].borderWidth} solid
+    ${({ theme, inputRole }) => theme.input[inputRole].borderColor};
+  color: ${({ theme, inputRole }) => theme.input[inputRole].iconColor};
   margin-bottom: 8px;
 
   ${IconContainer} {
-    color: ${({ theme }) => theme.input.iconColor};
+    color: ${({ theme, inputRole }) => theme.input[inputRole].iconColor};
   }
 
-  ${({ hasError, theme }) =>
+  ${({ hasError, theme, inputRole }) =>
     hasError &&
     css`
-      border-color: ${theme.input.errorBorderColor};
-      border-width: ${theme.input.errorBorderWidth};
+      border-color: ${theme.input[inputRole].errorBorderColor};
+      border-width: ${theme.input[inputRole].errorBorderWidth};
       ${IconContainer} {
-        color: ${theme.input.errorIconColor};
+        color: ${theme.input[inputRole].errorIconColor};
       }
     `};
 
-  ${({ isFocused, theme }) =>
+  ${({ isFocused, theme, inputRole }) =>
     isFocused &&
     css`
-      border-color: ${theme.input.focusedBorderColor};
-      color: ${theme.input.filledIconColor};
-      border-width: ${theme.input.focusedBorderWidth};
+      border-color: ${theme.input[inputRole].focusedBorderColor};
+      color: ${theme.input[inputRole].filledIconColor};
+      border-width: ${theme.input[inputRole].focusedBorderWidth};
       ${IconContainer} {
-        color: ${theme.input.filledIconColor};
+        color: ${theme.input[inputRole].filledIconColor};
       }
     `};
 
-  ${({ isFilled, theme }) =>
+  ${({ isFilled, theme, inputRole }) =>
     isFilled &&
     css`
-      border-color: ${theme.input.filledBorderColor};
-      color: ${theme.input.filledIconColor};
-      border-width: ${theme.input.filledBorderWidth};
+      border-color: ${theme.input[inputRole].filledBorderColor};
+      color: ${theme.input[inputRole].filledIconColor};
+      border-width: ${theme.input[inputRole].filledBorderWidth};
       ${IconContainer} {
-        color: ${theme.input.filledIconColor};
+        color: ${theme.input[inputRole].filledIconColor};
       }
     `};
 
@@ -76,10 +87,11 @@ export const InputContainer = styled.div<InputContainerProps>`
     width: 100%;
     background-color: transparent;
     border: 0;
-    color: ${({ theme }) => theme.input.fontColor};
+    color: ${({ theme, inputRole }) => theme.input[inputRole].fontColor};
 
     &::placeholder {
-      color: ${({ theme }) => theme.input.placeholderColor};
+      color: ${({ theme, inputRole }) =>
+        theme.input[inputRole].placeholderColor};
     }
   }
 
@@ -88,21 +100,21 @@ export const InputContainer = styled.div<InputContainerProps>`
   }
 `;
 
-export const Error = styled(Tooltip)`
+export const Error = styled(Tooltip)<ErrorProps>`
   height: 20px;
   margin-left: 16px;
 
   svg {
     margin: 0;
-    color: ${({ theme }) => theme.input.errorIconColor};
+    color: ${({ theme, inputRole }) => theme.input[inputRole].errorIconColor};
   }
 `;
 
-export const Label = styled.span`
+export const Label = styled.span<LabelProps>`
   font-size: 14px;
   align-self: flex-start;
   margin-left: 4px;
-  color: ${({ theme }) => theme.input.labelFontColor};
+  color: ${({ theme, inputRole }) => theme.input[inputRole].labelFontColor};
 `;
 
 export const Content = styled.div`
