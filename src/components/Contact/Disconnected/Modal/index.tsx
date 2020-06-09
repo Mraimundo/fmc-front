@@ -4,8 +4,9 @@ import { useForm, FormContext } from 'react-hook-form';
 
 import { useToast } from 'context/ToastContext';
 import { Input, Button } from 'components/shared';
-import { FiUser, FiLock } from 'react-icons/fi';
+import { FiUser } from 'react-icons/fi';
 import openTicket from 'services/contact/openTicket';
+import SubjectSelect from '../PublicSubjectsSelect';
 import schemaValidation from './schemaValidation';
 
 import { Container } from './styles';
@@ -50,10 +51,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
     try {
-      // Chama o servico de envio do form
       const { message } = await openTicket({
         ...data,
-        subjectId: 1,
+        subjectId: parseInt(data.subject, 0),
       });
       addToast({ title: message });
     } catch (e) {
@@ -80,12 +80,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               <Input name="dddMobile" icon={FiUser} label="Celular" />
               <Input name="mobile" icon={FiUser} />
             </div>
-            <Input name="subject" icon={FiUser} label="Assunto" />
+            <SubjectSelect name="subject" />
             <Input name="message" icon={FiUser} label="Mensagem" />
-
-            <Input name="test1" icon={FiUser} label="Mensagem" />
-            <Input name="test2" icon={FiUser} label="Mensagem" />
-            <Input name="test3" icon={FiUser} label="Mensagem" />
             <Button type="submit" buttonRole="primary" loading={loading}>
               Cadastrar
             </Button>
