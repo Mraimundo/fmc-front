@@ -97,7 +97,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             <SubjectSelect name="subject" />
             <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
             <Button type="submit" buttonRole="primary" loading={loading}>
-              Cadastrar
+              Enviar
             </Button>
           </form>
         </FormContext>
