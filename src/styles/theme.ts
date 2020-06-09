@@ -47,6 +47,8 @@ export default {
       errorBorderWidth: '1px',
       focusedBorderWidth: '1px',
       filledBorderWidth: '1px',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
     },
     secondary: {
       borderColor: '#808285',
@@ -65,6 +67,8 @@ export default {
       errorBorderWidth: '1px',
       focusedBorderWidth: '1px',
       filledBorderWidth: '1px',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
     },
   },
   tooltip: {

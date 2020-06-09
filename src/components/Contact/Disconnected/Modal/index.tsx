@@ -3,8 +3,14 @@ import DefaultModal from 'components/shared/Modal';
 import { useForm, FormContext } from 'react-hook-form';
 
 import { useToast } from 'context/ToastContext';
-import { Input, Button } from 'components/shared';
-import { FiUser } from 'react-icons/fi';
+import { Input, Button, TextArea } from 'components/shared';
+import {
+  FiUser,
+  FiMail,
+  FiSmartphone,
+  FiArchive,
+  FiMessageCircle,
+} from 'react-icons/fi';
 import openTicket from 'services/contact/openTicket';
 import SubjectSelect from '../PublicSubjectsSelect';
 import schemaValidation from './schemaValidation';
@@ -35,16 +41,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     validationSchema: schemaValidation,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
-    defaultValues: {
-      cpf: '12345678909',
-      dddMobile: '43',
-      email: 'test@test.com',
-      fileUrl: '',
-      message: 'teste',
-      mobile: '999001234',
-      name: 'Teste',
-      subject: 'test',
-    },
   });
 
   const { handleSubmit } = methods;
@@ -86,26 +82,41 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               label="Nome"
               inputRole={inputRole}
             />
-            <Input name="cpf" icon={FiUser} label="Cpf" inputRole={inputRole} />
+            <Input
+              name="cpf"
+              icon={FiArchive}
+              label="Cpf"
+              numbersOnly
+              pattern="XXX.XXX.XXX-XX"
+              inputRole={inputRole}
+            />
             <Input
               name="email"
-              icon={FiUser}
+              icon={FiMail}
               label="Email"
               inputRole={inputRole}
             />
             <BoxPhone>
               <Input
                 name="dddMobile"
-                icon={FiUser}
+                icon={FiSmartphone}
                 label="Celular"
+                numbersOnly
+                pattern="(XX)"
                 inputRole={inputRole}
               />
-              <Input name="mobile" icon={FiUser} inputRole={inputRole} />
+              <Input
+                name="mobile"
+                icon={FiSmartphone}
+                numbersOnly
+                pattern="X XXXX-XXXX"
+                inputRole={inputRole}
+              />
             </BoxPhone>
             <SubjectSelect name="subject" inputRole={inputRole} />
-            <Input
+            <TextArea
               name="message"
-              icon={FiUser}
+              icon={FiMessageCircle}
               label="Mensagem"
               inputRole={inputRole}
             />
