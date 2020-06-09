@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Draggable from 'react-draggable';
 import { Container, Content } from './styles';
-import Modal from './Modal/Disconnected';
+import Modal from './Disconnected/Modal';
 
 type Position = 'left-bottom' | 'right-bottom' | 'left-top' | 'right-top';
 
