@@ -1,14 +1,17 @@
 import { storageApi } from '../api';
 
-interface ApiResponse {
+interface StorageData {
   id: string;
   url: string;
+}
+interface ApiResponse {
+  data: StorageData;
 }
 
 export default async (
   file: Blob,
   storageFolder: string,
-): Promise<ApiResponse> => {
+): Promise<StorageData> => {
   const request = new FormData();
   const storageKey = process.env.REACT_APP_STORAGE_KEY;
   request.append('fileToUpload', file);
@@ -18,5 +21,6 @@ export default async (
     request,
   );
 
-  return response;
+  const { id, url } = response.data;
+  return { id, url };
 };
