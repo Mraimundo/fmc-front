@@ -48,8 +48,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
 
   const { handleSubmit, register, setValue } = methods;
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
-    return;
     setLoading(true);
     try {
       const { message } = await openTicket({
@@ -76,7 +74,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       if (e && e.target && e.target.files && e.target.files.length > 0) {
         setAttaching(true);
         const { url } = await sendFile(e.target.files[0], 'avatar');
-        console.log(url);
         setValue('fileUrl', url);
         setFileAttached(true);
         setAttaching(false);
