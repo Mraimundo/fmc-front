@@ -139,10 +139,10 @@ const Select: React.FC<SelectProps> = ({
             }}
             classes={classes}
             getOptionSelected={(option, value) =>
-              option?.value === value?.value}
+              option?.value === value?.value
+            }
             options={options}
             loading={loading}
-            componentName={name}
             onChange={(event, value) => {
               setValue(name, value?.value);
               setIsFilled(!!value);
