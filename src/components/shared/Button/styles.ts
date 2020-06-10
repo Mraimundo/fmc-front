@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
+import { shade, lighten } from 'polished';
 
 interface ContainerProps {
   buttonRole: 'primary' | 'secondary';
@@ -21,11 +21,27 @@ export const Container = styled.button<ContainerProps>`
   justify-content: center;
   align-items: center;
 
-  transition: background-color 0.2s;
+  background-position: center;
+  transition: background 0.5s;
   will-change: background-color;
   &:hover {
     background: ${({ theme, buttonRole }) =>
-      shade(0.2, theme.button[buttonRole].backgroundColor)};
+        shade(0.2, theme.button[buttonRole].backgroundColor)}
+      radial-gradient(
+        circle,
+        transparent 1%,
+        ${({ theme, buttonRole }) =>
+            shade(0.2, theme.button[buttonRole].backgroundColor)}
+          1%
+      )
+      center/15000%;
+  }
+
+  &:active {
+    background-color: ${({ theme, buttonRole }) =>
+      shade(0.3, theme.button[buttonRole].backgroundColor)};
+    background-size: 100%;
+    transition: background 0s;
   }
 
   ._loading {
