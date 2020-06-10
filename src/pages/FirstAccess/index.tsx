@@ -2,7 +2,7 @@ import React from 'react';
 import { useSpring } from 'react-spring';
 
 import logoImg from 'assets/images/logo.png';
-import FormFmc from './FormFmc';
+import Form from './Form';
 
 import { Container, Content, contentAnimation } from './styles';
 
@@ -13,7 +13,7 @@ const FirstAccess: React.FC = () => {
     <Container>
       <img src={logoImg} alt="Logo" />
       <Content style={props}>
-        <FormFmc />
+        <Form />
       </Content>
     </Container>
   );

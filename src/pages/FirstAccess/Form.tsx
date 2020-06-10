@@ -3,19 +3,26 @@ import React, { useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
-
-import { Button, PasswordInput } from 'components/shared';
+import { PROFILES } from 'config/constants';
 
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 
-import { Title, Info, BoxPhone, Separator, Avatar, Input } from './styles';
+import {
+  Title,
+  Info,
+  Separator,
+  Avatar,
+  Input,
+  PasswordInput,
+  Button,
+} from './styles';
 
 interface FirstAccessFormData {
   cpf: string;
   password: string;
 }
 
-const FormFmc: React.FC = () => {
+const Form: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
   const inputRole = 'secondary';
@@ -50,13 +57,9 @@ const FormFmc: React.FC = () => {
     setLoading(false);
   });
 
-  return (
-    <FormContext {...methods}>
-      <form onSubmit={onSubmit}>
-        <Title>
-          Ativar cadastro - <strong>Equipe FMC</strong>
-        </Title>
-        <Avatar name="avatar" inputRole={inputRole} />
+  const componentsByProfile = {
+    [PROFILES.fmc]: () => (
+      <>
         <Info>
           <span>Departamento</span>
           <p>CRM</p>
@@ -69,6 +72,29 @@ const FormFmc: React.FC = () => {
           <span>UPN</span>
           <p>fernanda.pelegrinoti</p>
         </Info>
+      </>
+    ),
+    [PROFILES.focalPoint]: () => (
+      <>
+        <Info>
+          <span>Empresa</span>
+          <p>Agro Amazônia</p>
+        </Info>
+      </>
+    ),
+  };
+
+  // Pegar do retorno da API
+  const profile = 'focal_point';
+
+  return (
+    <FormContext {...methods}>
+      <form onSubmit={onSubmit}>
+        <Title>
+          Ativar cadastro - <strong>Equipe FMC</strong>
+        </Title>
+        <Avatar name="avatar" inputRole={inputRole} />
+        {componentsByProfile[profile]()}
         <Input
           name="nickname"
           icon={FiUser}
@@ -90,28 +116,19 @@ const FormFmc: React.FC = () => {
         <Input
           name="cpf"
           icon={FiUser}
-          label="CPF"
+          label="CPF*"
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
           inputRole={inputRole}
         />
-        <BoxPhone>
-          <Input
-            name="dddMobile"
-            icon={FiSmartphone}
-            label="Celular"
-            numbersOnly
-            pattern="(XX)"
-            inputRole={inputRole}
-          />
-          <Input
-            name="mobile"
-            icon={FiSmartphone}
-            numbersOnly
-            pattern="X XXXX-XXXX"
-            inputRole={inputRole}
-          />
-        </BoxPhone>
+        <Input
+          name="mobile"
+          icon={FiSmartphone}
+          numbersOnly
+          pattern="(XX) X XXXX-XXXX"
+          label="Celular*"
+          inputRole={inputRole}
+        />
         <Separator />
         <Title>Segurança</Title>
         <PasswordInput
@@ -126,7 +143,7 @@ const FormFmc: React.FC = () => {
           label="Confirmar Senha"
           inputRole={inputRole}
         />
-        <Button type="submit" buttonRole={inputRole} loading={loading}>
+        <Button type="submit" buttonRole="primary" loading={loading}>
           Enviar cadastro para aprovação
         </Button>
       </form>
@@ -134,4 +151,4 @@ const FormFmc: React.FC = () => {
   );
 };
 
-export default FormFmc;
+export default Form;

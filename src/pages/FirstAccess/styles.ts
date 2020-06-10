@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import {
   Avatar as DefaultAvatar,
   Input as DefaultInput,
+  PasswordInput as DefaultPasswordInput,
+  Button as DefaultButton,
 } from 'components/shared';
 import { animated } from 'react-spring';
 
@@ -26,6 +28,11 @@ export const Content = styled(animated.div)`
   width: 720px;
   background: #fff;
   padding: 20px 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const contentAnimation = {
@@ -41,23 +48,24 @@ export const Avatar = styled(DefaultAvatar)`
     margin-top: 0;
     font-size: 14px;
     font-weight: bold;
-    @media screen and (min-width: 1367px) {
-      height: 40px;
-      font-size: 16px;
-    }
+    /*@media screen and (min-width: 1367px) {*/
+    height: 40px;
+    font-size: 16px;
+    /*}*/
   }
 `;
 
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.primary};
+  margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
   strong {
     font-weight: bolder;
   }
-  @media screen and (min-width: 1367px) {
-    font-size: 24px;
-  }
+  /*@media screen and (min-width: 1367px) {*/
+  font-size: 24px;
+  /*}*/
 `;
 
 export const Info = styled.div`
@@ -77,15 +85,38 @@ export const Info = styled.div`
 `;
 
 export const Input = styled(DefaultInput)`
-  margin-top: 10px;
+  margin-top: 15px;
   max-width: 350px;
 
-  @media screen and (max-width: 1368px) {
-    ._inputContainer {
-      height: 40px;
-    }
+  /*@media screen and (max-width: 1368px) {*/
+  ._inputContainer {
+    height: 40px;
   }
+  /*}*/
 `;
 
-export const BoxPhone = styled.div``;
-export const Separator = styled.div``;
+export const PasswordInput = styled(DefaultPasswordInput)`
+  margin-top: 15px;
+  max-width: 350px;
+
+  /*@media screen and (max-width: 1368px) {*/
+  ._inputContainer {
+    height: 40px;
+  }
+  /*}*/
+`;
+
+export const Button = styled(DefaultButton)`
+  margin-top: 15px;
+  max-width: 300px;
+  align-self: center;
+  height: 44px;
+  margin-top: 30px;
+`;
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 25px 0;
+`;
