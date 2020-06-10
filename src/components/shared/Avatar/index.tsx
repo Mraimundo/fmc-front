@@ -48,10 +48,10 @@ const Avatar: React.FC<SelectProps> = ({
           }}
         />
         <img src={src || avatar} alt="Avatar" />
-        <label htmlFor="avatar">
+        <label htmlFor="fileAvatarId">
           <input
             type="file"
-            id="avatar"
+            id="fileAvatarId"
             accept="image/*"
             onChange={handleAttachFile}
           />
