@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { Button as DefaultButton } from 'components/shared';
+import {
+  Button as DefaultButton,
+  Input as DefaultInput,
+  TextArea as DefaultTextArea,
+} from 'components/shared';
+import Select from '../PublicSubjectsSelect';
 
 export const Container = styled.div`
   display: flex;
@@ -43,19 +48,40 @@ export const BoxPhone = styled.div`
   }
 `;
 
-export const Button = styled(DefaultButton)`
-  align-self: center;
-  width: 200px;
-
-  @media screen and (max-width: 520px) {
-    width: 100%;
-  }
-`;
-
 export const AttachFile = styled.span`
   color: ${({ theme }) => theme.font.color.primary};
   font-size: 14px;
   margin-bottom: 12px;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+export const Button = styled(DefaultButton)`
+  align-self: center;
+  width: 200px;
+  height: 52px;
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+  }
+`;
+
+export const Input = styled(DefaultInput)`
+  margin-bottom: 8px;
+  ._inputContainer {
+    height: 44px;
+  }
+`;
+
+export const SubjectSelect = styled(Select)`
+  margin-bottom: 8px;
+  ._inputContainer {
+    height: 44px;
+  }
+`;
+
+export const TextArea = styled(DefaultTextArea)`
+  ._inputContainer {
+    height: 90px;
+  }
 `;

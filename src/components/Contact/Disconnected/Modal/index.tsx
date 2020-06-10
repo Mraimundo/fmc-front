@@ -3,7 +3,7 @@ import DefaultModal from 'components/shared/Modal';
 import { useForm, FormContext } from 'react-hook-form';
 
 import { useToast } from 'context/ToastContext';
-import { Input, TextArea } from 'components/shared';
+import sendFile from 'services/storage/sendFile';
 import {
   FiUser,
   FiMail,
@@ -12,11 +12,19 @@ import {
   FiMessageCircle,
 } from 'react-icons/fi';
 import openTicket from 'services/contact/openTicket';
-import sendFile from 'services/storage/sendFile';
-import SubjectSelect from '../PublicSubjectsSelect';
+
 import schemaValidation from './schemaValidation';
 
-import { Container, Title, BoxPhone, Button, AttachFile } from './styles';
+import {
+  Container,
+  Title,
+  BoxPhone,
+  Input,
+  SubjectSelect,
+  TextArea,
+  Button,
+  AttachFile,
+} from './styles';
 
 interface ModalProps {
   isOpen: boolean;

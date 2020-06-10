@@ -6,10 +6,12 @@ import { getPublicSubjectsForSelect } from 'services/contact/publicSubjects';
 interface Props {
   name: string;
   inputRole?: 'primary' | 'secondary';
+  className?: string;
 }
 
 const PublicSubjectsSelect: React.FC<Props> = ({
   name,
+  className,
   inputRole = 'primary',
 }) => {
   return (
@@ -19,6 +21,7 @@ const PublicSubjectsSelect: React.FC<Props> = ({
       icon={FiMessageSquare}
       loadItems={getPublicSubjectsForSelect}
       inputRole={inputRole}
+      className={className}
     />
   );
 };
