@@ -18,6 +18,7 @@ const Avatar: React.FC<SelectProps> = ({
   inputRole = 'primary',
 }) => {
   const inputRef = useRef<HTMLInputElement>();
+  const inputFileRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [src, setSrc] = useState('');
 
@@ -54,8 +55,16 @@ const Avatar: React.FC<SelectProps> = ({
             id="fileAvatarId"
             accept="image/*"
             onChange={handleAttachFile}
+            ref={inputFileRef}
           />
-          <Button loading={loading} buttonRole={inputRole} type="button">
+          <Button
+            loading={loading}
+            buttonRole={inputRole}
+            type="button"
+            onClick={() => {
+              inputFileRef.current?.click();
+            }}
+          >
             Inserir imagem de perfil
           </Button>
         </label>
