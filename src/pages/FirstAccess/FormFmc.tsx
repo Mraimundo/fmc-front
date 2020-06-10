@@ -4,11 +4,11 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
-import { Input, Button, PasswordInput, Avatar } from 'components/shared';
+import { Input, Button, PasswordInput } from 'components/shared';
 
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 
-import { Title, Info, BoxPhone, Separator } from './styles';
+import { Title, Info, BoxPhone, Separator, Avatar } from './styles';
 
 interface FirstAccessFormData {
   cpf: string;

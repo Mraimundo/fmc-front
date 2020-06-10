@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSpring } from 'react-spring';
 
-import logoImg from 'assets/images/logo.svg';
+import logoImg from 'assets/images/logo.png';
 import FormFmc from './FormFmc';
 
 import { Container, Content, contentAnimation } from './styles';
