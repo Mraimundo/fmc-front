@@ -38,7 +38,7 @@ const Avatar: React.FC<SelectProps> = ({
 
   return useMemo(
     () => (
-      <Container className={className}>
+      <Container className={className} avatarSelected={!!src}>
         <input
           type="hidden"
           name={name}
