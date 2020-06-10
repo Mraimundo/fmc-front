@@ -1,10 +1,9 @@
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Button } from 'components/shared';
 import sendFile from 'services/storage/sendFile';
 import avatar from 'assets/images/avatar.svg';
 
-import { Container } from './styles';
+import { Container, Button } from './styles';
 
 interface SelectProps {
   name: string;
