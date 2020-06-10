@@ -12,7 +12,6 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   width: fit-content;
   img {
-    padding: 1px;
     width: 121px;
     object-fit: cover;
 
