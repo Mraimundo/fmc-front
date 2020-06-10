@@ -4,11 +4,11 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
-import { Input, Button, PasswordInput } from 'components/shared';
+import { Button, PasswordInput } from 'components/shared';
 
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 
-import { Title, Info, BoxPhone, Separator, Avatar } from './styles';
+import { Title, Info, BoxPhone, Separator, Avatar, Input } from './styles';
 
 interface FirstAccessFormData {
   cpf: string;
@@ -53,7 +53,9 @@ const FormFmc: React.FC = () => {
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <Title>Ativar cadastro - Equipe FMC</Title>
+        <Title>
+          Ativar cadastro - <strong>Equipe FMC</strong>
+        </Title>
         <Avatar name="avatar" inputRole={inputRole} />
         <Info>
           <span>Departamento</span>
@@ -73,7 +75,6 @@ const FormFmc: React.FC = () => {
           label="Como gostaria de ser chamado*"
           inputRole={inputRole}
         />
-
         <Input
           name="name"
           icon={FiUser}

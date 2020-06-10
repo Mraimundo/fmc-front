@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { Avatar as DefaultAvatar } from 'components/shared';
+import {
+  Avatar as DefaultAvatar,
+  Input as DefaultInput,
+} from 'components/shared';
 import { animated } from 'react-spring';
 
 export const Container = styled.div`
@@ -15,7 +18,7 @@ export const Container = styled.div`
 
   > img {
     width: 260px;
-    margin-top: 15px;
+    margin: 15px 0;
   }
 `;
 
@@ -32,14 +35,59 @@ export const contentAnimation = {
 
 export const Avatar = styled(DefaultAvatar)`
   margin-top: 15px;
+  margin-bottom: 5px;
+  button {
+    height: 35px;
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: bold;
+    @media screen and (min-width: 1367px) {
+      height: 40px;
+      font-size: 16px;
+    }
+  }
 `;
 
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.primary};
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
+  strong {
+    font-weight: bolder;
+  }
+  @media screen and (min-width: 1367px) {
+    font-size: 24px;
+  }
 `;
 
-export const Info = styled.div``;
+export const Info = styled.div`
+  margin-top: 15px;
+
+  span {
+    color: ${({ theme }) => theme.font.color.secondary};
+    font-size: 14px;
+  }
+
+  p {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+`;
+
+export const Input = styled(DefaultInput)`
+  margin-top: 15px;
+  margin-bottom: 10px;
+  max-width: 350px;
+
+  @media screen and (max-width: 1368px) {
+    height: 50px;
+    ._inputContainer {
+      height: 40px;
+    }
+  }
+`;
+
 export const BoxPhone = styled.div``;
 export const Separator = styled.div``;
