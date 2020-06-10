@@ -39,7 +39,7 @@ export const Container = styled.button<ContainerProps>`
 
   &:active {
     background-color: ${({ theme, buttonRole }) =>
-      shade(0.3, theme.button[buttonRole].backgroundColor)};
+      lighten(0.1, theme.button[buttonRole].backgroundColor)};
     background-size: 100%;
     transition: background 0s;
   }
