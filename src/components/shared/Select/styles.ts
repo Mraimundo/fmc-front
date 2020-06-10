@@ -45,7 +45,6 @@ export const InputContainer = styled.div<InputContainerProps>`
   border: ${({ theme, inputRole }) => theme.input[inputRole].borderWidth} solid
     ${({ theme, inputRole }) => theme.input[inputRole].borderColor};
   color: ${({ theme, inputRole }) => theme.input[inputRole].iconColor};
-  margin-bottom: 8px;
 
   ${IconContainer} {
     color: ${({ theme, inputRole }) => theme.input[inputRole].iconColor};
