@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button as DefaultButton } from 'components/shared';
 
-export const Container = styled.div`
+interface ContainerProps {
+  avatarSelected: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,10 +13,15 @@ export const Container = styled.div`
   width: fit-content;
   img {
     padding: 1px;
-    border-radius: 50%;
     width: 120px;
-    height: 120px;
     object-fit: cover;
+
+    ${({ avatarSelected }) =>
+      avatarSelected &&
+      css`
+        border-radius: 50%;
+        height: 120px;
+      `}
   }
 
   input {
