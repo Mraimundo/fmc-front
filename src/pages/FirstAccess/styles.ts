@@ -77,12 +77,10 @@ export const Info = styled.div`
 `;
 
 export const Input = styled(DefaultInput)`
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   max-width: 350px;
 
   @media screen and (max-width: 1368px) {
-    height: 50px;
     ._inputContainer {
       height: 40px;
     }
