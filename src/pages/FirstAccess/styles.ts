@@ -15,3 +15,8 @@ export const contentAnimation = {
   from: { marginRight: '-250px', opacity: 0 },
   to: { marginRight: '0', opacity: 1 },
 };
+
+export const Title = styled.h3``;
+export const Info = styled.div``;
+export const BoxPhone = styled.div``;
+export const Separator = styled.div``;

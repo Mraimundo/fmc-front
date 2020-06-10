@@ -4,9 +4,11 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
-import { Input, Button, PasswordInput } from 'components/shared';
+import { Input, Button, PasswordInput, Avatar } from 'components/shared';
 
-import { FiUser, FiLock } from 'react-icons/fi';
+import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
+
+import { Title, Info, BoxPhone, Separator } from './styles';
 
 interface FirstAccessFormData {
   cpf: string;
@@ -16,6 +18,7 @@ interface FirstAccessFormData {
 const FormFmc: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
+  const inputRole = 'secondary';
 
   const schema = Yup.object().shape({
     cpf: Yup.string().required('Cpf é obrigatório'),
@@ -51,7 +54,7 @@ const FormFmc: React.FC = () => {
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
         <Title>Ativar cadastro - Equipe FMC</Title>
-        <Avatar />
+        <Avatar name="avatar" inputRole={inputRole} />
         <Info>
           <span>Departamento</span>
           <p>CRM</p>
@@ -68,16 +71,28 @@ const FormFmc: React.FC = () => {
           name="nickname"
           icon={FiUser}
           label="Como gostaria de ser chamado*"
+          inputRole={inputRole}
         />
 
-        <Input name="name" icon={FiUser} label="Nome completo*" />
-        <Input name="email" icon={FiUser} label="Email*" />
+        <Input
+          name="name"
+          icon={FiUser}
+          label="Nome completo*"
+          inputRole={inputRole}
+        />
+        <Input
+          name="email"
+          icon={FiUser}
+          label="Email*"
+          inputRole={inputRole}
+        />
         <Input
           name="cpf"
           icon={FiUser}
           label="CPF"
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
+          inputRole={inputRole}
         />
         <BoxPhone>
           <Input
@@ -98,13 +113,19 @@ const FormFmc: React.FC = () => {
         </BoxPhone>
         <Separator />
         <Title>Segurança</Title>
-        <PasswordInput name="password" icon={FiLock} label="Senha" />
+        <PasswordInput
+          name="password"
+          icon={FiLock}
+          label="Senha"
+          inputRole={inputRole}
+        />
         <PasswordInput
           name="confirm_password"
           icon={FiLock}
           label="Confirmar Senha"
+          inputRole={inputRole}
         />
-        <Button type="submit" buttonRole="primary" loading={loading}>
+        <Button type="submit" buttonRole={inputRole} loading={loading}>
           Enviar cadastro para aprovação
         </Button>
       </form>
