@@ -67,8 +67,11 @@ const FormFmc: React.FC = () => {
         <Input
           name="nickname"
           icon={FiUser}
-          label="Como gostaria de ser chamado"
+          label="Como gostaria de ser chamado*"
         />
+
+        <Input name="name" icon={FiUser} label="Nome completo*" />
+        <Input name="email" icon={FiUser} label="Email*" />
         <Input
           name="cpf"
           icon={FiUser}
@@ -76,9 +79,33 @@ const FormFmc: React.FC = () => {
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
         />
+        <BoxPhone>
+          <Input
+            name="dddMobile"
+            icon={FiSmartphone}
+            label="Celular"
+            numbersOnly
+            pattern="(XX)"
+            inputRole={inputRole}
+          />
+          <Input
+            name="mobile"
+            icon={FiSmartphone}
+            numbersOnly
+            pattern="X XXXX-XXXX"
+            inputRole={inputRole}
+          />
+        </BoxPhone>
+        <Separator />
+        <Title>Segurança</Title>
         <PasswordInput name="password" icon={FiLock} label="Senha" />
+        <PasswordInput
+          name="confirm_password"
+          icon={FiLock}
+          label="Confirmar Senha"
+        />
         <Button type="submit" buttonRole="primary" loading={loading}>
-          Entrar
+          Enviar cadastro para aprovação
         </Button>
       </form>
     </FormContext>
