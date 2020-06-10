@@ -5,15 +5,17 @@ import { getPublicSubjectsForSelect } from 'services/contact/publicSubjects';
 
 interface Props {
   name: string;
+  className?: string;
 }
 
-const PublicSubjectsSelect: React.FC<Props> = ({ name }) => {
+const PublicSubjectsSelect: React.FC<Props> = ({ name, className }) => {
   return (
     <Select
       name={name}
       label="Assunto"
       icon={FiMessageSquare}
       loadItems={getPublicSubjectsForSelect}
+      className={className}
     />
   );
 };

@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import {
+  Input as DefaultInput,
+  TextArea as DefaultTextArea,
+} from 'components/shared';
+import Select from '../PublicSubjectsSelect';
 
 export const Container = styled.div`
   display: flex;
@@ -30,5 +35,25 @@ export const BoxPhone = styled.div`
       margin-right: 0;
       width: 100%;
     }
+  }
+`;
+
+export const Input = styled(DefaultInput)`
+  margin-bottom: 8px;
+  ._inputContainer {
+    height: 48px;
+  }
+`;
+
+export const SubjectSelect = styled(Select)`
+  margin-bottom: 8px;
+  ._inputContainer {
+    height: 48px;
+  }
+`;
+
+export const TextArea = styled(DefaultTextArea)`
+  ._inputContainer {
+    height: 90px;
   }
 `;
