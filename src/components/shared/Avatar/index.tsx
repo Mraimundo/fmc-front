@@ -1,4 +1,10 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
+import React, {
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+} from 'react';
 import { useFormContext } from 'react-hook-form';
 import sendFile from 'services/storage/sendFile';
 import avatar from 'assets/images/avatar.svg';
@@ -19,9 +25,14 @@ const Avatar: React.FC<SelectProps> = ({
   const inputRef = useRef<HTMLInputElement>();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const [src, setSrc] = useState('');
+  const [src, setSrc] = useState();
 
-  const { register, setValue } = useFormContext();
+  const { register, setValue, getValues } = useFormContext();
+
+  useEffect(() => {
+    if (src) return;
+    setSrc(getValues(name));
+  }, [src, name, getValues]);
 
   const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
