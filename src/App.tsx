@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
+import history from 'services/history';
 
 import GlobalStyle from 'styles/global';
 import Routes from 'routes';
@@ -11,9 +12,9 @@ dotenv.config();
 const App: React.FC = () => (
   <>
     <AppProvider>
-      <BrowserRouter>
+      <Router history={history}>
         <Routes />
-      </BrowserRouter>
+      </Router>
     </AppProvider>
     <GlobalStyle />
   </>
