@@ -30,7 +30,12 @@ interface Subsidiary {
   city: string;
 }
 
-export interface Participant {
+export interface Regulation {
+  regulation_id: string;
+  version: string;
+}
+
+interface ParticipantResponse {
   id: number;
   cpf: string;
   rg: string;
@@ -41,7 +46,7 @@ export interface Participant {
   birth_date: Date;
   created: Date; // "2020-06-10T14:47:34-03:00";
   gender: string;
-  area_code: null;
+  area_code: string;
   upn: string;
   nick_name: string;
   nationality: string;
@@ -59,20 +64,37 @@ export interface Participant {
   subsidiary: Subsidiary;
 }
 
+export interface Participant extends ParticipantResponse {
+  password: string;
+  password_confirmation: string;
+  education_level: string;
+  regulations_accepted: Regulation[];
+}
+
+const build = (data: ParticipantResponse): Participant => {
+  return {
+    ...data,
+    password: '',
+    password_confirmation: '',
+    education_level: '',
+    regulations_accepted: [],
+  };
+};
+
 export const getParticipantByCpf = async (
   cpf: string,
 ): Promise<Participant> => {
-  const { data } = await pluginApi.get<Participant>(
+  const { data } = await pluginApi.get<ParticipantResponse>(
     `participants/register?cpf=${cpf}`,
   );
-  return data;
+  return build(data);
 };
 
 export const getParticipantByUpn = async (
   upn: string,
 ): Promise<Participant> => {
-  const { data } = await pluginApi.get<Participant>(
+  const { data } = await pluginApi.get<ParticipantResponse>(
     `participants/register?upn=${upn}`,
   );
-  return data;
+  return build(data);
 };

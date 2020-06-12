@@ -160,7 +160,7 @@ const Form: React.FC<Props> = ({ participant }) => {
           inputRole={inputRole}
         />
         <PasswordInput
-          name="confirm_password"
+          name="password_confirmation"
           icon={FiLock}
           label="Confirmar Senha"
           inputRole={inputRole}
