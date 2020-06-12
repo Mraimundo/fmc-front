@@ -41,9 +41,8 @@ const FormSignIn: React.FC = () => {
       });
     } catch (e) {
       addToast({
-        description: e.response?.data?.message || 'Falha ao fazer login',
+        title: e.response?.data?.message || 'Falha ao fazer login',
         type: 'error',
-        title: 'Erro',
       });
     }
     setLoading(false);
