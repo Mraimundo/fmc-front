@@ -4,8 +4,9 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 import { PROFILES } from 'config/constants';
+import { Participant } from 'services/register/getParticipantData';
 
-import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
+import { FiUser, FiLock, FiSmartphone, FiPhone } from 'react-icons/fi';
 
 import {
   Title,
@@ -15,31 +16,35 @@ import {
   Input,
   PasswordInput,
   Button,
+  BoxPhone,
 } from './styles';
+
+interface Props {
+  participant: Participant;
+}
 
 interface FirstAccessFormData {
   cpf: string;
   password: string;
 }
 
-const Form: React.FC = () => {
+const Form: React.FC<Props> = ({ participant }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
   const inputRole = 'secondary';
 
-  const schema = Yup.object().shape({
-    cpf: Yup.string().required('Cpf é obrigatório'),
-    password: Yup.string().required('Senha é obrigatória'),
-  });
+  const schema = Yup.object().shape({});
 
-  const methods = useForm<FirstAccessFormData>({
+  const methods = useForm<Participant>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
+    defaultValues: participant,
   });
 
   const { handleSubmit } = methods;
-  const onSubmit = handleSubmit(async ({ cpf, password }) => {
+  const onSubmit = handleSubmit(async data => {
+    console.log(data);
     setLoading(true);
     try {
       // Chamar Serviço de Registro
@@ -80,6 +85,13 @@ const Form: React.FC = () => {
           <span>Empresa</span>
           <p>Agro Amazônia</p>
         </Info>
+        <Input
+          name="role.name"
+          icon={FiUser}
+          label="Cargo*"
+          inputRole={inputRole}
+          disabled
+        />
       </>
     ),
   };
@@ -96,7 +108,7 @@ const Form: React.FC = () => {
         <Avatar name="avatar" inputRole={inputRole} />
         {componentsByProfile[profile]()}
         <Input
-          name="nickname"
+          name="nick_name"
           icon={FiUser}
           label="Como gostaria de ser chamado*"
           inputRole={inputRole}
@@ -121,14 +133,24 @@ const Form: React.FC = () => {
           pattern="XXX.XXX.XXX-XX"
           inputRole={inputRole}
         />
-        <Input
-          name="mobile"
-          icon={FiSmartphone}
-          numbersOnly
-          pattern="(XX) X XXXX-XXXX"
-          label="Celular*"
-          inputRole={inputRole}
-        />
+        <BoxPhone>
+          <Input
+            name="area_code"
+            numbersOnly
+            pattern="(XX)"
+            label="DDD*"
+            inputRole={inputRole}
+          />
+          <Input
+            name="cell_phone"
+            icon={FiSmartphone}
+            numbersOnly
+            label="Celular*"
+            pattern="X XXXX-XXXX"
+            inputRole={inputRole}
+          />
+        </BoxPhone>
+
         <Separator />
         <Title>Segurança</Title>
         <PasswordInput

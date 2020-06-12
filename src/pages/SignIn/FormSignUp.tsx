@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -7,10 +7,16 @@ import { useToast } from 'context/ToastContext';
 import { Input, Button } from 'components/shared';
 import { FiUser } from 'react-icons/fi';
 
+import history from 'services/history';
+
+import {
+  getParticipantByCpf,
+  getParticipantByUpn,
+} from 'services/register/getParticipantData';
 import { MenuList, ItemList } from './styles';
 
 interface SignUpFormData {
-  cpf: string;
+  param_first_access: string;
 }
 
 type TypeSelect = 'fmc' | 'participant';
@@ -21,7 +27,7 @@ const FormSignUp: React.FC = () => {
   const { addToast } = useToast();
 
   const schema = Yup.object().shape({
-    cpf: Yup.string().required('Cpf é obrigatório'),
+    param_first_access: Yup.string().required('Campo obrigatório'),
   });
 
   const methods = useForm<SignUpFormData>({
@@ -30,12 +36,15 @@ const FormSignUp: React.FC = () => {
     mode: 'onSubmit',
   });
 
-  const { handleSubmit } = methods;
-  const onSubmit = handleSubmit(async ({ cpf }) => {
+  const { handleSubmit, setValue } = methods;
+  const onSubmit = handleSubmit(async ({ param_first_access }) => {
     setLoading(true);
     try {
-      // Pergunta do primeiro acesso
-      // Redireciona para o primeiro acesso
+      const participant =
+        typeSelected === 'participant'
+          ? await getParticipantByCpf(param_first_access)
+          : await getParticipantByUpn(param_first_access);
+      history.push('/firstAccess', participant);
     } catch (e) {
       addToast({
         description: e.response?.data?.message || 'Falha ao checar CPF',
@@ -46,33 +55,41 @@ const FormSignUp: React.FC = () => {
     setLoading(false);
   });
 
+  const handleSelectType = useCallback(
+    (type: TypeSelect) => {
+      setTypeSelected(type);
+      setValue('param_first_access', '');
+    },
+    [setValue],
+  );
+
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
         <MenuList>
           <ItemList
             active={typeSelected === 'participant'}
-            onClick={() => setTypeSelected('participant')}
+            onClick={() => handleSelectType('participant')}
           >
             Participante
           </ItemList>
           <ItemList
             active={typeSelected === 'fmc'}
-            onClick={() => setTypeSelected('fmc')}
+            onClick={() => handleSelectType('fmc')}
           >
             FMC
           </ItemList>
         </MenuList>
         {typeSelected === 'participant' ? (
           <Input
-            name="cpf_first_access"
+            name="param_first_access"
             icon={FiUser}
             placeholder="CPF"
             numbersOnly
             pattern="XXX.XXX.XXX-XX"
           />
         ) : (
-          <Input name="upn_first_access" icon={FiUser} placeholder="UPN" />
+          <Input name="param_first_access" icon={FiUser} placeholder="UPN" />
         )}
         <Button type="submit" buttonRole="primary" loading={loading}>
           Cadastrar

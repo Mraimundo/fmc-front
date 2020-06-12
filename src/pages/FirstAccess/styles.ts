@@ -120,3 +120,17 @@ export const Separator = styled.div`
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   margin: 25px 0;
 `;
+
+export const BoxPhone = styled.div`
+  display: flex;
+  max-width: 350px;
+  > div {
+    justify-content: flex-end;
+    width: 80px;
+    margin-right: 20px;
+    & + div {
+      margin-right: 0;
+      width: 100%;
+    }
+  }
+`;
