@@ -47,9 +47,8 @@ const FormSignUp: React.FC = () => {
       history.push('/firstAccess', participant);
     } catch (e) {
       addToast({
-        description: e.response?.data?.message || 'Falha ao checar CPF',
+        title: e.response?.data?.message || 'Falha ao checar CPF',
         type: 'error',
-        title: 'Erro',
       });
     }
     setLoading(false);
