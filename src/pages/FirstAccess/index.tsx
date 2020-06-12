@@ -29,9 +29,8 @@ const FirstAccess: React.FC = () => {
 
   const saveParticipant = useCallback(
     async (data: Participant): Promise<boolean> => {
-      // await save(data);
-      const test = { ...participant, ...data };
-      console.log(test);
+      const request = { ...participant, ...data } as Participant;
+      await save(request);
       return true;
     },
     [participant],

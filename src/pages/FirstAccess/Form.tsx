@@ -40,12 +40,12 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
 
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
-    saveParticipant(data);
     setLoading(true);
     try {
-      // Chamar Serviço de Registro
+      saveParticipant(data);
       addToast({
-        title: 'Login realizado com sucesso!',
+        title: 'Cadastro realizado com sucesso!',
+        description: 'Agora você já pode efetuar seu login',
         type: 'success',
       });
     } catch (e) {
