@@ -59,6 +59,10 @@ const Input: React.FC<InputProps> = ({
     [onFocus],
   );
 
+  useEffect(() => {
+    setIsFilled(!!inputRef.current?.value);
+  }, []);
+
   const onInputBlur = useCallback(
     ({ ...props }) => {
       setIsFocused(false);
