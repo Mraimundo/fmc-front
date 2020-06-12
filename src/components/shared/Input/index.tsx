@@ -27,6 +27,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   numbersOnly?: boolean;
   pattern?: string;
   inputRole?: 'primary' | 'secondary';
+  shouldRegister?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = ({
   pattern = '',
   type = 'text',
   inputRole = 'primary',
+  shouldRegister = true,
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -130,7 +132,7 @@ const Input: React.FC<InputProps> = ({
             name={name}
             type={type}
             ref={(e: HTMLInputElement) => {
-              register(e);
+              shouldRegister && register(e);
               inputRef.current = e;
             }}
             onBlur={onInputBlur}
@@ -161,6 +163,7 @@ const Input: React.FC<InputProps> = ({
       type,
       rest,
       inputRole,
+      shouldRegister,
     ],
   );
 };
