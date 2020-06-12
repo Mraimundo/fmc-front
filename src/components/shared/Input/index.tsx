@@ -59,10 +59,6 @@ const Input: React.FC<InputProps> = ({
     [onFocus],
   );
 
-  useEffect(() => {
-    setIsFilled(!!inputRef.current?.value);
-  }, []);
-
   const onInputBlur = useCallback(
     ({ ...props }) => {
       setIsFocused(false);
@@ -84,9 +80,9 @@ const Input: React.FC<InputProps> = ({
     [],
   );
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void | Promise<void> => {
-      let formattedValue = event.target.value;
+  const internalSetValue = useCallback(
+    value => {
+      let formattedValue = value;
       if (numbersOnly) {
         formattedValue = formatNumbersOnly(formattedValue);
       }
@@ -94,11 +90,23 @@ const Input: React.FC<InputProps> = ({
         formattedValue = formatString(pattern, formattedValue);
       }
       setValue(name, formattedValue);
+    },
+    [setValue, pattern, formatNumbersOnly, numbersOnly, name],
+  );
+
+  useEffect(() => {
+    setIsFilled(!!inputRef.current?.value);
+    internalSetValue(inputRef.current?.value);
+  }, [internalSetValue]);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void | Promise<void> => {
+      internalSetValue(event.target.value);
       if (typeof onChange === 'function') {
         onChange(event);
       }
     },
-    [onChange, name, formatNumbersOnly, numbersOnly, setValue, pattern],
+    [onChange, internalSetValue],
   );
 
   return useMemo(
