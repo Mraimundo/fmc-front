@@ -6,7 +6,7 @@ import { useToast } from 'context/ToastContext';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/register/getParticipantData';
 
-import { FiUser, FiLock, FiSmartphone, FiPhone } from 'react-icons/fi';
+import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 
 import {
   Title,
@@ -21,6 +21,7 @@ import {
 
 interface Props {
   participant: Participant;
+  saveParticipant(data: Participant): Promise<boolean>;
 }
 
 interface FirstAccessFormData {
@@ -28,7 +29,7 @@ interface FirstAccessFormData {
   password: string;
 }
 
-const Form: React.FC<Props> = ({ participant }) => {
+const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
   const inputRole = 'secondary';
@@ -44,7 +45,7 @@ const Form: React.FC<Props> = ({ participant }) => {
 
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
+    saveParticipant(data);
     setLoading(true);
     try {
       // Chamar Serviço de Registro
@@ -91,6 +92,7 @@ const Form: React.FC<Props> = ({ participant }) => {
           label="Cargo*"
           inputRole={inputRole}
           disabled
+          shouldRegister={false}
         />
       </>
     ),

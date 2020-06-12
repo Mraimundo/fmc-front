@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import history from 'services/history';
 import { useSpring } from 'react-spring';
 import { Participant } from 'services/register/getParticipantData';
+import save from 'services/register/saveParticipant';
 
 import logoImg from 'assets/images/logo.png';
 import Form from './Form';
@@ -26,13 +27,23 @@ const FirstAccess: React.FC = () => {
     }
   }, [location]);
 
+  const saveParticipant = useCallback(
+    async (data: Participant): Promise<boolean> => {
+      // await save(data);
+      const test = { ...participant, ...data };
+      console.log(test);
+      return true;
+    },
+    [participant],
+  );
+
   return (
     <>
       {!!participant && (
         <Container>
           <img src={logoImg} alt="Logo" />
           <Content style={props}>
-            <Form participant={participant} />
+            <Form participant={participant} saveParticipant={saveParticipant} />
           </Content>
         </Container>
       )}
