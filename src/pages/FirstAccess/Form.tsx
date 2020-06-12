@@ -24,11 +24,6 @@ interface Props {
   saveParticipant(data: Participant): Promise<boolean>;
 }
 
-interface FirstAccessFormData {
-  cpf: string;
-  password: string;
-}
-
 const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
@@ -68,15 +63,15 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
       <>
         <Info>
           <span>Departamento</span>
-          <p>CRM</p>
+          <p>{participant.department}</p>
         </Info>
         <Info>
           <span>Seu cargo</span>
-          <p>Gerente</p>
+          <p>{participant.role.name}</p>
         </Info>
         <Info>
           <span>UPN</span>
-          <p>fernanda.pelegrinoti</p>
+          <p>{participant.upn}</p>
         </Info>
       </>
     ),
@@ -84,13 +79,14 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
       <>
         <Info>
           <span>Empresa</span>
-          <p>Agro Amazônia</p>
+          <p>{participant.establishment.name}</p>
         </Info>
         <Input
           name="role.name"
           icon={FiUser}
           label="Cargo*"
           inputRole={inputRole}
+          value={participant.role.name}
           disabled
           shouldRegister={false}
         />
@@ -107,7 +103,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
         <Title>
           Ativar cadastro - <strong>Equipe FMC</strong>
         </Title>
-        <Avatar name="avatar" inputRole={inputRole} />
+        <Avatar name="picture" inputRole={inputRole} />
         {componentsByProfile[profile]()}
         <Input
           name="nick_name"
