@@ -72,7 +72,9 @@ const Input: React.FC<InputProps> = ({
     [onBlur],
   );
 
-  const internalErrorControl = errors[name];
+  const internalErrorControl = name
+    .split('.')
+    .reduce((node, prop) => node && node[prop], errors); // errors[index];
   useEffect(() => {
     setError(internalErrorControl?.message || '');
   }, [internalErrorControl]);
