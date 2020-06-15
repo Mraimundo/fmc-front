@@ -1,16 +1,15 @@
 import React, { useState, useCallback, useMemo } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
-import * as Yup from 'yup';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/register/getParticipantData';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
+import getschemaValidations from './getSchemaValidations';
 
 import {
   Title,
-  Info,
   Separator,
   Avatar,
   Input,
@@ -28,7 +27,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const [loading, setLoading] = useState(false);
   const inputRole = 'secondary';
 
-  const schema = Yup.object().shape({});
+  const schema = getschemaValidations(participant.profile);
 
   const methods = useForm<Participant>({
     validationSchema: schema,

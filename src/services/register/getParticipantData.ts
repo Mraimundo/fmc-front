@@ -1,4 +1,5 @@
 import { pluginApi } from 'services/api';
+import { IProfile } from 'config/constants';
 
 interface Address {
   id: number;
@@ -57,7 +58,7 @@ interface ParticipantResponse {
   pis_nis: string;
   department: string;
   access_premio_ideall: boolean;
-  profile: 'PARTICIPANTE' | 'FMC' | 'FOCAL';
+  profile: IProfile;
   address: Address;
   role: Role;
   establishment: Establishment;
