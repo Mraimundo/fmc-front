@@ -2,6 +2,7 @@ import { Participant, Regulation } from './getParticipantData';
 
 interface SaveRequest {
   cpf: string;
+  upn: string;
   password: string;
   password_confirmation: string;
   nick_name: string;
@@ -36,6 +37,7 @@ interface SaveRequest {
 export default (participant: Participant): SaveRequest => {
   return {
     cpf: participant.cpf,
+    upn: participant.upn,
     nick_name: participant.nick_name,
     name: participant.name,
     email: participant.email,

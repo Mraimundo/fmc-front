@@ -1,6 +1,6 @@
 import { pluginApi } from 'services/api';
 
-interface Regulation {
+export interface DataRegulation {
   id: number;
   name: string;
   content: string;
@@ -10,10 +10,10 @@ interface Regulation {
 }
 
 interface ApiResponse {
-  regulations: Regulation[];
+  regulations: DataRegulation[];
 }
 
-export default async (): Promise<Regulation> => {
+export default async (): Promise<DataRegulation> => {
   const { data } = await pluginApi.get<ApiResponse>('regulations/terms');
   return data.regulations[0];
 };

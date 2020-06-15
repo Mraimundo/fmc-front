@@ -1,4 +1,7 @@
+export type IProfile = 'FOCAL_POINT' | 'FMC' | 'PARTICIPANTE';
+
 export const PROFILES = {
-  focalPoint: 'focal_point',
-  fmc: 'fmc',
+  focalPoint: 'FOCAL_POINT',
+  fmc: 'FMC',
+  participant: 'PARTICIPANTE',
 };

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
-import { useToast } from 'context/ToastContext';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/register/getParticipantData';
-
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
+import ComponentsByProfile from './ComponentsByProfile';
+import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
 
 import {
   Title,
@@ -17,16 +17,15 @@ import {
   PasswordInput,
   Button,
   BoxPhone,
-} from './styles';
+} from '../styles';
 
 interface Props {
   participant: Participant;
-  saveParticipant(data: Participant): Promise<boolean>;
+  saveParticipant(data: Participant): Promise<void>;
 }
 
 const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const [loading, setLoading] = useState(false);
-  const { addToast } = useToast();
   const inputRole = 'secondary';
 
   const schema = Yup.object().shape({});
@@ -41,61 +40,9 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-    try {
-      saveParticipant(data);
-      addToast({
-        title: 'Cadastro realizado com sucesso!',
-        description: 'Agora você já pode efetuar seu login',
-        type: 'success',
-      });
-    } catch (e) {
-      addToast({
-        description: e.response?.data?.message || 'Falha ao fazer login',
-        type: 'error',
-        title: 'Erro',
-      });
-    }
+    await saveParticipant(data);
     setLoading(false);
   });
-
-  const componentsByProfile = {
-    [PROFILES.fmc]: () => (
-      <>
-        <Info>
-          <span>Departamento</span>
-          <p>{participant.department}</p>
-        </Info>
-        <Info>
-          <span>Seu cargo</span>
-          <p>{participant.role.name}</p>
-        </Info>
-        <Info>
-          <span>UPN</span>
-          <p>{participant.upn}</p>
-        </Info>
-      </>
-    ),
-    [PROFILES.focalPoint]: () => (
-      <>
-        <Info>
-          <span>Empresa</span>
-          <p>{participant.establishment.name}</p>
-        </Info>
-        <Input
-          name="role.name"
-          icon={FiUser}
-          label="Cargo*"
-          inputRole={inputRole}
-          value={participant.role.name}
-          disabled
-          shouldRegister={false}
-        />
-      </>
-    ),
-  };
-
-  // Pegar do retorno da API
-  const profile = 'focal_point';
 
   return (
     <FormContext {...methods}>
@@ -104,7 +51,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
           Ativar cadastro - <strong>Equipe FMC</strong>
         </Title>
         <Avatar name="picture" inputRole={inputRole} />
-        {componentsByProfile[profile]()}
+        <ComponentsByProfile participant={participant} inputRole={inputRole} />
         <Input
           name="nick_name"
           icon={FiUser}
@@ -148,6 +95,10 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
             inputRole={inputRole}
           />
         </BoxPhone>
+
+        {participant.profile === PROFILES.participant && (
+          <ExtraFieldsForParticipant inputRole={inputRole} />
+        )}
 
         <Separator />
         <Title>Segurança</Title>
