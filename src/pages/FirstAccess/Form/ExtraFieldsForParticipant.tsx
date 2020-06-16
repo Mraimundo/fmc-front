@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useFormContext } from 'react-hook-form';
+import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
 import { FiUser } from 'react-icons/fi';
 import { Input, Separator } from '../styles';
 
@@ -7,6 +9,19 @@ interface Props {
 }
 
 const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
+  const { setValue } = useFormContext();
+
+  const handleCepBlur = useCallback(zipCode => {
+    getAddressInfo(zipCode).then(
+      ({ endereco, bairro, cidade, estado: { sigla } }) => {
+        setValue('address.street', endereco);
+        setValue('address.district', bairro);
+        setValue('address.city', cidade);
+        setValue('address.state_code', sigla);
+      },
+    );
+  }, []);
+
   return (
     <>
       <Separator />
@@ -75,6 +90,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         icon={FiUser}
         label="CEP"
         inputRole={inputRole}
+        onBlur={e => handleCepBlur(e.target.value)}
       />
 
       <Input

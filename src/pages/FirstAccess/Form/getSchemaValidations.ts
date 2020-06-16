@@ -28,6 +28,12 @@ const commomValidations = {
       hasUpperCase,
     )
     .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
+  password_confirmation: Yup.string()
+    .required(mandatoryMessage)
+    .oneOf(
+      [Yup.ref('password')],
+      'Confirmação de senha precisa ser igual a senha',
+    ),
 };
 
 export default (profile: IProfile): Yup.ObjectSchema<object> => {
