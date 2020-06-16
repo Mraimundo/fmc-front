@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Accordion as DefaultAccordion } from 'components/shared';
 import DefaultModal from 'components/shared/Modal';
 
 interface ContainerProps {
@@ -57,4 +58,11 @@ export const Content = styled.div`
 
 export const Title = styled.h1``;
 
-export const SubTitle = styled.h3``;
+export const SubTitle = styled.h3`
+  margin-top: 25px;
+  margin-bottom: 12px;
+`;
+
+export const Accordion = styled(DefaultAccordion)`
+  margin-bottom: 8px;
+`;

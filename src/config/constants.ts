@@ -9,5 +9,5 @@ export const PROFILES = {
 export const REGULATIONS_TYPE = {
   dataTerm: 'data_term',
   regulationOfCampaign: 'regulation_of_campaign',
-  safraTerm: 'safra_term,',
+  safraTerm: 'safra_term',
 };

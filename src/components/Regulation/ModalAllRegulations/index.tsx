@@ -49,7 +49,7 @@ const ModalAllRegulations: React.FC = () => {
         regulations.length > 0 && (
           <>
             <SubTitle>{TITLES[type]}</SubTitle>
-            {dataRegulations.map(item => (
+            {regulations.map(item => (
               <Accordion
                 key={`accordion-ragulation-${item.id}`}
                 title={item.name}
@@ -78,14 +78,11 @@ const ModalAllRegulations: React.FC = () => {
         <Content>
           <Title>Regulamentos</Title>
           {dataRegulations.length > 0 &&
-            printRegulation(dataRegulations, REGULATIONS_TYPE.dataTerm)}
+            printRegulation(dataRegulations, 'data_term')}
           {campaignRegulations.length > 0 &&
-            printRegulation(
-              campaignRegulations,
-              REGULATIONS_TYPE.regulationOfCampaign,
-            )}
+            printRegulation(campaignRegulations, 'regulation_of_campaign')}
           {safraRegulations.length > 0 &&
-            printRegulation(safraRegulations, REGULATIONS_TYPE.safraTerm)}
+            printRegulation(safraRegulations, 'safra_term')}
         </Content>
       </Container>
     </Modal>
