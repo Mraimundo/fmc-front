@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import Select from 'components/shared/Select';
 
-import { FaGraduationCap } from 'react-icons/fa';
+import { FaHandPaper } from 'react-icons/fa';
 
 interface Props {
   name: string;
@@ -10,9 +10,9 @@ interface Props {
   inputRole?: 'primary' | 'secondary';
 }
 
-const values = ['Médio Completo', 'Superior Completo', 'Superior Incompleto'];
+const values = ['Solteiro', 'Casado', 'Separado', 'Divorciado', 'Viúvo'];
 
-const GraduationLevelSelect: React.FC<Props> = ({
+const MaritalStatusSelect: React.FC<Props> = ({
   name,
   className,
   disabled = false,
@@ -28,8 +28,8 @@ const GraduationLevelSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Grau de instrução"
-      icon={FaGraduationCap}
+      label="Estado civil"
+      icon={FaHandPaper}
       loadItems={loadItems}
       className={className}
       disabled={disabled}
@@ -38,4 +38,4 @@ const GraduationLevelSelect: React.FC<Props> = ({
   );
 };
 
-export default GraduationLevelSelect;
+export default MaritalStatusSelect;

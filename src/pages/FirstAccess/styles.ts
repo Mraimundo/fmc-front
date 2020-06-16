@@ -7,6 +7,7 @@ import {
 } from 'components/shared';
 import { animated } from 'react-spring';
 import GraduationLevelSelect from './Form/GraduationLevelSelect';
+import MaritalSelect from './Form/MaritalStatusSelect';
 
 export const Container = styled.div`
   width: 100%;
@@ -108,6 +109,17 @@ export const PasswordInput = styled(DefaultPasswordInput)`
 `;
 
 export const GraduationSelect = styled(GraduationLevelSelect)`
+  margin-top: 15px;
+  max-width: 350px;
+
+  /*@media screen and (max-width: 1368px) {*/
+  ._inputContainer {
+    height: 40px;
+  }
+  /*}*/
+`;
+
+export const MaritalStatusSelect = styled(MaritalSelect)`
   margin-top: 15px;
   max-width: 350px;
 

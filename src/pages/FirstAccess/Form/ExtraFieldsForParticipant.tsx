@@ -2,7 +2,12 @@ import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
 import { FiUser } from 'react-icons/fi';
-import { Input, Separator, GraduationSelect } from '../styles';
+import {
+  Input,
+  Separator,
+  GraduationSelect,
+  MaritalStatusSelect,
+} from '../styles';
 
 interface Props {
   inputRole: 'primary' | 'secondary';
@@ -50,12 +55,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         inputRole={inputRole}
       />
 
-      <Input
-        name="marital_status"
-        icon={FiUser}
-        label="Estado civil"
-        inputRole={inputRole}
-      />
+      <MaritalStatusSelect name="marital_status" inputRole={inputRole} />
 
       <Input name="rg" icon={FiUser} label="RG" inputRole={inputRole} />
 
