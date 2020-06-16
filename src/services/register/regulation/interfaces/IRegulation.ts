@@ -10,3 +10,10 @@ export interface Regulation {
   type: RegulationType;
   accepted: boolean;
 }
+
+export interface RegulationResponse extends Omit<Regulation, 'accepted'> {
+  regulation_accepted_logs: {
+    id: number;
+    created: Date;
+  }[];
+}
