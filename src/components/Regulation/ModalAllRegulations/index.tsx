@@ -6,9 +6,15 @@ import {
 } from 'services/register/regulation/interfaces/IRegulation';
 import { REGULATIONS_TYPE } from 'config/constants';
 import logoImg from 'assets/images/logo.png';
-import { Accordion } from 'components/shared';
 
-import { Modal, Container, Content, Title, SubTitle } from './styles';
+import {
+  Modal,
+  Container,
+  Content,
+  Title,
+  SubTitle,
+  Accordion,
+} from './styles';
 
 const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
