@@ -29,6 +29,8 @@ interface SelectProps {
   className?: string;
   loadItems(search: string): Option[] | Promise<Option[]>;
   inputRole?: 'primary' | 'secondary';
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -38,6 +40,8 @@ const Select: React.FC<SelectProps> = ({
   label,
   loadItems,
   inputRole = 'primary',
+  placeholder = '',
+  disabled = false,
 }) => {
   const theme = useContext(ThemeContext);
   const useStyles = makeStyles({
@@ -103,12 +107,28 @@ const Select: React.FC<SelectProps> = ({
 
   const classes = useStyles();
 
-  const { register, errors, setValue, triggerValidation } = useFormContext();
+  const {
+    register,
+    errors,
+    setValue,
+    triggerValidation,
+    watch,
+  } = useFormContext();
 
   const internalErrorControl = errors[name];
   useEffect(() => {
     setError(internalErrorControl?.message || '');
   }, [internalErrorControl]);
+
+  const [internalValue, setInternalValue] = useState<Option | null>(null);
+  const op = watch(name);
+  useEffect(() => {
+    if (op === undefined) {
+      setInputValue('');
+      setInternalValue(null);
+      setIsFilled(false);
+    }
+  }, [op]);
 
   return useMemo(
     () => (
@@ -130,6 +150,7 @@ const Select: React.FC<SelectProps> = ({
           inputRole={inputRole}
         >
           <UiAutocomplete<Option>
+            disabled={disabled}
             open={open}
             onOpen={() => {
               setOpen(true);
@@ -139,18 +160,22 @@ const Select: React.FC<SelectProps> = ({
             }}
             classes={classes}
             getOptionSelected={(option, value) =>
-              option?.value === value?.value
-            }
+              option?.value === value?.value}
             options={options}
             loading={loading}
             onChange={(event, value) => {
               setValue(name, value?.value);
               setIsFilled(!!value);
+              setInternalValue({
+                title: value?.title || '',
+                value: value?.value || '',
+              });
               !!error && triggerValidation();
             }}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
             }}
+            value={internalValue}
             getOptionLabel={option => option.title}
             renderInput={params => (
               <Content>
@@ -212,6 +237,8 @@ const Select: React.FC<SelectProps> = ({
       setValue,
       triggerValidation,
       inputRole,
+      disabled,
+      internalValue,
     ],
   );
 };
