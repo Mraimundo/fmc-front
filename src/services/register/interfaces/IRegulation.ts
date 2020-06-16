@@ -1,3 +1,5 @@
+type RegulationType = 'data_term' | 'regulation_of_campaign' | 'safra_term';
+
 export interface Regulation {
   id: number;
   name: string;
@@ -5,4 +7,6 @@ export interface Regulation {
   version: number;
   file: string;
   display_option: 'text' | 'pdf';
+  type: RegulationType;
+  accepted: boolean;
 }
