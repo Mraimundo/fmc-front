@@ -1,4 +1,7 @@
-type RegulationType = 'data_term' | 'regulation_of_campaign' | 'safra_term';
+export type RegulationType =
+  | 'data_term'
+  | 'regulation_of_campaign'
+  | 'safra_term';
 
 export interface Regulation {
   id: number;

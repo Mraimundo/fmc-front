@@ -5,3 +5,9 @@ export const PROFILES = {
   fmc: 'FMC',
   participant: 'PARTICIPANTE',
 };
+
+export const REGULATIONS_TYPE = {
+  dataTerm: 'data_term',
+  regulationOfCampaign: 'regulation_of_campaign',
+  safraTerm: 'safra_term,',
+};

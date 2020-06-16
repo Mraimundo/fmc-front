@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
-import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
+import {
+  Regulation,
+  RegulationType,
+} from 'services/register/regulation/interfaces/IRegulation';
+import { REGULATIONS_TYPE } from 'config/constants';
 import logoImg from 'assets/images/logo.png';
+import { Accordion } from 'components/shared';
 
 import { Modal, Container, Content, Title, SubTitle } from './styles';
+
+const TITLES = {
+  [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
+  [REGULATIONS_TYPE.regulationOfCampaign]: 'Regulamento do Programa Juntos',
+  [REGULATIONS_TYPE.safraTerm]: 'Acordos de Safras',
+};
 
 const ModalAllRegulations: React.FC = () => {
   const [dataRegulations, setDataRegulations] = useState<
@@ -32,6 +43,27 @@ const ModalAllRegulations: React.FC = () => {
     });
   }, []);
 
+  const printRegulation = useCallback(
+    (regulations: Omit<Regulation, 'content'>[], type: RegulationType) => {
+      return (
+        regulations.length > 0 && (
+          <>
+            <SubTitle>{TITLES[type]}</SubTitle>
+            {dataRegulations.map(item => (
+              <Accordion
+                key={`accordion-ragulation-${item.id}`}
+                title={item.name}
+              >
+                <h1>Teste</h1>
+              </Accordion>
+            ))}
+          </>
+        )
+      );
+    },
+    [],
+  );
+
   return (
     <Modal
       isOpen
@@ -45,17 +77,15 @@ const ModalAllRegulations: React.FC = () => {
         <img src={logoImg} alt="Logo" />
         <Content>
           <Title>Regulamentos</Title>
-          {dataRegulations.length > 0 && (
-            <>
-              <SubTitle>Termos da Lei de Segurança de Dados</SubTitle>
-              {dataRegulations.map(item => (
-                <
-              ))}
-            </>
-          )}
-
-          <SubTitle>Regulamento do Programa Juntos</SubTitle>
-          <SubTitle>Acordos de Safras</SubTitle>
+          {dataRegulations.length > 0 &&
+            printRegulation(dataRegulations, REGULATIONS_TYPE.dataTerm)}
+          {campaignRegulations.length > 0 &&
+            printRegulation(
+              campaignRegulations,
+              REGULATIONS_TYPE.regulationOfCampaign,
+            )}
+          {safraRegulations.length > 0 &&
+            printRegulation(safraRegulations, REGULATIONS_TYPE.safraTerm)}
         </Content>
       </Container>
     </Modal>
