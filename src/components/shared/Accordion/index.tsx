@@ -6,10 +6,12 @@ interface Props {
   children: React.ReactNode;
   title?: string;
   type?: 'primary' | 'secondary';
+  className?: string;
 }
 
 const Accordion: React.FC<Props> = ({
   title = '',
+  className = '',
   type = 'primary',
   children,
 }) => {
@@ -20,7 +22,7 @@ const Accordion: React.FC<Props> = ({
   }, [open]);
 
   return (
-    <Container open={open} type={type}>
+    <Container open={open} type={type} className={className}>
       <ListValuesTitleWrapper onClick={toggleAccordion}>
         <ListValuesTitle open={open} type={type}>
           <h3>{title}</h3>
