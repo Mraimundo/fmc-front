@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Regulation } from 'services/register/interfaces/IRegulation';
+import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import parser from 'html-react-parser';
 
 import { Container, RegulationContent, Button } from './styles';
