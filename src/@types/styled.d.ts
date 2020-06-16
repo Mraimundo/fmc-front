@@ -13,6 +13,20 @@ declare module 'styled-components' {
         tertiary: string;
       };
     };
+    regulation: {
+      primary: {
+        backgroundColor: string;
+        scrollBarColor: string;
+        scrollBarBackgroundColor: string;
+        fontColor: string;
+      };
+      secondary: {
+        backgroundColor: string;
+        scrollBarColor: string;
+        scrollBarBackgroundColor: string;
+        fontColor: string;
+      };
+    };
     contact: {
       ballon: {
         backgroundColor: string;
