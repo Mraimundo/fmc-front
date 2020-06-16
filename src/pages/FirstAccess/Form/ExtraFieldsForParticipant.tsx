@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
 import { FiUser } from 'react-icons/fi';
-import { Input, Separator } from '../styles';
+import { Input, Separator, GraduationSelect } from '../styles';
 
 interface Props {
   inputRole: 'primary' | 'secondary';
@@ -34,12 +34,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         inputRole={inputRole}
       />
 
-      <Input
-        name="education_level"
-        icon={FiUser}
-        label="Grau de instrução"
-        inputRole={inputRole}
-      />
+      <GraduationSelect name="education_level" inputRole={inputRole} />
 
       <Input
         name="place_of_birth"

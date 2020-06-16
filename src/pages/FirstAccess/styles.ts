@@ -6,6 +6,7 @@ import {
   Button as DefaultButton,
 } from 'components/shared';
 import { animated } from 'react-spring';
+import GraduationLevelSelect from './Form/GraduationLevelSelect';
 
 export const Container = styled.div`
   width: 100%;
@@ -96,6 +97,17 @@ export const Input = styled(DefaultInput)`
 `;
 
 export const PasswordInput = styled(DefaultPasswordInput)`
+  margin-top: 15px;
+  max-width: 350px;
+
+  /*@media screen and (max-width: 1368px) {*/
+  ._inputContainer {
+    height: 40px;
+  }
+  /*}*/
+`;
+
+export const GraduationSelect = styled(GraduationLevelSelect)`
   margin-top: 15px;
   max-width: 350px;
 

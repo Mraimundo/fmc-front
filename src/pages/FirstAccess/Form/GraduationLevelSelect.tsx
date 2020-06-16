@@ -1,36 +1,38 @@
 import React, { useCallback } from 'react';
 import Select from 'components/shared/Select';
 
+import { FaGraduationCap } from 'react-icons/fa';
+
 interface Props {
   name: string;
   className?: string;
   disabled?: boolean;
-  onChange(y: number): void;
+  inputRole?: 'primary' | 'secondary';
 }
-
-const Years = ['2017', '2018', '2019', '2020'];
+const values = ['Solteiro', 'Casado', 'Separado', 'Divorciado', 'Viúvo'];
 
 const GraduationLevelSelect: React.FC<Props> = ({
   name,
   className,
   disabled = false,
-  onChange,
+  inputRole = 'primary',
 }) => {
-  const loadItems = useCallback((search = '') => {
-    return Years.filter(year => year.includes(search)).map(year => ({
-      value: year,
-      title: year,
+  const loadItems = useCallback(() => {
+    return values.map(item => ({
+      value: item.toLowerCase(),
+      title: item,
     }));
   }, []);
 
   return (
     <Select
       name={name}
-      label="Ano"
+      label="Grau de instrução"
+      icon={FaGraduationCap}
       loadItems={loadItems}
       className={className}
       disabled={disabled}
-      onChange={onChange}
+      inputRole={inputRole}
     />
   );
 };
