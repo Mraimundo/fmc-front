@@ -158,3 +158,36 @@ export const BoxPhone = styled.div`
     }
   }
 `;
+
+export const RegulationContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: linear-gradient(
+    90deg,
+    rgba(4, 36, 44, 1) 0%,
+    rgba(56, 77, 85, 1) 100%
+  );
+
+  > img {
+    width: 240px;
+    margin-top: 20px;
+  }
+
+  > div {
+    max-width: 800px;
+  }
+
+  button {
+    height: 45px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+`;
+
+export const RegulationContent = styled.div`
+  max-height: calc(100% - 94px);
+`;

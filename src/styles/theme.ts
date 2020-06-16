@@ -12,7 +12,7 @@ export default {
     primary: {
       backgroundColor: '#fff',
       scrollBarColor: '#c6c6c6',
-      scrollBarBackgroundColor: '#312e38',
+      scrollBarBackgroundColor: '#fff',
       fontColor: '#312e38',
     },
     secondary: {

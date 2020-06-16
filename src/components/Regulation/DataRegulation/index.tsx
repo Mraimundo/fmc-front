@@ -33,7 +33,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
         onClick={handleAcceptClick}
         loading={loading}
       >
-        Aceito
+        Aceito participar
       </Button>
     </Container>
   );

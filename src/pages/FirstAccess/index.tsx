@@ -4,25 +4,36 @@ import history from 'services/history';
 import { useToast } from 'context/ToastContext';
 import { useSpring } from 'react-spring';
 import { Participant } from 'services/register/getParticipantData';
-import getDataRegulation, {
-  DataRegulation,
-} from 'services/register/getDataRegulation';
+import getDataRegulation from 'services/register/getDataRegulation';
+import { Regulation } from 'services/register/interfaces/IRegulation';
 import save from 'services/register/saveParticipant';
 import numbersOnly from 'util/numbersOnly';
+import DataRegulation from 'components/Regulation/DataRegulation';
 
 import logoImg from 'assets/images/logo.png';
 import Form from './Form';
 
-import { Container, Content, contentAnimation } from './styles';
+import {
+  Container,
+  Content,
+  contentAnimation,
+  RegulationContainer,
+  RegulationContent,
+} from './styles';
 
 const FirstAccess: React.FC = () => {
   const props = useSpring(contentAnimation);
   const { addToast } = useToast();
   const [participant, setParticipant] = useState<Participant | null>(null);
-  const [dataRegulation, setDataRegulation] = useState<DataRegulation | null>(
-    null,
+  const [dataRegulation, setDataRegulation] = useState<Regulation | null>(null);
+  const [hasAcceptedDataRegulation, setHasAcceptedDataRegulation] = useState(
+    false,
   );
   const location = useLocation<Participant>();
+
+  const onAcceptRegulation = useCallback(() => {
+    setHasAcceptedDataRegulation(true);
+  }, []);
 
   useEffect(() => {
     async function load(): Promise<void> {
@@ -77,13 +88,28 @@ const FirstAccess: React.FC = () => {
 
   return (
     <>
-      {!!participant && (
-        <Container>
+      {!hasAcceptedDataRegulation ? (
+        <RegulationContainer>
           <img src={logoImg} alt="Logo" />
-          <Content style={props}>
-            <Form participant={participant} saveParticipant={saveParticipant} />
-          </Content>
-        </Container>
+          <RegulationContent>
+            <DataRegulation
+              onAccept={onAcceptRegulation}
+              regulation={dataRegulation}
+            />
+          </RegulationContent>
+        </RegulationContainer>
+      ) : (
+        !!participant && (
+          <Container>
+            <img src={logoImg} alt="Logo" />
+            <Content style={props}>
+              <Form
+                participant={participant}
+                saveParticipant={saveParticipant}
+              />
+            </Content>
+          </Container>
+        )
       )}
     </>
   );
