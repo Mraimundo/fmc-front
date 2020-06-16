@@ -1,3 +1,4 @@
+import numbersOnly from 'util/numbersOnly';
 import { Participant, Regulation } from './getParticipantData';
 
 interface SaveRequest {
@@ -36,24 +37,24 @@ interface SaveRequest {
 
 export default (participant: Participant): SaveRequest => {
   return {
-    cpf: participant.cpf,
+    cpf: numbersOnly(participant.cpf),
     upn: participant.upn,
     nick_name: participant.nick_name,
     name: participant.name,
     email: participant.email,
-    area_code: participant.area_code,
-    cell_phone: participant.cell_phone,
+    area_code: numbersOnly(participant.area_code),
+    cell_phone: numbersOnly(participant.cell_phone),
     picture: participant.picture,
     gender: participant.gender,
     place_of_birth: participant.place_of_birth,
     nationality: participant.nationality,
     marital_status: participant.marital_status,
-    rg: participant.rg,
+    rg: numbersOnly(participant.rg),
     rg_emitter: participant.rg_emitter,
     rg_emitter_uf: participant.rg_emitter_uf,
-    pis_nis: participant.pis_nis,
-    zip_code: participant.address.zip_code,
-    public_place: participant.address.logradouro,
+    pis_nis: numbersOnly(participant.pis_nis),
+    zip_code: numbersOnly(participant.address.zip_code),
+    public_place: participant.address.public_place || 'x',
     street: participant.address.street,
     number: participant.address.number,
     complement: participant.address.complement,

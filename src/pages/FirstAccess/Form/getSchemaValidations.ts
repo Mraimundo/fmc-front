@@ -53,7 +53,7 @@ export default (profile: IProfile): Yup.ObjectSchema<object> => {
         pis_nis: Yup.string().required(mandatoryMessage),
         address: Yup.object().shape({
           zip_code: Yup.string().required(mandatoryMessage),
-          logradouro: Yup.string().required(mandatoryMessage),
+          /* logradouro: Yup.string().required(mandatoryMessage), */
           street: Yup.string().required(mandatoryMessage),
           number: Yup.string().required(mandatoryMessage),
           complement: Yup.string(),

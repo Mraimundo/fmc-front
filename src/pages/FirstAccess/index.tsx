@@ -58,6 +58,7 @@ const FirstAccess: React.FC = () => {
             },
           ],
         } as Participant;
+
         await save(request);
         addToast({
           title: 'Cadastro realizado com sucesso!',

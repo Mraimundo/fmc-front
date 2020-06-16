@@ -4,7 +4,7 @@ import { IProfile } from 'config/constants';
 interface Address {
   id: number;
   zip_code: string;
-  logradouro: string;
+  public_place: string;
   street: string;
   number: string;
   complement: string;
