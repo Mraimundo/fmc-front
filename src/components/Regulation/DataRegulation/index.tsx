@@ -1,72 +1,38 @@
-import React, { useCallback } from 'react';
-import {} from 'services/';
+import React, { useCallback, useState } from 'react';
+import { Regulation } from 'services/register/interfaces/IRegulation';
+import parser from 'html-react-parser';
 
 import { Container, RegulationContent, Button } from './styles';
 
 interface Props {
-  onAccept(): void;
+  onAccept(): Promise<void> | void;
+  regulation: Regulation | null;
 }
 
-const DataRegulation: React.FC = () => {
+const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
+  const [loading, setLoading] = useState(false);
   const buttonRole = 'primary';
 
-  const handleAcceptClick = useCallback(() => {
-    console.log('oi');
-  }, []);
+  const handleAcceptClick = useCallback(async () => {
+    setLoading(true);
+    try {
+      await onAccept();
+    } catch {}
+
+    setLoading(false);
+  }, [onAccept]);
 
   return (
     <Container>
-      <RegulationContent>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
-        <p>Teste</p>
+      <RegulationContent type="primary">
+        {parser(regulation?.content || '')}
       </RegulationContent>
-      <Button type="button" buttonRole={buttonRole} onClick={handleAcceptClick}>
+      <Button
+        type="button"
+        buttonRole={buttonRole}
+        onClick={handleAcceptClick}
+        loading={loading}
+      >
         Aceito
       </Button>
     </Container>

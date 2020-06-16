@@ -6,7 +6,7 @@ const storageUrl = process.env.REACT_APP_STORAGE_HOST;
 const headers = { Accept: 'application/json' };
 
 const pluginApi = axios.create({
-  baseURL: `${baseURL}/${plugin}/api/v2`,
+  baseURL: `${baseURL}/${plugin}/api/v1`,
   headers,
 });
 

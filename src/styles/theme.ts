@@ -6,6 +6,20 @@ export default {
       tertiary: '#fff',
     },
   },
+  regulation: {
+    primary: {
+      backgroundColor: '#fff',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
+      fontColor: '#312e38',
+    },
+    secondary: {
+      backgroundColor: '#fff',
+      scrollBarColor: '#c6c6c6',
+      scrollBarBackgroundColor: '#312e38',
+      fontColor: '#312e38',
+    },
+  },
   menu: {
     activeBackgroundColor: '#f4ede8',
     inactiveBackgroundColor: '#fff',
