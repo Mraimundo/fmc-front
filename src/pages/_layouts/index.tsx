@@ -3,17 +3,13 @@ import ModalRegulations from 'components/Regulation/ModalAllRegulations';
 import { useAuth } from 'context/AuthContext';
 
 const Dashboard: React.FC = ({ children }) => {
-  const { participant } = useAuth();
-
-  useEffect(() => {
-    console.log(participant);
-  }, [participant]);
+  const { shouldShowRegulationsModal } = useAuth();
 
   return (
     <>
       {children}
       <ModalRegulations
-        isOpen={false}
+        isOpen={shouldShowRegulationsModal}
         onRequestClose={() => {
           console.log('oi');
         }}

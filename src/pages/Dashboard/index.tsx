@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Container } from './styles';
 
 const Dashboard: React.FC = () => {
-  const { participant, signOut } = useAuth();
+  const { participant, signOut, updateParticipantData } = useAuth();
 
   React.useEffect(() => {
     console.log(participant);
@@ -14,7 +14,8 @@ const Dashboard: React.FC = () => {
 
   const handleEditClick = useCallback(() => {
     console.log('oi');
-  }, []);
+    updateParticipantData();
+  }, [updateParticipantData]);
 
   return (
     <Container>

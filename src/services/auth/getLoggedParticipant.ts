@@ -1,4 +1,4 @@
-import { vendavallApi } from 'services/api';
+import { pluginApi } from 'services/api';
 
 interface Address {
   id: number;
@@ -54,7 +54,10 @@ export interface Participant {
 
 export default async (): Promise<Participant> => {
   try {
-    const { data } = await vendavallApi.get<Participant>('getLogged', {});
+    const { data } = await pluginApi.get<Participant>(
+      'participants/profile',
+      {},
+    );
     return data;
   } catch {
     return {} as Participant;

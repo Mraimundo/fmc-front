@@ -28,6 +28,7 @@ interface AuthContextState {
   shouldShowRegulationsModal: boolean;
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
+  updateParticipantData(): void;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
@@ -49,6 +50,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
     false,
   );
+  const [shouldUpdateParticipant, setShouldUpdateParticipant] = useState(false);
 
   const signIn = useCallback(async ({ cpf, password }: Credentials) => {
     const { token } = await signInService({
@@ -73,7 +75,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     if (!data.id) {
       setTimeout(() => {
         updateParticipantData();
-      }, 200000);
+      }, 2000);
       return;
     }
     setParticipant(data);
@@ -93,7 +95,13 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
       updateParticipantData();
     });
-  }, [apiToken, signOut, addToast, updateParticipantData]);
+  }, [
+    apiToken,
+    signOut,
+    addToast,
+    updateParticipantData,
+    shouldUpdateParticipant,
+  ]);
 
   useEffect(() => {
     if (!apiToken) return;
@@ -112,6 +120,9 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         shouldShowRegulationsModal,
+        updateParticipantData: () => {
+          setShouldUpdateParticipant(!shouldUpdateParticipant);
+        },
       }}
     >
       {apiToken ? <Layout>{children}</Layout> : children}
