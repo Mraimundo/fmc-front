@@ -5,7 +5,7 @@ import { Container } from './styles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
-  buttonRole: 'primary' | 'secondary' | 'tertiary';
+  buttonRole: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
   type: 'button' | 'submit';
 }
 

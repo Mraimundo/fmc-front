@@ -128,6 +128,11 @@ export default {
       fontColor: '#d7d8da',
       borderRadius: '10px',
     },
+    quaternary: {
+      backgroundColor: '#ff9000',
+      fontColor: '#312e38',
+      borderRadius: '10px',
+    },
   },
   link: {
     fontColor: '#808285',
