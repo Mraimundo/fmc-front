@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
+import getRegulationById from 'services/register/regulation/getRegulationById';
 import {
   Regulation,
   RegulationType,
@@ -32,6 +33,10 @@ const ModalAllRegulations: React.FC = () => {
   const [safraRegulations, setSafraRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
+  const [
+    regulationSelected,
+    setRegulationSelected,
+  ] = useState<Regulation | null>(null);
 
   useEffect(() => {
     getAllRegulations().then(regulations => {
@@ -49,6 +54,16 @@ const ModalAllRegulations: React.FC = () => {
     });
   }, []);
 
+  const openRegulation = useCallback(() => {
+    return (
+      regulationSelected && (
+        <h1>
+          <span>Regulaamento: {regulationSelected.id}</span>
+        </h1>
+      )
+    );
+  }, [regulationSelected]);
+
   const printRegulation = useCallback(
     (regulations: Omit<Regulation, 'content'>[], type: RegulationType) => {
       return (
@@ -60,7 +75,7 @@ const ModalAllRegulations: React.FC = () => {
                 key={`accordion-ragulation-${item.id}`}
                 title={item.name}
               >
-                <h1>Teste</h1>
+                {openRegulation()}
               </Accordion>
             ))}
           </>
