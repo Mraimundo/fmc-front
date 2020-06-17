@@ -3,12 +3,11 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { Container, ListValuesTitleWrapper, ListValuesTitle } from './styles';
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title?: string;
   type?: 'primary' | 'secondary';
   className?: string;
-  open?: boolean;
-  onClick?(): void | Promise<void>;
+  loadChildren?(): React.ReactNode;
 }
 
 const Accordion: React.FC<Props> = ({
@@ -16,32 +15,30 @@ const Accordion: React.FC<Props> = ({
   className = '',
   type = 'primary',
   children,
-  open,
-  onClick,
+  loadChildren,
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
 
   const toggleAccordion = useCallback(() => {
-    if (typeof open === 'boolean') {
-      setInternalOpen(open);
-      return;
-    }
     setInternalOpen(!internalOpen);
-  }, [internalOpen, open]);
+  }, [internalOpen]);
 
   return (
-    <Container
-      open={internalOpen}
-      type={type}
-      className={className}
-      onClick={onClick}
-    >
+    <Container open={internalOpen} type={type} className={className}>
       <ListValuesTitleWrapper onClick={toggleAccordion}>
         <ListValuesTitle open={internalOpen} type={type}>
           <h3>{title}</h3>
         </ListValuesTitle>
       </ListValuesTitleWrapper>
-      {internalOpen && <div>{children}</div>}
+      {internalOpen && (
+        <>
+          {typeof loadChildren === 'function' ? (
+            <h1>Teste função</h1>
+          ) : (
+            <div>{children}</div>
+          )}
+        </>
+      )}
     </Container>
   );
 };
