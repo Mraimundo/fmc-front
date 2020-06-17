@@ -62,31 +62,28 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     if (token) {
       setToken(token);
-      setTimeout(() => {
-        updateParticipantData();
-      }, 1000);
       return token;
     }
 
     return '';
   });
 
-  const signIn = useCallback(
-    async ({ cpf, password }: Credentials) => {
-      const { token } = await signInService({
-        cpf: numbersOnly(cpf),
-        password,
-      });
+  useEffect(() => {
+    setTimeout(() => {
+      if (apiToken) updateParticipantData();
+    }, 1000);
+  }, [apiToken, updateParticipantData]);
 
-      localStorage.setItem('@Vendavall:token', token);
-      setToken(token);
-      setApiToken(token);
-      setTimeout(() => {
-        updateParticipantData();
-      }, 1000);
-    },
-    [updateParticipantData],
-  );
+  const signIn = useCallback(async ({ cpf, password }: Credentials) => {
+    const { token } = await signInService({
+      cpf: numbersOnly(cpf),
+      password,
+    });
+
+    localStorage.setItem('@Vendavall:token', token);
+    setToken(token);
+    setApiToken(token);
+  }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Vendavall:token');
