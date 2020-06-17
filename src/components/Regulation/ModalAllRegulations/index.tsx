@@ -33,10 +33,9 @@ const ModalAllRegulations: React.FC = () => {
   const [safraRegulations, setSafraRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
-  const [
-    regulationSelected,
-    setRegulationSelected,
-  ] = useState<Regulation | null>(null);
+  const [regulationSelected, setRegulationSelected] = useState<Regulation>(
+    {} as Regulation,
+  );
 
   useEffect(() => {
     getAllRegulations().then(regulations => {
@@ -54,19 +53,9 @@ const ModalAllRegulations: React.FC = () => {
     });
   }, []);
 
-  const openRegulation = useCallback(() => {
-    return (
-      regulationSelected && (
-        <h1>
-          <span>Regulaamento: {regulationSelected.id}</span>
-        </h1>
-      )
-    );
-  }, [regulationSelected]);
-
-  const handleOpenRegulation = useCallback(async regulationId => {
+  const handleOpenRegulation = useCallback(async (regulationId: number) => {
+    setRegulationSelected({ id: regulationId } as Regulation);
     const t = await getRegulationById(regulationId);
-    console.log(t);
     setRegulationSelected(t);
   }, []);
 
@@ -80,9 +69,9 @@ const ModalAllRegulations: React.FC = () => {
               <Accordion
                 key={`accordion-ragulation-${item.id}`}
                 title={item.name}
-                onOpen={() => handleOpenRegulation(item.id)}
+                open={regulationSelected?.id === item.id}
               >
-                {openRegulation()}
+                <h1>teste</h1>
               </Accordion>
             ))}
           </>
