@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 
 import { Container, ListValuesTitleWrapper, ListValuesTitle } from './styles';
 
@@ -7,6 +7,7 @@ interface Props {
   title?: string;
   type?: 'primary' | 'secondary';
   className?: string;
+  onOpen?(): void | Promise<void>;
 }
 
 const Accordion: React.FC<Props> = ({
@@ -14,12 +15,20 @@ const Accordion: React.FC<Props> = ({
   className = '',
   type = 'primary',
   children,
+  onOpen,
 }) => {
   const [open, isOpen] = useState(false);
 
   const toggleAccordion = useCallback(() => {
     isOpen(!open);
   }, [open]);
+
+  useEffect(() => {
+    if (typeof onOpen !== 'function') return;
+    if (open) {
+      onOpen();
+    }
+  }, [open, onOpen]);
 
   return (
     <Container open={open} type={type} className={className}>
