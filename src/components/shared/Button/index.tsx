@@ -16,7 +16,13 @@ const Button: React.FC<ButtonProps> = ({
 }) => (
   <Container type="button" {...rest}>
     {loading ? (
-      <ReactLoading className="_loading" type="bars" height={24} width={24} />
+      <ReactLoading
+        className="_loading"
+        type="bars"
+        height={24}
+        width={24}
+        data-testid="button-loader"
+      />
     ) : (
       <>{children}</>
     )}

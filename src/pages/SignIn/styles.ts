@@ -56,19 +56,6 @@ export const Content = styled(animated.div)`
       margin-bottom: 24px;
     }
 
-    a {
-      color: ${({ theme }) => theme.font.color.tertiary};
-      display: block;
-      margin-top: 6px;
-      font-size: 12px;
-
-      transition: color 0.2s;
-      will-change: color;
-      &:hover {
-        color: ${({ theme }) => shade(0.2, theme.font.color.tertiary)};
-      }
-    }
-
     input {
       &::placeholder {
         font-size: 14px;
@@ -105,10 +92,6 @@ export const Content = styled(animated.div)`
         ._iconContainer svg {
           width: 20px;
         }
-      }
-
-      a {
-        font-size: 16px;
       }
 
       button {
@@ -225,4 +208,18 @@ export const Contact = styled(ContactBallon)`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const ForgotPasswordButton = styled.button`
+  color: ${({ theme }) => theme.link.fontColor};
+  display: block;
+  margin-top: 24px;
+  border: none;
+  background: transparent;
+
+  transition: color 0.2s;
+  will-change: color;
+  &:hover {
+    color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
+  }
 `;

@@ -5,8 +5,9 @@ import * as Yup from 'yup';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 
-import { Button, PasswordInput, Input } from 'components/shared';
+import { Input, Button, PasswordInput } from 'components/shared';
 import { FiUser, FiLock } from 'react-icons/fi';
+import RecoverPasswordButton from './RecoverPassword';
 
 interface SignInFormData {
   cpf: string;
@@ -61,8 +62,8 @@ const FormSignIn: React.FC = () => {
         <Button type="submit" buttonRole="primary" loading={loading}>
           Entrar
         </Button>
-        <a href="forgot">Esqueci minha senha</a>
       </form>
+      <RecoverPasswordButton />
     </FormContext>
   );
 };
