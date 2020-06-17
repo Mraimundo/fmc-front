@@ -124,6 +124,11 @@ declare module 'styled-components' {
         fontColor: string;
         borderRadius: string;
       };
+      tertiary: {
+        backgroundColor: string;
+        fontColor: string;
+        borderRadius: string;
+      };
     };
     link: {
       fontColor: string;
