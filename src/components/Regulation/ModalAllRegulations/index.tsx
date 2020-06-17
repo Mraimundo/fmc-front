@@ -66,6 +66,7 @@ const ModalAllRegulations: React.FC = () => {
 
   const handleOpenRegulation = useCallback(async regulationId => {
     const t = await getRegulationById(regulationId);
+    console.log(t);
     setRegulationSelected(t);
   }, []);
 
@@ -81,7 +82,7 @@ const ModalAllRegulations: React.FC = () => {
                 title={item.name}
                 onOpen={() => handleOpenRegulation(item.id)}
               >
-                {regulationSelected && openRegulation()}
+                {openRegulation()}
               </Accordion>
             ))}
           </>
