@@ -95,6 +95,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
+    if (!apiToken) return;
     isTokenValid().then(isValid => {
       if (!isValid) {
         signOut();
@@ -104,7 +105,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         });
       }
     });
-  }, [addToast, signOut]);
+  }, [addToast, signOut, apiToken]);
 
   return (
     <AuthContext.Provider

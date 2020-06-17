@@ -8,10 +8,6 @@ import { Container } from './styles';
 const Dashboard2: React.FC = () => {
   const { participant, signOut } = useAuth();
 
-  React.useEffect(() => {
-    console.log(participant);
-  }, [participant]);
-
   const handleEditClick = useCallback(() => {
     console.log('oi');
   }, []);
