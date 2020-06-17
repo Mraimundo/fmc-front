@@ -8,12 +8,7 @@ const Dashboard: React.FC = ({ children }) => {
   return (
     <>
       {children}
-      <ModalRegulations
-        isOpen={shouldShowRegulationsModal}
-        onRequestClose={() => {
-          console.log('oi');
-        }}
-      />
+      <ModalRegulations isOpen={shouldShowRegulationsModal} />
     </>
   );
 };

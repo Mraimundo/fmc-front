@@ -2,11 +2,14 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import parser from 'html-react-parser';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
 import getRegulationById from 'services/register/regulation/getRegulationById';
+import acceptRegulation from 'services/register/regulation/acceptRegulation';
 import { Button } from 'components/shared';
 import {
   Regulation,
   RegulationType,
 } from 'services/register/regulation/interfaces/IRegulation';
+import { useAuth } from 'context/AuthContext';
+import { useToast } from 'context/ToastContext';
 import { REGULATIONS_TYPE } from 'config/constants';
 import logoImg from 'assets/images/logo.png';
 
@@ -32,10 +35,13 @@ const TITLES = {
 
 interface Props {
   isOpen: boolean;
-  onRequestClose(): void;
+  onRequestClose?(): void;
 }
 
 const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
+  const { updateParticipantData, shouldShowRegulationsModal } = useAuth();
+  const { addToast } = useToast();
+
   const [dataRegulations, setDataRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
@@ -46,6 +52,11 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
     Omit<Regulation, 'content'>[]
   >([]);
   const [loading, setLoading] = useState(false);
+  const [acceptedIds, setAcceptedIds] = useState<number[]>([]);
+  const [
+    regulationSelected,
+    setRegulationSelected,
+  ] = useState<Regulation | null>(null);
   const t = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,42 +72,132 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       setSafraRegulations(
         regulations.filter(regulation => regulation.type === 'safra_term'),
       );
+      setAcceptedIds(
+        regulations
+          .filter(regulation => regulation.accepted)
+          .map(regulation => regulation.id),
+      );
     });
   }, []);
 
+  const handleAcceptRegulation = useCallback(
+    async (id: number, version: number, title: string) => {
+      console.log('oi');
+      try {
+        setLoading(true);
+        await acceptRegulation(id, version);
+        addToast({
+          title: `Você aceitou o regulamento ${title}`,
+          type: 'success',
+        });
+        if (
+          acceptedIds.length > 0 &&
+          safraRegulations.length +
+            campaignRegulations.length +
+            dataRegulations.length ===
+            acceptedIds.length + 1
+        ) {
+          addToast({
+            title: 'Você aceitou todos os regulamentos',
+            type: 'success',
+          });
+          updateParticipantData();
+          return;
+        }
+        setAcceptedIds([...acceptedIds, id]);
+      } catch {
+        addToast({
+          title: `Falha ao aceitar o regulamento ${title}`,
+          type: 'error',
+        });
+      }
+
+      setLoading(false);
+    },
+    [
+      addToast,
+      acceptedIds,
+      safraRegulations,
+      campaignRegulations,
+      dataRegulations,
+      updateParticipantData,
+    ],
+  );
+
+  /* useEffect(() => {
+    if (
+      shouldShowRegulationsModal &&
+      acceptedIds.length > 0 &&
+      safraRegulations.length +
+        campaignRegulations.length +
+        dataRegulations.length ===
+        acceptedIds.length
+    ) {
+      addToast({
+        title: 'Você aceitou todos os regulamentos',
+        type: 'success',
+      });
+      updateParticipantData();
+    }
+  }, [
+    safraRegulations,
+    campaignRegulations,
+    dataRegulations,
+    acceptedIds,
+    addToast,
+    shouldShowRegulationsModal,
+    updateParticipantData,
+  ]); */
+
   const handleOpenRegulation = useCallback(
     async (regulationId: number) => {
-      const regulation = await getRegulationById(regulationId);
-      return (
-        <>
-          <ContentRegulation>
-            <PrintRef ref={t}>{parser(regulation?.content || '')}</PrintRef>
-          </ContentRegulation>
-          <Actions>
-            <Button
-              buttonRole="tertiary"
-              type="button"
-              loading={loading}
-              onClick={() => {}}
-            >
-              Aceitar
-            </Button>
+      if (!regulationSelected || regulationId !== regulationSelected.id) {
+        const regulation = await getRegulationById(regulationId);
+        setRegulationSelected(regulation);
+      }
 
-            <ReactToPrint
-              trigger={() => {
-                return (
-                  <Button buttonRole="secondary" type="button">
-                    Download
-                  </Button>
-                );
-              }}
-              content={() => t.current}
-            />
-          </Actions>
-        </>
+      return (
+        regulationSelected && (
+          <>
+            <ContentRegulation>
+              <PrintRef ref={t}>
+                {parser(regulationSelected.content || '')}
+              </PrintRef>
+            </ContentRegulation>
+            <Actions>
+              {acceptedIds.indexOf(regulationSelected.id) === -1 && (
+                <Button
+                  buttonRole="tertiary"
+                  type="button"
+                  loading={loading}
+                  onClick={() => {
+                    handleAcceptRegulation(
+                      regulationSelected.id,
+                      regulationSelected.version,
+                      regulationSelected.name,
+                    );
+                  }}
+                >
+                  Aceitar
+                </Button>
+              )}
+
+              <ReactToPrint
+                trigger={() => {
+                  return (
+                    <Button buttonRole="secondary" type="button">
+                      Download
+                    </Button>
+                  );
+                }}
+                content={() => t.current}
+              />
+            </Actions>
+          </>
+        )
       );
     },
-    [loading],
+    [loading, acceptedIds, handleAcceptRegulation, regulationSelected],
   );
 
   const printRegulation = useCallback(
@@ -126,7 +227,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       type="primary"
-      shouldCloseOnEsc={false}
+      shouldCloseOnEsc
     >
       <Container type="primary">
         <img src={logoImg} alt="Logo" />
