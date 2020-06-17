@@ -21,7 +21,7 @@ const ChangePasswordConfirmationModal: React.FC<ModalProps> = ({
     >
       <Container>
         <h3>Senha cadastrada com sucesso!</h3>
-        <Button type="submit" buttonRole="primary" onClick={onRequestClose}>
+        <Button type="submit" buttonRole="quaternary" onClick={onRequestClose}>
           Acessar
         </Button>
       </Container>

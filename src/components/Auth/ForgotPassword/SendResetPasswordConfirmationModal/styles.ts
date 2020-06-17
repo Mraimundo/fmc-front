@@ -2,20 +2,29 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
+  align-items: center;
 
   padding: 60px 100px;
 
-  form {
-    display: flex;
-    flex-direction: column;
+  h3 {
+    font-weight: bold;
+    font-size: 24px;
   }
-`;
 
-export const Title = styled.h3`
-  color: ${({ theme }) => theme.font.color.primary};
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  p {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 18px;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  button {
+    width: 160px;
+    height: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 `;

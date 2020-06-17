@@ -24,7 +24,7 @@ const SendResetPasswordConfirmationModal: React.FC<ModalProps> = ({
         <p>
           Clique no link enviado para o seu email para recadastramento de senha
         </p>
-        <Button type="submit" buttonRole="secondary" onClick={onRequestClose}>
+        <Button type="submit" buttonRole="quaternary" onClick={onRequestClose}>
           Ok
         </Button>
       </Container>

@@ -126,12 +126,12 @@ export default {
     tertiary: {
       backgroundColor: '#193f4e',
       fontColor: '#d7d8da',
-      borderRadius: '10px',
+      borderRadius: '7px',
     },
     quaternary: {
-      backgroundColor: '#ff9000',
-      fontColor: '#312e38',
-      borderRadius: '10px',
+      backgroundColor: '#fff',
+      fontColor: '#e63027',
+      borderRadius: '7px',
     },
   },
   link: {

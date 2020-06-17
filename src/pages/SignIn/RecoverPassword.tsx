@@ -12,12 +12,12 @@ const RecoverPassword: React.FC = () => {
   const location = useLocation();
 
   const [requestResetModalOpened, setRequestResetModalOpened] = React.useState(
-    false,
+    true,
   );
   const [
     confirmRequestResesetModalOpened,
     setConfirmRequestResesetModalOpened,
-  ] = React.useState(true);
+  ] = React.useState(false);
   const [
     changePasswordModalOpened,
     setChangePasswordModalOpened,
