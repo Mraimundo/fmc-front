@@ -14,6 +14,7 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
   type = 'primary',
+  shouldCloseOnEsc = false,
   ...rest
 }) => {
   const [closing, setClosing] = useState(false);
@@ -71,6 +72,7 @@ const Modal: React.FC<ModalProps> = ({
     <ReactModal
       isOpen={opened}
       onRequestClose={handleOnClose}
+      shouldCloseOnEsc={shouldCloseOnEsc}
       style={{
         overlay: {
           animation: closing ? 'lighten 0.4s both' : 'darken 0.4s both',

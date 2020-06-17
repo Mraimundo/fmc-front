@@ -39,7 +39,7 @@ interface Props {
 }
 
 const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
-  const { updateParticipantData, shouldShowRegulationsModal } = useAuth();
+  const { updateParticipantData } = useAuth();
   const { addToast } = useToast();
 
   const [dataRegulations, setDataRegulations] = useState<
@@ -82,7 +82,6 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
 
   const handleAcceptRegulation = useCallback(
     async (id: number, version: number, title: string) => {
-      console.log('oi');
       try {
         setLoading(true);
         await acceptRegulation(id, version);
@@ -102,6 +101,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
             type: 'success',
           });
           updateParticipantData();
+          setLoading(false);
           return;
         }
         setAcceptedIds([...acceptedIds, id]);
@@ -123,31 +123,6 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       updateParticipantData,
     ],
   );
-
-  /* useEffect(() => {
-    if (
-      shouldShowRegulationsModal &&
-      acceptedIds.length > 0 &&
-      safraRegulations.length +
-        campaignRegulations.length +
-        dataRegulations.length ===
-        acceptedIds.length
-    ) {
-      addToast({
-        title: 'Você aceitou todos os regulamentos',
-        type: 'success',
-      });
-      updateParticipantData();
-    }
-  }, [
-    safraRegulations,
-    campaignRegulations,
-    dataRegulations,
-    acceptedIds,
-    addToast,
-    shouldShowRegulationsModal,
-    updateParticipantData,
-  ]); */
 
   const handleOpenRegulation = useCallback(
     async (regulationId: number) => {
@@ -223,12 +198,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
   );
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      type="primary"
-      shouldCloseOnEsc
-    >
+    <Modal isOpen={isOpen} onRequestClose={onRequestClose} type="primary">
       <Container type="primary">
         <img src={logoImg} alt="Logo" />
         <Content>
