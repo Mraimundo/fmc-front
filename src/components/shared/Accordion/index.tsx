@@ -7,7 +7,7 @@ interface Props {
   title?: string;
   type?: 'primary' | 'secondary';
   className?: string;
-  onOpen?(): void | Promise<void>;
+  open?: boolean;
 }
 
 const Accordion: React.FC<Props> = ({
@@ -15,25 +15,26 @@ const Accordion: React.FC<Props> = ({
   className = '',
   type = 'primary',
   children,
-  onOpen,
+  open,
 }) => {
-  const [open, isOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
 
   const toggleAccordion = useCallback(() => {
-    if (typeof onOpen === 'function' && !open) {
-      onOpen();
+    if (typeof open === 'boolean') {
+      setInternalOpen(open);
+      return;
     }
-    isOpen(!open);
-  }, [open, onOpen]);
+    setInternalOpen(!internalOpen);
+  }, [internalOpen, open]);
 
   return (
-    <Container open={open} type={type} className={className}>
+    <Container open={internalOpen} type={type} className={className}>
       <ListValuesTitleWrapper onClick={toggleAccordion}>
-        <ListValuesTitle open={open} type={type}>
+        <ListValuesTitle open={internalOpen} type={type}>
           <h3>{title}</h3>
         </ListValuesTitle>
       </ListValuesTitleWrapper>
-      {open && <div>{children}</div>}
+      {internalOpen && <div>{children}</div>}
     </Container>
   );
 };
