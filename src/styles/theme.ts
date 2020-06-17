@@ -123,6 +123,11 @@ export default {
       fontColor: '#fff',
       borderRadius: '7px',
     },
+    tertiary: {
+      backgroundColor: '#ff9000',
+      fontColor: '#312e38',
+      borderRadius: '10px',
+    },
   },
   link: {
     fontColor: '#808285',
