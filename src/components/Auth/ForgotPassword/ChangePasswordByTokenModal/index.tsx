@@ -14,6 +14,7 @@ import { Container, Title } from './styles';
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
+  onSuccessSendEmail(): void;
   token: string;
 }
 
@@ -26,6 +27,7 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
   token,
+  onSuccessSendEmail,
 }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
@@ -66,6 +68,7 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
     try {
       await changePassword(token, password);
       onRequestClose();
+      onSuccessSendEmail();
     } catch (e) {
       addToast({
         title:

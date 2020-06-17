@@ -14,6 +14,7 @@ import { Container, Title } from './styles';
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
+  onSuccessSendEmail(): void;
 }
 
 interface FormData {
@@ -23,6 +24,7 @@ interface FormData {
 const RequestResetPasswordModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
+  onSuccessSendEmail,
 }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
@@ -46,6 +48,7 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
     try {
       await sendEmail(cpf);
       onRequestClose();
+      onSuccessSendEmail();
     } catch (e) {
       addToast({
         title:

@@ -29,18 +29,6 @@ export const Content = styled(animated.div)`
     h1 {
       margin-bottom: 24px;
     }
-
-    a {
-      color: ${({ theme }) => theme.link.fontColor};
-      display: block;
-      margin-top: 24px;
-
-      transition: color 0.2s;
-      will-change: color;
-      &:hover {
-        color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
-      }
-    }
   }
 `;
 
@@ -53,4 +41,18 @@ export const Contact = styled(ContactBallon)`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const ForgotPasswordButton = styled.button`
+  color: ${({ theme }) => theme.link.fontColor};
+  display: block;
+  margin-top: 24px;
+  border: none;
+  background: transparent;
+
+  transition: color 0.2s;
+  will-change: color;
+  &:hover {
+    color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
+  }
 `;
