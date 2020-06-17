@@ -54,6 +54,8 @@ const ModalAllRegulations: React.FC = () => {
   }, []);
 
   const handleOpenRegulation = useCallback(async (regulationId: number) => {
+    console.log('clique');
+    console.log(regulationId);
     setRegulationSelected({ id: regulationId } as Regulation);
     const t = await getRegulationById(regulationId);
     setRegulationSelected(t);
@@ -69,7 +71,8 @@ const ModalAllRegulations: React.FC = () => {
               <Accordion
                 key={`accordion-ragulation-${item.id}`}
                 title={item.name}
-                open={regulationSelected?.id === item.id}
+                open={regulationSelected.id === item.id}
+                onClick={() => handleOpenRegulation(item.id)}
               >
                 <h1>teste</h1>
               </Accordion>
