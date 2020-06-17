@@ -44,7 +44,7 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
   const onSubmit = handleSubmit(async ({ cpf }) => {
     setLoading(true);
     try {
-      // await sendEmail(cpf);
+      await sendEmail(cpf);
       onRequestClose();
     } catch (e) {
       addToast({

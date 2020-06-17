@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useForm, FormContext } from 'react-hook-form';
 import DefaultModal from 'components/shared/Modal';
-
-import { Input, Button } from 'components/shared';
+import changePassword from 'services/auth/password/changePasswordByToken';
+import { PasswordInput, Button } from 'components/shared';
 import * as Yup from 'yup';
-import validateCpf from 'util/validations/cpf';
+import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
 
-import { FiArchive } from 'react-icons/fi';
+import { FiLock } from 'react-icons/fi';
 
 import { Container, Title } from './styles';
 
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
+  token: string;
 }
 
 interface FormData {
@@ -24,14 +25,32 @@ interface FormData {
 const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
+  token,
 }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
 
   const schemaValidation = Yup.object().shape({
-    cpf: Yup.string()
-      .required('Cpf é obrigatório')
-      .test('valid-cpf', 'e', validateCpf),
+    password: Yup.string()
+      .required('Campo obrigatório')
+      .min(10, 'Mínimo de 10 caracteres')
+      .test(
+        'lower-case',
+        'Deve conter pelo menos uma letra minúscula',
+        hasLowerCase,
+      )
+      .test(
+        'upper-case',
+        'Deve conter pelo menos uma letra maiúscula',
+        hasUpperCase,
+      )
+      .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
+    password_confirmation: Yup.string()
+      .required('Campo obrigatório')
+      .oneOf(
+        [Yup.ref('password')],
+        'Confirmação de senha precisa ser igual a senha',
+      ),
   });
 
   const methods = useForm<FormData>({
@@ -42,16 +61,16 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
 
   const { handleSubmit } = methods;
 
-  const onSubmit = handleSubmit(async ({ cpf }) => {
+  const onSubmit = handleSubmit(async ({ password }) => {
     setLoading(true);
     try {
-      // await sendEmail(cpf);
+      await changePassword(token, password);
       onRequestClose();
     } catch (e) {
       addToast({
         title:
           e.response?.data?.message ||
-          'Falha ao enviar Email. Por favor tente novamente',
+          'Falha ao alterar Senha. Por favor tente novamente',
         type: 'error',
       });
     }
@@ -61,18 +80,17 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
-        <Title>Esqueci minha senha</Title>
+        <Title>Cadastrar nova senha</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
-            <Input
-              name="cpf"
-              icon={FiArchive}
-              label="Cpf"
-              numbersOnly
-              pattern="XXX.XXX.XXX-XX"
+            <PasswordInput name="password" icon={FiLock} label="Nova senha" />
+            <PasswordInput
+              name="password_confirmation"
+              icon={FiLock}
+              label="Confirmar nova Senha"
             />
             <Button type="submit" buttonRole="primary" loading={loading}>
-              Enviar
+              Salvar
             </Button>
           </form>
         </FormContext>
