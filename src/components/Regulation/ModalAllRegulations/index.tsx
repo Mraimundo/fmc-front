@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import parser from 'html-react-parser';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
 import getRegulationById from 'services/register/regulation/getRegulationById';
@@ -10,6 +10,8 @@ import {
 import { REGULATIONS_TYPE } from 'config/constants';
 import logoImg from 'assets/images/logo.png';
 
+import ReactToPrint from 'react-to-print';
+
 import {
   Modal,
   Container,
@@ -19,6 +21,7 @@ import {
   Accordion,
   ContentRegulation,
   Actions,
+  PrintRef,
 } from './styles';
 
 const TITLES = {
@@ -43,6 +46,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
     Omit<Regulation, 'content'>[]
   >([]);
   const [loading, setLoading] = useState(false);
+  const t = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getAllRegulations().then(regulations => {
@@ -66,15 +70,28 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       return (
         <>
           <ContentRegulation>
-            {parser(regulation?.content || '')}
+            <PrintRef ref={t}>{parser(regulation?.content || '')}</PrintRef>
           </ContentRegulation>
           <Actions>
-            <Button buttonRole="tertiary" type="button" loading={loading}>
+            <Button
+              buttonRole="tertiary"
+              type="button"
+              loading={loading}
+              onClick={() => {}}
+            >
               Aceitar
             </Button>
-            <Button buttonRole="secondary" type="button">
-              Download
-            </Button>
+
+            <ReactToPrint
+              trigger={() => {
+                return (
+                  <Button buttonRole="secondary" type="button">
+                    Download
+                  </Button>
+                );
+              }}
+              content={() => t.current}
+            />
           </Actions>
         </>
       );

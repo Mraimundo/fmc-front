@@ -75,6 +75,7 @@ export const ContentRegulation = styled.div`
   overflow-y: auto;
   margin-left: 78px;
   transform: translateY(-5px) translateX(1px);
+  padding: 10px;
 `;
 
 export const Actions = styled.div`
@@ -88,5 +89,12 @@ export const Actions = styled.div`
     & + button {
       margin-left: 25px;
     }
+  }
+`;
+
+export const PrintRef = styled.div`
+  @media print {
+    margin: 50px;
+    color: #000;
   }
 `;
