@@ -20,14 +20,10 @@ const Accordion: React.FC<Props> = ({
   const [open, isOpen] = useState(false);
 
   const toggleAccordion = useCallback(() => {
-    isOpen(!open);
-  }, [open]);
-
-  useEffect(() => {
-    if (typeof onOpen !== 'function') return;
-    if (open) {
+    if (typeof onOpen === 'function' && !open) {
       onOpen();
     }
+    isOpen(!open);
   }, [open, onOpen]);
 
   return (
