@@ -7,7 +7,7 @@ interface Props {
   title?: string;
   type?: 'primary' | 'secondary';
   className?: string;
-  loadChildren?(): React.ReactNode;
+  loadChildren?(): React.ReactNode | Promise<React.ReactNode>;
 }
 
 const Accordion: React.FC<Props> = ({
@@ -33,7 +33,7 @@ const Accordion: React.FC<Props> = ({
       {internalOpen && (
         <>
           {typeof loadChildren === 'function' ? (
-            <h1>Teste função</h1>
+            loadChildren()
           ) : (
             <div>{children}</div>
           )}
