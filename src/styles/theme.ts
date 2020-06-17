@@ -124,8 +124,8 @@ export default {
       borderRadius: '7px',
     },
     tertiary: {
-      backgroundColor: '#ff9000',
-      fontColor: '#312e38',
+      backgroundColor: '#193f4e',
+      fontColor: '#d7d8da',
       borderRadius: '10px',
     },
   },

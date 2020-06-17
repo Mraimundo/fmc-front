@@ -83,8 +83,8 @@ export const Actions = styled.div`
   margin-bottom: 10px;
 
   > button {
-    width: 100px;
-    height: 28px;
+    width: 130px;
+    height: 34px;
     & + button {
       margin-left: 25px;
     }

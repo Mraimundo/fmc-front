@@ -27,7 +27,12 @@ const TITLES = {
   [REGULATIONS_TYPE.safraTerm]: 'Acordos de Safras',
 };
 
-const ModalAllRegulations: React.FC = () => {
+interface Props {
+  isOpen: boolean;
+  onRequestClose(): void;
+}
+
+const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
   const [dataRegulations, setDataRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
@@ -64,7 +69,7 @@ const ModalAllRegulations: React.FC = () => {
             {parser(regulation?.content || '')}
           </ContentRegulation>
           <Actions>
-            <Button buttonRole="primary" type="button" loading={loading}>
+            <Button buttonRole="tertiary" type="button" loading={loading}>
               Aceitar
             </Button>
             <Button buttonRole="secondary" type="button">
@@ -101,10 +106,8 @@ const ModalAllRegulations: React.FC = () => {
 
   return (
     <Modal
-      isOpen
-      onRequestClose={() => {
-        console.log('oi');
-      }}
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
       type="primary"
       shouldCloseOnEsc={false}
     >
