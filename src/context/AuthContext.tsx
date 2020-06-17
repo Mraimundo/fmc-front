@@ -28,6 +28,7 @@ interface AuthContextState {
   shouldShowRegulationsModal: boolean;
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
+  updateParticipantData(): void;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
@@ -69,19 +70,24 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const updateParticipantData = useCallback(async () => {
-    const data = await getLoggedParticipant();
+    console.log('opa4');
+    const [data, isThereRegulationsToAccept] = await Promise.all([
+      getLoggedParticipant(),
+      isThereAnyRegulationToAccept(),
+    ]);
     if (!data.id) {
       setTimeout(() => {
         updateParticipantData();
-      }, 200000);
+      }, 2000);
       return;
     }
+    setShouldShowRegulationsModal(isThereRegulationsToAccept);
     setParticipant(data);
   }, []);
 
   const { addToast } = useToast();
+
   useEffect(() => {
-    if (!apiToken) return;
     isTokenValid().then(isValid => {
       if (!isValid) {
         signOut();
@@ -89,20 +95,9 @@ export const AuthProvider: React.FC = ({ children }) => {
           title: 'Sua Sessão expirou, por favor refaça seu login',
           type: 'error',
         });
-        return;
       }
-      updateParticipantData();
     });
-  }, [apiToken, signOut, addToast, updateParticipantData]);
-
-  useEffect(() => {
-    if (!apiToken) return;
-    const checkRegulations = async (): Promise<void> => {
-      const isThereRegulationsToAccept = await isThereAnyRegulationToAccept();
-      setShouldShowRegulationsModal(isThereRegulationsToAccept);
-    };
-    checkRegulations();
-  }, [participant, apiToken]);
+  }, [addToast, signOut]);
 
   return (
     <AuthContext.Provider
@@ -112,6 +107,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         shouldShowRegulationsModal,
+        updateParticipantData,
       }}
     >
       {apiToken ? <Layout>{children}</Layout> : children}
