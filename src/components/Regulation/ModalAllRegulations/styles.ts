@@ -65,4 +65,28 @@ export const SubTitle = styled.h3`
 
 export const Accordion = styled(DefaultAccordion)`
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+`;
+
+export const ContentRegulation = styled.div`
+  border: 1px solid ${({ theme }) => theme.regulation.primary.borderColor};
+  overflow-y: auto;
+  margin-left: 78px;
+  transform: translateY(-5px) translateX(1px);
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  > button {
+    width: 100px;
+    height: 28px;
+    & + button {
+      margin-left: 25px;
+    }
+  }
 `;

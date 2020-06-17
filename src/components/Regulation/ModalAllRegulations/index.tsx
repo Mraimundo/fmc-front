@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import parser from 'html-react-parser';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
 import getRegulationById from 'services/register/regulation/getRegulationById';
+import { Button } from 'components/shared';
 import {
   Regulation,
   RegulationType,
@@ -15,6 +17,8 @@ import {
   Title,
   SubTitle,
   Accordion,
+  ContentRegulation,
+  Actions,
 } from './styles';
 
 const TITLES = {
@@ -33,9 +37,7 @@ const ModalAllRegulations: React.FC = () => {
   const [safraRegulations, setSafraRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
-  const [regulationSelected, setRegulationSelected] = useState<Regulation>(
-    {} as Regulation,
-  );
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAllRegulations().then(regulations => {
@@ -53,14 +55,27 @@ const ModalAllRegulations: React.FC = () => {
     });
   }, []);
 
-  const handleOpenRegulation = useCallback(async (regulationId: number) => {
-    console.log('clique');
-    console.log(regulationId);
-    return <h1>Teste</h1>;
-    // setRegulationSelected({ id: regulationId } as Regulation);
-    // const t = await getRegulationById(regulationId);
-    // setRegulationSelected(t);
-  }, []);
+  const handleOpenRegulation = useCallback(
+    async (regulationId: number) => {
+      const regulation = await getRegulationById(regulationId);
+      return (
+        <>
+          <ContentRegulation>
+            {parser(regulation?.content || '')}
+          </ContentRegulation>
+          <Actions>
+            <Button buttonRole="primary" type="button" loading={loading}>
+              Aceitar
+            </Button>
+            <Button buttonRole="secondary" type="button">
+              Download
+            </Button>
+          </Actions>
+        </>
+      );
+    },
+    [loading],
+  );
 
   const printRegulation = useCallback(
     (regulations: Omit<Regulation, 'content'>[], type: RegulationType) => {
@@ -81,7 +96,7 @@ const ModalAllRegulations: React.FC = () => {
         )
       );
     },
-    [],
+    [handleOpenRegulation],
   );
 
   return (
