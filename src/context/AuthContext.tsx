@@ -37,40 +37,12 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [participant, setParticipant] = useState<Participant>(
     {} as Participant,
   );
-  const [apiToken, setApiToken] = useState<string>(() => {
-    const token = localStorage.getItem('@Vendavall:token');
 
-    if (token) {
-      setToken(token);
-      return token;
-    }
-
-    return '';
-  });
   const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
     false,
   );
 
-  const signIn = useCallback(async ({ cpf, password }: Credentials) => {
-    const { token } = await signInService({
-      cpf: numbersOnly(cpf),
-      password,
-    });
-
-    localStorage.setItem('@Vendavall:token', token);
-    setToken(token);
-    setApiToken(token);
-  }, []);
-
-  const signOut = useCallback(() => {
-    localStorage.removeItem('@Vendavall:token');
-
-    setToken('');
-    setApiToken('');
-  }, []);
-
   const updateParticipantData = useCallback(async () => {
-    console.log('opa4');
     const [data, isThereRegulationsToAccept] = await Promise.all([
       getLoggedParticipant(),
       isThereAnyRegulationToAccept(),
@@ -83,6 +55,44 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
     setShouldShowRegulationsModal(isThereRegulationsToAccept);
     setParticipant(data);
+  }, []);
+
+  const [apiToken, setApiToken] = useState<string>(() => {
+    const token = localStorage.getItem('@Vendavall:token');
+
+    if (token) {
+      setToken(token);
+      setTimeout(() => {
+        updateParticipantData();
+      }, 1000);
+      return token;
+    }
+
+    return '';
+  });
+
+  const signIn = useCallback(
+    async ({ cpf, password }: Credentials) => {
+      const { token } = await signInService({
+        cpf: numbersOnly(cpf),
+        password,
+      });
+
+      localStorage.setItem('@Vendavall:token', token);
+      setToken(token);
+      setApiToken(token);
+      setTimeout(() => {
+        updateParticipantData();
+      }, 1000);
+    },
+    [updateParticipantData],
+  );
+
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@Vendavall:token');
+
+    setToken('');
+    setApiToken('');
   }, []);
 
   const { addToast } = useToast();
