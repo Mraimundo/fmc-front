@@ -9,6 +9,7 @@ import Route from './Route';
 const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={SignIn} isPrivate={false} />
+    <Route exact path="/recover" component={SignIn} isPrivate={false} />
     <Route
       exact
       path="/firstAccess"
