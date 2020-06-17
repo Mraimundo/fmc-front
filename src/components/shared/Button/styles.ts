@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { shade, lighten } from 'polished';
 
 interface ContainerProps {
-  buttonRole: 'primary' | 'secondary' | 'tertiary';
+  buttonRole: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
 }
 
 export const Container = styled.button<ContainerProps>`

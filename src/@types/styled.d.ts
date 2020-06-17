@@ -129,6 +129,11 @@ declare module 'styled-components' {
         fontColor: string;
         borderRadius: string;
       };
+      quaternary: {
+        backgroundColor: string;
+        fontColor: string;
+        borderRadius: string;
+      };
     };
     link: {
       fontColor: string;
