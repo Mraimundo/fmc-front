@@ -5,7 +5,7 @@ import { Button } from 'components/shared';
 import { Link } from 'react-router-dom';
 import { Container } from './styles';
 
-const Dashboard: React.FC = () => {
+const Dashboard2: React.FC = () => {
   const { participant, signOut } = useAuth();
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <h3>Participant: {participant.name}</h3>
       <h3>cpf: {participant.cpf}</h3>
-      <Link to="dashboard2">dashboard2</Link>
+      <Link to="dashboard">dashboard</Link>
       <Button buttonRole="primary" type="button" onClick={signOut}>
         Sair
       </Button>
@@ -31,4 +31,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Dashboard2;
