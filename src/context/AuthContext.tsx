@@ -8,6 +8,7 @@ import React, {
 import numbersOnly from 'util/numbersOnly';
 import signInService from 'services/auth/signIn';
 import isTokenValid from 'services/auth/isTokenValid';
+import Layout from 'pages/_layouts';
 
 import getLoggedParticipant, {
   Participant,
@@ -98,7 +99,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signOut,
       }}
     >
-      {children}
+      {apiToken ? <Layout>{children}</Layout> : children}
     </AuthContext.Provider>
   );
 };
