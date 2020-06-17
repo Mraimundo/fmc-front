@@ -72,6 +72,7 @@ const ModalAllRegulations: React.FC = () => {
               <Accordion
                 key={`accordion-ragulation-${item.id}`}
                 title={item.name}
+                loadChildren={() => handleOpenRegulation(item.id)}
               >
                 <h1>teste sem funçãooo</h1>
               </Accordion>
