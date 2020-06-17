@@ -48,9 +48,9 @@ export default {
       scrollBarBackgroundColor: '#fff',
     },
     secondary: {
-      backgroundColor: '#312e38',
+      backgroundColor: '#e63027',
       scrollBarColor: '#c6c6c6',
-      scrollBarBackgroundColor: '#312e38',
+      scrollBarBackgroundColor: '#e63027',
     },
   },
   input: {

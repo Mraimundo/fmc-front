@@ -17,7 +17,7 @@ const RecoverPassword: React.FC = () => {
   const [
     confirmRequestResesetModalOpened,
     setConfirmRequestResesetModalOpened,
-  ] = React.useState(false);
+  ] = React.useState(true);
   const [
     changePasswordModalOpened,
     setChangePasswordModalOpened,
