@@ -47,7 +47,13 @@ const Modal: React.FC<ModalProps> = ({
     }
 
     setClosing(true);
-  }, [isOpen]);
+    setTimeout(() => {
+      if (typeof onRequestClose !== 'function') {
+        setOpened(false);
+        setClosing(false);
+      }
+    }, 500);
+  }, [isOpen, onRequestClose]);
 
   const handleOnClose = useCallback(
     e => {
