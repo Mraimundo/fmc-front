@@ -50,7 +50,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
     false,
   );
-  const [shouldUpdateParticipant, setShouldUpdateParticipant] = useState(false);
 
   const signIn = useCallback(async ({ cpf, password }: Credentials) => {
     const { token } = await signInService({
@@ -71,19 +70,24 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const updateParticipantData = useCallback(async () => {
-    const data = await getLoggedParticipant();
+    console.log('opa4');
+    const [data, isThereRegulationsToAccept] = await Promise.all([
+      getLoggedParticipant(),
+      isThereAnyRegulationToAccept(),
+    ]);
     if (!data.id) {
       setTimeout(() => {
         updateParticipantData();
       }, 2000);
       return;
     }
+    setShouldShowRegulationsModal(isThereRegulationsToAccept);
     setParticipant(data);
   }, []);
 
   const { addToast } = useToast();
+
   useEffect(() => {
-    if (!apiToken) return;
     isTokenValid().then(isValid => {
       if (!isValid) {
         signOut();
@@ -91,26 +95,9 @@ export const AuthProvider: React.FC = ({ children }) => {
           title: 'Sua Sessão expirou, por favor refaça seu login',
           type: 'error',
         });
-        return;
       }
-      updateParticipantData();
     });
-  }, [
-    apiToken,
-    signOut,
-    addToast,
-    updateParticipantData,
-    shouldUpdateParticipant,
-  ]);
-
-  useEffect(() => {
-    if (!apiToken) return;
-    const checkRegulations = async (): Promise<void> => {
-      const isThereRegulationsToAccept = await isThereAnyRegulationToAccept();
-      setShouldShowRegulationsModal(isThereRegulationsToAccept);
-    };
-    checkRegulations();
-  }, [participant, apiToken]);
+  }, [addToast, signOut]);
 
   return (
     <AuthContext.Provider
@@ -120,9 +107,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         shouldShowRegulationsModal,
-        updateParticipantData: () => {
-          setShouldUpdateParticipant(!shouldUpdateParticipant);
-        },
+        updateParticipantData,
       }}
     >
       {apiToken ? <Layout>{children}</Layout> : children}
