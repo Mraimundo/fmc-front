@@ -8,6 +8,7 @@ interface Props {
   type?: 'primary' | 'secondary';
   className?: string;
   open?: boolean;
+  onClick?(): void | Promise<void>;
 }
 
 const Accordion: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const Accordion: React.FC<Props> = ({
   type = 'primary',
   children,
   open,
+  onClick,
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
 
@@ -28,7 +30,12 @@ const Accordion: React.FC<Props> = ({
   }, [internalOpen, open]);
 
   return (
-    <Container open={internalOpen} type={type} className={className}>
+    <Container
+      open={internalOpen}
+      type={type}
+      className={className}
+      onClick={onClick}
+    >
       <ListValuesTitleWrapper onClick={toggleAccordion}>
         <ListValuesTitle open={internalOpen} type={type}>
           <h3>{title}</h3>
