@@ -18,10 +18,30 @@ const Accordion: React.FC<Props> = ({
   loadChildren,
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
+  const [internalChildren, setInternalChildren] = useState<React.ReactNode>(
+    <></>,
+  );
 
   const toggleAccordion = useCallback(() => {
     setInternalOpen(!internalOpen);
   }, [internalOpen]);
+
+  useEffect(() => {
+    const load = async (): Promise<void> => {
+      if (typeof loadChildren === 'function') {
+        const content = await loadChildren();
+        setInternalChildren(content);
+        return;
+      }
+      setInternalChildren(children || <></>);
+    };
+    if (!internalOpen) {
+      setInternalChildren(<></>);
+      return;
+    }
+
+    load();
+  }, [internalOpen, children, loadChildren]);
 
   return (
     <Container open={internalOpen} type={type} className={className}>
@@ -30,15 +50,7 @@ const Accordion: React.FC<Props> = ({
           <h3>{title}</h3>
         </ListValuesTitle>
       </ListValuesTitleWrapper>
-      {internalOpen && (
-        <>
-          {typeof loadChildren === 'function' ? (
-            loadChildren()
-          ) : (
-            <div>{children}</div>
-          )}
-        </>
-      )}
+      {internalOpen && <>{internalChildren}</>}
     </Container>
   );
 };
