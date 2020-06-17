@@ -9,6 +9,7 @@ import numbersOnly from 'util/numbersOnly';
 import signInService from 'services/auth/signIn';
 import isTokenValid from 'services/auth/isTokenValid';
 import Layout from 'pages/_layouts';
+import isThereAnyRegulationToAccept from 'services/register/regulation/isThereAnyRegulationToAccept';
 
 import getLoggedParticipant, {
   Participant,
@@ -24,6 +25,7 @@ interface Credentials {
 interface AuthContextState {
   participant: Participant;
   signed: boolean;
+  shouldShowRegulationsModal: boolean;
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
 }
@@ -44,6 +46,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     return '';
   });
+  const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
+    false,
+  );
 
   const signIn = useCallback(async ({ cpf, password }: Credentials) => {
     const { token } = await signInService({
@@ -90,6 +95,15 @@ export const AuthProvider: React.FC = ({ children }) => {
     });
   }, [apiToken, signOut, addToast, updateParticipantData]);
 
+  useEffect(() => {
+    if (!apiToken) return;
+    const checkRegulations = async (): Promise<void> => {
+      const isThereRegulationsToAccept = await isThereAnyRegulationToAccept();
+      setShouldShowRegulationsModal(isThereRegulationsToAccept);
+    };
+    checkRegulations();
+  }, [participant, apiToken]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -97,6 +111,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signed: !!apiToken,
         signIn,
         signOut,
+        shouldShowRegulationsModal,
       }}
     >
       {apiToken ? <Layout>{children}</Layout> : children}
