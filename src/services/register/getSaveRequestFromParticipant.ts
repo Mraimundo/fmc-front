@@ -1,5 +1,5 @@
 import numbersOnly from 'util/numbersOnly';
-import { Participant, Regulation } from './getParticipantData';
+import { Participant, Regulation } from 'services/auth/interfaces/Participant';
 
 interface SaveRequest {
   cpf: string;

@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
-import { Participant } from 'services/register/getParticipantData';
+import { Participant } from 'services/auth/interfaces/Participant';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
@@ -16,7 +16,7 @@ import {
   PasswordInput,
   Button,
   BoxPhone,
-} from '../styles';
+} from './styles';
 
 interface Props {
   participant: Participant;

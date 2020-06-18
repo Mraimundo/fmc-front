@@ -1,6 +1,6 @@
 import { pluginApi } from 'services/api';
 import { Participant } from 'services/auth/interfaces/Participant';
-import buildRequest from './getSaveRequestFromParticipant';
+import buildRequest from 'services/register/getSaveRequestFromParticipant';
 
 interface ApiResponse {
   message: string;
@@ -9,5 +9,5 @@ interface ApiResponse {
 
 export default async (participant: Participant): Promise<void> => {
   const request = buildRequest(participant);
-  await pluginApi.post<ApiResponse>('participants/register/save', request);
+  await pluginApi.post<ApiResponse>('participants/edit', request);
 };

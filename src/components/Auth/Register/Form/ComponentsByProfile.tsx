@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { PROFILES } from 'config/constants';
-import { Participant } from 'services/register/getParticipantData';
+import { Participant } from 'services/auth/interfaces/Participant';
 import { FiUser } from 'react-icons/fi';
-import { Info, Input } from '../styles';
+import { Info, Input } from './styles';
 
 interface Props {
   participant: Participant;

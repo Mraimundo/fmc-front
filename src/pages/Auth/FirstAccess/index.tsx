@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import history from 'services/history';
 import { useToast } from 'context/ToastContext';
 import { useSpring } from 'react-spring';
-import { Participant } from 'services/register/getParticipantData';
+import { Participant } from 'services/auth/interfaces/Participant';
 import getDataRegulation from 'services/register/regulation/getDataRegulation';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import save from 'services/register/saveParticipant';
@@ -11,7 +11,7 @@ import numbersOnly from 'util/numbersOnly';
 import DataRegulation from 'components/Regulation/DataRegulation';
 
 import logoImg from 'assets/images/logo.png';
-import Form from './Form';
+import Form from 'components/Auth/Register/Form';
 
 import {
   Container,

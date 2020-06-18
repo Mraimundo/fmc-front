@@ -1,16 +1,17 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import SignIn from 'pages/SignIn';
+import SignInUp from 'pages/Auth/SignInUp';
 import Dashboard from 'pages/Dashboard';
 import Dashboard2 from 'pages/Dashboard2';
-import FirstAccess from 'pages/FirstAccess';
+import FirstAccess from 'pages/Auth/FirstAccess';
+import RegisterEdit from 'pages/Auth/RegisterEdit';
 import Route from './Route';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route exact path="/" component={SignIn} isPrivate={false} />
-    <Route exact path="/recover" component={SignIn} isPrivate={false} />
+    <Route exact path="/" component={SignInUp} isPrivate={false} />
+    <Route exact path="/recover" component={SignInUp} isPrivate={false} />
     <Route
       exact
       path="/firstAccess"
@@ -18,6 +19,7 @@ const Routes: React.FC = () => (
       isPrivate={false}
     />
     <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/edit" component={RegisterEdit} />
     <Route exact path="/dashboard2" component={Dashboard2} />
   </Switch>
 );

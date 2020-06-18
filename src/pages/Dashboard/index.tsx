@@ -1,21 +1,17 @@
 import React, { useCallback } from 'react';
 import { useAuth } from 'context/AuthContext';
 import { Button } from 'components/shared';
+import history from 'services/history';
 
 import { Link } from 'react-router-dom';
 import { Container } from './styles';
 
 const Dashboard: React.FC = () => {
-  const { participant, signOut, updateParticipantData } = useAuth();
-
-  React.useEffect(() => {
-    console.log(participant);
-  }, [participant]);
+  const { participant, signOut } = useAuth();
 
   const handleEditClick = useCallback(() => {
-    console.log('oi');
-    updateParticipantData();
-  }, [updateParticipantData]);
+    history.push('/edit');
+  }, []);
 
   return (
     <Container>

@@ -11,9 +11,8 @@ import isTokenValid from 'services/auth/isTokenValid';
 import Layout from 'pages/_layouts';
 import isThereAnyRegulationToAccept from 'services/register/regulation/isThereAnyRegulationToAccept';
 
-import getLoggedParticipant, {
-  Participant,
-} from 'services/auth/getLoggedParticipant';
+import getLoggedParticipant from 'services/auth/getLoggedParticipant';
+import { Participant } from 'services/auth/interfaces/Participant';
 import { setToken } from 'services/api';
 import { useToast } from './ToastContext';
 

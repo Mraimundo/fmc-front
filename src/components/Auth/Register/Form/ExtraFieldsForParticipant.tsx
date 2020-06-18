@@ -7,7 +7,7 @@ import {
   Separator,
   GraduationSelect,
   MaritalStatusSelect,
-} from '../styles';
+} from './styles';
 
 interface Props {
   inputRole: 'primary' | 'secondary';
