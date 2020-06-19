@@ -11,6 +11,7 @@ interface Props {
 
 const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   const [loading, setLoading] = useState(false);
+  const [canAccept, setCanAccept] = useState(false);
   const buttonRole = 'primary';
 
   const handleAcceptClick = useCallback(async () => {
@@ -32,6 +33,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
         buttonRole={buttonRole}
         onClick={handleAcceptClick}
         loading={loading}
+        disabled={!canAccept}
       >
         Aceito participar
       </Button>
