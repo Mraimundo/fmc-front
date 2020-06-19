@@ -42,7 +42,13 @@ export default (profile: IProfile): Yup.ObjectSchema<object> => {
       return Yup.object().shape({
         ...commomValidations,
         gender: Yup.string().required(mandatoryMessage),
-        birth_date: Yup.date().required(mandatoryMessage),
+        birth_date: Yup.date()
+          .transform((t, v) => {
+            const newValue = v.split('/');
+            return new Date(`${newValue[1]}/${newValue[0]}/${newValue[2]}`);
+          })
+          .typeError('Data inválida')
+          .required(mandatoryMessage),
         education_level: Yup.string().required(mandatoryMessage),
         place_of_birth: Yup.string().required(mandatoryMessage),
         nationality: Yup.string().required(mandatoryMessage),

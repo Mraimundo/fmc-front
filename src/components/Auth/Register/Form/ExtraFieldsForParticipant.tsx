@@ -16,16 +16,19 @@ interface Props {
 const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
   const { setValue } = useFormContext();
 
-  const handleCepBlur = useCallback(zipCode => {
-    getAddressInfo(zipCode).then(
-      ({ endereco, bairro, cidade, estado: { sigla } }) => {
-        setValue('address.street', endereco);
-        setValue('address.district', bairro);
-        setValue('address.city', cidade);
-        setValue('address.state_code', sigla);
-      },
-    );
-  }, []);
+  const handleCepBlur = useCallback(
+    zipCode => {
+      getAddressInfo(zipCode).then(
+        ({ endereco, bairro, cidade, estado: { sigla } }) => {
+          setValue('address.street', endereco);
+          setValue('address.district', bairro);
+          setValue('address.city', cidade);
+          setValue('address.state_code', sigla);
+        },
+      );
+    },
+    [setValue],
+  );
 
   return (
     <>
@@ -37,6 +40,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         icon={FiUser}
         label="Data de nascimento"
         inputRole={inputRole}
+        pattern="XX/XX/XXXX"
       />
 
       <GraduationSelect name="education_level" inputRole={inputRole} />

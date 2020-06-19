@@ -4,6 +4,7 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
+import validateCpf from 'util/validations/cpf';
 
 import { Input, Button, PasswordInput } from 'components/shared';
 import { FiUser, FiLock } from 'react-icons/fi';
@@ -20,7 +21,9 @@ const FormSignIn: React.FC = () => {
   const { addToast } = useToast();
 
   const schema = Yup.object().shape({
-    cpf: Yup.string().required('Cpf é obrigatório'),
+    cpf: Yup.string()
+      .required('Cpf é obrigatório')
+      .test('valid-cpf', 'Cpf inválido', validateCpf),
     password: Yup.string().required('Senha é obrigatória'),
   });
 

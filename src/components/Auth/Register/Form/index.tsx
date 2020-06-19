@@ -121,7 +121,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
           inputRole={inputRole}
         />
         <Button type="submit" buttonRole="primary" loading={loading}>
-          Enviar cadastro para aprovação
+          Confirmar
         </Button>
       </form>
     </FormContext>
