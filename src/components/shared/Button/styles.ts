@@ -49,4 +49,14 @@ export const Container = styled.button<ContainerProps>`
       fill: ${({ theme, buttonRole }) => theme.button[buttonRole].fontColor};
     }
   }
+
+  &:disabled {
+    opacity: 0.8;
+    background: ${({ theme, buttonRole }) =>
+      shade(0.2, theme.button[buttonRole].backgroundColor)};
+    cursor: not-allowed;
+    > * {
+      pointer-events: none;
+    }
+  }
 `;
