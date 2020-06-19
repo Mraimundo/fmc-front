@@ -1,4 +1,4 @@
-import { vendavallApi } from 'services/api';
+import { pluginApi, vendavallApi } from 'services/api';
 
 interface Option {
   name: 'Email' | 'Sms';
@@ -29,7 +29,7 @@ export default async (cpf: string): Promise<Response> => {
   const email = await getEmail(cpf);
   const {
     data: { message },
-  } = await vendavallApi.post<SendMailResponse>(
+  } = await pluginApi.post<SendMailResponse>(
     'participants/recover-password/send',
     {
       cpf,
