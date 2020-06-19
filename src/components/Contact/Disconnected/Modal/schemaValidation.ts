@@ -6,10 +6,12 @@ export default Yup.object().shape({
   cpf: Yup.string()
     .required('Cpf é obrigatório')
     .test('valid-cpf', 'Cpf inválido', validateCpf),
-  email: Yup.string().required('Email é obrigatório'),
-  dddMobile: Yup.string().required('DDD do Celular é obrigatório'),
-  mobile: Yup.string().required('Número de Celular é obrigatório'),
+  email: Yup.string().email('Email inválido').required('Email é obrigatório'),
+  dddMobile: Yup.string(),
+  mobile: Yup.string(),
   subject: Yup.string().required('Assunto é obrigatório'),
-  message: Yup.string().required('Mensagem é obrigatória'),
+  message: Yup.string()
+    .required('Mensagem é obrigatória')
+    .max(350, 'Limite de 350 caracteres'),
   fileUrl: Yup.string(),
 });

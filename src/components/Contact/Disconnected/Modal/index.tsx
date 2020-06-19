@@ -49,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const { addToast } = useToast();
 
   const methods = useForm<ContactFormData>({
-    // validationSchema: schemaValidation,
+    validationSchema: schemaValidation,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
   });
@@ -143,6 +143,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               icon={FiMessageCircle}
               label="Mensagem"
               inputRole={inputRole}
+              maxLength={350}
             />
 
             <input type="hidden" name="fileUrl" ref={register} />
@@ -157,7 +158,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                     <input
                       type="file"
                       id="inputFile"
-                      accept="image/*"
+                      accept="image/*,application/pdf"
                       style={{ display: 'none' }}
                       onChange={handleAttachFile}
                     />

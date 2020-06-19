@@ -57,6 +57,7 @@ const RecoverPassword: React.FC = () => {
         onSuccessSendEmail={() => {
           setConfirmRequestResesetModalOpened(true);
         }}
+        sendEmail={handleSendEmail}
       />
 
       <ConfirmRequestResesetModal
@@ -64,6 +65,7 @@ const RecoverPassword: React.FC = () => {
         onRequestClose={() => {
           setConfirmRequestResesetModalOpened(false);
         }}
+        email={email}
       />
 
       {!!token && (

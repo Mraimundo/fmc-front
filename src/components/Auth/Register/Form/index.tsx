@@ -47,7 +47,12 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
         <Title>
-          Ativar cadastro - <strong>Equipe FMC</strong>
+          Ativar cadastro -
+          <strong>
+            {participant.profile === 'FMC' && 'Equipe FMC'}
+            {participant.profile === 'FOCAL_POINT' && 'Focal Point'}
+            {participant.profile === 'PARTICIPANTE' && 'Participante'}
+          </strong>
         </Title>
         <Avatar name="picture" inputRole={inputRole} />
         <ComponentsByProfile participant={participant} inputRole={inputRole} />
@@ -62,12 +67,14 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
           icon={FiUser}
           label="Nome completo*"
           inputRole={inputRole}
+          disabled={participant.profile === 'FMC'}
         />
         <Input
           name="email"
           icon={FiUser}
           label="Email*"
           inputRole={inputRole}
+          disabled={participant.profile === 'FMC'}
         />
         <Input
           name="cpf"

@@ -53,7 +53,9 @@ const RegisterEdit: React.FC = () => {
         history.push('/');
       } catch (e) {
         addToast({
-          title: e.response?.data?.message || 'Falha ao fazer login',
+          title:
+            e.response?.data?.message ||
+            'Falha na validação dos dados. Por favor entre em contato com o suporte',
           type: 'error',
         });
       }
