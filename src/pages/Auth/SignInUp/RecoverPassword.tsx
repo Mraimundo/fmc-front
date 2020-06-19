@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import sendEmail from 'services/auth/password/sendEmailToResetPassword';
 import RequestResetModal from 'components/Auth/ForgotPassword/RequestResetPasswordModal';
 import ConfirmRequestResesetModal from 'components/Auth/ForgotPassword/SendResetPasswordConfirmationModal';
 import ChangePasswordModal from 'components/Auth/ForgotPassword/ChangePasswordByTokenModal';
@@ -11,22 +12,20 @@ import { ForgotPasswordButton } from './styles';
 const RecoverPassword: React.FC = () => {
   const location = useLocation();
 
-  const [requestResetModalOpened, setRequestResetModalOpened] = React.useState(
-    false,
-  );
+  const [email, setEmail] = useState('');
+  const [requestResetModalOpened, setRequestResetModalOpened] = useState(false);
   const [
     confirmRequestResesetModalOpened,
     setConfirmRequestResesetModalOpened,
-  ] = React.useState(false);
-  const [
-    changePasswordModalOpened,
-    setChangePasswordModalOpened,
-  ] = React.useState(false);
+  ] = useState(false);
+  const [changePasswordModalOpened, setChangePasswordModalOpened] = useState(
+    false,
+  );
   const [
     confirmChangePasswordModalOpened,
     setConfirmChangePasswordModalOpened,
-  ] = React.useState(false);
-  const [token, setToken] = React.useState('');
+  ] = useState(false);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     const { pathname } = location;
@@ -36,6 +35,11 @@ const RecoverPassword: React.FC = () => {
       setChangePasswordModalOpened(true);
     }
   }, [location]);
+
+  const handleSendEmail = useCallback(async (cpf: string): Promise<void> => {
+    const { email: emailResponse } = await sendEmail(cpf);
+    setEmail(emailResponse);
+  }, []);
 
   return (
     <>
