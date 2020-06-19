@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useForm, FormContext } from 'react-hook-form';
 import DefaultModal from 'components/shared/Modal';
-import sendEmail from 'services/auth/password/sendEmailToResetPassword';
 import { Input, Button } from 'components/shared';
 import * as Yup from 'yup';
 import validateCpf from 'util/validations/cpf';
@@ -15,6 +14,7 @@ interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
   onSuccessSendEmail(): void;
+  sendEmail(cpf: string): Promise<void>;
 }
 
 interface FormData {
@@ -25,6 +25,7 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
   onSuccessSendEmail,
+  sendEmail,
 }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
