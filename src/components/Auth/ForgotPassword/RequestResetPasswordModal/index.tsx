@@ -32,7 +32,7 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
   const schemaValidation = Yup.object().shape({
     cpf: Yup.string()
       .required('Cpf é obrigatório')
-      .test('valid-cpf', 'e', validateCpf),
+      .test('valid-cpf', 'Cpf inválido', validateCpf),
   });
 
   const methods = useForm<FormData>({

@@ -20,7 +20,7 @@ const SendResetPasswordConfirmationModal: React.FC<ModalProps> = ({
       type="secondary"
     >
       <Container>
-        <h3>Solicitação de alteraçã de senha enviada</h3>
+        <h3>Solicitação de alteração de senha enviada</h3>
         <p>
           Clique no link enviado para o seu email para recadastramento de senha
         </p>
