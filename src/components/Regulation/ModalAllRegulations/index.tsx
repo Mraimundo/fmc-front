@@ -41,6 +41,7 @@ interface Props {
 const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
   const { updateParticipantData } = useAuth();
   const { addToast } = useToast();
+  const [canAccept, setCanAccept] = useState(false);
 
   const [dataRegulations, setDataRegulations] = useState<
     Omit<Regulation, 'content'>[]
@@ -124,6 +125,19 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
     ],
   );
 
+  useEffect(() => {
+    setCanAccept(false);
+  }, [regulationSelected]);
+
+  const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
+    if (
+      e.currentTarget.scrollHeight - e.currentTarget.scrollTop ===
+      e.currentTarget.clientHeight
+    ) {
+      setCanAccept(true);
+    }
+  };
+
   const handleOpenRegulation = useCallback(
     async (regulationId: number) => {
       if (!regulationSelected || regulationId !== regulationSelected.id) {
@@ -134,7 +148,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       return (
         regulationSelected && (
           <>
-            <ContentRegulation>
+            <ContentRegulation onScroll={handleDivScroll}>
               <PrintRef ref={t}>
                 {parser(regulationSelected.content || '')}
               </PrintRef>
@@ -152,6 +166,7 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
                       regulationSelected.name,
                     );
                   }}
+                  disabled={!canAccept}
                 >
                   Aceitar
                 </Button>
@@ -172,7 +187,13 @@ const ModalAllRegulations: React.FC<Props> = ({ isOpen, onRequestClose }) => {
         )
       );
     },
-    [loading, acceptedIds, handleAcceptRegulation, regulationSelected],
+    [
+      loading,
+      acceptedIds,
+      handleAcceptRegulation,
+      regulationSelected,
+      canAccept,
+    ],
   );
 
   const printRegulation = useCallback(

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 import { Button as DefaultButton } from 'components/shared';
 
 export const Container = styled.div`
@@ -42,4 +43,48 @@ export const Button = styled(DefaultButton)`
   width: 250px;
   height: 60px;
   margin-top: 30px;
+`;
+
+export const BoxActions = styled.div`
+  display: flex;
+  margin-top: 24px;
+
+  > button {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    opacity: 0.7;
+    font-size: 14px;
+
+    img {
+      margin-right: 8px;
+      width: 27px;
+      height: 30px;
+      transition: transform 0.2s;
+    }
+
+    & + button {
+      margin-left: 20px;
+    }
+
+    transition: opacity 0.2s, transform 0.2s;
+    will-change: opacity, transform;
+    &:hover {
+      opacity: 1;
+     /* color: ${({ theme }) => shade(0.2, theme.link.fontColor)};*/
+     img {
+       transform: scale(1.1);
+     }
+    }
+  }
+`;
+
+export const PrintRef = styled.div`
+  @media print {
+    margin: 50px;
+    color: #000;
+  }
 `;
