@@ -27,8 +27,7 @@ const storageApi = axios.create({
 const pdfApi = axios.create({
   baseURL: pdfURL,
   headers: {
-    'content-type': 'multipart/form-data',
-    Accept: 'application/json',
+    Accept: 'application/json,application/pdf',
   },
 });
 
