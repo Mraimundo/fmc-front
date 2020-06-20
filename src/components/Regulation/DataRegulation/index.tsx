@@ -2,6 +2,8 @@ import React, { useCallback, useState, useRef } from 'react';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import parser from 'html-react-parser';
 import ReactToPrint from 'react-to-print';
+import getPdfLink from 'services/pdf/generatePdfLinkFromHtml';
+import { Link } from 'react-router-dom';
 
 import pdfIcon from 'assets/images/pdf.svg';
 import printIcon from 'assets/images/print.svg';
@@ -43,13 +45,32 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
     }
   };
 
+  const handlePdfDownload = useCallback(async () => {
+    const blob = await getPdfLink(regulation?.content || '');
+    const blob2 = new Blob([blob], { type: 'application/pdf' });
+    console.log(blob);
+    console.log(blob2);
+    // window.location.href = window.URL.createObjectURL(blob2);
+    // window.open(link);
+
+    /* const url = window.URL.createObjectURL(
+      new Blob([blob], { type: 'application/pdf' }),
+    );
+    const linkClick = document.createElement('a');
+    linkClick.href = url;
+    linkClick.download = 'Regulamento.pdf';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick); */
+  }, [regulation]);
+
   return (
     <Container>
       <RegulationContent type="primary" onScroll={handleDivScroll}>
         <PrintRef ref={printRef}>{parser(regulation?.content || '')}</PrintRef>
       </RegulationContent>
       <BoxActions>
-        <button type="button">
+        <button type="submit" onClick={handlePdfDownload}>
           <img src={pdfIcon} alt="Ícone botão salvar PDF" />
           Download (PDF)
         </button>
