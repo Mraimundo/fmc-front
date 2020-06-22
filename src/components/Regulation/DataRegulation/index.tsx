@@ -36,17 +36,22 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   }, [onAccept]);
 
   const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
+    console.log('Scroll');
+    console.log(e.currentTarget.scrollHeight);
+    console.log(e.currentTarget.scrollTop);
+    console.log(e.currentTarget.clientHeight);
     if (
       e.currentTarget.scrollHeight - e.currentTarget.scrollTop ===
       e.currentTarget.clientHeight
     ) {
+      console.log('oi');
       setCanAccept(true);
     }
   };
 
   const handlePdfDownload = useCallback(async () => {
-    return;
-    const data = await getPdfDownload(regulation?.content || '');
+    console.log('todo');
+    /* const data = await getPdfDownload(regulation?.content || '');
     const blob = new Blob([data], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(blob);
 
@@ -55,8 +60,8 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
     linkClick.download = 'Regulamento.pdf';
     document.body.appendChild(linkClick);
     linkClick.click();
-    document.body.removeChild(linkClick);
-  }, [regulation]);
+    document.body.removeChild(linkClick); */
+  }, []);
 
   return (
     <Container>
