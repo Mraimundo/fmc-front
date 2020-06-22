@@ -1,25 +1,20 @@
 import React from 'react';
 
 import Logo from './Logo';
-import { Container } from './styles';
+import StatusBox from './StatusBox';
+import Filters from './Filters';
+import Table from './Table';
+import { Container, Content } from './styles';
 
 const ParticipantIndication: React.FC = () => {
   return (
     <Container>
-      <Logo />
       <Content>
+        <Logo />
         <h3>Indique um participante</h3>
-        <StatusBox>
-          <h3>Equipe ativa no sistema</h3>
-          <StatusIndicator />
-          <AddButton />
-        </StatusBox>
+        <StatusBox />
         <span>Usuários indicados</span>
-        <Filters>
-          <FilialSelect />
-          <RoleSelect />
-          <Button>Filtrar</Button>
-        </Filters>
+        <Filters />
         <Table />
       </Content>
     </Container>
