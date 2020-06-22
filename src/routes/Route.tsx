@@ -4,7 +4,6 @@ import {
   Route as DefaultRoute,
   Redirect,
 } from 'react-router-dom';
-import Layout from 'pages/_layouts';
 
 import { useAuth } from 'context/AuthContext';
 
@@ -24,15 +23,7 @@ const Route: React.FC<RouteProps> = ({
       {...rest}
       render={({ location }) =>
         isPrivate === signed ? (
-          <>
-            {isPrivate ? (
-              <Layout>
-                <Component />
-              </Layout>
-            ) : (
-              <Component />
-            )}
-          </>
+          <>{isPrivate ? <Component /> : <Component />}</>
         ) : (
           <Redirect
             to={{
@@ -40,7 +31,8 @@ const Route: React.FC<RouteProps> = ({
               state: { from: location },
             }}
           />
-        )}
+        )
+      }
     />
   );
 };
