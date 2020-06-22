@@ -135,4 +135,42 @@ export default {
   link: {
     fontColor: '#f4ede8',
   },
+  table: {
+    primary: {
+      thead: {
+        tr: {
+          backgroundColor: '#232129',
+          color: '#fff',
+        },
+      },
+      tbody: {
+        tr: {
+          borderColor: '#f5f5f5',
+          borderWidth: '8px',
+          color: '#707070',
+        },
+        td: {
+          backgroundColor: '#fff',
+        },
+      },
+    },
+    secondary: {
+      thead: {
+        tr: {
+          backgroundColor: '#232129',
+          color: '#fff',
+        },
+      },
+      tbody: {
+        tr: {
+          borderColor: '#f5f5f5',
+          borderWidth: '8px',
+          color: '#707070',
+        },
+        td: {
+          backgroundColor: '#fff',
+        },
+      },
+    },
+  },
 };
