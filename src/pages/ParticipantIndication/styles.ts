@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Content = styled.div`
@@ -11,4 +12,12 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1100px;
   flex-direction: column;
+  background: #fff;
+  padding: 20px 60px;
+
+  > h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #193b4e;
+  }
 `;

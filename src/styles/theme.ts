@@ -10,10 +10,10 @@ export default {
   },
   layout: {
     primary: {
-      backgroundColor: '#312e38',
+      backgroundColor: '#efefef',
     },
     secondary: {
-      backgroundColor: '#312e38',
+      backgroundColor: '#fff',
     },
   },
   regulation: {

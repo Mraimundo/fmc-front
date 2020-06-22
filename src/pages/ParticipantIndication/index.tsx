@@ -9,8 +9,8 @@ import { Container, Content } from './styles';
 const ParticipantIndication: React.FC = () => {
   return (
     <Container>
+      <Logo />
       <Content>
-        <Logo />
         <h3>Indique um participante</h3>
         <StatusBox />
         <span>Usuários indicados</span>
