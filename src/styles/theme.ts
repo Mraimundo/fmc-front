@@ -8,6 +8,14 @@ export default {
       tertiary: '#fff',
     },
   },
+  layout: {
+    primary: {
+      backgroundColor: '#312e38',
+    },
+    secondary: {
+      backgroundColor: '#312e38',
+    },
+  },
   regulation: {
     primary: {
       backgroundColor: '#fff',
