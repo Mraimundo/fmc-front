@@ -46,12 +46,12 @@ const FormSignUp: React.FC = () => {
           : await getParticipantByUpn(param_first_access);
       history.push('/firstAccess', participant);
     } catch (e) {
+      setLoading(false);
       addToast({
         title: e.response?.data?.message || 'Falha ao checar CPF',
         type: 'error',
       });
     }
-    setLoading(false);
   });
 
   const handleSelectType = useCallback(
