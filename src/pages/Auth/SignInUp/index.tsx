@@ -15,7 +15,6 @@ const SignIn: React.FC = () => {
       <Logo />
       <Content style={props}>
         <Title>Já sou cadastrado</Title>
-
         <FormSignIn />
         <Title>Primeiro acesso?</Title>
         <FormSignUp />
