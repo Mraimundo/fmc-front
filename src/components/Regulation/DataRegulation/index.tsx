@@ -87,7 +87,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
         loading={loading}
         disabled={!canAccept}
       >
-        Aceito participar
+        Concordo com os termos e quero me cadastrar
       </Button>
     </Container>
   );
