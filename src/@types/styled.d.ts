@@ -2,6 +2,14 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    layout: {
+      primary: {
+        backgroundColor: string;
+      };
+      secondary: {
+        backgroundColor: string;
+      };
+    };
     menu: {
       activeBackgroundColor: string;
       inactiveBackgroundColor: string;
