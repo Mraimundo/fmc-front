@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import React from 'react';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+
 import history from 'services/history';
 
 import GlobalStyle from 'styles/global';
