@@ -20,4 +20,11 @@ export const Content = styled.div`
     font-weight: bold;
     color: #193b4e;
   }
+
+  > span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #193b4e;
+    margin-top: 35px;
+  }
 `;

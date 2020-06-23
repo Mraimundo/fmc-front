@@ -1,8 +1,7 @@
 import React from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 
-import RolesSelect from 'components/shared/Vendavall/Roles/PublicRolesSelect';
-import { Container, Button } from './styles';
+import { Container, Button, RolesSelect, FilialSelect } from './styles';
 
 interface FilterFormData {
   roles: string;
@@ -21,9 +20,9 @@ const Filters: React.FC = () => {
     <Container>
       <FormContext {...methods}>
         <form onSubmit={() => console.log('teste')}>
-          <RolesSelect name="filiais" />
-          <RolesSelect name="roles" />
-          <Button type="button" buttonRole="primary">
+          <FilialSelect name="filiais" inputRole="secondary" />
+          <RolesSelect name="roles" inputRole="secondary" />
+          <Button type="button" buttonRole="tertiary">
             Filtrar
           </Button>
         </form>

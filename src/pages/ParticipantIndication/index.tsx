@@ -12,7 +12,7 @@ const ParticipantIndication: React.FC = () => {
       <Logo />
       <Content>
         <h3>Indique um participante</h3>
-        <StatusBox />
+        <StatusBox percentActivated={10} />
         <span>Usuários indicados</span>
         <Filters />
         <Table />
