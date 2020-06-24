@@ -66,6 +66,7 @@ export const InputContainer = styled.div<InputContainerProps>`
 
   input {
     width: 100%;
+    min-width: 0;
     background-color: transparent;
     border: 0;
     color: ${({ theme, inputRole }) => theme.input[inputRole].fontColor};
