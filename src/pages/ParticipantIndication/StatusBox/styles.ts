@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 import { Button } from 'components/shared';
+import plusButton from 'assets/images/indication/plus-button.svg';
+import minusButton from 'assets/images/indication/minus-button.svg';
 
 export const Container = styled.div`
   display: flex;
-  padding: 23px 48px;
+  padding: 18px 48px;
   background-color: #e9ece6;
   width: 100%;
   margin-top: 40px;
@@ -20,12 +22,24 @@ export const Container = styled.div`
   }
 `;
 
-export const AddButton = styled(Button)`
+interface AddButtonProps {
+  opened: boolean;
+}
+export const AddButton = styled.button<AddButtonProps>`
   width: 65px;
+  height: 65px;
   padding: 0;
-  border-radius: 50%;
   margin: 0;
+  border-radius: 50%;
+  border: none;
   background: transparent;
+  transition: background 0.5s ease, transform 0.3s;
+  background-image: url(${({ opened }) => (opened ? minusButton : plusButton)});
+  ${({ opened }) =>
+    opened &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
 
 interface StatusIndicatorProps {

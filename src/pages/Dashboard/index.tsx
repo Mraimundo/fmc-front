@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
       <Button buttonRole="primary" type="button" onClick={handleEditClick}>
         Editar Participante
       </Button>
+      <Link to="/indication">Indicação</Link>
     </Container>
   );
 };

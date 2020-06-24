@@ -1,21 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
+import getTableListData from 'services/participantIndication/getParticipantsList';
+import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
+
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import StatusBox from './StatusBox';
 import Filters from './Filters';
 import Table from './Table';
-import { Container, Content } from './styles';
+import Form from './Form';
+import { Container, Content, ContentForm } from './styles';
 
 const ParticipantIndication: React.FC = () => {
+  const [tableData, setTableData] = useState<IParticipantIndication[]>([]);
+  const [formOpened, setFormOpened] = useState(false);
+
+  useEffect(() => {
+    getTableListData().then(list => setTableData(list));
+  }, []);
+
+  const saveIndication = useCallback(() => {
+    console.log('teste');
+  }, []);
+
+  useEffect(() => {
+    document.getElementsByTagName('body')[0].style.overflowY = 'scroll';
+    return () => {
+      document.getElementsByTagName('body')[0].style.overflowY = 'auto';
+    };
+  }, []);
+
   return (
     <Container>
       <Logo />
       <Content>
         <h3>Indique um participante</h3>
-        <StatusBox percentActivated={10} />
+        <Link to="/">Main</Link>
+        <StatusBox
+          percentActivated={10}
+          onAddClick={() => setFormOpened(!formOpened)}
+          opened={formOpened}
+        />
+        <ContentForm show={formOpened}>
+          <Form saveIndication={saveIndication} />
+        </ContentForm>
+
         <span>Usuários indicados</span>
         <Filters />
-        <Table />
+        <Table data={tableData} />
       </Content>
     </Container>
   );

@@ -1,29 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
+import headers from './headers';
+import transformer, { TransformedData } from './transformer';
+import { Container } from './styles';
 
 interface Props {
-  data: Research[];
+  data: ParticipantIndication[];
 }
 
 const Table: React.FC<Props> = ({ data }) => {
-  const headers = [
-    {
-      column: 'Ano',
-      dataValue: 'year',
-    },
-    {
-      column: 'Mes',
-      dataValue: 'month',
-    },
-    {
-      column: 'Data de Cadastro',
-      dataValue: 'created_at',
-    },
-  ];
-
+  const [tableData, setTableData] = useState<TransformedData[]>([]);
+  useEffect(() => {
+    setTableData(transformer(data));
+  }, [data]);
   return (
-    <CustomersTable
+    <Container
       headers={headers}
-      data={data}
+      data={tableData}
       noResultText="Nenhuma Pesquisa encontrada"
     />
   );

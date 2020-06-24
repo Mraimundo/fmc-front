@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import iconButton from 'assets/images/indication/plus-button.svg';
 import iconEmpty from 'assets/images/indication/status-empty.svg';
 import iconFilled from 'assets/images/indication/status-filled.svg';
 import { Rating } from '@material-ui/lab';
@@ -8,9 +7,15 @@ import { Container, AddButton, StatusIndicator } from './styles';
 
 interface Props {
   percentActivated: number;
+  onAddClick(): void;
+  opened?: boolean;
 }
 
-const StatusBox: React.FC<Props> = ({ percentActivated }) => {
+const StatusBox: React.FC<Props> = ({
+  percentActivated,
+  onAddClick,
+  opened = false,
+}) => {
   const statusRef = useRef<HTMLDivElement>(null);
   const [inactivated, setInactivated] = React.useState<number[]>([]);
   const [activated, setActivated] = React.useState<number[]>([]);
@@ -46,9 +51,7 @@ const StatusBox: React.FC<Props> = ({ percentActivated }) => {
           ))}
         </>
       </StatusIndicator>
-      <AddButton type="button" buttonRole="primary">
-        <img src={iconButton} alt="Botão indicar" />
-      </AddButton>
+      <AddButton type="button" onClick={onAddClick} opened={opened} />
     </Container>
   );
 };
