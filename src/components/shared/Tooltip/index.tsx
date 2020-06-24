@@ -1,6 +1,8 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import TooltipMaterial from '@material-ui/core/Tooltip';
 
-import { Container } from './styles';
+import { Container, ContentTooltip } from './styles';
 
 interface TooltipProps {
   title: string;
@@ -8,15 +10,25 @@ interface TooltipProps {
   type: 'success' | 'error' | 'info';
 }
 
+const HtmlTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: 'transparent',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: 'none',
+  },
+}))(TooltipMaterial);
+
 const Tooltip: React.FC<TooltipProps> = ({
   title,
   children,
   className,
   type,
 }) => (
-  <Container className={className} type={type}>
-    {children}
-    <span>{title}</span>
+  <Container className={className}>
+    <HtmlTooltip title={<ContentTooltip type={type}>{title}</ContentTooltip>}>
+      <span>{children}</span>
+    </HtmlTooltip>
   </Container>
 );
 
