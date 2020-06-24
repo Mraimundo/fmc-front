@@ -127,7 +127,14 @@ const Select: React.FC<SelectProps> = ({
       setInputValue('');
       setInternalValue(null);
       setIsFilled(false);
+      return;
     }
+    if (internalValue && internalValue.value) return;
+    setInternalValue({
+      title: op || '',
+      value: op || '',
+    });
+    setIsFilled(op !== '');
   }, [op]);
 
   return useMemo(
@@ -160,8 +167,7 @@ const Select: React.FC<SelectProps> = ({
             }}
             classes={classes}
             getOptionSelected={(option, value) =>
-              option?.value === value?.value
-            }
+              option?.value === value?.value}
             options={options}
             loading={loading}
             onChange={(event, value) => {
@@ -174,6 +180,10 @@ const Select: React.FC<SelectProps> = ({
               !!error && triggerValidation();
             }}
             onInputChange={(event, newInputValue) => {
+              console.log('1');
+              console.log(newInputValue);
+              console.log('2');
+
               setInputValue(newInputValue);
             }}
             value={internalValue}
@@ -240,6 +250,7 @@ const Select: React.FC<SelectProps> = ({
       inputRole,
       disabled,
       internalValue,
+      placeholder,
     ],
   );
 };
