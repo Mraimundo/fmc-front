@@ -1,7 +1,7 @@
-import React from 'react';
-import Select from 'components/shared/Select';
+import React, { useEffect, useState, useCallback } from 'react';
+import Select, { Option } from 'components/shared/Select';
 import { FiLink } from 'react-icons/fi';
-import { getPublicRolesForSelect } from 'services/role/publicRoles';
+import { getProtecedRolesForSelect } from 'services/role/protectedRoles';
 
 interface Props {
   name: string;
@@ -14,12 +14,22 @@ const ProtectedRolesSelect: React.FC<Props> = ({
   className,
   inputRole = 'primary',
 }) => {
+  const [data, setData] = useState<Option[]>([]);
+
+  useEffect(() => {
+    getProtecedRolesForSelect().then(list => setData(list));
+  }, []);
+
+  const loadItems = useCallback((): Option[] => {
+    return data;
+  }, [data]);
+
   return (
     <Select
       name={name}
       label="Cargo"
       icon={FiLink}
-      loadItems={getPublicRolesForSelect}
+      loadItems={loadItems}
       className={className}
       inputRole={inputRole}
     />

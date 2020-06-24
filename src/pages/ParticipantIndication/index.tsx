@@ -2,6 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
+import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
+import indicateParticipant from 'services/participantIndication/indicateParticipant';
+import { useToast } from 'context/ToastContext';
 
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
@@ -14,14 +17,27 @@ import { Container, Content, ContentForm } from './styles';
 const ParticipantIndication: React.FC = () => {
   const [tableData, setTableData] = useState<IParticipantIndication[]>([]);
   const [formOpened, setFormOpened] = useState(false);
+  const { addToast } = useToast();
 
   useEffect(() => {
     getTableListData().then(list => setTableData(list));
   }, []);
 
-  const saveIndication = useCallback(() => {
-    console.log('teste');
-  }, []);
+  const saveIndication = useCallback(
+    async (data: ICreateParticipantIndicateDTO): Promise<void> => {
+      try {
+        await indicateParticipant(data);
+      } catch (e) {
+        addToast({
+          title:
+            e.response?.data?.message ||
+            'Falha na validação dos dados. Por favor entre em contato com o suporte',
+          type: 'error',
+        });
+      }
+    },
+    [addToast],
+  );
 
   useEffect(() => {
     document.getElementsByTagName('body')[0].style.overflowY = 'scroll';

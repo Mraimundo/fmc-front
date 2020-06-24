@@ -5,22 +5,13 @@ import { useForm, FormContext } from 'react-hook-form';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import RolesSelect from 'components/shared/Vendavall/Roles/ProtectedRolesSelect';
 import FilialSelect from 'components/shared/Vendavall/Establishments/FilialSelect';
+import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
 import getschemaValidations from './getSchemaValidations';
 
 import { Container, Input, BoxPhone, Button } from './styles';
 
 interface Props {
-  saveIndication(): Promise<void> | void;
-}
-
-interface FormData {
-  filialId: string;
-  roleId: string;
-  name: string;
-  cpf: string;
-  ddd: string;
-  mobile: string;
-  email: string;
+  saveIndication(data: ICreateParticipantIndicateDTO): Promise<void> | void;
 }
 
 const Form: React.FC<Props> = ({ saveIndication }) => {
@@ -29,7 +20,7 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
 
   const schema = getschemaValidations();
 
-  const methods = useForm<FormData>({
+  const methods = useForm<ICreateParticipantIndicateDTO>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
@@ -38,7 +29,8 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-    await saveIndication();
+    // Temporário // MAYCONN
+    // await saveIndication({ ...data, establishment_id: 3 });
     setLoading(false);
   });
 
@@ -49,8 +41,8 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
       <span>Agro Amazônia</span>
       <FormContext {...methods}>
         <form onSubmit={onSubmit}>
-          <FilialSelect name="filiais" inputRole="secondary" />
-          <RolesSelect name="roles" inputRole="secondary" />
+          <FilialSelect name="subsidiary_id" inputRole="secondary" />
+          <RolesSelect name="role_id" inputRole="secondary" />
           <Input
             name="name"
             icon={FiUser}

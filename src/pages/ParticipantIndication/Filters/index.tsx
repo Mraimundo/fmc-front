@@ -16,13 +16,17 @@ const Filters: React.FC = () => {
 
   const { handleSubmit } = methods;
 
+  const onSubmit = handleSubmit(async data => {
+    console.log(data);
+  });
+
   return (
     <Container>
       <FormContext {...methods}>
-        <form onSubmit={() => console.log('teste')}>
+        <form onSubmit={onSubmit}>
           <FilialSelect name="filiais" inputRole="secondary" />
           <RolesSelect name="roles" inputRole="secondary" />
-          <Button type="button" buttonRole="tertiary">
+          <Button type="submit" buttonRole="tertiary">
             Filtrar
           </Button>
         </form>
