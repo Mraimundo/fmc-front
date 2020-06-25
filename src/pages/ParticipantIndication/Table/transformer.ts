@@ -7,6 +7,6 @@ export interface TransformedData extends ParticipantIndication {
 export default (data: ParticipantIndication[]): TransformedData[] => {
   return data.map(item => ({
     ...item,
-    formattedIndicatedDate: item.indicatedDate.toISOString(),
+    formattedIndicatedDate: item.created.toISOString(),
   }));
 };
