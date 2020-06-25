@@ -20,7 +20,7 @@ export default ({ edit }: Props) => [
   },
   {
     column: 'Indicado em',
-    dataValue: 'formattedIndicatedDate',
+    dataValue: 'indicatedDate',
   },
   {
     column: 'Status',
