@@ -120,9 +120,16 @@ const Select: React.FC<SelectProps> = ({
     setError(internalErrorControl?.message || '');
   }, [internalErrorControl]);
 
-  const [internalValue, setInternalValue] = useState<Option | null>(null);
-  const op = watch(name);
+  const op = watch(name) || null;
   useEffect(() => {
+    setIsFilled(!!op?.value);
+  }, [op]);
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
+  /* useEffect(() => {
+    console.log(op);
     if (op === undefined) {
       setInputValue('');
       setInternalValue(null);
@@ -135,20 +142,12 @@ const Select: React.FC<SelectProps> = ({
       value: op || '',
     });
     setIsFilled(op !== '');
-  }, [op]);
+  }, [op]); */
 
   return useMemo(
     () => (
       <Container className={className}>
         {!!label && <Label inputRole={inputRole}>{label}</Label>}
-        <input
-          type="hidden"
-          name={name}
-          ref={(e: HTMLInputElement) => {
-            register(e);
-            inputRef.current = e;
-          }}
-        />
         <InputContainer
           hasError={!!error}
           isFilled={isFilled}
@@ -167,26 +166,18 @@ const Select: React.FC<SelectProps> = ({
             }}
             classes={classes}
             getOptionSelected={(option, value) =>
-              option?.value === value?.value}
+              option?.value === value?.value
+            }
             options={options}
             loading={loading}
             onChange={(event, value) => {
-              setValue(name, value?.value);
-              setIsFilled(!!value);
-              setInternalValue({
-                title: value?.title || '',
-                value: value?.value || '',
-              });
+              setValue(name, value);
               !!error && triggerValidation();
             }}
             onInputChange={(event, newInputValue) => {
-              console.log('1');
-              console.log(newInputValue);
-              console.log('2');
-
               setInputValue(newInputValue);
             }}
-            value={internalValue}
+            value={op}
             getOptionLabel={option => option.title}
             renderInput={params => (
               <Content>
@@ -244,13 +235,12 @@ const Select: React.FC<SelectProps> = ({
       name,
       open,
       options,
-      register,
       setValue,
       triggerValidation,
       inputRole,
       disabled,
-      internalValue,
       placeholder,
+      op,
     ],
   );
 };
