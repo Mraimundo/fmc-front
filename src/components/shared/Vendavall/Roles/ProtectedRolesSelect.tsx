@@ -7,12 +7,14 @@ interface Props {
   name: string;
   className?: string;
   inputRole?: 'primary' | 'secondary';
+  disabled?: boolean;
 }
 
 const ProtectedRolesSelect: React.FC<Props> = ({
   name,
   className,
   inputRole = 'primary',
+  disabled = false,
 }) => {
   const [data, setData] = useState<Option[]>([]);
 
@@ -32,6 +34,7 @@ const ProtectedRolesSelect: React.FC<Props> = ({
       loadItems={loadItems}
       className={className}
       inputRole={inputRole}
+      disabled={disabled}
     />
   );
 };

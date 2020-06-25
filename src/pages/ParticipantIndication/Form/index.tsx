@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 
@@ -12,7 +12,7 @@ import getschemaValidations from './getSchemaValidations';
 
 import { Container, Input, BoxPhone, Button } from './styles';
 
-interface FormData {
+export interface FormData {
   role_select: Option;
   cpf: string;
   email: string;
@@ -28,13 +28,15 @@ interface Props {
     data: ICreateParticipantIndicateDTO | IEditParticipantIndicateDTO,
   ): Promise<boolean> | boolean;
   editing?: boolean;
-  indicationData?: FormData | undefined;
+  indicationData?: FormData;
+  establishmentId: number;
 }
 
 const Form: React.FC<Props> = ({
   saveIndication,
   editing = false,
-  indicationData = undefined,
+  indicationData,
+  establishmentId,
 }) => {
   const [loading, setLoading] = useState(false);
   const inputRole = 'secondary';
@@ -45,10 +47,14 @@ const Form: React.FC<Props> = ({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
-    defaultValues: indicationData,
   });
 
   const { handleSubmit, reset } = methods;
+
+  useEffect(() => {
+    reset(indicationData || {});
+  }, [indicationData, reset]);
+
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
     // Temporário // MAYCONN ID DO ESTABELECIMENTO
@@ -60,7 +66,7 @@ const Form: React.FC<Props> = ({
         name: data.name,
         area_code: data.area_code,
         cell_phone: data.cell_phone,
-        establishment_id: 1,
+        establishment_id: establishmentId,
         subsidiary_id: parseInt(data.subsidiary_select.value, 0),
       })
     ) {

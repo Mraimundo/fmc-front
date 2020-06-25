@@ -8,6 +8,7 @@ interface Props {
   className?: string;
   inputRole?: 'primary' | 'secondary';
   establishmentId: number;
+  disabled?: boolean;
 }
 
 const FilialSelect: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const FilialSelect: React.FC<Props> = ({
   className,
   inputRole = 'primary',
   establishmentId,
+  disabled = false,
 }) => {
   const [data, setData] = useState<Option[]>([]);
 
@@ -41,6 +43,7 @@ const FilialSelect: React.FC<Props> = ({
       loadItems={loadItems}
       className={className}
       inputRole={inputRole}
+      disabled={disabled}
     />
   );
 };

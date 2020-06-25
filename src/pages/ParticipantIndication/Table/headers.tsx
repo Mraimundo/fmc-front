@@ -1,7 +1,11 @@
 import React from 'react';
 import Actions from './Actions';
 
-export default [
+interface Props {
+  edit?(id: number): Promise<void> | void;
+}
+
+export default ({ edit }: Props) => [
   {
     column: 'Nome',
     dataValue: 'name',
@@ -25,6 +29,6 @@ export default [
   {
     column: ' ',
     dataValue: 'id',
-    fn: (id: string) => <Actions id={id} />,
+    fn: (id: string) => <Actions id={parseInt(id, 0)} edit={edit} />,
   },
 ];

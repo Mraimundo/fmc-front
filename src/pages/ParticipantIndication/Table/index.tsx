@@ -9,9 +9,10 @@ import { Container } from './styles';
 interface Props {
   data: ParticipantIndication[];
   isFetching: boolean;
+  onEditClick?(id: number): Promise<void> | void;
 }
 
-const Table: React.FC<Props> = ({ data, isFetching }) => {
+const Table: React.FC<Props> = ({ data, isFetching, onEditClick }) => {
   const [tableData, setTableData] = useState<ParticipantIndicationTableData[]>(
     [],
   );
@@ -20,7 +21,7 @@ const Table: React.FC<Props> = ({ data, isFetching }) => {
   }, [data]);
   return (
     <Container
-      headers={headers}
+      headers={headers({ edit: onEditClick })}
       data={tableData}
       noResultText="Nenhuma Pesquisa encontrada"
       isFetching={isFetching}

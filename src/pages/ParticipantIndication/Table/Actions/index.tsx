@@ -5,17 +5,20 @@ import { FaEdit, FaTrashAlt, FaShareSquare } from 'react-icons/fa';
 import { Container } from './style';
 
 interface Props {
-  id: string;
+  id: number;
+  edit?(id: number): Promise<void> | void;
 }
 
-const Actions: React.FC<Props> = ({ id }) => {
+const Actions: React.FC<Props> = ({ id, edit }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <Container loading={loading}>
-      <span title="Editar indicação">
-        <FaEdit size={20} />
-      </span>
+      {typeof edit === 'function' && (
+        <span title="Editar indicação">
+          <FaEdit size={20} onClick={() => edit(id)} />
+        </span>
+      )}
       <span title="Desativar participante">
         <FaTrashAlt size={20} />
       </span>
