@@ -49,10 +49,20 @@ export default (profile: IProfile): Yup.ObjectSchema<object> => {
           })
           .typeError('Data inválida')
           .required(mandatoryMessage),
-        education_level: Yup.string().required(mandatoryMessage),
+        education_level_select: Yup.object()
+          .shape({
+            value: Yup.string().required(mandatoryMessage),
+          })
+          .typeError(mandatoryMessage)
+          .required(mandatoryMessage),
         place_of_birth: Yup.string().required(mandatoryMessage),
         nationality: Yup.string().required(mandatoryMessage),
-        marital_status: Yup.string().required(mandatoryMessage),
+        marital_status_select: Yup.object()
+          .shape({
+            value: Yup.string().required(mandatoryMessage),
+          })
+          .typeError(mandatoryMessage)
+          .required(mandatoryMessage),
         rg: Yup.string().required(mandatoryMessage),
         rg_emitter: Yup.string().required(mandatoryMessage),
         rg_emitter_uf: Yup.string().required(mandatoryMessage),

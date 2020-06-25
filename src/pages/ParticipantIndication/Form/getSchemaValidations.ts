@@ -12,8 +12,18 @@ export default (): Yup.ObjectSchema<object> => {
       .test('valid-cpf', 'Cpf inválido', validateCpf),
     area_code: Yup.string().required(mandatoryMessage),
     cell_phone: Yup.string().required(mandatoryMessage),
-    role_id: Yup.number().required(mandatoryMessage),
+    role_select: Yup.object()
+      .shape({
+        value: Yup.string().required(mandatoryMessage),
+      })
+      .typeError(mandatoryMessage)
+      .required(mandatoryMessage),
     /* establishment_id: Yup.number().required(mandatoryMessage), */
-    subsidiary_id: Yup.number().required(mandatoryMessage),
+    subsidiary_select: Yup.object()
+      .shape({
+        value: Yup.string().required(mandatoryMessage),
+      })
+      .typeError(mandatoryMessage)
+      .required(mandatoryMessage),
   });
 };

@@ -43,7 +43,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         pattern="XX/XX/XXXX"
       />
 
-      <GraduationSelect name="education_level" inputRole={inputRole} />
+      <GraduationSelect name="education_level_select" inputRole={inputRole} />
 
       <Input
         name="place_of_birth"
@@ -59,7 +59,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         inputRole={inputRole}
       />
 
-      <MaritalStatusSelect name="marital_status" inputRole={inputRole} />
+      <MaritalStatusSelect name="marital_status_select" inputRole={inputRole} />
 
       <Input name="rg" icon={FiUser} label="RG" inputRole={inputRole} />
 

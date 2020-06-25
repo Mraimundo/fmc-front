@@ -1,18 +1,14 @@
 import { pluginApi } from 'services/api';
+import numbersOnly from 'util/numbersOnly';
 import ICreateParticipantIndicateDTO from './dtos/ICreateParticipantIndicateDTO';
-
-interface Response {
-  message: string;
-}
 
 export default async (
   participantData: ICreateParticipantIndicateDTO,
-): Promise<Response> => {
-  const { data } = await pluginApi.post<Response>(
-    'participants/indications/add',
-    participantData,
-  );
-  console.log(data);
-
-  return data;
+): Promise<void> => {
+  await pluginApi.post('participants/indications/add', {
+    ...participantData,
+    cpf: numbersOnly(participantData.cpf),
+    area_code: numbersOnly(participantData.area_code),
+    cell_phone: numbersOnly(participantData.cell_phone),
+  });
 };

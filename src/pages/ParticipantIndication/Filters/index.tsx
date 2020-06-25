@@ -24,7 +24,11 @@ const Filters: React.FC = () => {
     <Container>
       <FormContext {...methods}>
         <form onSubmit={onSubmit}>
-          <FilialSelect name="filiais" inputRole="secondary" />
+          <FilialSelect
+            name="filiais"
+            inputRole="secondary"
+            establishmentId={1}
+          />
           <RolesSelect name="roles" inputRole="secondary" />
           <Button type="submit" buttonRole="tertiary">
             Filtrar

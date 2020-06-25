@@ -23,23 +23,46 @@ interface Props {
   saveParticipant(data: Participant): Promise<void>;
 }
 
+interface FormData extends Participant {
+  marital_status_select: { title: string; value: string } | null;
+  education_level_select: { title: string; value: string } | null;
+}
+
 const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
   const [loading, setLoading] = useState(false);
   const inputRole = 'secondary';
 
   const schema = getschemaValidations(participant.profile);
 
-  const methods = useForm<Participant>({
+  const methods = useForm<FormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
-    defaultValues: participant,
+    defaultValues: {
+      ...participant,
+      marital_status_select: participant.marital_status
+        ? {
+            title: participant.marital_status || '',
+            value: participant.marital_status || '',
+          }
+        : null,
+      education_level_select: participant.education_level
+        ? {
+            title: participant.education_level || '',
+            value: participant.education_level || '',
+          }
+        : null,
+    },
   });
 
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-    await saveParticipant(data);
+    await saveParticipant({
+      ...data,
+      marital_status: data?.marital_status_select?.value || '',
+      education_level: data?.education_level_select?.value || '',
+    });
     setLoading(false);
   });
 

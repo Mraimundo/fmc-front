@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 
+import { Option } from 'components/shared/Select';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import RolesSelect from 'components/shared/Vendavall/Roles/ProtectedRolesSelect';
 import FilialSelect from 'components/shared/Vendavall/Establishments/FilialSelect';
@@ -11,7 +12,20 @@ import getschemaValidations from './getSchemaValidations';
 import { Container, Input, BoxPhone, Button } from './styles';
 
 interface Props {
-  saveIndication(data: ICreateParticipantIndicateDTO): Promise<void> | void;
+  saveIndication(
+    data: ICreateParticipantIndicateDTO,
+  ): Promise<boolean> | boolean;
+}
+
+interface FormData {
+  role_select: Option;
+  cpf: string;
+  email: string;
+  name: string;
+  area_code: string;
+  cell_phone: string;
+  establishment_id: number;
+  subsidiary_select: Option;
 }
 
 const Form: React.FC<Props> = ({ saveIndication }) => {
@@ -20,17 +34,30 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
 
   const schema = getschemaValidations();
 
-  const methods = useForm<ICreateParticipantIndicateDTO>({
+  const methods = useForm<FormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-    // Temporário // MAYCONN
-    // await saveIndication({ ...data, establishment_id: 3 });
+    // Temporário // MAYCONN ID DO ESTABELECIMENTO
+    if (
+      await saveIndication({
+        role_id: parseInt(data.role_select.value, 0),
+        cpf: data.cpf,
+        email: data.email,
+        name: data.name,
+        area_code: data.area_code,
+        cell_phone: data.cell_phone,
+        establishment_id: 1,
+        subsidiary_id: parseInt(data.subsidiary_select.value, 0),
+      })
+    ) {
+      reset();
+    }
     setLoading(false);
   });
 
@@ -41,8 +68,12 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
       <span>Agro Amazônia</span>
       <FormContext {...methods}>
         <form onSubmit={onSubmit}>
-          <FilialSelect name="subsidiary_id" inputRole="secondary" />
-          <RolesSelect name="role_id" inputRole="secondary" />
+          <FilialSelect
+            name="subsidiary_select"
+            inputRole="secondary"
+            establishmentId={1}
+          />
+          <RolesSelect name="role_select" inputRole="secondary" />
           <Input
             name="name"
             icon={FiUser}

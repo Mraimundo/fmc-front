@@ -24,9 +24,14 @@ const ParticipantIndication: React.FC = () => {
   }, []);
 
   const saveIndication = useCallback(
-    async (data: ICreateParticipantIndicateDTO): Promise<void> => {
+    async (data: ICreateParticipantIndicateDTO): Promise<boolean> => {
       try {
         await indicateParticipant(data);
+        setFormOpened(false);
+        addToast({
+          title: 'Indicação realizada com sucesso',
+        });
+        return true;
       } catch (e) {
         addToast({
           title:
@@ -35,6 +40,7 @@ const ParticipantIndication: React.FC = () => {
           type: 'error',
         });
       }
+      return false;
     },
     [addToast],
   );
