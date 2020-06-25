@@ -166,7 +166,8 @@ const Select: React.FC<SelectProps> = ({
             }}
             classes={classes}
             getOptionSelected={(option, value) =>
-              option?.value === value?.value}
+              option?.value === value?.value
+            }
             options={options}
             loading={loading}
             onChange={(event, value) => {
