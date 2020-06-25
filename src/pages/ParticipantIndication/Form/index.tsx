@@ -7,15 +7,10 @@ import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import RolesSelect from 'components/shared/Vendavall/Roles/ProtectedRolesSelect';
 import FilialSelect from 'components/shared/Vendavall/Establishments/FilialSelect';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
+import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
 import getschemaValidations from './getSchemaValidations';
 
 import { Container, Input, BoxPhone, Button } from './styles';
-
-interface Props {
-  saveIndication(
-    data: ICreateParticipantIndicateDTO,
-  ): Promise<boolean> | boolean;
-}
 
 interface FormData {
   role_select: Option;
@@ -28,7 +23,19 @@ interface FormData {
   subsidiary_select: Option;
 }
 
-const Form: React.FC<Props> = ({ saveIndication }) => {
+interface Props {
+  saveIndication(
+    data: ICreateParticipantIndicateDTO | IEditParticipantIndicateDTO,
+  ): Promise<boolean> | boolean;
+  editing?: boolean;
+  indicationData?: FormData | undefined;
+}
+
+const Form: React.FC<Props> = ({
+  saveIndication,
+  editing = false,
+  indicationData = undefined,
+}) => {
   const [loading, setLoading] = useState(false);
   const inputRole = 'secondary';
 
@@ -38,6 +45,7 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
+    defaultValues: indicationData,
   });
 
   const { handleSubmit, reset } = methods;
@@ -63,7 +71,7 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
 
   return (
     <Container>
-      <h3>Indique um participante</h3>
+      {editing ? <h3>Editando indicação</h3> : <h3>Indique um participante</h3>}
       <h4>Indique os participantes da sua Revenda</h4>
       <span>Agro Amazônia</span>
       <FormContext {...methods}>
@@ -72,8 +80,13 @@ const Form: React.FC<Props> = ({ saveIndication }) => {
             name="subsidiary_select"
             inputRole="secondary"
             establishmentId={1}
+            disabled={editing}
           />
-          <RolesSelect name="role_select" inputRole="secondary" />
+          <RolesSelect
+            name="role_select"
+            inputRole="secondary"
+            disabled={editing}
+          />
           <Input
             name="name"
             icon={FiUser}

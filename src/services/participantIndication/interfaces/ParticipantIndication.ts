@@ -2,8 +2,8 @@ export interface ParticipantIndication {
   id: number;
   superior_participant_id: number;
   status: number;
-  created: Date;
-  modified: Date;
+  created: string;
+  modified: string;
   participant: {
     id: number;
     name: string;
@@ -28,6 +28,6 @@ export interface ParticipantIndication {
     name: string;
     city: string;
     status: number;
-    created: Date;
+    created: string;
   };
 }

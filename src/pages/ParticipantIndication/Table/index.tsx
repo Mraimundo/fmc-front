@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { ParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
+import transformer, {
+  ParticipantIndicationTableData,
+} from 'services/participantIndication/transformers/participantIndicationsToTableList';
 import headers from './headers';
-import transformer, { TransformedData } from './transformer';
 import { Container } from './styles';
 
 interface Props {
   data: ParticipantIndication[];
+  isFetching: boolean;
 }
 
-const Table: React.FC<Props> = ({ data }) => {
-  const [tableData, setTableData] = useState<TransformedData[]>([]);
+const Table: React.FC<Props> = ({ data, isFetching }) => {
+  const [tableData, setTableData] = useState<ParticipantIndicationTableData[]>(
+    [],
+  );
   useEffect(() => {
     setTableData(transformer(data));
   }, [data]);
@@ -18,6 +23,7 @@ const Table: React.FC<Props> = ({ data }) => {
       headers={headers}
       data={tableData}
       noResultText="Nenhuma Pesquisa encontrada"
+      isFetching={isFetching}
     />
   );
 };

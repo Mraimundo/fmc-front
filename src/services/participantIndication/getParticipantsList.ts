@@ -5,8 +5,27 @@ interface Response {
   indications: ParticipantIndication[];
 }
 
-export default async (): Promise<ParticipantIndication[]> => {
-  const { data } = await pluginApi.get<Response>('participants/indications');
+interface Request {
+  roleId?: number;
+  subsidiaryId?: number;
+}
 
-  return data.indications;
+export default async ({ roleId, subsidiaryId }: Request = {}): Promise<
+  ParticipantIndication[]
+> => {
+  let extraSearch = '';
+  if (roleId) {
+    extraSearch += `?role_id=${roleId}`;
+  }
+  if (subsidiaryId) {
+    extraSearch += `${roleId ? '&' : '?'}subsidiary_id=${subsidiaryId}`;
+  }
+  const { data } = await pluginApi.get<Response>(
+    `participants/indications${extraSearch}`,
+  );
+
+  // Enqnto o endpoint não suporta que passe o parametro de order
+  return data.indications.sort((item1, item2) =>
+    item1.participant.status > item2.participant.status ? -1 : 1,
+  );
 };

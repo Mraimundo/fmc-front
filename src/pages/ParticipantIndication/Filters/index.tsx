@@ -1,14 +1,19 @@
 import React from 'react';
 import { useForm, FormContext } from 'react-hook-form';
+import { Option } from 'components/shared/Select';
 
 import { Container, Button, RolesSelect, FilialSelect } from './styles';
 
 interface FilterFormData {
-  roles: string;
-  filiais: string;
+  roles: Option;
+  filiais: Option;
 }
 
-const Filters: React.FC = () => {
+interface Props {
+  filter(roleId: number, subsidiaryId: number): void | Promise<void>;
+}
+
+const Filters: React.FC<Props> = ({ filter }) => {
   const methods = useForm<FilterFormData>({
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
@@ -17,7 +22,9 @@ const Filters: React.FC = () => {
   const { handleSubmit } = methods;
 
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
+    const roleId = parseInt(data.roles?.value || '0', 0) || 0;
+    const subsidiaryId = parseInt(data.filiais?.value || '0', 0);
+    filter(roleId, subsidiaryId);
   });
 
   return (
