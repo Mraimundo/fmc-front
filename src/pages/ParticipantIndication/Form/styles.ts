@@ -54,6 +54,12 @@ export const BoxPhone = styled.div`
       width: 100%;
     }
   }
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+    > div + div {
+      margin-top: 8px;
+    }
+  }
 `;
 
 export const Input = styled(DefaultInput)``;
@@ -62,4 +68,8 @@ export const Button = styled(DefaultButton)`
   height: 44px;
   width: 200px;
   align-self: flex-end;
+  @media screen and (max-width: 720px) {
+    width: 100%;
+    margin: 20px 0 10px 0;
+  }
 `;

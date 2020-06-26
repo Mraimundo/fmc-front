@@ -14,6 +14,17 @@ export const Container = styled.div`
       height: 40px;
     }
   }
+
+  @media screen and (max-width: 720px) {
+    margin-top: 10px;
+    form {
+      flex-direction: column;
+
+      > button {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const Button = styled(DefaultButton)``;
@@ -31,6 +42,11 @@ export const RolesSelect = styled(DefaultRolesSelect)`
   ._inputContainer {
     height: 40px;
   }
+
+  @media screen and (max-width: 720px) {
+    margin-right: 0;
+    margin-top: 8px;
+  }
 `;
 
 export const FilialSelect = styled(DefaultFilialSelect)`
@@ -45,5 +61,9 @@ export const FilialSelect = styled(DefaultFilialSelect)`
   margin-right: 20px;
   ._inputContainer {
     height: 40px;
+  }
+
+  @media screen and (max-width: 720px) {
+    margin-right: 0;
   }
 `;

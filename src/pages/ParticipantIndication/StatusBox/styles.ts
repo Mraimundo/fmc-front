@@ -20,6 +20,15 @@ export const Container = styled.div`
     margin-right: 10px;
     width: 225px;
   }
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+    padding: 10px;
+    > h3 {
+      width: 100%;
+      text-align: center;
+      margin-right: 0;
+    }
+  }
 `;
 
 interface AddButtonProps {
@@ -40,6 +49,14 @@ export const AddButton = styled.button<AddButtonProps>`
     css`
       transform: rotate(180deg);
     `}
+
+  @media screen and (max-width: 720px) {
+    align-self: flex-end;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
+  }
 `;
 
 interface StatusIndicatorProps {
@@ -63,6 +80,23 @@ export const StatusIndicator = styled.div<StatusIndicatorProps>`
       top: -20px;
       left: 50%;
       transform: translateX(-50%);
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 100%;
+    min-height: 10px;
+    margin-top:7px;
+    > span {
+      margin-left: 0;
+      & + span {
+        margin-left: 6px;
+      }
+    }
+    ._last {
+      &::after {
+        top: 34px;
+      }
     }
   }
 `;

@@ -35,6 +35,29 @@ export const Content = styled.div`
     color: #193b4e;
     margin-top: 35px;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 20px 8px;
+
+    > h3 {
+      font-size: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column-reverse;
+      > span {
+        display: block;
+        font-size: 12px;
+        align-self: flex-end;
+        transform: translateX(-20px);
+      }
+    }
+
+    > span {
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
 `;
 
 interface ContentFormProps {
