@@ -5,7 +5,7 @@ import transformer, {
 } from 'services/news/transformers/toNewsView';
 import { News } from 'services/news/interfaces';
 
-import { Container } from './styles';
+import { Container, Content } from './styles';
 
 interface Props {
   news: News;
@@ -24,7 +24,8 @@ const View: React.FC<Props> = ({ news }) => {
         <h4>Notícias</h4>
         <h3>{data.title}</h3>
         <span>{`${data.date} ${data.category}`}</span>
-        {parser(data.body || '')}
+        <p>{data.summary}</p>
+        <Content>{parser(data.body || '')}</Content>
       </Container>
     )
   );

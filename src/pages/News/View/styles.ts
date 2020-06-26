@@ -17,7 +17,20 @@ export const Content = styled.div`
   background: #fff;
   padding: 20px 60px;
 
+  > h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.news.titleColor};
+    margin: 35px 0 20px 25px;
+  }
+
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
   }
+`;
+
+export const Separator = styled.div`
+  width: 100%;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
 `;
