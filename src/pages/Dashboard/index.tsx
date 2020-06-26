@@ -25,6 +25,7 @@ const Dashboard: React.FC = () => {
         Editar Participante
       </Button>
       <Link to="/indication">Indicação</Link>
+      <Link to="/news">Notícias</Link>
     </Container>
   );
 };
