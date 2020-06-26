@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeContext } from 'styled-components';
 
-import getNews from 'services/news/getNews';
+import getNews from 'services/news/getNewsList';
 import { News as INews } from 'services/news/interfaces';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 
@@ -10,7 +10,7 @@ import { Button } from 'components/shared';
 
 import { Container, Content } from './styles';
 
-import theme from './theme';
+import theme from '../theme';
 
 const News: React.FC = () => {
   const [news, setNews] = useState<INews[]>([]);

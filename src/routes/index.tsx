@@ -5,7 +5,8 @@ import SignInUp from 'pages/Auth/SignInUp';
 import Dashboard from 'pages/Dashboard';
 import Dashboard2 from 'pages/Dashboard2';
 import FirstAccess from 'pages/Auth/FirstAccess';
-import News from 'pages/News';
+import News from 'pages/News/List';
+import View from 'pages/News/View';
 import ParticipantIndication from 'pages/ParticipantIndication';
 import RegisterEdit from 'pages/Auth/RegisterEdit';
 
@@ -26,6 +27,7 @@ const Routes: React.FC = () => (
     <Route exact path="/dashboard2" component={Dashboard2} />
     <Route exact path="/indication" component={ParticipantIndication} />
     <Route exact path="/news" component={News} />
+    <Route exact path="/news/:id" component={View} />
   </Switch>
 );
 
