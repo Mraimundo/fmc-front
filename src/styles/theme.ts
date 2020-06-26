@@ -183,4 +183,9 @@ export default {
       },
     },
   },
+  news: {
+    titleColor: '#193b4e',
+    summaryColor: '#000',
+    dateColor: '#000',
+  },
 };

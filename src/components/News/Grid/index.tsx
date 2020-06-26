@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { News } from 'services/news/interfaces';
+import transformer, {
+  Response as Data,
+} from 'services/news/transformers/toNewsList';
 
 import { Container, MiniBox } from './styles';
 
 interface Props {
-  news: number[];
+  news: News[];
 }
 
 const Grid: React.FC<Props> = ({ news }) => {
+  const [data, setData] = useState<Data[]>([]);
+
+  useEffect(() => {
+    setData(transformer(news));
+  }, [news]);
+
   return (
     <Container>
-      {news.map(item => (
-        <MiniBox key={`key-${item}`}>
-          <img src="" alt="" />
-          <span>22/04/2020 Categoria</span>
-          <h3>Titulo da notícia que pode ser bem grande lalalal alalala</h3>
-          <p>
-            Breve descrição da notícia que pode ser muito maior do que o título.
-            Breve descrição da notícia que pode ser muito maior do que o título.
-            Breve descrição da notícia que pode ser muito maior do que o título.
-            Breve descrição da notícia que pode ser muito maior do que o título
-          </p>
+      {data.map(item => (
+        <MiniBox key={`key-news-${item.id}`}>
+          <img src={item.pictureUrl} alt={item.title} />
+          <span>{`${item.date} ${item.category}`} </span>
+          <h3>{item.title}</h3>
+          <p>{item.summary}</p>
         </MiniBox>
       ))}
     </Container>

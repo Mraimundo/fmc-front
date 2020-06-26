@@ -184,5 +184,10 @@ declare module 'styled-components' {
     link: {
       fontColor: string;
     };
+    news: {
+      titleColor: string;
+      summaryColor: string;
+      dateColor: string;
+    };
   }
 }
