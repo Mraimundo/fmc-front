@@ -14,7 +14,6 @@ import getEstablishments, {
   Establishment,
 } from 'services/auth/getEstablishments';
 import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
-import Logo from './Logo';
 import StatusBox from './StatusBox';
 import Filters from './Filters';
 import Table from './Table';
@@ -148,7 +147,6 @@ const ParticipantIndication: React.FC = () => {
 
   return (
     <Container>
-      <Logo />
       <Content>
         <h3>
           Indique um participante

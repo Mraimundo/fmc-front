@@ -73,7 +73,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
           Ativar cadastro -
           <strong>
             {participant.profile === 'FMC' && 'Equipe FMC'}
-            {participant.profile === 'FOCAL_POINT' && 'Focal Point'}
+            {participant.profile === 'FOCALPOINT' && 'Focal Point'}
             {participant.profile === 'PARTICIPANTE' && 'Participante'}
           </strong>
         </Title>

@@ -12,10 +12,10 @@ import {
   REGISTER_TO_COMPLETE,
 } from './vendavallStatus';
 
-export type IProfile = 'FOCAL_POINT' | 'FMC' | 'PARTICIPANTE';
+export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE';
 
 export const PROFILES = {
-  focalPoint: 'FOCAL_POINT',
+  focalPoint: 'FOCALPOINT',
   fmc: 'FMC',
   participant: 'PARTICIPANTE',
 };
