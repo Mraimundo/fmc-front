@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import SignIn from 'pages/SignIn';
 import Dashboard from 'pages/Dashboard';
 import FirstAccess from 'pages/FirstAccess';
+import News from 'pages/News';
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -17,6 +18,7 @@ const Routes: React.FC = () => (
       isPrivate={false}
     />
     <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/news" component={News} />
   </Switch>
 );
 
