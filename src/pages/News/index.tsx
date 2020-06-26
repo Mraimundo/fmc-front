@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ThemeContext } from 'styled-components';
 
 import getNews from 'services/news/getNews';
 import { News as INews } from 'services/news/interfaces';
@@ -9,8 +8,6 @@ import { Grid } from 'components/News';
 import { Button } from 'components/shared';
 
 import { Container, Content } from './styles';
-
-import theme from './theme';
 
 const News: React.FC = () => {
   const [news, setNews] = useState<INews[]>([]);
@@ -32,18 +29,16 @@ const News: React.FC = () => {
   }, [news, pagination]);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <Container>
-        <Content>
-          <h3>Notícias</h3>
-          <Grid news={news} />
+    <Container>
+      <Content>
+        <h3>Notícias</h3>
+        <Grid news={news} />
 
-          <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
-            Carregar mais notícias
-          </Button>
-        </Content>
-      </Container>
-    </ThemeContext.Provider>
+        <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
+          Carregar mais notícias
+        </Button>
+      </Content>
+    </Container>
   );
 };
 
