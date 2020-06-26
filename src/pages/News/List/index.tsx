@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import getNews from 'services/news/getNews';
+import getNews from 'services/news/getNewsList';
 import { News as INews } from 'services/news/interfaces';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 

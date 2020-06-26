@@ -4,7 +4,8 @@ import { Switch } from 'react-router-dom';
 import SignIn from 'pages/SignIn';
 import Dashboard from 'pages/Dashboard';
 import FirstAccess from 'pages/FirstAccess';
-import News from 'pages/News';
+import News from 'pages/News/List';
+import View from 'pages/News/View';
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -19,6 +20,7 @@ const Routes: React.FC = () => (
     />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/news" component={News} />
+    <Route exact path="/news/:id" component={View} />
   </Switch>
 );
 

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: grid;
@@ -14,7 +16,12 @@ export const Container = styled.div`
   }
 `;
 
-export const MiniBox = styled.div`
+export const MiniBox = styled(Link)`
+  padding: 10px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
   img {
     max-width: 100%;
   }
@@ -38,9 +45,7 @@ export const MiniBox = styled.div`
 
   @media screen and (max-width: 720px) {
     max-width: 500px;
-    display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
     & + div {
       margin-top: 40px;
@@ -53,5 +58,11 @@ export const MiniBox = styled.div`
     > img {
       width: 100%;
     }
+  }
+
+  transition: transform 0.2s, background 0.2s;
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.05);
   }
 `;
