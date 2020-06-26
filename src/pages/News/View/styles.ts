@@ -24,6 +24,12 @@ export const Content = styled.div`
     margin: 35px 0 20px 25px;
   }
 
+  > button {
+    width: 250px;
+    margin: 25px 0;
+    align-self: center;
+  }
+
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
   }
