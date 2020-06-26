@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useParams } from 'react-router-dom';
 import getNewsById from 'services/news/getNewsById';
@@ -7,6 +7,7 @@ import history from 'services/history';
 import { News as INews } from 'services/news/interfaces';
 import News from 'components/News/View';
 import Grid from 'components/News/Grid';
+import { Button } from 'components/shared';
 
 import { Container, Content, Separator } from './styles';
 
@@ -27,6 +28,9 @@ const View: React.FC = () => {
       try {
         const data = await getNewsById(parseInt(params.id, 0));
         setNews(data);
+        window.scrollTo({
+          top: 0,
+        });
       } catch {
         addToast({
           title: 'Falha ao carregar a notícia solicitada',
@@ -38,6 +42,10 @@ const View: React.FC = () => {
     load();
   }, [params, addToast]);
 
+  const handleBack = useCallback(() => {
+    history.push('/news');
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -45,6 +53,9 @@ const View: React.FC = () => {
         <Separator />
         <h4>Últimas Notícias</h4>
         <Grid news={lastNews} />
+        <Button buttonRole="primary" type="button" onClick={handleBack}>
+          Ver todas as notícias
+        </Button>
       </Content>
     </Container>
   );

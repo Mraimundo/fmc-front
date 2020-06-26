@@ -21,7 +21,7 @@ const Grid: React.FC<Props> = ({ news }) => {
   return (
     <Container>
       {data.map(item => (
-        <MiniBox key={`key-news-${item.id}`} to="#">
+        <MiniBox key={`key-news-${item.id}`} to={`/news/${item.id}`}>
           <img src={item.pictureUrl} alt={item.title} />
           <span>{`${item.date} ${item.category}`} </span>
           <h3>{item.title}</h3>
