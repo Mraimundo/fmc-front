@@ -16,4 +16,8 @@ export const Content = styled.div`
   flex-direction: column;
   background: #fff;
   padding: 20px 60px;
+
+  @media screen and (max-width: 720px) {
+    padding: 20px 20px;
+  }
 `;

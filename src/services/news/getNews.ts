@@ -1,5 +1,6 @@
 import { vendavallApi } from 'services/api';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
+import { News } from './interfaces';
 
 interface Request {
   page?: number;
@@ -10,17 +11,28 @@ interface ApiResponse {
   pagination: Pagination;
 }
 
-export default async ({ page = 1 }: Request): Promise<Subject[]> => {
+interface Response {
+  news: News[];
+  pagination: Pagination;
+}
+
+export default async ({ page = 1 }: Request): Promise<Response> => {
   /*
     End point aceita os parametros
     search=a&categories[0]=1&categories[1]=2&limit=6&page=3
   */
   try {
     const {
-      data: { subjects },
+      data: { data: news, pagination },
     } = await vendavallApi.get<ApiResponse>(`news?limit=6&page=${page}`);
-    return subjects || [];
+    return {
+      news,
+      pagination,
+    };
   } catch (e) {
-    return [];
+    return {
+      news: [],
+      pagination: {} as Pagination,
+    };
   }
 };
