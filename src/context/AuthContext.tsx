@@ -49,7 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     if (!data.id) {
       setTimeout(() => {
         updateParticipantData();
-      }, 2000);
+      }, 5000);
       return;
     }
     setShouldShowRegulationsModal(isThereRegulationsToAccept);

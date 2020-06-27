@@ -24,8 +24,11 @@ const Dashboard: React.FC = () => {
       <Button buttonRole="primary" type="button" onClick={handleEditClick}>
         Editar Participante
       </Button>
-      <Link to="/indication">Indicação</Link>
-      <Link to="/news">Notícias</Link>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Link to="/indication">Indicação</Link>
+        <Link to="/news">Notícias</Link>
+        <Link to="/gallery">Galeria</Link>
+      </div>
     </Container>
   );
 };
