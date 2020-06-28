@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { TicketsGrid as DefaultTicketsGrid } from 'components/Contact/Connected';
+import {
+  TicketsGrid as DefaultTicketsGrid,
+  Form as DefaultForm,
+} from 'components/Contact/Connected';
 
 export const Container = styled.div`
   display: flex;
@@ -50,4 +53,14 @@ export const BoxTickets = styled.div`
 
 export const TicketsGrid = styled(DefaultTicketsGrid)`
   padding: 20px;
+`;
+
+export const Form = styled(DefaultForm)`
+  max-width: 500px;
+
+  > button {
+    width: 200px;
+    height: 45px;
+    align-self: center;
+  }
 `;

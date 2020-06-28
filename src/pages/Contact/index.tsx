@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useToast } from 'context/ToastContext';
 import { Button } from 'components/shared';
-import { Form } from 'components/Contact/Connected';
+import Logo from 'components/shared/Logo';
 
-import { Container, Content, BoxTickets, TicketsGrid } from './styles';
+import { Container, Content, BoxTickets, TicketsGrid, Form } from './styles';
 
 const Contact: React.FC = () => {
   const { addToast } = useToast();
 
   return (
     <Container>
+      <Logo />
       <Content>
         <h3>Fale Conosco</h3>
         <Form />
