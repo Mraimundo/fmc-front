@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TicketsGrid as DefaultTicketsGrid } from 'components/Contact/Connected';
 
 export const Container = styled.div`
   display: flex;
@@ -33,4 +34,20 @@ export const Content = styled.div`
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
   }
+`;
+
+export const BoxTickets = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 25px 25px;
+  margin-top: 35px;
+  > h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.news.titleColor};
+    margin-bottom: 15px;
+  }
+`;
+
+export const TicketsGrid = styled(DefaultTicketsGrid)`
+  padding: 20px;
 `;
