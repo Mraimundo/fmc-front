@@ -11,6 +11,7 @@ import ParticipantIndication from 'pages/ParticipantIndication';
 import RegisterEdit from 'pages/Auth/RegisterEdit';
 import Gallery from 'pages/Gallery/List';
 import Regulation from 'pages/Auth/Regulation';
+import Contact from 'pages/Contact';
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -31,6 +32,7 @@ const Routes: React.FC = () => (
     <Route exact path="/news/:id" component={View} />
     <Route exact path="/gallery" component={Gallery} />
     <Route exact path="/regulation" component={Regulation} />
+    <Route exact path="/contact" component={Contact} isPrivate={false} />
   </Switch>
 );
 
