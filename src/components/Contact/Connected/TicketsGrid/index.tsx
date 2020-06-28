@@ -6,7 +6,11 @@ import Form from './Form';
 import Messages from './Messages';
 import { Container, GridHeader, TicketGrid } from './styles';
 
-const TicketsGrid: React.FC = () => {
+interface Props {
+  className?: string;
+}
+
+const TicketsGrid: React.FC<Props> = ({ className }) => {
   const [ticketSelected, setTicketSelected] = useState<{ id: number } | null>(
     null,
   );
@@ -96,7 +100,7 @@ const TicketsGrid: React.FC = () => {
   }, []);
 
   return (
-    <Container>
+    <Container className={className}>
       <GridHeader>
         <span>Data de abertura</span>
         <span>Assunto/Categoria</span>
