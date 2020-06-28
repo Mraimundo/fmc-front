@@ -13,7 +13,9 @@ interface FormData {
   message: string;
 }
 
-const Form: React.FC = () => {
+interface Props {}
+
+const Form: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
 
@@ -24,7 +26,7 @@ const Form: React.FC = () => {
   });
 
   const { handleSubmit } = methods;
-  const onSubmit = handleSubmit(async ({ cpf, password }) => {
+  const onSubmit = handleSubmit(async data => {
     setLoading(true);
     try {
       await signIn({ cpf, password });
