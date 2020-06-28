@@ -7,6 +7,7 @@ import FirstAccess from 'pages/FirstAccess';
 import News from 'pages/News/List';
 import View from 'pages/News/View';
 import Gallery from 'pages/Gallery/List';
+import Contact from 'pages/Contact';
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -23,6 +24,7 @@ const Routes: React.FC = () => (
     <Route exact path="/news" component={News} />
     <Route exact path="/news/:id" component={View} />
     <Route exact path="/gallery" component={Gallery} />
+    <Route exact path="/contact" component={Contact} />
   </Switch>
 );
 
