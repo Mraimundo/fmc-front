@@ -7,20 +7,14 @@ import { useToast } from 'context/ToastContext';
 
 import { Input, Button, PasswordInput } from 'components/shared';
 import { FiUser, FiLock } from 'react-icons/fi';
+import schema from './schemaValidation';
 
-interface SignInFormData {
-  message: Yup.string().required('Mensagem é obrigatória'),
-}
+interface FormData {}
 
 const Form: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
   const { addToast } = useToast();
-
-  const schema = Yup.object().shape({
-    cpf: Yup.string().required('Cpf é obrigatório'),
-    password: Yup.string().required('Senha é obrigatória'),
-  });
 
   const methods = useForm<SignInFormData>({
     validationSchema: schema,
