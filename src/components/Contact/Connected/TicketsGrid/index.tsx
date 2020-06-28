@@ -2,35 +2,97 @@ import React, { useState, useCallback } from 'react';
 
 import { FiClock, FiCheckCircle, FiMessageCircle } from 'react-icons/fi';
 
+import Form from './Form';
+import Messages from './Messages';
 import { Container, GridHeader, TicketGrid } from './styles';
 
 const TicketsGrid: React.FC = () => {
   const [ticketSelected, setTicketSelected] = useState<{ id: number } | null>(
     null,
   );
+
+  interface Message {
+    date: string;
+    time: string;
+    type: 'r' | 'p';
+    name: string;
+    message: string;
+  }
+
+  const messages: Message[] = [
+    {
+      date: '02/04/2020',
+      time: '14h00',
+      type: 'p',
+      name: 'Meu nome',
+      message: 'Preciso de ajuda para incluir um participante',
+    },
+    {
+      date: '02/04/2020',
+      time: '14h00',
+      type: 'p',
+      name: 'Meu nome',
+      message: 'Preciso de ajuda para incluir um participante',
+    },
+    {
+      date: '02/04/2020',
+      time: '14h00',
+      type: 'p',
+      name: 'Meu nome',
+      message: 'Preciso de ajuda para incluir um participante',
+    },
+    {
+      date: '02/04/2020',
+      time: '14h00',
+      type: 'p',
+      name: 'Meu nome',
+      message: 'Preciso de ajuda para incluir um participante',
+    },
+    {
+      date: '03/04/2020',
+      time: '18h00',
+      type: 'r',
+      name: 'Atendente X',
+      message: 'Certo, qual o problema que você está tendo',
+    },
+  ];
   const test = [
     {
       id: 1,
       date: '02/04/2020',
       subject: 'Dúvidas di Focal Point',
       status: 'Em análise',
+      messages,
     },
     {
       id: 2,
       date: '02/04/2020',
       subject: 'Dúvidas di Focal Point',
       status: 'Em análise',
+      messages,
     },
     {
       id: 3,
       date: '02/04/2020',
       subject: 'Dúvidas di Focal Point',
       status: 'Em análise',
+      messages,
     },
   ];
 
-  const handleTicketClick = useCallback((ticket: { id: number }) => {
-    setTicketSelected({ id: ticket.id });
+  const handleTicketClick = useCallback(
+    (ticket: { id: number }) => {
+      if (ticket.id === ticketSelected?.id) {
+        setTicketSelected(null);
+        return;
+      }
+      setTicketSelected({ id: ticket.id });
+    },
+    [ticketSelected],
+  );
+
+  const handleSendMessage = useCallback((message: string) => {
+    console.log(message);
   }, []);
 
   return (
@@ -57,7 +119,8 @@ const TicketsGrid: React.FC = () => {
             </div>
           </header>
           <div className="_contentMessage">
-            <h1>Hello</h1>
+            <Messages messages={item.messages} />
+            <Form sendMessage={handleSendMessage} />
           </div>
         </TicketGrid>
       ))}

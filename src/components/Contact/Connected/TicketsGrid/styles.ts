@@ -15,9 +15,9 @@ export const TicketGrid = styled.div<TicketGridProps>`
   display: flex;
   flex-direction: column;
   margin-top: 5px;
-  cursor: pointer;
   border: 1px solid transparent;
 
+  transition: border 1s ease;
   ${({ opened }) =>
     opened &&
     css`
@@ -36,6 +36,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
     display: grid;
     grid-template-columns: 150px auto 80px 80px;
     padding: 25px 20px;
+    cursor: pointer;
 
     span {
       display: flex;
@@ -66,6 +67,11 @@ export const TicketGrid = styled.div<TicketGridProps>`
   ._contentMessage {
     max-height: 0;
     overflow-y: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: max-height 0.5s ease;
     ${({ opened }) =>
       opened &&
       css`
