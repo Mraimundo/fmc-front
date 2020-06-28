@@ -55,10 +55,16 @@ export const BoxPhone = styled.div`
     }
   }
   @media screen and (max-width: 720px) {
-    flex-direction: column;
+    > div {
+      width: 95px;
+      & + width {
+        width: 100%;
+      }
+    }
+    /*flex-direction: column;
     > div + div {
       margin-top: 8px;
-    }
+    }*/
   }
 `;
 

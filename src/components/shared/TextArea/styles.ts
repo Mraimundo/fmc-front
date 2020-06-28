@@ -27,7 +27,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     theme.input[inputRole].backgroundColor};
   border-radius: ${({ theme, inputRole }) =>
     theme.input[inputRole].borderRadius};
-  padding: 0 0 0 16px;
+  padding: 0 16px 0 16px;
   width: 100%;
   height: 100px;
   display: flex;
@@ -60,6 +60,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     `};
 
   textarea {
+    min-width: 0;
     width: 100%;
     height: 100%;
     background-color: transparent;

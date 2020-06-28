@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
+  @media screen and (max-width: 720px) {
+    position: relative;
+    margin-top: 30px;
+    margin-left: auto;
+  }
 `;
 
 export const Content = styled.div`

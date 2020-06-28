@@ -123,7 +123,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             <BoxPhone>
               <Input
                 name="dddMobile"
-                icon={FiSmartphone}
                 label="Celular"
                 numbersOnly
                 pattern="(XX)"

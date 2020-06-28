@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeContext } from 'styled-components';
+import Logo from 'components/shared/Logo';
 
 import getNews from 'services/news/getNewsList';
 import { News as INews } from 'services/news/interfaces';
@@ -34,6 +35,7 @@ const News: React.FC = () => {
   return (
     <ThemeContext.Provider value={theme}>
       <Container>
+        <Logo />
         <Content>
           <h3>Notícias</h3>
           <Grid news={news} />

@@ -24,13 +24,11 @@ const Contact: React.FC<ContactProps> = ({ initialPosition }) => {
   return (
     <>
       <Container style={defaultPosition}>
-        <Draggable>
-          <div>
-            <Content onClick={() => setModalOpened(true)}>
-              <span>?</span>
-            </Content>
-          </div>
-        </Draggable>
+        <div>
+          <Content onClick={() => setModalOpened(true)}>
+            <span>?</span>
+          </Content>
+        </div>
       </Container>
       <Modal
         isOpen={modalOpened}

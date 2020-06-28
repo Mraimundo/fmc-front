@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
+import Logo from 'components/shared/Logo';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
@@ -147,6 +148,7 @@ const ParticipantIndication: React.FC = () => {
 
   return (
     <Container>
+      <Logo />
       <Content>
         <h3>
           Indique um participante

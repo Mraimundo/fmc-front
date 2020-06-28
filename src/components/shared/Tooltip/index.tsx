@@ -26,7 +26,10 @@ const Tooltip: React.FC<TooltipProps> = ({
   type,
 }) => (
   <Container className={className}>
-    <HtmlTooltip title={<ContentTooltip type={type}>{title}</ContentTooltip>}>
+    <HtmlTooltip
+      enterTouchDelay={0}
+      title={<ContentTooltip type={type}>{title}</ContentTooltip>}
+    >
       <span>{children}</span>
     </HtmlTooltip>
   </Container>

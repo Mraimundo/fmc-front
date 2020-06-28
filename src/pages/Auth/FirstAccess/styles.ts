@@ -23,6 +23,10 @@ export const Content = styled(animated.div)`
   background: #fff;
   padding: 20px 30px;
 
+  @media screen and (max-width: 720px) {
+    width: 100%;
+  }
+
   form {
     display: flex;
     flex-direction: column;

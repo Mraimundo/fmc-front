@@ -4,6 +4,7 @@ import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
+import PasswordHelp from 'components/shared/PasswordHelp';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
 import getschemaValidations from './getSchemaValidations';
@@ -136,6 +137,7 @@ const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
           icon={FiLock}
           label="Senha"
           inputRole={inputRole}
+          help={PasswordHelp}
         />
         <PasswordInput
           name="password_confirmation"

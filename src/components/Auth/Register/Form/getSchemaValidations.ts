@@ -72,7 +72,7 @@ export default (profile: IProfile): Yup.ObjectSchema<object> => {
           /* logradouro: Yup.string().required(mandatoryMessage), */
           street: Yup.string().required(mandatoryMessage),
           number: Yup.string().required(mandatoryMessage),
-          complement: Yup.string(),
+          complement: Yup.string().required(mandatoryMessage),
           district: Yup.string().required(mandatoryMessage),
           city: Yup.string().required(mandatoryMessage),
           state_code: Yup.string().required(mandatoryMessage),

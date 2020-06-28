@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useForm, FormContext } from 'react-hook-form';
-import DefaultModal from 'components/shared/Modal';
 import changePassword from 'services/auth/password/changePasswordByToken';
 import { PasswordInput, Button } from 'components/shared';
 import * as Yup from 'yup';
+import PasswordHelp from 'components/shared/PasswordHelp';
 import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
 
 import { FiLock } from 'react-icons/fi';
 
-import { Container, Title } from './styles';
+import { Container, Title, Modal as DefaultModal } from './styles';
 
 interface ModalProps {
   isOpen: boolean;
@@ -86,7 +86,12 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
         <Title>Cadastrar nova senha</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
-            <PasswordInput name="password" icon={FiLock} label="Nova senha" />
+            <PasswordInput
+              name="password"
+              icon={FiLock}
+              label="Nova senha"
+              help={PasswordHelp}
+            />
             <PasswordInput
               name="password_confirmation"
               icon={FiLock}

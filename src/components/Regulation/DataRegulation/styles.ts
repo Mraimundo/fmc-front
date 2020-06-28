@@ -40,8 +40,8 @@ export const RegulationContent = styled.div<RegulationProps>`
 `;
 
 export const Button = styled(DefaultButton)`
-  width: 250px;
-  height: 60px;
+  width: 100%;
+  max-width: 500px;
   margin-top: 30px;
 `;
 

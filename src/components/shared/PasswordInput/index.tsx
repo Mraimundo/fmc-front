@@ -27,6 +27,7 @@ interface InputProps
   icon?: React.ComponentType<IconBaseProps>;
   label?: string;
   inputRole?: 'primary' | 'secondary';
+  help?: React.ComponentType | undefined;
 }
 
 const PasswordInput: React.FC<InputProps> = ({
@@ -37,6 +38,7 @@ const PasswordInput: React.FC<InputProps> = ({
   className,
   label,
   inputRole = 'primary',
+  help: Help,
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -120,6 +122,7 @@ const PasswordInput: React.FC<InputProps> = ({
             </Error>
           )}
         </InputContainer>
+        {isFocused && typeof Help !== 'undefined' && <Help />}
       </Container>
     ),
     [
@@ -137,6 +140,7 @@ const PasswordInput: React.FC<InputProps> = ({
       handleEyeClick,
       label,
       inputRole,
+      Help,
     ],
   );
 };

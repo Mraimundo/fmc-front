@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import DefaultModal from 'components/shared/Modal';
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +32,10 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 60px 20px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -38,4 +43,13 @@ export const Title = styled.h3`
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 18px;
+`;
+
+export const Modal = styled(DefaultModal)`
+  @media screen and (max-width: 720px) {
+    ._modalContainer {
+      width: 98%;
+      padding-right: 0;
+    }
+  }
 `;
