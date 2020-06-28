@@ -5,7 +5,10 @@ import { useToast } from 'context/ToastContext';
 
 import { TextArea, Button } from 'components/shared';
 import { FiUser, FiMessageCircle } from 'react-icons/fi';
+import SubjectSelect from '../SubjectsSelect';
 import schema from './schemaValidation';
+
+import { Container } from './styles';
 
 interface FormData {
   category: { title: string; value: string } | null;
@@ -13,9 +16,11 @@ interface FormData {
   message: string;
 }
 
-interface Props {}
+interface Props {
+  className?: string;
+}
 
-const Form: React.FC<Props> = () => {
+const Form: React.FC<Props> = ({ className }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
 
@@ -27,33 +32,19 @@ const Form: React.FC<Props> = () => {
 
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit(async data => {
-    setLoading(true);
-    try {
-      await signIn({ cpf, password });
-      addToast({
-        title: 'Login realizado com sucesso!',
-        type: 'success',
-      });
-    } catch (e) {
-      addToast({
-        title: e.response?.data?.message || 'Falha ao fazer login',
-        type: 'error',
-      });
-    }
-    setLoading(false);
+    console.log(data);
   });
 
   return (
     <FormContext {...methods}>
-      <form onSubmit={onSubmit}>
-        <SubjectSelect name="subject" icon={FiUser} />
-        <SubjectSelect name="subject" icon={FiUser} />
+      <Container onSubmit={onSubmit} className={className}>
+        <SubjectSelect name="subject" />
+        <SubjectSelect name="category" />
         <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
         <Button type="submit" buttonRole="primary" loading={loading}>
-          Entrar
+          Enviar
         </Button>
-      </form>
-      <RecoverPasswordButton />
+      </Container>
     </FormContext>
   );
 };

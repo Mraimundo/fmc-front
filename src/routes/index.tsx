@@ -24,7 +24,7 @@ const Routes: React.FC = () => (
     <Route exact path="/news" component={News} />
     <Route exact path="/news/:id" component={View} />
     <Route exact path="/gallery" component={Gallery} />
-    <Route exact path="/contact" component={Contact} />
+    <Route exact path="/contact" component={Contact} isPrivate={false} />
   </Switch>
 );
 
