@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
-import * as Yup from 'yup';
-import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 
-import { Input, Button, PasswordInput } from 'components/shared';
-import { FiUser, FiLock } from 'react-icons/fi';
+import { TextArea, Button } from 'components/shared';
+import { FiUser, FiMessageCircle } from 'react-icons/fi';
 import schema from './schemaValidation';
 
-interface FormData {}
+interface FormData {
+  category: { title: string; value: string } | null;
+  subject: { title: string; value: string } | null;
+  message: string;
+}
 
 const Form: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
   const { addToast } = useToast();
 
-  const methods = useForm<SignInFormData>({
+  const methods = useForm<FormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
@@ -43,8 +44,8 @@ const Form: React.FC = () => {
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <SubjectSelect name="subject" />
-        <SubjectSelect name="subject" />
+        <SubjectSelect name="subject" icon={FiUser} />
+        <SubjectSelect name="subject" icon={FiUser} />
         <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
         <Button type="submit" buttonRole="primary" loading={loading}>
           Entrar
