@@ -26,7 +26,7 @@ export default async ({
     const {
       data: { data, pagination },
     } = await vendavallApi.get<ApiResponse>(
-      `gallery?limit=${limit}&page=${page}&type=${type}`,
+      `gallery?limit=${limit}&page=${page}&types[0]=${type}`,
     );
     return {
       data,
