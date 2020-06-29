@@ -23,6 +23,7 @@ import StatusBox from './StatusBox';
 import Filters from './Filters';
 import Table from './Table';
 import Form, { FormData } from './Form';
+import Establishments from './Establishments';
 import { Container, Content, ContentForm } from './styles';
 
 const ParticipantIndication: React.FC = () => {
@@ -206,7 +207,12 @@ const ParticipantIndication: React.FC = () => {
         <h3>
           Indique um participante
           {establishmentSelected && ` na revenda ${establishmentSelected.name}`}
-          {establishments.length > 1 && <span>Alterar revenda</span>}
+          {establishments.length > 1 && (
+            <div>
+              <span>Alterar revenda</span>
+              <Establishments establishments={establishments} />
+            </div>
+          )}
         </h3>
         <StatusBox
           percentActivated={activePercentage}

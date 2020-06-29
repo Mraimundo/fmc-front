@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { Establishment } from 'services/auth/getEstablishments';
 import { Container } from './styles';
 
-const Establishments: React.FC = () => {
-  const [establishments, setEstablishments] = useState<Establishment[]>([]);
+interface Props {
+  establishments: Establishment[];
+  className?: string;
+}
+
+const Establishments: React.FC<Props> = ({ establishments, className }) => {
   return (
-    <Container>
-      <h1>Teste</h1>
+    <Container className={className}>
+      {establishments.map(item => (
+        <h1>{`${item.name} (${item.cnpj})`}</h1>
+      ))}
     </Container>
   );
 };
