@@ -142,7 +142,7 @@ const ParticipantIndication: React.FC = () => {
         await inactiveParticipantFromIndication(indicationId);
         setTableData(
           produce(tableData, draft => {
-            return draft.map(item => {
+            draft.map(item => {
               if (item.id === indicationId) {
                 item.participant.status = INACTIVE;
               }
@@ -154,6 +154,7 @@ const ParticipantIndication: React.FC = () => {
           title: 'Participante inativado com sucesso',
         });
       } catch (e) {
+        console.log(e);
         addToast({
           title:
             e.response?.data?.message ||
@@ -162,7 +163,7 @@ const ParticipantIndication: React.FC = () => {
         });
       }
     },
-    [addToast],
+    [addToast, tableData],
   );
 
   useEffect(() => {
@@ -205,7 +206,7 @@ const ParticipantIndication: React.FC = () => {
         <h3>
           Indique um participante
           {establishmentSelected && ` na revenda ${establishmentSelected.name}`}
-          {establishments.length > 0 && <span>Alterar revenda</span>}
+          {establishments.length > 1 && <span>Alterar revenda</span>}
         </h3>
         <StatusBox
           percentActivated={activePercentage}

@@ -49,7 +49,7 @@ const Actions: React.FC<Props> = ({
             </span>
           )}
           {typeof inactiveParticipantIndication === 'function' && (
-            <span title="Reenviar email de indicação">
+            <span title="Desativar participante">
               <FaTrashAlt
                 size={20}
                 onClick={() =>
@@ -58,7 +58,7 @@ const Actions: React.FC<Props> = ({
             </span>
           )}
           {typeof resendIndication === 'function' && (
-            <span title="Desativar participante">
+            <span title="Reenviar email de indicação">
               <FaShareSquare
                 size={20}
                 onClick={() => handleAction({ fn: resendIndication, id })}
