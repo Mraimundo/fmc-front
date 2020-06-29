@@ -9,6 +9,7 @@ interface Props {
   id: number;
   edit?(id: number): Promise<void> | void;
   resendIndication?(id: number): Promise<void> | void;
+  inactiveParticipantIndication?(id: number): Promise<void> | void;
 }
 
 interface ActionProps {
@@ -16,7 +17,12 @@ interface ActionProps {
   id: number;
 }
 
-const Actions: React.FC<Props> = ({ id, edit, resendIndication }) => {
+const Actions: React.FC<Props> = ({
+  id,
+  edit,
+  resendIndication,
+  inactiveParticipantIndication,
+}) => {
   const [loading, setLoading] = useState(false);
 
   const handleAction = useCallback(
@@ -42,9 +48,15 @@ const Actions: React.FC<Props> = ({ id, edit, resendIndication }) => {
               />
             </span>
           )}
-          <span title="Reenviar email de indicação">
-            <FaTrashAlt size={20} />
-          </span>
+          {typeof inactiveParticipantIndication === 'function' && (
+            <span title="Reenviar email de indicação">
+              <FaTrashAlt
+                size={20}
+                onClick={() =>
+                  handleAction({ fn: inactiveParticipantIndication, id })}
+              />
+            </span>
+          )}
           {typeof resendIndication === 'function' && (
             <span title="Desativar participante">
               <FaShareSquare

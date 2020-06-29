@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import produce from 'immer';
 
+import { INACTIVE, PRECHARGE } from 'config/constants/vendavallStatus';
 import Logo from 'components/shared/Logo';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
@@ -10,6 +12,7 @@ import {
   edit as editIndication,
 } from 'services/participantIndication/indicateParticipant';
 import resendIndicationEmail from 'services/participantIndication/resendIndicationEmail';
+import inactiveParticipantFromIndication from 'services/participantIndication/inactiveParticipantFromIndication';
 import { useToast } from 'context/ToastContext';
 
 import getEstablishments, {
@@ -133,6 +136,35 @@ const ParticipantIndication: React.FC = () => {
     [addToast],
   );
 
+  const handleInactiveParticipant = useCallback(
+    async (indicationId: number): Promise<void> => {
+      try {
+        await inactiveParticipantFromIndication(indicationId);
+        setTableData(
+          produce(tableData, draft => {
+            return draft.map(item => {
+              if (item.id === indicationId) {
+                item.participant.status = INACTIVE;
+              }
+              return item;
+            });
+          }),
+        );
+        addToast({
+          title: 'Participante inativado com sucesso',
+        });
+      } catch (e) {
+        addToast({
+          title:
+            e.response?.data?.message ||
+            'Falha ao inativar participante. Por favor entre em contato com o suporte',
+          type: 'error',
+        });
+      }
+    },
+    [addToast],
+  );
+
   useEffect(() => {
     getIndicationTeamDetails().then(({ active_percentage }) =>
       setActivePercentage(Math.ceil(active_percentage)),
@@ -197,6 +229,7 @@ const ParticipantIndication: React.FC = () => {
           isFetching={isFetching}
           onEditClick={onEditClick}
           onResendEmailClick={handleResendIndication}
+          onInactiveParticipantClick={handleInactiveParticipant}
         />
       </Content>
     </Container>

@@ -4,9 +4,14 @@ import Actions from './Actions';
 interface Props {
   edit?(id: number): Promise<void> | void;
   resendIndicationEmail?(id: number): Promise<void> | void;
+  inactivaParticipantIndication?(id: number): Promise<void> | void;
 }
 
-export default ({ edit, resendIndicationEmail }: Props) => [
+export default ({
+  edit,
+  resendIndicationEmail,
+  inactivaParticipantIndication,
+}: Props) => [
   {
     column: 'Nome',
     dataValue: 'name',
@@ -35,6 +40,7 @@ export default ({ edit, resendIndicationEmail }: Props) => [
         id={parseInt(id, 0)}
         edit={edit}
         resendIndication={resendIndicationEmail}
+        inactiveParticipantIndication={inactivaParticipantIndication}
       />
     ),
   },

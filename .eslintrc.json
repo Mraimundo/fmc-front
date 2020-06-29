@@ -38,6 +38,7 @@
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "import/prefer-default-export": "off",
       "no-unused-expressions": "off",
+      "no-param-reassign": ["error", { "props": false }],
       "@typescript-eslint/camelcase": ["error", { "properties": "never", "ignoreDestructuring": true } ],
       "no-empty": [
         "error",
