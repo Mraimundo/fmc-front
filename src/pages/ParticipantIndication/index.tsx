@@ -9,6 +9,7 @@ import {
   create as indicate,
   edit as editIndication,
 } from 'services/participantIndication/indicateParticipant';
+import resendIndicationEmail from 'services/participantIndication/resendIndicationEmail';
 import { useToast } from 'context/ToastContext';
 
 import getEstablishments, {
@@ -113,6 +114,25 @@ const ParticipantIndication: React.FC = () => {
     [addToast, editing],
   );
 
+  const handleResendIndication = useCallback(
+    async (indicationId: number): Promise<void> => {
+      try {
+        await resendIndicationEmail(indicationId);
+        addToast({
+          title: 'Indicação reenviada no email do participante com sucesso',
+        });
+      } catch (e) {
+        addToast({
+          title:
+            e.response?.data?.message ||
+            'Falha no reenvio do email. Por favor entre em contato com o suporte',
+          type: 'error',
+        });
+      }
+    },
+    [addToast],
+  );
+
   useEffect(() => {
     getIndicationTeamDetails().then(({ active_percentage }) =>
       setActivePercentage(Math.ceil(active_percentage)),
@@ -176,6 +196,7 @@ const ParticipantIndication: React.FC = () => {
           data={tableData}
           isFetching={isFetching}
           onEditClick={onEditClick}
+          onResendEmailClick={handleResendIndication}
         />
       </Content>
     </Container>

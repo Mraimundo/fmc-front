@@ -3,9 +3,10 @@ import Actions from './Actions';
 
 interface Props {
   edit?(id: number): Promise<void> | void;
+  resendIndicationEmail?(id: number): Promise<void> | void;
 }
 
-export default ({ edit }: Props) => [
+export default ({ edit, resendIndicationEmail }: Props) => [
   {
     column: 'Nome',
     dataValue: 'name',
@@ -29,6 +30,12 @@ export default ({ edit }: Props) => [
   {
     column: ' ',
     dataValue: 'id',
-    fn: (id: string) => <Actions id={parseInt(id, 0)} edit={edit} />,
+    fn: (id: string) => (
+      <Actions
+        id={parseInt(id, 0)}
+        edit={edit}
+        resendIndication={resendIndicationEmail}
+      />
+    ),
   },
 ];

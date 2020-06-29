@@ -10,9 +10,15 @@ interface Props {
   data: ParticipantIndication[];
   isFetching: boolean;
   onEditClick?(id: number): Promise<void> | void;
+  onResendEmailClick?(id: number): Promise<void> | void;
 }
 
-const Table: React.FC<Props> = ({ data, isFetching, onEditClick }) => {
+const Table: React.FC<Props> = ({
+  data,
+  isFetching,
+  onEditClick,
+  onResendEmailClick,
+}) => {
   const [tableData, setTableData] = useState<ParticipantIndicationTableData[]>(
     [],
   );
@@ -21,7 +27,10 @@ const Table: React.FC<Props> = ({ data, isFetching, onEditClick }) => {
   }, [data]);
   return (
     <Container
-      headers={headers({ edit: onEditClick })}
+      headers={headers({
+        edit: onEditClick,
+        resendIndicationEmail: onResendEmailClick,
+      })}
       data={tableData}
       noResultText="Nenhuma Pesquisa encontrada"
       isFetching={isFetching}

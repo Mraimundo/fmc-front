@@ -29,6 +29,7 @@ const Dashboard: React.FC = () => {
         <Link to="/news">Notícias</Link>
         <Link to="/gallery">Galeria</Link>
         <Link to="/regulation">Regulamentos</Link>
+        <Link to="/contact">Fale Conosco</Link>
       </div>
     </Container>
   );

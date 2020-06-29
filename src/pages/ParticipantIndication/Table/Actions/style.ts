@@ -18,5 +18,14 @@ export const Container = styled.div<ContainerProps>`
     &:hover {
       transform: scale(1.2);
     }
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
+  ._loading {
+    svg {
+      fill: #193b4e;
+    }
   }
 `;
