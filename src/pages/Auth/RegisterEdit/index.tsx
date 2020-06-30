@@ -69,7 +69,11 @@ const RegisterEdit: React.FC = () => {
         <Container>
           <img src={logoImg} alt="Logo" />
           <Content style={props}>
-            <Form participant={participant} saveParticipant={saveParticipant} />
+            <Form
+              participant={participant}
+              saveParticipant={saveParticipant}
+              editing
+            />
           </Content>
         </Container>
       )}

@@ -22,6 +22,7 @@ import {
 interface Props {
   participant: Participant;
   saveParticipant(data: Participant): Promise<void>;
+  editing?: boolean;
 }
 
 interface FormData extends Participant {
@@ -29,11 +30,15 @@ interface FormData extends Participant {
   education_level_select: { title: string; value: string } | null;
 }
 
-const Form: React.FC<Props> = ({ participant, saveParticipant }) => {
+const Form: React.FC<Props> = ({
+  participant,
+  saveParticipant,
+  editing = false,
+}) => {
   const [loading, setLoading] = useState(false);
   const inputRole = 'secondary';
 
-  const schema = getschemaValidations(participant.profile);
+  const schema = getschemaValidations(participant.profile, editing);
 
   const methods = useForm<FormData>({
     validationSchema: schema,

@@ -14,33 +14,71 @@ const commomValidations = {
     .test('valid-cpf', 'Cpf inválido', validateCpf),
   area_code: Yup.string().required(mandatoryMessage),
   cell_phone: Yup.string().required(mandatoryMessage),
-  password: Yup.string()
-    .required(mandatoryMessage)
-    .min(10, 'Mínimo de 10 caracteres')
-    .test(
-      'lower-case',
-      'Deve conter pelo menos uma letra minúscula',
-      hasLowerCase,
-    )
-    .test(
-      'upper-case',
-      'Deve conter pelo menos uma letra maiúscula',
-      hasUpperCase,
-    )
-    .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
-  password_confirmation: Yup.string()
-    .required(mandatoryMessage)
-    .oneOf(
-      [Yup.ref('password')],
-      'Confirmação de senha precisa ser igual a senha',
-    ),
 };
 
-export default (profile: IProfile): Yup.ObjectSchema<object> => {
+const passwordFields = (editing: boolean) => {
+  if (editing) {
+    return {
+      password: Yup.lazy<string>(v =>
+        v !== ''
+          ? Yup.string()
+              .min(10, 'Mínimo de 10 caracteres')
+              .test(
+                'lower-case',
+                'Deve conter pelo menos uma letra minúscula',
+                hasLowerCase,
+              )
+              .test(
+                'upper-case',
+                'Deve conter pelo menos uma letra maiúscula',
+                hasUpperCase,
+              )
+              .test('lower-case', 'Deve conter pelo menos um número', hasNumber)
+          : Yup.string(),
+      ),
+      password_confirmation: Yup.string().oneOf(
+        [Yup.ref('password')],
+        'Confirmação de senha precisa ser igual a senha',
+      ),
+    };
+  }
+  return {
+    password: Yup.string()
+      .required(mandatoryMessage)
+      .min(10, 'Mínimo de 10 caracteres')
+      .test(
+        'lower-case',
+        'Deve conter pelo menos uma letra minúscula',
+        hasLowerCase,
+      )
+      .test(
+        'upper-case',
+        'Deve conter pelo menos uma letra maiúscula',
+        hasUpperCase,
+      )
+      .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
+    password_confirmation: Yup.string()
+      .required(mandatoryMessage)
+      .oneOf(
+        [Yup.ref('password')],
+        'Confirmação de senha precisa ser igual a senha',
+      ),
+  };
+};
+
+export default (
+  profile: IProfile,
+  editing = false,
+): Yup.ObjectSchema<object> => {
+  const defaultValidations = {
+    ...commomValidations,
+    ...passwordFields(editing),
+  };
+
   switch (profile) {
     case 'PARTICIPANTE':
       return Yup.object().shape({
-        ...commomValidations,
+        ...defaultValidations,
         gender: Yup.string().required(mandatoryMessage),
         birth_date: Yup.date()
           .transform((t, v) => {
@@ -79,6 +117,6 @@ export default (profile: IProfile): Yup.ObjectSchema<object> => {
         }),
       });
     default:
-      return Yup.object().shape({ ...commomValidations });
+      return Yup.object().shape({ ...defaultValidations });
   }
 };
