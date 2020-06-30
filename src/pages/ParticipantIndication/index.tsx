@@ -45,14 +45,17 @@ const ParticipantIndication: React.FC = () => {
 
   const { addToast } = useToast();
 
-  const filter = useCallback(async (roleId = 0, subsidiaryId = 0) => {
-    setFetching(true);
-    setTableData([]);
-    getTableListData({ roleId, subsidiaryId }).then(list => {
-      setTableData(list);
-      setFetching(false);
-    });
-  }, []);
+  const filter = useCallback(
+    async (establishmentId, roleId = 0, subsidiaryId = 0) => {
+      setFetching(true);
+      setTableData([]);
+      getTableListData({ roleId, subsidiaryId, establishmentId }).then(list => {
+        setTableData(list);
+        setFetching(false);
+      });
+    },
+    [],
+  );
 
   const onEditClick = useCallback(
     (id: number): void => {
@@ -155,7 +158,6 @@ const ParticipantIndication: React.FC = () => {
           title: 'Participante inativado com sucesso',
         });
       } catch (e) {
-        console.log(e);
         addToast({
           title:
             e.response?.data?.message ||
@@ -168,11 +170,19 @@ const ParticipantIndication: React.FC = () => {
   );
 
   useEffect(() => {
-    getIndicationTeamDetails().then(({ active_percentage }) =>
-      setActivePercentage(Math.ceil(active_percentage)),
-    );
     getEstablishments().then(list => setEstablishments(list));
   }, []);
+
+  useEffect(() => {
+    if (establishmentSelected) {
+      getIndicationTeamDetails(
+        establishmentSelected?.id,
+      ).then(({ active_percentage }) =>
+        setActivePercentage(Math.ceil(active_percentage)),
+      );
+      setRefresh(true);
+    }
+  }, [establishmentSelected]);
 
   useEffect(() => {
     if (establishments.length > 0) {
@@ -181,11 +191,12 @@ const ParticipantIndication: React.FC = () => {
   }, [establishments]);
 
   useEffect(() => {
+    if (!establishmentSelected) return;
     if (refresh) {
-      filter();
+      filter(establishmentSelected.id);
       setRefresh(false);
     }
-  }, [refresh, filter]);
+  }, [refresh, filter, establishmentSelected]);
 
   useEffect(() => {
     document.getElementsByTagName('body')[0].style.overflowY = 'scroll';
@@ -208,10 +219,11 @@ const ParticipantIndication: React.FC = () => {
           Indique um participante
           {establishmentSelected && ` na revenda ${establishmentSelected.name}`}
           {establishments.length > 1 && (
-            <div>
-              <span>Alterar revenda</span>
-              <Establishments establishments={establishments} />
-            </div>
+            <Establishments
+              establishments={establishments}
+              setValue={setEstablishmentSelected}
+              value={establishmentSelected}
+            />
           )}
         </h3>
         <StatusBox

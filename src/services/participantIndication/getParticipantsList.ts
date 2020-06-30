@@ -8,17 +8,22 @@ interface Response {
 interface Request {
   roleId?: number;
   subsidiaryId?: number;
+  establishmentId: number;
 }
 
-export default async ({ roleId, subsidiaryId }: Request = {}): Promise<
-  ParticipantIndication[]
-> => {
+export default async ({
+  roleId,
+  subsidiaryId,
+  establishmentId,
+}: Request): Promise<ParticipantIndication[]> => {
   let extraSearch = '';
   if (roleId) {
     extraSearch += `?role_id=${roleId}`;
   }
   if (subsidiaryId) {
-    extraSearch += `${roleId ? '&' : '?'}subsidiary_id=${subsidiaryId}`;
+    extraSearch += `${
+      roleId ? '&' : '?'
+    }subsidiary_id=${subsidiaryId}&establishment_id=${establishmentId}`;
   }
   const { data } = await pluginApi.get<Response>(
     `participants/indications${extraSearch}`,

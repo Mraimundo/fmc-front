@@ -21,12 +21,7 @@ export const Content = styled.div`
     font-size: 24px;
     font-weight: bold;
     color: #193b4e;
-    > span {
-      font-size: 14px;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-left: 8px;
-    }
+    display: flex;
   }
 
   > span {

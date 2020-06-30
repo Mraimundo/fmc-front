@@ -8,9 +8,11 @@ export interface IndicationTeamDetails {
   active_percentage: number;
 }
 
-export default async (): Promise<IndicationTeamDetails> => {
+export default async (
+  establishmentId: number,
+): Promise<IndicationTeamDetails> => {
   const { data } = await pluginApi.get<IndicationTeamDetails>(
-    'participants/indications/details',
+    `participants/indications/details?establishment_id=${establishmentId}`,
   );
 
   return data;
