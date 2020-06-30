@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import parser from 'html-react-parser';
+import React, { useEffect, useState, useCallback } from 'react';
 import getAllRegulations from 'services/register/regulation/getAllRegulations';
-import getRegulationById from 'services/register/regulation/getRegulationById';
 import acceptRegulation from 'services/register/regulation/acceptRegulation';
-import { Button } from 'components/shared';
 import {
   Regulation,
   RegulationType,
@@ -13,18 +10,9 @@ import { useToast } from 'context/ToastContext';
 import { REGULATIONS_TYPE } from 'config/constants';
 import logoImg from 'assets/images/logo.png';
 
-import ReactToPrint from 'react-to-print';
+import RegulationBox from './RegulationBox';
 
-import {
-  Container,
-  Content,
-  Title,
-  SubTitle,
-  Accordion,
-  ContentRegulation,
-  Actions,
-  PrintRef,
-} from './styles';
+import { Container, Content, Title, SubTitle, Accordion } from './styles';
 
 const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
@@ -35,7 +23,6 @@ const TITLES = {
 const AllRegulations: React.FC = () => {
   const { updateParticipantData } = useAuth();
   const { addToast } = useToast();
-  const [canAccept, setCanAccept] = useState(false);
 
   const [dataRegulations, setDataRegulations] = useState<
     Omit<Regulation, 'content'>[]
@@ -46,13 +33,7 @@ const AllRegulations: React.FC = () => {
   const [safraRegulations, setSafraRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
-  const [loading, setLoading] = useState(false);
   const [acceptedIds, setAcceptedIds] = useState<number[]>([]);
-  const [
-    regulationSelected,
-    setRegulationSelected,
-  ] = useState<Regulation | null>(null);
-  const t = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getAllRegulations().then(regulations => {
@@ -78,7 +59,6 @@ const AllRegulations: React.FC = () => {
   const handleAcceptRegulation = useCallback(
     async (id: number, version: number, title: string) => {
       try {
-        setLoading(true);
         await acceptRegulation(id, version);
         addToast({
           title: `Você aceitou o regulamento ${title}`,
@@ -96,7 +76,6 @@ const AllRegulations: React.FC = () => {
             type: 'success',
           });
           updateParticipantData();
-          setLoading(false);
           return;
         }
         setAcceptedIds([...acceptedIds, id]);
@@ -106,8 +85,6 @@ const AllRegulations: React.FC = () => {
           type: 'error',
         });
       }
-
-      setLoading(false);
     },
     [
       addToast,
@@ -119,75 +96,17 @@ const AllRegulations: React.FC = () => {
     ],
   );
 
-  useEffect(() => {
-    setCanAccept(false);
-  }, [regulationSelected]);
-
-  const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
-    if (
-      e.currentTarget.scrollHeight - e.currentTarget.scrollTop <=
-      e.currentTarget.clientHeight
-    ) {
-      setCanAccept(true);
-    }
-  };
-
   const handleOpenRegulation = useCallback(
     async (regulationId: number) => {
-      if (!regulationSelected || regulationId !== regulationSelected.id) {
-        const regulation = await getRegulationById(regulationId);
-        setRegulationSelected(regulation);
-      }
-
       return (
-        regulationSelected && (
-          <>
-            <ContentRegulation onScroll={handleDivScroll}>
-              <PrintRef ref={t}>
-                {parser(regulationSelected.content || '')}
-              </PrintRef>
-            </ContentRegulation>
-            <Actions>
-              {acceptedIds.indexOf(regulationSelected.id) === -1 && (
-                <Button
-                  buttonRole="tertiary"
-                  type="button"
-                  loading={loading}
-                  onClick={() => {
-                    handleAcceptRegulation(
-                      regulationSelected.id,
-                      regulationSelected.version,
-                      regulationSelected.name,
-                    );
-                  }}
-                  disabled={!canAccept}
-                >
-                  Aceitar
-                </Button>
-              )}
-
-              <ReactToPrint
-                trigger={() => {
-                  return (
-                    <Button buttonRole="secondary" type="button">
-                      Download
-                    </Button>
-                  );
-                }}
-                content={() => t.current}
-              />
-            </Actions>
-          </>
-        )
+        <RegulationBox
+          regulationId={regulationId}
+          acceptedIds={acceptedIds}
+          handleAcceptRegulation={handleAcceptRegulation}
+        />
       );
     },
-    [
-      loading,
-      acceptedIds,
-      handleAcceptRegulation,
-      regulationSelected,
-      canAccept,
-    ],
+    [acceptedIds, handleAcceptRegulation],
   );
 
   const printRegulation = useCallback(
