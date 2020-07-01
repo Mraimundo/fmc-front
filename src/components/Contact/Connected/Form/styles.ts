@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import DefaultSubjectSelect from '../SubjectsSelect';
 
 export const Container = styled.form`
   display: flex;
@@ -11,5 +12,17 @@ export const Container = styled.form`
 
   > button {
     margin-top: 25px;
+  }
+`;
+
+export const SubjectSelect = styled(DefaultSubjectSelect)`
+  ._inputContainer {
+    height: 45px;
+  }
+`;
+
+export const CategorySelect = styled(DefaultSubjectSelect)`
+  ._inputContainer {
+    height: 45px;
   }
 `;

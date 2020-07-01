@@ -1,23 +1,23 @@
 import React from 'react';
 import Select from 'components/shared/Select';
 import { FiMessageSquare } from 'react-icons/fi';
-import { getPublicSubjectsForSelect } from 'services/contact/publicSubjects';
+import { getPrivateSubjectsForSelect } from 'services/contact/privateSubjects';
 
 interface Props {
   name: string;
   className?: string;
 }
 
-const PublicSubjectsSelect: React.FC<Props> = ({ name, className }) => {
+const SubjectsSelect: React.FC<Props> = ({ name, className }) => {
   return (
     <Select
       name={name}
       label="Assunto"
       icon={FiMessageSquare}
-      loadItems={getPublicSubjectsForSelect}
+      loadItems={getPrivateSubjectsForSelect}
       className={className}
     />
   );
 };
 
-export default PublicSubjectsSelect;
+export default SubjectsSelect;

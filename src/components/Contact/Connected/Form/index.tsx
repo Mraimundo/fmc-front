@@ -5,10 +5,9 @@ import { useToast } from 'context/ToastContext';
 
 import { TextArea, Button } from 'components/shared';
 import { FiUser, FiMessageCircle } from 'react-icons/fi';
-import SubjectSelect from '../SubjectsSelect';
 import schema from './schemaValidation';
 
-import { Container } from './styles';
+import { Container, SubjectSelect, CategorySelect } from './styles';
 
 interface FormData {
   category: { title: string; value: string } | null;
@@ -39,7 +38,7 @@ const Form: React.FC<Props> = ({ className }) => {
     <FormContext {...methods}>
       <Container onSubmit={onSubmit} className={className}>
         <SubjectSelect name="subject" />
-        <SubjectSelect name="category" />
+        <CategorySelect name="category" />
         <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
         <Button type="submit" buttonRole="primary" loading={loading}>
           Enviar
