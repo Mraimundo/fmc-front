@@ -10,10 +10,15 @@ interface FilterFormData {
 }
 
 interface Props {
-  filter(roleId: number, subsidiaryId: number): void | Promise<void>;
+  filter(
+    establishmentId: number,
+    roleId: number,
+    subsidiaryId: number,
+  ): void | Promise<void>;
+  establishmentId: number;
 }
 
-const Filters: React.FC<Props> = ({ filter }) => {
+const Filters: React.FC<Props> = ({ filter, establishmentId }) => {
   const methods = useForm<FilterFormData>({
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
@@ -24,7 +29,7 @@ const Filters: React.FC<Props> = ({ filter }) => {
   const onSubmit = handleSubmit(async data => {
     const roleId = parseInt(data.roles?.value || '0', 0) || 0;
     const subsidiaryId = parseInt(data.filiais?.value || '0', 0);
-    filter(roleId, subsidiaryId);
+    filter(establishmentId, roleId, subsidiaryId);
   });
 
   return (
@@ -34,7 +39,7 @@ const Filters: React.FC<Props> = ({ filter }) => {
           <FilialSelect
             name="filiais"
             inputRole="secondary"
-            establishmentId={1}
+            establishmentId={establishmentId}
           />
           <RolesSelect name="roles" inputRole="secondary" />
           <Button type="submit" buttonRole="tertiary">

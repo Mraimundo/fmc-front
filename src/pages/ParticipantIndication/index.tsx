@@ -242,7 +242,10 @@ const ParticipantIndication: React.FC = () => {
           </ContentForm>
         )}
         <span>Usuários indicados</span>
-        <Filters filter={filter} />
+        <Filters
+          filter={filter}
+          establishmentId={establishmentSelected?.id || 0}
+        />
         <Table
           data={tableData}
           isFetching={isFetching}

@@ -16,14 +16,12 @@ export default async ({
   subsidiaryId,
   establishmentId,
 }: Request): Promise<ParticipantIndication[]> => {
-  let extraSearch = '';
+  let extraSearch = `?establishment_id=${establishmentId}`;
   if (roleId) {
-    extraSearch += `?role_id=${roleId}`;
+    extraSearch += `&role_id=${roleId}`;
   }
   if (subsidiaryId) {
-    extraSearch += `${
-      roleId ? '&' : '?'
-    }subsidiary_id=${subsidiaryId}&establishment_id=${establishmentId}`;
+    extraSearch += `&subsidiary_id=${subsidiaryId}`;
   }
   const { data } = await pluginApi.get<Response>(
     `participants/indications${extraSearch}`,
