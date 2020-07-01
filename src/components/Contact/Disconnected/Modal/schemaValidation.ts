@@ -9,7 +9,9 @@ export default Yup.object().shape({
   email: Yup.string().email('Email inválido').required('Email é obrigatório'),
   dddMobile: Yup.string(),
   mobile: Yup.string(),
-  subject: Yup.string().required('Assunto é obrigatório'),
+  subject: Yup.object().shape({
+    value: Yup.string().required('Assunto é obrigatório'),
+  }),
   message: Yup.string()
     .required('Mensagem é obrigatória')
     .max(350, 'Limite de 350 caracteres'),

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import DefaultModal from 'components/shared/Modal';
 import { useForm, FormContext } from 'react-hook-form';
+import { Option } from 'components/shared/Select';
 
 import { useToast } from 'context/ToastContext';
 import sendFile from 'services/storage/sendFile';
@@ -37,7 +38,7 @@ interface ContactFormData {
   email: string;
   dddMobile: string;
   mobile: string;
-  subject: string;
+  subject: Option;
   message: string;
   fileUrl: string;
 }
@@ -60,7 +61,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     try {
       const { message } = await openTicket({
         ...data,
-        subjectId: parseInt(data.subject, 0),
+        subjectId: parseInt(data.subject.value, 0),
       });
       addToast({ title: message });
       onRequestClose();

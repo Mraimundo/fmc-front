@@ -57,7 +57,6 @@ const Form: React.FC<Props> = ({
 
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-    // Temporário // MAYCONN ID DO ESTABELECIMENTO
     if (
       await saveIndication({
         role_id: parseInt(data.role_select.value, 0),
@@ -85,7 +84,7 @@ const Form: React.FC<Props> = ({
           <FilialSelect
             name="subsidiary_select"
             inputRole="secondary"
-            establishmentId={1}
+            establishmentId={establishmentId}
             disabled={editing}
           />
           <RolesSelect

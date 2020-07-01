@@ -4,8 +4,12 @@ export const Container = styled.div`
   position: absolute;
   @media screen and (max-width: 720px) {
     position: relative;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-left: auto;
+
+    right: 0px !important;
+    bottom: 35px !important;
+    order: -1;
   }
 `;
 
@@ -36,5 +40,10 @@ export const Content = styled.div`
   }
   &:hover {
     animation: move 200ms ease infinite alternate;
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 50px;
+    height: 50px;
   }
 `;
