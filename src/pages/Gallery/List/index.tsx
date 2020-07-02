@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeContext } from 'styled-components';
-import Logo from 'components/shared/Logo';
 
 import getGalleryList from 'services/gallery/getGalleryList';
 import { Media } from 'services/gallery/interfaces';
@@ -88,7 +87,6 @@ const List: React.FC = () => {
   return (
     <ThemeContext.Provider value={theme}>
       <Container>
-        <Logo />
         <Content>
           <h3>Imagens</h3>
           <ImagesGrid gallery={images} />

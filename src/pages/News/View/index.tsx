@@ -8,7 +8,6 @@ import { News as INews } from 'services/news/interfaces';
 import News from 'components/News/View';
 import Grid from 'components/News/Grid';
 import { Button } from 'components/shared';
-import Logo from 'components/shared/Logo';
 
 import { Container, Content, Separator } from './styles';
 
@@ -49,7 +48,6 @@ const View: React.FC = () => {
 
   return (
     <Container>
-      <Logo />
       <Content>
         {news && <News news={news} />}
         <Separator />

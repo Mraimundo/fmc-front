@@ -26,7 +26,7 @@ const Item: React.FC<Props> = ({ menu, children }) => {
 
   return (
     <Container opened={opened} onClick={() => handleMenuClick(menu)}>
-      {menu.title}
+      <span>{menu.title}</span>
       {children}
     </Container>
   );

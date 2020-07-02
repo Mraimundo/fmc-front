@@ -20,7 +20,7 @@ export const Content = styled.div`
     justify-content: center;
     padding-top: 18px;
 
-    img + img {
+    a + img {
       display: none;
     }
   }

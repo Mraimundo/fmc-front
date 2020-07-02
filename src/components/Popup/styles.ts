@@ -13,9 +13,29 @@ export const Modal = styled(DefaultModal)`
 
 export const Container = styled.div`
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  >label {
+    margin-top: 5px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    input {
+      margin-right: 5px;
+    }
+  }
+
+  > button {
+    width: 110px;
+    height: 37px;
+    align-self: center;
+  }
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  color: #000;
+`;
 
 export const Close = styled.div`
   width: 100%;

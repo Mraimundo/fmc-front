@@ -6,10 +6,17 @@ interface ContainerProps {
 export const Container = styled.li<ContainerProps>`
   cursor: pointer;
 
+  > span {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   > ul {
     margin-left: 10px;
     max-height: 0;
     visibility: hidden;
+    margin-top: 5px;
   }
 
   ${({ opened }) =>

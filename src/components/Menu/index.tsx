@@ -28,7 +28,7 @@ const Menu: React.FC = () => {
   return menus && menus.length > 0 ? (
     build(menus)
   ) : (
-    <h1>Nenhum menu configurado</h1>
+    <></>
   );
 };
 

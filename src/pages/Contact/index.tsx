@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useToast } from 'context/ToastContext';
 import { Button } from 'components/shared';
-import Logo from 'components/shared/Logo';
 
 import { Container, Content, BoxTickets, TicketsGrid, Form } from './styles';
 
@@ -10,7 +9,6 @@ const Contact: React.FC = () => {
 
   return (
     <Container>
-      <Logo />
       <Content>
         <h3>Fale Conosco</h3>
         <Form />
