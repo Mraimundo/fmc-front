@@ -5,6 +5,7 @@ export const Container = styled.ul`
   display: flex;
   width: 100%;
   justify-content: space-around;
+  flex-wrap: wrap;
   li {
     color: #000;
   }
