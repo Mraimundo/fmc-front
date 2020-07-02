@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from 'pages/_layouts';
 import {
   RouteProps as DefaultRouteProps,
   Route as DefaultRoute,
@@ -23,7 +24,15 @@ const Route: React.FC<RouteProps> = ({
       {...rest}
       render={({ location }) =>
         isPrivate === signed ? (
-          <>{isPrivate ? <Component /> : <Component />}</>
+          <>
+            {isPrivate ? (
+              <Layout>
+                <Component />
+              </Layout>
+            ) : (
+              <Component />
+            )}
+          </>
         ) : (
           <Redirect
             to={{
@@ -31,8 +40,7 @@ const Route: React.FC<RouteProps> = ({
               state: { from: location },
             }}
           />
-        )
-      }
+        )}
     />
   );
 };

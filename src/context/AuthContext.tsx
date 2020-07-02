@@ -8,7 +8,6 @@ import React, {
 import numbersOnly from 'util/numbersOnly';
 import signInService from 'services/auth/signIn';
 import isTokenValid from 'services/auth/isTokenValid';
-import Layout from 'pages/_layouts';
 import isThereAnyRegulationToAccept from 'services/register/regulation/isThereAnyRegulationToAccept';
 
 import getLoggedParticipant from 'services/auth/getLoggedParticipant';
@@ -117,7 +116,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         updateParticipantData,
       }}
     >
-      {apiToken ? <Layout>{children}</Layout> : children}
+      {children}
     </AuthContext.Provider>
   );
 };

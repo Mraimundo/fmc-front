@@ -1,36 +1,23 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useAuth } from 'context/AuthContext';
 import { Button } from 'components/shared';
-import history from 'services/history';
+import Menu from 'components/Menu';
 
-import { Link } from 'react-router-dom';
 import { Container } from './styles';
 
 const Dashboard: React.FC = () => {
   const { participant, signOut } = useAuth();
 
-  const handleEditClick = useCallback(() => {
-    history.push('/edit');
-  }, []);
-
   return (
     <Container>
       <h3>Participant: {participant.name}</h3>
       <h3>cpf: {participant.cpf}</h3>
-      <Link to="dashboard2">dashboard2</Link>
+
       <Button buttonRole="primary" type="button" onClick={signOut}>
         Sair
       </Button>
-      <Button buttonRole="primary" type="button" onClick={handleEditClick}>
-        Editar Participante
-      </Button>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Link to="/indication">Indicação</Link>
-        <Link to="/news">Notícias</Link>
-        <Link to="/gallery">Galeria</Link>
-        <Link to="/regulation">Regulamentos</Link>
-        <Link to="/contact">Fale Conosco</Link>
-      </div>
+
+      <Menu />
     </Container>
   );
 };
