@@ -1,9 +1,13 @@
 import { format, parseISO } from 'date-fns';
 
-export const formatDate = (date: string, formatMask = 'dd/MM/yyyy') => {
+export const formatDate = (date: string | Date, formatMask = 'dd/MM/yyyy') => {
   if (!date) return '';
+  let dateToFormat = date;
+  if (typeof dateToFormat === 'string') {
+    dateToFormat = parseISO(dateToFormat);
+  }
 
-  return format(parseISO(date), formatMask);
+  return format(dateToFormat, formatMask);
 
   // return format(new Date(date), formatMask);
 };

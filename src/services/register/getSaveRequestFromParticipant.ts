@@ -1,5 +1,6 @@
 import numbersOnly from 'util/numbersOnly';
 import { Participant, Regulation } from 'services/auth/interfaces/Participant';
+import { formatDate } from 'util/datetime';
 
 interface SaveRequest {
   cpf: string;
@@ -29,6 +30,7 @@ interface SaveRequest {
   city: string;
   state_code: string;
   district: string;
+  birth_date: string;
 
   establishment_id: number;
   role_id: number;
@@ -37,6 +39,7 @@ interface SaveRequest {
 
 export default (participant: Participant): SaveRequest => {
   return {
+    birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
     upn: participant.upn,
     nick_name: participant.nick_name,

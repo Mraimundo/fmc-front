@@ -82,7 +82,7 @@ export default (
     case 'PARTICIPANTE':
       return Yup.object().shape({
         ...defaultValidations,
-        birth_date: Yup.date()
+        formatted_birth_date: Yup.date()
           .transform((t, v) => {
             const newValue = v.split('/');
             return new Date(`${newValue[1]}/${newValue[0]}/${newValue[2]}`);

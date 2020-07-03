@@ -54,7 +54,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
       <GenderSelect name="gender_select" inputRole={inputRole} />
 
       <Input
-        name="birth_date"
+        name="formatted_birth_date"
         icon={FiUser}
         label="Data de nascimento"
         inputRole={inputRole}

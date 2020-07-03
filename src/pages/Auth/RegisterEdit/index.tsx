@@ -46,7 +46,7 @@ const RegisterEdit: React.FC = () => {
 
         await save(request);
         addToast({
-          title: 'Cadastro realizado com sucesso!',
+          title: 'Cadastro alterado com sucesso!',
           type: 'success',
         });
         updateParticipantData();

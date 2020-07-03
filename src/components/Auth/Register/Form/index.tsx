@@ -5,6 +5,7 @@ import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import PasswordHelp from 'components/shared/PasswordHelp';
+import { formatDate } from 'util/datetime';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
 import getschemaValidations from './getSchemaValidations';
@@ -30,6 +31,7 @@ interface FormData extends Participant {
   education_level_select: { title: string; value: string } | null;
   gender_select: { title: string; value: string } | null;
   public_place_select: { title: string; value: string } | null;
+  formatted_birth_date: string;
 }
 
 const Form: React.FC<Props> = ({
@@ -48,6 +50,10 @@ const Form: React.FC<Props> = ({
     mode: 'onSubmit',
     defaultValues: {
       ...participant,
+      formatted_birth_date: participant.birth_date.replace(
+        /(\d{4})-(\d{2})-(\d{2}).*/,
+        '$3/$2/$1',
+      ),
       gender_select: participant.gender
         ? {
             value: participant.gender,
@@ -90,6 +96,7 @@ const Form: React.FC<Props> = ({
         ...data.address,
         public_place: data?.public_place_select?.value || '',
       },
+      birth_date: data.formatted_birth_date,
     });
     setLoading(false);
   });

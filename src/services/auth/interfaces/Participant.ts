@@ -43,7 +43,7 @@ export interface Participant {
   email: string;
   picture: string;
   cell_phone: string;
-  birth_date: Date;
+  birth_date: string;
   created: Date; // "2020-06-10T14:47:34-03:00";
   gender: string;
   area_code: string;
