@@ -1,7 +1,7 @@
 const isRepeatingNumber = (str: string): boolean => /^(\d)(\1){10}$/.test(str);
 
 export default (value: string): boolean => {
-  const cpf = value.replace(/\D/g, '').padStart(11, '0');
+  const cpf = value.replace(/\D/g, ''); // .padStart(11, '0');
 
   if (
     cpf === '' ||

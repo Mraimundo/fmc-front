@@ -54,7 +54,7 @@ export default (participant: Participant): SaveRequest => {
     rg_emitter_uf: participant.rg_emitter_uf,
     pis_nis: numbersOnly(participant.pis_nis),
     zip_code: numbersOnly(participant.address.zip_code),
-    public_place: participant.address.public_place || 'x',
+    public_place: participant.address.public_place,
     street: participant.address.street,
     number: participant.address.number,
     complement: participant.address.complement,

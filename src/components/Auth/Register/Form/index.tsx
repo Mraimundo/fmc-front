@@ -28,6 +28,8 @@ interface Props {
 interface FormData extends Participant {
   marital_status_select: { title: string; value: string } | null;
   education_level_select: { title: string; value: string } | null;
+  gender_select: { title: string; value: string } | null;
+  public_place_select: { title: string; value: string } | null;
 }
 
 const Form: React.FC<Props> = ({
@@ -46,6 +48,21 @@ const Form: React.FC<Props> = ({
     mode: 'onSubmit',
     defaultValues: {
       ...participant,
+      gender_select: participant.gender
+        ? {
+            value: participant.gender,
+            title:
+              participant.gender.toLowerCase() === 'm'
+                ? 'Masculino'
+                : 'Feminino',
+          }
+        : null,
+      public_place_select: participant.address.public_place
+        ? {
+            title: participant.address.public_place || '',
+            value: participant.address.public_place || '',
+          }
+        : null,
       marital_status_select: participant.marital_status
         ? {
             title: participant.marital_status || '',
@@ -68,6 +85,11 @@ const Form: React.FC<Props> = ({
       ...data,
       marital_status: data?.marital_status_select?.value || '',
       education_level: data?.education_level_select?.value || '',
+      gender: data?.gender_select?.value || '',
+      address: {
+        ...data.address,
+        public_place: data?.public_place_select?.value || '',
+      },
     });
     setLoading(false);
   });
@@ -96,14 +118,20 @@ const Form: React.FC<Props> = ({
           icon={FiUser}
           label="Nome completo*"
           inputRole={inputRole}
-          disabled={participant.profile === 'FMC'}
+          disabled={
+            participant.profile === 'FMC' ||
+            participant.profile === 'FOCALPOINT'
+          }
         />
         <Input
           name="email"
           icon={FiUser}
           label="Email*"
           inputRole={inputRole}
-          disabled={participant.profile === 'FMC'}
+          disabled={
+            participant.profile === 'FMC' ||
+            participant.profile === 'FOCALPOINT'
+          }
         />
         <Input
           name="cpf"

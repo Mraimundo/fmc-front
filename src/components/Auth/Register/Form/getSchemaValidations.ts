@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { IProfile } from 'config/constants';
 import validateCpf from 'util/validations/cpf';
+import validMobilePhone from 'util/validations/mobilePhone';
 import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
 
 const mandatoryMessage = 'Campo obrigatório';
@@ -13,7 +14,9 @@ const commomValidations = {
     .required(mandatoryMessage)
     .test('valid-cpf', 'Cpf inválido', validateCpf),
   area_code: Yup.string().required(mandatoryMessage),
-  cell_phone: Yup.string().required(mandatoryMessage),
+  cell_phone: Yup.string()
+    .required(mandatoryMessage)
+    .test('valid-mobile', 'Número inválido', validMobilePhone),
 };
 
 const passwordFields = (editing: boolean) => {
@@ -79,7 +82,6 @@ export default (
     case 'PARTICIPANTE':
       return Yup.object().shape({
         ...defaultValidations,
-        gender: Yup.string().required(mandatoryMessage),
         birth_date: Yup.date()
           .transform((t, v) => {
             const newValue = v.split('/');
@@ -96,6 +98,18 @@ export default (
         place_of_birth: Yup.string().required(mandatoryMessage),
         nationality: Yup.string().required(mandatoryMessage),
         marital_status_select: Yup.object()
+          .shape({
+            value: Yup.string().required(mandatoryMessage),
+          })
+          .typeError(mandatoryMessage)
+          .required(mandatoryMessage),
+        gender_select: Yup.object()
+          .shape({
+            value: Yup.string().required(mandatoryMessage),
+          })
+          .typeError(mandatoryMessage)
+          .required(mandatoryMessage),
+        public_place_select: Yup.object()
           .shape({
             value: Yup.string().required(mandatoryMessage),
           })

@@ -2,11 +2,15 @@ import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
 import { FiUser } from 'react-icons/fi';
+import numbersOnly from 'util/numbersOnly';
+import { useToast } from 'context/ToastContext';
 import {
   Input,
   Separator,
   GraduationSelect,
   MaritalStatusSelect,
+  GenderSelect,
+  PublicPlaceSelect,
 } from './styles';
 
 interface Props {
@@ -15,25 +19,39 @@ interface Props {
 
 const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
   const { setValue } = useFormContext();
+  const { addToast } = useToast();
 
   const handleCepBlur = useCallback(
     zipCode => {
-      getAddressInfo(zipCode).then(
-        ({ endereco, bairro, cidade, estado: { sigla } }) => {
+      getAddressInfo(zipCode).then(data => {
+        try {
+          const {
+            endereco,
+            bairro,
+            cidade,
+            estado: { sigla },
+          } = data;
           setValue('address.street', endereco);
           setValue('address.district', bairro);
           setValue('address.city', cidade);
           setValue('address.state_code', sigla);
-        },
-      );
+        } catch {
+          addToast({
+            title:
+              'Não encontrei o CEP inserido. Caso esteja correto forneça as informações do CEP manualmente.',
+            type: 'info',
+          });
+        }
+      });
     },
-    [setValue],
+    [setValue, addToast],
   );
 
   return (
     <>
       <Separator />
-      <Input name="gender" icon={FiUser} label="Gênero" inputRole={inputRole} />
+
+      <GenderSelect name="gender_select" inputRole={inputRole} />
 
       <Input
         name="birth_date"
@@ -61,7 +79,13 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <MaritalStatusSelect name="marital_status_select" inputRole={inputRole} />
 
-      <Input name="rg" icon={FiUser} label="RG" inputRole={inputRole} />
+      <Input
+        name="rg"
+        icon={FiUser}
+        label="RG"
+        inputRole={inputRole}
+        maxLength={10}
+      />
 
       <Input
         name="rg_emitter"
@@ -89,8 +113,12 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         icon={FiUser}
         label="CEP"
         inputRole={inputRole}
-        onBlur={e => handleCepBlur(e.target.value)}
+        onBlur={e => handleCepBlur(numbersOnly(e.target.value))}
+        pattern="XX.XXX-XXX"
+        numbersOnly
       />
+
+      <PublicPlaceSelect name="public_place_select" inputRole={inputRole} />
 
       <Input
         name="address.street"

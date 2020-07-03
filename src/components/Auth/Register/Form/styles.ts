@@ -5,8 +5,10 @@ import {
   PasswordInput as DefaultPasswordInput,
   Button as DefaultButton,
 } from 'components/shared';
-import GraduationLevelSelect from './GraduationLevelSelect';
-import MaritalSelect from './MaritalStatusSelect';
+import DefaultGraduationLevelSelect from './GraduationLevelSelect';
+import DefaultMaritalSelect from './MaritalStatusSelect';
+import DefaultGenderSelect from './GenderSelect';
+import DefaultPublicPlaceSelect from './PublicPlaceSelect';
 
 export const Avatar = styled(DefaultAvatar)`
   margin-top: 15px;
@@ -74,7 +76,7 @@ export const PasswordInput = styled(DefaultPasswordInput)`
   /*}*/
 `;
 
-export const GraduationSelect = styled(GraduationLevelSelect)`
+export const GraduationSelect = styled(DefaultGraduationLevelSelect)`
   margin-top: 15px;
   max-width: 350px;
 
@@ -85,7 +87,7 @@ export const GraduationSelect = styled(GraduationLevelSelect)`
   /*}*/
 `;
 
-export const MaritalStatusSelect = styled(MaritalSelect)`
+export const MaritalStatusSelect = styled(DefaultMaritalSelect)`
   margin-top: 15px;
   max-width: 350px;
 
@@ -94,6 +96,24 @@ export const MaritalStatusSelect = styled(MaritalSelect)`
     height: 40px;
   }
   /*}*/
+`;
+
+export const GenderSelect = styled(DefaultGenderSelect)`
+  margin-top: 15px;
+  max-width: 350px;
+
+  ._inputContainer {
+    height: 40px;
+  }
+`;
+
+export const PublicPlaceSelect = styled(DefaultPublicPlaceSelect)`
+  margin-top: 15px;
+  max-width: 350px;
+
+  ._inputContainer {
+    height: 40px;
+  }
 `;
 
 export const Button = styled(DefaultButton)`
