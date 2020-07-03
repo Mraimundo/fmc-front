@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import fontFaces from './font/font-faces';
 import { FONTS } from './font/globals';
+import 'react-image-lightbox/style.css';
 
 export default createGlobalStyle`
   ${fontFaces}

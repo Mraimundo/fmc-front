@@ -90,33 +90,40 @@ const List: React.FC = () => {
         <Content>
           <h3>Imagens</h3>
           <ImagesGrid gallery={images} />
-          <Button
-            buttonRole="primary"
-            type="button"
-            onClick={handleLoadMoreImages}
-          >
-            Carregar mais imagens
-          </Button>
+          {imagesPagination.current_page !== imagesPagination.last_page && (
+            <Button
+              buttonRole="primary"
+              type="button"
+              onClick={handleLoadMoreImages}
+            >
+              Carregar mais imagens
+            </Button>
+          )}
           <Separator />
           <h3>Vídeos</h3>
           <VideosGrid gallery={videos} />
-          <Button
-            buttonRole="primary"
-            type="button"
-            onClick={handleLoadMoreVideos}
-          >
-            Carregar mais vídeos
-          </Button>
+          {videosPagination.current_page !== videosPagination.last_page && (
+            <Button
+              buttonRole="primary"
+              type="button"
+              onClick={handleLoadMoreVideos}
+            >
+              Carregar mais vídeos
+            </Button>
+          )}
           <Separator />
           <h3>Documentos</h3>
           <DocumentsGrid gallery={documents} />
-          <Button
-            buttonRole="primary"
-            type="button"
-            onClick={handleLoadMoreDocuments}
-          >
-            Carregar mais documentos
-          </Button>
+          {documentsPagination.current_page !==
+            documentsPagination.last_page && (
+            <Button
+              buttonRole="primary"
+              type="button"
+              onClick={handleLoadMoreDocuments}
+            >
+              Carregar mais documentos
+            </Button>
+          )}
         </Content>
       </Container>
     </ThemeContext.Provider>

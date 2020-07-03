@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import DefaultModal from 'components/shared/Modal';
 import { useForm, FormContext } from 'react-hook-form';
 import { Option } from 'components/shared/Select';
 
@@ -25,6 +24,7 @@ import {
   TextArea,
   Button,
   AttachFile,
+  DefaultModal,
 } from './styles';
 
 interface ModalProps {

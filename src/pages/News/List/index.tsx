@@ -37,9 +37,11 @@ const News: React.FC = () => {
         <Content>
           <h3>Notícias</h3>
           <Grid news={news} />
-          <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
-            Carregar mais notícias
-          </Button>
+          {pagination.current_page !== pagination.last_page && (
+            <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
+              Carregar mais notícias
+            </Button>
+          )}
         </Content>
       </Container>
     </ThemeContext.Provider>

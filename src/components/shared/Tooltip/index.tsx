@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import TooltipMaterial from '@material-ui/core/Tooltip';
 
@@ -10,29 +11,31 @@ interface TooltipProps {
   type: 'success' | 'error' | 'info';
 }
 
-const HtmlTooltip = withStyles(theme => ({
-  tooltip: {
-    backgroundColor: 'transparent',
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    border: 'none',
-  },
-}))(TooltipMaterial);
-
 const Tooltip: React.FC<TooltipProps> = ({
   title,
   children,
   className,
   type,
-}) => (
-  <Container className={className}>
-    <HtmlTooltip
-      enterTouchDelay={0}
-      title={<ContentTooltip type={type}>{title}</ContentTooltip>}
-    >
-      <span>{children}</span>
-    </HtmlTooltip>
-  </Container>
-);
+}) => {
+  const styledTheme = useContext(ThemeContext);
+
+  const HtmlTooltip = withStyles(theme => ({
+    tooltip: {
+      backgroundColor: styledTheme.tooltip[type].backgroundColor,
+      fontSize: theme.typography.pxToRem(12),
+      border: 'none',
+    },
+  }))(TooltipMaterial);
+  return (
+    <Container className={className}>
+      <HtmlTooltip
+        enterTouchDelay={0}
+        title={<ContentTooltip type={type}>{title}</ContentTooltip>}
+      >
+        <span>{children}</span>
+      </HtmlTooltip>
+    </Container>
+  );
+};
 
 export default Tooltip;

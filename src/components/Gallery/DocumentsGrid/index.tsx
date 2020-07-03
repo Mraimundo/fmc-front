@@ -31,7 +31,7 @@ const DocumentsGrid: React.FC<Props> = ({ gallery }) => {
             <span>{`${item.date}`} </span>
             <p>{item.description}</p>
           </div>
-          <a href={item.url} download target="_blank" rel="noreferrer">
+          <a href={item.download_url} download>
             <FiDownload size={28} />
           </a>
         </MiniBox>

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useForm, FormContext } from 'react-hook-form';
-import DefaultModal from 'components/shared/Modal';
 import { Input, Button } from 'components/shared';
 import * as Yup from 'yup';
 import validateCpf from 'util/validations/cpf';
 
 import { FiArchive } from 'react-icons/fi';
 
-import { Container, Title } from './styles';
+import { Container, Title, DefaultModal } from './styles';
 
 interface ModalProps {
   isOpen: boolean;

@@ -112,6 +112,7 @@ const Form: React.FC<Props> = ({
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
           inputRole={inputRole}
+          disabled={participant.cpf !== ''}
         />
         <BoxPhone>
           <Input

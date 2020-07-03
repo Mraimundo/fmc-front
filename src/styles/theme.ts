@@ -185,7 +185,7 @@ export default {
   },
   news: {
     titleColor: '#193b4e',
-    summaryColor: '#000',
+    summaryColor: '#193b4e',
     dateColor: '#000',
   },
 };

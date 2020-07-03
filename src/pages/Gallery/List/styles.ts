@@ -22,6 +22,14 @@ export const Content = styled.div`
     height: 45px;
     margin: 25px 0;
     align-self: center;
+    font-weight: bold;
+  }
+
+  > h3 {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-weight: bolder;
+    margin-left: 35px;
+    margin-bottom: 15px;
   }
 
   @media screen and (max-width: 720px) {
@@ -33,4 +41,5 @@ export const Separator = styled.div`
   width: 100%;
   border-top: 2px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
+  margin-bottom: 25px;
 `;

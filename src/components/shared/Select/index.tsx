@@ -158,6 +158,8 @@ const Select: React.FC<SelectProps> = ({
           <UiAutocomplete<Option>
             disabled={disabled}
             open={open}
+            noOptionsText=""
+            loadingText="Carregando"
             onOpen={() => {
               setOpen(true);
             }}

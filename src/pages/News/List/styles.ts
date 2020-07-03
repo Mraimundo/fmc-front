@@ -24,6 +24,13 @@ export const Content = styled.div`
     align-self: center;
   }
 
+  > h3 {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-weight: bolder;
+    margin-left: 35px;
+    margin-bottom: 15px;
+  }
+
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
   }

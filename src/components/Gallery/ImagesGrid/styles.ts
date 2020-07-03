@@ -25,6 +25,7 @@ export const MiniBox = styled.div`
     max-width: 100%;
     height: 165px;
     object-fit: cover;
+    cursor: pointer;
   }
 
   span {

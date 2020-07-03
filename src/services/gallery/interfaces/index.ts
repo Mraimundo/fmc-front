@@ -18,4 +18,5 @@ export interface Media {
   cover_picture: string;
   tags: Tag[];
   meta: Meta;
+  title: string;
 }

@@ -4,6 +4,7 @@ import {
   Input as DefaultInput,
   TextArea as DefaultTextArea,
 } from 'components/shared';
+import Modal from 'components/shared/Modal';
 import Select from '../PublicSubjectsSelect';
 
 export const Container = styled.div`
@@ -20,6 +21,7 @@ export const Container = styled.div`
 
   @media screen and (max-width: 520px) {
     width: 320px;
+    padding: 20px 10px;
   }
 
   form {
@@ -83,5 +85,11 @@ export const SubjectSelect = styled(Select)`
 export const TextArea = styled(DefaultTextArea)`
   ._inputContainer {
     height: 90px;
+  }
+`;
+
+export const DefaultModal = styled(Modal)`
+  ._modalContainer {
+    padding: 0;
   }
 `;

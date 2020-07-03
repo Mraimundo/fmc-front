@@ -13,7 +13,7 @@ export default (data: Media[]): Response[] => {
   return data.map(item => ({
     id: item.id,
     url: item.url,
-    title: 'Título a ser implementado no back',
+    title: item.title,
     description: item.description,
     date: formatDate(item.created),
   }));

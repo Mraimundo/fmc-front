@@ -60,9 +60,8 @@ export const MiniBox = styled(Link)`
     }
   }
 
-  transition: transform 0.2s, background 0.2s;
+  transition: background 0.2s;
   &:hover {
     background: rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
   }
 `;

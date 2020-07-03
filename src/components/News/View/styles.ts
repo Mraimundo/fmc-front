@@ -28,6 +28,8 @@ export const Container = styled.div`
     font-size: 12px;
     color: ${({ theme }) => theme.news.summaryColor};
     margin-top: 20px;
+    margin-bottom: 20px;
+    opacity: 0.7;
   }
 `;
 
