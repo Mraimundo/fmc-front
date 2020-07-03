@@ -31,15 +31,16 @@ const Popup: React.FC<Props> = ({ isOpen, onRequestClose, popup }) => {
           </button>
         </Close>
         <Content>{parser(popup.body)}</Content>
-        <label>
-          <input
-            type="checkbox"
-            checked={markAsRead}
-            onChange={() => setMarkAsRead(e => !e)}
-          />
-          Não quero mais ver isso
-        </label>
-
+        {popup.canMarkAsRead && (
+          <label>
+            <input
+              type="checkbox"
+              checked={markAsRead}
+              onChange={() => setMarkAsRead(e => !e)}
+            />
+            Não quero mais ver isso
+          </label>
+        )}
         <Button type="button" buttonRole="primary" onClick={handleClose}>
           Ok
         </Button>

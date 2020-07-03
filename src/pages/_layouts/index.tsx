@@ -12,19 +12,24 @@ import Logo from 'components/shared/Logo';
 
 import { Container } from './styles';
 
+interface PopupTest extends Popup {
+  opened: boolean;
+}
+
 const PATHS_TO_NOT_SHOW_LOGO = ['/edit'];
 
 const Dashboard: React.FC = ({ children }) => {
   const { shouldShowRegulationsModal } = useAuth();
   const { menuSelected } = useMenu();
-  const [popups, setPopups] = useState<Popup[]>([]);
-  const [popOpened, setPopOpened] = useState(true);
+  const [popups, setPopups] = useState<PopupTest[]>([]);
   const [showLogo, setShowLogo] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
     if (menuSelected && pathname === menuSelected.address) {
-      getPopups(menuSelected.address).then(data => setPopups(data));
+      getPopups(menuSelected.address).then(data => {
+        setPopups(data.map(item => ({ ...item, opened: true })));
+      });
     }
   }, [menuSelected, pathname]);
 
@@ -44,9 +49,16 @@ const Dashboard: React.FC = ({ children }) => {
         <Pop
           key={`popup-${item.id}`}
           popup={item}
-          isOpen={popOpened && !shouldShowRegulationsModal}
+          isOpen={item.opened && !shouldShowRegulationsModal}
           onRequestClose={() => {
-            setPopOpened(false);
+            setPopups(e =>
+              e.map(i => {
+                if (i.id === item.id) {
+                  i.opened = false;
+                }
+                return i;
+              }),
+            );
           }}
         />
       ))}
