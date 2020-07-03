@@ -6,15 +6,12 @@ import store from 'state/store';
 import theme from 'styles/theme';
 import { AuthProvider } from './AuthContext';
 import { ToastProvider } from './ToastContext';
-import { MenuProvider } from './MenuContext';
 
 const AppProvider: React.FC = ({ children }) => (
   <Provider store={store}>
     <ThemeContext.Provider value={theme}>
       <ToastProvider>
-        <AuthProvider>
-          <MenuProvider>{children}</MenuProvider>
-        </AuthProvider>
+        <AuthProvider>{children}</AuthProvider>
       </ToastProvider>
     </ThemeContext.Provider>
   </Provider>

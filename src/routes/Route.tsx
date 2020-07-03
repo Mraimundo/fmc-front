@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { useAuth } from 'context/AuthContext';
+import { MenuProvider } from 'context/MenuContext';
 
 interface RouteProps extends DefaultRouteProps {
   isPrivate?: boolean;
@@ -26,9 +27,11 @@ const Route: React.FC<RouteProps> = ({
         isPrivate === signed ? (
           <>
             {isPrivate ? (
-              <Layout>
-                <Component />
-              </Layout>
+              <MenuProvider>
+                <Layout>
+                  <Component />
+                </Layout>
+              </MenuProvider>
             ) : (
               <Component />
             )}
