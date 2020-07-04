@@ -63,7 +63,7 @@ const List: React.FC = () => {
     getGalleryList({
       page: videosPagination.current_page + 1,
       limit: 3,
-      type: 'image',
+      type: 'video',
     }).then(({ data, pagination }) => {
       setVideosPagination(pagination);
       setVideos([...videos, ...data]);
@@ -77,7 +77,7 @@ const List: React.FC = () => {
     getGalleryList({
       page: documentsPagination.current_page + 1,
       limit: 4,
-      type: 'image',
+      type: 'document',
     }).then(({ data, pagination }) => {
       setDocumentsPagination(pagination);
       setDocuments([...documents, ...data]);
