@@ -45,7 +45,10 @@ const Accordion: React.FC<Props> = ({
 
   return (
     <Container open={internalOpen} type={type} className={className}>
-      <ListValuesTitleWrapper onClick={toggleAccordion}>
+      <ListValuesTitleWrapper
+        onClick={toggleAccordion}
+        className="_listWrapperContainer"
+      >
         <ListValuesTitle open={internalOpen} type={type}>
           <h3>{title}</h3>
         </ListValuesTitle>
