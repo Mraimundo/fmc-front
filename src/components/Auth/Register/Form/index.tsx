@@ -5,7 +5,6 @@ import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { formatDate } from 'util/datetime';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
 import getschemaValidations from './getSchemaValidations';

@@ -1,4 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Contact, Message } from 'services/contact/connected/interfaces';
+import transformer, {
+  Response as GridDataItem,
+} from 'services/contact/connected/transformers/toContactGridListTransformer';
+import getMessages from 'services/contact/connected/getMessagesFromContact';
+import transformerMessages, {
+  Response as MessageItem,
+} from 'services/contact/connected/transformers/toMessagesListTransformer';
 
 import { FiClock, FiCheckCircle, FiMessageCircle } from 'react-icons/fi';
 
@@ -8,92 +16,39 @@ import { Container, GridHeader, TicketGrid } from './styles';
 
 interface Props {
   className?: string;
+  contacts: Contact[];
 }
 
-const TicketsGrid: React.FC<Props> = ({ className }) => {
-  const [ticketSelected, setTicketSelected] = useState<{ id: number } | null>(
-    null,
+const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
+  const [loadingMessages, setLoadingMessages] = useState(false);
+  const [gridList, setGridList] = useState<GridDataItem[]>([]);
+  const [ticketSelected, setTicketSelected] = useState<Contact | undefined>(
+    undefined,
   );
+  const [messages, setMessages] = useState<MessageItem[]>([]);
 
-  interface Message {
-    date: string;
-    time: string;
-    type: 'r' | 'p';
-    name: string;
-    message: string;
-  }
-
-  const messages: Message[] = [
-    {
-      date: '02/04/2020',
-      time: '14h00',
-      type: 'p',
-      name: 'Meu nome',
-      message: 'Preciso de ajuda para incluir um participante',
-    },
-    {
-      date: '02/04/2020',
-      time: '14h00',
-      type: 'p',
-      name: 'Meu nome',
-      message: 'Preciso de ajuda para incluir um participante',
-    },
-    {
-      date: '02/04/2020',
-      time: '14h00',
-      type: 'p',
-      name: 'Meu nome',
-      message: 'Preciso de ajuda para incluir um participante',
-    },
-    {
-      date: '02/04/2020',
-      time: '14h00',
-      type: 'p',
-      name: 'Meu nome',
-      message: 'Preciso de ajuda para incluir um participante',
-    },
-    {
-      date: '03/04/2020',
-      time: '18h00',
-      type: 'r',
-      name: 'Atendente X',
-      message: 'Certo, qual o problema que você está tendo',
-    },
-  ];
-  const test = [
-    {
-      id: 1,
-      date: '02/04/2020',
-      subject: 'Dúvidas di Focal Point',
-      status: 'Em análise',
-      messages,
-    },
-    {
-      id: 2,
-      date: '02/04/2020',
-      subject: 'Dúvidas di Focal Point',
-      status: 'Em análise',
-      messages,
-    },
-    {
-      id: 3,
-      date: '02/04/2020',
-      subject: 'Dúvidas di Focal Point',
-      status: 'Em análise',
-      messages,
-    },
-  ];
+  useEffect(() => {
+    setGridList(transformer(contacts));
+  }, [contacts]);
 
   const handleTicketClick = useCallback(
-    (ticket: { id: number }) => {
-      if (ticket.id === ticketSelected?.id) {
-        setTicketSelected(null);
-        return;
-      }
-      setTicketSelected({ id: ticket.id });
+    ({ id }: Contact) => {
+      setTicketSelected(contacts.find(item => item.id === id));
     },
-    [ticketSelected],
+    [contacts],
   );
+
+  useEffect(() => {
+    if (!ticketSelected) return;
+    const loadMessages = async () => {
+      setLoadingMessages(true);
+      const data = await getMessages(ticketSelected.id);
+      setMessages(transformerMessages(data));
+      setLoadingMessages(false);
+    };
+
+    loadMessages();
+  }, [ticketSelected]);
 
   const handleSendMessage = useCallback((message: string) => {
     console.log(message);
@@ -107,9 +62,9 @@ const TicketsGrid: React.FC<Props> = ({ className }) => {
         <span>Status</span>
         <span>Respostas</span>
       </GridHeader>
-      {test.map(item => (
+      {gridList.map(item => (
         <TicketGrid
-          key={`${item.date}-${item.subject}`}
+          key={`contact-list-${item.id}`}
           opened={ticketSelected?.id === item.id}
         >
           <header onClick={() => handleTicketClick(item)}>

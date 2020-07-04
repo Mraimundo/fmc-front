@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'components/shared/Select';
 import { FiMessageSquare } from 'react-icons/fi';
-import { getPrivateSubjectsForSelect } from 'services/contact/privateSubjects';
+import { getPrivateSubjectsForSelect } from 'services/contact/connected/privateSubjects';
 
 interface Props {
   name: string;

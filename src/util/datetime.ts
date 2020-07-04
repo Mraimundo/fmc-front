@@ -12,10 +12,15 @@ export const formatDate = (date: string | Date, formatMask = 'dd/MM/yyyy') => {
   // return format(new Date(date), formatMask);
 };
 
-export const extractHourFromDate = (date: string) => {
+export const extractHourFromDate = (date: string | Date) => {
   if (!date) return '';
 
-  return format(new Date(date), 'HH:mm');
+  let dateToFormat = date;
+  if (typeof dateToFormat === 'string') {
+    dateToFormat = parseISO(dateToFormat);
+  }
+
+  return format(dateToFormat, 'HH:mm');
 };
 
 export const ptMonths = [

@@ -11,7 +11,7 @@ import {
   FiArchive,
   FiMessageCircle,
 } from 'react-icons/fi';
-import openTicket from 'services/contact/openTicket';
+import openTicket from 'services/contact/disconnected/openTicket';
 
 import schemaValidation from './schemaValidation';
 

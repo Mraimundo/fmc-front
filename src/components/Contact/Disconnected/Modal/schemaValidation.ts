@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import validateCpf from 'util/validations/cpf';
+import validMobilePhone from 'util/validations/mobilePhone';
 
 export default Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
@@ -7,7 +8,9 @@ export default Yup.object().shape({
     .required('Cpf é obrigatório')
     .test('valid-cpf', 'Cpf inválido', validateCpf),
   email: Yup.string().email('Email inválido').required('Email é obrigatório'),
-  dddMobile: Yup.string(),
+  dddMobile: Yup.string()
+    .required('Número é obrigatório')
+    .test('valid-mobile', 'Número inválido', validMobilePhone),
   mobile: Yup.string(),
   subject: Yup.object().shape({
     value: Yup.string().required('Assunto é obrigatório'),

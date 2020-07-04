@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useToast } from 'context/ToastContext';
-import { Button } from 'components/shared';
+import React from 'react';
+import openTicket from 'services/contact/connected/openTicket';
 
 import { Container, Content, BoxTickets, TicketsGrid, Form } from './styles';
 
 const Contact: React.FC = () => {
-  const { addToast } = useToast();
-
   return (
     <Container>
       <Content>
         <h3>Fale Conosco</h3>
-        <Form />
+        <Form openTicket={openTicket} />
         <BoxTickets>
           <h3>Meus chamados</h3>
           <TicketsGrid />

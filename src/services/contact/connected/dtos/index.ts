@@ -1,4 +1,12 @@
 export interface CreateTicketDTO {
-  subject_id: number;
-  category_id: number;
+  subjectId: number;
+  categoryId: number;
+  message: string;
+  fileUrl: string;
+}
+
+export interface SendMessageDTO {
+  message: string;
+  fileUrl: string;
+  contactId: number;
 }

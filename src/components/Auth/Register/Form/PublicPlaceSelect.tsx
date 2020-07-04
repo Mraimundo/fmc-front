@@ -36,7 +36,7 @@ const PublicPlaceSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Logradouro"
+      label="Tipo de Logradouro"
       icon={FaAddressCard}
       loadItems={loadItems}
       className={className}
