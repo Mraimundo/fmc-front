@@ -4,7 +4,7 @@ import { Thead, Tr, Th } from 'react-super-responsive-table';
 export interface Header {
   column: string;
   dataValue: string;
-  fn?(value: string): React.ReactNode;
+  fn?(value: string | Record<string, any>): React.ReactNode;
 }
 
 interface Props {

@@ -34,10 +34,11 @@ export default ({
   },
   {
     column: ' ',
-    dataValue: 'id',
-    fn: (id: string) => (
+    dataValue: 'personal',
+    fn: (personalData: { id: number; status: number }) => (
       <Actions
-        id={parseInt(id, 0)}
+        id={personalData.id}
+        personalData={personalData}
         edit={edit}
         resendIndication={resendIndicationEmail}
         inactiveParticipantIndication={inactivaParticipantIndication}

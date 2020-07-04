@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from 'context/AuthContext';
 import { Establishment } from 'services/auth/getEstablishments';
 import { FiCircle, FiCheckCircle } from 'react-icons/fi';
 
@@ -18,6 +19,7 @@ const Establishments: React.FC<Props> = ({
   value,
 }) => {
   const [opened, setOpened] = useState(false);
+  const { participant } = useAuth();
 
   return (
     <Container
@@ -25,7 +27,7 @@ const Establishments: React.FC<Props> = ({
       opened={opened}
       onClick={() => setOpened(!opened)}
     >
-      <span>(Alterar revenda)</span>
+      <span>(Alterar)</span>
       <div>
         {establishments.map(item => (
           <h4 onClick={() => setValue(item)}>

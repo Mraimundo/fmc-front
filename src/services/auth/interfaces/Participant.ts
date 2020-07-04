@@ -22,6 +22,7 @@ interface Establishment {
   id: number;
   name: string;
   cnpj: string;
+  type_name: 'Revenda' | 'Cooperativa';
 }
 
 interface Subsidiary {

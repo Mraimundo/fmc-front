@@ -14,6 +14,10 @@ export interface ParticipantIndicationTableData {
   email: string;
   indicatedDate: string;
   status: string;
+  personal: {
+    id: number;
+    status: number;
+  };
 }
 
 export default (
@@ -27,5 +31,9 @@ export default (
     email: item.participant.email,
     indicatedDate: formatDate(item.created),
     status: status(item.participant.status),
+    personal: {
+      id: item.id,
+      status: item.participant.status,
+    },
   }));
 };

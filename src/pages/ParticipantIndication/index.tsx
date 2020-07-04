@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import produce from 'immer';
 
+import { useAuth } from 'context/AuthContext';
 import { INACTIVE, PRECHARGE } from 'config/constants/vendavallStatus';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
@@ -43,6 +44,7 @@ const ParticipantIndication: React.FC = () => {
   ] = useState<Establishment | null>(null);
 
   const { addToast } = useToast();
+  const { participant } = useAuth();
 
   const filter = useCallback(
     async (establishmentId, roleId = 0, subsidiaryId = 0) => {
@@ -174,11 +176,6 @@ const ParticipantIndication: React.FC = () => {
 
   useEffect(() => {
     if (establishmentSelected) {
-      getIndicationTeamDetails(
-        establishmentSelected?.id,
-      ).then(({ active_percentage }) =>
-        setActivePercentage(Math.ceil(active_percentage)),
-      );
       setRefresh(true);
     }
   }, [establishmentSelected]);
@@ -193,6 +190,11 @@ const ParticipantIndication: React.FC = () => {
     if (!establishmentSelected) return;
     if (refresh) {
       filter(establishmentSelected.id);
+      getIndicationTeamDetails(
+        establishmentSelected.id,
+      ).then(({ active_percentage }) =>
+        setActivePercentage(Math.ceil(active_percentage)),
+      );
       setRefresh(false);
     }
   }, [refresh, filter, establishmentSelected]);
@@ -207,6 +209,7 @@ const ParticipantIndication: React.FC = () => {
   useEffect(() => {
     if (!formOpened) {
       setIndicationDataEdit(undefined);
+      setEditing(false);
     }
   }, [formOpened]);
 
@@ -215,7 +218,8 @@ const ParticipantIndication: React.FC = () => {
       <Content>
         <h3>
           Indique um participante
-          {establishmentSelected && ` na revenda ${establishmentSelected.name}`}
+          {establishmentSelected &&
+            ` na ${participant.establishment?.type_name} ${establishmentSelected.name}`}
           {establishments.length > 1 && (
             <Establishments
               establishments={establishments}
