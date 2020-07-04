@@ -6,8 +6,9 @@ export interface Response {
   date: string;
   time: string;
   type: 'r' | 'p';
-  responsibleName: string;
+  name: string;
   fileUrl: string;
+  message: string;
 }
 
 export default (data: Message[]): Response[] => {
@@ -16,7 +17,8 @@ export default (data: Message[]): Response[] => {
     date: formatDate(item.created),
     time: extractHourFromDate(item.created),
     type: item.type,
-    responsibleName: item.resposible_name,
+    name: item.resposible_name,
     fileUrl: item.file,
+    message: item.text,
   }));
 };

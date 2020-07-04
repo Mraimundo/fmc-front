@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
+import { SendMessageDTO } from 'services/contact/connected/dtos';
 
 import { useForm, FormContext } from 'react-hook-form';
 import { useToast } from 'context/ToastContext';
@@ -14,10 +15,11 @@ interface FormData {
 }
 
 interface Props {
-  sendMessage(message: string): Promise<void> | void;
+  sendMessage(data: SendMessageDTO): Promise<{ message: string }>;
+  contactId: number;
 }
 
-const Form: React.FC<Props> = ({ sendMessage }) => {
+const Form: React.FC<Props> = ({ sendMessage, contactId }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
 
@@ -31,11 +33,20 @@ const Form: React.FC<Props> = ({ sendMessage }) => {
     mode: 'onSubmit',
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
     try {
-      await sendMessage(data.message);
+      const { message } = await sendMessage({
+        contactId,
+        fileUrl: '',
+        message: data.message,
+      });
+      reset();
+      addToast({
+        title: message,
+        type: 'success',
+      });
     } catch (e) {
       addToast({
         title: e.response?.data?.message || 'Falha ao enviar mensagem',

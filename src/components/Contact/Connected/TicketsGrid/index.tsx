@@ -1,14 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+
+import { SendMessageDTO } from 'services/contact/connected/dtos';
 import { Contact, Message } from 'services/contact/connected/interfaces';
 import transformer, {
   Response as GridDataItem,
+  StatusText,
 } from 'services/contact/connected/transformers/toContactGridListTransformer';
 import getMessages from 'services/contact/connected/getMessagesFromContact';
 import transformerMessages, {
   Response as MessageItem,
 } from 'services/contact/connected/transformers/toMessagesListTransformer';
+import sendMessage from 'services/contact/connected/sendMessage';
 
-import { FiClock, FiCheckCircle, FiMessageCircle } from 'react-icons/fi';
+import {
+  FiClock,
+  FiCheckCircle,
+  FiSlash,
+  FiMessageCircle,
+} from 'react-icons/fi';
 
 import Form from './Form';
 import Messages from './Messages';
@@ -27,32 +36,53 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
   );
   const [messages, setMessages] = useState<MessageItem[]>([]);
 
+  const getIcon = useCallback((status: StatusText) => {
+    switch (status) {
+      case 'pending':
+        return <FiClock size={26} />;
+      case 'answered':
+        return <FiCheckCircle size={26} color="green" />;
+      case 'closed':
+        return <FiSlash size={26} color="#e63027" />;
+      default:
+        return <FiClock size={26} />;
+    }
+  }, []);
+
   useEffect(() => {
     setGridList(transformer(contacts));
   }, [contacts]);
 
   const handleTicketClick = useCallback(
-    ({ id }: Contact) => {
-      setTicketSelected(contacts.find(item => item.id === id));
+    ({ id }: GridDataItem) => {
+      setTicketSelected(ticket =>
+        ticket?.id === id ? undefined : contacts.find(item => item.id === id),
+      );
     },
     [contacts],
   );
+
+  const handleSendMessage = useCallback(async (data: SendMessageDTO) => {
+    const result = await sendMessage(data);
+    const newMessages = await getMessages(data.contactId);
+    setMessages(transformerMessages(newMessages));
+    return result;
+  }, []);
 
   useEffect(() => {
     if (!ticketSelected) return;
     const loadMessages = async () => {
       setLoadingMessages(true);
-      const data = await getMessages(ticketSelected.id);
-      setMessages(transformerMessages(data));
-      setLoadingMessages(false);
+      setTimeout(() => {
+        getMessages(ticketSelected.id).then(data => {
+          setMessages(transformerMessages(data));
+          setLoadingMessages(false);
+        });
+      }, 1000);
     };
 
     loadMessages();
   }, [ticketSelected]);
-
-  const handleSendMessage = useCallback((message: string) => {
-    console.log(message);
-  }, []);
 
   return (
     <Container className={className}>
@@ -69,17 +99,15 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
         >
           <header onClick={() => handleTicketClick(item)}>
             <span>{item.date}</span>
-            <h4>{item.subject}</h4>
-            <div>
-              <FiClock size={26} />
-            </div>
+            <h4>{item.category}</h4>
+            <div>{getIcon(item.statusText)}</div>
             <div>
               <FiMessageCircle size={26} />
             </div>
           </header>
           <div className="_contentMessage">
-            <Messages messages={item.messages} />
-            <Form sendMessage={handleSendMessage} />
+            <Messages messages={messages} loading={loadingMessages} />
+            <Form contactId={item.id} sendMessage={handleSendMessage} />
           </div>
         </TicketGrid>
       ))}
