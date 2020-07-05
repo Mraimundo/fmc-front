@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 
 import store from 'state/store';
-import theme from 'styles/theme';
+import { disconnectedTheme } from 'styles/theme';
 import { AuthProvider } from './AuthContext';
 import { ToastProvider } from './ToastContext';
 
 const AppProvider: React.FC = ({ children }) => (
   <Provider store={store}>
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={disconnectedTheme}>
       <ToastProvider>
         <AuthProvider>{children}</AuthProvider>
       </ToastProvider>

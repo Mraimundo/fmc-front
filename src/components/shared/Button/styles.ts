@@ -15,7 +15,8 @@ export const Container = styled.button<ContainerProps>`
   padding: 0 16px;
   width: 100%;
   color: ${({ theme, buttonRole }) => theme.button[buttonRole].fontColor};
-  font-weight: 500;
+  font-weight: bold;
+  font-size: 16px;
   margin-top: 16px;
   display: flex;
   justify-content: center;

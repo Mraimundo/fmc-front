@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: grid;
@@ -29,20 +28,20 @@ export const MiniBox = styled.div`
 
   span {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.dateColor};
+    color: ${({ theme }) => theme.font.color.secondary};
   }
 
   h3 {
     font-size: 16px;
     font-weight: bolder;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 
   p {
     font-size: 14px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 

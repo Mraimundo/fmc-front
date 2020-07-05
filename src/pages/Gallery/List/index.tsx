@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ThemeContext } from 'styled-components';
 
 import getGalleryList from 'services/gallery/getGalleryList';
 import { Media } from 'services/gallery/interfaces';
@@ -8,8 +7,6 @@ import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { ImagesGrid, VideosGrid, DocumentsGrid } from 'components/Gallery';
 import { Button } from 'components/shared';
 import { Container, Content, Separator } from './styles';
-
-import theme from '../theme';
 
 const List: React.FC = () => {
   const [images, setImages] = useState<Media[]>([]);
@@ -85,48 +82,45 @@ const List: React.FC = () => {
   }, [documents, documentsPagination]);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <Container>
-        <Content>
-          <h3>Imagens</h3>
-          <ImagesGrid gallery={images} />
-          {imagesPagination.current_page !== imagesPagination.last_page && (
-            <Button
-              buttonRole="primary"
-              type="button"
-              onClick={handleLoadMoreImages}
-            >
-              Carregar mais imagens
-            </Button>
-          )}
-          <Separator />
-          <h3>Vídeos</h3>
-          <VideosGrid gallery={videos} />
-          {videosPagination.current_page !== videosPagination.last_page && (
-            <Button
-              buttonRole="primary"
-              type="button"
-              onClick={handleLoadMoreVideos}
-            >
-              Carregar mais vídeos
-            </Button>
-          )}
-          <Separator />
-          <h3>Documentos</h3>
-          <DocumentsGrid gallery={documents} />
-          {documentsPagination.current_page !==
-            documentsPagination.last_page && (
-            <Button
-              buttonRole="primary"
-              type="button"
-              onClick={handleLoadMoreDocuments}
-            >
-              Carregar mais documentos
-            </Button>
-          )}
-        </Content>
-      </Container>
-    </ThemeContext.Provider>
+    <Container>
+      <Content>
+        <h3>Imagens</h3>
+        <ImagesGrid gallery={images} />
+        {imagesPagination.current_page !== imagesPagination.last_page && (
+          <Button
+            buttonRole="primary"
+            type="button"
+            onClick={handleLoadMoreImages}
+          >
+            Carregar mais imagens
+          </Button>
+        )}
+        <Separator />
+        <h3>Vídeos</h3>
+        <VideosGrid gallery={videos} />
+        {videosPagination.current_page !== videosPagination.last_page && (
+          <Button
+            buttonRole="primary"
+            type="button"
+            onClick={handleLoadMoreVideos}
+          >
+            Carregar mais vídeos
+          </Button>
+        )}
+        <Separator />
+        <h3>Documentos</h3>
+        <DocumentsGrid gallery={documents} />
+        {documentsPagination.current_page !== documentsPagination.last_page && (
+          <Button
+            buttonRole="primary"
+            type="button"
+            onClick={handleLoadMoreDocuments}
+          >
+            Carregar mais documentos
+          </Button>
+        )}
+      </Content>
+    </Container>
   );
 };
 

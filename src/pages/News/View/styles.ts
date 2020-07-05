@@ -20,7 +20,7 @@ export const Content = styled.div`
   > h4 {
     font-size: 18px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 35px 0 20px 25px;
   }
 

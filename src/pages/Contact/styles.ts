@@ -24,7 +24,7 @@ export const Content = styled.div`
   > h3 {
     font-size: 18px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 35px 0 20px 25px;
   }
 
@@ -46,7 +46,7 @@ export const BoxTickets = styled.div`
   > h3 {
     font-size: 18px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;
   }
 `;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: grid;
@@ -28,19 +27,19 @@ export const MiniBox = styled(Link)`
 
   span {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.dateColor};
+    color: ${({ theme }) => theme.font.color.secondary};
   }
 
   h3 {
     font-size: 16px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 
   p {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.summaryColor};
+    color: ${({ theme }) => theme.font.color.secondary};
   }
 
   @media screen and (max-width: 720px) {

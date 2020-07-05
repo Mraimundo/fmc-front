@@ -7,33 +7,35 @@ export const Container = styled.div`
   > h3 {
     font-size: 16px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
   }
 
   > h4 {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
-    color: ${({ theme }) => theme.news.titleColor};
-    margin-top: 35px;
+    color: ${({ theme }) => theme.font.color.primary};
+    margin-top: 5px;
     margin-left: 25px;
   }
 
   > span {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.dateColor};
+    color: ${({ theme }) => theme.font.color.secondary};
   }
 
   > p {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.summaryColor};
+    color: ${({ theme }) => theme.font.color.secondary};
     margin-top: 20px;
     margin-bottom: 20px;
     opacity: 0.7;
+    text-align: justify;
   }
 `;
 
 export const Content = styled.div`
   width: 100%;
-  color: ${({ theme }) => theme.news.summaryColor};
+  color: ${({ theme }) => theme.font.color.secondary};
+  text-align: justify;
 `;

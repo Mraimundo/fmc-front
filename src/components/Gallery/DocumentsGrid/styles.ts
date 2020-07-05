@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -32,7 +31,7 @@ export const MiniBox = styled.div`
     align-self: center;
     margin-right: 20px;
     svg {
-      color: ${({ theme }) => theme.news.titleColor};
+      color: ${({ theme }) => theme.font.color.primary};
     }
   }
 
@@ -41,7 +40,7 @@ export const MiniBox = styled.div`
     flex: 1;
     span {
       font-size: 12px;
-      color: ${({ theme }) => theme.news.dateColor};
+      color: ${({ theme }) => theme.font.color.secondary};
       transform: translateY(-2px);
       display: block;
     }
@@ -49,13 +48,13 @@ export const MiniBox = styled.div`
     h3 {
       font-size: 16px;
       font-weight: bolder;
-      color: ${({ theme }) => theme.news.titleColor};
+      color: ${({ theme }) => theme.font.color.primary};
     }
 
     p {
       font-size: 14px;
       font-weight: bold;
-      color: ${({ theme }) => theme.news.titleColor};
+      color: ${({ theme }) => theme.font.color.primary};
       margin-top: 6px;
     }
   }

@@ -30,13 +30,13 @@ export const MiniBox = styled.div`
 
   span {
     font-size: 12px;
-    color: ${({ theme }) => theme.news.dateColor};
+    color: ${({ theme }) => theme.font.color.secondary};
   }
 
   h3 {
     font-size: 16px;
     font-weight: bolder;
-    color: ${({ theme }) => theme.news.titleColor};
+    color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 
@@ -47,15 +47,15 @@ export const MiniBox = styled.div`
 
     > span {
       font-size: 12px;
-      color: ${({ theme }) => theme.news.dateColor};
+      color: ${({ theme }) => theme.font.color.secondary};
     }
 
     > a {
       font-size: 12px;
-      color: ${({ theme }) => theme.news.dateColor};
+      color: ${({ theme }) => theme.font.color.secondary};
       transition: color 0.2s;
       &:hover {
-        color: ${({ theme }) => lighten(0.2, theme.news.dateColor)};
+        color: ${({ theme }) => lighten(0.2, theme.font.color.secondary)};
       }
     }
   }
