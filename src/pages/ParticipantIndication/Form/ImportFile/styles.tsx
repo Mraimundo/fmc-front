@@ -8,20 +8,20 @@ export const Container = styled.div`
   > h3 {
     font-size: 20px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-top: 10px;
   }
 
   a {
     text-decoration: none;
-    border: 1px solid #193b4e;
+    border: 1px solid ${({ theme }) => theme.font.color.primary};
     width: 290px;
     height: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     font-weight: bold;
     background: #efefef;
   }
@@ -29,14 +29,14 @@ export const Container = styled.div`
   label {
     button {
       text-decoration: none;
-      border: 1px solid #193b4e;
+      border: 1px solid ${({ theme }) => theme.font.color.primary};
       width: 290px;
       height: 85px;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 20px;
-      color: #193b4e;
+      color: ${({ theme }) => theme.font.color.primary};
       font-weight: bold;
       background: #efefef;
     }

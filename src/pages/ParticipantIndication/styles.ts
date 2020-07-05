@@ -20,14 +20,14 @@ export const Content = styled.div`
   > h3 {
     font-size: 24px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     display: flex;
   }
 
   > span {
     font-size: 18px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-top: 35px;
   }
 

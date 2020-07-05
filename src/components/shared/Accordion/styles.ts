@@ -8,7 +8,7 @@ interface ListProps {
 }
 
 export const Container = styled.div<ListProps>`
-  border: 1px solid ${({ theme, type }) => theme.regulation[type].borderColor};
+  border: 1px solid ${({ theme, type }) => theme.accordion[type].borderColor};
   transition: max-height 0.2s, min-height 0.2s;
   max-height: 65px;
   min-height: 40px;
@@ -25,13 +25,13 @@ export const ListValuesTitle = styled.div<ListProps>`
   display: flex;
   align-items: center;
   font-size: 0.9em;
-  color: ${({ theme, type }) => theme.regulation[type].fontColor};
+  /*color: $ { ({ theme, type }) => theme.regulation[type].fontColor};*/
   padding: 5px;
   position: relative;
   min-height: 55px;
 
   > h3 {
-    color: ${({ theme, type }) => theme.regulation[type].fontColor};
+    color: ${({ theme, type }) => theme.accordion[type].fontColor};
     margin-left: 95px;
   }
 
@@ -41,8 +41,8 @@ export const ListValuesTitle = styled.div<ListProps>`
     mask: url(${({ open }) => (open ? minus : plus)});
     background-color: ${({ theme, open, type }) =>
       open
-        ? theme.regulation[type].closeIconColor
-        : theme.regulation[type].openIconColor};
+        ? theme.accordion[type].closeIconColor
+        : theme.accordion[type].openIconColor};
     transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
     position: absolute;
     left: 30px;
@@ -56,8 +56,8 @@ export const ListValuesTitle = styled.div<ListProps>`
     content: '';
     background-color: ${({ theme, open, type }) =>
       open
-        ? theme.regulation[type].backgroundCloseIconColor
-        : theme.regulation[type].backgroundOpenIconColor};
+        ? theme.accordion[type].backgroundCloseIconColor
+        : theme.accordion[type].backgroundOpenIconColor};
     width: 75px;
     height: 45px;
     display: flex;

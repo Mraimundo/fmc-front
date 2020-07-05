@@ -25,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
 
   ._loading {
     svg {
-      fill: #193b4e;
+      fill: ${({ theme }) => theme.font.color.primary};
     }
   }
 `;

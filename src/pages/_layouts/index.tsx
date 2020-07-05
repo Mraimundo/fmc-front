@@ -11,12 +11,13 @@ import Popups from './Popups';
 
 import { Container } from './styles';
 
-const PATHS_TO_NOT_SHOW_LOGO = ['/edit'];
+const PATHS_TO_NOT_SHOW_LOGO = ['/edit', '/regulation'];
 
 const Dashboard: React.FC = ({ children }) => {
-  const { shouldShowRegulationsModal } = useAuth();
+  const { shouldShowRegulationsModal, participant } = useAuth();
   const [showLogo, setShowLogo] = useState(false);
   const { pathname } = useLocation();
+  const [theme, setTheme] = useState(defaultTheme);
 
   useEffect(() => {
     if (PATHS_TO_NOT_SHOW_LOGO.indexOf(pathname) >= 0) {
@@ -26,8 +27,14 @@ const Dashboard: React.FC = ({ children }) => {
     setShowLogo(true);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!participant || !participant.id) return;
+    if (participant.establishment.type_name === 'Cooperativa')
+      setTheme(cooperativaTheme);
+  }, [participant]);
+
   return (
-    <ThemeContext.Provider value={defaultTheme}>
+    <ThemeContext.Provider value={theme}>
       <Container>
         {showLogo && <Logo />}
         {children}

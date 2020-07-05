@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Button } from 'components/shared';
-import plusButton from 'assets/images/indication/plus-button.svg';
-import minusButton from 'assets/images/indication/minus-button.svg';
+import plusButton from 'assets/images/indication/add.svg';
+import minusButton from 'assets/images/indication/minus.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -15,7 +14,7 @@ export const Container = styled.div`
   > h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     text-transform: uppercase;
     margin-right: 10px;
     width: 225px;
@@ -43,13 +42,15 @@ export const AddButton = styled.button<AddButtonProps>`
   border: none;
   background: transparent;
   transition: background 0.5s ease, transform 0.3s;
-  background-image: url(${({ opened }) => (opened ? minusButton : plusButton)});
+  background: url(${({ opened }) => (opened ? minusButton : plusButton)}) center
+    center;
+  background-repeat: no-repeat;
+  background-color: ${({ theme }) => theme.font.color.primary};
   ${({ opened }) =>
     opened &&
     css`
       transform: rotate(180deg);
     `}
-
   @media screen and (max-width: 720px) {
     align-self: flex-end;
     margin-top: 10px;
@@ -69,13 +70,18 @@ export const StatusIndicator = styled.div<StatusIndicatorProps>`
   > span {
     margin-left: 6px;
     position: relative;
+    ._filled {
+      rect {
+        fill: ${({ theme }) => theme.font.color.primary};
+      }
+    }
   }
 
   ._last {
     &::after {
       content: "${({ percentActivated }) => percentActivated}%";
       position: absolute;
-      color: #193b4e;
+      color: ${({ theme }) => theme.font.color.primary};
       font-weight: 900;
       top: -20px;
       left: 50%;

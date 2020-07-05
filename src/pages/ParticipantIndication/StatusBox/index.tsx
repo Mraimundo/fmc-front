@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import iconEmpty from 'assets/images/indication/status-empty.svg';
 import iconFilled from 'assets/images/indication/status-filled.svg';
-import { Rating } from '@material-ui/lab';
+import { ReactSVG } from 'react-svg';
 
 import { Container, AddButton, StatusIndicator } from './styles';
 
@@ -41,12 +41,12 @@ const StatusBox: React.FC<Props> = ({
               key={`activated-${item}`}
               className={key + 1 === activated.length ? '_last' : ''}
             >
-              <img src={iconFilled} alt="Icone preenchido" />
+              <ReactSVG src={iconFilled} className="_filled" />
             </span>
           ))}
           {inactivated.map(item => (
             <span key={`inactivated-${item}`}>
-              <img src={iconEmpty} alt="Icone vazio" />
+              <ReactSVG src={iconEmpty} className="_empty" />
             </span>
           ))}
         </>

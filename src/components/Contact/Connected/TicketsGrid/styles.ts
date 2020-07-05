@@ -24,8 +24,6 @@ export const TicketGrid = styled.div<TicketGridProps>`
       border-color: rgba(0, 0, 0, 0.2);
     `};
 
-  color: #000;
-
   & + div {
     margin-top: 10px;
   }
@@ -42,7 +40,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
       display: flex;
       align-items: center;
       font-size: 14px;
-      color: #808285;
+      color: ${({ theme }) => theme.font.color.quartenary};
     }
 
     h4 {
@@ -50,7 +48,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
       align-items: center;
 
       font-size: 14px;
-      color: #808285;
+      color: ${({ theme }) => theme.font.color.quartenary};
       font-weight: bold;
     }
 
@@ -59,7 +57,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
       align-items: center;
       justify-content: center;
       > svg {
-        color: #193b4e;
+        color: ${({ theme }) => theme.font.color.primary};
       }
     }
   }
@@ -84,7 +82,6 @@ export const TicketGrid = styled.div<TicketGridProps>`
 export const GridHeader = styled.div`
   display: grid;
   grid-template-columns: 170px auto 85px 80px;
-  color: #000;
   width: 100%;
   padding-right: 20px;
 
@@ -92,7 +89,7 @@ export const GridHeader = styled.div`
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     font-weight: bold;
     &:nth-child(3) {
       justify-self: center;

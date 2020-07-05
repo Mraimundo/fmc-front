@@ -1,3 +1,4 @@
+import accordion from './modules/accordion/default';
 import indication from './modules/indication/default';
 import layout from './modules/layout/default';
 import regulation from './modules/regulation/default';
@@ -13,6 +14,7 @@ import menu from './modules/menu/disconnected';
 import modal from './modules/modal/disconnected';
 
 export default {
+  accordion,
   button,
   indication,
   contact,

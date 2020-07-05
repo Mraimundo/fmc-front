@@ -9,7 +9,7 @@ export const Container = styled.div`
   > div {
     min-height: 100vh;
     > div {
-      min-height: 100vh;
+      min-height: calc(100vh -95px);
     }
   }
 `;

@@ -1,3 +1,4 @@
+import accordion from './modules/accordion/default';
 import button from './modules/button/default';
 import contact from './modules/contact/default';
 import indication from './modules/indication/default';
@@ -12,6 +13,7 @@ import table from './modules/table/default';
 import tooltip from './modules/tooltip/default';
 
 export default {
+  accordion,
   button,
   indication,
   contact,

@@ -11,20 +11,20 @@ export const Container = styled.div`
   > h3 {
     font-size: 24px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-top: 10px;
   }
 
   > h4 {
     font-size: 18px;
     font-weight: bold;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
   }
 
   > span {
     font-size: 18px;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     font-weight: bold;
     opacity: 0.7;
     margin-top: 15px;

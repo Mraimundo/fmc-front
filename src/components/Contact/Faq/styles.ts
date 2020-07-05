@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100%;
   overflow-y: auto;
   background: #fff;
-  color: #000;
+  color: ${({ theme }) => theme.font.color.secondary};
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -23,6 +23,10 @@ export const Content = styled.div`
 export const SubTitle = styled.h3`
   margin-top: 25px;
   margin-bottom: 12px;
+  font-size: 20px;
+  margin-left: 12px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.font.color.primary};
 `;
 
 export const Accordion = styled(DefaultAccordion)`

@@ -3,5 +3,6 @@ export default interface Font {
     primary: string;
     secondary: string;
     tertiary: string;
+    quartenary: string;
   };
 }

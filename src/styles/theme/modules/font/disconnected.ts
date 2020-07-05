@@ -3,5 +3,6 @@ export default {
     primary: '#808285',
     secondary: '#e63027',
     tertiary: '#fff',
+    quartenary: '#808285',
   },
 };

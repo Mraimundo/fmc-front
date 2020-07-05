@@ -34,7 +34,7 @@ export const RolesSelect = styled(DefaultRolesSelect)`
   margin-right: 20px;
 
   > span {
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-left: 0;
     font-size: 15px;
   }
@@ -53,7 +53,7 @@ export const FilialSelect = styled(DefaultFilialSelect)`
   flex: 1;
 
   > span {
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-left: 0;
     font-size: 15px;
   }
