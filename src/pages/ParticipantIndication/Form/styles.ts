@@ -79,3 +79,27 @@ export const Button = styled(DefaultButton)`
     margin: 20px 0 10px 0;
   }
 `;
+
+export const PanelIndication = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  transform: translateY(-5px);
+
+  > button {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    background: transparent;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  > ._selected {
+    border-bottom: 4px solid rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.8);
+  }
+`;

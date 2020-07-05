@@ -9,8 +9,9 @@ import FilialSelect from 'components/shared/Vendavall/Establishments/FilialSelec
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
 import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
 import getschemaValidations from './getSchemaValidations';
+import ImportFileForm from './ImportFile';
 
-import { Container, Input, BoxPhone, Button } from './styles';
+import { Container, Input, BoxPhone, Button, PanelIndication } from './styles';
 
 export interface FormData {
   role_select: Option;
@@ -32,6 +33,8 @@ interface Props {
   establishmentId: number;
 }
 
+type Type = 'individual' | 'multiple';
+
 const Form: React.FC<Props> = ({
   saveIndication,
   editing = false,
@@ -39,6 +42,8 @@ const Form: React.FC<Props> = ({
   establishmentId,
 }) => {
   const [loading, setLoading] = useState(false);
+  const [type, setType] = useState<Type>('individual');
+
   const inputRole = 'secondary';
 
   const schema = getschemaValidations();
@@ -76,64 +81,88 @@ const Form: React.FC<Props> = ({
 
   return (
     <Container>
+      {!editing && (
+        <PanelIndication>
+          <button
+            type="button"
+            className={type === 'individual' ? '_selected' : ''}
+            onClick={() => setType('individual')}
+          >
+            Individual
+          </button>
+          <button
+            type="button"
+            className={type === 'multiple' ? '_selected' : ''}
+            onClick={() => setType('multiple')}
+          >
+            Em Lote
+          </button>
+        </PanelIndication>
+      )}
       {editing ? <h3>Editando indicação</h3> : <h3>Indique um participante</h3>}
-      <h4>Indique os participantes da sua Revenda</h4>
-      <span>Agro Amazônia</span>
-      <FormContext {...methods}>
-        <form onSubmit={onSubmit}>
-          <FilialSelect
-            name="subsidiary_select"
-            inputRole="secondary"
-            establishmentId={establishmentId}
-            disabled={editing}
-          />
-          <RolesSelect
-            name="role_select"
-            inputRole="secondary"
-            disabled={editing}
-          />
-          <Input
-            name="name"
-            icon={FiUser}
-            label="Nome completo*"
-            inputRole={inputRole}
-          />
-          <Input
-            name="cpf"
-            icon={FiUser}
-            label="CPF*"
-            numbersOnly
-            pattern="XXX.XXX.XXX-XX"
-            inputRole={inputRole}
-          />
-          <BoxPhone>
-            <Input
-              name="area_code"
-              numbersOnly
-              pattern="(XX)"
-              label="DDD*"
-              inputRole={inputRole}
-            />
-            <Input
-              name="cell_phone"
-              icon={FiSmartphone}
-              numbersOnly
-              label="Celular*"
-              pattern="X XXXX-XXXX"
-              inputRole={inputRole}
-            />
-          </BoxPhone>
-          <Input
-            name="email"
-            icon={FiUser}
-            label="Email*"
-            inputRole={inputRole}
-          />
-          <Button type="submit" buttonRole="tertiary" loading={loading}>
-            Salvar
-          </Button>
-        </form>
-      </FormContext>
+      {type === 'multiple' ? (
+        <ImportFileForm />
+      ) : (
+        <>
+          <h4>Indique os participantes da sua Revenda</h4>
+          <span>Agro Amazônia</span>
+          <FormContext {...methods}>
+            <form onSubmit={onSubmit}>
+              <FilialSelect
+                name="subsidiary_select"
+                inputRole="secondary"
+                establishmentId={establishmentId}
+                disabled={editing}
+              />
+              <RolesSelect
+                name="role_select"
+                inputRole="secondary"
+                disabled={editing}
+              />
+              <Input
+                name="name"
+                icon={FiUser}
+                label="Nome completo*"
+                inputRole={inputRole}
+              />
+              <Input
+                name="cpf"
+                icon={FiUser}
+                label="CPF*"
+                numbersOnly
+                pattern="XXX.XXX.XXX-XX"
+                inputRole={inputRole}
+              />
+              <BoxPhone>
+                <Input
+                  name="area_code"
+                  numbersOnly
+                  pattern="(XX)"
+                  label="DDD*"
+                  inputRole={inputRole}
+                />
+                <Input
+                  name="cell_phone"
+                  icon={FiSmartphone}
+                  numbersOnly
+                  label="Celular*"
+                  pattern="X XXXX-XXXX"
+                  inputRole={inputRole}
+                />
+              </BoxPhone>
+              <Input
+                name="email"
+                icon={FiUser}
+                label="Email*"
+                inputRole={inputRole}
+              />
+              <Button type="submit" buttonRole="tertiary" loading={loading}>
+                Salvar
+              </Button>
+            </form>
+          </FormContext>
+        </>
+      )}
     </Container>
   );
 };
