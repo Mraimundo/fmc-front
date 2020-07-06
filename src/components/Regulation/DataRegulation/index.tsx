@@ -38,7 +38,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
     if (
       e.currentTarget.scrollHeight - e.currentTarget.scrollTop <=
-      e.currentTarget.clientHeight
+      e.currentTarget.clientHeight + 2
     ) {
       setCanAccept(true);
     }
