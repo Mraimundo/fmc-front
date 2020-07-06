@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import generic, { GenericState } from './modules/generic/reducer';
+import pointManagement, {
+  PointManagementState,
+} from './modules/point-management/reducer';
 
 export type StoreState = {
-  generic: GenericState;
+  pointManagement: PointManagementState;
 };
 
 export default combineReducers<StoreState>({
-  generic,
+  pointManagement,
 });

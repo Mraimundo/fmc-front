@@ -24,3 +24,8 @@ export type ActionCreatorFailureType<
     string
   >
 > = (errors: ApiErrors[]) => TCreatedAction;
+
+export type FetchState = {
+  errors?: ApiErrors[];
+  isFetching: boolean;
+};
