@@ -8,10 +8,10 @@ export default Yup.object().shape({
     .required('Cpf é obrigatório')
     .test('valid-cpf', 'Cpf inválido', validateCpf),
   email: Yup.string().email('Email inválido').required('Email é obrigatório'),
-  dddMobile: Yup.string()
+  dddMobile: Yup.string().required('DDD é obrigatório'),
+  mobile: Yup.string()
     .required('Número é obrigatório')
     .test('valid-mobile', 'Número inválido', validMobilePhone),
-  mobile: Yup.string(),
   subject: Yup.object().shape({
     value: Yup.string().required('Assunto é obrigatório'),
   }),
