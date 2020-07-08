@@ -27,8 +27,8 @@ export interface Training {
   start_date: Date;
   end_date: Date;
   status: Status;
-  image: string;
+  image_url: string;
   category: Category[];
   number_of_questions: number;
-  participantion: Participation[];
+  participantion: Participation;
 }
