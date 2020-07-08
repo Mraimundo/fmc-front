@@ -12,6 +12,7 @@ export interface Response {
   date: string;
   time: string;
   category: string;
+  subject: string;
   status: number;
   statusText: StatusText;
 }
@@ -37,5 +38,6 @@ export default (data: Contact[]): Response[] => {
     category: item.contact_category_title,
     status: item.status,
     statusText: getStatusText(item.status),
+    subject: item.contact_subject_title,
   }));
 };

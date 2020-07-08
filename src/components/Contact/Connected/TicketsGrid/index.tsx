@@ -99,7 +99,7 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
         >
           <header onClick={() => handleTicketClick(item)}>
             <span>{item.date}</span>
-            <h4>{item.category}</h4>
+            <h4>{`${item.subject} / ${item.category}`}</h4>
             <div>{getIcon(item.statusText)}</div>
             <div>
               <FiMessageCircle size={26} />

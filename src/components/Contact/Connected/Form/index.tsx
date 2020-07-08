@@ -55,6 +55,11 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
+    defaultValues: {
+      category: null,
+      subject: null,
+      message: '',
+    },
   });
 
   const { handleSubmit, watch, setValue, reset } = methods;
