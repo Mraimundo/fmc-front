@@ -73,11 +73,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     }, 1000);
   }, [apiToken, updateParticipantData]);
 
-  const signIn = useCallback(async ({ cpf, password }: Credentials) => {
-    const { token } = await signInService({
-      cpf: numbersOnly(cpf),
-      password,
-    });
+  const signIn = useCallback(async (data: Credentials | string) => {
+    const { token } = await signInService(data);
 
     localStorage.setItem('@Vendavall:token', token);
     setToken(token);
