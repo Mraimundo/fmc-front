@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import { useToast } from 'context/ToastContext';
 import { CreateTicketDTO } from 'services/contact/connected/dtos/index';
+import uploadFileToStorage from 'services/storage/sendFile';
 
 import { TextArea, Button } from 'components/shared';
 import { FiUser, FiMessageCircle } from 'react-icons/fi';
@@ -23,8 +24,32 @@ interface Props {
 
 const Form: React.FC<Props> = ({ className, openTicket }) => {
   const [loading, setLoading] = useState(false);
+  const [attachingFile, setAttachingFile] = useState(false);
+  const [fileUrl, setFileUrl] = useState('');
+  const inputFileRef = useRef<HTMLInputElement>(null);
   const [subjectId, setSubjectId] = useState(0);
   const { addToast } = useToast();
+
+  const handleAttachFile = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e && e.target && e.target.files && e.target.files.length > 0) {
+        const isFileTooLarge = e.target.files[0].size / 1024 > 4096;
+        if (isFileTooLarge) {
+          addToast({
+            title: 'Arquivo excede o tamanho máximo de 4mb!',
+            type: 'error',
+          });
+          return;
+        }
+
+        setAttachingFile(true);
+        const { url } = await uploadFileToStorage(e.target.files[0], 'avatar');
+        setFileUrl(url);
+        setAttachingFile(false);
+      }
+    },
+    [addToast],
+  );
 
   const methods = useForm<FormData>({
     validationSchema: schema,
@@ -38,7 +63,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
       setLoading(true);
       const { message } = await openTicket({
         categoryId: parseInt(data.category?.value || '0', 0),
-        fileUrl: '',
+        fileUrl,
         message: data.message,
         subjectId: parseInt(data.subject?.value || '0', 0),
       });
@@ -47,6 +72,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
         type: 'success',
       });
       reset();
+      setFileUrl('');
     } catch (e) {
       addToast({
         title:
@@ -72,6 +98,29 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
         <SubjectSelect name="subject" />
         <CategorySelect name="category" subjectId={subjectId} />
         <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
+
+        <label htmlFor="fileId">
+          <input
+            type="file"
+            id="fileId"
+            accept="image/*, .pdf"
+            onChange={handleAttachFile}
+            ref={inputFileRef}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              inputFileRef.current?.click();
+            }}
+          >
+            {fileUrl !== '' ? (
+              <>Arquivo anexado</>
+            ) : (
+              <>{attachingFile ? 'Carregando ... ' : 'Anexar um arquivo'}</>
+            )}
+          </button>
+        </label>
+
         <Button type="submit" buttonRole="primary" loading={loading}>
           Enviar
         </Button>

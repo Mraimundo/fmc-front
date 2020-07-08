@@ -12,3 +12,25 @@ export const Container = styled.form`
     height: 45px;
   }
 `;
+
+export const BoxText = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > label {
+    button {
+      background: transparent;
+      text-decoration: none;
+      border: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: 0;
+      color: ${({ theme }) => theme.font.color.primary};
+      font-size: 10px;
+    }
+
+    input {
+      display: none;
+    }
+  }
+`;
