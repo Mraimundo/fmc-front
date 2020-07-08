@@ -11,15 +11,21 @@ import { MenuProvider } from 'context/MenuContext';
 
 interface RouteProps extends DefaultRouteProps {
   isPrivate?: boolean;
+  special?: boolean;
   component: React.ComponentType;
 }
 
 const Route: React.FC<RouteProps> = ({
   isPrivate = true,
+  special = false,
   component: Component,
   ...rest
 }) => {
   const { signed } = useAuth();
+  if (special) {
+    return <DefaultRoute {...rest} render={() => <Component />} />;
+  }
+
   return (
     <DefaultRoute
       {...rest}

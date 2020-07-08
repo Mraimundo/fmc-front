@@ -21,8 +21,7 @@ const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={SignInUp} isPrivate={false} />
     <Route exact path="/recover" component={SignInUp} isPrivate={false} />
-    <Route path="/autologin" component={Autologin} isPrivate={false} />
-
+    <Route path="/autologin" component={Autologin} special />
     <Route
       exact
       path="/firstAccess"
