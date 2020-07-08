@@ -30,5 +30,5 @@ export interface Training {
   image_url: string;
   category: Category[];
   number_of_questions: number;
-  participantion: Participation;
+  participation?: Participation;
 }

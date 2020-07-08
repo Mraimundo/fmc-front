@@ -27,13 +27,13 @@ export default (data: Training[]): Response[] => {
     id: item.id,
     title: item.title,
     category: item.category.map(i => i.name).join(', '),
-    startDateParticipation: item.participation.started_date
+    startDateParticipation: item.participation?.started_date
       ? formatDate(item.participation.started_date)
       : '',
-    endDateParticipation: item.participation.finished_date
+    endDateParticipation: item.participation?.finished_date
       ? formatDate(item.participation.finished_date)
       : '',
     status: getStatusText(item.status),
-    certificateUrl: item.participation.certificate_url || '',
+    certificateUrl: item.participation?.certificate_url || '',
   }));
 };

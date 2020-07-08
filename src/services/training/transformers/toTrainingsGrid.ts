@@ -17,6 +17,6 @@ export default (data: Training[]): Response[] => {
     category: item.category.map(i => i.name),
     startDate: formatDate(item.start_date),
     endDate: formatDate(item.end_date),
-    imageUrl: item.image,
+    imageUrl: item.image_url,
   }));
 };

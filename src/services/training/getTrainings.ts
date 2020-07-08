@@ -2,7 +2,7 @@ import { vendavallApi } from 'services/api';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { Training, Status, TRAINING_STATUS } from './interfaces';
 
-const availabled = [
+const availabled: Training[] = [
   {
     id: 1,
     title: 'Nome do treinamento',
@@ -10,7 +10,7 @@ const availabled = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -18,7 +18,6 @@ const availabled = [
         name: 'Categoria 1',
       },
     ],
-    participation: {},
   },
   {
     id: 2,
@@ -27,7 +26,7 @@ const availabled = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -35,7 +34,6 @@ const availabled = [
         name: 'Categoria 1',
       },
     ],
-    participation: {},
   },
   {
     id: 3,
@@ -44,7 +42,7 @@ const availabled = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -52,11 +50,10 @@ const availabled = [
         name: 'Categoria 1',
       },
     ],
-    participation: {},
   },
 ];
 
-const finished = [
+const finished: Training[] = [
   {
     id: 4,
     title: 'Nome do treinamento',
@@ -64,7 +61,7 @@ const finished = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -73,6 +70,7 @@ const finished = [
       },
     ],
     participation: {
+      id: 1,
       started_date: new Date(),
       finished_date: new Date(),
       total_points: 7,
@@ -87,7 +85,7 @@ const finished = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -96,6 +94,7 @@ const finished = [
       },
     ],
     participation: {
+      id: 2,
       started_date: new Date(),
       finished_date: new Date(),
       total_points: 7,
@@ -110,7 +109,7 @@ const finished = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
-    image:
+    image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
       {
@@ -119,6 +118,7 @@ const finished = [
       },
     ],
     participation: {
+      id: 3,
       started_date: new Date(),
       finished_date: new Date(),
       total_points: 7,

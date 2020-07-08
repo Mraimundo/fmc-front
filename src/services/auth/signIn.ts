@@ -1,4 +1,4 @@
-import { pluginApi } from 'services/api';
+import { pluginApi, vendavallApi } from 'services/api';
 
 interface SignInParams {
   cpf: string;
