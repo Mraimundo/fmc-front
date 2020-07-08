@@ -15,6 +15,8 @@ import Regulation from 'pages/Auth/Regulation';
 import Contact from 'pages/Contact';
 import Faq from 'pages/Faq';
 import Training from 'pages/Training';
+import PointManagement from 'pages/PointManagement';
+
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -39,6 +41,7 @@ const Routes: React.FC = () => (
     <Route exact path="/contact" component={Contact} />
     <Route exact path="/faq" component={Faq} />
     <Route exact path="/training" component={Training} />
+    <Route exact path="/distribuicao-de-pontos" component={PointManagement} />
   </Switch>
 );
 
