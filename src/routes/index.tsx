@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import SignInUp from 'pages/Auth/SignInUp';
+import Autologin from 'pages/Auth/Autologin';
 import Dashboard from 'pages/Dashboard';
 import Dashboard2 from 'pages/Dashboard2';
 import FirstAccess from 'pages/Auth/FirstAccess';
@@ -20,6 +21,8 @@ const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={SignInUp} isPrivate={false} />
     <Route exact path="/recover" component={SignInUp} isPrivate={false} />
+    <Route path="/autologin" component={Autologin} isPrivate={false} />
+
     <Route
       exact
       path="/firstAccess"
