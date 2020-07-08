@@ -23,8 +23,8 @@ const Autologin: React.FC = () => {
           title: 'Token inválido',
           type: 'error',
         });
-        history.push('/');
       }
+      history.push('/');
     };
     login();
   }, [search, signIn, addToast]);
