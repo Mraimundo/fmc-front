@@ -24,7 +24,7 @@ interface AuthContextState {
   participant: Participant;
   signed: boolean;
   shouldShowRegulationsModal: boolean;
-  signIn(credentials: Credentials): Promise<void>;
+  signIn(credentials: Credentials | string): Promise<void>;
   signOut(): void;
   updateParticipantData(): void;
 }
