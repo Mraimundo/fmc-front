@@ -29,7 +29,7 @@ const Grid: React.FC<Props> = ({ data }) => {
           <div>
             <span>{`De ${item.startDate} até ${item.endDate}`} </span>
           </div>
-          <Link to="#">Participar</Link>
+          <Link to="/training/1">Participar</Link>
         </MiniBox>
       ))}
     </Container>

@@ -21,6 +21,13 @@ interface Participation {
   certificate_url: string;
 }
 
+interface Media {
+  id: number;
+  title: string;
+  url: string;
+  type: 'video' | 'document' | 'image';
+}
+
 export interface Training {
   id: number;
   title: string;
@@ -29,6 +36,20 @@ export interface Training {
   status: Status;
   image_url: string;
   category: Category[];
+  media: Media[];
   number_of_questions: number;
   participation?: Participation;
+  summary: string;
+  body: string;
+}
+
+interface Answer {
+  id: number;
+  answer: string;
+}
+
+export interface Question {
+  id: number;
+  question: string;
+  options: Answer[];
 }

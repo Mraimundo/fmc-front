@@ -36,11 +36,10 @@ const OpenTrainingsGrid: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>Imagens</h3>
         <Grid data={trainings} />
         {pagination.current_page !== pagination.last_page && (
           <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
-            Carregar mais imagens
+            Carregar mais treinamentos
           </Button>
         )}
       </Content>

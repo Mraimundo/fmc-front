@@ -10,6 +10,9 @@ const availabled: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
@@ -26,6 +29,9 @@ const availabled: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
@@ -42,6 +48,9 @@ const availabled: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
@@ -61,6 +70,9 @@ const finished: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
@@ -85,6 +97,9 @@ const finished: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [
@@ -109,6 +124,9 @@ const finished: Training[] = [
     end_date: new Date(),
     status: 0,
     number_of_questions: 10,
+    media: [],
+    summary: '',
+    body: '',
     image_url:
       'https://storage.vendavall.com.br/photo/1593810092.5eff9cac29f1e2.50823230.png',
     category: [

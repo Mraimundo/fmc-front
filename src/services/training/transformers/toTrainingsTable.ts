@@ -1,16 +1,6 @@
 import { formatDate } from 'util/datetime';
-import { Training, Status, TRAINING_STATUS } from '../interfaces';
-
-const getStatusText = (status: Status): string => {
-  switch (status) {
-    case TRAINING_STATUS.AVAILABLE:
-      return 'Disponível';
-    case TRAINING_STATUS.FINISHED:
-      return 'Finalizado';
-    default:
-      return 'Status desconhecido';
-  }
-};
+import { Training } from '../interfaces';
+import getStatusText from '../util/getStatusText';
 
 export interface Response {
   id: number;
