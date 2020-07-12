@@ -12,9 +12,12 @@ export default Yup.object().shape({
   mobile: Yup.string()
     .required('Número é obrigatório')
     .test('valid-mobile', 'Número inválido', validMobilePhone),
-  subject: Yup.object().shape({
-    value: Yup.string().required('Assunto é obrigatório'),
-  }),
+  subject: Yup.object()
+    .shape({
+      value: Yup.string().required('Assunto é obrigatório'),
+    })
+    .required('Assunto é obrigatório')
+    .typeError('Assunto é obrigatório'),
   message: Yup.string()
     .required('Mensagem é obrigatória')
     .max(350, 'Limite de 350 caracteres'),

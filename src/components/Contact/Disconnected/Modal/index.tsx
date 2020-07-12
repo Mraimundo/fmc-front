@@ -32,7 +32,7 @@ interface ContactFormData {
   email: string;
   dddMobile: string;
   mobile: string;
-  subject: Option;
+  subject: Option | null;
   message: string;
   fileUrl: string;
 }
@@ -47,6 +47,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     validationSchema: schemaValidation,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
+    defaultValues: {
+      subject: null,
+    },
   });
 
   const { handleSubmit, register, setValue } = methods;
@@ -55,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     try {
       const { message } = await openTicket({
         ...data,
-        subjectId: parseInt(data.subject.value, 0),
+        subjectId: parseInt(data.subject?.value || '0', 0),
       });
       addToast({ title: message });
       onRequestClose();
