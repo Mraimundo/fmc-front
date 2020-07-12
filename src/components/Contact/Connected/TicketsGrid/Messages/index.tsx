@@ -22,10 +22,11 @@ const Messages: React.FC<Props> = ({ messages, loading }) => {
             <MessageBox type={message.type}>
               <span>
                 {`${message.date} - ${message.time} - ${
-                  message.name || participant.name
+                  message.name || participant.nick_name
                 }`}
               </span>
               <p>{message.message}</p>
+              {!!message.fileUrl && <a href={message.fileUrl}>Anexo</a>}
             </MessageBox>
           </Content>
         ))

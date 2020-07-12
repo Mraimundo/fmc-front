@@ -36,6 +36,8 @@ export const MessageBox = styled.div<MessageBoxProps>`
   position: relative;
   margin-left: 28px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 
   span {
     display: block;
@@ -50,6 +52,12 @@ export const MessageBox = styled.div<MessageBoxProps>`
     font-size: 15px;
     color: ${({ theme }) => theme.font.color.secondary};
     margin: 5px 0%;
+  }
+
+  > a {
+    color: ${({ theme }) => theme.font.color.quartenary};
+    align-self: flex-end;
+    font-size: 14px;
   }
 
   &:after {

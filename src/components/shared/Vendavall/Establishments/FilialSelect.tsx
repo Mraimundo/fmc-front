@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Select, { Option } from 'components/shared/Select';
-import { FiLink } from 'react-icons/fi';
 import getSubsidiaryList from 'services/establishment/getSubsidiaryList';
 
 interface Props {
@@ -39,7 +38,6 @@ const FilialSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Filial"
-      icon={FiLink}
       loadItems={loadItems}
       className={className}
       inputRole={inputRole}

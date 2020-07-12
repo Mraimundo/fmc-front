@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 
 import { Option } from 'components/shared/Select';
-import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import RolesSelect from 'components/shared/Vendavall/Roles/ProtectedRolesSelect';
 import FilialSelect from 'components/shared/Vendavall/Establishments/FilialSelect';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
 import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
+import { Establishment } from 'services/auth/getEstablishments';
 import getschemaValidations from './getSchemaValidations';
 import ImportFileForm from './ImportFile';
 
@@ -30,7 +30,7 @@ interface Props {
   ): Promise<boolean> | boolean;
   editing?: boolean;
   indicationData?: FormData;
-  establishmentId: number;
+  establishment: Establishment;
 }
 
 type Type = 'individual' | 'multiple';
@@ -39,7 +39,7 @@ const Form: React.FC<Props> = ({
   saveIndication,
   editing = false,
   indicationData,
-  establishmentId,
+  establishment,
 }) => {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<Type>('individual');
@@ -70,7 +70,7 @@ const Form: React.FC<Props> = ({
         name: data.name,
         area_code: data.area_code,
         cell_phone: data.cell_phone,
-        establishment_id: establishmentId,
+        establishment_id: establishment.id,
         subsidiary_id: parseInt(data.subsidiary_select.value, 0),
       })
     ) {
@@ -104,14 +104,17 @@ const Form: React.FC<Props> = ({
         <ImportFileForm />
       ) : (
         <>
-          <h4>Indique os participantes da sua Revenda</h4>
-          <span>Agro Amazônia</span>
+          <h4>
+            Indique os participantes da sua
+            {establishment.type_name}
+          </h4>
+          <span>{establishment.name}</span>
           <FormContext {...methods}>
             <form onSubmit={onSubmit}>
               <FilialSelect
                 name="subsidiary_select"
                 inputRole="secondary"
-                establishmentId={establishmentId}
+                establishmentId={establishment.id}
                 disabled={editing}
               />
               <RolesSelect
@@ -119,15 +122,9 @@ const Form: React.FC<Props> = ({
                 inputRole="secondary"
                 disabled={editing}
               />
-              <Input
-                name="name"
-                icon={FiUser}
-                label="Nome completo*"
-                inputRole={inputRole}
-              />
+              <Input name="name" label="Nome completo*" inputRole={inputRole} />
               <Input
                 name="cpf"
-                icon={FiUser}
                 label="CPF*"
                 numbersOnly
                 pattern="XXX.XXX.XXX-XX"
@@ -138,24 +135,18 @@ const Form: React.FC<Props> = ({
                   name="area_code"
                   numbersOnly
                   pattern="(XX)"
-                  label="DDD*"
+                  label="DDD"
                   inputRole={inputRole}
                 />
                 <Input
                   name="cell_phone"
-                  icon={FiSmartphone}
                   numbersOnly
-                  label="Celular*"
+                  label="Celular"
                   pattern="X XXXX-XXXX"
                   inputRole={inputRole}
                 />
               </BoxPhone>
-              <Input
-                name="email"
-                icon={FiUser}
-                label="Email*"
-                inputRole={inputRole}
-              />
+              <Input name="email" label="Email*" inputRole={inputRole} />
               <Button type="submit" buttonRole="tertiary" loading={loading}>
                 Salvar
               </Button>

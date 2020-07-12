@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'components/shared/Select';
-import { FiMessageSquare } from 'react-icons/fi';
 import { getPrivateSubjectsForSelect } from 'services/contact/connected/privateSubjects';
 
 interface Props {
@@ -13,7 +12,6 @@ const SubjectsSelect: React.FC<Props> = ({ name, className }) => {
     <Select
       name={name}
       label="Assunto"
-      icon={FiMessageSquare}
       loadItems={getPrivateSubjectsForSelect}
       className={className}
     />

@@ -17,6 +17,7 @@ export interface ParticipantIndicationTableData {
   personal: {
     id: number;
     status: number;
+    name: string;
   };
 }
 
@@ -34,6 +35,7 @@ export default (
     personal: {
       id: item.id,
       status: item.participant.status,
+      name: item.participant.name,
     },
   }));
 };

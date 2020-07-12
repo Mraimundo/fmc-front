@@ -1,7 +1,8 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useToast } from 'context/ToastContext';
 import uploadFileToStorage from 'services/storage/sendFile';
 import sendFile from 'services/participantIndication/importFile';
+import forceDownload from 'services/storage/getUrlToForceDownload';
 
 import { Container, SaveButton } from './styles';
 
@@ -11,6 +12,17 @@ const ImportFile: React.FC = () => {
   const [fileUrl, setFileUrl] = useState('');
   const inputFileRef = useRef<HTMLInputElement>(null);
   const { addToast } = useToast();
+  const [downloadLink, setDownloadLink] = useState('');
+
+  useEffect(() => {
+    setDownloadLink(
+      forceDownload({
+        filename: 'Indicação_participante_em_lote_modelo.xlsx',
+        url:
+          'https://storage.vendavall.com.br/photos/1593794488.5eff5fb8bb63c8.54067056.xlsx',
+      }),
+    );
+  }, []);
 
   const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,10 +67,7 @@ const ImportFile: React.FC = () => {
   return (
     <Container>
       <h3>Em lote</h3>
-      <a
-        href="https://storage.vendavall.com.br/photos/1593794488.5eff5fb8bb63c8.54067056.xlsx"
-        download
-      >
+      <a href={downloadLink} download>
         Download da planilha de exemplo
       </a>
       <label htmlFor="fileId">

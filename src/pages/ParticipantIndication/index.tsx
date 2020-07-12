@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import produce from 'immer';
 
 import { useAuth } from 'context/AuthContext';
-import { INACTIVE, PRECHARGE } from 'config/constants/vendavallStatus';
+import { INACTIVE, PRECHARGE, ACTIVE } from 'config/constants/vendavallStatus';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
@@ -13,6 +13,7 @@ import {
 } from 'services/participantIndication/indicateParticipant';
 import resendIndicationEmail from 'services/participantIndication/resendIndicationEmail';
 import inactiveParticipantFromIndication from 'services/participantIndication/inactiveParticipantFromIndication';
+import activeParticipantFromIndication from 'services/participantIndication/activeParticipantFromIndication';
 import { useToast } from 'context/ToastContext';
 
 import getEstablishments, {
@@ -170,6 +171,35 @@ const ParticipantIndication: React.FC = () => {
     [addToast, tableData],
   );
 
+  const handleActiveParticipant = useCallback(
+    async (indicationId: number): Promise<void> => {
+      try {
+        await activeParticipantFromIndication(indicationId);
+        setTableData(
+          produce(tableData, draft => {
+            draft.map(item => {
+              if (item.id === indicationId) {
+                item.participant.status = ACTIVE;
+              }
+              return item;
+            });
+          }),
+        );
+        addToast({
+          title: 'Participante ativado com sucesso',
+        });
+      } catch (e) {
+        addToast({
+          title:
+            e.response?.data?.message ||
+            'Falha ao ativar participante. Por favor entre em contato com o suporte',
+          type: 'error',
+        });
+      }
+    },
+    [addToast, tableData],
+  );
+
   useEffect(() => {
     getEstablishments().then(list => setEstablishments(list));
   }, []);
@@ -218,8 +248,7 @@ const ParticipantIndication: React.FC = () => {
       <Content>
         <h3>
           Indique um participante
-          {establishmentSelected &&
-            ` na ${participant.establishment?.type_name} ${establishmentSelected.name}`}
+          {` na ${establishmentSelected?.type_name} ${establishmentSelected?.name}`}
           {establishments.length > 1 && (
             <Establishments
               establishments={establishments}
@@ -239,7 +268,7 @@ const ParticipantIndication: React.FC = () => {
               saveIndication={saveIndication}
               editing={editing}
               indicationData={indicationDataEdit}
-              establishmentId={establishmentSelected.id}
+              establishment={establishmentSelected}
             />
           </ContentForm>
         )}
@@ -254,6 +283,7 @@ const ParticipantIndication: React.FC = () => {
           onEditClick={onEditClick}
           onResendEmailClick={handleResendIndication}
           onInactiveParticipantClick={handleInactiveParticipant}
+          onActiveParticipantClick={handleActiveParticipant}
         />
       </Content>
     </Container>

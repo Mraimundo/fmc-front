@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Select, { Option } from 'components/shared/Select';
-import { FiLink } from 'react-icons/fi';
 import { getProtecedRolesForSelect } from 'services/role/protectedRoles';
 
 interface Props {
@@ -30,7 +29,6 @@ const ProtectedRolesSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Cargo"
-      icon={FiLink}
       loadItems={loadItems}
       className={className}
       inputRole={inputRole}

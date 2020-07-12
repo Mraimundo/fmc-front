@@ -7,7 +7,6 @@ import { useForm, FormContext } from 'react-hook-form';
 import { useToast } from 'context/ToastContext';
 
 import { TextArea, Button } from 'components/shared';
-import { FiMessageCircle } from 'react-icons/fi';
 
 import { Container, BoxText } from './styles';
 
@@ -86,7 +85,7 @@ const Form: React.FC<Props> = ({ sendMessage, contactId }) => {
     <FormContext {...methods}>
       <Container onSubmit={onSubmit}>
         <BoxText>
-          <TextArea name="message" icon={FiMessageCircle} label="Responder" />
+          <TextArea name="message" label="Responder" />
           <label htmlFor="fileId">
             <input
               type="file"

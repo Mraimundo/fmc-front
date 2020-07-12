@@ -4,13 +4,7 @@ import { Option } from 'components/shared/Select';
 
 import { useToast } from 'context/ToastContext';
 import sendFile from 'services/storage/sendFile';
-import {
-  FiUser,
-  FiMail,
-  FiSmartphone,
-  FiArchive,
-  FiMessageCircle,
-} from 'react-icons/fi';
+
 import openTicket from 'services/contact/disconnected/openTicket';
 
 import schemaValidation from './schemaValidation';
@@ -101,26 +95,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         <Title>Fale conosco</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
-            <Input
-              name="name"
-              icon={FiUser}
-              label="Nome"
-              inputRole={inputRole}
-            />
+            <Input name="name" label="Nome" inputRole={inputRole} />
             <Input
               name="cpf"
-              icon={FiArchive}
               label="Cpf"
               numbersOnly
               pattern="XXX.XXX.XXX-XX"
               inputRole={inputRole}
             />
-            <Input
-              name="email"
-              icon={FiMail}
-              label="Email"
-              inputRole={inputRole}
-            />
+            <Input name="email" label="Email" inputRole={inputRole} />
             <BoxPhone>
               <Input
                 name="dddMobile"
@@ -131,7 +114,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               />
               <Input
                 name="mobile"
-                icon={FiSmartphone}
                 numbersOnly
                 pattern="X XXXX-XXXX"
                 inputRole={inputRole}
@@ -140,7 +122,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             <SubjectSelect name="subject" inputRole={inputRole} />
             <TextArea
               name="message"
-              icon={FiMessageCircle}
               label="Mensagem"
               inputRole={inputRole}
               maxLength={350}

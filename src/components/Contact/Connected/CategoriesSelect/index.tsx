@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'components/shared/Select';
-import { FiMessageSquare } from 'react-icons/fi';
 import { getPrivateCategoriesForSelect } from 'services/contact/connected/privateCategories';
 
 interface Props {
@@ -14,7 +13,6 @@ const CaterogiesSelect: React.FC<Props> = ({ name, className, subjectId }) => {
     <Select
       name={name}
       label="Categoria"
-      icon={FiMessageSquare}
       loadItems={() => getPrivateCategoriesForSelect(subjectId)}
       className={className}
     />

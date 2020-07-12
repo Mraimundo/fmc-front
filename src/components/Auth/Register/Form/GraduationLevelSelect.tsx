@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import Select from 'components/shared/Select';
 
-import { FaGraduationCap } from 'react-icons/fa';
-
 interface Props {
   name: string;
   className?: string;
@@ -29,7 +27,6 @@ const GraduationLevelSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Grau de instrução"
-      icon={FaGraduationCap}
       loadItems={loadItems}
       className={className}
       disabled={disabled}

@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'components/shared/Select';
-import { FiMessageSquare } from 'react-icons/fi';
 import { getPublicSubjectsForSelect } from 'services/contact/disconnected/publicSubjects';
 
 interface Props {
@@ -18,7 +17,6 @@ const PublicSubjectsSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Assunto"
-      icon={FiMessageSquare}
       loadItems={getPublicSubjectsForSelect}
       inputRole={inputRole}
       className={className}

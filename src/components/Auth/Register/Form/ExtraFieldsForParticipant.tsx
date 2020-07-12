@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
-import { FiUser } from 'react-icons/fi';
 import numbersOnly from 'util/numbersOnly';
 import { useToast } from 'context/ToastContext';
 import {
@@ -55,7 +54,6 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <Input
         name="formatted_birth_date"
-        icon={FiUser}
         label="Data de nascimento"
         inputRole={inputRole}
         pattern="XX/XX/XXXX"
@@ -63,54 +61,30 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <GraduationSelect name="education_level_select" inputRole={inputRole} />
 
-      <Input
-        name="place_of_birth"
-        icon={FiUser}
-        label="Naturalidade"
-        inputRole={inputRole}
-      />
+      <Input name="place_of_birth" label="Naturalidade" inputRole={inputRole} />
 
-      <Input
-        name="nationality"
-        icon={FiUser}
-        label="Nacionalidade"
-        inputRole={inputRole}
-      />
+      <Input name="nationality" label="Nacionalidade" inputRole={inputRole} />
 
       <MaritalStatusSelect name="marital_status_select" inputRole={inputRole} />
 
-      <Input
-        name="rg"
-        icon={FiUser}
-        label="RG"
-        inputRole={inputRole}
-        maxLength={10}
-      />
+      <Input name="rg" label="RG" inputRole={inputRole} maxLength={10} />
 
-      <Input
-        name="rg_emitter"
-        icon={FiUser}
-        label="Órgão emissor"
-        inputRole={inputRole}
-      />
+      <Input name="rg_emitter" label="Órgão emissor" inputRole={inputRole} />
 
       <Input
         name="rg_emitter_uf"
-        icon={FiUser}
         label="UF do Órgão Emissor"
         inputRole={inputRole}
       />
 
       <Input
         name="pis_nis"
-        icon={FiUser}
         label="N° inscrição na Previdência Social (PIS ou NIS)"
         inputRole={inputRole}
       />
 
       <Input
         name="address.zip_code"
-        icon={FiUser}
         label="CEP"
         inputRole={inputRole}
         onBlur={e => handleCepBlur(numbersOnly(e.target.value))}
@@ -120,47 +94,21 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <PublicPlaceSelect name="public_place_select" inputRole={inputRole} />
 
-      <Input
-        name="address.street"
-        icon={FiUser}
-        label="Endereço"
-        inputRole={inputRole}
-      />
+      <Input name="address.street" label="Endereço" inputRole={inputRole} />
 
-      <Input
-        name="address.number"
-        icon={FiUser}
-        label="Número"
-        inputRole={inputRole}
-      />
+      <Input name="address.number" label="Número" inputRole={inputRole} />
 
       <Input
         name="address.complement"
-        icon={FiUser}
         label="Complemento"
         inputRole={inputRole}
       />
 
-      <Input
-        name="address.district"
-        icon={FiUser}
-        label="Bairro"
-        inputRole={inputRole}
-      />
+      <Input name="address.district" label="Bairro" inputRole={inputRole} />
 
-      <Input
-        name="address.city"
-        icon={FiUser}
-        label="Município"
-        inputRole={inputRole}
-      />
+      <Input name="address.city" label="Município" inputRole={inputRole} />
 
-      <Input
-        name="address.state_code"
-        icon={FiUser}
-        label="Estado"
-        inputRole={inputRole}
-      />
+      <Input name="address.state_code" label="Estado" inputRole={inputRole} />
     </>
   );
 };

@@ -5,8 +5,6 @@ import { Input, Button } from 'components/shared';
 import * as Yup from 'yup';
 import validateCpf from 'util/validations/cpf';
 
-import { FiArchive } from 'react-icons/fi';
-
 import { Container, Title, DefaultModal } from './styles';
 
 interface ModalProps {
@@ -68,7 +66,6 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
           <form onSubmit={onSubmit}>
             <Input
               name="cpf"
-              icon={FiArchive}
               label="Cpf"
               numbersOnly
               pattern="XXX.XXX.XXX-XX"

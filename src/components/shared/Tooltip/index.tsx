@@ -8,7 +8,7 @@ import { Container, ContentTooltip } from './styles';
 interface TooltipProps {
   title: string;
   className?: string;
-  type: 'success' | 'error' | 'info';
+  type: 'success' | 'error' | 'info' | 'primary';
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -21,7 +21,10 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const HtmlTooltip = withStyles(theme => ({
     tooltip: {
-      backgroundColor: styledTheme.tooltip[type].backgroundColor,
+      backgroundColor:
+        type === 'primary'
+          ? styledTheme.font.color.primary
+          : styledTheme.tooltip[type].backgroundColor,
       fontSize: theme.typography.pxToRem(12),
       border: 'none',
     },

@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import Select from 'components/shared/Select';
 
-import { FaAddressCard } from 'react-icons/fa';
-
 interface Props {
   name: string;
   className?: string;
@@ -37,7 +35,6 @@ const PublicPlaceSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Tipo de Logradouro"
-      icon={FaAddressCard}
       loadItems={loadItems}
       className={className}
       disabled={disabled}

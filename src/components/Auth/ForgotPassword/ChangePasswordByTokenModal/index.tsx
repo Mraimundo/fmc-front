@@ -7,8 +7,6 @@ import * as Yup from 'yup';
 import PasswordHelp from 'components/shared/PasswordHelp';
 import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
 
-import { FiLock } from 'react-icons/fi';
-
 import { Container, Title, Modal as DefaultModal } from './styles';
 
 interface ModalProps {
@@ -88,13 +86,11 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
           <form onSubmit={onSubmit}>
             <PasswordInput
               name="password"
-              icon={FiLock}
               label="Nova senha"
               help={PasswordHelp}
             />
             <PasswordInput
               name="password_confirmation"
-              icon={FiLock}
               label="Confirmar nova Senha"
             />
             <Button type="submit" buttonRole="primary" loading={loading}>

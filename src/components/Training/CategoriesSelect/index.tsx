@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import { FaTrophy } from 'react-icons/fa';
 import getCategories from 'services/training/getCategories';
 import transformer from 'services/training/transformers/categoriesToSelectOptions';
 
@@ -31,7 +30,6 @@ const CategoriesSelect: React.FC<Props> = ({
   return (
     <BaseSelect
       label={label}
-      icon={FaTrophy}
       loadItems={loadItems}
       className={className}
       value={value}

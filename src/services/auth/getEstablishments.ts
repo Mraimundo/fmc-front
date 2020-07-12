@@ -5,6 +5,7 @@ export interface Establishment {
   name: string;
   status: number;
   cnpj: string;
+  type_name: string;
 }
 
 interface Response {

@@ -12,6 +12,7 @@ interface Props {
   onEditClick?(id: number): Promise<void> | void;
   onResendEmailClick?(id: number): Promise<void> | void;
   onInactiveParticipantClick?(id: number): Promise<void> | void;
+  onActiveParticipantClick?(id: number): Promise<void> | void;
 }
 
 const Table: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const Table: React.FC<Props> = ({
   onEditClick,
   onResendEmailClick,
   onInactiveParticipantClick,
+  onActiveParticipantClick,
 }) => {
   const [tableData, setTableData] = useState<ParticipantIndicationTableData[]>(
     [],
@@ -33,6 +35,7 @@ const Table: React.FC<Props> = ({
         edit: onEditClick,
         resendIndicationEmail: onResendEmailClick,
         inactivaParticipantIndication: onInactiveParticipantClick,
+        activeParticipantIndication: onActiveParticipantClick,
       })}
       data={tableData}
       noResultText="Nenhuma Pesquisa encontrada"

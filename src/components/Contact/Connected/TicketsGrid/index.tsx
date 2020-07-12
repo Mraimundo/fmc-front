@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Tooltip } from 'components/shared';
 
 import { SendMessageDTO } from 'services/contact/connected/dtos';
 import { Contact, Message } from 'services/contact/connected/interfaces';
@@ -39,13 +40,29 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
   const getIcon = useCallback((status: StatusText) => {
     switch (status) {
       case 'pending':
-        return <FiClock size={26} />;
+        return (
+          <Tooltip title="Pendente" type="primary">
+            <FiClock size={26} />
+          </Tooltip>
+        );
       case 'answered':
-        return <FiCheckCircle size={26} color="green" />;
+        return (
+          <Tooltip title="Respondido" type="primary">
+            <FiCheckCircle size={26} color="green" />
+          </Tooltip>
+        );
       case 'closed':
-        return <FiSlash size={26} color="#e63027" />;
+        return (
+          <Tooltip title="Fechado" type="primary">
+            <FiSlash size={26} color="#e63027" />
+          </Tooltip>
+        );
       default:
-        return <FiClock size={26} />;
+        return (
+          <Tooltip title="Status não definido" type="primary">
+            <FiClock size={26} />
+          </Tooltip>
+        );
     }
   }, []);
 

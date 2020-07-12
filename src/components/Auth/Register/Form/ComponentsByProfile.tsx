@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
-import { FiUser } from 'react-icons/fi';
 import { Info, Input } from './styles';
 
 interface Props {
@@ -36,7 +35,6 @@ const ComponentsByProfile: React.FC<Props> = ({ participant, inputRole }) => {
           </Info>
           <Input
             name="role.name"
-            icon={FiUser}
             label="Cargo*"
             inputRole={inputRole}
             value={participant.role.name}
@@ -57,7 +55,6 @@ const ComponentsByProfile: React.FC<Props> = ({ participant, inputRole }) => {
           </Info>
           <Input
             name="role.name"
-            icon={FiUser}
             label="Cargo*"
             inputRole={inputRole}
             value={participant.role.name}

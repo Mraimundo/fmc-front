@@ -6,7 +6,6 @@ import { CreateTicketDTO } from 'services/contact/connected/dtos/index';
 import uploadFileToStorage from 'services/storage/sendFile';
 
 import { TextArea, Button } from 'components/shared';
-import { FiUser, FiMessageCircle } from 'react-icons/fi';
 import schema from './schemaValidation';
 
 import { Container, SubjectSelect, CategorySelect } from './styles';
@@ -102,7 +101,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
       <Container onSubmit={onSubmit} className={className}>
         <SubjectSelect name="subject" />
         <CategorySelect name="category" subjectId={subjectId} />
-        <TextArea name="message" icon={FiMessageCircle} label="Mensagem" />
+        <TextArea name="message" label="Mensagem" />
 
         <label htmlFor="fileId">
           <input

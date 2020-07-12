@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
-import { FiUser, FiLock, FiSmartphone } from 'react-icons/fi';
 import PasswordHelp from 'components/shared/PasswordHelp';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
@@ -105,7 +104,7 @@ const Form: React.FC<Props> = ({
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
         <Title>
-          Ativar cadastro -
+          Ativar cadastro -{' '}
           <strong>
             {participant.profile === 'FMC' && 'Equipe FMC'}
             {participant.profile === 'FOCALPOINT' && 'Focal Point'}
@@ -116,13 +115,11 @@ const Form: React.FC<Props> = ({
         <ComponentsByProfile participant={participant} inputRole={inputRole} />
         <Input
           name="nick_name"
-          icon={FiUser}
           label="Como gostaria de ser chamado*"
           inputRole={inputRole}
         />
         <Input
           name="name"
-          icon={FiUser}
           label="Nome completo*"
           inputRole={inputRole}
           disabled={
@@ -132,7 +129,6 @@ const Form: React.FC<Props> = ({
         />
         <Input
           name="email"
-          icon={FiUser}
           label="Email*"
           inputRole={inputRole}
           disabled={
@@ -142,7 +138,6 @@ const Form: React.FC<Props> = ({
         />
         <Input
           name="cpf"
-          icon={FiUser}
           label="CPF*"
           numbersOnly
           pattern="XXX.XXX.XXX-XX"
@@ -159,7 +154,6 @@ const Form: React.FC<Props> = ({
           />
           <Input
             name="cell_phone"
-            icon={FiSmartphone}
             numbersOnly
             label="Celular*"
             pattern="X XXXX-XXXX"
@@ -175,14 +169,12 @@ const Form: React.FC<Props> = ({
         <Title>Segurança</Title>
         <PasswordInput
           name="password"
-          icon={FiLock}
           label="Senha"
           inputRole={inputRole}
           help={PasswordHelp}
         />
         <PasswordInput
           name="password_confirmation"
-          icon={FiLock}
           label="Confirmar Senha"
           inputRole={inputRole}
         />

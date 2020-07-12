@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import Select from 'components/shared/Select';
 
-import { FaHandPaper } from 'react-icons/fa';
-
 interface Props {
   name: string;
   className?: string;
@@ -29,7 +27,6 @@ const MaritalStatusSelect: React.FC<Props> = ({
     <Select
       name={name}
       label="Estado civil"
-      icon={FaHandPaper}
       loadItems={loadItems}
       className={className}
       disabled={disabled}
