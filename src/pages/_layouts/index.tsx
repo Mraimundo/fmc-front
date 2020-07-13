@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ThemeContext } from 'styled-components';
-import ModalRegulations from 'components/Regulation/ModalAllRegulations';
+import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
 import { useLocation } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ const Dashboard: React.FC = ({ children }) => {
         {showLogo && <Logo />}
         {children}
         {!shouldShowRegulationsModal && <Popups />}
-        <ModalRegulations isOpen={shouldShowRegulationsModal} />
+        <ModalRegulations />
       </Container>
     </ThemeContext.Provider>
   );

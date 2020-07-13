@@ -6,6 +6,8 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: ${({ loading }) => (loading ? 'center' : 'flex-start')};
+  padding-top: 10px;
+  padding-bottom: 10px;
   > span {
     & + span {
       margin-left: 12px;

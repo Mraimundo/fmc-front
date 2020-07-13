@@ -55,15 +55,20 @@ const Actions: React.FC<Props> = ({
           />
         ) : (
           <ActionsBox>
-            {typeof edit === 'function' && personalData.status === PRECHARGE && (
-              <Button
-                type="button"
-                buttonRole="primary"
-                onClick={() => handleAction({ fn: edit, id })}
-              >
-                Editar
-              </Button>
-            )}
+            <Button
+              type="button"
+              buttonRole="primary"
+              onClick={() =>
+                typeof edit === 'function'
+                  ? handleAction({ fn: edit, id })
+                  : null
+              }
+              disabled={
+                typeof edit !== 'function' || personalData.status !== PRECHARGE
+              }
+            >
+              Editar
+            </Button>
             {typeof inactiveParticipantIndication === 'function' &&
               (personalData.status === ACTIVE ||
                 personalData.status === PRECHARGE) && (
@@ -89,16 +94,22 @@ const Actions: React.FC<Props> = ({
                   Ativar
                 </Button>
               )}
-            {typeof resendIndication === 'function' &&
-              personalData.status === PRECHARGE && (
-                <Button
-                  type="button"
-                  buttonRole="primary"
-                  onClick={() => handleAction({ fn: resendIndication, id })}
-                >
-                  Reenviar email
-                </Button>
-              )}
+
+            <Button
+              type="button"
+              buttonRole="primary"
+              onClick={() =>
+                typeof resendIndication === 'function'
+                  ? handleAction({ fn: resendIndication, id })
+                  : null
+              }
+              disabled={
+                typeof resendIndication !== 'function' ||
+                personalData.status !== PRECHARGE
+              }
+            >
+              Reenviar email
+            </Button>
           </ActionsBox>
         )}
       </Content>

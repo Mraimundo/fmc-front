@@ -36,7 +36,7 @@ const Quiz: React.FC = () => {
     if (questions?.length > 0) {
       setQuestionSelected(0);
     }
-  }, [questions]);
+  }, [questions, questionSelected]);
 
   useEffect(() => {
     if (questionSelected >= 0) {
@@ -113,7 +113,8 @@ const Quiz: React.FC = () => {
                   name="gender1"
                   value={question.myAnswerId}
                   onChange={e =>
-                    answerQuestion(question.id, parseInt(e.target.value, 0))}
+                    answerQuestion(question.id, parseInt(e.target.value, 0))
+                  }
                 >
                   {question?.options.map(item => (
                     <FormControlLabel
