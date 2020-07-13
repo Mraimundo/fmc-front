@@ -1,4 +1,9 @@
 export { default as CooperativeDistributionPoints } from './CooperativeDistributionPoints';
-export { default as ResalePointsTabContent } from './ResalePointsTabContent';
+export { default as CooperativePointsTabContent } from './CooperativePointsTabContent';
 export { default as TeamAwardsTabContent } from './TeamAwardsTabContent';
 export { default as ParticipantWidgetDistribution } from './ParticipantWidgetDistribution';
+export { default as ResumeDistribution } from './ResumeDistribution';
+export { default as Title } from './Title';
+export { default as Label } from './Label';
+export { default as Loader } from './Loader';
+export { default as Checkbox } from './Checkbox';

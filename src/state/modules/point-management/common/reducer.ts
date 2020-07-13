@@ -1,22 +1,39 @@
 import { Reducer } from 'redux';
 
+import { FetchState, ActionCreatorFailure } from '@types';
 import { CommonActions } from './actions';
 import {
-  SET_TOTAL_POINTS_TO_DISTRIBUTE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_RESALE,
+  SET_TOTAL_POINTS_COOPERATIVE,
+  SET_IS_READY_TO_DISTRIBUTE,
 } from './constants';
 
+const emptyFetchState: FetchState = { isFetching: false };
+const fetchingState: FetchState = { isFetching: true };
+const fetchErrorState = <T extends string>(
+  action: ActionCreatorFailure<T>,
+): FetchState => ({
+  errors: action.payload.errors,
+  isFetching: false,
+});
+
 export type CommonState = {
-  totalPointsToDistribute: string | null;
-  totalPointsTeamAwards: string | null;
-  totalPointsResale: string | null;
+  fetchTotalPointsToDistribute: FetchState;
+  isReadyToDistribute: boolean;
+  totalPointsToDistribute: string;
+  totalPointsTeamAwards: string;
+  totalPointsCooperative: string;
 };
 
 export const initialState: CommonState = {
-  totalPointsToDistribute: null,
-  totalPointsTeamAwards: null,
-  totalPointsResale: null,
+  fetchTotalPointsToDistribute: emptyFetchState,
+  isReadyToDistribute: false,
+  totalPointsToDistribute: '',
+  totalPointsTeamAwards: '',
+  totalPointsCooperative: '',
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -24,9 +41,17 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
   action: CommonActions,
 ): CommonState => {
   switch (action.type) {
-    case SET_TOTAL_POINTS_TO_DISTRIBUTE:
+    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION:
+      return { ...state, fetchTotalPointsToDistribute: fetchingState };
+    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE:
       return {
         ...state,
+        fetchTotalPointsToDistribute: fetchErrorState(action),
+      };
+    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS:
+      return {
+        ...state,
+        fetchTotalPointsToDistribute: emptyFetchState,
         totalPointsToDistribute: action.payload.totalPointsToDistribute,
       };
 
@@ -36,10 +61,16 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
         totalPointsTeamAwards: action.payload.totalPointsTeamAwards,
       };
 
-    case SET_TOTAL_POINTS_RESALE:
+    case SET_TOTAL_POINTS_COOPERATIVE:
       return {
         ...state,
-        totalPointsResale: action.payload.totalPointsResale,
+        totalPointsCooperative: action.payload.totalPointsCooperative,
+      };
+
+    case SET_IS_READY_TO_DISTRIBUTE:
+      return {
+        ...state,
+        isReadyToDistribute: action.payload.isReadyToDistribute,
       };
 
     default:

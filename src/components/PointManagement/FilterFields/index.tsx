@@ -6,16 +6,24 @@ import {
 } from 'state/modules/point-management/team-awards/types';
 import SubsidiarySelect from '../SubsidiarySelect';
 import ParticipantsFinder from '../ParticipantsFinder';
+import SelectedSubsidiaries from '../SelectedSubsidiaries';
 import RolesList from '../RolesList';
+import {
+  Wrapper,
+  SubsidiariesParticipantWrapper,
+  SubsidiariesWrapper,
+  RolesListWrapper,
+} from './styles';
 
 type Props = {
   subsidiaries: Subsidiary[] | null;
   selectedSubsidiaries: number[] | null;
   selectedSubsidiariesWithName: Subsidiary[] | null;
   roles: Role[] | null;
+  isFetchingRoles: boolean;
   selectedRoles: number[] | null;
-  handleSelectSubsidiary: (ids: number[]) => void;
-  handleSelectRole: (id: number) => void;
+  handleSelectSubsidiary: (id: number) => void;
+  handleSelectRole: (id?: number) => void;
   handleChangeParticipantsFinder: (term: string) => void;
 };
 const FilterFields: React.FC<Props> = ({
@@ -23,6 +31,7 @@ const FilterFields: React.FC<Props> = ({
   selectedSubsidiaries,
   selectedSubsidiariesWithName,
   roles,
+  isFetchingRoles = false,
   selectedRoles,
   handleSelectSubsidiary,
   handleSelectRole,
@@ -50,27 +59,33 @@ const FilterFields: React.FC<Props> = ({
         roles={roles}
         selectedRoles={selectedRoles}
         onSelect={handleSelectRole}
+        isFetchingRoles={isFetchingRoles}
       />
     ),
-    [roles, selectedRoles, handleSelectRole],
+    [roles, selectedRoles, handleSelectRole, isFetchingRoles],
+  );
+
+  const selectedSubsidiariesList = useMemo(
+    () => (
+      <SelectedSubsidiaries
+        subsidiaries={selectedSubsidiariesWithName}
+        onRemove={handleSelectSubsidiary}
+      />
+    ),
+    [selectedSubsidiariesWithName, handleSelectSubsidiary],
   );
 
   return (
-    <div>
-      <div>
-        <div>
+    <Wrapper>
+      <SubsidiariesParticipantWrapper>
+        <SubsidiariesWrapper>
           {subsidiarySelect}
-          <ul>
-            {!!selectedSubsidiariesWithName &&
-              selectedSubsidiariesWithName.map((sub: Subsidiary) => (
-                <li>{sub.label}</li>
-              ))}
-          </ul>
-        </div>
+          {selectedSubsidiariesList}
+        </SubsidiariesWrapper>
         {participantsFinder}
-      </div>
-      <div>{rolesList}</div>
-    </div>
+      </SubsidiariesParticipantWrapper>
+      <RolesListWrapper>{rolesList}</RolesListWrapper>
+    </Wrapper>
   );
 };
 

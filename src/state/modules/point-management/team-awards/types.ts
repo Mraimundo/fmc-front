@@ -16,11 +16,12 @@ export type Participant = {
   name: string;
   picture?: string | null;
   subsidiary: string;
+  role: Role;
 };
 
 export type ScoredParticipant = Participant & {
-  role: Role;
-  points?: string | null;
+  points: string;
+  assigned: boolean;
 };
 
 export type ParticipantsList = FetchParticipantsRawData;

@@ -2,10 +2,13 @@ import { expect } from 'chai';
 
 import reducer, { initialState } from './reducer';
 import {
-  SET_TOTAL_POINTS_TO_DISTRIBUTE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_RESALE,
+  SET_TOTAL_POINTS_COOPERATIVE,
 } from './constants';
+import { errors } from './mock';
 
 describe('src/state/modules/point-management/common/reducer', () => {
   it('should be a function', () => {
@@ -18,15 +21,46 @@ describe('src/state/modules/point-management/common/reducer', () => {
     expect(result).to.be.deep.equal(initialState);
   });
 
-  it('should can handle SET_TOTAL_POINTS_TO_DISTRIBUTE', () => {
+  it('should can handle FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION', () => {
     const result = reducer(undefined, {
-      type: SET_TOTAL_POINTS_TO_DISTRIBUTE,
-      payload: { totalPointsToDistribute: '10' },
+      type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
     });
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      totalPointsToDistribute: '10',
+      fetchTotalPointsToDistribute: {
+        isFetching: true,
+      },
+    });
+  });
+
+  it('should can handle FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE', () => {
+    const result = reducer(undefined, {
+      type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+      payload: { errors },
+    });
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      fetchTotalPointsToDistribute: {
+        isFetching: false,
+        errors,
+      },
+    });
+  });
+
+  it('should can handle FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS', () => {
+    const result = reducer(undefined, {
+      type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
+      payload: { totalPointsToDistribute: 5000 },
+    });
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      totalPointsToDistribute: 5000,
+      fetchTotalPointsToDistribute: {
+        isFetching: false,
+      },
     });
   });
 
@@ -42,15 +76,15 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_TOTAL_POINTS_RESALE', () => {
+  it('should can handle SET_TOTAL_POINTS_COOPERATIVE', () => {
     const result = reducer(undefined, {
-      type: SET_TOTAL_POINTS_RESALE,
-      payload: { totalPointsResale: '10' },
+      type: SET_TOTAL_POINTS_COOPERATIVE,
+      payload: { totalPointsCooperative: '10' },
     });
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      totalPointsResale: '10',
+      totalPointsCooperative: '10',
     });
   });
 });

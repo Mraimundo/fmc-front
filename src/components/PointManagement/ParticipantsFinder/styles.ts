@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
+import { FONTS } from 'styles/font/globals';
+
 export const Input = styled.input`
-  border: 1.5px solid #808285;
+  border: 1.2px solid #707070;
   border-radius: 0;
   width: 100%;
   height: 60px;
   outline: none;
   padding: 5px 10px;
-  color: #808285;
+  color: #707070;
+  margin-top: 5px;
+  width: 280px;
+  font-family: ${FONTS.medium};
 `;
 
 export const Wrapper = styled.div`

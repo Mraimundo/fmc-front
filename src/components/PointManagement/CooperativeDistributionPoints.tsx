@@ -1,29 +1,54 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-grid-system';
+import { useRifm } from 'rifm';
 
-type Props = {
-  totalPointsToDistrute?: number;
-  teamPoints?: number;
-  cooperativePoints?: number;
-  handleDistributePoints(): void;
-};
+import { formatPoints, parseNumber, formatCurrency } from 'util/points';
+import {
+  getTotalPointsToDistribute,
+  getTotalPointsTeamAwards,
+  getTotalPointsCooperative,
+  isEnabledBtnToDistribute,
+} from 'state/modules/point-management/common/selectors';
+import {
+  fetchTotalPointsToDistribute,
+  setTotalPointsTeamAwards,
+  setTotalPointsCooperative,
+  setIsReadyToDistribute,
+} from 'state/modules/point-management/common/actions';
 
-const CooperativeDistributionPoints: React.FC<Props> = ({
-  totalPointsToDistrute = 0,
-  teamPoints = 0,
-  cooperativePoints = 0,
-  handleDistributePoints,
-}) => {
-  const enableButton = useMemo(
-    () => teamPoints + cooperativePoints === totalPointsToDistrute,
-    [teamPoints, cooperativePoints, totalPointsToDistrute],
-  );
+const CooperativeDistributionPoints: React.FC = () => {
+  const totalPointsToDistrute = useSelector(getTotalPointsToDistribute);
+  const totalPointsTeamAwards = useSelector(getTotalPointsTeamAwards);
+  const totalPointsCooperative = useSelector(getTotalPointsCooperative);
+  const enabledBtnToDistribute = useSelector(isEnabledBtnToDistribute);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTotalPointsToDistribute());
+  }, [dispatch]);
+
+  const teamAwardsRifm = useRifm({
+    value: totalPointsTeamAwards,
+    onChange: (value: string) =>
+      dispatch(setTotalPointsTeamAwards(parseNumber(value))),
+    format: formatCurrency,
+  });
+
+  const cooperativeResaleRifm = useRifm({
+    value: totalPointsCooperative,
+    onChange: (value: string) =>
+      dispatch(setTotalPointsCooperative(parseNumber(value))),
+    format: formatCurrency,
+  });
 
   return (
     <Container>
       <div>
         <h1>
-          {`TOTAL PONTOS COOPERATIVA PARA DISTRIBUIR ${totalPointsToDistrute}`}
+          {`TOTAL PONTOS COOPERATIVA PARA DISTRIBUIR ${formatPoints(
+            totalPointsToDistrute,
+          )}`}
         </h1>
         <p>
           Defina como deseja utilizar seus e pontos. Eles podem ser distribuídos
@@ -31,10 +56,24 @@ const CooperativeDistributionPoints: React.FC<Props> = ({
         </p>
       </div>
       <div>
+        <input
+          type="tel"
+          placeholder="Pontos Equipe"
+          value={teamAwardsRifm.value}
+          onChange={teamAwardsRifm.onChange}
+        />
+        <input
+          type="text"
+          placeholder="Pontos Cooperativa"
+          value={cooperativeResaleRifm.value}
+          onChange={cooperativeResaleRifm.onChange}
+        />
+      </div>
+      <div>
         <button
           type="button"
-          disabled={!enableButton}
-          onClick={handleDistributePoints}
+          disabled={!enabledBtnToDistribute}
+          onClick={() => dispatch(setIsReadyToDistribute(true))}
           data-testid="button-distribute-points-cooperative"
         >
           DISTRIBUIR PONTOS

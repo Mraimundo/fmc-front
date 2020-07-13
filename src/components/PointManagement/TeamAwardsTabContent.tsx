@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { StoreState } from 'state/root-reducer';
@@ -7,9 +7,13 @@ import {
   getSelectedSubsidiaries,
   getSelectedSubsidiariesWithName,
   getRoles,
+  fetchRolesIsFetching,
   getSelectedRoles,
   getParticipants,
+  getScoredParticipants,
   fetchParticipantIsFetching,
+  getSelectedRolesAll,
+  getSelectedParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
 import {
   fetchSubsidiaries,
@@ -18,7 +22,10 @@ import {
   selectSubsidiary,
   selectRole,
   setParticipantFinder,
+  scoreParticipant,
+  setSelectedRolesAll,
 } from 'state/modules/point-management/team-awards/actions';
+import { Participant } from 'state/modules/point-management/team-awards/types';
 import Title from './Title';
 import FilterFields from './FilterFields';
 import ParticipantsList from './ParticipantsList';
@@ -29,17 +36,25 @@ const TeamAwardsTabContent: React.FC = () => {
     selectedSubsidiaries,
     selectedSubsidiariesWithName,
     roles,
+    isFetchingRoles,
     selectedRoles,
     participants,
+    scoredParticipants,
     isFetchingParticipant,
+    selectedRolesAll,
+    selectedParticipants,
   ] = useSelector((state: StoreState) => [
     getSubsidiaries(state),
     getSelectedSubsidiaries(state),
     getSelectedSubsidiariesWithName(state),
     getRoles(state),
+    fetchRolesIsFetching(state),
     getSelectedRoles(state),
     getParticipants(state),
+    getScoredParticipants(state),
     fetchParticipantIsFetching(state),
+    getSelectedRolesAll(state),
+    getSelectedParticipants(state),
   ]);
 
   const dispatch = useDispatch();
@@ -51,17 +66,31 @@ const TeamAwardsTabContent: React.FC = () => {
   }, [dispatch]);
 
   const handleSelectSubsidiary = useCallback(
-    (ids: number[]) => dispatch(selectSubsidiary(ids)),
+    (id: number) => dispatch(selectSubsidiary(id)),
     [dispatch],
   );
 
   const handleSelectRole = useCallback(
-    (id: number) => dispatch(selectRole(id)),
+    (id?: number) => dispatch(selectRole(id)),
     [dispatch],
   );
 
   const handleChangeParticipantsFinder = useCallback(
     (term: string) => dispatch(setParticipantFinder(term)),
+    [dispatch],
+  );
+
+  const handleScoreParticipant = useCallback(
+    (participant: Participant, points: string) => {
+      dispatch(scoreParticipant(participant, points));
+    },
+    [dispatch],
+  );
+
+  const handleSelectAllRole = useCallback(
+    (role: string) => {
+      dispatch(setSelectedRolesAll(role));
+    },
     [dispatch],
   );
 
@@ -73,13 +102,21 @@ const TeamAwardsTabContent: React.FC = () => {
         selectedSubsidiaries={selectedSubsidiaries}
         selectedSubsidiariesWithName={selectedSubsidiariesWithName}
         roles={roles}
+        isFetchingRoles={isFetchingRoles}
         selectedRoles={selectedRoles}
         handleSelectSubsidiary={handleSelectSubsidiary}
         handleSelectRole={handleSelectRole}
         handleChangeParticipantsFinder={handleChangeParticipantsFinder}
       />
       {!isFetchingParticipant ? (
-        <ParticipantsList participants={participants} />
+        <ParticipantsList
+          participants={participants}
+          scoredParticipants={scoredParticipants}
+          handleScoreParticipant={handleScoreParticipant}
+          handleSelectAllRole={handleSelectAllRole}
+          selectedRolesAll={selectedRolesAll}
+          selectedParticipants={selectedParticipants}
+        />
       ) : (
         <h2>buscando participantes...</h2>
       )}
