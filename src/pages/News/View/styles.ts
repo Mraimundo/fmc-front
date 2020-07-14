@@ -25,7 +25,8 @@ export const Content = styled.div`
   }
 
   > button {
-    width: 250px;
+    width: 265px;
+    height: 36px;
     margin: 25px 0;
     align-self: center;
   }

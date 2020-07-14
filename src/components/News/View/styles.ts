@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   > h3 {
-    font-size: 16px;
+    font-size: 21px;
     font-weight: bold;
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
@@ -25,7 +25,7 @@ export const Container = styled.div`
   }
 
   > p {
-    font-size: 12px;
+    font-size: 18px;
     color: ${({ theme }) => theme.font.color.secondary};
     margin-top: 20px;
     margin-bottom: 20px;

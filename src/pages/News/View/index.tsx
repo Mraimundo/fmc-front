@@ -24,7 +24,7 @@ const View: React.FC = () => {
   useEffect(() => {
     if (!params.id) return;
     const load = async () => {
-      getLastNews().then(list => setLastNews(list));
+      getLastNews(parseInt(params.id, 0)).then(list => setLastNews(list));
       try {
         const data = await getNewsById(parseInt(params.id, 0));
         setNews(data);
