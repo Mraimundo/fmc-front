@@ -106,7 +106,7 @@ const Form: React.FC<Props> = ({
         <>
           <h4>
             Indique os participantes da sua
-            {establishment.type_name}
+            {` ${establishment.type.name}`}
           </h4>
           <span>{establishment.name}</span>
           <FormContext {...methods}>

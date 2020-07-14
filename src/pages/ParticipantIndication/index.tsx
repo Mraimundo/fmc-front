@@ -248,7 +248,7 @@ const ParticipantIndication: React.FC = () => {
       <Content>
         <h3>
           Indique um participante
-          {` na ${establishmentSelected?.type_name} ${establishmentSelected?.name}`}
+          {` na ${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
           {establishments.length > 1 && (
             <Establishments
               establishments={establishments}
