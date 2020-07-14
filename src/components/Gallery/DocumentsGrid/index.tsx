@@ -4,7 +4,8 @@ import transformer, {
   Response as Data,
 } from 'services/gallery/transformers/toDocumentsList';
 
-import { FiDownload } from 'react-icons/fi';
+import { ReactSVG } from 'react-svg';
+import DownloadIcon from 'assets/images/indication/download.svg';
 import { Container, MiniBox } from './styles';
 
 interface Props {
@@ -32,7 +33,7 @@ const DocumentsGrid: React.FC<Props> = ({ gallery }) => {
             <p>{item.description}</p>
           </div>
           <a href={item.download_url} download>
-            <FiDownload size={28} />
+            <ReactSVG src={DownloadIcon} />
           </a>
         </MiniBox>
       ))}

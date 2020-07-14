@@ -33,13 +33,13 @@ export const MiniBox = styled.div`
 
   h3 {
     font-size: 16px;
-    font-weight: bolder;
+    font-weight: bold;
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;

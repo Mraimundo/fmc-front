@@ -5,8 +5,7 @@ import { Media } from 'services/gallery/interfaces';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 
 import { ImagesGrid, VideosGrid, DocumentsGrid } from 'components/Gallery';
-import { Button } from 'components/shared';
-import { Container, Content, Separator } from './styles';
+import { Container, Content, Separator, Button } from './styles';
 
 const List: React.FC = () => {
   const [images, setImages] = useState<Media[]>([]);

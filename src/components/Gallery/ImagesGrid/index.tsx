@@ -35,7 +35,7 @@ const ImagesGrid: React.FC<Props> = ({ gallery }) => {
             onClick={() => handlePictureClick(item.url)}
           />
           <span>{item.category.join(', ')} </span>
-          <h3>{item.title || 'Título não informard'}</h3>
+          <h3>{item.title || 'Título não informado'}</h3>
           <div>
             <span>{`Publicado em ${item.date}`} </span>
             <a href={item.download_url} download>

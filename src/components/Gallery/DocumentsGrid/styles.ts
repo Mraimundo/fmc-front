@@ -32,6 +32,9 @@ export const MiniBox = styled.div`
     margin-right: 20px;
     svg {
       color: ${({ theme }) => theme.font.color.primary};
+      > path {
+        fill: ${({ theme }) => theme.font.color.primary};
+      }
     }
   }
 
@@ -43,17 +46,17 @@ export const MiniBox = styled.div`
       color: ${({ theme }) => theme.font.color.secondary};
       transform: translateY(-2px);
       display: block;
+      margin-top: 2px;
     }
 
     h3 {
       font-size: 16px;
-      font-weight: bolder;
+      font-weight: bold;
       color: ${({ theme }) => theme.font.color.primary};
     }
 
     p {
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 16px;
       color: ${({ theme }) => theme.font.color.primary};
       margin-top: 6px;
     }

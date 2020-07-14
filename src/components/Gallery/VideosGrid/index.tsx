@@ -23,7 +23,7 @@ const VideosGrid: React.FC<Props> = ({ gallery }) => {
       {data.map(item => (
         <MiniBox key={`key-news-${item.id}`}>
           <ReactPlayer url={item.url} className="video-player" controls />
-          <h3>{item.title || 'Título não informardo'}</h3>
+          <h3>{item.title || 'Título não informado'}</h3>
           <p>{item.description}</p>
           <span>{`Publicado em ${item.date}`} </span>
         </MiniBox>

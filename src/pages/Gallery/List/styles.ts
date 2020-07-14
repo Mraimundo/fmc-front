@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import DefaultButton from 'components/shared/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -18,8 +19,6 @@ export const Content = styled.div`
   padding: 20px 60px;
 
   > button {
-    width: 250px;
-    height: 45px;
     margin: 25px 0;
     align-self: center;
     font-weight: bold;
@@ -42,4 +41,9 @@ export const Separator = styled.div`
   border-top: 2px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
   margin-bottom: 25px;
+`;
+
+export const Button = styled(DefaultButton)`
+  width: 265px;
+  height: 36px;
 `;
