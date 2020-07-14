@@ -82,13 +82,12 @@ const FormSignUp: React.FC = () => {
         {typeSelected === 'participant' ? (
           <Input
             name="param_first_access"
-            icon={FiUser}
             placeholder="CPF"
             numbersOnly
             pattern="XXX.XXX.XXX-XX"
           />
         ) : (
-          <Input name="param_first_access" icon={FiUser} placeholder="UPN" />
+          <Input name="param_first_access" placeholder="UPN" />
         )}
         <Button type="submit" buttonRole="primary" loading={loading}>
           Cadastrar

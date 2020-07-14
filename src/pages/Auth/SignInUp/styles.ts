@@ -15,7 +15,7 @@ export const Container = styled.div`
     rgba(56, 77, 85, 1) 100%
   );
 
-  padding: 70px 20px;
+  padding: 70px 20px 0 20px;
 
   > img {
     width: 100%;
@@ -51,6 +51,10 @@ export const Content = styled(animated.div)`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    > div + div {
+      margin-top: 8px;
+    }
 
     h1 {
       margin-bottom: 24px;
@@ -129,7 +133,7 @@ export const Content = styled(animated.div)`
 
 export const Title = styled.h3`
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   color: ${({ theme }) => theme.font.color.tertiary};
   width: 100%;
   @media screen and (min-width: 1367px) {
@@ -211,15 +215,17 @@ export const Contact = styled(ContactBallon)`
 `;
 
 export const ForgotPasswordButton = styled.button`
-  color: ${({ theme }) => theme.link.fontColor};
+  color: ${({ theme }) => theme.font.color.tertiary};
   display: block;
-  margin-top: 24px;
+  margin-top: 2px;
+  margin-bottom: 20px;
   border: none;
   background: transparent;
+  text-decoration: underline;
 
   transition: color 0.2s;
   will-change: color;
   &:hover {
-    color: ${({ theme }) => shade(0.2, theme.link.fontColor)};
+    color: ${({ theme }) => shade(0.2, theme.font.color.tertiary)};
   }
 `;
