@@ -19,6 +19,6 @@ const mock: Participant[] = [
   },
 ];
 
-export default (): Participant[] => {
+export default async (): Promise<Participant[]> => {
   return mock;
 };

@@ -16,4 +16,26 @@ export const Content = styled.div`
   flex-direction: column;
   background: #fff;
   padding: 20px 60px;
+
+  > h3 {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 35px;
+    margin-bottom: 30px;
+  }
+
+  > span {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 16px;
+    margin-left: 35px;
+    margin-bottom: 15px;
+  }
+`;
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 40px 0;
 `;

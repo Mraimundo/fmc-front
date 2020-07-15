@@ -48,6 +48,6 @@ const mock: Product[] = [
   },
 ];
 
-export default (): Product[] => {
+export default async (): Promise<Product[]> => {
   return mock;
 };

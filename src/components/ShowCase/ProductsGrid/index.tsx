@@ -24,7 +24,7 @@ const ProductsGrid: React.FC<Props> = ({ products }) => {
         <MiniBox key={`key-news-${item.id}`} to={`/news/${item.id}`}>
           <img src={item.imageUrl} alt={item.title} />
           <h4>{item.title}</h4>
-          <h3>{item.points}</h3>
+          <h3>{item.points} pontos</h3>
           <Link to={item.urlAccess}>Resgatar</Link>
         </MiniBox>
       ))}

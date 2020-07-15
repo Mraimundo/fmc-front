@@ -1,0 +1,71 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const Container = styled.div`
+  display: flex;
+  width: 276px;
+`;
+
+export const Content = styled.div`
+  padding: 10px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f6f6f6;
+  width: 100%;
+  height: 100%;
+
+  > h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    margin-top: 15px;
+  }
+
+  > h4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    margin-top: 8px;
+  }
+
+  > a {
+    margin-top: 30px;
+    width: 158px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ theme }) => theme.button.primary.backgroundColor};
+    color: ${({ theme }) => theme.button.primary.fontColor};
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+`;
+
+export const Circle = styled.div`
+  width: 101px;
+  height: 101px;
+  border: 1px solid ${({ theme }) => theme.font.color.primary};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > span {
+    font-size: 14px;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    text-align: center;
+  }
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: fit;
+  }
+`;
