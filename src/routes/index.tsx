@@ -17,6 +17,7 @@ import Faq from 'pages/Faq';
 import TrainingList from 'pages/Training/List';
 import TrainingView from 'pages/Training/View';
 import PointManagement from 'pages/PointManagement';
+import ShowCase from 'pages/ShowCase';
 
 import Route from './Route';
 
@@ -44,6 +45,7 @@ const Routes: React.FC = () => (
     <Route exact path="/training" component={TrainingList} />
     <Route exact path="/training/:id" component={TrainingView} />
     <Route exact path="/distribuicao-de-pontos" component={PointManagement} />
+    <Route exact path="/vitrine" component={ShowCase} />
   </Switch>
 );
 

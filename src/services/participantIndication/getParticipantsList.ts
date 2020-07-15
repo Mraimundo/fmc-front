@@ -28,7 +28,5 @@ export default async ({
   );
 
   // Enqnto o endpoint não suporta que passe o parametro de order
-  return data.indications.sort((item1, item2) =>
-    item1.participant.status > item2.participant.status ? -1 : 1,
-  );
+  return data.indications;
 };
