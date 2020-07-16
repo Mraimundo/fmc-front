@@ -56,6 +56,7 @@ export const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   > span {
     font-size: 14px;
@@ -66,6 +67,32 @@ export const Circle = styled.div`
   > img {
     width: 100%;
     height: 100%;
-    object-fit: fit;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  > div {
+    position: absolute;
+    bottom: 0;
+    right: -14px;
+
+    input {
+      display: none;
+    }
+
+    label {
+      > div {
+        cursor: pointer;
+        svg {
+          color: ${({ theme }) => theme.font.color.primary};
+          > path {
+            fill: ${({ theme }) => theme.font.color.primary};
+          }
+          > circle {
+            fill: ${({ theme }) => theme.font.color.primary};
+          }
+        }
+      }
+    }
   }
 `;

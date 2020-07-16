@@ -1,4 +1,4 @@
-import { Participant } from '../interfaces';
+import { ParticipantGroup } from '../interfaces';
 
 const format = (value: number): string => {
   const { format: formatS } = new Intl.NumberFormat('pt-BR', {
@@ -13,20 +13,18 @@ const format = (value: number): string => {
 
 export interface Response {
   id: number;
-  imageUrl: string;
   name: string;
   points: string;
   urlAccess: string;
-  type: 'cpf' | 'cnpj';
+  category: string;
 }
 
-export default (participant: Participant): Response => {
-  return {
+export default (data: ParticipantGroup[]): Response[] => {
+  return data.map(participant => ({
     id: participant.id,
-    imageUrl: participant.imageUrl,
     name: participant.name,
     points: format(participant.points),
     urlAccess: participant.urlPi,
-    type: participant.type,
-  };
+    category: participant.category,
+  }));
 };
