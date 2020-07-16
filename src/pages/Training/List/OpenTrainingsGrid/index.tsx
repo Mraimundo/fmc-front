@@ -13,8 +13,10 @@ const OpenTrainingsGrid: React.FC = () => {
   const [pagination, setPagination] = useState<Pagination>({} as Pagination);
 
   useEffect(() => {
+    console.log('oi');
     getTrainings({ status: TRAINING_STATUS.AVAILABLE }).then(
       ({ data, pagination: apiPagination }) => {
+        console.log(data);
         setTrainings(data);
         setPagination(apiPagination);
       },

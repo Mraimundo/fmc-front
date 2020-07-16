@@ -7,8 +7,6 @@ export const Container = styled(Link)`
   color: ${({ theme }) => theme.font.color.tertiary};
   background: ${({ theme }) => theme.font.color.primary};
   transition: color 0.2s;
-  width: auto;
-  padding: 6px 20px;
   text-decoration: none;
   border-radius: 8px;
   align-self: center;
@@ -16,7 +14,8 @@ export const Container = styled(Link)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  margin-top: 10px;
+  width: 86px;
+  height: 29px;
 
   background-position: center;
   transition: background 0.5s;

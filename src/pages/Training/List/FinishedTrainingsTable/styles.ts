@@ -9,4 +9,9 @@ export const Container = styled(Table)`
     font-size: 14px;
     font-weight: bold;
   }
+
+  ._customWidth {
+    width: 94px;
+    padding-left: 0;
+  }
 `;

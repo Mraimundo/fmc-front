@@ -34,6 +34,7 @@ export default [
     fn: (id: string) => (
       <Actions name="Gabarito" actionUrl={`/trainings/${id}`} />
     ),
+    className: '_customWidth',
   },
   {
     column: ' ',
@@ -41,5 +42,6 @@ export default [
     fn: (certificateUrl: string) => (
       <Actions name="Certificado" actionUrl={certificateUrl} />
     ),
+    className: '_customWidth',
   },
 ];

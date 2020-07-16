@@ -6,17 +6,18 @@ export const Container = styled.div`
   justify-content: space-between;
 
   > span {
-    width: 160px;
-    height: 40px;
+    width: 232px;
+    height: 48px;
     border-radius: 3px;
     background-color: transparent;
     border: 1px solid ${({ theme }) => theme.font.color.primary};
-    font-size: 14px;
+    font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
   }
 
   > div {
@@ -26,25 +27,26 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    span {
+    > span {
       font-size: 12px;
-      color: ${({ theme }) => theme.font.color.primary};
+      color: ${({ theme }) => theme.font.color.secondary};
     }
 
     h3 {
-      font-size: 16px;
+      font-size: 21px;
       font-weight: bold;
       color: ${({ theme }) => theme.font.color.primary};
-      margin: 4px 0 2px 0;
+      margin: 1px 0 2px 0;
     }
 
     > div {
       display: flex;
       width: 100%;
       justify-content: space-between;
+      margin-top: 6px;
 
       > span {
-        font-size: 10px;
+        font-size: 12px;
         color: ${({ theme }) => theme.font.color.secondary};
       }
     }

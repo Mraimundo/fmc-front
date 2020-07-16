@@ -5,6 +5,7 @@ export interface Header {
   column: string;
   dataValue: string;
   fn?(value: string | Record<string, any>): React.ReactNode;
+  className?: string;
 }
 
 interface Props {
@@ -15,8 +16,10 @@ const Head: React.FC<Props> = ({ headers }) => {
   return (
     <Thead>
       <Tr>
-        {headers.map(({ column, dataValue }) => (
-          <Th key={dataValue}>{column}</Th>
+        {headers.map(({ column, dataValue, className }) => (
+          <Th key={dataValue} className={className}>
+            {column}
+          </Th>
         ))}
       </Tr>
     </Thead>

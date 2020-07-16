@@ -16,14 +16,14 @@ export default (data: Training[]): Response[] => {
   return data.map(item => ({
     id: item.id,
     title: item.title,
-    category: item.category.map(i => i.name).join(', '),
-    startDateParticipation: item.participation?.started_date
-      ? formatDate(item.participation.started_date)
+    category: item.categories.map(i => i.name).join(', '),
+    startDateParticipation: item.participation?.startedDate
+      ? formatDate(item.participation.startedDate)
       : '',
-    endDateParticipation: item.participation?.finished_date
-      ? formatDate(item.participation.finished_date)
+    endDateParticipation: item.participation?.finishedDate
+      ? formatDate(item.participation.finishedDate)
       : '',
     status: getStatusText(item.status),
-    certificateUrl: item.participation?.certificate_url || '',
+    certificateUrl: item.participation?.certificateUrl || '',
   }));
 };

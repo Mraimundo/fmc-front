@@ -14,14 +14,14 @@ export interface Category {
 
 interface Participation {
   id: number;
-  started_date: Date;
-  finished_date: Date;
-  total_points: number;
-  right_answers: number;
-  certificate_url: string;
+  startedDate: Date;
+  finishedDate: Date;
+  totalPoints: number;
+  rightAnswers: number;
+  certificateUrl: string;
 }
 
-interface Media {
+export interface Media {
   id: number;
   title: string;
   url: string;
@@ -31,13 +31,13 @@ interface Media {
 export interface Training {
   id: number;
   title: string;
-  start_date: Date;
-  end_date: Date;
+  startDate: Date;
+  endDate: Date;
   status: Status;
-  image_url: string;
-  category: Category[];
+  imageUrl: string;
+  categories: Category[];
   media: Media[];
-  number_of_questions: number;
+  numberOfQuestions: number;
   participation?: Participation;
   summary: string;
   body: string;

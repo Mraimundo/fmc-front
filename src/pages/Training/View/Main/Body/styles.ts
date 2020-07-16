@@ -5,12 +5,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  > h4 {
+    font-size: 21px;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    margin-top: 30px;
+  }
+
   > h3 {
-    font-size: 12px;
-    color: ${({ theme }) => theme.font.color.secondary};
-    margin-top: 20px;
+    font-size: 18px;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    margin-top: 10px;
     margin-bottom: 20px;
-    opacity: 0.7;
     text-align: justify;
   }
 

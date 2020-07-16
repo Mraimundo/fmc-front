@@ -29,8 +29,9 @@ export const MiniBox = styled.div`
   }
 
   span {
-    font-size: 12px;
+    font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
+    margin-top: 6px;
   }
 
   h3 {
@@ -46,7 +47,7 @@ export const MiniBox = styled.div`
     justify-content: space-between;
 
     > span {
-      font-size: 10px;
+      font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
     }
   }

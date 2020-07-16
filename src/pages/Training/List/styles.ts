@@ -20,19 +20,23 @@ export const Content = styled.div`
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bolder;
+    font-weight: bold;
     margin-left: 35px;
     margin-bottom: 15px;
+    font-size: 24px;
   }
 `;
 
 export const CategoriesSelect = styled(DefaultCategoriesSelect)`
   margin-left: 35px;
+  margin-top: 20px;
+  margin-bottom: 5px;
 
   ._inputContainer {
     height: 40px;
     width: 100%;
     max-width: 360px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
 `;
 

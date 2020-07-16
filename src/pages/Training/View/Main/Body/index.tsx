@@ -7,6 +7,7 @@ const Body: React.FC = () => {
 
   return (
     <Container>
+      <h4>Conteúdo teórico</h4>
       <h3>{training?.summary}</h3>
       <div>
         {training?.videoUrl ? (

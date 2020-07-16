@@ -25,10 +25,10 @@ export interface Response {
 export default (data: Training): Response => {
   return {
     id: data.id,
-    category: data.category.map(i => i.name),
+    category: data.categories.map(i => i.name),
     title: data.title,
-    startDate: formatDate(data.start_date),
-    endDate: formatDate(data.end_date),
+    startDate: formatDate(data.startDate),
+    endDate: formatDate(data.endDate),
     imageUrl: data.media.find(item => item.type === 'image')?.url || '',
     videoUrl: data.media.find(item => item.type === 'video')?.url || '',
     status: getStatusText(data.status),
@@ -36,6 +36,6 @@ export default (data: Training): Response => {
     body: data.body,
     documents: data.media
       .filter(item => item.type === 'document')
-      .map(item => ({ id: item.id, url: item.url, imageUrl: data.image_url })),
+      .map(item => ({ id: item.id, url: item.url, imageUrl: data.imageUrl })),
   };
 };

@@ -16,8 +16,8 @@ const Body: React.FC<Props> = ({ headers, data }) => {
     <Tbody>
       {data.map((value, index) => (
         <Tr key={`tr-${index}`}>
-          {headers.map(({ dataValue, fn }) => (
-            <Td key={dataValue}>
+          {headers.map(({ dataValue, fn, className }) => (
+            <Td key={dataValue} className={className}>
               {fn ? fn(value[dataValue]) : value[dataValue]}
             </Td>
           ))}

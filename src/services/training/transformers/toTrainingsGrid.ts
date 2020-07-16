@@ -14,9 +14,9 @@ export default (data: Training[]): Response[] => {
   return data.map(item => ({
     id: item.id,
     title: item.title,
-    category: item.category.map(i => i.name),
-    startDate: formatDate(item.start_date),
-    endDate: formatDate(item.end_date),
-    imageUrl: item.image_url,
+    category: item.categories.map(i => i.name),
+    startDate: formatDate(item.startDate),
+    endDate: formatDate(item.endDate),
+    imageUrl: item.imageUrl,
   }));
 };

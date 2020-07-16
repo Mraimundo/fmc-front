@@ -1,17 +1,17 @@
 import { vendavallApi } from 'services/api';
 import { Category } from './interfaces';
 
+interface ApiResponse {
+  categories: Category[];
+}
+
 export default async (): Promise<Category[]> => {
   try {
-    /* const {
-      data: { roles },
-    } = await vendavallApi.get<ApiResponse>(`roles`); */
+    const {
+      data: { categories },
+    } = await vendavallApi.get<ApiResponse>('trainings/get-categories');
+    return categories;
   } catch (e) {
     return [];
   }
-
-  return [
-    { id: 1, name: 'Categoria 1' },
-    { id: 2, name: 'Categoria 3' },
-  ];
 };

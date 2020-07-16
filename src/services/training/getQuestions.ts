@@ -42,8 +42,7 @@ const questions: Question[] = [
       },
       {
         id: 6,
-        answer:
-          'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
+        answer: 'RESPOSTA CERTA',
       },
       {
         id: 7,
@@ -52,33 +51,6 @@ const questions: Question[] = [
       },
       {
         id: 8,
-        answer:
-          'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
-      },
-    ],
-  },
-  {
-    id: 3,
-    question:
-      'Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta Pergunta?',
-    options: [
-      {
-        id: 9,
-        answer:
-          'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
-      },
-      {
-        id: 10,
-        answer:
-          'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
-      },
-      {
-        id: 11,
-        answer:
-          'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
-      },
-      {
-        id: 12,
         answer:
           'Resposta Resposta Resposta Resposta Resposta Resposta Resposta',
       },

@@ -6,8 +6,9 @@ export const Container = styled.div`
   padding-left: 35px;
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bolder;
+    font-weight: bold;
     margin-bottom: 15px;
+    font-size: 24px;
   }
 
   > div {
@@ -22,6 +23,12 @@ export const Container = styled.div`
     a {
       margin-left: 10px;
       color: ${({ theme }) => theme.font.color.primary};
+      svg {
+        color: ${({ theme }) => theme.font.color.primary};
+        > path {
+          fill: ${({ theme }) => theme.font.color.primary};
+        }
+      }
     }
   }
 `;
