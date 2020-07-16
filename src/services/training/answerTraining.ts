@@ -5,6 +5,7 @@ interface ApiResponse {
   certificate: boolean;
   message: string;
   points: number;
+  approved: boolean;
 }
 
 export default async (request: AnswerTrainingDTO): Promise<ApiResponse> => {

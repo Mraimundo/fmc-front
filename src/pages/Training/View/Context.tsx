@@ -10,6 +10,8 @@ import {
   getQuestions,
   answerTraining,
   getRightAnswers,
+  checkIfParticipantHasBeenApproved,
+  getMyAnswers,
 } from 'services/training';
 import setVideoWatchedService from 'services/training/setVideoWatched';
 import transformer, {
@@ -21,7 +23,7 @@ import history from 'services/history';
 
 export interface Question extends IQuestion {
   myAnswerId: number | null;
-  rightAnswerId: number | null;
+  correct: boolean | null;
 }
 
 interface TrainingContextState {
@@ -35,6 +37,9 @@ interface TrainingContextState {
   answerQuestion(questionId: number, answerId: number): void;
   sendAnswers(): Promise<void>;
   quizAlreadyAnswered: boolean;
+  successModalOpened: boolean;
+  closeSuccessModal(): void;
+  approved: boolean;
 }
 
 const TrainingContext = createContext<TrainingContextState>(
@@ -47,7 +52,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizAlreadyAnswered, setQuizAlreadyAnswered] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [successModalOpened, setSuccessModalOpened] = useState(false);
+  const [approved, setApproved] = useState(false);
   const { addToast } = useToast();
+
+  const closeSuccessModal = useCallback(() => setSuccessModalOpened(false), []);
 
   const sendAnswers = useCallback(async () => {
     if (!training) {
@@ -63,8 +72,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
       return;
     }
     try {
-      const passou = true;
-      await answerTraining({
+      const { approved: approvedApi, message } = await answerTraining({
         trainingId: training.id,
         answers: questions.map(item => ({
           questionId: item.id,
@@ -72,7 +80,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
         })),
       });
       setQuizAlreadyAnswered(true);
-      if (passou) {
+      if (approvedApi) {
+        setApproved(approvedApi);
+        setSuccessModalOpened(true);
         getRightAnswers(training.id).then(answers => {
           setQuestions(data =>
             data.map(item => ({
@@ -81,6 +91,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
                 answers.find(i => i.question_id === item.id)?.answer_id || null,
             })),
           );
+        });
+      } else {
+        addToast({
+          title: message,
+          type: 'success',
         });
       }
     } catch {
@@ -94,15 +109,36 @@ export const TrainingProvider: React.FC = ({ children }) => {
   const loadTraining = useCallback(
     async (trainingId: number): Promise<void> => {
       try {
-        getQuestions(trainingId).then(data =>
-          setQuestions(
-            data.questions.map(item => ({
-              ...item,
-              myAnswerId: null,
-              rightAnswerId: null,
-            })),
-          ),
-        );
+        getQuestions(trainingId).then(async data => {
+          const approvedApi = await checkIfParticipantHasBeenApproved(
+            trainingId,
+          );
+          if (approvedApi) {
+            const answers = await getMyAnswers(trainingId);
+            setQuestions(
+              data.map(item => ({
+                ...item,
+                correct:
+                  answers.find(i => i.question_id === item.id)?.correct ||
+                  false,
+                myAnswerId:
+                  answers.find(i => i.question_id === item.id)?.answer_id ||
+                  null,
+              })),
+            );
+            setQuizAlreadyAnswered(true);
+            setShowQuiz(true);
+            setApproved(approvedApi);
+          } else {
+            setQuestions(
+              data.map(item => ({
+                ...item,
+                myAnswerId: null,
+                correct: null,
+              })),
+            );
+          }
+        });
         const data = await getTraining(trainingId);
         setTraining(transformer(data));
       } catch {
@@ -151,6 +187,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
         answerQuestion,
         sendAnswers,
         quizAlreadyAnswered,
+        successModalOpened,
+        closeSuccessModal,
+        approved,
       }}
     >
       {children}

@@ -1,11 +1,13 @@
 export const TRAINING_STATUS = {
-  AVAILABLE: 0,
-  FINISHED: 1,
+  AVAILABLE: 'available',
+  INITIATED: 'initiated',
+  CLOSED: 'closed',
 };
 
 export type Status =
   | typeof TRAINING_STATUS.AVAILABLE
-  | typeof TRAINING_STATUS.FINISHED;
+  | typeof TRAINING_STATUS.INITIATED
+  | typeof TRAINING_STATUS.CLOSED;
 
 export interface Category {
   id: number;
@@ -13,12 +15,9 @@ export interface Category {
 }
 
 interface Participation {
-  id: number;
   startedDate: Date;
   finishedDate: Date;
-  totalPoints: number;
-  rightAnswers: number;
-  certificateUrl: string;
+  approved: boolean;
 }
 
 export interface Media {

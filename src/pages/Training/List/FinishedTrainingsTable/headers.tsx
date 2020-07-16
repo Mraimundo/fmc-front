@@ -7,6 +7,12 @@ interface Props {
   inactivaParticipantIndication?(id: number): Promise<void> | void;
 }
 
+interface CustomProps {
+  id: number;
+  approved: boolean;
+  certificateUrl: string;
+}
+
 export default [
   {
     column: 'Treinamentos',
@@ -30,18 +36,24 @@ export default [
   },
   {
     column: ' ',
-    dataValue: 'id',
-    fn: (id: string) => (
-      <Actions name="Gabarito" actionUrl={`/trainings/${id}`} />
-    ),
+    dataValue: 'custom',
+    fn: ({ id, approved }: CustomProps) =>
+      approved ? (
+        <Actions name="Gabarito" actionUrl={`/training/${id}`} />
+      ) : (
+        <></>
+      ),
     className: '_customWidth',
   },
   {
     column: ' ',
-    dataValue: 'certificateUrl',
-    fn: (certificateUrl: string) => (
-      <Actions name="Certificado" actionUrl={certificateUrl} />
-    ),
+    dataValue: 'custom',
+    fn: ({ id, approved, certificateUrl }: CustomProps) =>
+      approved ? (
+        <Actions name="Certificado" actionUrl={certificateUrl} />
+      ) : (
+        <Actions name="Acessar" actionUrl={`/training/${id}`} />
+      ),
     className: '_customWidth',
   },
 ];

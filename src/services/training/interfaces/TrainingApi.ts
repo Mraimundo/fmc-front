@@ -26,7 +26,7 @@ export interface QuizVideo {
 
 export interface TrainingApi {
   id: number;
-  title: string;
+  name: string;
   body: string;
   start_date: Date;
   end_date: Date;
@@ -42,4 +42,10 @@ export interface TrainingApi {
   points_value: number;
   quiz_categories: Category[];
   quiz_videos: QuizVideo[];
+  approved?: boolean;
+  participant_feedback?: {
+    approved: boolean;
+    approved_at: Date;
+    started_at: Date;
+  };
 }

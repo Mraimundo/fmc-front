@@ -8,20 +8,24 @@ import { Button } from 'components/shared';
 import Grid from './Grid';
 import { Container, Content } from './styles';
 
-const OpenTrainingsGrid: React.FC = () => {
+interface Props {
+  categoryId: number | null;
+}
+
+const OpenTrainingsGrid: React.FC<Props> = ({ categoryId }) => {
   const [trainings, setTrainings] = useState<Training[]>([]);
   const [pagination, setPagination] = useState<Pagination>({} as Pagination);
 
   useEffect(() => {
-    console.log('oi');
-    getTrainings({ status: TRAINING_STATUS.AVAILABLE }).then(
-      ({ data, pagination: apiPagination }) => {
-        console.log(data);
-        setTrainings(data);
-        setPagination(apiPagination);
-      },
-    );
-  }, []);
+    getTrainings({
+      status: TRAINING_STATUS.AVAILABLE,
+      categoryId,
+    }).then(({ data, pagination: apiPagination }) => {
+      console.log(data);
+      setTrainings(data);
+      setPagination(apiPagination);
+    });
+  }, [categoryId]);
 
   const handleLoadMore = useCallback(() => {
     if (pagination.current_page === pagination.last_page) return;

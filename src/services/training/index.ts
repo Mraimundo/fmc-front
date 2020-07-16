@@ -5,6 +5,8 @@ import setVideoWatched from './setVideoWatched';
 import getQuestions from './getQuestions';
 import answerTraining from './answerTraining';
 import getRightAnswers from './getRightAnswers';
+import checkIfParticipantHasBeenApproved from './checkIfParticipantHasBeenApproved';
+import getMyAnswers from './getMyAnswers';
 
 export {
   getCategories,
@@ -14,4 +16,6 @@ export {
   getQuestions,
   answerTraining,
   getRightAnswers,
+  checkIfParticipantHasBeenApproved,
+  getMyAnswers,
 };

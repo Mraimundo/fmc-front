@@ -10,6 +10,11 @@ export interface Response {
   endDateParticipation: string;
   status: string;
   certificateUrl: string;
+  custom: {
+    id: number;
+    approved: boolean;
+    certificateUrl: string;
+  };
 }
 
 export default (data: Training[]): Response[] => {
@@ -22,8 +27,15 @@ export default (data: Training[]): Response[] => {
       : '',
     endDateParticipation: item.participation?.finishedDate
       ? formatDate(item.participation.finishedDate)
-      : '',
-    status: getStatusText(item.status),
-    certificateUrl: item.participation?.certificateUrl || '',
+      : ``,
+    status: item.participation?.approved
+      ? 'Finalizado'
+      : getStatusText(item.status),
+    certificateUrl: '',
+    custom: {
+      id: item.id,
+      approved: !!item.participation?.approved,
+      certificateUrl: '',
+    },
   }));
 };

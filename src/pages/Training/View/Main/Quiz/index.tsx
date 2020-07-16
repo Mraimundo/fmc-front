@@ -81,9 +81,11 @@ const Quiz: React.FC = () => {
 
   return (
     <Container>
-      <Button buttonRole="primary" type="button" onClick={handleAnswerClick}>
-        Responder
-      </Button>
+      {!canShowTheQuiz && (
+        <Button buttonRole="primary" type="button" onClick={handleAnswerClick}>
+          Responder
+        </Button>
+      )}
       {canShowTheQuiz && !!question && (
         <>
           <Content>
@@ -93,11 +95,7 @@ const Quiz: React.FC = () => {
                   selected={key === questionSelected}
                   key={`question-${item.id}`}
                   onClick={() => setQuestionSelected(key)}
-                  status={
-                    quizAlreadyAnswered
-                      ? item.myAnswerId === item.rightAnswerId
-                      : undefined
-                  }
+                  status={quizAlreadyAnswered ? !!item.correct : undefined}
                 >
                   <span>{key + 1}</span>
                   <strong />
@@ -136,22 +134,25 @@ const Quiz: React.FC = () => {
             >
               {`<< Anterior`}
             </Button>
-            <Button
-              type="button"
-              buttonRole="primary"
-              loading={loading}
-              onClick={
-                questionSelected === questions.length - 1
-                  ? handleSave
-                  : handleNextQuestion
-              }
-            >
-              {`${
-                questionSelected === questions.length - 1
-                  ? 'Salvar'
-                  : 'Próximo >>'
-              }  `}
-            </Button>
+            {(!quizAlreadyAnswered ||
+              questionSelected !== questions.length - 1) && (
+              <Button
+                type="button"
+                buttonRole="primary"
+                loading={loading}
+                onClick={
+                  questionSelected === questions.length - 1
+                    ? handleSave
+                    : handleNextQuestion
+                }
+              >
+                {`${
+                  questionSelected === questions.length - 1
+                    ? 'Salvar'
+                    : 'Próximo >>'
+                }  `}
+              </Button>
+            )}
           </Actions>
         </>
       )}

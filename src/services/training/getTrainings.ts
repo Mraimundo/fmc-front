@@ -8,6 +8,7 @@ interface Request {
   page?: number;
   limit?: number;
   status: Status;
+  categoryId?: number | null;
 }
 
 interface Data {
@@ -16,7 +17,7 @@ interface Data {
 }
 
 interface ApiResponse {
-  trainings: TrainingApi[];
+  data: TrainingApi[];
   pagination: Pagination;
 }
 
@@ -24,21 +25,24 @@ export default async ({
   page = 1,
   limit = 3,
   status,
+  categoryId,
 }: Request): Promise<Data> => {
   try {
+    let extraSearch = '';
+    if (categoryId) {
+      extraSearch = `&categories[0]=${categoryId}`;
+    }
     const {
-      data: { trainings, pagination },
+      data: { data, pagination },
     } = await vendavallApi.get<ApiResponse>(
-      `trainings/get-trainings?page=${page}&limit=3&status=${status}`,
+      `trainings?status[0]=${status}&page=${page}&limit=${limit}${extraSearch}`,
     );
-    console.log(trainings);
 
     return {
-      data: trainings.map(item => transformer(item)),
+      data: data.map(item => transformer(item)),
       pagination,
     };
   } catch (e) {
-    console.log(e);
     return {
       data: [],
       pagination: {} as Pagination,

@@ -8,6 +8,7 @@ import Header from './Header';
 import Body from './Body';
 import Documents from './Documents';
 import Quiz from './Quiz';
+import SuccessModal from './SuccessModal';
 
 import { Container, Content, Separator } from './styles';
 
@@ -19,7 +20,7 @@ const Main: React.FC = () => {
   const params = useParams<Params>();
   const { addToast } = useToast();
 
-  const { loadTraining } = useTraining();
+  const { loadTraining, successModalOpened, closeSuccessModal } = useTraining();
 
   useEffect(() => {
     if (!params.id) return;
@@ -36,6 +37,10 @@ const Main: React.FC = () => {
         <Documents />
         <Separator />
         <Quiz />
+        <SuccessModal
+          isOpen={successModalOpened}
+          onRequestClose={closeSuccessModal}
+        />
       </Content>
     </Container>
   );

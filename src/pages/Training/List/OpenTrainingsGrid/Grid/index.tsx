@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import startTraining from 'services/training/startTraining';
+import history from 'services/history';
 
 import { Training } from 'services/training/interfaces';
 import transformer, {
@@ -19,6 +21,11 @@ const Grid: React.FC<Props> = ({ data }) => {
     setGridData(transformer(data));
   }, [data]);
 
+  const handleStartTraining = useCallback((trainingId: number) => {
+    startTraining(trainingId);
+    history.push(`/training/${trainingId}`);
+  }, []);
+
   return (
     <Container>
       {gridData.map(item => (
@@ -29,7 +36,9 @@ const Grid: React.FC<Props> = ({ data }) => {
           <div>
             <span>{`De ${item.startDate} até ${item.endDate}`} </span>
           </div>
-          <Link to="/training/1">Participar</Link>
+          <button type="button" onClick={() => handleStartTraining(item.id)}>
+            Participar
+          </button>
         </MiniBox>
       ))}
     </Container>

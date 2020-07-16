@@ -52,7 +52,8 @@ export const MiniBox = styled.div`
     }
   }
 
-  > a {
+  > button {
+    border: none;
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.tertiary};
     background: ${({ theme }) => theme.font.color.primary};

@@ -17,7 +17,11 @@ const Training: React.FC = () => {
           setValue={value => setCategorySelected(value)}
           label="Treinamentos disponíveis"
         />
-        <OpenTrainingsGrid />
+        <OpenTrainingsGrid
+          categoryId={
+            categorySelected?.value ? parseInt(categorySelected.value, 0) : null
+          }
+        />
         <Box>
           <h3>Meus treinamentos</h3>
           <FinishedTrainingsTable />

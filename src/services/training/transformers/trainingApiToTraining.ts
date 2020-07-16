@@ -4,7 +4,7 @@ import { TrainingApi } from '../interfaces/TrainingApi';
 export default (training: TrainingApi): Training => ({
   id: training.id,
   body: training.body,
-  title: training.title,
+  title: training.name,
   categories: training.quiz_categories.map(cat => ({
     id: cat.id,
     name: cat.name,
@@ -31,14 +31,12 @@ export default (training: TrainingApi): Training => ({
       } as Media;
     }),
   ],
-  participation: training.participation?.id
-    ? {
-        id: training.participation.id,
-        startedDate: training.participation.start_date,
-        finishedDate: training.participation.end_date,
-        totalPoints: training.participation.total,
-        rightAnswers: training.participation.right_answers,
-        certificateUrl: training.participation.certificate_url,
-      }
-    : undefined,
+  participation:
+    typeof training.participant_feedback?.approved === 'boolean'
+      ? {
+          startedDate: training.participant_feedback.started_at,
+          finishedDate: training.participant_feedback.approved_at,
+          approved: training.participant_feedback.approved,
+        }
+      : undefined,
 });
