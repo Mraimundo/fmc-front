@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -7,8 +7,9 @@ import { useToast } from 'context/ToastContext';
 import validateCpf from 'util/validations/cpf';
 
 import { Input, Button, PasswordInput } from 'components/shared';
-import { FiUser, FiLock } from 'react-icons/fi';
+import { FaSignInAlt } from 'react-icons/fa';
 import RecoverPasswordButton from './RecoverPassword';
+import { SingleSignOnButton } from './styles';
 
 interface SignInFormData {
   cpf: string;
@@ -51,6 +52,11 @@ const FormSignIn: React.FC = () => {
     setLoading(false);
   });
 
+  const handleSingleSignOnClick = useCallback(() => {
+    const base = process.env.REACT_APP_API_HOST;
+    window.location.href = `${base}/juntos-fmc/api/v1/sso`;
+  }, []);
+
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
@@ -66,6 +72,14 @@ const FormSignIn: React.FC = () => {
         </Button>
       </form>
       <RecoverPasswordButton />
+      <SingleSignOnButton
+        type="button"
+        buttonRole="quaternary"
+        onClick={handleSingleSignOnClick}
+      >
+        Funcionário FMC
+        <FaSignInAlt size={26} color="#fff" />
+      </SingleSignOnButton>
     </FormContext>
   );
 };

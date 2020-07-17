@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import ContactBallon from 'components/Contact';
 import { animated } from 'react-spring';
 import { shade } from 'polished';
+import { Button } from 'components/shared';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -227,5 +228,19 @@ export const ForgotPasswordButton = styled.button`
   will-change: color;
   &:hover {
     color: ${({ theme }) => shade(0.2, theme.font.color.tertiary)};
+  }
+`;
+
+export const SingleSignOnButton = styled(Button)`
+  background: ${({ theme }) => theme.font.color.quartenary};
+  width: 244px;
+  height: 48px;
+  color: ${({ theme }) => theme.font.color.tertiary};
+  display: flex;
+  align-items: center;
+  > svg {
+    color: #fff;
+    margin-left: 8px;
+    transform: translateY(-1px);
   }
 `;
