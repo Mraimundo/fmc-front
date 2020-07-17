@@ -1,4 +1,5 @@
 import React from 'react';
+import parser from 'html-react-parser';
 import { useTraining } from '../../Context';
 import { Container, Player } from './styles';
 
@@ -24,7 +25,7 @@ const Body: React.FC = () => {
             <img src={training?.imageUrl} alt="Imagem do treinamento" />
           </div>
         )}
-        <p>{training?.body}</p>
+        <p>{parser(training?.body || '')}</p>
       </div>
     </Container>
   );

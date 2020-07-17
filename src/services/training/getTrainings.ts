@@ -7,7 +7,7 @@ import transformer from './transformers/trainingApiToTraining';
 interface Request {
   page?: number;
   limit?: number;
-  status: Status;
+  status: Status[];
   categoryId?: number | null;
 }
 
@@ -23,7 +23,7 @@ interface ApiResponse {
 
 export default async ({
   page = 1,
-  limit = 3,
+  limit = 15,
   status,
   categoryId,
 }: Request): Promise<Data> => {
@@ -32,10 +32,16 @@ export default async ({
     if (categoryId) {
       extraSearch = `&categories[0]=${categoryId}`;
     }
+
+    let statusSearch = '';
+    status.forEach((element, index) => {
+      statusSearch += `&status[${index}]=${element}`;
+    });
+
     const {
       data: { data, pagination },
     } = await vendavallApi.get<ApiResponse>(
-      `trainings?status[0]=${status}&page=${page}&limit=${limit}${extraSearch}`,
+      `trainings?page=${page}${statusSearch}&limit=${limit}${extraSearch}`,
     );
 
     return {

@@ -32,3 +32,10 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const Separator = styled.div`
+  width: 100%;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  margin-top: 35px;
+  margin-bottom: 35px;
+`;

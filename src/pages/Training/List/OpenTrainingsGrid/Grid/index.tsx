@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import startTraining from 'services/training/startTraining';
 import history from 'services/history';
 
-import { Training } from 'services/training/interfaces';
+import { Training, TRAINING_STATUS } from 'services/training/interfaces';
 import transformer, {
   Response as Data,
 } from 'services/training/transformers/toTrainingsGrid';
@@ -36,7 +36,13 @@ const Grid: React.FC<Props> = ({ data }) => {
           <div>
             <span>{`De ${item.startDate} até ${item.endDate}`} </span>
           </div>
-          <button type="button" onClick={() => handleStartTraining(item.id)}>
+          <button
+            type="button"
+            onClick={() => handleStartTraining(item.id)}
+            disabled={
+              item.status === TRAINING_STATUS.INITIATED && item.finished
+            }
+          >
             Participar
           </button>
         </MiniBox>

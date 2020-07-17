@@ -1,6 +1,29 @@
 import { Training, Media } from '../interfaces';
 import { TrainingApi } from '../interfaces/TrainingApi';
 
+const getMedias = (training: TrainingApi): Media[] => {
+  const videos = training.quiz_videos.map(video => {
+    return {
+      id: video.id,
+      title: video.title,
+      type: 'video',
+      url: video.video_url,
+    } as Media;
+  });
+  const media: Media[] = [];
+  if (training.file_url) {
+    media.push({
+      id: training.id,
+      type: 'document',
+      url: training.file_url,
+      title: 'Esperando pelo retorno do back',
+    });
+  }
+  media.push(...videos);
+
+  return media;
+};
+
 export default (training: TrainingApi): Training => ({
   id: training.id,
   body: training.body,
@@ -15,22 +38,7 @@ export default (training: TrainingApi): Training => ({
   startDate: training.start_date,
   endDate: training.end_date,
   numberOfQuestions: training.number_of_questions,
-  media: [
-    {
-      id: training.id,
-      type: 'document',
-      url: training.file_url,
-      title: 'Esperando pelo retorno do back',
-    },
-    ...training.quiz_videos.map(video => {
-      return {
-        id: video.id,
-        title: video.title,
-        type: 'video',
-        url: video.video_url,
-      } as Media;
-    }),
-  ],
+  media: getMedias(training),
   participation:
     typeof training.participant_feedback?.approved === 'boolean'
       ? {

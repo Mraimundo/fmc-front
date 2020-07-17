@@ -16,7 +16,7 @@ const FinishedTrainingsTable: React.FC = () => {
   useEffect(() => {
     setIsFetching(true);
     getTrainings({
-      status: TRAINING_STATUS.INITIATED,
+      status: [TRAINING_STATUS.INITIATED],
       limit: 50,
     })
       .then(({ data, pagination: apiPagination }) => {

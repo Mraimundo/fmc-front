@@ -35,7 +35,6 @@ const Main: React.FC = () => {
         <Body />
         <Separator />
         <Documents />
-        <Separator />
         <Quiz />
         <SuccessModal
           isOpen={successModalOpened}

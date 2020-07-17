@@ -87,6 +87,11 @@ export const MiniBox = styled.div`
       background-size: 100%;
       transition: background 0s;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
   }
 
   @media screen and (max-width: 720px) {

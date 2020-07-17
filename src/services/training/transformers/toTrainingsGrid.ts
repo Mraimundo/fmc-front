@@ -1,5 +1,5 @@
 import { formatDate } from 'util/datetime';
-import { Training } from '../interfaces';
+import { Training, Status } from '../interfaces';
 
 export interface Response {
   id: number;
@@ -8,6 +8,8 @@ export interface Response {
   startDate: string;
   endDate: string;
   imageUrl: string;
+  status: Status;
+  finished: boolean;
 }
 
 export default (data: Training[]): Response[] => {
@@ -18,5 +20,7 @@ export default (data: Training[]): Response[] => {
     startDate: formatDate(item.startDate),
     endDate: formatDate(item.endDate),
     imageUrl: item.imageUrl,
+    status: item.status,
+    finished: !!item.participation?.finishedDate,
   }));
 };

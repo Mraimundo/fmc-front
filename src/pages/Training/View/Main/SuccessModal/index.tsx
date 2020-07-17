@@ -18,8 +18,8 @@ const PopupSuccess: React.FC<Props> = ({ isOpen, onRequestClose }) => {
           </button>
         </Close>
         <Content>
-          <h3>Parabéns</h3>
-          <h4>Treinmaneot concluído com sucesso</h4>
+          <h3>Parabéns!</h3>
+          <h4>Treinamento concluído com sucesso</h4>
           <a href="google.com">Baixar certificado (PDF)</a>
         </Content>
         <Button type="button" buttonRole="primary" onClick={onRequestClose}>
