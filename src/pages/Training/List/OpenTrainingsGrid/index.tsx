@@ -51,6 +51,7 @@ const OpenTrainingsGrid: React.FC<Props> = ({ categoryId }) => {
     });
   }, [pagination]); */
 
+  // Continuação da Gambiarra
   const handleLoadMore = useCallback(() => {
     setPagination(pag => {
       const {

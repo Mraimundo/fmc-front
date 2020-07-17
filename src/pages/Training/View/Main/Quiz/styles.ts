@@ -100,6 +100,34 @@ export const Asnwers = styled.div`
   .Mui-checked {
     color: green;
   }
+
+  ._rightAnswer {
+    .MuiFormControlLabel-label {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        background: green;
+        top: 0px;
+        right: -25px;
+        border-radius: 50%;
+      }
+
+      &::after {
+        content: 'L';
+        font-size: 22px;
+        font-weight: bold;
+        position: absolute;
+        color: #fff;
+        transform: scaleX(-1) rotate(-35deg);
+        top: -7px;
+        right: -21px;
+      }
+    }
+  }
 `;
 
 export const FormControlLabel = styled(DefaultFormControlLabel)`

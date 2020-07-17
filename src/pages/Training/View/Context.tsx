@@ -9,11 +9,15 @@ import {
   getTraining,
   getQuestions,
   answerTraining,
-  getRightAnswers,
   checkIfParticipantHasBeenApproved,
-  getMyAnswers,
 } from 'services/training';
 import setVideoWatchedService from 'services/training/setVideoWatched';
+import getMyAnswers, {
+  Answer as IAnswer,
+} from 'services/training/getMyAnswers';
+import getRightAnswers, {
+  AnswerResponse as IAnswerResponse,
+} from 'services/training/getRightAnswers';
 import transformer, {
   Response as ITraining,
 } from 'services/training/transformers/toTrainingPage';
@@ -23,6 +27,7 @@ import history from 'services/history';
 
 export interface Question extends IQuestion {
   myAnswerId: number | null;
+  rightAnswerId: number | null;
   correct: boolean | null;
 }
 
@@ -114,7 +119,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
             trainingId,
           );
           if (approvedApi) {
-            const answers = await getMyAnswers(trainingId);
+            const [answers, rightAnswers] = await Promise.all<
+              IAnswer[],
+              IAnswerResponse[]
+            >([getMyAnswers(trainingId), getRightAnswers(trainingId)]);
+
             setQuestions(
               data.map(item => ({
                 ...item,
@@ -124,6 +133,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
                 myAnswerId:
                   answers.find(i => i.question_id === item.id)?.answer_id ||
                   null,
+                rightAnswerId:
+                  rightAnswers.find(i => i.question_id === item.id)
+                    ?.answer_id || null,
               })),
             );
             setQuizAlreadyAnswered(true);
@@ -134,6 +146,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
               data.map(item => ({
                 ...item,
                 myAnswerId: null,
+                rightAnswerId: null,
                 correct: null,
               })),
             );

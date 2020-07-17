@@ -115,12 +115,18 @@ const Quiz: React.FC = () => {
                   }
                 >
                   {question?.options.map(item => (
-                    <FormControlLabel
-                      key={`answer-${item.id}`}
-                      value={item.id}
-                      control={<Radio color="primary" />}
-                      label={item.answer}
-                    />
+                    <div
+                      className={
+                        question.rightAnswerId === item.id ? '_rightAnswer' : ''
+                      }
+                    >
+                      <FormControlLabel
+                        key={`answer-${item.id}`}
+                        value={item.id}
+                        control={<Radio color="primary" />}
+                        label={item.answer}
+                      />
+                    </div>
                   ))}
                 </RadioGroup>
               </FormControl>

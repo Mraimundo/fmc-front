@@ -1,6 +1,6 @@
 import { vendavallApi } from 'services/api';
 
-interface Answer {
+export interface Answer {
   id: number;
   training_id: number;
   question_id: number;
