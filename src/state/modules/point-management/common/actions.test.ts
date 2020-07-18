@@ -1,30 +1,69 @@
 import { expect } from 'chai';
 
 import {
-  setTotalPointsToDistribute,
+  fetchTotalPointsToDistribute,
+  fetchTotalPointsToDistributeFailure,
+  fetchTotalPointsToDistributeSuccess,
   setTotalPointsTeamAwards,
-  setTotalPointsResale,
+  setTotalPointsCooperative,
 } from './actions';
 import {
-  SET_TOTAL_POINTS_TO_DISTRIBUTE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_RESALE,
+  SET_TOTAL_POINTS_COOPERATIVE,
 } from './constants';
 
+import { errors } from './mock';
+
 describe('src/state/modules/point-management/common/actions', () => {
-  describe('setTotalPointsToDistribute', () => {
+  describe('fetchTotalPointsToDistribute', () => {
     it('should be a function', () => {
-      expect(setTotalPointsToDistribute).to.be.a('function');
+      expect(fetchTotalPointsToDistribute).to.be.a('function');
     });
 
     it('should return a object', () => {
-      expect(setTotalPointsToDistribute('10')).to.be.a('object');
+      expect(fetchTotalPointsToDistribute()).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(setTotalPointsToDistribute('10')).to.be.deep.equal({
-        type: SET_TOTAL_POINTS_TO_DISTRIBUTE,
-        payload: { totalPointsToDistribute: '10' },
+      expect(fetchTotalPointsToDistribute()).to.be.deep.equal({
+        type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+      });
+    });
+  });
+
+  describe('fetchTotalPointsToDistributeFailure', () => {
+    it('should be a function', () => {
+      expect(fetchTotalPointsToDistributeFailure).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(fetchTotalPointsToDistributeFailure(errors)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(fetchTotalPointsToDistributeFailure(errors)).to.be.deep.equal({
+        type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+        payload: { errors },
+      });
+    });
+  });
+
+  describe('fetchTotalPointsToDistributeSuccess', () => {
+    it('should be a function', () => {
+      expect(fetchTotalPointsToDistributeSuccess).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(fetchTotalPointsToDistributeSuccess(5000)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(fetchTotalPointsToDistributeSuccess(5000)).to.be.deep.equal({
+        type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
+        payload: { totalPointsToDistribute: 5000 },
       });
     });
   });
@@ -46,19 +85,19 @@ describe('src/state/modules/point-management/common/actions', () => {
     });
   });
 
-  describe('setTotalPointsResale', () => {
+  describe('setTotalPointsCooperative', () => {
     it('should be a function', () => {
-      expect(setTotalPointsResale).to.be.a('function');
+      expect(setTotalPointsCooperative).to.be.a('function');
     });
 
     it('should return a object', () => {
-      expect(setTotalPointsResale(5)).to.be.a('object');
+      expect(setTotalPointsCooperative(5)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(setTotalPointsResale(5)).to.be.deep.equal({
-        type: SET_TOTAL_POINTS_RESALE,
-        payload: { totalPointsResale: 5 },
+      expect(setTotalPointsCooperative(5)).to.be.deep.equal({
+        type: SET_TOTAL_POINTS_COOPERATIVE,
+        payload: { totalPointsCooperative: 5 },
       });
     });
   });

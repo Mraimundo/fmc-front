@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReactSVG } from 'react-svg';
-import InputLabel from '@material-ui/core/InputLabel';
 
+import { Label } from 'components/PointManagement';
 import searchIcon from 'assets/images/point-management/search-icon.svg';
 import useDebounce from 'hooks/use-debounce';
 import { Wrapper, Input } from './styles';
@@ -10,19 +10,24 @@ type Props = {
   onChange: (v: string) => void;
 };
 
+const PARTICIPANTS_FINDER_DEBOUNCE_TIME = 500; // ms
 const ParticipantsFinder: React.FC<Props> = ({ onChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(
+    searchTerm,
+    PARTICIPANTS_FINDER_DEBOUNCE_TIME,
+  );
 
   useEffect(() => {
-    if (debouncedSearchTerm) onChange(searchTerm);
-  }, [debouncedSearchTerm]);
+    if (debouncedSearchTerm) onChange(debouncedSearchTerm);
+  }, [debouncedSearchTerm, onChange]);
 
   return (
-    <>
-      <InputLabel id="filter-branch">Filtrar Cargos</InputLabel>
+    <div>
+      <Label htmlFor="filter-branch">Localize um participante</Label>
       <Wrapper>
         <Input
+          id="filter-branch"
           type="text"
           value={searchTerm}
           onChange={({ target }) => setSearchTerm(target.value)}
@@ -30,7 +35,7 @@ const ParticipantsFinder: React.FC<Props> = ({ onChange }) => {
         />
         <ReactSVG src={searchIcon} />
       </Wrapper>
-    </>
+    </div>
   );
 };
 

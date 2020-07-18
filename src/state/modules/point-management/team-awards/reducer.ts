@@ -18,8 +18,27 @@ import {
   SET_PARTICIPANT_FINDER,
   SET_POINTS_TO_DISTRIBUTE,
   TOGGLE_DISTRIBUTE_EQUALLY,
+  SCORE_PARTICIPANT,
+  ASSIGN_POINTS_ACTION,
+  ASSIGN_POINTS_FAILURE,
+  ASSIGN_POINTS_SUCCESS,
+  SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+  SCORE_ALL_PARTICIPANTS_EQUALLY,
+  SET_SELECTED_ROLES_ALL,
+  SELECT_ALL_PARTICIPANTS,
+  DESELECT_ALL_PARTICIPANTS,
 } from './constants';
-import { toggleRoleSelection } from './utils';
+import {
+  toggleRoleSelection,
+  toggleSubsidiarySelection,
+  scoreParticipant,
+  assignPoints,
+  scoreAllParticipantsEqually,
+  setSelectedRolesAll,
+  selectAllParticipants,
+  deselectAllParticipants,
+} from './utils';
+import { scoredParticipants } from './mock';
 
 const emptyFetchState: FetchState = { isFetching: false };
 const fetchingState: FetchState = { isFetching: true };
@@ -34,30 +53,38 @@ export type TeamAwardsState = {
   fetchSubsidiaries: FetchState;
   fetchRoles: FetchState;
   fetchParticipants: FetchState;
+  assignPoints: FetchState;
   subsidiaries: Subsidiary[] | null;
   roles: Role[] | null;
   participants: ParticipantsList | null;
+  selectedParticipants: number[] | null;
   scoredParticipants: ScoredParticipant[] | null;
   selectedSubsidiaries: number[] | null;
   selectedRoles: number[] | null;
   participantFinder: string | null;
-  pointsToDistribute: string | null;
+  pointsToDistribute: string;
   distributeEqually: boolean;
+  totalForEachParticipantDistributedEqually: number | null;
+  selectedRolesAll: string[] | null;
 };
 
 export const initialState: TeamAwardsState = {
   fetchSubsidiaries: emptyFetchState,
   fetchRoles: emptyFetchState,
   fetchParticipants: emptyFetchState,
+  assignPoints: emptyFetchState,
   subsidiaries: null,
   roles: null,
   participants: null,
-  scoredParticipants: null,
+  selectedParticipants: null,
+  scoredParticipants,
   selectedSubsidiaries: null,
   selectedRoles: null,
   participantFinder: '',
-  pointsToDistribute: null,
+  pointsToDistribute: '',
   distributeEqually: false,
+  totalForEachParticipantDistributedEqually: null,
+  selectedRolesAll: null,
 };
 
 const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
@@ -101,16 +128,20 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case SELECT_SUBSIDIARY:
       return {
         ...state,
-        selectedSubsidiaries: action.payload.selectedSubsidiaries,
+        selectedSubsidiaries: action.meta.subsidiaryId
+          ? toggleSubsidiarySelection(
+              state.selectedSubsidiaries,
+              action.meta.subsidiaryId,
+            )
+          : null,
       };
 
     case SELECT_ROLE:
       return {
         ...state,
-        selectedRoles: toggleRoleSelection(
-          state.selectedRoles,
-          action.meta.roleId,
-        ),
+        selectedRoles: action.meta.roleId
+          ? toggleRoleSelection(state.selectedRoles, action.meta.roleId)
+          : null,
       };
 
     case SET_PARTICIPANT_FINDER:
@@ -129,6 +160,77 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
       return {
         ...state,
         distributeEqually: !state.distributeEqually,
+      };
+
+    case SCORE_PARTICIPANT:
+      return {
+        ...state,
+        scoredParticipants: scoreParticipant(
+          action.meta.participant,
+          action.meta.points,
+          state.scoredParticipants,
+        ),
+      };
+
+    case ASSIGN_POINTS_ACTION:
+      return {
+        ...state,
+        assignPoints: fetchingState,
+      };
+
+    case ASSIGN_POINTS_FAILURE:
+      return { ...state, assignPoints: fetchErrorState(action) };
+
+    case ASSIGN_POINTS_SUCCESS:
+      return {
+        ...state,
+        distributeEqually: false,
+        pointsToDistribute: '',
+        scoredParticipants: assignPoints(state.scoredParticipants),
+      };
+
+    case SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY:
+      return {
+        ...state,
+        totalForEachParticipantDistributedEqually:
+          action.payload.totalForEachParticipantDistributedEqually,
+      };
+
+    case SCORE_ALL_PARTICIPANTS_EQUALLY:
+      return {
+        ...state,
+        scoredParticipants: scoreAllParticipantsEqually(
+          state.scoredParticipants,
+          action.meta.points,
+        ),
+      };
+
+    case SET_SELECTED_ROLES_ALL:
+      return {
+        ...state,
+        selectedRolesAll: action.meta.role
+          ? setSelectedRolesAll(state.selectedRolesAll, action.meta.role)
+          : null,
+      };
+
+    case SELECT_ALL_PARTICIPANTS:
+      return {
+        ...state,
+        selectedParticipants: action.meta.role
+          ? selectAllParticipants(state.participants, action.meta.role)
+          : null,
+      };
+
+    case DESELECT_ALL_PARTICIPANTS:
+      return {
+        ...state,
+        selectedParticipants: action.meta.role
+          ? deselectAllParticipants(
+              state.selectedParticipants,
+              state.participants,
+              action.meta.role,
+            )
+          : null,
       };
 
     default:

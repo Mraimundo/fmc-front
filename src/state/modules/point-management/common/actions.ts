@@ -1,19 +1,44 @@
-import { ActionCreatorPayload } from '@types';
 import {
-  SET_TOTAL_POINTS_TO_DISTRIBUTE,
+  ActionCreator,
+  ActionCreatorPayload,
+  ActionCreatorFailure,
+  ApiErrors,
+} from '@types';
+import {
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_RESALE,
+  SET_TOTAL_POINTS_COOPERATIVE,
+  SET_IS_READY_TO_DISTRIBUTE,
 } from './constants';
 import { CommonState } from './reducer';
 
-export const setTotalPointsToDistribute = (
+export const fetchTotalPointsToDistribute = (): ActionCreator<
+  typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION
+> =>
+  <const>{
+    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+  };
+
+export const fetchTotalPointsToDistributeFailure = (
+  errors: ApiErrors[],
+): ActionCreatorFailure<typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE> =>
+  <const>{
+    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+    payload: {
+      errors,
+    },
+  };
+
+export const fetchTotalPointsToDistributeSuccess = (
   totalPointsToDistribute: string,
 ): ActionCreatorPayload<
-  typeof SET_TOTAL_POINTS_TO_DISTRIBUTE,
+  typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
   Pick<CommonState, 'totalPointsToDistribute'>
 > =>
   <const>{
-    type: SET_TOTAL_POINTS_TO_DISTRIBUTE,
+    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
     payload: { totalPointsToDistribute },
   };
 
@@ -28,19 +53,33 @@ export const setTotalPointsTeamAwards = (
     payload: { totalPointsTeamAwards },
   };
 
-export const setTotalPointsResale = (
-  totalPointsResale: string,
+export const setTotalPointsCooperative = (
+  totalPointsCooperative: string,
 ): ActionCreatorPayload<
-  typeof SET_TOTAL_POINTS_RESALE,
-  Pick<CommonState, 'totalPointsResale'>
+  typeof SET_TOTAL_POINTS_COOPERATIVE,
+  Pick<CommonState, 'totalPointsCooperative'>
 > =>
   <const>{
-    type: SET_TOTAL_POINTS_RESALE,
-    payload: { totalPointsResale },
+    type: SET_TOTAL_POINTS_COOPERATIVE,
+    payload: { totalPointsCooperative },
+  };
+
+export const setIsReadyToDistribute = (
+  isReadyToDistribute: boolean,
+): ActionCreatorPayload<
+  typeof SET_IS_READY_TO_DISTRIBUTE,
+  Pick<CommonState, 'isReadyToDistribute'>
+> =>
+  <const>{
+    type: SET_IS_READY_TO_DISTRIBUTE,
+    payload: { isReadyToDistribute },
   };
 
 export type CommonActions = ReturnType<
-  | typeof setTotalPointsToDistribute
+  | typeof fetchTotalPointsToDistribute
+  | typeof fetchTotalPointsToDistributeFailure
+  | typeof fetchTotalPointsToDistributeSuccess
   | typeof setTotalPointsTeamAwards
-  | typeof setTotalPointsResale
+  | typeof setTotalPointsCooperative
+  | typeof setIsReadyToDistribute
 >;

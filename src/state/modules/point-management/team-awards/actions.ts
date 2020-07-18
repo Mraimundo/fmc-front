@@ -19,9 +19,18 @@ import {
   SET_PARTICIPANT_FINDER,
   SET_POINTS_TO_DISTRIBUTE,
   TOGGLE_DISTRIBUTE_EQUALLY,
+  SCORE_PARTICIPANT,
+  ASSIGN_POINTS_ACTION,
+  ASSIGN_POINTS_FAILURE,
+  ASSIGN_POINTS_SUCCESS,
+  SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+  SCORE_ALL_PARTICIPANTS_EQUALLY,
+  SET_SELECTED_ROLES_ALL,
+  SELECT_ALL_PARTICIPANTS,
+  DESELECT_ALL_PARTICIPANTS,
 } from './constants';
 import { TeamAwardsState } from './reducer';
-import { Subsidiary, Role, ParticipantsList } from './types';
+import { Subsidiary, Role, Participant, ParticipantsList } from './types';
 
 export const fetchSubsidiaries = (): ActionCreator<
   typeof FETCH_SUBSIDIARIES_ACTION
@@ -106,17 +115,16 @@ export const fetchParticipantsSuccess = (
   };
 
 export const selectSubsidiary = (
-  selectedSubsidiaries: number[],
-): ActionCreatorPayload<
-  typeof SELECT_SUBSIDIARY,
-  Pick<TeamAwardsState, 'selectedSubsidiaries'>
-> =>
+  subsidiaryId: number,
+): ActionCreator<typeof SELECT_SUBSIDIARY> =>
   <const>{
     type: SELECT_SUBSIDIARY,
-    payload: { selectedSubsidiaries },
+    meta: { subsidiaryId },
   };
 
-export const selectRole = (roleId: number): ActionCreator<typeof SELECT_ROLE> =>
+export const selectRole = (
+  roleId?: number,
+): ActionCreator<typeof SELECT_ROLE> =>
   <const>{
     type: SELECT_ROLE,
     meta: { roleId },
@@ -151,6 +159,80 @@ export const toggleDistributeEqually = (): ActionCreator<
     type: TOGGLE_DISTRIBUTE_EQUALLY,
   };
 
+export const scoreParticipant = (
+  participant: Participant,
+  points: string,
+): ActionCreator<typeof SCORE_PARTICIPANT> =>
+  <const>{
+    type: SCORE_PARTICIPANT,
+    meta: { participant, points },
+  };
+
+export const assignPoints = (): ActionCreator<typeof ASSIGN_POINTS_ACTION> =>
+  <const>{
+    type: ASSIGN_POINTS_ACTION,
+  };
+
+export const assignPointsFailure = (
+  errors: ApiErrors[],
+): ActionCreatorFailure<typeof ASSIGN_POINTS_FAILURE> =>
+  <const>{
+    type: ASSIGN_POINTS_FAILURE,
+    payload: {
+      errors,
+    },
+  };
+
+export const assignPointsSuccess = (): ActionCreator<
+  typeof ASSIGN_POINTS_SUCCESS
+> =>
+  <const>{
+    type: ASSIGN_POINTS_SUCCESS,
+  };
+
+export const setTotalForEachParticipantDistributedEqually = (
+  totalForEachParticipantDistributedEqually: number,
+): ActionCreatorPayload<
+  typeof SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+  Pick<TeamAwardsState, 'totalForEachParticipantDistributedEqually'>
+> =>
+  <const>{
+    type: SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+    payload: { totalForEachParticipantDistributedEqually },
+  };
+
+export const scoreAllParticipantsEqually = (
+  points: string,
+): ActionCreator<typeof SCORE_ALL_PARTICIPANTS_EQUALLY> =>
+  <const>{
+    type: SCORE_ALL_PARTICIPANTS_EQUALLY,
+    meta: { points },
+  };
+
+export const setSelectedRolesAll = (
+  role: string,
+): ActionCreator<typeof SET_SELECTED_ROLES_ALL> =>
+  <const>{
+    type: SET_SELECTED_ROLES_ALL,
+    meta: { role },
+  };
+
+export const selectAllParticipants = (
+  role: string,
+): ActionCreator<typeof SELECT_ALL_PARTICIPANTS> =>
+  <const>{
+    type: SELECT_ALL_PARTICIPANTS,
+    meta: { role },
+  };
+
+export const deselectAllParticipants = (
+  role: string,
+): ActionCreator<typeof DESELECT_ALL_PARTICIPANTS> =>
+  <const>{
+    type: DESELECT_ALL_PARTICIPANTS,
+    meta: { role },
+  };
+
 export type TeamAwardsActions = ReturnType<
   | typeof fetchSubsidiaries
   | typeof fetchSubsidiariesFailure
@@ -166,4 +248,13 @@ export type TeamAwardsActions = ReturnType<
   | typeof setParticipantFinder
   | typeof setPointsToDistribute
   | typeof toggleDistributeEqually
+  | typeof scoreParticipant
+  | typeof assignPoints
+  | typeof assignPointsFailure
+  | typeof assignPointsSuccess
+  | typeof setTotalForEachParticipantDistributedEqually
+  | typeof scoreAllParticipantsEqually
+  | typeof setSelectedRolesAll
+  | typeof selectAllParticipants
+  | typeof deselectAllParticipants
 >;

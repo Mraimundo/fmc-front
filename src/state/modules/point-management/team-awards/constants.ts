@@ -32,3 +32,28 @@ export const SET_POINTS_TO_DISTRIBUTE =
 
 export const TOGGLE_DISTRIBUTE_EQUALLY =
   '@fmc/point-management/team-awards/TOGGLE_DISTRIBUTE_EQUALLY';
+
+export const SCORE_PARTICIPANT =
+  '@fmc/point-management/team-awards/SCORE_PARTICIPANT';
+
+export const ASSIGN_POINTS_ACTION =
+  '@fmc/point-management/team-awards/ASSIGN_POINTS_ACTION';
+export const ASSIGN_POINTS_FAILURE =
+  '@fmc/point-management/team-awards/ASSIGN_POINTS_FAILURE';
+export const ASSIGN_POINTS_SUCCESS =
+  '@fmc/point-management/team-awards/ASSIGN_POINTS_SUCCESS';
+
+export const SCORE_ALL_PARTICIPANTS_EQUALLY =
+  '@fmc/point-management/team-awards/SCORE_ALL_PARTICIPANTS_EQUALLY';
+
+export const SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY =
+  '@fmc/point-management/team-awards/SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY';
+
+export const SET_SELECTED_ROLES_ALL =
+  '@fmc/point-management/team-awards/SET_SELECTED_ROLES_ALL';
+
+export const SELECT_ALL_PARTICIPANTS =
+  '@fmc/point-management/team-awards/SELECT_ALL_PARTICIPANTS';
+
+export const DESELECT_ALL_PARTICIPANTS =
+  '@fmc/point-management/team-awards/DESELECT_ALL_PARTICIPANTS';

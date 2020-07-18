@@ -8,7 +8,7 @@ type Props = {
   picture?: string | null;
   circleDimension?: number;
 };
-const Avatar: React.FC<Props> = ({ name, picture, circleDimension = 100 }) => {
+const Avatar: React.FC<Props> = ({ name, picture, circleDimension = 50 }) => {
   const nameInitials = getNameAbbr(name);
 
   if (!picture) {

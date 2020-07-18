@@ -14,6 +14,16 @@ import {
   selectRole,
   setParticipantFinder,
   setPointsToDistribute,
+  toggleDistributeEqually,
+  scoreParticipant,
+  assignPoints,
+  assignPointsFailure,
+  assignPointsSuccess,
+  setTotalForEachParticipantDistributedEqually,
+  scoreAllParticipantsEqually,
+  setSelectedRolesAll,
+  selectAllParticipants,
+  deselectAllParticipants,
 } from './actions';
 import {
   FETCH_SUBSIDIARIES_ACTION,
@@ -29,15 +39,18 @@ import {
   SELECT_ROLE,
   SET_PARTICIPANT_FINDER,
   SET_POINTS_TO_DISTRIBUTE,
+  TOGGLE_DISTRIBUTE_EQUALLY,
+  SCORE_PARTICIPANT,
+  ASSIGN_POINTS_ACTION,
+  ASSIGN_POINTS_FAILURE,
+  ASSIGN_POINTS_SUCCESS,
+  SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+  SCORE_ALL_PARTICIPANTS_EQUALLY,
+  SET_SELECTED_ROLES_ALL,
+  SELECT_ALL_PARTICIPANTS,
+  DESELECT_ALL_PARTICIPANTS,
 } from './constants';
-import {
-  errors,
-  subsidiaries,
-  selectedSubsidiaries,
-  roles,
-  selectedRoles,
-  participants,
-} from './mock';
+import { errors, subsidiaries, roles, participant, participants } from './mock';
 
 describe('src/state/modules/point-management/team-awards/actions', () => {
   describe('fetchSubsidiaries', () => {
@@ -202,13 +215,13 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(selectSubsidiary(selectedSubsidiaries)).to.be.a('object');
+      expect(selectSubsidiary(1)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(selectSubsidiary(selectedSubsidiaries)).to.be.deep.equal({
+      expect(selectSubsidiary(1)).to.be.deep.equal({
         type: SELECT_SUBSIDIARY,
-        payload: { selectedSubsidiaries },
+        meta: { subsidiaryId: 1 },
       });
     });
   });
@@ -260,6 +273,177 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
       expect(setPointsToDistribute('5000')).to.be.deep.equal({
         type: SET_POINTS_TO_DISTRIBUTE,
         payload: { pointsToDistribute: '5000' },
+      });
+    });
+  });
+
+  describe('toggleDistributeEqually', () => {
+    it('should be a function', () => {
+      expect(toggleDistributeEqually).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(toggleDistributeEqually()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(toggleDistributeEqually()).to.be.deep.equal({
+        type: TOGGLE_DISTRIBUTE_EQUALLY,
+      });
+    });
+  });
+
+  describe('scoreParticipant', () => {
+    it('should be a function', () => {
+      expect(scoreParticipant).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(scoreParticipant(participant, '200')).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(scoreParticipant(participant, '200')).to.be.deep.equal({
+        type: SCORE_PARTICIPANT,
+        meta: { participant, points: '200' },
+      });
+    });
+  });
+
+  describe('assignPoints', () => {
+    it('should be a function', () => {
+      expect(assignPoints).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(assignPoints()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(assignPoints()).to.be.deep.equal({
+        type: ASSIGN_POINTS_ACTION,
+      });
+    });
+  });
+
+  describe('assignPointsFailure', () => {
+    it('should be a function', () => {
+      expect(assignPointsFailure).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(assignPointsFailure(errors)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(assignPointsFailure(errors)).to.be.deep.equal({
+        type: ASSIGN_POINTS_FAILURE,
+        payload: { errors },
+      });
+    });
+  });
+
+  describe('assignPointsSuccess', () => {
+    it('should be a function', () => {
+      expect(assignPointsSuccess).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(assignPointsSuccess()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(assignPointsSuccess()).to.be.deep.equal({
+        type: ASSIGN_POINTS_SUCCESS,
+      });
+    });
+  });
+
+  describe('setTotalForEachParticipantDistributedEqually', () => {
+    it('should be a function', () => {
+      expect(setTotalForEachParticipantDistributedEqually).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(setTotalForEachParticipantDistributedEqually(1500)).to.be.a(
+        'object',
+      );
+    });
+
+    it('should return a valid object', () => {
+      expect(
+        setTotalForEachParticipantDistributedEqually(10000),
+      ).to.be.deep.equal({
+        type: SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY,
+        payload: { totalForEachParticipantDistributedEqually: 10000 },
+      });
+    });
+  });
+
+  describe('scoreAllParticipantsEqually', () => {
+    it('should be a function', () => {
+      expect(scoreAllParticipantsEqually).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(scoreAllParticipantsEqually('1500')).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(scoreAllParticipantsEqually('1500')).to.be.deep.equal({
+        type: SCORE_ALL_PARTICIPANTS_EQUALLY,
+        meta: { points: '1500' },
+      });
+    });
+  });
+
+  describe('setSelectedRolesAll', () => {
+    it('should be a function', () => {
+      expect(setSelectedRolesAll).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(setSelectedRolesAll(roles[0].name)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(setSelectedRolesAll(roles[0].name)).to.be.deep.equal({
+        type: SET_SELECTED_ROLES_ALL,
+        meta: { role: roles[0].name },
+      });
+    });
+  });
+
+  describe('selectAllParticipants', () => {
+    it('should be a function', () => {
+      expect(selectAllParticipants).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(selectAllParticipants(roles[0].name)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(selectAllParticipants(roles[0].name)).to.be.deep.equal({
+        type: SELECT_ALL_PARTICIPANTS,
+        meta: { role: roles[0].name },
+      });
+    });
+  });
+
+  describe('deselectAllParticipants', () => {
+    it('should be a function', () => {
+      expect(deselectAllParticipants).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(deselectAllParticipants(roles[0].name)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(deselectAllParticipants(roles[0].name)).to.be.deep.equal({
+        type: DESELECT_ALL_PARTICIPANTS,
+        meta: { role: roles[0].name },
       });
     });
   });

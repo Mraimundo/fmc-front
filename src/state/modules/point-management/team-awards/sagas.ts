@@ -13,6 +13,9 @@ import {
   SELECT_SUBSIDIARY,
   SELECT_ROLE,
   SET_PARTICIPANT_FINDER,
+  TOGGLE_DISTRIBUTE_EQUALLY,
+  ASSIGN_POINTS_ACTION,
+  SET_SELECTED_ROLES_ALL,
 } from './constants';
 import {
   fetchSubsidiariesFailure,
@@ -21,11 +24,24 @@ import {
   fetchRolesSuccess,
   fetchParticipantsFailure,
   fetchParticipantsSuccess,
+  setTotalForEachParticipantDistributedEqually,
+  toggleDistributeEqually,
+  setPointsToDistribute,
+  scoreAllParticipantsEqually,
+  selectAllParticipants,
+  deselectAllParticipants,
+  assignPointsSuccess,
+  assignPointsFailure,
 } from './actions';
 import {
   getSelectedSubsidiaries,
   getSelectedRoles,
   getParticipantFinder,
+  getDistributeEqually,
+  getParticipantListTotalWithoutScore,
+  getPointsToDistribute,
+  getTotalForEachParticipantDistributedEqually,
+  getSelectedRolesAll,
 } from './selectors';
 import { Subsidiary, Role, ParticipantsList } from './types';
 
@@ -63,6 +79,7 @@ export function* workerFetchParticipants() {
     const subsidiaries = yield select(getSelectedSubsidiaries);
     const roles = yield select(getSelectedRoles);
     const participantFinder = yield select(getParticipantFinder);
+
     const participants: ParticipantsList = yield call(
       fetchParticipantsService,
       {
@@ -79,7 +96,57 @@ export function* workerFetchParticipants() {
   }
 }
 
-export default function* genericSagas() {
+export function* workerAssignPoints() {
+  try {
+    const distributeEqually: boolean = yield select(getDistributeEqually);
+
+    if (!distributeEqually) {
+      yield put(assignPointsSuccess());
+      return;
+    }
+
+    const totalForEachParticipantDistributedEqually: number = yield select(
+      getTotalForEachParticipantDistributedEqually,
+    );
+
+    yield put(
+      scoreAllParticipantsEqually(
+        `${totalForEachParticipantDistributedEqually}`,
+      ),
+    );
+    yield put(assignPointsSuccess());
+  } catch (error) {
+    yield call(handlerErrors, error, assignPointsFailure);
+  }
+}
+
+export function* workerDistributeEqually() {
+  const distributeEqually: boolean = yield select(getDistributeEqually);
+
+  if (!distributeEqually) return;
+
+  const participantsTotal = yield select(getParticipantListTotalWithoutScore);
+
+  if (!participantsTotal) return;
+
+  const pointsToDistribute = yield select(getPointsToDistribute);
+
+  const points = pointsToDistribute / participantsTotal;
+  yield put(setTotalForEachParticipantDistributedEqually(points));
+}
+
+export function* workerSetSelectedRolesAll({ meta }: any) {
+  const selectedRolesAll = yield select(getSelectedRolesAll);
+
+  if (selectedRolesAll && selectedRolesAll.includes(meta.role)) {
+    yield put(selectAllParticipants(meta.role));
+    return;
+  }
+
+  yield put(deselectAllParticipants(meta.role));
+}
+
+export default function* teamAwardsSagas() {
   yield all([
     takeEvery(FETCH_SUBSIDIARIES_ACTION, workerFetchSubsidiaries),
     takeEvery(FETCH_ROLES_ACTION, workerFetchRoles),
@@ -92,5 +159,8 @@ export default function* genericSagas() {
       ],
       workerFetchParticipants,
     ),
+    takeEvery(ASSIGN_POINTS_ACTION, workerAssignPoints),
+    takeEvery(TOGGLE_DISTRIBUTE_EQUALLY, workerDistributeEqually),
+    takeEvery(SET_SELECTED_ROLES_ALL, workerSetSelectedRolesAll),
   ]);
 }

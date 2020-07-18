@@ -1,26 +1,32 @@
 import styled, { css } from 'styled-components';
 
+import { FONTS } from 'styles/font/globals';
+
 export const List = styled.ul`
   list-style-type: none;
   padding: 0;
   display: flex;
+  margin-top: 5px;
 `;
 
 export const Item = styled.li`
   border-radius: 6px;
-  border: 2px solid #193b4e;
+  border: 1.2px solid #193b4e;
   background-color: #fff;
   padding: 0 15px;
   color: #193b4e;
-  font-weight: 600;
+  font-family: ${FONTS.medium};
   cursor: pointer;
   height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 5px;
+  transition: background-color 150ms ease, color 150ms ease;
+  font-size: 0.9em;
 
   &:hover {
-    background-color: #abbcc6;
+    background-color: #193b4e;
     color: #fff;
   }
 

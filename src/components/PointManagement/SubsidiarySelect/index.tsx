@@ -1,84 +1,72 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
+import React, { useState, useRef, useMemo } from 'react';
+import { ReactSVG } from 'react-svg';
 
+import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
+import useOnClickOutside from 'hooks/use-on-click-outside';
 import { Subsidiary } from 'state/modules/point-management/team-awards/types';
-
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 300,
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    margin: 2,
-  },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import { Label, Checkbox } from 'components/PointManagement';
+import { Input, WrapperInput, Wrapper, Dropdown } from './styles';
 
 type Props = {
   subsidiaries: Subsidiary[] | null;
   selectedSubsidiaries: number[] | null;
-  onSelect: (values: number[]) => void;
+  onSelect: (value: number) => void;
 };
 const SubsidiarySelect: React.FC<Props> = ({
   subsidiaries = [],
   selectedSubsidiaries,
   onSelect,
 }) => {
-  const classes = useStyles();
+  const [visible, isVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useOnClickOutside(dropdownRef, () => isVisible(false));
+
+  const selectedSubsidiariesText = useMemo(() => {
+    if (!selectedSubsidiaries) return 'Selecionar filial';
+
+    const subsidiariesCount = selectedSubsidiaries.length;
+    return subsidiariesCount > 1
+      ? `${subsidiariesCount} filiais selecionadas`
+      : `${subsidiariesCount} filial selecionada`;
+  }, [selectedSubsidiaries]);
 
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel id="filter-branch">Filtrar Filial</InputLabel>
-      <Select
-        multiple
-        value={selectedSubsidiaries || []}
-        onChange={({ target }: any) => onSelect(target.value)}
-        input={<Input />}
-        renderValue={(selected: any) => (
-          <>{selected.length} filiais selecionadas</>
-        )}
-        MenuProps={MenuProps}
-      >
-        {!!subsidiaries &&
-          subsidiaries.map(({ id, label }: Subsidiary) => (
-            <MenuItem key={id} value={id}>
-              <Checkbox
-                checked={
-                  selectedSubsidiaries
-                    ? selectedSubsidiaries.includes(id)
-                    : false
-                }
-              />
-              <ListItemText primary={label} />
-            </MenuItem>
-          ))}
-      </Select>
-    </FormControl>
+    <Wrapper ref={dropdownRef}>
+      <Label>Filtrar filial</Label>
+      <WrapperInput onClick={() => isVisible(!visible)}>
+        <Input
+          id="filter-branch"
+          type="text"
+          value={selectedSubsidiariesText}
+          data-testid="participants-finder-input"
+          readOnly
+        />
+        <ReactSVG src={arrowDownIcon} />
+      </WrapperInput>
+      {visible && (
+        <Dropdown>
+          <ul>
+            {!!subsidiaries &&
+              subsidiaries.map(({ id, label }: Subsidiary) => {
+                const isChecked = selectedSubsidiaries
+                  ? selectedSubsidiaries.includes(id)
+                  : false;
+
+                return (
+                  <li key={id}>
+                    <Checkbox
+                      checked={isChecked}
+                      onChange={() => onSelect(id)}
+                      label={label}
+                    />
+                  </li>
+                );
+              })}
+          </ul>
+        </Dropdown>
+      )}
+    </Wrapper>
   );
 };
 
