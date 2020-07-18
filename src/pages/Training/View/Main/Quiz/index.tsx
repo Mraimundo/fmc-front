@@ -29,6 +29,7 @@ const Quiz: React.FC = () => {
     answerQuestion,
     sendAnswers,
     quizAlreadyAnswered,
+    training,
   } = useTraining();
 
   useEffect(() => {
@@ -45,6 +46,10 @@ const Quiz: React.FC = () => {
   }, [questions, questionSelected]);
 
   const handleAnswerClick = useCallback(() => {
+    if (!training?.videoUrl) {
+      showMeTheQuiz();
+      return;
+    }
     if (!canAnswerTraining) {
       addToast({
         title: 'Você precisa assistir o vídeo para prosseguir',
@@ -53,7 +58,7 @@ const Quiz: React.FC = () => {
       return;
     }
     showMeTheQuiz();
-  }, [canAnswerTraining, addToast, showMeTheQuiz]);
+  }, [canAnswerTraining, addToast, showMeTheQuiz, training]);
 
   const handleNextQuestion = useCallback(() => {
     setQuestionSelected(n => {
@@ -133,31 +138,37 @@ const Quiz: React.FC = () => {
             </Asnwers>
           </Content>
           <Actions>
-            <Button
-              type="button"
-              buttonRole="primary"
-              onClick={handlePreviousQuestion}
-            >
-              {`<< Anterior`}
-            </Button>
+            <div>
+              {questionSelected > 0 && (
+                <Button
+                  type="button"
+                  buttonRole="primary"
+                  onClick={handlePreviousQuestion}
+                >
+                  {`<< Anterior`}
+                </Button>
+              )}
+            </div>
             {(!quizAlreadyAnswered ||
               questionSelected !== questions.length - 1) && (
-              <Button
-                type="button"
-                buttonRole="primary"
-                loading={loading}
-                onClick={
-                  questionSelected === questions.length - 1
-                    ? handleSave
-                    : handleNextQuestion
-                }
-              >
-                {`${
-                  questionSelected === questions.length - 1
-                    ? 'Salvar'
-                    : 'Próximo >>'
-                }  `}
-              </Button>
+              <div>
+                <Button
+                  type="button"
+                  buttonRole="primary"
+                  loading={loading}
+                  onClick={
+                    questionSelected === questions.length - 1
+                      ? handleSave
+                      : handleNextQuestion
+                  }
+                >
+                  {`${
+                    questionSelected === questions.length - 1
+                      ? 'Salvar'
+                      : 'Próximo >>'
+                  }  `}
+                </Button>
+              </div>
             )}
           </Actions>
         </>

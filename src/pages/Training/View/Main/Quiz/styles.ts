@@ -149,7 +149,7 @@ export const Actions = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  > button {
+  button {
     width: 160px;
     height: 40px;
     font-size: 14px;

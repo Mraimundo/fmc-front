@@ -1,4 +1,5 @@
 import { formatDate } from 'util/datetime';
+import getUrlToForceDownload from 'services/storage/getUrlToForceDownload';
 import { Training } from '../interfaces';
 import getStatusText from '../util/getStatusText';
 
@@ -29,13 +30,20 @@ export default (data: Training): Response => {
     title: data.title,
     startDate: formatDate(data.startDate),
     endDate: formatDate(data.endDate),
-    imageUrl: data.media.find(item => item.type === 'image')?.url || '',
+    imageUrl: data.imageUrl,
     videoUrl: data.media.find(item => item.type === 'video')?.url || '',
     status: getStatusText(data.status),
     summary: data.summary,
     body: data.body,
     documents: data.media
       .filter(item => item.type === 'document')
-      .map(item => ({ id: item.id, url: item.url, imageUrl: data.imageUrl })),
+      .map(item => ({
+        id: item.id,
+        url: getUrlToForceDownload({
+          url: item.url,
+          filename: `material${item.url.substr(item.url.lastIndexOf('.'))}`,
+        }),
+        imageUrl: data.imageUrl,
+      })),
   };
 };

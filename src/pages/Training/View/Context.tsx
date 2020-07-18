@@ -63,54 +63,6 @@ export const TrainingProvider: React.FC = ({ children }) => {
 
   const closeSuccessModal = useCallback(() => setSuccessModalOpened(false), []);
 
-  const sendAnswers = useCallback(async () => {
-    if (!training) {
-      return;
-    }
-    if (
-      questions.filter(item => !!item.myAnswerId).length !== questions.length
-    ) {
-      addToast({
-        title: 'Todas as questões devem ser respondidas!',
-        type: 'error',
-      });
-      return;
-    }
-    try {
-      const { approved: approvedApi, message } = await answerTraining({
-        trainingId: training.id,
-        answers: questions.map(item => ({
-          questionId: item.id,
-          answerId: item.myAnswerId || 0,
-        })),
-      });
-      setQuizAlreadyAnswered(true);
-      if (approvedApi) {
-        setApproved(approvedApi);
-        setSuccessModalOpened(true);
-        getRightAnswers(training.id).then(answers => {
-          setQuestions(data =>
-            data.map(item => ({
-              ...item,
-              rightAnswerId:
-                answers.find(i => i.question_id === item.id)?.answer_id || null,
-            })),
-          );
-        });
-      } else {
-        addToast({
-          title: message,
-          type: 'success',
-        });
-      }
-    } catch {
-      addToast({
-        title: 'Falha ao responder treinamento. Por favor contate o suporte',
-        type: 'error',
-      });
-    }
-  }, [questions, addToast, training]);
-
   const loadTraining = useCallback(
     async (trainingId: number): Promise<void> => {
       try {
@@ -153,7 +105,8 @@ export const TrainingProvider: React.FC = ({ children }) => {
           }
         });
         const data = await getTraining(trainingId);
-        setTraining(transformer(data));
+        const transformedTraining = transformer(data);
+        setTraining(transformedTraining);
       } catch {
         addToast({
           title: 'Falha ao carregar o treinamento solicitado',
@@ -164,6 +117,46 @@ export const TrainingProvider: React.FC = ({ children }) => {
     },
     [addToast],
   );
+
+  const sendAnswers = useCallback(async () => {
+    if (!training) {
+      return;
+    }
+    if (
+      questions.filter(item => !!item.myAnswerId).length !== questions.length
+    ) {
+      addToast({
+        title: 'Todas as questões devem ser respondidas!',
+        type: 'error',
+      });
+      return;
+    }
+    try {
+      const { approved: approvedApi, message } = await answerTraining({
+        trainingId: training.id,
+        answers: questions.map(item => ({
+          questionId: item.id,
+          answerId: item.myAnswerId || 0,
+        })),
+      });
+      setQuizAlreadyAnswered(true);
+      if (approvedApi) {
+        setApproved(approvedApi);
+        setSuccessModalOpened(true);
+        loadTraining(training.id);
+      } else {
+        addToast({
+          title: message,
+          type: 'success',
+        });
+      }
+    } catch {
+      addToast({
+        title: 'Falha ao responder treinamento. Por favor contate o suporte',
+        type: 'error',
+      });
+    }
+  }, [questions, addToast, training, loadTraining]);
 
   const showMeTheQuiz = useCallback((): void => {
     setShowQuiz(true);
