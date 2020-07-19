@@ -15,7 +15,7 @@ const Dashboard2: React.FC = () => {
   return (
     <Container>
       <h3>Participant: {participant.name}</h3>
-      <h3>cpf: {participant.cpf}</h3>
+      <h3>CPF: {participant.cpf}</h3>
       <Link to="dashboard">dashboard</Link>
       <Button buttonRole="primary" type="button" onClick={signOut}>
         Sair

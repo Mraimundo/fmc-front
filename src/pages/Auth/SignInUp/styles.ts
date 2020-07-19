@@ -149,6 +149,9 @@ export const Title = styled.h3`
 export const MenuList = styled.ul`
   list-style: none;
   margin: 15px 0;
+  max-width: 325px;
+  display: flex;
+  width: 100%;
 
   @media screen and (max-width: 500px) {
     display: flex;

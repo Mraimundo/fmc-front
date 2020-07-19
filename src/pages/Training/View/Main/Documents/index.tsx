@@ -1,5 +1,6 @@
 import React from 'react';
-import DownloadIcon from 'assets/images/indication/download.svg';
+import downloadIcon from 'assets/images/indication/download.svg';
+import docIcon from 'assets/images/training/doc-icon.png';
 import { ReactSVG } from 'react-svg';
 import { useTraining } from '../../Context';
 import { Container, Separator } from './styles';
@@ -15,9 +16,9 @@ const Documents: React.FC = () => {
             <h3>Documentos</h3>
             {training.documents.map(item => (
               <div key={`document-${item.id}`}>
-                <img src={item.imageUrl} alt="Imagem do documento" />
+                <img src={docIcon} alt="Imagem do documento" />
                 <a href={item.url} download>
-                  <ReactSVG src={DownloadIcon} />
+                  <ReactSVG src={downloadIcon} />
                 </a>
               </div>
             ))}

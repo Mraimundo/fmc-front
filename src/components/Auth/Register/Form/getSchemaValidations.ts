@@ -12,7 +12,7 @@ const commomValidations = {
   email: Yup.string().required(mandatoryMessage).email('Email inválido'),
   cpf: Yup.string()
     .required(mandatoryMessage)
-    .test('valid-cpf', 'Cpf inválido', validateCpf),
+    .test('valid-cpf', 'CPF inválido', validateCpf),
   area_code: Yup.string().required(mandatoryMessage),
   cell_phone: Yup.string()
     .required(mandatoryMessage)

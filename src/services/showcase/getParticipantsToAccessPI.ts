@@ -5,17 +5,17 @@ const mock: Participant[] = [
   {
     id: 1,
     imageUrl: '',
-    name: 'Estabelecimento X',
-    points: 1000,
-    type: 'cnpj',
+    name: 'Participante X',
+    points: 1500,
+    type: 'cpf',
     urlPi: '#',
   },
   {
     id: 2,
     imageUrl: '',
-    name: 'Participante X',
-    points: 1500,
-    type: 'cpf',
+    name: 'Estabelecimento X',
+    points: 1000,
+    type: 'cnpj',
     urlPi: '#',
   },
 ];
@@ -43,17 +43,6 @@ export default async (): Promise<Participant[]> => {
   } = await pluginApi.get<ApiResponse>('marketplace/points');
   const result: Participant[] = [];
 
-  if (participant?.id) {
-    result.push({
-      id: participant.id,
-      imageUrl: participant.picture,
-      name: participant.name,
-      points: participant.points,
-      type: 'cpf',
-      urlPi: participant.url_pi,
-    });
-  }
-
   if (establishment?.id) {
     result.push({
       id: establishment.id,
@@ -62,6 +51,17 @@ export default async (): Promise<Participant[]> => {
       points: establishment.points,
       type: 'cnpj',
       urlPi: establishment.url_pi,
+    });
+  }
+
+  if (participant?.id) {
+    result.push({
+      id: participant.id,
+      imageUrl: participant.picture,
+      name: participant.name,
+      points: participant.points,
+      type: 'cpf',
+      urlPi: participant.url_pi,
     });
   }
 

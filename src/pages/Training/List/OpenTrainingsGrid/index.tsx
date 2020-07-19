@@ -25,12 +25,13 @@ const OpenTrainingsGrid: React.FC<Props> = ({ categoryId }) => {
       categoryId,
       limit: 100,
     }).then(({ data, pagination: apiPagination }) => {
-      setTrainings(data.filter(item => !item.participation?.approved));
+      const filteredData = data.filter(item => !item.participation?.approved);
+      setTrainings(filteredData);
 
       const currentPage = 1;
-      const lastPage = Math.ceil(data.length / 3);
+      const lastPage = Math.ceil((filteredData.length || 1) / 3);
 
-      setTrainingsToSend(data.slice(0, 3));
+      setTrainingsToSend(filteredData.slice(0, 3));
       setPagination({
         current_page: currentPage,
         last_page: lastPage,

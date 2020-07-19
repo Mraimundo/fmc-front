@@ -93,6 +93,7 @@ const Quiz: React.FC = () => {
       )}
       {canShowTheQuiz && !!question && (
         <>
+          <h4>Quiz</h4>
           <Content>
             <BoxNumbers>
               {questions.map((item, key) => (

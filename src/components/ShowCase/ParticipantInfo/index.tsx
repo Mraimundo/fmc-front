@@ -45,7 +45,13 @@ const ParticipantInfo: React.FC<Props> = ({ participant, className }) => {
             {imageUrl ? (
               <img src={imageUrl} alt={data.name} />
             ) : (
-              <span>Imagem do canal</span>
+              <span>
+                {`${
+                  participant.type === 'cnpj'
+                    ? 'Imagem do canal'
+                    : 'Imagem do perfil'
+                } `}
+              </span>
             )}
             <div>
               <label htmlFor="fileAvatarId">
