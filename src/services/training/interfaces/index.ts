@@ -18,6 +18,7 @@ interface Participation {
   startedDate: Date;
   finishedDate: Date;
   approved: boolean;
+  totalAttempts: number;
 }
 
 export interface Media {
@@ -40,6 +41,7 @@ export interface Training {
   participation?: Participation;
   summary: string;
   body: string;
+  maxTries: number;
 }
 
 interface Answer {

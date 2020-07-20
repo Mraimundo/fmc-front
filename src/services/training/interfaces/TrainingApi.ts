@@ -33,6 +33,7 @@ export interface TrainingApi {
   cover_picture: string;
   summary: string;
   max_tries: number;
+  total_attempts: number;
   correction_date: Date;
   status: Status;
   file_url: string;

@@ -150,9 +150,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
           type: 'success',
         });
       }
-    } catch {
+    } catch (e) {
       addToast({
-        title: 'Falha ao responder treinamento. Por favor contate o suporte',
+        title:
+          e?.response?.data?.message ||
+          'Falha ao responder treinamento. Por favor contate o suporte',
         type: 'error',
       });
     }

@@ -1,3 +1,4 @@
+import { number } from 'yup';
 import { Training, Media } from '../interfaces';
 import { TrainingApi } from '../interfaces/TrainingApi';
 
@@ -39,12 +40,14 @@ export default (training: TrainingApi): Training => ({
   endDate: training.end_date,
   numberOfQuestions: training.number_of_questions,
   media: getMedias(training),
+  maxTries: training.max_tries,
   participation:
     typeof training.participant_feedback?.approved === 'boolean'
       ? {
           startedDate: training.participant_feedback.started_at,
           finishedDate: training.participant_feedback.approved_at,
           approved: training.participant_feedback.approved,
+          totalAttempts: training.total_attempts,
         }
       : undefined,
 });
