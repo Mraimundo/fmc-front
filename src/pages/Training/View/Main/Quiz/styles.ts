@@ -13,6 +13,13 @@ export const Container = styled.div`
     align-self: center;
     margin-top: 20px;
   }
+
+  > h4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 20px 35px;
+  }
 `;
 
 export const Content = styled.div`
@@ -77,7 +84,30 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
         border: 1px solid #000;
         top: calc(100% - 6px);
         left: calc(100% - 6px);
-        background: ${status ? 'green' : 'red'};
+        ${status
+          ? css`
+              &::after {
+                content: 'L';
+                position: absolute;
+                color: green;
+                font-size: 15px;
+                font-weight: bold;
+                transform: scaleX(-1) rotate(-35deg);
+                top: -6px;
+                left: 2px;
+              }
+            `
+          : css`
+              &::after {
+                content: 'X';
+                position: absolute;
+                color: red;
+                font-size: 13px;
+                font-weight: bold;
+                top: -3px;
+                left: 1px;
+              }
+            `}
       }
     `};
 `;

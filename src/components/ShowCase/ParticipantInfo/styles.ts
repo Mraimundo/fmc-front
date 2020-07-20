@@ -23,6 +23,7 @@ export const Content = styled.div`
     font-weight: bold;
     color: ${({ theme }) => theme.font.color.quartenary};
     margin-top: 15px;
+    text-align: center;
   }
 
   > h4 {

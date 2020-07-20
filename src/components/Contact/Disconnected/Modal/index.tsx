@@ -101,7 +101,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             <Input name="name" label="Nome" inputRole={inputRole} />
             <Input
               name="cpf"
-              label="Cpf"
+              label="CPF"
               numbersOnly
               pattern="XXX.XXX.XXX-XX"
               inputRole={inputRole}

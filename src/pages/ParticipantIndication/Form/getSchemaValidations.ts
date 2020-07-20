@@ -10,7 +10,7 @@ export default (): Yup.ObjectSchema<object> => {
     email: Yup.string().required(mandatoryMessage).email('Email inválido'),
     cpf: Yup.string()
       .required(mandatoryMessage)
-      .test('valid-cpf', 'Cpf inválido', validateCpf),
+      .test('valid-cpf', 'CPF inválido', validateCpf),
     area_code: Yup.string(),
     cell_phone: Yup.lazy<string>(v =>
       v !== ''

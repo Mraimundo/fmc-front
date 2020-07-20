@@ -19,6 +19,8 @@ import TrainingView from 'pages/Training/View';
 import PointManagement from 'pages/PointManagement';
 import ShowCase from 'pages/ShowCase';
 
+import CampaignsManager from 'pages/CampaignsManager';
+
 import Route from './Route';
 
 const Routes: React.FC = () => (
@@ -46,6 +48,11 @@ const Routes: React.FC = () => (
     <Route exact path="/training/:id" component={TrainingView} />
     <Route exact path="/distribuicao-de-pontos" component={PointManagement} />
     <Route exact path="/vitrine" component={ShowCase} />
+    <Route
+      exact
+      path="/gerenciamento-de-campanhas"
+      component={CampaignsManager}
+    />
   </Switch>
 );
 

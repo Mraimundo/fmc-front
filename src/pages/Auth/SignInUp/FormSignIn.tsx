@@ -23,8 +23,8 @@ const FormSignIn: React.FC = () => {
 
   const schema = Yup.object().shape({
     cpf: Yup.string()
-      .required('Cpf é obrigatório')
-      .test('valid-cpf', 'Cpf inválido', validateCpf),
+      .required('CPF é obrigatório')
+      .test('valid-cpf', 'CPF inválido', validateCpf),
     password: Yup.string().required('Senha é obrigatória'),
   });
 
