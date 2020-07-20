@@ -35,6 +35,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
           setValue('address.district', bairro);
           setValue('address.city', cidade);
           setValue('address.state_code', sigla);
+          setValue('state_code_select', { value: sigla, title: sigla });
         } catch {
           addToast({
             title:
