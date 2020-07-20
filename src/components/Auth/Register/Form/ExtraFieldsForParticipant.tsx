@@ -90,7 +90,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
         label="CEP"
         inputRole={inputRole}
         onBlur={e => handleCepBlur(numbersOnly(e.target.value))}
-        pattern="XX.XXX-XXX"
+        pattern="XXXXX-XXX"
         numbersOnly
       />
 

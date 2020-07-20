@@ -21,7 +21,10 @@ const Box: React.FC<Props> = ({ participant }) => {
 
   return (
     <Container>
-      <ParticipantInfo participant={participant} />
+      <ParticipantInfo
+        participant={participant}
+        showChangePicture={participant.type === 'cnpj'}
+      />
       <ContentBox>
         <h3>Produtos em destaque</h3>
         <ProductsGrid products={products} />

@@ -15,9 +15,14 @@ import { Container, Content, Circle } from './styles';
 interface Props {
   participant: Participant;
   className?: string;
+  showChangePicture: boolean;
 }
 
-const ParticipantInfo: React.FC<Props> = ({ participant, className }) => {
+const ParticipantInfo: React.FC<Props> = ({
+  participant,
+  className,
+  showChangePicture,
+}) => {
   const [data, setData] = useState<Data | null>(null);
   const [imageUrl, setImageUrl] = useState('');
 
@@ -53,17 +58,19 @@ const ParticipantInfo: React.FC<Props> = ({ participant, className }) => {
                 } `}
               </span>
             )}
-            <div>
-              <label htmlFor="fileAvatarId">
-                <input
-                  type="file"
-                  id="fileAvatarId"
-                  accept="image/*"
-                  onChange={handleAttachFile}
-                />
-                <ReactSVG src={cameraIcon} />
-              </label>
-            </div>
+            {showChangePicture && (
+              <div>
+                <label htmlFor="fileAvatarId">
+                  <input
+                    type="file"
+                    id="fileAvatarId"
+                    accept="image/*"
+                    onChange={handleAttachFile}
+                  />
+                  <ReactSVG src={cameraIcon} />
+                </label>
+              </div>
+            )}
           </Circle>
           <h3>{data.name}</h3>
           <h4>{data.points} pontos</h4>
