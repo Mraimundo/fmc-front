@@ -9,6 +9,16 @@ import DefaultGraduationLevelSelect from './GraduationLevelSelect';
 import DefaultMaritalSelect from './MaritalStatusSelect';
 import DefaultGenderSelect from './GenderSelect';
 import DefaultPublicPlaceSelect from './PublicPlaceSelect';
+import DefaultUfSelect from './UfsSelect';
+
+export const UfSelect = styled(DefaultUfSelect)`
+  margin-top: 15px;
+  max-width: 100px;
+
+  ._inputContainer {
+    height: 40px;
+  }
+`;
 
 export const Avatar = styled(DefaultAvatar)`
   margin-top: 15px;

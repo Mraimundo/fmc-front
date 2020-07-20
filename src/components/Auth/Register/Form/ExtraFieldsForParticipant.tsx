@@ -10,6 +10,7 @@ import {
   MaritalStatusSelect,
   GenderSelect,
   PublicPlaceSelect,
+  UfSelect,
 } from './styles';
 
 interface Props {
@@ -108,7 +109,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <Input name="address.city" label="Município" inputRole={inputRole} />
 
-      <Input name="address.state_code" label="Estado" inputRole={inputRole} />
+      <UfSelect name="state_code_select" label="Estado" inputRole={inputRole} />
     </>
   );
 };

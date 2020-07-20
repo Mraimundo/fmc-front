@@ -30,6 +30,7 @@ interface FormData extends Participant {
   gender_select: { title: string; value: string } | null;
   public_place_select: { title: string; value: string } | null;
   formatted_birth_date: string;
+  state_code_select: { title: string; value: string } | null;
 }
 
 const Form: React.FC<Props> = ({
@@ -80,6 +81,12 @@ const Form: React.FC<Props> = ({
             value: participant.education_level || '',
           }
         : null,
+      state_code_select: participant.address?.state_code
+        ? {
+            title: participant.address.state_code || '',
+            value: participant.address.state_code || '',
+          }
+        : null,
     },
   });
 
@@ -94,6 +101,7 @@ const Form: React.FC<Props> = ({
       address: {
         ...data.address,
         public_place: data?.public_place_select?.value || '',
+        state_code: data?.state_code_select?.value || '',
       },
       birth_date: data.formatted_birth_date,
     });

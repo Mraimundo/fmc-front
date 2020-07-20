@@ -127,8 +127,14 @@ export default (
           complement: Yup.string().required(mandatoryMessage),
           district: Yup.string().required(mandatoryMessage),
           city: Yup.string().required(mandatoryMessage),
-          state_code: Yup.string().required(mandatoryMessage),
+          /* state_code: Yup.string().required(mandatoryMessage), */
         }),
+        state_code_select: Yup.object()
+          .shape({
+            value: Yup.string().required(mandatoryMessage),
+          })
+          .typeError(mandatoryMessage)
+          .required(mandatoryMessage),
       });
     default:
       return Yup.object().shape({ ...defaultValidations });
