@@ -16,7 +16,7 @@ const Layout2: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>Vitrine de prêmios</h3>
+        <h3>Catálogo de prêmios</h3>
         <span>Selecione o cliente que deseja acessar</span>
         <TypesSelect
           value={categorySelected}
