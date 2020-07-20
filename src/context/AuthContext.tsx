@@ -5,7 +5,6 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
-import numbersOnly from 'util/numbersOnly';
 import signInService from 'services/auth/signIn';
 import isTokenValid from 'services/auth/isTokenValid';
 import isThereAnyRegulationToAccept from 'services/register/regulation/isThereAnyRegulationToAccept';
@@ -27,11 +26,13 @@ interface AuthContextState {
   signIn(credentials: Credentials | string): Promise<void>;
   signOut(): void;
   updateParticipantData(): void;
+  setToken(token: string): void;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const [tries, setTries] = useState(0);
   const [participant, setParticipant] = useState<Participant>(
     {} as Participant,
   );
@@ -91,16 +92,37 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!apiToken) return;
-    isTokenValid().then(isValid => {
-      if (!isValid) {
-        signOut();
-        addToast({
-          title: 'Sua Sessão expirou, por favor refaça seu login',
-          type: 'error',
-        });
-      }
-    });
+    setToken(apiToken);
+    setTimeout(() => {
+      isTokenValid().then(isValid => {
+        if (!isValid) {
+          signOut();
+          addToast({
+            title: 'Sua Sessão expirou, por favor refaça seu login',
+            type: 'error',
+          });
+        }
+      });
+    }, 800);
   }, [addToast, signOut, apiToken]);
+
+  const setTokenFn = useCallback(
+    (tokenParam: string) => {
+      setToken(tokenParam);
+      isTokenValid().then(isValid => {
+        if (!isValid) {
+          signOut();
+          addToast({
+            title: 'Token inválido',
+            type: 'error',
+          });
+          return;
+        }
+        setApiToken(tokenParam);
+      });
+    },
+    [addToast, signOut],
+  );
 
   return (
     <AuthContext.Provider
@@ -111,6 +133,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signOut,
         shouldShowRegulationsModal,
         updateParticipantData,
+        setToken: setTokenFn,
       }}
     >
       {children}
