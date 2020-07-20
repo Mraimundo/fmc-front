@@ -118,6 +118,7 @@ export const AuthProvider: React.FC = ({ children }) => {
           });
           return;
         }
+        localStorage.setItem('@Vendavall:token', tokenParam);
         setApiToken(tokenParam);
       });
     },
