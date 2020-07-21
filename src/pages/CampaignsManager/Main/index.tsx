@@ -5,6 +5,8 @@ import {
   ConfigurationForm,
   ResultForm,
   FinishForm,
+  ComunicationForm,
+  RegulationForm,
 } from 'components/CampaignsManager';
 import TabsNavigation from './TabsNavigation';
 
@@ -13,6 +15,8 @@ import {
   RESULTS_TAB,
   CONFIGURATION_TAB,
   FINISHED_TAB,
+  COMUNICATION_TAB,
+  REGULATION_TAB,
 } from '../tabs';
 import { useCampaignsManager } from '../Context';
 import { Container, Content } from './styles';
@@ -25,8 +29,10 @@ const Main: React.FC = () => {
         <TabsNavigation />
         {tabSelected === SOLICITATION_TAB && <RegisterCampaignForm />}
         {tabSelected === CONFIGURATION_TAB && <ConfigurationForm />}
-        {tabSelected === RESULTS_TAB && <ResultForm />}
+        {tabSelected === COMUNICATION_TAB && <ComunicationForm />}
+        {tabSelected === REGULATION_TAB && <RegulationForm />}
         {tabSelected === FINISHED_TAB && <FinishForm />}
+        {tabSelected === RESULTS_TAB && <ResultForm />}
       </Content>
     </Container>
   );

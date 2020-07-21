@@ -3,6 +3,7 @@ import ConfigurationForm from './Forms/Configuration';
 import RegulationForm from './Forms/Regulation';
 import ResultForm from './Forms/Results';
 import FinishForm from './Forms/Finish';
+import ComunicationForm from './Forms/Comunication';
 
 export {
   RegisterCampaignForm,
@@ -10,4 +11,5 @@ export {
   RegulationForm,
   ResultForm,
   FinishForm,
+  ComunicationForm,
 };
