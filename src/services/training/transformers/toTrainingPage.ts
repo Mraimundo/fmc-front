@@ -21,6 +21,8 @@ export interface Response {
   videoUrl: string;
   body: string;
   documents: Document[];
+  maxTries: number;
+  totalAttempts: number;
 }
 
 export default (data: Training): Response => {
@@ -33,6 +35,8 @@ export default (data: Training): Response => {
     imageUrl: data.imageUrl,
     videoUrl: data.media.find(item => item.type === 'video')?.url || '',
     status: getStatusText(data.status),
+    maxTries: data.maxTries,
+    totalAttempts: data.totalAttempts || 0,
     summary: data.summary,
     body: data.body,
     documents: data.media

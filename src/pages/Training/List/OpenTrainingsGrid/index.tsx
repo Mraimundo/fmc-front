@@ -25,7 +25,12 @@ const OpenTrainingsGrid: React.FC<Props> = ({ categoryId }) => {
       categoryId,
       limit: 100,
     }).then(({ data, pagination: apiPagination }) => {
-      const filteredData = data.filter(item => !item.participation?.approved);
+      const filteredData = data.filter(
+        item =>
+          !item.participation?.approved &&
+          (item.maxTries === 0 ||
+            item.maxTries > (item.participation?.totalAttempts || 0)),
+      );
       setTrainings(filteredData);
 
       const currentPage = 1;

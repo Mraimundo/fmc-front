@@ -23,13 +23,14 @@ const Quiz: React.FC = () => {
 
   const {
     questions,
-    canAnswerTraining,
+    videoWatched,
     showMeTheQuiz,
     canShowTheQuiz,
     answerQuestion,
     sendAnswers,
     quizAlreadyAnswered,
     training,
+    canAnswer,
   } = useTraining();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const Quiz: React.FC = () => {
       showMeTheQuiz();
       return;
     }
-    if (!canAnswerTraining) {
+    if (!videoWatched) {
       addToast({
         title: 'Você precisa assistir o vídeo para prosseguir',
         type: 'error',
@@ -58,7 +59,7 @@ const Quiz: React.FC = () => {
       return;
     }
     showMeTheQuiz();
-  }, [canAnswerTraining, addToast, showMeTheQuiz, training]);
+  }, [videoWatched, addToast, showMeTheQuiz, training]);
 
   const handleNextQuestion = useCallback(() => {
     setQuestionSelected(n => {
@@ -86,7 +87,7 @@ const Quiz: React.FC = () => {
 
   return (
     <Container>
-      {!canShowTheQuiz && (
+      {!canShowTheQuiz && canAnswer.canAnswer && (
         <Button buttonRole="primary" type="button" onClick={handleAnswerClick}>
           Responder
         </Button>

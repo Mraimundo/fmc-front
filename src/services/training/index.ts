@@ -7,6 +7,7 @@ import answerTraining from './answerTraining';
 import getRightAnswers from './getRightAnswers';
 import checkIfParticipantHasBeenApproved from './checkIfParticipantHasBeenApproved';
 import getMyAnswers from './getMyAnswers';
+import canAnswerTraininig from './canAnswerTraininig';
 
 export {
   getCategories,
@@ -18,4 +19,5 @@ export {
   getRightAnswers,
   checkIfParticipantHasBeenApproved,
   getMyAnswers,
+  canAnswerTraininig,
 };

@@ -42,6 +42,7 @@ export interface Training {
   summary: string;
   body: string;
   maxTries: number;
+  totalAttempts: number;
 }
 
 interface Answer {

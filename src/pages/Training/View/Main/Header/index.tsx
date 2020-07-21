@@ -4,7 +4,7 @@ import { useTraining } from '../../Context';
 import { Container } from './styles';
 
 const Header: React.FC = () => {
-  const { training, approved } = useTraining();
+  const { training, approved, canAnswer } = useTraining();
 
   return (
     <Container>
@@ -15,7 +15,13 @@ const Header: React.FC = () => {
           <span>{`De ${training?.startDate} até ${training?.endDate}`} </span>
         </div>
       </div>
-      <span>{approved ? 'Finalizado' : 'Iniciado'}</span>
+      <span>
+        {approved ||
+        (training?.maxTries !== 0 &&
+          (training?.maxTries || 0) <= (training?.totalAttempts || 0))
+          ? 'Finalizado'
+          : 'Iniciado'}
+      </span>
     </Container>
   );
 };

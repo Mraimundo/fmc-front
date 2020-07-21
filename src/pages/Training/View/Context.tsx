@@ -10,6 +10,7 @@ import {
   getQuestions,
   answerTraining,
   checkIfParticipantHasBeenApproved,
+  canAnswerTraininig,
 } from 'services/training';
 import setVideoWatchedService from 'services/training/setVideoWatched';
 import getMyAnswers, {
@@ -33,7 +34,7 @@ export interface Question extends IQuestion {
 
 interface TrainingContextState {
   training: ITraining | null;
-  canAnswerTraining: boolean;
+  videoWatched: boolean;
   loadTraining(trainingId: number): Promise<void>;
   setVideoWatched(): Promise<void>;
   showMeTheQuiz(): void;
@@ -45,6 +46,7 @@ interface TrainingContextState {
   successModalOpened: boolean;
   closeSuccessModal(): void;
   approved: boolean;
+  canAnswer: { canAnswer: boolean; reason: string };
 }
 
 const TrainingContext = createContext<TrainingContextState>(
@@ -53,12 +55,13 @@ const TrainingContext = createContext<TrainingContextState>(
 
 export const TrainingProvider: React.FC = ({ children }) => {
   const [training, setTraining] = useState<ITraining | null>(null);
-  const [canAnswerTraining, setCanAnswerTraining] = useState(false);
+  const [videoWatched, setVideoWatched] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizAlreadyAnswered, setQuizAlreadyAnswered] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [successModalOpened, setSuccessModalOpened] = useState(false);
   const [approved, setApproved] = useState(false);
+  const [canAnswer, setCanAnswer] = useState({ canAnswer: false, reason: '' });
   const { addToast } = useToast();
 
   const closeSuccessModal = useCallback(() => setSuccessModalOpened(false), []);
@@ -66,6 +69,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
   const loadTraining = useCallback(
     async (trainingId: number): Promise<void> => {
       try {
+        canAnswerTraininig(trainingId).then(({ can_answer, message }) => {
+          setCanAnswer({ canAnswer: can_answer, reason: message });
+        });
         getQuestions(trainingId).then(async data => {
           const approvedApi = await checkIfParticipantHasBeenApproved(
             trainingId,
@@ -139,6 +145,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
           answerId: item.myAnswerId || 0,
         })),
       });
+      canAnswerTraininig(training.id).then(
+        ({ can_answer, message: reason }) => {
+          setCanAnswer({ canAnswer: can_answer, reason });
+        },
+      );
       setQuizAlreadyAnswered(true);
       if (approvedApi) {
         setApproved(approvedApi);
@@ -177,20 +188,20 @@ export const TrainingProvider: React.FC = ({ children }) => {
     [quizAlreadyAnswered],
   );
 
-  const setVideoWatched = useCallback(async () => {
+  const handleVideoWatched = useCallback(async () => {
     if (training) await setVideoWatchedService(training.id);
-    setCanAnswerTraining(true);
+    setVideoWatched(true);
   }, [training]);
 
   return (
     <TrainingContext.Provider
       value={{
         training,
-        canAnswerTraining,
+        videoWatched,
         canShowTheQuiz: showQuiz,
         questions,
         loadTraining,
-        setVideoWatched,
+        setVideoWatched: handleVideoWatched,
         showMeTheQuiz,
         answerQuestion,
         sendAnswers,
@@ -198,6 +209,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
         successModalOpened,
         closeSuccessModal,
         approved,
+        canAnswer,
       }}
     >
       {children}

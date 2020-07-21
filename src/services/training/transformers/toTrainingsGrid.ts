@@ -21,6 +21,9 @@ export default (data: Training[]): Response[] => {
     endDate: formatDate(item.endDate),
     imageUrl: item.imageUrl,
     status: item.status,
-    finished: !!item.participation?.finishedDate,
+    finished:
+      !!item.participation?.finishedDate ||
+      (item.maxTries === item.participation?.totalAttempts &&
+        item.maxTries !== 0),
   }));
 };

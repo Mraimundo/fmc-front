@@ -28,9 +28,12 @@ export default (data: Training[]): Response[] => {
     endDateParticipation: item.participation?.finishedDate
       ? formatDate(item.participation.finishedDate)
       : ``,
-    status: item.participation?.approved
-      ? 'Finalizado'
-      : getStatusText(item.status),
+    status:
+      item.participation?.approved ||
+      (item.maxTries <= (item.participation?.totalAttempts || 0) &&
+        item.maxTries !== 0)
+        ? 'Finalizado'
+        : getStatusText(item.status),
     certificateUrl: '',
     custom: {
       id: item.id,
