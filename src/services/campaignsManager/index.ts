@@ -5,7 +5,7 @@ import getMechanics from './getMechanics';
 import getProducts from './getProducts';
 import getProductsCategories from './getProductsCategories';
 import getRegional from './getRegional';
-import getStatus from './getStatus';
+import getCampaignStatus from './getCampaignStatus';
 import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
 
 export {
@@ -16,6 +16,6 @@ export {
   getProducts,
   getProductsCategories,
   getRegional,
-  getStatus,
+  getCampaignStatus,
   getTitlesOptionsForCampaign,
 };

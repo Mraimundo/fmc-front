@@ -4,6 +4,18 @@ const mock: Customer[] = [
   {
     id: 1,
     name: 'test',
+    directors: [
+      {
+        id: 1,
+        name: 'test',
+      },
+    ],
+    regional: [
+      {
+        id: 1,
+        name: 'test',
+      },
+    ],
   },
 ];
 
