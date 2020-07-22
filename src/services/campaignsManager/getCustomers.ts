@@ -1,4 +1,4 @@
-import { Customer } from './interfaces';
+import { Customer } from './interfaces/Campaign';
 
 const mock: Customer[] = [
   {

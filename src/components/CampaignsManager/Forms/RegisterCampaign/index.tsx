@@ -1,10 +1,15 @@
 import React from 'react';
-import { RegisterFormProvider } from './Context';
+import { RegisterFormProvider, RegisterFormProps } from './Context';
 import Form from './Form';
 
-const RegisterCampaign: React.FC = () => {
+const RegisterCampaign: React.FC<RegisterFormProps> = ({ initialValues }) => {
   return (
-    <RegisterFormProvider>
+    <RegisterFormProvider
+      initialValues={initialValues}
+      handleAction={async () => {
+        console.log('oi');
+      }}
+    >
       <Form />
     </RegisterFormProvider>
   );

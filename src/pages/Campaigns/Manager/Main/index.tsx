@@ -23,11 +23,18 @@ import { Container, Content } from './styles';
 
 const Main: React.FC = () => {
   const { tabSelected } = useCampaignsManager();
+
+  const handleAction = async (): Promise<void> => {
+    console.log('t');
+  };
+
   return (
     <Container>
       <Content>
         <TabsNavigation />
-        {tabSelected === SOLICITATION_TAB && <RegisterCampaignForm />}
+        {tabSelected === SOLICITATION_TAB && (
+          <RegisterCampaignForm handleAction={handleAction} />
+        )}
         {tabSelected === CONFIGURATION_TAB && <ConfigurationForm />}
         {tabSelected === COMUNICATION_TAB && <ComunicationForm />}
         {tabSelected === REGULATION_TAB && <RegulationForm />}

@@ -1,7 +1,7 @@
 import { Option } from 'components/shared/Select';
-import { Mechanic } from '../interfaces/Campaign';
+import { StatusResponse } from '../getStatus';
 
-export default (data: Mechanic[]): Option[] => {
+export default (data: StatusResponse[]): Option[] => {
   return data.map(item => ({
     title: item.name,
     value: item.id.toString(),

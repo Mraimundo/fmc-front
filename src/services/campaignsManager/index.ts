@@ -1,15 +1,21 @@
-import getMechanics from './getMechanics';
-import getCustomers from './getCustomers';
-import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
-import getProductsCategories from './getProductsCategories';
-import getProducts from './getProducts';
 import getChannels from './getChannels';
+import getCustomers from './getCustomers';
+import getDirectors from './getDirectors';
+import getMechanics from './getMechanics';
+import getProducts from './getProducts';
+import getProductsCategories from './getProductsCategories';
+import getRegional from './getRegional';
+import getStatus from './getStatus';
+import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
 
 export {
-  getMechanics,
-  getCustomers,
-  getTitlesOptionsForCampaign,
-  getProductsCategories,
-  getProducts,
   getChannels,
+  getCustomers,
+  getDirectors,
+  getMechanics,
+  getProducts,
+  getProductsCategories,
+  getRegional,
+  getStatus,
+  getTitlesOptionsForCampaign,
 };

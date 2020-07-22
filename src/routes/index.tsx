@@ -20,7 +20,8 @@ import TrainingView from 'pages/Training/View';
 import PointManagement from 'pages/PointManagement';
 import ShowCase from 'pages/ShowCase';
 
-import CampaignsManager from 'pages/CampaignsManager';
+import CampaignManager from 'pages/Campaigns/Manager';
+import NewCampaign from 'pages/Campaigns/New';
 
 import Route from './Route';
 
@@ -53,7 +54,12 @@ const Routes: React.FC = () => (
     <Route
       exact
       path="/gerenciamento-de-campanhas"
-      component={CampaignsManager}
+      component={CampaignManager}
+    />
+    <Route
+      exact
+      path="/gerenciamento-de-campanhas/registrar"
+      component={NewCampaign}
     />
   </Switch>
 );

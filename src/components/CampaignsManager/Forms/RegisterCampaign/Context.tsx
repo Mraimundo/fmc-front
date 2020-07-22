@@ -2,23 +2,43 @@ import React, {
   createContext,
   useState,
   useContext,
-  useCallback,
   useEffect,
+  useCallback,
 } from 'react';
+import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 
 interface RegisterFormContextState {
-  test: string;
+  campaign: Campaign;
+  handleSubmitAction(): Promise<void>;
 }
 
 const RegisterFormContext = createContext<RegisterFormContextState>(
   {} as RegisterFormContextState,
 );
 
-export const RegisterFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+export interface RegisterFormProps {
+  initialValues?: Campaign;
+  handleAction(campaign: Campaign): Promise<void>;
+}
+export const RegisterFormProvider: React.FC<RegisterFormProps> = ({
+  initialValues,
+  children,
+  handleAction,
+}) => {
+  const [campaign, setCampaign] = useState({} as Campaign);
+
+  useEffect(() => {
+    if (initialValues) {
+      setCampaign(initialValues);
+    }
+  }, [initialValues]);
+
+  const handleSubmitAction = useCallback(async (): Promise<void> => {
+    await handleAction(campaign);
+  }, [campaign, handleAction]);
 
   return (
-    <RegisterFormContext.Provider value={{ test }}>
+    <RegisterFormContext.Provider value={{ campaign, handleSubmitAction }}>
       {children}
     </RegisterFormContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { Mechanic } from './interfaces';
+import { Mechanic } from './interfaces/Campaign';
 
 const mock: Mechanic[] = [
   {
