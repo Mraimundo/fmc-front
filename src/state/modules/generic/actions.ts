@@ -2,7 +2,6 @@ import {
   ActionCreator,
   ActionCreatorPayload,
   ActionCreatorFailure,
-  ApiErrors,
 } from '@types';
 import {
   FETCH_ANYTHING_ACTION,
@@ -19,12 +18,12 @@ export const fetchAnythingAction = (): ActionCreator<
   };
 
 export const fetchAnythingFailure = (
-  errors: ApiErrors[],
+  error: string,
 ): ActionCreatorFailure<typeof FETCH_ANYTHING_FAILURE> =>
   <const>{
     type: FETCH_ANYTHING_FAILURE,
     payload: {
-      errors,
+      error,
     },
   };
 

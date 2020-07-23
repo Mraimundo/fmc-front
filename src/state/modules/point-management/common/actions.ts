@@ -2,48 +2,80 @@ import {
   ActionCreator,
   ActionCreatorPayload,
   ActionCreatorFailure,
-  ApiErrors,
 } from '@types';
 import {
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
+  FETCH_ESTABLISHMENTS_ACTION,
+  FETCH_ESTABLISHMENTS_FAILURE,
+  FETCH_ESTABLISHMENTS_SUCCESS,
+  FETCH_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_COOPERATIVE,
+  SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
+  SET_SELECTED_ESTABLISHMENT,
 } from './constants';
 import { CommonState } from './reducer';
+import { PointsToDistribute, Establishment } from './types';
 
-export const fetchTotalPointsToDistribute = (): ActionCreator<
-  typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION
+export const fetchEstablishments = (): ActionCreator<
+  typeof FETCH_ESTABLISHMENTS_ACTION
 > =>
   <const>{
-    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
+    type: FETCH_ESTABLISHMENTS_ACTION,
   };
 
-export const fetchTotalPointsToDistributeFailure = (
-  errors: ApiErrors[],
-): ActionCreatorFailure<typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE> =>
+export const fetchEstablishmentsFailure = (
+  error: string,
+): ActionCreatorFailure<typeof FETCH_ESTABLISHMENTS_FAILURE> =>
   <const>{
-    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
+    type: FETCH_ESTABLISHMENTS_FAILURE,
     payload: {
-      errors,
+      error,
     },
   };
 
-export const fetchTotalPointsToDistributeSuccess = (
-  totalPointsToDistribute: string,
+export const fetchEstablishmentsSuccess = (
+  establishments: Establishment[] | null,
 ): ActionCreatorPayload<
-  typeof FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
-  Pick<CommonState, 'totalPointsToDistribute'>
+  typeof FETCH_ESTABLISHMENTS_SUCCESS,
+  Pick<CommonState, 'establishments'>
 > =>
   <const>{
-    type: FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
-    payload: { totalPointsToDistribute },
+    type: FETCH_ESTABLISHMENTS_SUCCESS,
+    payload: { establishments },
+  };
+
+export const fetchPointsToDistribute = (): ActionCreator<
+  typeof FETCH_POINTS_TO_DISTRIBUTE_ACTION
+> =>
+  <const>{
+    type: FETCH_POINTS_TO_DISTRIBUTE_ACTION,
+  };
+
+export const fetchPointsToDistributeFailure = (
+  error: string,
+): ActionCreatorFailure<typeof FETCH_POINTS_TO_DISTRIBUTE_FAILURE> =>
+  <const>{
+    type: FETCH_POINTS_TO_DISTRIBUTE_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchPointsToDistributeSuccess = (
+  pointsToDistribute: PointsToDistribute,
+): ActionCreatorPayload<
+  typeof FETCH_POINTS_TO_DISTRIBUTE_SUCCESS,
+  Pick<CommonState, 'pointsToDistribute'>
+> =>
+  <const>{
+    type: FETCH_POINTS_TO_DISTRIBUTE_SUCCESS,
+    payload: { pointsToDistribute },
   };
 
 export const setTotalPointsTeamAwards = (
-  totalPointsTeamAwards: string,
+  totalPointsTeamAwards: number,
 ): ActionCreatorPayload<
   typeof SET_TOTAL_POINTS_TEAM_AWARDS,
   Pick<CommonState, 'totalPointsTeamAwards'>
@@ -53,15 +85,15 @@ export const setTotalPointsTeamAwards = (
     payload: { totalPointsTeamAwards },
   };
 
-export const setTotalPointsCooperative = (
-  totalPointsCooperative: string,
+export const setTotalPointsResaleCooperative = (
+  totalPointsResaleCooperative: number,
 ): ActionCreatorPayload<
-  typeof SET_TOTAL_POINTS_COOPERATIVE,
-  Pick<CommonState, 'totalPointsCooperative'>
+  typeof SET_TOTAL_POINTS_RESALE_COOPERATIVE,
+  Pick<CommonState, 'totalPointsResaleCooperative'>
 > =>
   <const>{
-    type: SET_TOTAL_POINTS_COOPERATIVE,
-    payload: { totalPointsCooperative },
+    type: SET_TOTAL_POINTS_RESALE_COOPERATIVE,
+    payload: { totalPointsResaleCooperative },
   };
 
 export const setIsReadyToDistribute = (
@@ -75,11 +107,26 @@ export const setIsReadyToDistribute = (
     payload: { isReadyToDistribute },
   };
 
+export const setSelectedEstablishment = (
+  selectedEstablishment: Establishment,
+): ActionCreatorPayload<
+  typeof SET_SELECTED_ESTABLISHMENT,
+  Pick<CommonState, 'selectedEstablishment'>
+> =>
+  <const>{
+    type: SET_SELECTED_ESTABLISHMENT,
+    payload: { selectedEstablishment },
+  };
+
 export type CommonActions = ReturnType<
-  | typeof fetchTotalPointsToDistribute
-  | typeof fetchTotalPointsToDistributeFailure
-  | typeof fetchTotalPointsToDistributeSuccess
+  | typeof fetchEstablishments
+  | typeof fetchEstablishmentsFailure
+  | typeof fetchEstablishmentsSuccess
+  | typeof fetchPointsToDistribute
+  | typeof fetchPointsToDistributeFailure
+  | typeof fetchPointsToDistributeSuccess
   | typeof setTotalPointsTeamAwards
-  | typeof setTotalPointsCooperative
+  | typeof setTotalPointsResaleCooperative
   | typeof setIsReadyToDistribute
+  | typeof setSelectedEstablishment
 >;

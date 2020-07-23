@@ -7,9 +7,11 @@ import {
   assignPoints,
   getParticipantScore,
   scoreAllParticipantsEqually,
+  extractParticipantsFromList,
 } from './utils';
 import {
   participant,
+  participants,
   scoredParticipants,
   selectedRoles,
   roles,
@@ -195,6 +197,16 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
       expect(
         scoreAllParticipantsEqually(scoredParticipants, '200'),
       ).to.be.deep.equal(response);
+    });
+  });
+
+  describe('extractParticipantsFromList', () => {
+    it('should return only participants with total and without list index', () => {
+      expect(extractParticipantsFromList(participants)).to.be.deep.equal([
+        participants['Gerente Comercial'].list[0],
+        participants['Gerente Comercial'].list[1],
+        participants['Supervisor'].list[0],
+      ]);
     });
   });
 });

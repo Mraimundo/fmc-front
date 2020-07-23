@@ -19,7 +19,7 @@ const ParticipantsFinder: React.FC<Props> = ({ onChange }) => {
   );
 
   useEffect(() => {
-    if (debouncedSearchTerm) onChange(debouncedSearchTerm);
+    onChange(debouncedSearchTerm);
   }, [debouncedSearchTerm, onChange]);
 
   return (

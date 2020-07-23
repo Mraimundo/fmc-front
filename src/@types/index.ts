@@ -1,8 +1,3 @@
-export type ApiErrors = {
-  message: string;
-  code: string;
-};
-
 export interface ActionCreator<Type> {
   type: Type;
   meta?: any;
@@ -11,7 +6,7 @@ export interface ActionCreator<Type> {
 export interface ActionCreatorFailure<Type extends string = string>
   extends ActionCreator<Type> {
   payload: {
-    errors: ApiErrors[];
+    error: string;
   };
 }
 
@@ -23,9 +18,9 @@ export type ActionCreatorFailureType<
   TCreatedAction extends ActionCreatorFailure<string> = ActionCreatorFailure<
     string
   >
-> = (errors: ApiErrors[]) => TCreatedAction;
+> = (error: string) => TCreatedAction;
 
 export type FetchState = {
-  errors?: ApiErrors[];
+  error?: string;
   isFetching: boolean;
 };

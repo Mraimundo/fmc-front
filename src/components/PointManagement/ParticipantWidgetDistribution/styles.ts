@@ -1,20 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 
 import { FONTS } from 'styles/font/globals';
 
 export const Name = styled.h1`
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: #193b4e;
-  font-family: ${FONTS.regular};
+  font-family: ${FONTS.medium};
 `;
 
 export const Subsidiary = styled.h1`
-  font-size: 0.75em;
+  font-size: 0.65em;
   color: #193b4e;
+  margin-top: 2px;
 `;
 
 export const Card = styled.li`
+  position: relative;
   width: calc((100% / 3) - 15px);
   border-radius: 6px;
   border: 1.2px solid #193b4e;
@@ -31,18 +34,23 @@ export const Card = styled.li`
   &:not(:nth-child(3n)) {
     margin-right: 15px;
   }
+`;
 
-  input {
-    width: 100px;
-    padding: 0.5em;
-    border-radius: 0;
-    border: none;
-    border: 1.3px solid #707070;
-    text-align: center;
-    color: #707070;
-    font-size: 0.9em;
-    margin-top: 3px;
-    font-family: ${FONTS.medium};
+export const InputPoints = styled.input`
+  width: 100px;
+  padding: 0.5em;
+  border-radius: 0;
+  border: none;
+  border: 1.3px solid #707070;
+  text-align: center;
+  color: #707070;
+  font-size: 0.9em;
+  margin-top: 3px;
+  font-family: ${FONTS.medium};
+
+  &:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
   }
 `;
 
@@ -63,4 +71,21 @@ export const InputWrapper = styled.div`
     font-size: 0.8em;
     color: #193b4e;
   }
+`;
+
+const iconStyle = css`
+  fill: #193f4e;
+  font-size: 1.2em;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  cursor: pointer;
+`;
+
+export const SelectIcon = styled(AiOutlineCheckCircle)`
+  ${iconStyle};
+`;
+
+export const SelectedIcon = styled(AiFillCheckCircle)`
+  ${iconStyle}
 `;

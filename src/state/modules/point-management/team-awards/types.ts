@@ -2,12 +2,11 @@ import { FetchParticipantsRawData } from 'services/point-management/team-awards'
 
 export type Subsidiary = {
   id: number;
-  label: string;
+  name: string;
 };
 
 export type Role = {
   id: number;
-  identifier: string;
   name: string;
 };
 
@@ -20,8 +19,9 @@ export type Participant = {
 };
 
 export type ScoredParticipant = Participant & {
-  points: string;
-  assigned: boolean;
+  points: number;
 };
+
+export type WaitingScoredParticipant = ScoredParticipant;
 
 export type ParticipantsList = FetchParticipantsRawData;

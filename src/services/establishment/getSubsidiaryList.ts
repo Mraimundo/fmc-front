@@ -11,7 +11,7 @@ interface ApiResponse {
   subsidiaries: Subsidiary[];
 }
 
-export default async (establishmentId: number): Promise<Subsidiary[]> => {
+export default async (establishmentId: number | string): Promise<Subsidiary[]> => {
   try {
     const {
       data: { subsidiaries },

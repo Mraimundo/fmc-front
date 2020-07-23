@@ -1,4 +1,3 @@
-import { ApiErrors } from '@types';
 import { TeamAwardsState } from './reducer';
 import {
   Subsidiary,
@@ -6,13 +5,14 @@ import {
   Participant,
   ParticipantsList,
   ScoredParticipant,
+  WaitingScoredParticipant,
 } from './types';
 
-export const errors: ApiErrors[] = [{ code: '1', message: 'internal error' }];
+export const error = 'Generic Error';
 
 export const subsidiaries: Subsidiary[] = [
-  { id: 1, label: 'Filial 1' },
-  { id: 2, label: 'Filial 2' },
+  { id: 1, name: 'Filial 1' },
+  { id: 2, name: 'Filial 2' },
 ];
 
 export const selectedSubsidiaries: number[] = [1, 2];
@@ -22,8 +22,8 @@ export const selectedRoles: number[] = [1, 2];
 export const selectedParticipants: number[] | null = null;
 
 export const roles: Role[] = [
-  { id: 1, identifier: 'gerente-comercial', name: 'Gerente Comercial' },
-  { id: 2, identifier: 'supervisor', name: 'Supervisor' },
+  { id: 1, name: 'Gerente Comercial' },
+  { id: 2, name: 'Supervisor' },
 ];
 
 export const participant: Participant = {
@@ -35,35 +35,34 @@ export const participant: Participant = {
     'https://storage.vendavall.com.br/teste/avatars/1593900044.5f00fc0c6bc0c1.33183597.jpg',
 };
 
+export const waitingScoredParticipants: WaitingScoredParticipant[] | null = null;
+
 export const scoredParticipants: ScoredParticipant[] = [
   {
     ...participant,
-    points: '200',
-    assigned: true,
+    points: 200,
   },
   {
     id: 3,
     name: 'Centi',
     subsidiary: 'Unidade GHI',
-    points: '21',
+    points: 21,
     picture: 'photo.jpg',
     role: roles[0],
-    assigned: true,
   },
   {
     id: 2,
     name: 'Mayconn',
     subsidiary: 'Unidade DEF',
-    points: '210',
+    points: 210,
     picture: 'photo.jpg',
     role: roles[1],
-    assigned: true,
   },
 ];
 
 export const participants: ParticipantsList = {
   'Gerente Comercial': {
-    total: 2,
+    count: 2,
     list: [
       {
         ...participant,
@@ -79,7 +78,7 @@ export const participants: ParticipantsList = {
     ],
   },
   Supervisor: {
-    total: 1,
+    count: 1,
     list: [
       {
         id: 2,
@@ -95,29 +94,34 @@ export const participants: ParticipantsList = {
 const state: TeamAwardsState = {
   fetchSubsidiaries: {
     isFetching: false,
-    errors,
+    error,
   },
   fetchRoles: {
     isFetching: false,
-    errors: [],
+    error: '',
   },
   fetchParticipants: {
     isFetching: false,
-    errors: [],
+    error: '',
   },
   assignPoints: {
     isFetching: false,
-    errors: [],
+    error: '',
+  },
+  distributePoints: {
+    isFetching: false,
+    error: '',
   },
   subsidiaries,
   roles,
   participants,
   selectedParticipants,
+  waitingScoredParticipants,
   scoredParticipants,
   selectedSubsidiaries,
   selectedRoles,
   participantFinder: 'Gabriel',
-  pointsToDistribute: '5000',
+  pointsToDistribute: 5000,
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: 1666.6666666666667,
   selectedRolesAll: null,

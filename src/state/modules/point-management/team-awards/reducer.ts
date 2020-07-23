@@ -1,8 +1,15 @@
 import { Reducer } from 'redux';
 
-import { FetchState, ActionCreatorFailure } from '@types';
+import { FetchState } from '@types';
+import { emptyFetchState, fetchingState, fetchErrorState } from 'state/utils';
 import { TeamAwardsActions } from './actions';
-import { Subsidiary, Role, ParticipantsList, ScoredParticipant } from './types';
+import {
+  Subsidiary,
+  Role,
+  ParticipantsList,
+  WaitingScoredParticipant,
+  ScoredParticipant,
+} from './types';
 import {
   FETCH_SUBSIDIARIES_ACTION,
   FETCH_SUBSIDIARIES_FAILURE,
@@ -27,42 +34,40 @@ import {
   SET_SELECTED_ROLES_ALL,
   SELECT_ALL_PARTICIPANTS,
   DESELECT_ALL_PARTICIPANTS,
+  TOGGLE_SELECTED_PARTICIPANT,
+  REMOVE_ALL_SCORES,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
 } from './constants';
 import {
   toggleRoleSelection,
   toggleSubsidiarySelection,
   scoreParticipant,
-  assignPoints,
   scoreAllParticipantsEqually,
   setSelectedRolesAll,
-  selectAllParticipants,
+  selectAllParticipantsByRole,
   deselectAllParticipants,
+  toggleSelectedParticipant,
+  migrateWaitingScoredToScored,
 } from './utils';
-import { scoredParticipants } from './mock';
-
-const emptyFetchState: FetchState = { isFetching: false };
-const fetchingState: FetchState = { isFetching: true };
-const fetchErrorState = <T extends string>(
-  action: ActionCreatorFailure<T>,
-): FetchState => ({
-  errors: action.payload.errors,
-  isFetching: false,
-});
 
 export type TeamAwardsState = {
   fetchSubsidiaries: FetchState;
   fetchRoles: FetchState;
   fetchParticipants: FetchState;
   assignPoints: FetchState;
+  distributePoints: FetchState;
   subsidiaries: Subsidiary[] | null;
   roles: Role[] | null;
   participants: ParticipantsList | null;
   selectedParticipants: number[] | null;
+  waitingScoredParticipants: WaitingScoredParticipant[] | null;
   scoredParticipants: ScoredParticipant[] | null;
   selectedSubsidiaries: number[] | null;
   selectedRoles: number[] | null;
   participantFinder: string | null;
-  pointsToDistribute: string;
+  pointsToDistribute: number;
   distributeEqually: boolean;
   totalForEachParticipantDistributedEqually: number | null;
   selectedRolesAll: string[] | null;
@@ -73,15 +78,17 @@ export const initialState: TeamAwardsState = {
   fetchRoles: emptyFetchState,
   fetchParticipants: emptyFetchState,
   assignPoints: emptyFetchState,
+  distributePoints: emptyFetchState,
   subsidiaries: null,
   roles: null,
   participants: null,
   selectedParticipants: null,
-  scoredParticipants,
+  waitingScoredParticipants: null,
+  scoredParticipants: null,
   selectedSubsidiaries: null,
   selectedRoles: null,
   participantFinder: '',
-  pointsToDistribute: '',
+  pointsToDistribute: 0,
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: null,
   selectedRolesAll: null,
@@ -128,17 +135,17 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case SELECT_SUBSIDIARY:
       return {
         ...state,
-        selectedSubsidiaries: action.meta.subsidiaryId
-          ? toggleSubsidiarySelection(
-              state.selectedSubsidiaries,
-              action.meta.subsidiaryId,
-            )
-          : null,
+        fetchParticipants: fetchingState,
+        selectedSubsidiaries: toggleSubsidiarySelection(
+          state.selectedSubsidiaries,
+          action.meta.subsidiaryId,
+        ),
       };
 
     case SELECT_ROLE:
       return {
         ...state,
+        fetchParticipants: fetchingState,
         selectedRoles: action.meta.roleId
           ? toggleRoleSelection(state.selectedRoles, action.meta.roleId)
           : null,
@@ -147,12 +154,15 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case SET_PARTICIPANT_FINDER:
       return {
         ...state,
+        fetchParticipants: fetchingState,
         participantFinder: action.payload.participantFinder,
       };
 
     case SET_POINTS_TO_DISTRIBUTE:
       return {
         ...state,
+        distributeEqually: false,
+        totalForEachParticipantDistributedEqually: null,
         pointsToDistribute: action.payload.pointsToDistribute,
       };
 
@@ -165,10 +175,10 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case SCORE_PARTICIPANT:
       return {
         ...state,
-        scoredParticipants: scoreParticipant(
+        waitingScoredParticipants: scoreParticipant(
           action.meta.participant,
           action.meta.points,
-          state.scoredParticipants,
+          state.waitingScoredParticipants,
         ),
       };
 
@@ -185,8 +195,15 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
       return {
         ...state,
         distributeEqually: false,
-        pointsToDistribute: '',
-        scoredParticipants: assignPoints(state.scoredParticipants),
+        pointsToDistribute: 0,
+        selectedParticipants: null,
+        selectedRolesAll: null,
+        totalForEachParticipantDistributedEqually: null,
+        scoredParticipants: migrateWaitingScoredToScored(
+          state.waitingScoredParticipants,
+          state.scoredParticipants,
+        ),
+        waitingScoredParticipants: null,
       };
 
     case SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY:
@@ -199,39 +216,67 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case SCORE_ALL_PARTICIPANTS_EQUALLY:
       return {
         ...state,
-        scoredParticipants: scoreAllParticipantsEqually(
-          state.scoredParticipants,
-          action.meta.points,
-        ),
+        waitingScoredParticipants: scoreAllParticipantsEqually({
+          participants: state.participants,
+          points: action.meta.points,
+          waitingScoredParticipants: state.waitingScoredParticipants,
+          selectedParticipants: state.selectedParticipants,
+        }),
       };
 
     case SET_SELECTED_ROLES_ALL:
       return {
         ...state,
-        selectedRolesAll: action.meta.role
-          ? setSelectedRolesAll(state.selectedRolesAll, action.meta.role)
-          : null,
+        selectedRolesAll: setSelectedRolesAll(
+          state.selectedRolesAll,
+          action.meta.role,
+        ),
       };
 
     case SELECT_ALL_PARTICIPANTS:
       return {
         ...state,
-        selectedParticipants: action.meta.role
-          ? selectAllParticipants(state.participants, action.meta.role)
-          : null,
+        selectedParticipants: selectAllParticipantsByRole({
+          participants: state.participants,
+          role: action.meta.role,
+          scoredParticipants: state.scoredParticipants,
+          selectedParticipants: state.selectedParticipants,
+        }),
       };
 
     case DESELECT_ALL_PARTICIPANTS:
       return {
         ...state,
-        selectedParticipants: action.meta.role
-          ? deselectAllParticipants(
-              state.selectedParticipants,
-              state.participants,
-              action.meta.role,
-            )
-          : null,
+        selectedParticipants: deselectAllParticipants(
+          state.selectedParticipants,
+          state.participants,
+          action.meta.role,
+        ),
       };
+
+    case TOGGLE_SELECTED_PARTICIPANT:
+      return {
+        ...state,
+        selectedParticipants: toggleSelectedParticipant(
+          state.selectedParticipants,
+          action.meta.participantId,
+        ),
+      };
+
+    case REMOVE_ALL_SCORES:
+      return {
+        ...state,
+        scoredParticipants: null,
+      };
+
+    case DISTRIBUTE_POINTS_ACTION:
+      return { ...state, distributePoints: fetchingState };
+
+    case DISTRIBUTE_POINTS_FAILURE:
+      return { ...state, distributePoints: fetchErrorState(action) };
+
+    case DISTRIBUTE_POINTS_SUCCESS:
+      return { ...state, distributePoints: emptyFetchState };
 
     default:
       return state;

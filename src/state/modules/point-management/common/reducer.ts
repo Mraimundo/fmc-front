@@ -1,39 +1,48 @@
 import { Reducer } from 'redux';
 
-import { FetchState, ActionCreatorFailure } from '@types';
+import { FetchState } from '@types';
+import { emptyFetchState, fetchingState, fetchErrorState } from 'state/utils';
 import { CommonActions } from './actions';
 import {
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION,
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE,
-  FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS,
+  FETCH_ESTABLISHMENTS_ACTION,
+  FETCH_ESTABLISHMENTS_FAILURE,
+  FETCH_ESTABLISHMENTS_SUCCESS,
+  FETCH_POINTS_TO_DISTRIBUTE_ACTION,
+  FETCH_POINTS_TO_DISTRIBUTE_FAILURE,
+  FETCH_POINTS_TO_DISTRIBUTE_SUCCESS,
   SET_TOTAL_POINTS_TEAM_AWARDS,
-  SET_TOTAL_POINTS_COOPERATIVE,
+  SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
+  SET_SELECTED_ESTABLISHMENT,
 } from './constants';
+import { PointsToDistribute, Establishment } from './types';
 
-const emptyFetchState: FetchState = { isFetching: false };
-const fetchingState: FetchState = { isFetching: true };
-const fetchErrorState = <T extends string>(
-  action: ActionCreatorFailure<T>,
-): FetchState => ({
-  errors: action.payload.errors,
-  isFetching: false,
-});
+export const emptyPointsToDistribute: PointsToDistribute = {
+  general: null,
+  resaleCooperative: null,
+  teamAwards: null,
+};
 
 export type CommonState = {
-  fetchTotalPointsToDistribute: FetchState;
+  fetchEstablishments: FetchState;
+  fetchPointsToDistribute: FetchState;
   isReadyToDistribute: boolean;
-  totalPointsToDistribute: string;
-  totalPointsTeamAwards: string;
-  totalPointsCooperative: string;
+  pointsToDistribute: PointsToDistribute;
+  totalPointsTeamAwards: number;
+  totalPointsResaleCooperative: number;
+  establishments: Establishment[] | null;
+  selectedEstablishment: Establishment | null;
 };
 
 export const initialState: CommonState = {
-  fetchTotalPointsToDistribute: emptyFetchState,
+  fetchEstablishments: emptyFetchState,
+  fetchPointsToDistribute: emptyFetchState,
   isReadyToDistribute: false,
-  totalPointsToDistribute: '',
-  totalPointsTeamAwards: '',
-  totalPointsCooperative: '',
+  pointsToDistribute: emptyPointsToDistribute,
+  totalPointsTeamAwards: 0,
+  totalPointsResaleCooperative: 0,
+  establishments: null,
+  selectedEstablishment: null,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -41,18 +50,32 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
   action: CommonActions,
 ): CommonState => {
   switch (action.type) {
-    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_ACTION:
-      return { ...state, fetchTotalPointsToDistribute: fetchingState };
-    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_FAILURE:
+    case FETCH_ESTABLISHMENTS_ACTION:
+      return { ...state, fetchEstablishments: fetchingState };
+    case FETCH_ESTABLISHMENTS_FAILURE:
       return {
         ...state,
-        fetchTotalPointsToDistribute: fetchErrorState(action),
+        fetchEstablishments: fetchErrorState(action),
       };
-    case FETCH_TOTAL_POINTS_TO_DISTRIBUTE_SUCCESS:
+    case FETCH_ESTABLISHMENTS_SUCCESS:
       return {
         ...state,
-        fetchTotalPointsToDistribute: emptyFetchState,
-        totalPointsToDistribute: action.payload.totalPointsToDistribute,
+        fetchEstablishments: emptyFetchState,
+        establishments: action.payload.establishments,
+      };
+
+    case FETCH_POINTS_TO_DISTRIBUTE_ACTION:
+      return { ...state, fetchPointsToDistribute: fetchingState };
+    case FETCH_POINTS_TO_DISTRIBUTE_FAILURE:
+      return {
+        ...state,
+        fetchPointsToDistribute: fetchErrorState(action),
+      };
+    case FETCH_POINTS_TO_DISTRIBUTE_SUCCESS:
+      return {
+        ...state,
+        fetchPointsToDistribute: emptyFetchState,
+        pointsToDistribute: action.payload.pointsToDistribute,
       };
 
     case SET_TOTAL_POINTS_TEAM_AWARDS:
@@ -61,16 +84,23 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
         totalPointsTeamAwards: action.payload.totalPointsTeamAwards,
       };
 
-    case SET_TOTAL_POINTS_COOPERATIVE:
+    case SET_TOTAL_POINTS_RESALE_COOPERATIVE:
       return {
         ...state,
-        totalPointsCooperative: action.payload.totalPointsCooperative,
+        totalPointsResaleCooperative:
+          action.payload.totalPointsResaleCooperative,
       };
 
     case SET_IS_READY_TO_DISTRIBUTE:
       return {
         ...state,
         isReadyToDistribute: action.payload.isReadyToDistribute,
+      };
+
+    case SET_SELECTED_ESTABLISHMENT:
+      return {
+        ...state,
+        selectedEstablishment: action.payload.selectedEstablishment,
       };
 
     default:

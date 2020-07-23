@@ -13,11 +13,11 @@ const SelectedSubsidiaries: React.FC<Props> = ({ subsidiaries, onRemove }) => {
       {!!subsidiaries &&
         subsidiaries.map((sub: Subsidiary) => (
           <SubsidiaryItem
-            key={sub.label}
-            title={`Remover ${sub.label}`}
+            key={sub.name}
+            title={`Remover ${sub.name}`}
             onClick={() => onRemove(sub.id)}
           >
-            {sub.label}
+            {sub.name}
           </SubsidiaryItem>
         ))}
     </List>
