@@ -57,3 +57,16 @@ export const SELECT_ALL_PARTICIPANTS =
 
 export const DESELECT_ALL_PARTICIPANTS =
   '@fmc/point-management/team-awards/DESELECT_ALL_PARTICIPANTS';
+
+export const TOGGLE_SELECTED_PARTICIPANT =
+  '@fmc/point-management/team-awards/TOGGLE_SELECTED_PARTICIPANT';
+
+export const REMOVE_ALL_SCORES =
+  '@fmc/point-management/team-awards/REMOVE_ALL_SCORES';
+
+export const DISTRIBUTE_POINTS_ACTION =
+  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_ACTION';
+export const DISTRIBUTE_POINTS_FAILURE =
+  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_FAILURE';
+export const DISTRIBUTE_POINTS_SUCCESS =
+  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_SUCCESS';

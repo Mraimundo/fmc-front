@@ -24,6 +24,11 @@ import {
   setSelectedRolesAll,
   selectAllParticipants,
   deselectAllParticipants,
+  toggleSelectedParticipant,
+  removeAllScores,
+  distributePoints,
+  distributePointsFailure,
+  distributePointsSuccess,
 } from './actions';
 import {
   FETCH_SUBSIDIARIES_ACTION,
@@ -49,8 +54,13 @@ import {
   SET_SELECTED_ROLES_ALL,
   SELECT_ALL_PARTICIPANTS,
   DESELECT_ALL_PARTICIPANTS,
+  TOGGLE_SELECTED_PARTICIPANT,
+  REMOVE_ALL_SCORES,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
 } from './constants';
-import { errors, subsidiaries, roles, participant, participants } from './mock';
+import { error, subsidiaries, roles, participant, participants } from './mock';
 
 describe('src/state/modules/point-management/team-awards/actions', () => {
   describe('fetchSubsidiaries', () => {
@@ -75,14 +85,14 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(fetchSubsidiariesFailure(errors)).to.be.a('object');
+      expect(fetchSubsidiariesFailure(error)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(fetchSubsidiariesFailure(errors)).to.be.deep.equal({
+      expect(fetchSubsidiariesFailure(error)).to.be.deep.equal({
         type: FETCH_SUBSIDIARIES_FAILURE,
         payload: {
-          errors,
+          error,
         },
       });
     });
@@ -127,14 +137,14 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(fetchRolesFailure(errors)).to.be.a('object');
+      expect(fetchRolesFailure(error)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(fetchRolesFailure(errors)).to.be.deep.equal({
+      expect(fetchRolesFailure(error)).to.be.deep.equal({
         type: FETCH_ROLES_FAILURE,
         payload: {
-          errors,
+          error,
         },
       });
     });
@@ -179,14 +189,14 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(fetchParticipantsFailure(errors)).to.be.a('object');
+      expect(fetchParticipantsFailure(error)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(fetchParticipantsFailure(errors)).to.be.deep.equal({
+      expect(fetchParticipantsFailure(error)).to.be.deep.equal({
         type: FETCH_PARTICIPANTS_FAILURE,
         payload: {
-          errors,
+          error,
         },
       });
     });
@@ -266,13 +276,13 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(setPointsToDistribute('5000')).to.be.a('object');
+      expect(setPointsToDistribute(5000)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(setPointsToDistribute('5000')).to.be.deep.equal({
+      expect(setPointsToDistribute(5000)).to.be.deep.equal({
         type: SET_POINTS_TO_DISTRIBUTE,
-        payload: { pointsToDistribute: '5000' },
+        payload: { pointsToDistribute: 5000 },
       });
     });
   });
@@ -299,13 +309,13 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(scoreParticipant(participant, '200')).to.be.a('object');
+      expect(scoreParticipant(participant, 200)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(scoreParticipant(participant, '200')).to.be.deep.equal({
+      expect(scoreParticipant(participant, 200)).to.be.deep.equal({
         type: SCORE_PARTICIPANT,
-        meta: { participant, points: '200' },
+        meta: { participant, points: 200 },
       });
     });
   });
@@ -332,13 +342,13 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(assignPointsFailure(errors)).to.be.a('object');
+      expect(assignPointsFailure(error)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(assignPointsFailure(errors)).to.be.deep.equal({
+      expect(assignPointsFailure(error)).to.be.deep.equal({
         type: ASSIGN_POINTS_FAILURE,
-        payload: { errors },
+        payload: { error },
       });
     });
   });
@@ -386,13 +396,13 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
 
     it('should return a object', () => {
-      expect(scoreAllParticipantsEqually('1500')).to.be.a('object');
+      expect(scoreAllParticipantsEqually(1500)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(scoreAllParticipantsEqually('1500')).to.be.deep.equal({
+      expect(scoreAllParticipantsEqually(1500)).to.be.deep.equal({
         type: SCORE_ALL_PARTICIPANTS_EQUALLY,
-        meta: { points: '1500' },
+        meta: { points: 1500 },
       });
     });
   });
@@ -444,6 +454,88 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
       expect(deselectAllParticipants(roles[0].name)).to.be.deep.equal({
         type: DESELECT_ALL_PARTICIPANTS,
         meta: { role: roles[0].name },
+      });
+    });
+  });
+
+  describe('toggleSelectedParticipant', () => {
+    it('should be a function', () => {
+      expect(toggleSelectedParticipant).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(toggleSelectedParticipant(1)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(toggleSelectedParticipant(1)).to.be.deep.equal({
+        type: TOGGLE_SELECTED_PARTICIPANT,
+        meta: { participantId: 1 },
+      });
+    });
+  });
+
+  describe('removeAllScores', () => {
+    it('should be a function', () => {
+      expect(removeAllScores).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(removeAllScores()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(removeAllScores()).to.be.deep.equal({
+        type: REMOVE_ALL_SCORES,
+      });
+    });
+  });
+
+  describe('distributePoints', () => {
+    it('should be a function', () => {
+      expect(distributePoints).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePoints()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePoints()).to.be.deep.equal({
+        type: DISTRIBUTE_POINTS_ACTION,
+      });
+    });
+  });
+
+  describe('distributePointsFailure', () => {
+    it('should be a function', () => {
+      expect(distributePointsFailure).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsFailure(error)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsFailure(error)).to.be.deep.equal({
+        type: DISTRIBUTE_POINTS_FAILURE,
+        payload: { error },
+      });
+    });
+  });
+
+  describe('distributePointsSuccess', () => {
+    it('should be a function', () => {
+      expect(distributePointsSuccess).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsSuccess()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsSuccess()).to.be.deep.equal({
+        type: DISTRIBUTE_POINTS_SUCCESS,
       });
     });
   });

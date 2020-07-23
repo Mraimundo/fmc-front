@@ -11,30 +11,28 @@ const Sso: React.FC = () => {
 
   useEffect(() => {
     const token = new URLSearchParams(search).get('token');
-    let encodedMessage = new URLSearchParams(search).get('m');
-    let decodedMessage = '';
+    const encodedMessage = new URLSearchParams(search).get('m');
 
-    try {
-      if (encodedMessage) {
-        decodedMessage = decodeURIComponent(atob(encodedMessage));
+    if (encodedMessage) {
+      try {
+        const decodedMessage = decodeURIComponent(atob(encodedMessage));
         addToast({
           title: decodedMessage,
           type: 'error',
         });
+      } catch {
+        history.push('/');
+        return;
       }
-    } catch (e) {
-      encodedMessage = null;
     }
 
     if (!token) {
       history.push('/');
       return;
     }
-    const login = () => {
-      setToken(token);
-      history.push('/');
-    };
-    login();
+
+    setToken(token);
+    history.push('/');
   }, [search, addToast, setToken]);
   return <h1>aguarde...</h1>;
 };

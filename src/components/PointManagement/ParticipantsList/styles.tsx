@@ -22,3 +22,10 @@ export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
 `;
+
+export const ParticipantsEmpty = styled.h3`
+  color: #193b4e;
+  font-family: ${FONTS.medium};
+  margin-top: 1em;
+  font-size: 1em;
+`;
