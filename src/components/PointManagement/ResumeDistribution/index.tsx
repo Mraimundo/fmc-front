@@ -1,90 +1,112 @@
-import React, { useCallback } from 'react';
-import { useRifm } from 'rifm';
+import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { formatPoints, parseNumber, formatCurrency } from 'util/points';
+import { formatPoints } from 'util/points';
 import Button from 'components/shared/Button';
 import { Title, Checkbox } from 'components/PointManagement';
 import {
   setPointsToDistribute,
   toggleDistributeEqually,
   assignPoints,
+  removeAllScores,
 } from 'state/modules/point-management/team-awards/actions';
 import {
   getPointsToDistribute,
-  getBalanceAvailable,
+  getAvailableScore,
   getDistributeEqually,
   getScoredParticipantsResume,
   getTotalForEachParticipantDistributedEqually,
+  getSelectedParticipantsWithoutScore,
+  getIsEnabledToAssignPoints,
 } from 'state/modules/point-management/team-awards/selectors';
-import { InputPointsToDistribute } from './styles';
+import ResumeWidget from './ResumeWidget';
+import PointsToDistribute from './PointsToDistribute';
+import RemoveAllScores from '../RemoveAllScores';
+import { Text, AvailableScoreText } from './styles';
 
 const ResumeDistribution: React.FC = () => {
-  const dispatch = useDispatch();
-  const pointsToDistribute = useSelector(getPointsToDistribute);
-  const availablePoints = useSelector(getBalanceAvailable);
-  const distributeEqually = useSelector(getDistributeEqually);
-  const scoredParticipants = useSelector(getScoredParticipantsResume);
-  const totalForEachParticipantDistributedEqually = useSelector(
-    getTotalForEachParticipantDistributedEqually,
-  );
+  const [
+    pointsToDistribute,
+    availableScore,
+    distributeEqually,
+    scoredParticipants,
+    totalForEachParticipantDistributedEqually,
+    selectedParticipantsWithoutScore,
+    isEnabledToAssignPoints,
+  ] = [
+    useSelector(getPointsToDistribute),
+    useSelector(getAvailableScore),
+    useSelector(getDistributeEqually),
+    useSelector(getScoredParticipantsResume),
+    useSelector(getTotalForEachParticipantDistributedEqually),
+    useSelector(getSelectedParticipantsWithoutScore),
+    useSelector(getIsEnabledToAssignPoints),
+  ];
 
-  const pointsToDistributeRifm = useRifm({
-    value: pointsToDistribute,
-    onChange: (value: string) =>
-      dispatch(setPointsToDistribute(parseNumber(value))),
-    format: formatCurrency,
-  });
+  const dispatch = useDispatch();
+
+  const handleChangePointsToDistribute = useCallback(
+    (points: number) => {
+      return dispatch(setPointsToDistribute(points));
+    },
+    [dispatch],
+  );
 
   const handleChangeDistributeEqually = useCallback(() => {
     dispatch(toggleDistributeEqually());
   }, [dispatch]);
 
+  const handleRemoveAllScores = useCallback(() => {
+    dispatch(removeAllScores());
+  }, []);
+
+  const isDisabledDistributeEqually = useMemo(() => {
+    if (distributeEqually) return false;
+
+    return !pointsToDistribute || !selectedParticipantsWithoutScore;
+  }, [distributeEqually, pointsToDistribute, selectedParticipantsWithoutScore]);
+
   return (
     <div>
-      <Title>2. Digite a quantidade de pontos que deseja distribuir</Title>
-      <InputPointsToDistribute
-        type="tel"
-        placeholder="DIGITE AQUI O VALOR"
-        value={pointsToDistributeRifm.value}
-        onChange={pointsToDistributeRifm.onChange}
+      <Title center>
+        2. Digite a quantidade de pontos que deseja distribuir
+      </Title>
+      <PointsToDistribute
+        pointsToDistribute={pointsToDistribute}
+        onChange={handleChangePointsToDistribute}
+        maxLength={availableScore}
       />
-      <h3>Saldo disponível: {availablePoints} pontos</h3>
+      <AvailableScoreText>
+        Saldo disponível: {formatPoints(availableScore)}
+      </AvailableScoreText>
       <Checkbox
         checked={distributeEqually}
-        disabled={!pointsToDistributeRifm.value}
+        disabled={isDisabledDistributeEqually}
         onChange={handleChangeDistributeEqually}
         label="Distribuir igualmente"
       />
       {!!totalForEachParticipantDistributedEqually && (
-        <p>
+        <Text>
           Cada participante receberá{' '}
-          {formatPoints(totalForEachParticipantDistributedEqually)} pontos
-        </p>
+          {formatPoints(totalForEachParticipantDistributedEqually)}
+        </Text>
       )}
       <Button
         buttonRole="tertiary"
         type="button"
         onClick={() => dispatch(assignPoints())}
+        style={{ marginBottom: '1em' }}
+        disabled={!isEnabledToAssignPoints}
       >
         ATRIBUIR PONTOS
       </Button>
-      <h2>Resumo da distribuição</h2>
-      <ul>
-        {!!scoredParticipants &&
-          Object.keys(scoredParticipants).map(role => (
-            <li>
-              <h4>{role}</h4>
-              <p>
-                {`${
-                  scoredParticipants[role].count
-                } pessoas contempladas - ${formatPoints(
-                  scoredParticipants[role].totalPoints,
-                )}`}
-              </p>
-            </li>
-          ))}
-      </ul>
+      <Title center>Resumo da distribuição</Title>
+      {!!scoredParticipants && (
+        <>
+          <ResumeWidget scoredParticipants={scoredParticipants} />
+          <RemoveAllScores onClick={handleRemoveAllScores} />
+        </>
+      )}
       <Button buttonRole="tertiary" type="button">
         DISTRIBUIR PREMIAÇÃO
       </Button>

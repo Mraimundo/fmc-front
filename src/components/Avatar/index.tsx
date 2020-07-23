@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { getNameAbbr } from 'util/string';
 import { AvatarCircle, AvatarInitialsName } from './styles';
@@ -9,9 +9,15 @@ type Props = {
   circleDimension?: number;
 };
 const Avatar: React.FC<Props> = ({ name, picture, circleDimension = 50 }) => {
-  const nameInitials = getNameAbbr(name);
+  const [hasPicture, setHasPicture] = useState(true);
 
-  if (!picture) {
+  useEffect(() => {
+    setHasPicture(!!picture);
+  }, [picture]);
+
+  if (!hasPicture || !picture) {
+    const nameInitials = getNameAbbr(name);
+
     return (
       <AvatarInitialsName circleDimension={circleDimension}>
         {nameInitials}
@@ -25,6 +31,7 @@ const Avatar: React.FC<Props> = ({ name, picture, circleDimension = 50 }) => {
       alt={name}
       title={name}
       circleDimension={circleDimension}
+      onError={() => setHasPicture(false)}
     />
   );
 };

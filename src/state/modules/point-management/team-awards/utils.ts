@@ -1,4 +1,10 @@
-import { Participant, ScoredParticipant, ParticipantsList } from './types';
+import {
+  Participant,
+  WaitingScoredParticipant,
+  ScoredParticipant,
+  ParticipantsList,
+} from './types';
+import { scoredParticipants, selectedParticipants } from './mock';
 
 export const toggleRoleSelection = (
   selectedRoles: number[] | null,
@@ -48,77 +54,116 @@ export const toggleSubsidiarySelection = (
 
 export const scoreParticipant = (
   participant: Participant,
-  points: string,
-  scoredParticipants: ScoredParticipant[] | null,
-): ScoredParticipant[] => {
-  const scored: ScoredParticipant = {
+  points: number,
+  waitingScoredParticipants: WaitingScoredParticipant[] | null,
+): WaitingScoredParticipant[] => {
+  const scored: WaitingScoredParticipant = {
     ...participant,
     points,
-    assigned: false,
   };
 
-  if (!scoredParticipants) return [scored] as ScoredParticipant[];
+  if (!waitingScoredParticipants) return [scored];
 
-  if (!points || points === '0') {
-    return scoredParticipants.filter(
-      scoredParticipant => scoredParticipant.id !== participant.id,
-    );
+  if (!points) {
+    return waitingScoredParticipants.filter(({ id }) => id !== participant.id);
   }
 
-  const participantAlreadyScored = scoredParticipants.find(
-    (scoredParticipant: ScoredParticipant): boolean =>
-      scoredParticipant.id === participant.id,
+  const participantAlreadyScored = waitingScoredParticipants.find(
+    ({ id }): boolean => id === participant.id,
   );
 
-  if (!participantAlreadyScored)
-    return [...scoredParticipants, scored] as ScoredParticipant[];
+  if (!participantAlreadyScored) return [...waitingScoredParticipants, scored];
 
   return [
-    ...scoredParticipants.filter(
-      scoredParticipant => scoredParticipant.id !== participant.id,
-    ),
+    ...waitingScoredParticipants.filter(({ id }) => id !== participant.id),
     scored,
-  ] as ScoredParticipant[];
+  ];
 };
 
-export const assignPoints = (
-  scoredParticipants: ScoredParticipant[] | null,
-): ScoredParticipant[] | null => {
-  if (!scoredParticipants) return scoredParticipants;
+// export const assignPoints = (
+//   scoredParticipants: ScoredParticipant[] | null,
+// ): ScoredParticipant[] | null => {
+//   if (!scoredParticipants) return scoredParticipants;
 
-  return scoredParticipants.map(scoredParticipant => ({
-    ...scoredParticipant,
-    assigned: true,
-  }));
-};
+//   return scoredParticipants.map(scoredParticipant => ({
+//     ...scoredParticipant,
+//     assigned: true,
+//   }));
+// };
 
 export const getParticipantScore = (
+  waitingScoredParticipants: WaitingScoredParticipant[] | null,
   scoredParticipants: ScoredParticipant[] | null,
   participantId: number,
-): string => {
-  if (!scoredParticipants) return '';
+): number => {
+  if (!scoredParticipants && !waitingScoredParticipants) return 0;
 
-  const participant = scoredParticipants.find(
-    (scoredParticipant: ScoredParticipant) =>
-      scoredParticipant.id === participantId,
-  );
+  const getParticipantByScoredRule = (
+    scoredRule: (ScoredParticipant[] | WaitingScoredParticipant[]) | null,
+  ): (ScoredParticipant | WaitingScoredParticipant) | undefined => {
+    if (!scoredRule) return undefined;
 
-  if (!participant) return '';
+    return scoredRule.find(
+      ({ id }: ScoredParticipant | WaitingScoredParticipant) =>
+        id === participantId,
+    );
+  };
 
-  return participant.points;
+  const waitingScore = getParticipantByScoredRule(waitingScoredParticipants);
+  const consolidatedScore = getParticipantByScoredRule(scoredParticipants);
+
+  if (waitingScore) return waitingScore.points;
+  if (consolidatedScore) return consolidatedScore.points;
+
+  return 0;
 };
 
-export const scoreAllParticipantsEqually = (
-  scoredParticipants: ScoredParticipant[] | null,
-  points: string,
-): ScoredParticipant[] | null => {
-  if (!scoredParticipants) return null;
+export const extractParticipantsFromList = (
+  participantsList: ParticipantsList | null,
+): Participant[] | null => {
+  if (!participantsList) return null;
 
-  // TODO: pontuar apenas participantes selecionados
-  return scoredParticipants.map((scoredParticipant: ScoredParticipant) => ({
-    ...scoredParticipant,
-    points,
-  }));
+  return Object.values(participantsList).reduce(
+    (acc: Participant[], { count, list }) => {
+      if (!count) return acc;
+
+      return [...acc, ...list];
+    },
+    [] as Participant[],
+  );
+};
+
+interface IScoreAllParticipantsEqually {
+  selectedParticipants: number[] | null;
+  waitingScoredParticipants: WaitingScoredParticipant[] | null;
+  participants: ParticipantsList | null;
+  points: number;
+}
+export const scoreAllParticipantsEqually = ({
+  selectedParticipants,
+  waitingScoredParticipants,
+  participants: participantsList,
+  points,
+}: IScoreAllParticipantsEqually): any => {
+  const participants = extractParticipantsFromList(participantsList);
+
+  if (!participants || !selectedParticipants) return null;
+
+  const participantsToScore = participants
+    .filter((participant: Participant) =>
+      selectedParticipants.includes(participant.id),
+    )
+    .map((participant: Participant) => ({
+      ...participant,
+      points,
+      // assigned: true,
+    }));
+
+  if (waitingScoredParticipants) {
+    return [...waitingScoredParticipants, ...participantsToScore];
+  }
+
+  return participantsToScore;
 };
 
 export const isSelectedParticipant = (
@@ -130,13 +175,46 @@ export const isSelectedParticipant = (
   return selectedParticipants.includes(participantId);
 };
 
-export const selectAllParticipants = (
-  participants: ParticipantsList | null,
-  role: string,
-): number[] | null => {
+export const isScoredParticipant = (
+  scoredParticipant: ScoredParticipant[] | null,
+  participantId: number,
+): boolean => {
+  if (!scoredParticipant) return false;
+
+  return !!scoredParticipant.find(({ id }) => id === participantId);
+};
+
+interface ISelectAllParticipantsByRole {
+  selectedParticipants: number[] | null;
+  scoredParticipants: ScoredParticipant[] | null;
+  participants: ParticipantsList | null;
+  role: string;
+}
+export const selectAllParticipantsByRole = ({
+  selectedParticipants,
+  scoredParticipants,
+  participants,
+  role,
+}: ISelectAllParticipantsByRole): number[] | null => {
   if (!participants) return null;
 
-  return participants[role].list.map(({ id }: Participant) => id);
+  const participantsWithoutScore = participants[role].list
+    .filter(({ id }: Participant) => {
+      if (!scoredParticipants) return true;
+
+      const hasScore = scoredParticipants.find(
+        scoredParticipant => scoredParticipant.id === id,
+      );
+      return hasScore ? false : true;
+    })
+    .map(({ id }: Participant) => id);
+
+  if (!selectedParticipants)
+    return participantsWithoutScore.length <= 0
+      ? null
+      : participantsWithoutScore;
+
+  return [...selectedParticipants, ...participantsWithoutScore];
 };
 
 export const deselectAllParticipants = (
@@ -155,3 +233,42 @@ export const deselectAllParticipants = (
       !participantIdsByRole.includes(selectedParticipant),
   );
 };
+
+export const toggleSelectedParticipant = (
+  selectedParticipants: number[] | null,
+  participantId: number | null,
+): number[] | null => {
+  if (!participantId) return selectedParticipants;
+
+  if (!selectedParticipants) return [participantId];
+
+  if (selectedParticipants.includes(participantId)) {
+    return selectedParticipants.filter(
+      selectedParticipant => selectedParticipant !== participantId,
+    );
+  }
+
+  return [...selectedParticipants, participantId];
+};
+
+export const migrateWaitingScoredToScored = (
+  waitingScoredParticipants: WaitingScoredParticipant[] | null,
+  scoredParticipants: ScoredParticipant[] | null,
+): ScoredParticipant[] | null => {
+  if (scoredParticipants && waitingScoredParticipants) {
+    return [...scoredParticipants, ...waitingScoredParticipants];
+  }
+
+  return waitingScoredParticipants;
+};
+
+export function extractIdAndPointsFromScoredParticipants<T extends unknown>(
+  scoredParticipants: ScoredParticipant[] | null,
+): T | null {
+  if (!scoredParticipants) return null;
+
+  return scoredParticipants.map(({ id, points: value }) => ({
+    id,
+    value,
+  })) as T;
+}

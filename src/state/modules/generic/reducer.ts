@@ -1,6 +1,5 @@
 import { Reducer } from 'redux';
 
-import { ApiErrors } from '@types';
 import { GenericActions } from './actions';
 import {
   FETCH_ANYTHING_ACTION,
@@ -12,14 +11,14 @@ export type GenericState = {
   isFetching: boolean;
   name: string;
   email: string;
-  errors: ApiErrors[];
+  error: string;
 };
 
 export const initialState: GenericState = {
   isFetching: false,
   name: '',
   email: '',
-  errors: [],
+  error: '',
 };
 
 const genericReducer: Reducer<GenericState> = (
@@ -30,7 +29,7 @@ const genericReducer: Reducer<GenericState> = (
     case FETCH_ANYTHING_ACTION:
       return { ...state, isFetching: true };
     case FETCH_ANYTHING_FAILURE:
-      return { ...state, isFetching: false, errors: action.payload.errors };
+      return { ...state, isFetching: false, error: action.payload.error };
     case FETCH_ANYTHING_SUCCESS:
       return {
         ...state,

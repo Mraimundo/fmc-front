@@ -1,22 +1,23 @@
-import { all, takeEvery, call, put, select } from 'redux-saga/effects';
+import {
+  all,
+  takeEvery,
+  call,
+  put,
+  select,
+} from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
 import {
-  fetchSubsidiariesService,
-  fetchRolesService,
   fetchParticipantsService,
+  distributePointsService,
 } from 'services/point-management/team-awards';
+import { getProtectedRoles } from 'services/role/protectedRoles';
+import fetchSubsidiariesService from 'services/establishment/getSubsidiaryList';
 import {
-  FETCH_SUBSIDIARIES_ACTION,
-  FETCH_ROLES_ACTION,
-  FETCH_PARTICIPANTS_ACTION,
-  SELECT_SUBSIDIARY,
-  SELECT_ROLE,
-  SET_PARTICIPANT_FINDER,
-  TOGGLE_DISTRIBUTE_EQUALLY,
-  ASSIGN_POINTS_ACTION,
-  SET_SELECTED_ROLES_ALL,
-} from './constants';
+  transformSubsidiariesRawData,
+  transformScoredParticipantsToDataDistribution,
+} from 'services/point-management/transformers/team-awards';
+import * as constants from './constants';
 import {
   fetchSubsidiariesFailure,
   fetchSubsidiariesSuccess,
@@ -30,58 +31,62 @@ import {
   scoreAllParticipantsEqually,
   selectAllParticipants,
   deselectAllParticipants,
-  assignPointsSuccess,
   assignPointsFailure,
+  assignPointsSuccess,
+  distributePointsFailure,
+  distributePointsSuccess,
 } from './actions';
+import * as selectors from './selectors';
 import {
-  getSelectedSubsidiaries,
-  getSelectedRoles,
-  getParticipantFinder,
-  getDistributeEqually,
-  getParticipantListTotalWithoutScore,
-  getPointsToDistribute,
-  getTotalForEachParticipantDistributedEqually,
-  getSelectedRolesAll,
-} from './selectors';
+  getSelectedEstablishment,
+} from 'state/modules/point-management/common/selectors';
 import { Subsidiary, Role, ParticipantsList } from './types';
-
-// remove with api ready to use
+import { Establishment } from '../common/types';
 import {
-  subsidiaries as subsidiariesMock,
-  roles as rolesMock,
-  participants as participantsMock,
-} from './mock';
+  getInvoicePoints,
+  getMarketplacePoints,
+} from '../resale-cooperative/selectors';
 
 export function* workerFetchSubsidiaries() {
   try {
-    const subsidiaries: Subsidiary[] = yield call(fetchSubsidiariesService);
+    const selectedEstablishment: Establishment | null = yield select(getSelectedEstablishment);
 
-    yield put(fetchSubsidiariesSuccess(subsidiaries));
+    if (!selectedEstablishment) return;
+
+    const subsidiaries: Subsidiary[] = yield call(
+      fetchSubsidiariesService,
+      selectedEstablishment.value,
+    );
+
+    const transformedSubsidiaries = transformSubsidiariesRawData(subsidiaries);
+    yield put(fetchSubsidiariesSuccess(transformedSubsidiaries));
   } catch (error) {
-    yield put(fetchSubsidiariesSuccess(subsidiariesMock));
-    // yield call(handlerErrors, error, fetchSubsidiariesFailure);
+    yield call(handlerErrors, error, fetchSubsidiariesFailure);
   }
 }
 
 export function* workerFetchRoles() {
   try {
-    const roles: Role[] = yield call(fetchRolesService);
+    const roles: Role[] = yield call(getProtectedRoles);
 
     yield put(fetchRolesSuccess(roles));
   } catch (error) {
-    yield put(fetchRolesSuccess(rolesMock));
-    // yield call(handlerErrors, error, fetchRolesFailure);
+    yield call(handlerErrors, error, fetchRolesFailure);
   }
 }
 
 export function* workerFetchParticipants() {
   try {
-    const subsidiaries = yield select(getSelectedSubsidiaries);
-    const roles = yield select(getSelectedRoles);
-    const participantFinder = yield select(getParticipantFinder);
+    const subsidiaries: number[] | null = yield select(selectors.getSelectedSubsidiaries);
+    const roles: number[] | null = yield select(selectors.getSelectedRoles);
+    const participantFinder: string = yield select(selectors.getParticipantFinder);
+    const selectedEstablishment: Establishment | null = yield select(getSelectedEstablishment);
+
+    if (!selectedEstablishment) return;
 
     const participants: ParticipantsList = yield call(
       fetchParticipantsService,
+      selectedEstablishment.value,
       {
         subsidiaries,
         roles,
@@ -91,28 +96,32 @@ export function* workerFetchParticipants() {
 
     yield put(fetchParticipantsSuccess(participants));
   } catch (error) {
-    yield put(fetchParticipantsSuccess(participantsMock));
-    // yield call(handlerErrors, error, fetchParticipantsFailure);
+    yield call(handlerErrors, error, fetchParticipantsFailure);
   }
 }
 
 export function* workerAssignPoints() {
   try {
-    const distributeEqually: boolean = yield select(getDistributeEqually);
+    const hasEnoughScore: boolean = yield select(selectors.getHasEnoughScore);
+    if (!hasEnoughScore) {
+      alert('Você não possui saldo suficiente para atribuir estes pontos');
+      return;
+    }
 
+    const distributeEqually: boolean = yield select(
+      selectors.getDistributeEqually,
+    );
     if (!distributeEqually) {
       yield put(assignPointsSuccess());
       return;
     }
 
     const totalForEachParticipantDistributedEqually: number = yield select(
-      getTotalForEachParticipantDistributedEqually,
+      selectors.getTotalForEachParticipantDistributedEqually,
     );
 
     yield put(
-      scoreAllParticipantsEqually(
-        `${totalForEachParticipantDistributedEqually}`,
-      ),
+      scoreAllParticipantsEqually(totalForEachParticipantDistributedEqually),
     );
     yield put(assignPointsSuccess());
   } catch (error) {
@@ -121,46 +130,83 @@ export function* workerAssignPoints() {
 }
 
 export function* workerDistributeEqually() {
-  const distributeEqually: boolean = yield select(getDistributeEqually);
+  const distributeEqually: boolean = yield select(
+    selectors.getDistributeEqually,
+  );
 
-  if (!distributeEqually) return;
+  const participantsTotal = yield select(
+    selectors.getSelectedParticipantsWithoutScore,
+  );
 
-  const participantsTotal = yield select(getParticipantListTotalWithoutScore);
+  if (!distributeEqually || !participantsTotal) {
+    yield put(setTotalForEachParticipantDistributedEqually(null));
+    return;
+  }
 
-  if (!participantsTotal) return;
-
-  const pointsToDistribute = yield select(getPointsToDistribute);
+  const pointsToDistribute = yield select(selectors.getPointsToDistribute);
 
   const points = pointsToDistribute / participantsTotal;
   yield put(setTotalForEachParticipantDistributedEqually(points));
 }
 
 export function* workerSetSelectedRolesAll({ meta }: any) {
-  const selectedRolesAll = yield select(getSelectedRolesAll);
+  const selectedRolesAll = yield select(selectors.getSelectedRolesAll);
 
   if (selectedRolesAll && selectedRolesAll.includes(meta.role)) {
     yield put(selectAllParticipants(meta.role));
+    // yield call(workerDistributeEqually);
     return;
   }
 
   yield put(deselectAllParticipants(meta.role));
 }
 
+export function* workerDistributePoints() {
+  try {
+    const scoredParticipants = yield select(selectors.getScoredParticipants);
+    const establishmentId = yield select(getSelectedEstablishment);
+    const invoicePoints = yield select(getInvoicePoints);
+    const marketplacePoints = yield select(getMarketplacePoints);
+
+    const dataDistribuion = transformScoredParticipantsToDataDistribution({
+      scoredParticipants,
+      establishmentId,
+      invoicePoints,
+      marketplacePoints,
+      pointId: 1,
+    });
+
+    const response = yield call<any>(distributePointsService, dataDistribuion);
+    console.log('response on workerDistributePoints -> ', response);
+  } catch (error) {
+    yield call(handlerErrors, error, distributePointsFailure);
+  }
+}
+
 export default function* teamAwardsSagas() {
   yield all([
-    takeEvery(FETCH_SUBSIDIARIES_ACTION, workerFetchSubsidiaries),
-    takeEvery(FETCH_ROLES_ACTION, workerFetchRoles),
+    takeEvery(constants.FETCH_SUBSIDIARIES_ACTION, workerFetchSubsidiaries),
+    takeEvery(constants.FETCH_ROLES_ACTION, workerFetchRoles),
     takeEvery(
       [
-        FETCH_PARTICIPANTS_ACTION,
-        SELECT_SUBSIDIARY,
-        SELECT_ROLE,
-        SET_PARTICIPANT_FINDER,
+        constants.FETCH_PARTICIPANTS_ACTION,
+        constants.SELECT_SUBSIDIARY,
+        constants.SELECT_ROLE,
+        constants.SET_PARTICIPANT_FINDER,
       ],
       workerFetchParticipants,
     ),
-    takeEvery(ASSIGN_POINTS_ACTION, workerAssignPoints),
-    takeEvery(TOGGLE_DISTRIBUTE_EQUALLY, workerDistributeEqually),
-    takeEvery(SET_SELECTED_ROLES_ALL, workerSetSelectedRolesAll),
+    takeEvery(constants.ASSIGN_POINTS_ACTION, workerAssignPoints),
+    takeEvery(
+      [
+        constants.TOGGLE_DISTRIBUTE_EQUALLY,
+        constants.TOGGLE_SELECTED_PARTICIPANT,
+        constants.SELECT_ALL_PARTICIPANTS,
+        constants.DESELECT_ALL_PARTICIPANTS,
+      ],
+      workerDistributeEqually,
+    ),
+    takeEvery(constants.SET_SELECTED_ROLES_ALL, workerSetSelectedRolesAll),
+    takeEvery(constants.DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
   ]);
 }

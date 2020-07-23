@@ -23,7 +23,7 @@ const SubsidiarySelect: React.FC<Props> = ({
   useOnClickOutside(dropdownRef, () => isVisible(false));
 
   const selectedSubsidiariesText = useMemo(() => {
-    if (!selectedSubsidiaries) return 'Selecionar filial';
+    if (!selectedSubsidiaries) return 'Todas filiais';
 
     const subsidiariesCount = selectedSubsidiaries.length;
     return subsidiariesCount > 1
@@ -48,7 +48,7 @@ const SubsidiarySelect: React.FC<Props> = ({
         <Dropdown>
           <ul>
             {!!subsidiaries &&
-              subsidiaries.map(({ id, label }: Subsidiary) => {
+              subsidiaries.map(({ id, name }: Subsidiary) => {
                 const isChecked = selectedSubsidiaries
                   ? selectedSubsidiaries.includes(id)
                   : false;
@@ -58,7 +58,7 @@ const SubsidiarySelect: React.FC<Props> = ({
                     <Checkbox
                       checked={isChecked}
                       onChange={() => onSelect(id)}
-                      label={label}
+                      label={name}
                     />
                   </li>
                 );

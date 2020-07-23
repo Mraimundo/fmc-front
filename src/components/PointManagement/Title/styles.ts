@@ -7,4 +7,5 @@ export const StyledTitle = styled.h1`
   font-weight: bold;
   font-size: 1.3em;
   font-family: ${FONTS.bold};
+  ${({ center }: { center: boolean }) => center && `text-align: center;`};
 `;

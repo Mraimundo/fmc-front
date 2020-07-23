@@ -4,20 +4,24 @@ import reducer, { initialState } from './reducer';
 import * as actions from './actions';
 import {
   scoreParticipant,
-  assignPoints,
+  // assignPoints,
   scoreAllParticipantsEqually,
   toggleSubsidiarySelection,
   setSelectedRolesAll,
-  selectAllParticipants,
+  // selectAllParticipants,
   deselectAllParticipants,
+  migrateWaitingScoredToScored,
+  selectAllParticipantsByRole,
+  toggleSelectedParticipant,
 } from './utils';
 import state, {
-  errors,
+  error,
   subsidiaries,
   roles,
   participants,
   scoredParticipants,
   participant,
+  waitingScoredParticipants,
   selectedParticipants,
 } from './mock';
 
@@ -44,13 +48,13 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   });
 
   it('should can handle FETCH_SUBSIDIARIES_FAILURE', () => {
-    const result = reducer(undefined, actions.fetchSubsidiariesFailure(errors));
+    const result = reducer(undefined, actions.fetchSubsidiariesFailure(error));
 
     expect(result).to.be.deep.equal({
       ...initialState,
       fetchSubsidiaries: {
         isFetching: false,
-        errors,
+        error,
       },
     });
   });
@@ -82,13 +86,13 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   });
 
   it('should can handle FETCH_ROLES_FAILURE', () => {
-    const result = reducer(undefined, actions.fetchRolesFailure(errors));
+    const result = reducer(undefined, actions.fetchRolesFailure(error));
 
     expect(result).to.be.deep.equal({
       ...initialState,
       fetchRoles: {
         isFetching: false,
-        errors,
+        error,
       },
     });
   });
@@ -117,13 +121,13 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   });
 
   it('should can handle FETCH_PARTICIPANTS_FAILURE', () => {
-    const result = reducer(undefined, actions.fetchParticipantsFailure(errors));
+    const result = reducer(undefined, actions.fetchParticipantsFailure(error));
 
     expect(result).to.be.deep.equal({
       ...initialState,
       fetchParticipants: {
         isFetching: false,
-        errors,
+        error,
       },
     });
   });
@@ -152,6 +156,9 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
         initialState.selectedSubsidiaries,
         1,
       ),
+      fetchParticipants: {
+        isFetching: true,
+      },
     });
   });
 
@@ -161,6 +168,9 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     expect(result).to.be.deep.equal({
       ...initialState,
       selectedRoles: [1],
+      fetchParticipants: {
+        isFetching: true,
+      },
     });
   });
 
@@ -170,15 +180,20 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     expect(result).to.be.deep.equal({
       ...initialState,
       participantFinder: 'Gabriel',
+      fetchParticipants: {
+        isFetching: true,
+      },
     });
   });
 
   it('should can handle SET_POINTS_TO_DISTRIBUTE', () => {
-    const result = reducer(undefined, actions.setPointsToDistribute('5000'));
+    const result = reducer(undefined, actions.setPointsToDistribute(5000));
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      pointsToDistribute: '5000',
+      pointsToDistribute: 5000,
+      distributeEqually: false,
+      totalForEachParticipantDistributedEqually: null,
     });
   });
 
@@ -194,15 +209,15 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   it('should can handle SCORE_PARTICIPANT', () => {
     const result = reducer(
       undefined,
-      actions.scoreParticipant(participant, '200'),
+      actions.scoreParticipant(participant, 200),
     );
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      scoredParticipants: scoreParticipant(
+      waitingScoredParticipants: scoreParticipant(
         participant,
-        '200',
-        scoredParticipants,
+        200,
+        waitingScoredParticipants,
       ),
     });
   });
@@ -219,13 +234,13 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   });
 
   it('should can handle ASSIGN_POINTS_FAILURE', () => {
-    const result = reducer(undefined, actions.assignPointsFailure(errors));
+    const result = reducer(undefined, actions.assignPointsFailure(error));
 
     expect(result).to.be.deep.equal({
       ...initialState,
       assignPoints: {
         isFetching: false,
-        errors,
+        error,
       },
     });
   });
@@ -235,10 +250,16 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      assignPoints: {
-        isFetching: false,
-      },
-      scoredParticipants: assignPoints(initialState.scoredParticipants),
+      distributeEqually: false,
+      pointsToDistribute: 0,
+      selectedParticipants: null,
+      selectedRolesAll: null,
+      totalForEachParticipantDistributedEqually: null,
+      scoredParticipants: migrateWaitingScoredToScored(
+        waitingScoredParticipants,
+        scoredParticipants,
+      ),
+      waitingScoredParticipants: null,
     });
   });
 
@@ -257,15 +278,17 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
   it('should can handle SCORE_ALL_PARTICIPANTS_EQUALLY', () => {
     const result = reducer(
       undefined,
-      actions.scoreAllParticipantsEqually('1000'),
+      actions.scoreAllParticipantsEqually(1000),
     );
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      scoredParticipants: scoreAllParticipantsEqually(
-        initialState.scoredParticipants,
-        '1000',
-      ),
+      waitingScoredParticipants: scoreAllParticipantsEqually({
+        participants,
+        points: 1000,
+        waitingScoredParticipants,
+        selectedParticipants,
+      }),
     });
   });
 
@@ -276,16 +299,6 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
       ...initialState,
       selectedRolesAll: setSelectedRolesAll(null, roles[0].name),
     });
-
-    expect(
-      reducer(state, actions.setSelectedRolesAll(roles[0].name)),
-    ).to.be.deep.equal({
-      ...state,
-      selectedRolesAll: setSelectedRolesAll(
-        state.selectedRolesAll,
-        roles[0].name,
-      ),
-    });
   });
 
   it('should can handle SELECT_ALL_PARTICIPANTS', () => {
@@ -293,14 +306,12 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
       reducer(undefined, actions.selectAllParticipants(roles[0].name)),
     ).to.be.deep.equal({
       ...initialState,
-      selectedParticipants: selectAllParticipants(null, roles[0].name),
-    });
-
-    expect(
-      reducer(state, actions.selectAllParticipants(roles[0].name)),
-    ).to.be.deep.equal({
-      ...state,
-      selectedParticipants: selectAllParticipants(participants, roles[0].name),
+      selectedParticipants: selectAllParticipantsByRole({
+        participants,
+        role: roles[0].name,
+        scoredParticipants,
+        selectedParticipants,
+      }),
     });
   });
 
@@ -309,18 +320,61 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
       reducer(undefined, actions.deselectAllParticipants(roles[0].name)),
     ).to.be.deep.equal({
       ...initialState,
-      selectedParticipants: deselectAllParticipants(null, null, roles[0].name),
-    });
-
-    expect(
-      reducer(state, actions.deselectAllParticipants(roles[0].name)),
-    ).to.be.deep.equal({
-      ...state,
       selectedParticipants: deselectAllParticipants(
         selectedParticipants,
         participants,
         roles[0].name,
       ),
+    });
+  });
+
+  it('should can handle TOGGLE_SELECTED_PARTICIPANT', () => {
+    expect(
+      reducer(undefined, actions.toggleSelectedParticipant(1)),
+    ).to.be.deep.equal({
+      ...initialState,
+      selectedParticipants: toggleSelectedParticipant(selectedParticipants, 1),
+    });
+  });
+
+  it('should can handle REMOVE_ALL_SCORES', () => {
+    expect(reducer(undefined, actions.removeAllScores())).to.be.deep.equal({
+      ...initialState,
+      scoredParticipants: null,
+    });
+  });
+
+  it('should can handle DISTRIBUTE_POINTS_ACTION', () => {
+    const result = reducer(undefined, actions.distributePoints());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: true,
+      },
+    });
+  });
+
+  it('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
+    const result = reducer(undefined, actions.distributePointsFailure(error));
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: false,
+        error,
+      },
+    });
+  });
+
+  it('should can handle DISTRIBUTE_POINTS_SUCCESS', () => {
+    const result = reducer(undefined, actions.distributePointsSuccess());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: false,
+      },
     });
   });
 });
