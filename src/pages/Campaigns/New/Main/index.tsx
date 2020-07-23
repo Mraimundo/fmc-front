@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { RegisterCampaignForm } from 'components/CampaignsManager';
+import { useNewCampaign } from '../Context';
 
 import { Container, Content } from './styles';
 
 const Main: React.FC = () => {
-  const handleAction = async (): Promise<void> => {
-    console.log('s');
-  };
+  const { handleSave } = useNewCampaign();
   return (
     <Container>
       <Content>
-        <RegisterCampaignForm handleAction={handleAction} />
+        <RegisterCampaignForm handleAction={handleSave} />
       </Content>
     </Container>
   );

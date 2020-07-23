@@ -1,4 +1,5 @@
 import campaignStatusToSelectOptions from './campaignStatusToSelectOptions';
+import campaignToCreateNewCampaignDTO from './campaignToCreateNewCampaignDTO';
 import categoriesToSelectOptions from './categoriesToSelectOptions';
 import channelsToSelectOptions from './channelsToSelectOptions';
 import customersToSelectOptions from './customersToSelectOptions';
@@ -10,6 +11,7 @@ import titlesToSelectOptions from './titlesToSelectOptions';
 
 export {
   campaignStatusToSelectOptions,
+  campaignToCreateNewCampaignDTO,
   categoriesToSelectOptions,
   channelsToSelectOptions,
   customersToSelectOptions,

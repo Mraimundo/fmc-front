@@ -5,11 +5,12 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import { Campaign, Goal } from 'services/campaignsManager/interfaces/Campaign';
 
 interface RegisterFormContextState {
   campaign: Campaign;
-  handleSubmitAction(): Promise<void>;
+  handleAction(): Promise<void>;
+  addGoal(data: Goal): void;
 }
 
 const RegisterFormContext = createContext<RegisterFormContextState>(
@@ -34,11 +35,28 @@ export const RegisterFormProvider: React.FC<RegisterFormProps> = ({
   }, [initialValues]);
 
   const handleSubmitAction = useCallback(async (): Promise<void> => {
+    console.log(campaign);
+    return;
     await handleAction(campaign);
-  }, [campaign, handleAction]);
+  }, [handleAction, campaign]);
+
+  const addGoal = useCallback((goal: Goal): void => {
+    setCampaign(state => {
+      const goals = state.goals.filter(
+        item => item.product.id !== goal.product.id,
+      );
+      goals.push(goal);
+      state.goals = goals.sort((item1, item2) =>
+        item1.product.id > item2.product.id ? 1 : -1,
+      );
+      return state;
+    });
+  }, []);
 
   return (
-    <RegisterFormContext.Provider value={{ campaign, handleSubmitAction }}>
+    <RegisterFormContext.Provider
+      value={{ campaign, handleAction: handleSubmitAction, addGoal }}
+    >
       {children}
     </RegisterFormContext.Provider>
   );

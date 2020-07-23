@@ -1,3 +1,4 @@
+import createNewCampaign from './createNewCampaign';
 import getChannels from './getChannels';
 import getCustomers from './getCustomers';
 import getDirectors from './getDirectors';
@@ -9,6 +10,7 @@ import getCampaignStatus from './getCampaignStatus';
 import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
 
 export {
+  createNewCampaign,
   getChannels,
   getCustomers,
   getDirectors,

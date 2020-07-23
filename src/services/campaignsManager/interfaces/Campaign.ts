@@ -14,16 +14,38 @@ export type Status =
 export interface Mechanic {
   id: number;
   name: string;
+  homeImage: string;
+  internalImage: string;
+  emailImage: string;
+  campaignListImage: string;
+  description: string;
+  created: Date;
 }
 
 export interface Regional {
   id: number;
   name: string;
+  code: string;
+  directorship: string;
+  upnDv: string;
+  upnDvParticipantId: number;
+  upnGrv: string;
+  upnGrvParticipantId: number;
+  generatedAt: Date;
+  created: Date;
 }
 
 export interface Director {
   id: number;
   name: string;
+  code: string;
+  directorship: string;
+  upnDv: string;
+  upnDvParticipantId: number;
+  upnGrv: string;
+  upnGrvParticipantId: number;
+  generatedAt: Date;
+  created: Date;
 }
 
 export interface Customer {
@@ -54,6 +76,8 @@ export interface Goal {
 }
 
 export interface Campaign {
+  title: string;
+  description: string;
   mechanic: Mechanic;
   customers: Customer[];
   startDate: Date;
