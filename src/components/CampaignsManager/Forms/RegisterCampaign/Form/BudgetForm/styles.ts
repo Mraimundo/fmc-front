@@ -50,4 +50,13 @@ export const Box = styled.div`
     padding: 0 16px;
     border: 1px solid ${({ theme }) => theme.font.color.quartenary};
   }
+
+  > input[type='tel'] {
+    width: 194px;
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
+  }
 `;
+
+export const Input = styled.input``;

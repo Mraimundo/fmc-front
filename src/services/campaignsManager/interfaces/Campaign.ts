@@ -51,18 +51,25 @@ export interface Director {
 export interface Customer {
   id: number;
   name: string;
-  regional: Regional[];
-  directors: Director[];
+  cnpj: string;
+}
+
+export interface Audience {
+  customer: Customer;
+  balance: number;
 }
 
 export interface Category {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface Product {
   id: number;
   name: string;
+  /* description: string;
+  created: Date;
+  segment: Category; */
 }
 
 export interface Prize {
@@ -78,10 +85,10 @@ export interface Goal {
 export interface Campaign {
   title: string;
   description: string;
-  mechanic: Mechanic;
-  customers: Customer[];
-  startDate: Date;
-  endDate: Date;
+  mechanic: Mechanic | null;
+  audience: Audience[];
+  startDate: Date | null;
+  endDate: Date | null;
   prize: Prize;
   affordPoints: number;
   complementaryAffordPoints: number;

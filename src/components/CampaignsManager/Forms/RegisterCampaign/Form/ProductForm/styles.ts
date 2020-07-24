@@ -41,6 +41,10 @@ export const ProductDetails = styled.div`
   width: 100%;
   max-width: 900px;
 
+  svg {
+    cursor: pointer;
+  }
+
   > h5 {
     font-size: 16px;
     font-weight: bold;
@@ -55,6 +59,7 @@ export const ProductDetails = styled.div`
     max-width: 280px;
     height: 44px;
     border: 1px solid ${({ theme }) => theme.font.color.quartenary};
+    text-align: right;
   }
 
   > div {
@@ -72,5 +77,26 @@ export const ProductDetails = styled.div`
       font-size: 16px;
       color: ${({ theme }) => theme.font.color.quartenary};
     }
+  }
+`;
+
+export const Input = styled.input``;
+
+export const ObservatioBox = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    font-size: 16px;
+    color: ${({ theme }) => theme.font.color.primary};
+    margin-top: 40px;
+  }
+
+  > textarea {
+    width: 100%;
+    max-width: 435px;
+    height: 132px;
+    resize: none;
+    padding: 10px;
   }
 `;

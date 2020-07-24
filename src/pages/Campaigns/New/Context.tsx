@@ -3,6 +3,7 @@ import { createNewCampaign } from 'services/campaignsManager';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { CreateNewCampaignDTO } from 'services/campaignsManager/dtos';
 import { campaignToCreateNewCampaignDTO } from 'services/campaignsManager/transformers';
+import { useToast } from 'context/ToastContext';
 
 export interface NewCampaignContextState {
   test: string;
@@ -16,15 +17,25 @@ const NewCampaignContext = createContext<NewCampaignContextState>(
 export const NewCampaignProvider: React.FC = ({ children }) => {
   const [test, setTest] = useState('');
 
-  const handleSave = useCallback(async (data: Campaign) => {
-    const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
-    try {
-      await createNewCampaign(dto);
-    } catch (e) {
-      console.log(e);
-      console.log('add a message here later');
-    }
-  }, []);
+  const { addToast } = useToast();
+
+  const handleSave = useCallback(
+    async (data: Campaign) => {
+      const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
+      try {
+        await createNewCampaign(dto);
+      } catch (e) {
+        console.log('erro pagina registrar', e);
+        addToast({
+          title:
+            e?.response?.data?.message ||
+            'Falha ao registrar campanha. Por favor contate o suporte.',
+          type: 'error',
+        });
+      }
+    },
+    [addToast],
+  );
 
   return (
     <NewCampaignContext.Provider value={{ test, handleSave }}>

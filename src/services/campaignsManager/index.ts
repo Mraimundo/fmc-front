@@ -8,6 +8,7 @@ import getProductsCategories from './getProductsCategories';
 import getRegional from './getRegional';
 import getCampaignStatus from './getCampaignStatus';
 import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
+import newEmptyCampaignObject from './newEmptyCampaignObject';
 
 export {
   createNewCampaign,
@@ -20,4 +21,5 @@ export {
   getRegional,
   getCampaignStatus,
   getTitlesOptionsForCampaign,
+  newEmptyCampaignObject,
 };

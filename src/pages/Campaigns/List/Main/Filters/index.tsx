@@ -7,11 +7,15 @@ import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
 import CustomersSelect from 'components/CampaignsManager/Selects/Customers';
 import CampaignStatusSelect from 'components/CampaignsManager/Selects/CampaignStatus';
 import MechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
+import { Mechanic } from 'services/campaignsManager/interfaces/Campaign';
 
 import { Container, Separator } from './styles';
 
 const Filters: React.FC = () => {
   const [categorySelected, setCategorySelected] = useState<Option | null>(null);
+  const [mechanicSelected, setMechanicSelected] = useState<Mechanic | null>(
+    null,
+  );
 
   return (
     <Container>
@@ -38,8 +42,8 @@ const Filters: React.FC = () => {
         placeholder="Status"
       />
       <MechanicsSelect
-        setValue={value => setCategorySelected(value)}
-        value={categorySelected}
+        setValue={value => setMechanicSelected(value)}
+        value={mechanicSelected}
         placeholder="Mecânica"
       />
       <Button type="button" buttonRole="primary">

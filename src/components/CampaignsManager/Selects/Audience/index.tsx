@@ -1,26 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/campaignsManager/getMechanics';
-import transformer from 'services/campaignsManager/transformers/mechanicsToSelectOptions';
-import { Mechanic } from 'services/campaignsManager/interfaces/Campaign';
+import getData from 'services/campaignsManager/getAudience';
+import transformer from 'services/campaignsManager/transformers/audienceToSelectOptions';
+import { Audience } from 'services/campaignsManager/interfaces/Campaign';
 
 interface Props {
   className?: string;
   label?: string;
-  setValue(value: Mechanic | null): void; // (value: Option | null): void;
-  value: Mechanic | null; // Option | null;
+  setValue(value: Audience | null): void;
+  value: Audience | null;
   placeholder?: string;
 }
 
-const MechanicsSelect: React.FC<Props> = ({
+const AudienceSelect: React.FC<Props> = ({
   className,
   value,
   setValue,
   label,
   placeholder,
 }) => {
-  const [options, setOptions] = useState<Mechanic[]>([]);
+  const [options, setOptions] = useState<Audience[]>([]);
   const [internalValue, setInternalValue] = useState<Option | null>(null);
 
   useEffect(() => {
@@ -32,12 +32,11 @@ const MechanicsSelect: React.FC<Props> = ({
       setInternalValue(null);
       return;
     }
-    setInternalValue({ title: value.name, value: value.id.toString() });
+    setInternalValue({
+      title: value.customer.name,
+      value: value.customer.id.toString(),
+    });
   }, [value]);
-
-  const loadItems = useCallback(() => {
-    return transformer(options);
-  }, [options]);
 
   const handleSetValue = useCallback(
     (v: Option | null): void => {
@@ -45,13 +44,17 @@ const MechanicsSelect: React.FC<Props> = ({
         setValue(null);
         return;
       }
-      const foundMechanic = options.find(
-        item => item.id === parseInt(v.value, 0),
+      const foundCustomer = options.find(
+        item => item.customer.id === parseInt(v.value, 0),
       );
-      setValue(foundMechanic || null);
+      setValue(foundCustomer || null);
     },
     [setValue, options],
   );
+
+  const loadItems = useCallback(() => {
+    return transformer(options);
+  }, [options]);
 
   return (
     <BaseSelect
@@ -66,4 +69,4 @@ const MechanicsSelect: React.FC<Props> = ({
   );
 };
 
-export default MechanicsSelect;
+export default AudienceSelect;
