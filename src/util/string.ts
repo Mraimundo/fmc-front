@@ -1,4 +1,4 @@
-export const getNameAbbr = (name: string): string => {
+export const getNameAbbr = (name?: string): string => {
   if (!name) return 'AA';
 
   const parts = name.split(' ');

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { formatPoints } from 'util/points';
 import {
   Wrapper,
@@ -14,12 +15,14 @@ interface ResaleCooperativeResumeProps {
   marketplacePoints: number;
   invoicePoints: number;
   maxInvoicePercentage: number;
+  establishmentType: EstablishmentType | '';
 }
 const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   totalPoints,
   marketplacePoints,
   invoicePoints,
   maxInvoicePercentage,
+  establishmentType,
 }) => {
   const resaleCooperativeTotalPoints = useMemo(
     () => totalPoints - (invoicePoints + marketplacePoints),
@@ -29,7 +32,7 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   return (
     <Wrapper>
       <div>
-        <h2>PONTOS PARA RESGATE DA REVENDA</h2>
+        <h2>PONTOS PARA RESGATE DA {establishmentType}</h2>
         <TotalPointsResume>
           {formatPoints(resaleCooperativeTotalPoints)}
         </TotalPointsResume>
@@ -38,7 +41,7 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
         <ResumeTableTitle>Resumo</ResumeTableTitle>
         <ResumeTable>
           <li>
-            <span>TOTAL PARA RESGATE</span>
+            <span>TOTAL PARA {establishmentType}</span>
             <span>{formatPoints(totalPoints)}</span>
           </li>
           <li>

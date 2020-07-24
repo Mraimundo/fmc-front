@@ -26,7 +26,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '00000000000000',
     type: {
       id: 1,
-      name: 'a',
+      name: 'Revenda',
     },
   },
   {
@@ -36,7 +36,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '11111111111111',
     type: {
       id: 2,
-      name: 'b',
+      name: 'Cooperativa',
     },
   },
 ];
@@ -58,6 +58,7 @@ const state: CommonState = {
   totalPointsTeamAwards: 5000,
   establishments,
   selectedEstablishment,
+  establishmentType: 'Revenda',
 };
 
 export default state;

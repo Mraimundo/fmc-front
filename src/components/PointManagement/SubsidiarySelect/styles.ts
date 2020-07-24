@@ -44,8 +44,9 @@ export const Dropdown = styled.div`
   padding: 1em;
   border: 1.2px solid #707070;
   height: auto;
-  max-height: 250px;
+  max-height: 300px;
   overflow: auto;
+  z-index: 1;
 
   ul {
     list-style-type: none;
@@ -57,6 +58,7 @@ export const Dropdown = styled.div`
       min-height: 35px;
       display: flex;
       align-items: center;
+      margin-bottom: 0.5em;
     }
   }
 `;

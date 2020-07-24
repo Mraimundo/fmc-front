@@ -47,15 +47,15 @@ export const scoredParticipants: ScoredParticipant[] = [
     name: 'Centi',
     subsidiary: 'Unidade GHI',
     points: 21,
-    picture: 'photo.jpg',
+    picture: 'https://storage.vendavall.com.br/teste/avatars/1593899963.5f00fbbb16a4d5.55411308.jpg',
     role: roles[0],
   },
   {
     id: 2,
-    name: 'Mayconn',
+    name: 'Mayconn Oliveira',
     subsidiary: 'Unidade DEF',
     points: 210,
-    picture: 'photo.jpg',
+    picture: null,
     role: roles[1],
   },
 ];

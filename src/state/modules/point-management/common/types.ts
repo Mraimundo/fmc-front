@@ -13,3 +13,5 @@ export type Establishment = {
   value: string;
   title: string;
 };
+
+export type EstablishmentType = 'Revenda' | 'Cooperativa';

@@ -1,6 +1,8 @@
 import React from 'react';
 
+import { Tooltip } from 'components/shared';
 import { Subsidiary } from 'state/modules/point-management/team-awards/types';
+import { limitChars } from 'util/string';
 import { List, SubsidiaryItem } from './styles';
 
 interface Props {
@@ -17,7 +19,9 @@ const SelectedSubsidiaries: React.FC<Props> = ({ subsidiaries, onRemove }) => {
             title={`Remover ${sub.name}`}
             onClick={() => onRemove(sub.id)}
           >
-            {sub.name}
+            <Tooltip title={sub.name} type="primary">
+              {limitChars(sub.name, 25)}
+            </Tooltip>
           </SubsidiaryItem>
         ))}
     </List>

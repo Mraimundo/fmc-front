@@ -7,6 +7,10 @@ import { FONTS } from 'styles/font/globals';
 export const Wrapper = styled.div`
   background-color: #fff;
   padding: 1em;
+
+  @media screen and (max-width: 992px) {
+    font-size: 12px;
+  }
 `;
 
 export const Tabs = styled(TabsRT)`
@@ -25,6 +29,7 @@ export const List = styled(TabList)`
     color: #fff;
     font-family: ${FONTS.medium};
     transition: padding 150ms ease;
+    text-transform: uppercase;
 
     &:hover {
       padding: 0.8em 2.6em;

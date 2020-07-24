@@ -14,8 +14,9 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
+  SET_ESTABLISHMENT_TYPE,
 } from './constants';
-import { PointsToDistribute, Establishment } from './types';
+import { PointsToDistribute, Establishment, EstablishmentType } from './types';
 
 export const emptyPointsToDistribute: PointsToDistribute = {
   general: null,
@@ -32,6 +33,7 @@ export type CommonState = {
   totalPointsResaleCooperative: number;
   establishments: Establishment[] | null;
   selectedEstablishment: Establishment | null;
+  establishmentType: EstablishmentType | '';
 };
 
 export const initialState: CommonState = {
@@ -43,6 +45,7 @@ export const initialState: CommonState = {
   totalPointsResaleCooperative: 0,
   establishments: null,
   selectedEstablishment: null,
+  establishmentType: '',
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -101,6 +104,12 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       return {
         ...state,
         selectedEstablishment: action.payload.selectedEstablishment,
+      };
+
+    case SET_ESTABLISHMENT_TYPE:
+      return {
+        ...state,
+        establishmentType: action.payload.establishmentType,
       };
 
     default:

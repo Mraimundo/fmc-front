@@ -4,7 +4,6 @@ import {
   transformTotalPointsToDistributeRawData,
   MountResponse,
 } from './transformers/common';
-import { establishments } from 'state/modules/point-management/common/mock';
 
 export interface FetchTotalPointsToDistributeRawData {
   undistributed_points: {
