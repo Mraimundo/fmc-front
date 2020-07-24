@@ -18,7 +18,7 @@ const MarketplacePoints: React.FC<MarketplacePointsProps> = ({
   return (
     <Wrapper>
       <Title>RESGATE NO MARKETPLACE</Title>
-      <Image src={marketplaceImage} alt="" title="" />
+      <Image src={marketplaceImage} alt="Marketplace Imagem" title="Marketplace" />
       <PointsInput
         onChange={onChange}
         value={marketplacePoints}

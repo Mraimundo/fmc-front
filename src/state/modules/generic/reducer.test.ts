@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 
-import { ApiErrors } from '@types';
 import reducer, { initialState } from './reducer';
 import {
   FETCH_ANYTHING_ACTION,
@@ -33,17 +32,16 @@ describe('src/state/modules/generic/reducer', () => {
   });
 
   it('should can handle FETCH_ANYTHING_FAILURE', () => {
-    const errors: ApiErrors[] = [{ code: '1', message: 'internal error' }];
-
+    const error = 'Generic Error';
     const result = reducer(undefined, {
       type: FETCH_ANYTHING_FAILURE,
-      payload: { isFetching: false, errors },
+      payload: { isFetching: false, error },
     });
 
     expect(result).to.be.deep.equal({
       ...initialState,
       isFetching: false,
-      errors,
+      error,
     });
   });
 

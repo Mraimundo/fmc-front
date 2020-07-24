@@ -260,6 +260,9 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
         scoredParticipants,
       ),
       waitingScoredParticipants: null,
+      assignPoints: {
+        isFetching: false,
+      }
     });
   });
 

@@ -194,6 +194,7 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case ASSIGN_POINTS_SUCCESS:
       return {
         ...state,
+        assignPoints: emptyFetchState,
         distributeEqually: false,
         pointsToDistribute: 0,
         selectedParticipants: null,

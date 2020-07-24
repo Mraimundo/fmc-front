@@ -34,6 +34,7 @@ export function* workerFetchEstablishments() {
     if (establishments.length === 1) {
       const [establishment]: Establishment[] = transformedEstablishments;
       yield put(actions.setSelectedEstablishment(establishment));
+      yield put(actions.setEstablishmentType(establishments[0].type.name));
       return;
     }
 

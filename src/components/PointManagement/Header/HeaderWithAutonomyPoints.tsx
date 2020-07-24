@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { formatPoints } from 'util/points';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { PointsInput } from 'components/PointManagement';
 import {
   HeaderAutonomyWrapper,
@@ -23,6 +24,7 @@ interface Props {
   onReadyToDistribute(): void;
   isAllowedToEdit: boolean;
   isAllowedToStartDistribution: boolean;
+  establishmentType: EstablishmentType | '';
 }
 const HeaderWithAutonomyPoints: React.FC<Props> = ({
   generalPoints,
@@ -33,6 +35,7 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
   onReadyToDistribute,
   isAllowedToEdit,
   isAllowedToStartDistribution,
+  establishmentType,
 }: Props) => {
   const totalPoints = useMemo(
     () => generalPoints - (totalResaleCooperativePoints + totalTeamAwardPoints),
@@ -41,17 +44,17 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
 
   return (
     <HeaderAutonomyWrapper>
-      <img src={headerImage} />
+      <img src={headerImage} alt="" title="" />
       <div>
         <TextDistributeWrapper>
           <TotalPointsToDistributeText>
-            {`TOTAL PONTOS COOPERATIVA PARA DISTRIBUIR ${formatPoints(
+            {`TOTAL PONTOS ${establishmentType} PARA DISTRIBUIR ${formatPoints(
               totalPoints,
             )}`}
           </TotalPointsToDistributeText>
           <p>
             Defina como deseja utilizar seus e pontos. Eles podem ser
-            distribuídos entre equipe e/ou cooperativa.
+            distribuídos entre equipe e/ou {establishmentType}.
           </p>
         </TextDistributeWrapper>
         <InputsWrapper>
@@ -67,7 +70,7 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
             />
           </BoxInput>
           <BoxInput>
-            <h2>PONTOS COOPERATIVA</h2>
+            <h2>PONTOS {establishmentType}</h2>
             <span>Pontos para distribuir</span>
 
             <PointsInput

@@ -13,18 +13,21 @@ import {
   getParticipantFinder,
   getPointsToDistribute,
   getScoredParticipants,
+  getWaitingScoredParticipants,
   getParticipantsList,
   fetchParticipantIsFetching,
   getDistributeEqually,
   getSelectedParticipants,
   getTotalForEachParticipantDistributedEqually,
   getSelectedRolesAll,
-  getParticipants,
   getSelectedParticipantsWithoutScore,
-  getTotalDistributed,
   getSelectedSubsidiariesWithName,
-  getBalanceAvailable,
   getScoredParticipantsResume,
+  getTotalWaitingScoredParticipants,
+  getTotalScoredParticipants,
+  getHasEnoughScore,
+  getAvailableScore,
+  getIsEnabledToAssignPoints,
 } from './selectors';
 import teamAwardsMock, {
   subsidiaries,
@@ -34,6 +37,8 @@ import teamAwardsMock, {
   participants,
   scoredParticipants,
   selectedParticipants,
+  waitingScoredParticipants,
+  participant,
 } from './mock';
 
 describe('src/state/modules/point-management/team-awards/selectors', () => {
@@ -74,6 +79,12 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       expect(getScoredParticipants(state)).to.be.equal(scoredParticipants);
     });
 
+    it('check getWaitingScoredParticipants', () => {
+      expect(getWaitingScoredParticipants(state)).to.be.equal(
+        waitingScoredParticipants,
+      );
+    });
+
     it('check getParticipantsList', () => {
       expect(getParticipantsList(state)).to.be.equal(participants);
     });
@@ -103,16 +114,12 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
     });
   });
 
-  describe('getParticipants', () => {
-    it('write tests', () => {});
-  });
-
   describe('getSelectedParticipantsWithoutScore', () => {
-    it('check getSelectedParticipantsWithoutScore', () => {
+    it('should return 0 with default state', () => {
       expect(getSelectedParticipantsWithoutScore(state)).to.be.equal(0);
+    });
 
-      const participantsMock =
-        state.pointManagement.teamAwards.participants || {};
+    it('should return 0 with selected participants null', () => {
       expect(
         getSelectedParticipantsWithoutScore({
           ...state,
@@ -120,39 +127,130 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
             ...state.pointManagement,
             teamAwards: {
               ...state.pointManagement.teamAwards,
-              participants: {
-                ...participantsMock,
-                Supervisor: {
-                  ...participantsMock.Supervisor,
-                  total: participantsMock.Supervisor.total + 1,
-                  list: [
-                    ...participantsMock.Supervisor.list,
-                    {
-                      id: 99,
-                      name: 'Fernandinho',
-                      subsidiary: 'Unidade GHI',
-                      picture: 'photo.jpg',
-                      role: roles[0],
-                    },
-                  ],
-                },
-              },
+              selectedParticipants: null,
+            },
+          },
+        }),
+      ).to.be.equal(0);
+    });
+
+    it('should return 1 with selected participants and without scored', () => {
+      expect(
+        getSelectedParticipantsWithoutScore({
+          ...state,
+          pointManagement: {
+            ...state.pointManagement,
+            teamAwards: {
+              ...state.pointManagement.teamAwards,
+              selectedParticipants: [participant.id],
+              scoredParticipants: null,
             },
           },
         }),
       ).to.be.equal(1);
     });
+
+    it('should return 0 when selected participant already has score', () => {
+      expect(
+        getSelectedParticipantsWithoutScore({
+          ...state,
+          pointManagement: {
+            ...state.pointManagement,
+            teamAwards: {
+              ...state.pointManagement.teamAwards,
+              selectedParticipants: [participant.id],
+              scoredParticipants,
+            },
+          },
+        }),
+      ).to.be.equal(0);
+    });
+
+    it('should return 1 when selected participant dont have score', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...state.pointManagement,
+          teamAwards: {
+            ...state.pointManagement.teamAwards,
+            selectedParticipants: [10],
+            scoredParticipants,
+          },
+        },
+      };
+
+      expect(getSelectedParticipantsWithoutScore(modifiedState)).to.be.equal(1);
+    });
   });
 
-  describe('getTotalDistributed', () => {
-    it('write tests', () => {});
+  describe('getTotalWaitingScoredParticipants', () => {
+    it('should return 0 with default state', () => {
+      expect(getTotalWaitingScoredParticipants(state)).to.be.equal(0);
+    });
+
+    it('should return 431 when has waiting scored participants (clone scoredParticipants total)', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            waitingScoredParticipants: scoredParticipants,
+          },
+        },
+      };
+
+      expect(getTotalWaitingScoredParticipants(modifiedState)).to.be.equal(431);
+    });
+  });
+
+  describe('getTotalScoredParticipants', () => {
+    it('should return 431 with default state', () => {
+      expect(getTotalScoredParticipants(state)).to.be.equal(431);
+    });
+
+    it('should return 0 when dont have scored participants', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            scoredParticipants: null,
+          },
+        },
+      };
+
+      expect(getTotalScoredParticipants(modifiedState)).to.be.equal(0);
+    });
+  });
+
+  describe('getHasEnoughScore', () => {
+    it('should return true with default state', () => {
+      expect(getHasEnoughScore(state)).to.be.true;
+    });
+
+    it('should return false dont have enough points', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 10,
+          },
+        },
+      };
+
+      expect(getHasEnoughScore(modifiedState)).to.be.false;
+    });
   });
 
   describe('getSelectedSubsidiariesWithName', () => {
     it('should return default status subsidiaries with label name', () => {
       expect(getSelectedSubsidiariesWithName(state)).to.be.deep.equal([
-        { id: 1, label: 'Filial 1' },
-        { id: 2, label: 'Filial 2' },
+        { id: 1, name: 'Filial 1' },
+        { id: 2, name: 'Filial 2' },
       ]);
     });
 
@@ -164,7 +262,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
           teamAwards: {
             ...teamAwardsMock,
             selectedSubsidiaries: null,
-          }
+          },
         },
       };
       expect(getSelectedSubsidiariesWithName(modifiedState)).to.be.null;
@@ -178,52 +276,32 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
           teamAwards: {
             ...teamAwardsMock,
             subsidiaries: null,
-          }
+          },
         },
       };
+
       expect(getSelectedSubsidiariesWithName(modifiedState)).to.be.null;
     });
   });
 
-  describe('getBalanceAvailable', () => {
-    it('check getBalanceAvailable', () => {
-      expect(getBalanceAvailable(state)).to.be.equal(0);
-      expect(
-        getBalanceAvailable({
-          ...state,
-          pointManagement: {
-            ...pointManagementMock,
-            teamAwards: {
-              ...teamAwardsMock,
-              pointsToDistribute: '2000',
-            },
+  describe('getAvailableScore', () => {
+    it('should be return 0 with default state', () => {
+      expect(getAvailableScore(state)).to.be.equal(4569);
+    });
+
+    it('should return 0 with total points team awards 0', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 0,
           },
-        }),
-      ).to.be.equal(3000);
-      expect(
-        getBalanceAvailable({
-          ...state,
-          pointManagement: {
-            ...pointManagementMock,
-            teamAwards: {
-              ...teamAwardsMock,
-              pointsToDistribute: '0',
-            },
-          },
-        }),
-      ).to.be.equal(5000);
-      expect(
-        getBalanceAvailable({
-          ...state,
-          pointManagement: {
-            ...pointManagementMock,
-            common: {
-              ...commonMock,
-              totalPointsTeamAwards: '',
-            },
-          },
-        }),
-      ).to.be.equal(0);
+        },
+      };
+
+      expect(getAvailableScore(modifiedState)).to.be.equal(0);
     });
   });
 
@@ -239,6 +317,59 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
           totalPoints: 210,
         },
       });
+    });
+  });
+
+  describe('getIsEnabledToAssignPoints', () => {
+    it('should return false with default state', () => {
+      expect(getIsEnabledToAssignPoints(state)).to.be.false;
+    });
+
+    it('should return true point to distribute and distribute equally true', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            distributeEqually: true,
+          },
+        },
+      };
+
+      expect(getIsEnabledToAssignPoints(modifiedState)).to.be.true;
+    });
+
+    it('should return false when dont have waiting scored points', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            distributeEqually: false,
+            waitingScoredParticipants: null,
+          },
+        },
+      };
+
+      expect(getIsEnabledToAssignPoints(modifiedState)).to.be.false;
+    });
+
+    it('should return true when have waiting scored points', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            distributeEqually: true,
+            waitingScoredParticipants: scoredParticipants,
+          },
+        },
+      };
+
+      expect(getIsEnabledToAssignPoints(modifiedState)).to.be.true;
     });
   });
 });

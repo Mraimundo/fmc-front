@@ -8,22 +8,25 @@ import {
   PointsText,
 } from './styles';
 
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import headerImage from 'assets/images/point-management/header-image.png';
 
 interface Props {
   resaleCooperativePoints: number;
   teamAwardsPoints: number;
+  establishmentType: EstablishmentType | '';
 }
 const HeaderTeamAwardsAndResaleCooperativePoints: React.FC<Props> = ({
   resaleCooperativePoints,
   teamAwardsPoints,
+  establishmentType,
 }: Props) => {
   return (
     <HeaderImageWrapper>
       <img src={headerImage} />
       <WrapperBoxPoints>
         <BoxPoints type="resaleCooperative">
-          <PointsText>{`TOTAL REVENDAS ${formatPoints(
+          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(
             resaleCooperativePoints,
           )}`}</PointsText>
         </BoxPoints>

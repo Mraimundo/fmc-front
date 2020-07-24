@@ -11,6 +11,7 @@ import {
   setTotalPointsResaleCooperative,
   setIsReadyToDistribute,
   setSelectedEstablishment,
+  setEstablishmentType,
 } from './actions';
 import * as constants from './constants';
 
@@ -190,6 +191,23 @@ describe('src/state/modules/point-management/common/actions', () => {
       expect(setSelectedEstablishment(selectedEstablishment)).to.be.deep.equal({
         type: constants.SET_SELECTED_ESTABLISHMENT,
         payload: { selectedEstablishment },
+      });
+    });
+  });
+
+  describe('setEstablishmentType', () => {
+    it('should be a function', () => {
+      expect(setEstablishmentType).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(setEstablishmentType('Revenda')).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(setEstablishmentType('Revenda')).to.be.deep.equal({
+        type: constants.SET_ESTABLISHMENT_TYPE,
+        payload: { establishmentType: 'Revenda' },
       });
     });
   });

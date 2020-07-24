@@ -36,8 +36,10 @@ describe('src/services/point-management/transformers/common', () => {
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
         general: 0,
+        generalPointId: null,
         teamAwards: null,
         resaleCooperative: {
+          pointId: 1,
           points: 1200,
           maxInvoicePercentage: 0,
         },
@@ -70,9 +72,11 @@ describe('src/services/point-management/transformers/common', () => {
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
         general: 5000,
+        generalPointId: 1,
         teamAwards: null,
         resaleCooperative: {
           points: 0,
+          pointId: null,
           maxInvoicePercentage: 20,
         },
       });
@@ -122,10 +126,13 @@ describe('src/services/point-management/transformers/common', () => {
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
         general: 0,
+        generalPointId: null,
         teamAwards: {
+          pointId: 1,
           points: 2500,
         },
         resaleCooperative: {
+          pointId: 1,
           points: 2600,
           maxInvoicePercentage: 20,
         },

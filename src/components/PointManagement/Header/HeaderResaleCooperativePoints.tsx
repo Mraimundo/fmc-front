@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { formatPoints } from 'util/points';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import {
   HeaderImageWrapper,
   WrapperBoxPoints,
@@ -11,14 +12,15 @@ import headerImage from 'assets/images/point-management/header-image.png';
 
 interface Props {
   points: number;
+  establishmentType: EstablishmentType | '';
 }
-const HeaderResaleCooperativePoints: React.FC<Props> = ({ points }: Props) => {
+const HeaderResaleCooperativePoints: React.FC<Props> = ({ points, establishmentType }) => {
   return (
     <HeaderImageWrapper>
-      <img src={headerImage} />
+      <img src={headerImage} alt="" title="" />
       <WrapperBoxPoints>
         <BoxPoints type="resaleCooperative">
-          <PointsText>{`TOTAL COOPERATIVA ${formatPoints(points)}`}</PointsText>
+          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(points)}`}</PointsText>
         </BoxPoints>
       </WrapperBoxPoints>
     </HeaderImageWrapper>

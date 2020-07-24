@@ -14,6 +14,7 @@ import {
   getIsResaleCooperativePointsOnly,
   getHasAutonomyToDistribute,
   getIsResaleCooperativeAndTeamAwardPoints,
+  getEstablishmentType,
 } from './selectors';
 import commonMock, {
   establishments,
@@ -55,6 +56,10 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getSelectedEstablishment(state)).to.be.equal(
         selectedEstablishment,
       );
+    });
+
+    it('check getEstablishmentType', () => {
+      expect(getEstablishmentType(state)).to.be.equal('Revenda');
     });
   });
 

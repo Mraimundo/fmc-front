@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 
-import { ApiErrors } from '@types';
 import {
   fetchAnythingAction,
   fetchAnythingFailure,
@@ -12,6 +11,8 @@ import {
   FETCH_ANYTHING_FAILURE,
 } from './constants';
 import { FetchAnythingData } from './types';
+
+const error = 'Generic Error';
 
 describe('src/state/modules/generic/actions', () => {
   describe('fetchAnythingAction', () => {
@@ -31,20 +32,19 @@ describe('src/state/modules/generic/actions', () => {
   });
 
   describe('fetchAnythingFailure', () => {
-    const errors: ApiErrors[] = [{ code: '1', message: 'internal error' }];
     it('should be a function', () => {
       expect(fetchAnythingFailure).to.be.a('function');
     });
 
     it('should return a object', () => {
-      expect(fetchAnythingFailure(errors)).to.be.a('object');
+      expect(fetchAnythingFailure(error)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(fetchAnythingFailure(errors)).to.be.deep.equal({
+      expect(fetchAnythingFailure(error)).to.be.deep.equal({
         type: FETCH_ANYTHING_FAILURE,
         payload: {
-          errors,
+          error,
         },
       });
     });
