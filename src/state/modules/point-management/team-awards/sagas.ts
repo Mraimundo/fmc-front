@@ -1,10 +1,4 @@
-import {
-  all,
-  takeEvery,
-  call,
-  put,
-  select,
-} from 'redux-saga/effects';
+import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
 import {
@@ -35,11 +29,10 @@ import {
   assignPointsSuccess,
   distributePointsFailure,
   distributePointsSuccess,
+  setSelectedRolesAll,
 } from './actions';
 import * as selectors from './selectors';
-import {
-  getSelectedEstablishment,
-} from 'state/modules/point-management/common/selectors';
+import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
 import { Subsidiary, Role, ParticipantsList } from './types';
 import { Establishment } from '../common/types';
 import {
@@ -49,9 +42,12 @@ import {
 
 export function* workerFetchSubsidiaries() {
   try {
-    const selectedEstablishment: Establishment | null = yield select(getSelectedEstablishment);
+    const selectedEstablishment: Establishment | null = yield select(
+      getSelectedEstablishment,
+    );
 
-    if (!selectedEstablishment) return;
+    if (!selectedEstablishment)
+      throw 'Você não possui nenhum estabelecimento selecionado';
 
     const subsidiaries: Subsidiary[] = yield call(
       fetchSubsidiariesService,
@@ -77,12 +73,19 @@ export function* workerFetchRoles() {
 
 export function* workerFetchParticipants() {
   try {
-    const subsidiaries: number[] | null = yield select(selectors.getSelectedSubsidiaries);
+    const subsidiaries: number[] | null = yield select(
+      selectors.getSelectedSubsidiaries,
+    );
     const roles: number[] | null = yield select(selectors.getSelectedRoles);
-    const participantFinder: string = yield select(selectors.getParticipantFinder);
-    const selectedEstablishment: Establishment | null = yield select(getSelectedEstablishment);
+    const participantFinder: string = yield select(
+      selectors.getParticipantFinder,
+    );
+    const selectedEstablishment: Establishment | null = yield select(
+      getSelectedEstablishment,
+    );
 
-    if (!selectedEstablishment) return;
+    if (!selectedEstablishment)
+      throw 'Você não possui nenhum estabelecimento selecionado';
 
     const participants: ParticipantsList = yield call(
       fetchParticipantsService,
@@ -103,10 +106,8 @@ export function* workerFetchParticipants() {
 export function* workerAssignPoints() {
   try {
     const hasEnoughScore: boolean = yield select(selectors.getHasEnoughScore);
-    if (!hasEnoughScore) {
-      alert('Você não possui saldo suficiente para atribuir estes pontos');
-      return;
-    }
+    if (!hasEnoughScore)
+      throw 'Você não possui saldo suficiente para atribuir estes pontos';
 
     const distributeEqually: boolean = yield select(
       selectors.getDistributeEqually,
@@ -149,16 +150,22 @@ export function* workerDistributeEqually() {
   yield put(setTotalForEachParticipantDistributedEqually(points));
 }
 
-export function* workerSetSelectedRolesAll({ meta }: any) {
-  const selectedRolesAll = yield select(selectors.getSelectedRolesAll);
+interface IWorkerSetSelectedRolesAll {
+  type: typeof constants.SET_SELECTED_ROLES_ALL;
+  meta: { role: string };
+}
+export function* workerSetSelectedRolesAll({
+  meta: { role },
+}: IWorkerSetSelectedRolesAll) {
+  const selectedRolesAll: string[] | null = yield select(selectors.getSelectedRolesAll);
 
-  if (selectedRolesAll && selectedRolesAll.includes(meta.role)) {
-    yield put(selectAllParticipants(meta.role));
+  if (selectedRolesAll && selectedRolesAll.includes(role)) {
+    yield put(selectAllParticipants(role));
     // yield call(workerDistributeEqually);
     return;
   }
 
-  yield put(deselectAllParticipants(meta.role));
+  yield put(deselectAllParticipants(role));
 }
 
 export function* workerDistributePoints() {
@@ -206,7 +213,10 @@ export default function* teamAwardsSagas() {
       ],
       workerDistributeEqually,
     ),
-    takeEvery(constants.SET_SELECTED_ROLES_ALL, workerSetSelectedRolesAll),
+    takeEvery<IWorkerSetSelectedRolesAll>(
+      constants.SET_SELECTED_ROLES_ALL,
+      workerSetSelectedRolesAll,
+    ),
     takeEvery(constants.DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
   ]);
 }

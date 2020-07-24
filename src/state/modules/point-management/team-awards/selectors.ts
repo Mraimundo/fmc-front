@@ -5,7 +5,6 @@ import {
   Subsidiary,
   Role,
   ParticipantsList,
-  Participant,
   ScoredParticipant,
   WaitingScoredParticipant,
 } from './types';

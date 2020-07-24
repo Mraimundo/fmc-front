@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col } from 'react-grid-system';
 import { Tab, TabPanel } from 'react-tabs';
@@ -33,12 +33,14 @@ const PointManagement: React.FC = () => {
     establishments,
     isResaleCooperativePointsOnly,
     fetchPointsToDistribute,
+    establishmentType,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
     useSelector(selectors.getEstablishments),
     useSelector(selectors.getIsResaleCooperativePointsOnly),
     useSelector(selectors.getFetchPointsToDistribute),
+    useSelector(selectors.getEstablishmentType),
   ];
 
   const dispatch = useDispatch();
@@ -48,11 +50,18 @@ const PointManagement: React.FC = () => {
 
   useEffect(() => {
     if (error) addToast({ title: error, type: 'info' });
-  }, [error]);
+  }, [error, addToast]);
 
   useEffect(() => {
     dispatch(fetchEstablishments());
   }, [dispatch]);
+
+  const handleChangeEstablishment = useCallback(
+    (establishment: Establishment) => {
+      dispatch(setSelectedEstablishment(establishment));
+    },
+    [dispatch],
+  );
 
   return (
     <Container>
@@ -60,22 +69,24 @@ const PointManagement: React.FC = () => {
         {!!establishments && establishments.length > 1 && (
           <EstablishmentSelection
             establishments={establishments}
-            onChange={(establishment: Establishment) =>
-              dispatch(setSelectedEstablishment(establishment))
-            }
+            onChange={handleChangeEstablishment}
             selectedEstablishment={selectedEstablishment}
           />
         )}
-        {!!selectedEstablishment && <Header />}
+        {!!selectedEstablishment && (
+          <Header establishmentType={establishmentType} />
+        )}
         {isReadyToDistribute && (
           <Tabs>
             <List>
-              <Tab>PONTOS REVENDA</Tab>
+              <Tab>PONTOS {establishmentType}</Tab>
               {!isResaleCooperativePointsOnly && <Tab>PREMIAÇÃO EQUIPE</Tab>}
             </List>
 
             <Panel>
-              <ResaleCooperativePointsTabContent />
+              <ResaleCooperativePointsTabContent
+                establishmentType={establishmentType}
+              />
             </Panel>
             {!isResaleCooperativePointsOnly && (
               <TabPanel>

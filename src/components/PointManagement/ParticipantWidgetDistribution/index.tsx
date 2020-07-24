@@ -44,7 +44,7 @@ const ParticipantWidgetDistribution: React.FC<Props> = ({
           <SelectIcon onClick={() => onToggleParticipant(id)} />
         </Tooltip>
       ),
-    [isSelected, onToggleParticipant],
+    [isSelected, onToggleParticipant, id],
   );
 
   return (

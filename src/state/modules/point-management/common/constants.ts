@@ -23,3 +23,6 @@ export const SET_IS_READY_TO_DISTRIBUTE =
 
 export const SET_SELECTED_ESTABLISHMENT =
   '@fmc/point-management/common/SET_SELECTED_ESTABLISHMENT';
+
+export const SET_ESTABLISHMENT_TYPE =
+  '@fmc/point-management/common/SET_ESTABLISHMENT_TYPE';

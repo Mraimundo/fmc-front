@@ -21,6 +21,17 @@ export const RoleTitle = styled.h1`
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
+
+  li {
+    @media screen and (max-width: 1442px) {
+      width: calc((100% / 2) - 15px);
+    }
+
+    @media screen and (max-width: 992px) {
+      width: 100%;
+      margin-right: 0 !important;
+    }
+  }
 `;
 
 export const ParticipantsEmpty = styled.h3`

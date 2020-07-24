@@ -12,13 +12,19 @@ import {
   setMarketplacePoints,
   setInvoicePoints,
 } from 'state/modules/point-management/resale-cooperative/actions';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 
 import ResaleCooperativeResume from './ResaleCooperativeResume';
 import MarketplacePoints from './MarketplacePoints';
 import InvoicePoints from './InvoicePoints';
 import { WrapperPoints } from './styles';
 
-const ResaleCooperativePointsTabContent: React.FC = () => {
+interface ResaleCooperativePointsTabContentProps {
+  establishmentType: EstablishmentType | '';
+}
+const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabContentProps> = ({
+  establishmentType,
+}) => {
   const [
     totalPointsResaleCooperative,
     marketplacePoints,
@@ -33,13 +39,19 @@ const ResaleCooperativePointsTabContent: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleSetMarketplacePoints = useCallback((points: number) => {
-    dispatch(setMarketplacePoints(points));
-  }, []);
+  const handleSetMarketplacePoints = useCallback(
+    (points: number) => {
+      dispatch(setMarketplacePoints(points));
+    },
+    [dispatch],
+  );
 
-  const handleSetInvoicePoints = useCallback((points: number) => {
-    dispatch(setInvoicePoints(points));
-  }, []);
+  const handleSetInvoicePoints = useCallback(
+    (points: number) => {
+      dispatch(setInvoicePoints(points));
+    },
+    [dispatch],
+  );
 
   const maxLengthInvoicePoints = useMemo(() => {
     if (!maxInvoicePercentage || !totalPointsResaleCooperative) return null;
@@ -54,6 +66,7 @@ const ResaleCooperativePointsTabContent: React.FC = () => {
         marketplacePoints={marketplacePoints || 0}
         invoicePoints={invoicePoints || 0}
         maxInvoicePercentage={maxInvoicePercentage || 0}
+        establishmentType={establishmentType}
       />
       <WrapperPoints>
         <MarketplacePoints

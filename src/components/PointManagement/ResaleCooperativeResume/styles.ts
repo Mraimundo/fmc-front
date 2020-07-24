@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   > div > h2 {
     font-size: 1.4em;
     font-family: ${FONTS.regular};
+    text-transform: uppercase;
   }
 `;
 
@@ -48,6 +49,7 @@ export const ResumeTable = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-transform: uppercase;
 
     &:not(:last-child) {
       margin-bottom: 0.5em;

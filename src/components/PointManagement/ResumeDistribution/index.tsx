@@ -58,7 +58,7 @@ const ResumeDistribution: React.FC = () => {
 
   const handleRemoveAllScores = useCallback(() => {
     dispatch(removeAllScores());
-  }, []);
+  }, [dispatch]);
 
   const isDisabledDistributeEqually = useMemo(() => {
     if (distributeEqually) return false;

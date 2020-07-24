@@ -29,6 +29,7 @@ export const TotalPointsToDistributeText = styled.h1`
   font-size: 1.6em;
   font-family: ${FONTS.bold};
   margin-bottom: 5px;
+  text-transform: uppercase;
 `;
 
 export const HeaderImageWrapper = styled.div`
@@ -90,6 +91,7 @@ export const BoxInput = styled.div`
   > h2 {
     font-family: ${FONTS.bold};
     font-size: 1.1em;
+    text-transform: uppercase;
   }
 
   > span {
@@ -145,4 +147,5 @@ export const BoxPoints = styled.div`
 
 export const PointsText = styled.h2`
   font-family: ${FONTS.bold};
+  text-transform: uppercase;
 `;
