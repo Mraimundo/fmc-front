@@ -5,11 +5,32 @@ export const CAMPAIGN_STATUS = {
   CANCELED: 0,
 };
 
+export const CAMPAIGN_STATUS_TEXT = {
+  UNDER_ANALYSIS: 'under_analysis',
+  ON_APPROVAL: 'on_approval',
+  PUBLISHED: 'published',
+  CANCELED: 'canceled',
+  COMPLETED: 'completed',
+};
+
+export type StatusText =
+  | typeof CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS
+  | typeof CAMPAIGN_STATUS_TEXT.ON_APPROVAL
+  | typeof CAMPAIGN_STATUS_TEXT.PUBLISHED
+  | typeof CAMPAIGN_STATUS_TEXT.CANCELED
+  | typeof CAMPAIGN_STATUS_TEXT.COMPLETED;
+
 export type Status =
   | typeof CAMPAIGN_STATUS.ACTIVE
   | typeof CAMPAIGN_STATUS.BUILDING
   | typeof CAMPAIGN_STATUS.CANCELED
   | typeof CAMPAIGN_STATUS.WAITING_APPROVAL;
+
+export interface CampaignStatus {
+  id: Status;
+  name: string;
+  statusText: StatusText;
+}
 
 export interface Mechanic {
   id: number;
@@ -83,6 +104,7 @@ export interface Goal {
 }
 
 export interface Campaign {
+  id: number | null;
   title: string;
   description: string;
   mechanic: Mechanic | null;
@@ -98,5 +120,6 @@ export interface Campaign {
   expectedSellOut: number;
   goals: Goal[];
   observation: string;
-  status: Status;
+  status: CampaignStatus;
+  createdAt: Date | null;
 }

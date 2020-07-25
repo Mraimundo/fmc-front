@@ -1,7 +1,13 @@
-import { Campaign, CAMPAIGN_STATUS } from './interfaces/Campaign';
+import {
+  Campaign,
+  CAMPAIGN_STATUS,
+  CAMPAIGN_STATUS_TEXT,
+} from './interfaces/Campaign';
+import getPtStatus from './util/getPtStatusText';
 
 export default (): Campaign => {
   return {
+    id: null,
     title: '',
     description: '',
     mechanic: null,
@@ -20,6 +26,11 @@ export default (): Campaign => {
     expectedSellOut: 0,
     goals: [],
     observation: '',
-    status: CAMPAIGN_STATUS.BUILDING,
+    status: {
+      id: CAMPAIGN_STATUS.BUILDING,
+      name: getPtStatus(CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS),
+      statusText: CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS,
+    },
+    createdAt: null,
   };
 };

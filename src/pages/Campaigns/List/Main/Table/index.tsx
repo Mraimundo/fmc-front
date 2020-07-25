@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import transformer, {
-  ParticipantIndicationTableData,
-} from 'services/participantIndication/transformers/participantIndicationsToTableList';
+  Response as ITableItemData,
+} from 'services/campaignsManager/transformers/campaignsToCampaignsTable';
 import headers from './headers';
+import { useCampaignsList } from '../../Context';
 import { Container } from './styles';
 
 interface Props {
@@ -12,56 +13,23 @@ interface Props {
 }
 
 const Table: React.FC = () => {
-  /* const [tableData, setTableData] = useState<ParticipantIndicationTableData[]>(
-    [],
-  ); */
+  const { campaigns, isFetching } = useCampaignsList();
+  const [tableData, setTableData] = useState<ITableItemData[]>([]);
 
-  const mock = [
-    {
-      id: 1,
-      solicitationDate: '06/06/2020',
-      campaign: 'Título da campanha',
-      edit: {
-        id: 1,
-        status: {
-          id: 0,
-          name: 'Teste',
-        },
-      },
-      status: {
-        status: {
-          id: 0,
-          name: 'Em aprovação',
-        },
-      },
-      approval: {
-        id: 1,
-        status: {
-          id: 0,
-          name: 'Teste',
-        },
-      },
-      highlight: {
-        id: 1,
-        highlight: true,
-      },
-      activated: {
-        id: 1,
-        activated: true,
-      },
-    },
-  ];
+  useEffect(() => {
+    setTableData(transformer(campaigns));
+  }, [campaigns]);
 
-  /* useEffect(() => {
-    setTableData(transformer(data));
-  }, [data]); */
-  return (
-    <Container
-      headers={headers}
-      data={mock}
-      noResultText="Nenhuma Pesquisa encontrada"
-      isFetching={false}
-    />
+  return useMemo(
+    () => (
+      <Container
+        headers={headers}
+        data={tableData}
+        noResultText="Nenhuma Pesquisa encontrada"
+        isFetching={isFetching}
+      />
+    ),
+    [tableData, isFetching],
   );
 };
 

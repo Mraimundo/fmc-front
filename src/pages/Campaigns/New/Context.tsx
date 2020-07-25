@@ -4,6 +4,7 @@ import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { CreateNewCampaignDTO } from 'services/campaignsManager/dtos';
 import { campaignToCreateNewCampaignDTO } from 'services/campaignsManager/transformers';
 import { useToast } from 'context/ToastContext';
+import history from 'services/history';
 
 export interface NewCampaignContextState {
   test: string;
@@ -24,6 +25,11 @@ export const NewCampaignProvider: React.FC = ({ children }) => {
       const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
       try {
         await createNewCampaign(dto);
+        addToast({
+          title: 'Campanha requisitada com sucesso',
+          type: 'success',
+        });
+        history.push('/gerenciamento-de-campanhas/lista');
       } catch (e) {
         console.log('erro pagina registrar', e);
         addToast({

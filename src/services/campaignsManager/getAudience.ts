@@ -1,25 +1,6 @@
 import { pluginApi } from 'services/api';
 import { Audience } from './interfaces/Campaign';
 
-const mock: Audience[] = [
-  /* {
-    id: 1,
-    name: 'test',
-    directors: [
-      {
-        id: 1,
-        name: 'test',
-      },
-    ],
-    regional: [
-      {
-        id: 1,
-        name: 'test',
-      },
-    ],
-  }, */
-];
-
 interface EstablishmentApi {
   id: number;
   name: string;

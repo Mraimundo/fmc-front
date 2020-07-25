@@ -1,35 +1,40 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import history from 'services/history';
+import { useCampaignsList } from '../../Context';
 
 import { Container, Content, Box, Action, AddButton } from './styles';
 
 const Resume: React.FC = () => {
-  const mock = [
-    { status: 'Em análise', qnt: 1 },
-    { status: 'Em aprovação', qnt: 1 },
-    { status: 'Publicadas', qnt: 1 },
-    { status: 'Canceladas', qnt: 1 },
-    { status: 'Finalizadas', qnt: 1 },
-  ];
-  return (
-    <Container>
-      <h4>Campanhas especiais</h4>
-      <Content>
-        <Box>
-          <h6>Campanhas</h6>
-          {mock.map(item => (
-            <div key={item.status}>
-              <h5>{item.status}</h5>
-              <span />
-              <h5>{item.qnt}</h5>
-            </div>
-          ))}
-        </Box>
-        <Action>
-          <span>Nova campanha</span>
-          <AddButton type="button" />
-        </Action>
-      </Content>
-    </Container>
+  const { resume } = useCampaignsList();
+
+  return useMemo(
+    () => (
+      <Container>
+        <h4>Campanhas especiais</h4>
+        <Content>
+          <Box>
+            <h6>Campanhas</h6>
+            {resume.map(item => (
+              <div key={item.status.id}>
+                <h5>{item.status.name}</h5>
+                <span />
+                <h5>{item.count}</h5>
+              </div>
+            ))}
+          </Box>
+          <Action>
+            <span>Nova campanha</span>
+            <AddButton
+              type="button"
+              onClick={() =>
+                history.push('/gerenciamento-de-campanhas/registrar')
+              }
+            />
+          </Action>
+        </Content>
+      </Container>
+    ),
+    [resume],
   );
 };
 
