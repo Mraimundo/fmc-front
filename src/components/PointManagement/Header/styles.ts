@@ -14,6 +14,7 @@ export const DistributeButton = styled.button`
   outline: none;
   border: none;
   transition: box-shadow 150ms ease;
+  font-size: 1em;
 
   &:disabled {
     opacity: 0.5;
@@ -46,6 +47,10 @@ export const HeaderImageWrapper = styled.div`
     left: 0;
     top: 0;
     z-index: -1;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 

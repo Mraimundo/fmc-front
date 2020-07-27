@@ -22,7 +22,6 @@ interface Props {
   onSetTeamAwardPoints(points: number): void;
   onSetResaleCooperativePoints(points: number): void;
   onReadyToDistribute(): void;
-  isAllowedToEdit: boolean;
   isAllowedToStartDistribution: boolean;
   establishmentType: EstablishmentType | '';
 }
@@ -33,7 +32,6 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
   onSetTeamAwardPoints,
   onSetResaleCooperativePoints,
   onReadyToDistribute,
-  isAllowedToEdit,
   isAllowedToStartDistribution,
   establishmentType,
 }: Props) => {
@@ -42,15 +40,33 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
     [generalPoints, totalResaleCooperativePoints, totalTeamAwardPoints],
   );
 
+  const totalPointsText = useMemo(
+    () =>
+      `TOTAL PONTOS ${establishmentType} PARA DISTRIBUIR ${formatPoints(
+        totalPoints,
+      )}`,
+    [establishmentType, totalPoints],
+  );
+
+  const teamAwardsMaxLength = useMemo(() => {
+    if (generalPoints === totalResaleCooperativePoints) return 0;
+
+    return generalPoints - totalResaleCooperativePoints;
+  }, [generalPoints, totalResaleCooperativePoints]);
+
+  const resaleCooperativeMaxLength = useMemo(() => {
+    if (generalPoints === totalTeamAwardPoints) return 0;
+
+    return generalPoints - totalTeamAwardPoints;
+  }, [generalPoints, totalTeamAwardPoints]);
+
   return (
     <HeaderAutonomyWrapper>
       <img src={headerImage} alt="" title="" />
       <div>
         <TextDistributeWrapper>
           <TotalPointsToDistributeText>
-            {`TOTAL PONTOS ${establishmentType} PARA DISTRIBUIR ${formatPoints(
-              totalPoints,
-            )}`}
+            {totalPointsText}
           </TotalPointsToDistributeText>
           <p>
             Defina como deseja utilizar seus e pontos. Eles podem ser
@@ -59,17 +75,6 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
         </TextDistributeWrapper>
         <InputsWrapper>
           <BoxInput>
-            <h2>PONTOS EQUIPE</h2>
-            <span>Pontos para distribuir</span>
-            <PointsInput
-              value={totalTeamAwardPoints}
-              onChange={onSetTeamAwardPoints}
-              component={DistributeInput}
-              maxLength={generalPoints - totalResaleCooperativePoints}
-              disabled={isAllowedToEdit}
-            />
-          </BoxInput>
-          <BoxInput>
             <h2>PONTOS {establishmentType}</h2>
             <span>Pontos para distribuir</span>
 
@@ -77,8 +82,18 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
               value={totalResaleCooperativePoints}
               onChange={onSetResaleCooperativePoints}
               component={DistributeInput}
-              maxLength={generalPoints - totalTeamAwardPoints}
-              disabled={isAllowedToEdit}
+              maxLength={resaleCooperativeMaxLength}
+            />
+          </BoxInput>
+          <BoxInput>
+            <h2>PONTOS EQUIPE</h2>
+            <span>Pontos para distribuir</span>
+
+            <PointsInput
+              value={totalTeamAwardPoints}
+              onChange={onSetTeamAwardPoints}
+              component={DistributeInput}
+              maxLength={teamAwardsMaxLength}
             />
           </BoxInput>
         </InputsWrapper>

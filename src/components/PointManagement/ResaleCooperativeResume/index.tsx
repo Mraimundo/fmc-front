@@ -5,10 +5,8 @@ import { formatPoints } from 'util/points';
 import {
   Wrapper,
   TotalPointsResume,
-  ResumeTableWrapper,
-  ResumeTableTitle,
-  ResumeTable,
 } from './styles';
+import TableResume from './TableResume';
 
 interface ResaleCooperativeResumeProps {
   totalPoints: number;
@@ -34,32 +32,16 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
       <div>
         <h2>PONTOS PARA RESGATE DA {establishmentType}</h2>
         <TotalPointsResume>
-          {formatPoints(resaleCooperativeTotalPoints)}
+          {formatPoints(resaleCooperativeTotalPoints)} PONTOS
         </TotalPointsResume>
       </div>
-      <ResumeTableWrapper>
-        <ResumeTableTitle>Resumo</ResumeTableTitle>
-        <ResumeTable>
-          <li>
-            <span>TOTAL PARA {establishmentType}</span>
-            <span>{formatPoints(totalPoints)}</span>
-          </li>
-          <li>
-            <span>DESCONTO DE DUPLICATA</span>
-            <span>
-              {maxInvoicePercentage
-                ? `${formatPoints(
-                    invoicePoints,
-                  )} (máx. ${maxInvoicePercentage}%)`
-                : 'não permitido'}
-            </span>
-          </li>
-          <li>
-            <span>MARKETPLACE</span>
-            <span>{formatPoints(marketplacePoints)}</span>
-          </li>
-        </ResumeTable>
-      </ResumeTableWrapper>
+      <TableResume
+        establishmentType={establishmentType}
+        invoicePoints={invoicePoints}
+        marketplacePoints={marketplacePoints}
+        maxInvoicePercentage={maxInvoicePercentage}
+        totalPoints={totalPoints}
+      />
     </Wrapper>
   );
 };

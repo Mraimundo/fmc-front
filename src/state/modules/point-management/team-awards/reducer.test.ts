@@ -4,17 +4,15 @@ import reducer, { initialState } from './reducer';
 import * as actions from './actions';
 import {
   scoreParticipant,
-  // assignPoints,
   scoreAllParticipantsEqually,
   toggleSubsidiarySelection,
   setSelectedRolesAll,
-  // selectAllParticipants,
   deselectAllParticipants,
   migrateWaitingScoredToScored,
   selectAllParticipantsByRole,
   toggleSelectedParticipant,
 } from './utils';
-import state, {
+import {
   error,
   subsidiaries,
   roles,
@@ -344,40 +342,6 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     expect(reducer(undefined, actions.removeAllScores())).to.be.deep.equal({
       ...initialState,
       scoredParticipants: null,
-    });
-  });
-
-  it('should can handle DISTRIBUTE_POINTS_ACTION', () => {
-    const result = reducer(undefined, actions.distributePoints());
-
-    expect(result).to.be.deep.equal({
-      ...initialState,
-      distributePoints: {
-        isFetching: true,
-      },
-    });
-  });
-
-  it('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
-    const result = reducer(undefined, actions.distributePointsFailure(error));
-
-    expect(result).to.be.deep.equal({
-      ...initialState,
-      distributePoints: {
-        isFetching: false,
-        error,
-      },
-    });
-  });
-
-  it('should can handle DISTRIBUTE_POINTS_SUCCESS', () => {
-    const result = reducer(undefined, actions.distributePointsSuccess());
-
-    expect(result).to.be.deep.equal({
-      ...initialState,
-      distributePoints: {
-        isFetching: false,
-      },
     });
   });
 });

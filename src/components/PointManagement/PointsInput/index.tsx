@@ -13,7 +13,7 @@ interface Props {
 }
 const PointsInput: React.FC<Props> = ({
   component,
-  placeholder = 'R$ 0,00',
+  placeholder = '0,00',
   onChange,
   value,
   maxLength = null,
@@ -37,7 +37,7 @@ const PointsInput: React.FC<Props> = ({
       onValueChange={handleChange}
       isAllowed={(props: NumberFormatValues) => {
         const { formattedValue, floatValue } = props;
-        if (!maxLength || !floatValue || !formattedValue) return true;
+        if (maxLength === null || !floatValue || !formattedValue) return true;
 
         return floatValue <= maxLength * 100;
       }}

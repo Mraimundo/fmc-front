@@ -188,7 +188,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
 
     it('should return participant where participant id be inside scored rule', () => {
       expect(getParticipantByScoredRule(scoredParticipants, 3)).to.be.equal(
-        scoredParticipants[1],
+        scoredParticipants[2],
       );
     });
 
@@ -211,7 +211,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
     });
 
     it('should return a correct points with waiting scored participants', () => {
-      const waitingScoredParticipants = [scoredParticipants[1]];
+      const waitingScoredParticipants = [scoredParticipants[2]];
       expect(
         getParticipantScore(waitingScoredParticipants, null, 3),
       ).to.be.equal(21);
@@ -297,7 +297,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
       ).to.be.deep.equal([
         { ...participant, points: 10 },
         {
-          ...scoredParticipants[2],
+          ...scoredParticipants[1],
           points: 500,
         },
       ]);
@@ -480,10 +480,6 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
   describe('extractIdAndPointsFromScoredParticipants', () => {
     it('should be a function', () => {
       expect(extractIdAndPointsFromScoredParticipants).to.be.a('function');
-    });
-
-    it('should return null when dont have scored participants', () => {
-      expect(extractIdAndPointsFromScoredParticipants(null)).to.be.null;
     });
 
     it('should return array with id and value', () => {

@@ -8,6 +8,10 @@ export const List = styled.ul`
   margin: 23px;
   display: flex;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 1200px) {
+    margin: 1em 0 1.5em;
+  }
 `;
 
 export const SubsidiaryItem = styled.li`

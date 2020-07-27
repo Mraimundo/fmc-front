@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background-color: #fff;
   padding: 1em;
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1199px) {
     font-size: 12px;
   }
 `;
@@ -20,6 +20,19 @@ export const Tabs = styled(TabsRT)`
 export const List = styled(TabList)`
   margin: 0;
   border: none;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+
+    > li {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 
   > li {
     padding: 0.8em 2.5em;
@@ -49,8 +62,12 @@ export const Panel = styled(TabPanel)`
   background-color: #fff;
   display: none;
 
-  &[class$="selected"] {
+  &[class$='selected'] {
     display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+    border-radius: 0 0 10px 10px;
   }
 `;
 
@@ -58,6 +75,11 @@ export const TeamAwardsWrapper = styled.div`
   padding: 2em;
   border: 1.1px solid #193f4e;
   border-radius: 0 10px 10px 10px;
+  height: 100%;
+
+  @media screen and (max-width: 768px) {
+    border-radius: 0 0 10px 10px;
+  }
 `;
 
 export const TeamAwardsResumeWrapper = styled.div`
@@ -65,4 +87,49 @@ export const TeamAwardsResumeWrapper = styled.div`
   border: 1.1px solid #193f4e;
   border-radius: 10px;
   height: 100%;
+`;
+
+const simpleColspanCalc = (span: number) => `${(100 * span) / 12}%`;
+
+export const Row = styled.div`
+  display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+`;
+
+export const ParticipantsCol = styled.div`
+  margin-right: 0.5em;
+  width: ${simpleColspanCalc(9)};
+
+  @media screen and (max-width: 1599px) {
+    width: ${simpleColspanCalc(8)};
+  }
+
+  @media screen and (max-width: 1199px) {
+    width: ${simpleColspanCalc(7)};
+  }
+
+  @media screen and (max-width: 768px) {
+    width: ${simpleColspanCalc(12)};
+    margin-right: 0;
+    margin-bottom: 0.5em;
+  }
+`;
+
+export const ResumeCol = styled.div`
+  width: ${simpleColspanCalc(3)};
+
+  @media screen and (max-width: 1599px) {
+    width: ${simpleColspanCalc(4)};
+  }
+
+  @media screen and (max-width: 1199px) {
+    width: ${simpleColspanCalc(5)};
+  }
+
+  @media screen and (max-width: 768px) {
+    width: ${simpleColspanCalc(12)};
+  }
 `;

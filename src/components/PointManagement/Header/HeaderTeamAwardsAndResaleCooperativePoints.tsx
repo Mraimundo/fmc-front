@@ -28,12 +28,12 @@ const HeaderTeamAwardsAndResaleCooperativePoints: React.FC<Props> = ({
         <BoxPoints type="resaleCooperative">
           <PointsText>{`TOTAL ${establishmentType} ${formatPoints(
             resaleCooperativePoints,
-          )}`}</PointsText>
+          )} PONTOS`}</PointsText>
         </BoxPoints>
         <BoxPoints type="teamAwards">
           <PointsText>{`TOTAL PREMIAÇÃO EQUIPE ${formatPoints(
             teamAwardsPoints,
-          )}`}</PointsText>
+          )} PONTOS`}</PointsText>
         </BoxPoints>
       </WrapperBoxPoints>
     </HeaderImageWrapper>

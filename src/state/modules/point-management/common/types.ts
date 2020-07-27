@@ -1,9 +1,12 @@
 export type PointsToDistribute = {
   general: number | null;
+  generalPointId: number | null;
   teamAwards: {
+    pointId: number | null;
     points: number;
   } | null;
   resaleCooperative: {
+    pointId: number | null;
     points: number;
     maxInvoicePercentage: number;
   } | null;

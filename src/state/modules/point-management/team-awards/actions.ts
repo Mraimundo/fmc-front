@@ -25,7 +25,7 @@ export const fetchSubsidiariesFailure = (
   };
 
 export const fetchSubsidiariesSuccess = (
-  subsidiaries: Subsidiary[],
+  subsidiaries: Subsidiary[] | null,
 ): ActionCreatorPayload<
   typeof constants.FETCH_SUBSIDIARIES_SUCCESS,
   Pick<TeamAwardsState, 'subsidiaries'>
@@ -227,30 +227,6 @@ export const removeAllScores = (): ActionCreator<
     type: constants.REMOVE_ALL_SCORES,
   };
 
-export const distributePoints = (): ActionCreator<
-  typeof constants.DISTRIBUTE_POINTS_ACTION
-> =>
-  <const>{
-    type: constants.DISTRIBUTE_POINTS_ACTION,
-  };
-
-export const distributePointsFailure = (
-  error: string,
-): ActionCreatorFailure<typeof constants.DISTRIBUTE_POINTS_FAILURE> =>
-  <const>{
-    type: constants.DISTRIBUTE_POINTS_FAILURE,
-    payload: {
-      error,
-    },
-  };
-
-export const distributePointsSuccess = (): ActionCreator<
-  typeof constants.DISTRIBUTE_POINTS_SUCCESS
-> =>
-  <const>{
-    type: constants.DISTRIBUTE_POINTS_SUCCESS,
-  };
-
 export type TeamAwardsActions = ReturnType<
   | typeof fetchSubsidiaries
   | typeof fetchSubsidiariesFailure
@@ -277,7 +253,4 @@ export type TeamAwardsActions = ReturnType<
   | typeof deselectAllParticipants
   | typeof toggleSelectedParticipant
   | typeof removeAllScores
-  | typeof distributePoints
-  | typeof distributePointsFailure
-  | typeof distributePointsSuccess
 >;

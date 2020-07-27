@@ -25,9 +25,6 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
 } from './constants';
 
 describe('src/state/modules/point-management/team-awards/constants', () => {
@@ -329,42 +326,6 @@ describe('src/state/modules/point-management/team-awards/constants', () => {
     it('should return correct value', () => {
       expect(REMOVE_ALL_SCORES).to.be.equal(
         '@fmc/point-management/team-awards/REMOVE_ALL_SCORES',
-      );
-    });
-  });
-
-  describe('DISTRIBUTE_POINTS_ACTION', () => {
-    it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_ACTION).to.be.a('string');
-    });
-
-    it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_ACTION).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_ACTION',
-      );
-    });
-  });
-
-  describe('DISTRIBUTE_POINTS_FAILURE', () => {
-    it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_FAILURE).to.be.a('string');
-    });
-
-    it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_FAILURE).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_FAILURE',
-      );
-    });
-  });
-
-  describe('DISTRIBUTE_POINTS_SUCCESS', () => {
-    it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.a('string');
-    });
-
-    it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_SUCCESS',
       );
     });
   });

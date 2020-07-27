@@ -1,12 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Button from 'components/shared/Button';
-import { getTotalPointsResaleCooperative } from 'state/modules/point-management/common/selectors';
+import {
+  getTotalPointsResaleCooperative,
+  getFinishedDistribution,
+} from 'state/modules/point-management/common/selectors';
+import { distributePoints } from 'state/modules/point-management/common/actions';
 import {
   getMarketplacePoints,
   getInvoicePoints,
   getMaxInvoicePercentage,
+  getIsEnabledToRescue,
 } from 'state/modules/point-management/resale-cooperative/selectors';
 import {
   setMarketplacePoints,
@@ -15,9 +19,10 @@ import {
 import { EstablishmentType } from 'state/modules/point-management/common/types';
 
 import ResaleCooperativeResume from './ResaleCooperativeResume';
+import Congrats from './ResaleCooperativeResume/Congrats';
 import MarketplacePoints from './MarketplacePoints';
 import InvoicePoints from './InvoicePoints';
-import { WrapperPoints } from './styles';
+import { WrapperPoints, RescueResaleCooperativeButton } from './styles';
 
 interface ResaleCooperativePointsTabContentProps {
   establishmentType: EstablishmentType | '';
@@ -30,11 +35,15 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     marketplacePoints,
     invoicePoints,
     maxInvoicePercentage,
+    isEnabledToRescue,
+    finishedDistribution,
   ] = [
     useSelector(getTotalPointsResaleCooperative),
     useSelector(getMarketplacePoints),
     useSelector(getInvoicePoints),
     useSelector(getMaxInvoicePercentage),
+    useSelector(getIsEnabledToRescue),
+    useSelector(getFinishedDistribution),
   ];
 
   const dispatch = useDispatch();
@@ -61,13 +70,24 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
 
   return (
     <div>
-      <ResaleCooperativeResume
-        totalPoints={totalPointsResaleCooperative}
-        marketplacePoints={marketplacePoints || 0}
-        invoicePoints={invoicePoints || 0}
-        maxInvoicePercentage={maxInvoicePercentage || 0}
-        establishmentType={establishmentType}
-      />
+      {!finishedDistribution && (
+        <ResaleCooperativeResume
+          totalPoints={totalPointsResaleCooperative}
+          marketplacePoints={marketplacePoints || 0}
+          invoicePoints={invoicePoints || 0}
+          maxInvoicePercentage={maxInvoicePercentage || 0}
+          establishmentType={establishmentType}
+        />
+      )}
+      {finishedDistribution && (
+        <Congrats
+          totalPoints={totalPointsResaleCooperative}
+          marketplacePoints={marketplacePoints || 0}
+          invoicePoints={invoicePoints || 0}
+          maxInvoicePercentage={maxInvoicePercentage || 0}
+          establishmentType={establishmentType}
+        />
+      )}
       <WrapperPoints>
         <MarketplacePoints
           marketplacePoints={marketplacePoints || 0}
@@ -81,13 +101,16 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           maxLength={maxLengthInvoicePoints}
         />
       </WrapperPoints>
-      <Button
-        buttonRole="tertiary"
-        type="button"
-        onClick={() => console.log('click')}
-      >
-        RESGATAR PREMIAÇÃO
-      </Button>
+      {!finishedDistribution && (
+        <RescueResaleCooperativeButton
+          buttonRole="tertiary"
+          type="button"
+          disabled={!isEnabledToRescue}
+          onClick={() => dispatch(distributePoints())}
+        >
+          RESGATAR PREMIAÇÃO
+        </RescueResaleCooperativeButton>
+      )}
     </div>
   );
 };

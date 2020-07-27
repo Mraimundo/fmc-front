@@ -1,21 +1,22 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 import { Tab, TabPanel } from 'react-tabs';
 
 import { useToast } from 'context/ToastContext';
-import {
-  Header,
-  ResaleCooperativePointsTabContent,
-  TeamAwardsTabContent,
-  ResumeDistribution,
-} from 'components/PointManagement';
-import EstablishmentSelection from 'components/PointManagement/EstablishmentSelection';
 import {
   fetchEstablishments,
   setSelectedEstablishment,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
+import { Establishment } from 'state/modules/point-management/common/types';
+import {
+  Header,
+  ResaleCooperativePointsTabContent,
+  TeamAwardsTabContent,
+  ResumeDistribution,
+  EstablishmentSelection,
+} from 'components/PointManagement';
 import {
   Wrapper,
   Panel,
@@ -23,8 +24,10 @@ import {
   Tabs,
   TeamAwardsWrapper,
   TeamAwardsResumeWrapper,
+  Row,
+  ResumeCol,
+  ParticipantsCol,
 } from './styles';
-import { Establishment } from 'state/modules/point-management/common/types';
 
 const PointManagement: React.FC = () => {
   const [
@@ -34,6 +37,8 @@ const PointManagement: React.FC = () => {
     isResaleCooperativePointsOnly,
     fetchPointsToDistribute,
     establishmentType,
+    distributePoints,
+    finishedDistribution,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
@@ -41,16 +46,31 @@ const PointManagement: React.FC = () => {
     useSelector(selectors.getIsResaleCooperativePointsOnly),
     useSelector(selectors.getFetchPointsToDistribute),
     useSelector(selectors.getEstablishmentType),
+    useSelector(selectors.getDistributePoints),
+    useSelector(selectors.getFinishedDistribution),
   ];
 
   const dispatch = useDispatch();
   const { addToast } = useToast();
 
   const { error } = fetchPointsToDistribute;
+  const { error: errorOnDistribute } = distributePoints;
 
   useEffect(() => {
     if (error) addToast({ title: error, type: 'info' });
   }, [error, addToast]);
+
+  useEffect(() => {
+    if (errorOnDistribute) addToast({ title: errorOnDistribute, type: 'info' });
+  }, [errorOnDistribute, addToast]);
+
+  useEffect(() => {
+    if (finishedDistribution)
+      addToast({
+        title: 'Parabéns, você finalizou a distribuição de pontos!',
+        type: 'success',
+      });
+  }, [finishedDistribution, addToast]);
 
   useEffect(() => {
     dispatch(fetchEstablishments());
@@ -91,16 +111,16 @@ const PointManagement: React.FC = () => {
             {!isResaleCooperativePointsOnly && (
               <TabPanel>
                 <Row>
-                  <Col md={9}>
+                  <ParticipantsCol>
                     <TeamAwardsWrapper>
                       <TeamAwardsTabContent />
                     </TeamAwardsWrapper>
-                  </Col>
-                  <Col md={3}>
+                  </ParticipantsCol>
+                  <ResumeCol>
                     <TeamAwardsResumeWrapper>
                       <ResumeDistribution />
                     </TeamAwardsResumeWrapper>
-                  </Col>
+                  </ResumeCol>
                 </Row>
               </TabPanel>
             )}
