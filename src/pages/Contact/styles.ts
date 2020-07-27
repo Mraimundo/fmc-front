@@ -23,7 +23,7 @@ export const Content = styled.div`
 
   > h3 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 35px 0 20px 25px;
   }
@@ -45,7 +45,7 @@ export const BoxTickets = styled.div`
   margin-top: 35px;
   > h3 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;
   }

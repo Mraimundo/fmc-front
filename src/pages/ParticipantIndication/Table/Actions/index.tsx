@@ -108,7 +108,7 @@ const Actions: React.FC<Props> = ({
                 personalData.status !== PRECHARGE
               }
             >
-              Reenviar email
+              Reenviar E-mail
             </Button>
           </ActionsBox>
         )}

@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   > h4 {
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 20px 35px;
   }
@@ -53,7 +53,7 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
   border: 1px solid ${({ theme }) => theme.font.color.primary};
   border-radius: 50%;
   background: transparent;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 20px;
   color: ${({ theme }) => theme.font.color.primary};
   cursor: pointer;
@@ -91,7 +91,7 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
                 position: absolute;
                 color: green;
                 font-size: 15px;
-                font-weight: bold;
+                font-family: ${({ theme }) => theme.font.fontFamily.bold};
                 transform: scaleX(-1) rotate(-35deg);
                 top: -6px;
                 left: 2px;
@@ -103,7 +103,7 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
                 position: absolute;
                 color: red;
                 font-size: 13px;
-                font-weight: bold;
+                font-family: ${({ theme }) => theme.font.fontFamily.bold};
                 top: -3px;
                 left: 1px;
               }
@@ -149,7 +149,7 @@ export const Asnwers = styled.div`
       &::after {
         content: 'L';
         font-size: 22px;
-        font-weight: bold;
+        font-family: ${({ theme }) => theme.font.fontFamily.bold};
         position: absolute;
         color: #fff;
         transform: scaleX(-1) rotate(-35deg);

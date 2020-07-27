@@ -1,25 +1,20 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+import background from 'assets/images/background.svg';
+import backgroundHeader from 'assets/images/background-header.svg';
 
 export const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
-
-  > img {
-    width: 260px;
-    margin: 15px 0;
-  }
+  background: url(${background});
+  background-size: cover;
 `;
 
 export const Content = styled(animated.div)`
-  width: 720px;
+  width: 100%;
+  max-width: 997px;
   background: #fff;
   padding: 20px 30px;
 
@@ -38,35 +33,33 @@ export const contentAnimation = {
   to: { marginRight: '0', opacity: 1 },
 };
 
+export const RegulationContent = styled.div`
+  max-height: calc(100% - 161px);
+`;
+
 export const RegulationContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: url(${background});
 
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
-
-  > img {
-    width: 240px;
-    margin-top: 20px;
-  }
-
-  > div {
-    max-width: 800px;
-  }
-
-  button {
-    height: 45px;
-    text-transform: uppercase;
-    font-weight: 700;
+  ${RegulationContent} {
+    max-width: 1100px;
   }
 `;
 
-export const RegulationContent = styled.div`
-  max-height: calc(100% - 94px);
+export const Header = styled.div`
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 161px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(${backgroundHeader});
+  > img {
+    width: 364px;
+  }
 `;

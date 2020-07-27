@@ -1,3 +1,5 @@
+import { FONTS } from 'styles/font/globals';
+
 export default {
   color: {
     primary: '#2a4207',
@@ -5,4 +7,5 @@ export default {
     tertiary: '#fff',
     quartenary: '#808285',
   },
+  fontFamily: { ...FONTS },
 };

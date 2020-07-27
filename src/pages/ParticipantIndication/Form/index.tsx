@@ -146,7 +146,7 @@ const Form: React.FC<Props> = ({
                   inputRole={inputRole}
                 />
               </BoxPhone>
-              <Input name="email" label="Email*" inputRole={inputRole} />
+              <Input name="email" label="E-mail*" inputRole={inputRole} />
               <Button type="submit" buttonRole="tertiary" loading={loading}>
                 Salvar
               </Button>

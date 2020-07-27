@@ -25,7 +25,7 @@ export const SubTitle = styled.h3`
   margin-bottom: 12px;
   font-size: 20px;
   margin-left: 12px;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   color: ${({ theme }) => theme.font.color.primary};
 `;
 

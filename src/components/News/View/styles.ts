@@ -6,14 +6,14 @@ export const Container = styled.div`
 
   > h3 {
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
   }
 
   > h4 {
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 5px;
     margin-left: 25px;

@@ -13,7 +13,7 @@ export const Container = styled.div`
     border: 1px solid ${({ theme }) => theme.font.color.primary};
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@ export const Container = styled.div`
 
     h3 {
       font-size: 21px;
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       color: ${({ theme }) => theme.font.color.primary};
       margin: 1px 0 2px 0;
     }

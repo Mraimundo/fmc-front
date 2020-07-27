@@ -128,13 +128,13 @@ const ParticipantIndication: React.FC = () => {
       try {
         await resendIndicationEmail(indicationId);
         addToast({
-          title: 'Indicação reenviada no email do participante com sucesso',
+          title: 'Indicação reenviada no E-mail do participante com sucesso',
         });
       } catch (e) {
         addToast({
           title:
             e.response?.data?.message ||
-            'Falha no reenvio do email. Por favor entre em contato com o suporte',
+            'Falha no reenvio do E-mail. Por favor entre em contato com o suporte',
           type: 'error',
         });
       }

@@ -49,7 +49,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
 
       font-size: 14px;
       color: ${({ theme }) => theme.font.color.quartenary};
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
     }
 
     div {
@@ -90,7 +90,7 @@ export const GridHeader = styled.div`
     align-items: center;
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     &:nth-child(3) {
       justify-self: center;
     }

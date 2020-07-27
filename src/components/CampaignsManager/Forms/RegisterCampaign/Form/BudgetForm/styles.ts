@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin-top: 10px;
   > h4 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
     margin-bottom: 12px;
     margin-top: 30px;
@@ -14,7 +14,7 @@ export const Container = styled.div`
 
   > h5 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 18px;
     margin-top: 35px;
     margin-bottom: 8px;
@@ -40,7 +40,7 @@ export const Box = styled.div`
     margin-left: 10px;
     flex: 1;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
   }
 

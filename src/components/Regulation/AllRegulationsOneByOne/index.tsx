@@ -11,7 +11,14 @@ import {
 } from 'services/register/regulation';
 import Loading from './Loading';
 
-import { Container, Content, RegulationContent, Button, Modal } from './styles';
+import {
+  Container,
+  Content,
+  RegulationContent,
+  Button,
+  Modal,
+  Header,
+} from './styles';
 
 const AllRegulationsOneByOne: React.FC = () => {
   const { addToast } = useToast();
@@ -94,7 +101,9 @@ const AllRegulationsOneByOne: React.FC = () => {
   return (
     <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
       <Container>
-        <img src={logoImg} alt="Logo" />
+        <Header>
+          <img src={logoImg} alt="Logo" />
+        </Header>
         <Content>
           {loading ? (
             <RegulationContent

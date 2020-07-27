@@ -33,7 +33,7 @@ export const Container = styled.div`
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.primary};
   font-size: 24px;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   margin-bottom: 12px;
 `;
 

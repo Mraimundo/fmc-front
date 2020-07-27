@@ -47,7 +47,7 @@ export const Content = styled.div`
   > h3 {
     width: 335px;
     font-size: 28px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
   }
 
@@ -61,7 +61,7 @@ export const Content = styled.div`
     width: 335px;
     margin-top: 25px;
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
   }
 `;

@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   > h4 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
     margin-bottom: 8px;
   }
@@ -36,7 +36,7 @@ export const Content = styled.div`
     > span {
       text-transform: uppercase;
       color: ${({ theme }) => theme.font.color.quartenary};
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       font-size: 21px;
       margin-left: 20px;
     }

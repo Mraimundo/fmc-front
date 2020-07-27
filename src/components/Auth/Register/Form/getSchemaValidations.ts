@@ -9,7 +9,7 @@ const mandatoryMessage = 'Campo obrigatório';
 const commomValidations = {
   nick_name: Yup.string().required(mandatoryMessage),
   name: Yup.string().required(mandatoryMessage),
-  email: Yup.string().required(mandatoryMessage).email('Email inválido'),
+  email: Yup.string().required(mandatoryMessage).email('E-mail inválido'),
   cpf: Yup.string()
     .required(mandatoryMessage)
     .test('valid-cpf', 'CPF inválido', validateCpf),

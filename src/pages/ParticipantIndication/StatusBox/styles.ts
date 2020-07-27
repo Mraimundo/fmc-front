@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   > h3 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     text-transform: uppercase;
     margin-right: 10px;
@@ -82,7 +82,7 @@ export const StatusIndicator = styled.div<StatusIndicatorProps>`
       content: "${({ percentActivated }) => percentActivated}%";
       position: absolute;
       color: ${({ theme }) => theme.font.color.primary};
-      font-weight: 900;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       top: -20px;
       left: 50%;
       transform: translateX(-50%);

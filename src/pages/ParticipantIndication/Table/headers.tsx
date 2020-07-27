@@ -33,7 +33,7 @@ export default ({
     dataValue: 'profile',
   },
   {
-    column: 'Email',
+    column: 'E-mail',
     dataValue: 'email',
   },
   {

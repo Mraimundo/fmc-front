@@ -34,7 +34,7 @@ export const MiniBox = styled(Link)`
 
   h3 {
     font-size: 16px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }

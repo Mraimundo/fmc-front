@@ -13,7 +13,7 @@ export const Container = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   width: 86px;
   height: 29px;
 

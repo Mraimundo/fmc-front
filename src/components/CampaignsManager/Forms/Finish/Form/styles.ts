@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   > h4 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
     margin-bottom: 12px;
     margin-top: 35px;
@@ -51,7 +51,7 @@ export const MessageBox = styled.div<MessageBoxProps>`
     width: 100%;
     font-size: 15px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   p {

@@ -19,6 +19,7 @@ import {
   contentAnimation,
   RegulationContainer,
   RegulationContent,
+  Header,
 } from './styles';
 
 const FirstAccess: React.FC = () => {
@@ -92,7 +93,9 @@ const FirstAccess: React.FC = () => {
     <>
       {!hasAcceptedDataRegulation ? (
         <RegulationContainer>
-          <img src={logoImg} alt="Logo" />
+          <Header>
+            <img src={logoImg} alt="Logo" />
+          </Header>
           <RegulationContent>
             <DataRegulation
               onAccept={onAcceptRegulation}
@@ -103,7 +106,9 @@ const FirstAccess: React.FC = () => {
       ) : (
         !!participant && (
           <Container>
-            <img src={logoImg} alt="Logo" />
+            <Header>
+              <img src={logoImg} alt="Logo" />
+            </Header>
             <Content style={props}>
               <Form
                 participant={participant}

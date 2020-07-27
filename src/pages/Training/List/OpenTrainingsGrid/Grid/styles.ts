@@ -36,7 +36,7 @@ export const MiniBox = styled.div`
 
   h3 {
     font-size: 16px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 4px 0 2px 0;
   }
@@ -66,7 +66,7 @@ export const MiniBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-top: 10px;
 
     background-position: center;

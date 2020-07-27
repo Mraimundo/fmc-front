@@ -26,7 +26,7 @@ export const Content = styled.div`
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 24px;
     margin-left: 35px;
     margin-bottom: 15px;

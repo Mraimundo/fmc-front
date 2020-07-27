@@ -9,7 +9,7 @@ export const Container = styled.div`
 
   > h4 {
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 30px;
     margin-bottom: 10px;
@@ -47,7 +47,7 @@ export const ProductDetails = styled.div`
 
   > h5 {
     font-size: 16px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     padding-right: 18px;
     flex: 1;
@@ -73,7 +73,7 @@ export const ProductDetails = styled.div`
 
     > h3 {
       flex: 1;
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       font-size: 16px;
       color: ${({ theme }) => theme.font.color.quartenary};
     }

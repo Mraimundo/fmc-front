@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Button as DefaultButton } from 'components/shared';
 import DefaultModal from 'components/shared/Modal';
 import { darken, lighten, shade } from 'polished';
+import background from 'assets/images/background.svg';
+import backgroundHeader from 'assets/images/background-header.svg';
 
 interface RegulationProps {
   type: 'primary' | 'secondary';
@@ -11,23 +13,8 @@ export const RegulationContent = styled.div<RegulationProps>`
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 20px;
+  padding: 50px 90px;
   overflow-y: auto;
-
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarBackgroundColor};
-  }
-  padding-right: 12px;
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarColor};
-  }
 `;
 
 export const Button = styled(DefaultButton)`
@@ -47,18 +34,19 @@ export const Modal = styled(DefaultModal)`
   }
 `;
 
+export const Content = styled.div`
+  max-height: calc(100% - 161px);
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
+  background: url(${background});
 
   > img {
     width: 320px;
@@ -66,19 +54,20 @@ export const Container = styled.div`
     margin-bottom: 18px;
   }
 
-  > div {
-    max-width: 800px;
+  ${Content} {
+    max-width: 1100px;
     width: 100%;
   }
 
   button {
-    height: 45px;
+    height: 48px;
     text-transform: uppercase;
-    font-weight: 700;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     background-color: #dd0022;
-    width: 280px;
+    width: 275px;
     align-self: center;
     margin-bottom: 65px;
+    font-size: 18px;
 
     &:hover {
       background: ${shade(0.2, '#dd0022')}
@@ -98,8 +87,16 @@ export const Container = styled.div`
   }
 `;
 
-export const Content = styled.div`
-  max-height: calc(100% - 136px);
+export const Header = styled.div`
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 161px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url(${backgroundHeader});
+  > img {
+    width: 364px;
+  }
 `;

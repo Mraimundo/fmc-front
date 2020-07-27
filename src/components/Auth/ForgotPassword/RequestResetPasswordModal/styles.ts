@@ -22,7 +22,7 @@ export const Container = styled.div`
       width: 160px;
       height: 40px;
       text-transform: uppercase;
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       margin-top: 26px;
     }
 
@@ -40,7 +40,7 @@ export const Container = styled.div`
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.primary};
   font-size: 22px;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   margin-bottom: 18px;
 `;
 

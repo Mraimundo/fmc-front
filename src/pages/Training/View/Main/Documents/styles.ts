@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding-left: 35px;
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-bottom: 15px;
     font-size: 24px;
   }

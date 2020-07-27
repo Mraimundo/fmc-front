@@ -44,7 +44,7 @@ export const MessageBox = styled.div<MessageBoxProps>`
     width: 100%;
     font-size: 15px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   p {
