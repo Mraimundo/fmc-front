@@ -103,7 +103,7 @@ const Form: React.FC<Props> = ({ sendMessage, contactId }) => {
               {fileUrl !== '' ? (
                 <>Arquivo anexado</>
               ) : (
-                <>{attachingFile ? 'Carregando ... ' : 'Anexar um arquivo'}</>
+                <>{attachingFile ? 'Carregando ... ' : 'Anexar arquivo'}</>
               )}
             </button>
           </label>

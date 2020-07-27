@@ -8,8 +8,15 @@ export const Container = styled.form`
 
   > button {
     margin-left: 20px;
-    width: 200px;
-    height: 45px;
+    width: 137px;
+    height: 36px;
+  }
+
+  ._inputContainer {
+    height: 52px;
+    textarea {
+      overflow-y: auto;
+    }
   }
 `;
 
@@ -20,13 +27,13 @@ export const BoxText = styled.div`
   > label {
     button {
       background: transparent;
-      text-decoration: none;
+      text-decoration: underline;
       border: none;
       align-items: flex-start;
       justify-content: flex-start;
       margin-top: 0;
-      color: ${({ theme }) => theme.font.color.primary};
-      font-size: 10px;
+      color: ${({ theme }) => theme.font.color.quartenary};
+      font-size: 14px;
     }
 
     input {

@@ -112,7 +112,7 @@ export const EyeContainer = styled(IconContainer)<ErrorProps>`
 `;
 
 export const Label = styled.span<LabelProps>`
-  font-size: 14px;
+  font-size: 16px;
   align-self: flex-start;
   color: ${({ theme, inputRole }) => theme.input[inputRole].labelFontColor};
 `;

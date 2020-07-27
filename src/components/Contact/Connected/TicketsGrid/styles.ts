@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ReactSVG } from 'react-svg';
 
 export const Container = styled.div`
   width: 100%;
@@ -32,7 +33,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
     background: #efefef;
     width: 100%;
     display: grid;
-    grid-template-columns: 150px auto 80px 80px;
+    grid-template-columns: 150px auto 155px 80px;
     padding: 25px 20px;
     cursor: pointer;
 
@@ -81,7 +82,7 @@ export const TicketGrid = styled.div<TicketGridProps>`
 
 export const GridHeader = styled.div`
   display: grid;
-  grid-template-columns: 170px auto 85px 80px;
+  grid-template-columns: 170px auto 160px 80px;
   width: 100%;
   padding-right: 20px;
 
@@ -95,4 +96,17 @@ export const GridHeader = styled.div`
       justify-self: center;
     }
   }
+`;
+
+interface IconProps {
+  defaultcolor?: boolean;
+}
+export const Icon = styled(ReactSVG)<IconProps>`
+  ${({ defaultcolor, theme }) =>
+    defaultcolor &&
+    css`
+      path {
+        fill: ${theme.font.color.primary};
+      }
+    `}
 `;

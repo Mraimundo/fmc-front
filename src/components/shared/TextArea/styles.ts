@@ -27,9 +27,9 @@ export const InputContainer = styled.div<InputContainerProps>`
     theme.input[inputRole].backgroundColor};
   border-radius: ${({ theme, inputRole }) =>
     theme.input[inputRole].borderRadius};
-  padding: 0 16px 0 16px;
+  padding: 0 0 0 16px;
   width: 100%;
-  height: 100px;
+  height: 132px;
   display: flex;
   align-items: center;
   border: ${({ theme, inputRole }) => theme.input[inputRole].borderWidth} solid
@@ -69,25 +69,12 @@ export const InputContainer = styled.div<InputContainerProps>`
     resize: none;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-right: 12px;
+    overflow-y: scroll;
 
     &::placeholder {
       color: ${({ theme, inputRole }) =>
         theme.input[inputRole].placeholderColor};
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: ${({ theme, inputRole }) =>
-        theme.input[inputRole].scrollBarBackgroundColor};
-    }
-    padding-right: 12px;
-    &::-webkit-scrollbar {
-      width: 12px;
-    }
-    &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background-color: ${({ theme, inputRole }) =>
-        theme.input[inputRole].scrollBarColor};
     }
   }
 
@@ -107,7 +94,7 @@ export const Error = styled(Tooltip)<ErrorProps>`
 `;
 
 export const Label = styled.span<LabelProps>`
-  font-size: 14px;
+  font-size: 16px;
   align-self: flex-start;
   color: ${({ theme, inputRole }) => theme.input[inputRole].labelFontColor};
 `;

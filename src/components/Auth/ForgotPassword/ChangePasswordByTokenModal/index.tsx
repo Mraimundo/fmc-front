@@ -5,7 +5,12 @@ import changePassword from 'services/auth/password/changePasswordByToken';
 import { PasswordInput, Button } from 'components/shared';
 import * as Yup from 'yup';
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
+import {
+  hasLowerCase,
+  hasNumber,
+  hasUpperCase,
+  hasSpecialCharacteres,
+} from 'util/validations/string';
 
 import { Container, Title, Modal as DefaultModal } from './styles';
 
@@ -44,7 +49,12 @@ const ChangePasswordByTokenModal: React.FC<ModalProps> = ({
         'Deve conter pelo menos uma letra maiúscula',
         hasUpperCase,
       )
-      .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
+      .test('lower-case', 'Deve conter pelo menos um número', hasNumber)
+      .test(
+        'has-special-characteres',
+        'Deve conter pelo menos um desses caracteres (!, $, #, %, @, &)',
+        hasSpecialCharacteres,
+      ),
     password_confirmation: Yup.string()
       .required('Campo obrigatório')
       .oneOf(

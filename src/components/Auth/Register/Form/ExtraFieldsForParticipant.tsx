@@ -4,6 +4,7 @@ import getAddressInfo from 'services/address/getAddressInfoFromZipCode';
 import numbersOnly from 'util/numbersOnly';
 import { useToast } from 'context/ToastContext';
 import {
+  Title,
   Input,
   Separator,
   GraduationSelect,
@@ -51,6 +52,8 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
   return (
     <>
       <Separator />
+
+      <Title>Completar dados - obrigatório para o marketplace</Title>
 
       <GenderSelect name="gender_select" inputRole={inputRole} />
 

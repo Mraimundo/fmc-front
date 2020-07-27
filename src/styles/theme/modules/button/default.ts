@@ -2,7 +2,7 @@ export default {
   primary: {
     backgroundColor: '#193f4e',
     fontColor: '#fff',
-    borderRadius: '7px',
+    borderRadius: '10px',
   },
   secondary: {
     backgroundColor: '#193f4e',

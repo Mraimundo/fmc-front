@@ -10,6 +10,7 @@ const PasswordHelp: React.FC = () => {
         <li>Pelo menos uma letra minúscula</li>
         <li>Pelo menos uma letra maiúscula</li>
         <li>Pelo menos um número</li>
+        <li>{`Pelo menos um dos caracteres (!, $, #, %, @, &)  `}</li>
       </ul>
     </Container>
   );

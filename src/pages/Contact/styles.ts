@@ -44,7 +44,7 @@ export const BoxTickets = styled.div`
   padding: 25px 25px;
   margin-top: 35px;
   > h3 {
-    font-size: 18px;
+    font-size: 24px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;
@@ -56,11 +56,11 @@ export const TicketsGrid = styled(DefaultTicketsGrid)`
 `;
 
 export const Form = styled(DefaultForm)`
-  max-width: 500px;
+  max-width: 435px;
 
   > button {
-    width: 200px;
-    height: 45px;
+    width: 137px;
+    height: 36px;
     align-self: center;
   }
 `;

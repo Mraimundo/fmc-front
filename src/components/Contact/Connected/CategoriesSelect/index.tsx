@@ -15,6 +15,7 @@ const CaterogiesSelect: React.FC<Props> = ({ name, className, subjectId }) => {
       label="Categoria"
       loadItems={() => getPrivateCategoriesForSelect(subjectId)}
       className={className}
+      inputRole="secondary"
     />
   );
 };

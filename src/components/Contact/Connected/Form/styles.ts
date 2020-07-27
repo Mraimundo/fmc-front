@@ -18,13 +18,13 @@ export const Container = styled.form`
   > label {
     button {
       background: transparent;
-      text-decoration: none;
+      text-decoration: underline;
       border: none;
       align-items: flex-start;
       justify-content: flex-start;
-      margin-top: 0;
-      color: ${({ theme }) => theme.font.color.primary};
-      font-size: 10px;
+      margin-top: 2px;
+      color: ${({ theme }) => theme.font.color.quartenary};
+      font-size: 14px;
     }
 
     input {
@@ -35,12 +35,12 @@ export const Container = styled.form`
 
 export const SubjectSelect = styled(DefaultSubjectSelect)`
   ._inputContainer {
-    height: 45px;
+    height: 44px;
   }
 `;
 
 export const CategorySelect = styled(DefaultCategoriesSelect)`
   ._inputContainer {
-    height: 45px;
+    height: 44px;
   }
 `;
