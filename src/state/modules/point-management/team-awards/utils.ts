@@ -266,10 +266,8 @@ export const migrateWaitingScoredToScored = (
 };
 
 export function extractIdAndPointsFromScoredParticipants<T extends unknown>(
-  scoredParticipants: ScoredParticipant[] | null,
-): T | null {
-  if (!scoredParticipants) return null;
-
+  scoredParticipants: ScoredParticipant[],
+): T {
   return scoredParticipants.map(({ id, points: value }) => ({
     id,
     value,

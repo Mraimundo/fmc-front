@@ -15,6 +15,8 @@ import {
   getHasAutonomyToDistribute,
   getIsResaleCooperativeAndTeamAwardPoints,
   getEstablishmentType,
+  getDistributePoints,
+  getFinishedDistribution,
 } from './selectors';
 import commonMock, {
   establishments,
@@ -61,6 +63,14 @@ describe('src/state/modules/point-management/common/selectors', () => {
     it('check getEstablishmentType', () => {
       expect(getEstablishmentType(state)).to.be.equal('Revenda');
     });
+
+    it('check getDistributePoints', () => {
+      expect(getDistributePoints(state)).to.be.equal(commonMock.distributePoints);
+    });
+
+    it('check getFinishedDistribution', () => {
+      expect(getFinishedDistribution(state)).to.be.false;
+    });
   });
 
   describe('getIsResaleCooperativePointsOnly', () => {
@@ -77,6 +87,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: null,
               teamAwards: null,
             },
@@ -96,9 +107,11 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: null,
               teamAwards: {
                 points: 200,
+                pointId: 1,
               },
             },
           },
@@ -117,8 +130,10 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: 6000,
+              generalPointId: 2,
               resaleCooperative: {
                 maxInvoicePercentage: 20,
+                pointId: 1,
                 points: 20,
               },
               teamAwards: null,
@@ -139,7 +154,9 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: {
+                pointId: 1,
                 maxInvoicePercentage: 20,
                 points: 20,
               },
@@ -167,11 +184,14 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: 600,
+              generalPointId: 3,
               resaleCooperative: {
+                pointId: 1,
                 maxInvoicePercentage: 20,
                 points: 20,
               },
               teamAwards: {
+                pointId: 2,
                 points: 60,
               },
             },
@@ -191,7 +211,9 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: 600,
+              generalPointId: 2,
               resaleCooperative: {
+                pointId: 1,
                 maxInvoicePercentage: 20,
                 points: 0,
               },
@@ -213,11 +235,14 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: {
+                pointId: 1,
                 maxInvoicePercentage: 20,
                 points: 0,
               },
               teamAwards: {
+                pointId: 2,
                 points: 50,
               },
             },
@@ -243,12 +268,15 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: {
                 points: 50,
+                pointId: 1,
                 maxInvoicePercentage: 0,
               },
               teamAwards: {
                 points: 50,
+                pointId: 2,
               },
             },
           },
@@ -268,8 +296,10 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: null,
               teamAwards: {
+                pointId: 1,
                 points: 50,
               },
             },
@@ -290,6 +320,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
             ...commonMock,
             pointsToDistribute: {
               general: 210,
+              generalPointId: 1,
               resaleCooperative: null,
               teamAwards: null,
             },
@@ -318,6 +349,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
             totalPointsTeamAwards: 200,
             pointsToDistribute: {
               general: 5000,
+              generalPointId: 1,
               resaleCooperative: null,
               teamAwards: null,
             },
@@ -339,6 +371,51 @@ describe('src/state/modules/point-management/common/selectors', () => {
             totalPointsResaleCooperative: 2500,
             pointsToDistribute: {
               general: 5000,
+              generalPointId: 1,
+              resaleCooperative: null,
+              teamAwards: null,
+            },
+          },
+        },
+      };
+
+      expect(getIsAllowedToStartDistribution(modifiedState)).to.be.true;
+    });
+
+    it('should return true when total team awards === general points', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 5000,
+            totalPointsResaleCooperative: 0,
+            pointsToDistribute: {
+              general: 5000,
+              generalPointId: 1,
+              resaleCooperative: null,
+              teamAwards: null,
+            },
+          },
+        },
+      };
+
+      expect(getIsAllowedToStartDistribution(modifiedState)).to.be.true;
+    });
+
+    it('should return true when total resale cooperative === general points', () => {
+      const modifiedState: StoreState = {
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 0,
+            totalPointsResaleCooperative: 5000,
+            pointsToDistribute: {
+              general: 5000,
+              generalPointId: 1,
               resaleCooperative: null,
               teamAwards: null,
             },
@@ -360,6 +437,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
             totalPointsTeamAwards: 0,
             pointsToDistribute: {
               general: null,
+              generalPointId: null,
               resaleCooperative: null,
               teamAwards: null,
             },

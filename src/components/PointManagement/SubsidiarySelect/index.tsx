@@ -10,13 +10,13 @@ import { Input, WrapperInput, Wrapper, Dropdown } from './styles';
 
 import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
 
-type Props = {
+interface SubsidiarySelectProps {
   subsidiaries: Subsidiary[] | null;
   selectedSubsidiaries: number[] | null;
   onSelect: (value: number) => void;
 };
-const SubsidiarySelect: React.FC<Props> = ({
-  subsidiaries = [],
+const SubsidiarySelect: React.FC<SubsidiarySelectProps> = ({
+  subsidiaries,
   selectedSubsidiaries,
   onSelect,
 }) => {
@@ -26,13 +26,14 @@ const SubsidiarySelect: React.FC<Props> = ({
   useOnClickOutside(dropdownRef, () => isVisible(false));
 
   const selectedSubsidiariesText = useMemo(() => {
+    if (!subsidiaries) return 'Você não possui filiais';
     if (!selectedSubsidiaries) return 'Todas filiais';
 
     const subsidiariesCount = selectedSubsidiaries.length;
     return subsidiariesCount > 1
       ? `${subsidiariesCount} filiais selecionadas`
       : `${subsidiariesCount} filial selecionada`;
-  }, [selectedSubsidiaries]);
+  }, [selectedSubsidiaries, subsidiaries]);
 
   return (
     <Wrapper ref={dropdownRef}>
@@ -42,7 +43,7 @@ const SubsidiarySelect: React.FC<Props> = ({
           id="filter-branch"
           type="text"
           value={selectedSubsidiariesText}
-          data-testid="participants-finder-input"
+          data-testid="subsidiary-select"
           readOnly
         />
         <ReactSVG src={arrowDownIcon} />

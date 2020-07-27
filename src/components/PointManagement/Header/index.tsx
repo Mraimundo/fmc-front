@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-grid-system';
 
@@ -53,6 +53,18 @@ const Header: React.FC<HeaderProps> = ({ establishmentType }) => {
     [dispatch],
   );
 
+  // using different header to change layout only
+  const headerWithAutonomyPointsAfterConfirm = useMemo(
+    () => (
+      <HeaderTeamAwardsAndResaleCooperativePoints
+        resaleCooperativePoints={totalPointsResaleCooperative}
+        teamAwardsPoints={totalPointsTeamAwards}
+        establishmentType={establishmentType}
+      />
+    ),
+    [totalPointsResaleCooperative, totalPointsTeamAwards, establishmentType],
+  );
+
   const { general, resaleCooperative, teamAwards } = pointsToDistribute;
 
   return (
@@ -63,12 +75,11 @@ const Header: React.FC<HeaderProps> = ({ establishmentType }) => {
           establishmentType={establishmentType}
         />
       )}
-      {hasAutonomyToDistribute && (
+      {hasAutonomyToDistribute && !isReadyToDistribute && (
         <HeaderWithAutonomyPoints
           generalPoints={general || 0}
           totalResaleCooperativePoints={totalPointsResaleCooperative}
           totalTeamAwardPoints={totalPointsTeamAwards}
-          isAllowedToEdit={isReadyToDistribute}
           isAllowedToStartDistribution={isAllowedToStartDistribution}
           onReadyToDistribute={handleReadyToDistribute}
           onSetResaleCooperativePoints={handleSetResaleCooperativePoints}
@@ -76,6 +87,7 @@ const Header: React.FC<HeaderProps> = ({ establishmentType }) => {
           establishmentType={establishmentType}
         />
       )}
+      {hasAutonomyToDistribute && isReadyToDistribute && headerWithAutonomyPointsAfterConfirm}
       {isResaleCooperativeAndTeamAwardPoints && (
         <HeaderTeamAwardsAndResaleCooperativePoints
           resaleCooperativePoints={resaleCooperative?.points || 0}

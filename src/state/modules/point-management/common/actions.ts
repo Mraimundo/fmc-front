@@ -15,6 +15,10 @@ import {
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
   SET_ESTABLISHMENT_TYPE,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
+  SET_FINISHED_DISTRIBUTION,
 } from './constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment, EstablishmentType } from './types';
@@ -130,6 +134,43 @@ export const setEstablishmentType = (
     payload: { establishmentType },
   };
 
+export const distributePoints = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_ACTION
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_ACTION,
+  };
+
+export const distributePointsFailure = (
+  error: string,
+): ActionCreatorFailure<typeof DISTRIBUTE_POINTS_FAILURE> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const distributePointsSuccess = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_SUCCESS
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_SUCCESS,
+  };
+
+export const setFinishedDistribution = (
+  finishedDistribution = true,
+): ActionCreatorPayload<
+  typeof SET_FINISHED_DISTRIBUTION,
+  Pick<CommonState, 'finishedDistribution'>
+> =>
+  <const>{
+    type: SET_FINISHED_DISTRIBUTION,
+    payload: {
+      finishedDistribution,
+    },
+  };
+
 export type CommonActions = ReturnType<
   | typeof fetchEstablishments
   | typeof fetchEstablishmentsFailure
@@ -142,4 +183,8 @@ export type CommonActions = ReturnType<
   | typeof setIsReadyToDistribute
   | typeof setSelectedEstablishment
   | typeof setEstablishmentType
+  | typeof distributePoints
+  | typeof distributePointsFailure
+  | typeof distributePointsSuccess
+  | typeof setFinishedDistribution
 >;

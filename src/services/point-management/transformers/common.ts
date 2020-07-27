@@ -1,99 +1,125 @@
-import { FetchTotalPointsToDistributeRawData } from 'services/point-management/common';
-import { Points } from 'state/modules/point-management/constants';
+import {
+  FetchTotalPointsToDistributeRawData,
+  DataDistribution,
+  ScoredParticipantsDataDistribution,
+} from 'services/point-management/common';
 
-interface MountResponseProps {
-  general?: number;
-  generalPointId?: number;
-  teamAwardsPoints?: number;
-  teamAwardsPointId?: number;
-  resaleCooperativePoints?: number;
-  resaleCooperativePointId?: number;
-  resaleCooperativeMaxInvoicePercentage?: number;
-}
-export interface MountResponse {
-  general: number | null;
-  generalPointId: number | null;
-  teamAwards: {
-    pointId: number | null;
-    points: number;
-  } | null;
-  resaleCooperative: {
-    pointId: number | null;
-    points: number;
-    maxInvoicePercentage: number;
-  } | null;
-}
-export const mountResponse = (params: MountResponseProps): MountResponse => ({
-  general: params.general || 0,
-  generalPointId: params.generalPointId || null,
-  teamAwards: params.teamAwardsPoints
-    ? {
-        points: params.teamAwardsPoints,
-        pointId: params.teamAwardsPointId || null,
-      }
-    : null,
-  resaleCooperative: {
-    points: params.resaleCooperativePoints || 0,
-    pointId: params.resaleCooperativePointId || null,
-    maxInvoicePercentage: params.resaleCooperativeMaxInvoicePercentage || 0,
-  },
-});
+import { PointsToDistribute } from 'state/modules/point-management/common/types';
+import { ScoredParticipant } from 'state/modules/point-management/team-awards/types';
+import { extractIdAndPointsFromScoredParticipants } from 'state/modules/point-management/team-awards/utils';
+
+import {
+  isCooperativeWithTeamAwards,
+  isCooperativeWithoutTeamAwards,
+  isResale,
+} from '../rule-types';
+import {
+  resaleRule,
+  constructDataDistribution as constructDataDistributionResale,
+} from '../rule-types/resale';
+import {
+  cooperativeWithoutTeamAwardsRule,
+  constructDataDistribution as constructDataDistributionCooperativeWithoutTeamAwards,
+} from '../rule-types/cooperative-without-team-awards';
+import {
+  cooperativeWithTeamAwardsRule,
+  constructDataDistribution as constructDataDistributionCooperativeWithTeamAwards,
+} from '../rule-types/cooperative-with-team-awards';
 
 export const transformTotalPointsToDistributeRawData = (
   totalPointsToDistribute: FetchTotalPointsToDistributeRawData,
-): MountResponse | null => {
+): PointsToDistribute | null => {
   const { undistributed_points: undistributedPoints } = totalPointsToDistribute;
 
   if (undistributedPoints.length < 1) return null;
 
-  const type1 = undistributedPoints.find(({ point, establishment }) => {
-    const isRebate = point.type_name === Points.Rebate;
-    return isRebate && !establishment.team_receives_points;
-  });
+  // revenda
+  const {
+    checked: isRebaseRule,
+    getResponse: getRebaseRuleResponse,
+  } = resaleRule(undistributedPoints);
 
-  const type2 = undistributedPoints.find(({ point, establishment }) => {
-    const isRebate = point.type_name === Points.Rebate;
-    return isRebate && establishment.team_receives_points;
-  });
+  if (isRebaseRule) return getRebaseRuleResponse();
 
-  const type3 = undistributedPoints.find(({ point }) => {
-    const isSellerAward = point.type_name === Points.SellerAward;
-    return isSellerAward;
-  });
+  // cooperativa que não premia
+  const {
+    checked: isCooperativeWithoutTeamAwardsRule,
+    getResponse: getCooperativeWithoutTeamAwardsResponse,
+  } = cooperativeWithoutTeamAwardsRule(undistributedPoints);
 
-  const type4 = undistributedPoints.find(({ point, establishment }) => {
-    const isRebate = point.type_name === Points.Rebate;
-    return isRebate && !establishment.team_receives_points;
-  });
-
-  if (type3 && type4) {
-    return mountResponse({
-      teamAwardsPoints: type3.point.value,
-      teamAwardsPointId: type3.point.id,
-      resaleCooperativePoints: type4.point.value,
-      resaleCooperativePointId: type4.point.id,
-      resaleCooperativeMaxInvoicePercentage:
-        type4.establishment.dc_max_percentage,
-    });
-  }
-
-  // cooperativa q não premia
-  if (type1) {
-    return mountResponse({
-      resaleCooperativePoints: type1?.point.value,
-      resaleCooperativePointId: type1?.point.id,
-      resaleCooperativeMaxInvoicePercentage:
-        type1?.establishment.dc_max_percentage,
-    });
-  }
+  if (isCooperativeWithoutTeamAwardsRule)
+    return getCooperativeWithoutTeamAwardsResponse();
 
   // cooperativa que premia
-  if (type2) {
-    return mountResponse({
-      general: type2.point.value,
-      generalPointId: type2.point.id,
-      resaleCooperativeMaxInvoicePercentage:
-        type2.establishment.dc_max_percentage,
+  const {
+    checked: isCooperativeWithTeamAwardsRule,
+    getResponse: getCooperativeWithTeamAwardsResponse,
+  } = cooperativeWithTeamAwardsRule(undistributedPoints);
+
+  if (isCooperativeWithTeamAwardsRule)
+    return getCooperativeWithTeamAwardsResponse();
+
+  return null;
+};
+
+interface ITransformScoredParticipantsToDataDistribution {
+  scoredParticipants: ScoredParticipant[] | null;
+  establishmentId: number | string;
+  pointsToDistribute: PointsToDistribute;
+  marketplacePoints: number;
+  invoicePoints: number;
+}
+export const transformScoredParticipantsToDataDistribution = ({
+  scoredParticipants,
+  establishmentId,
+  pointsToDistribute,
+  marketplacePoints,
+  invoicePoints,
+}: ITransformScoredParticipantsToDataDistribution):
+  | DataDistribution[]
+  | null => {
+
+  const participants = scoredParticipants
+    ? extractIdAndPointsFromScoredParticipants<
+        ScoredParticipantsDataDistribution[]
+      >(scoredParticipants)
+    : [];
+
+  const { teamAwards, resaleCooperative } = pointsToDistribute;
+
+  const commonValues = {
+    establishmentId,
+    invoicePoints,
+    marketplacePoints,
+  };
+
+  if (isCooperativeWithTeamAwards(pointsToDistribute)) {
+    if (!pointsToDistribute.generalPointId) return null;
+
+    return constructDataDistributionCooperativeWithTeamAwards({
+      ...commonValues,
+      participants,
+      generalPointId: pointsToDistribute.generalPointId,
+    });
+  }
+
+  if (isCooperativeWithoutTeamAwards(pointsToDistribute)) {
+    if (!pointsToDistribute.resaleCooperative?.pointId) return null;
+
+    return constructDataDistributionCooperativeWithoutTeamAwards({
+      ...commonValues,
+      resaleCooperativePointId: pointsToDistribute.resaleCooperative?.pointId,
+    });
+  }
+
+  if (isResale(pointsToDistribute)) {
+    if (!teamAwards?.pointId || !resaleCooperative?.pointId) return null;
+
+    return constructDataDistributionResale({
+      ...commonValues,
+      participants,
+      resaleCooperativePointId: resaleCooperative.pointId,
+      teamAwardsPointId: teamAwards.pointId,
     });
   }
 

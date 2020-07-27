@@ -11,6 +11,7 @@ import {
   FilterFields,
   ParticipantsList,
 } from 'components/PointManagement';
+// import ModalMissingParticipants from './ModalMissingParticipants';
 
 const TeamAwardsTabContent: React.FC = () => {
   const [
@@ -84,9 +85,12 @@ const TeamAwardsTabContent: React.FC = () => {
     [dispatch],
   );
 
-  const handleToggleParticipant = useCallback((participantId: number) => {
-    dispatch(actions.toggleSelectedParticipant(participantId));
-  }, [dispatch]);
+  const handleToggleParticipant = useCallback(
+    (participantId: number) => {
+      dispatch(actions.toggleSelectedParticipant(participantId));
+    },
+    [dispatch],
+  );
 
   return (
     <>
@@ -116,6 +120,12 @@ const TeamAwardsTabContent: React.FC = () => {
       ) : (
         <Loader>buscando participantes...</Loader>
       )}
+      {/* <ModalMissingParticipants
+        isOpen
+        total={20}
+        onClose={() => console.log('close')}
+        onConfirm={() => console.log('confirm')}
+      /> */}
     </>
   );
 };

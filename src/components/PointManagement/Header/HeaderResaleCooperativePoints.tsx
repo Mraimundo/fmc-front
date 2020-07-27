@@ -20,7 +20,7 @@ const HeaderResaleCooperativePoints: React.FC<Props> = ({ points, establishmentT
       <img src={headerImage} alt="" title="" />
       <WrapperBoxPoints>
         <BoxPoints type="resaleCooperative">
-          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(points)}`}</PointsText>
+          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(points)} PONTOS`}</PointsText>
         </BoxPoints>
       </WrapperBoxPoints>
     </HeaderImageWrapper>

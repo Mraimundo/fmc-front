@@ -195,3 +195,13 @@ export const getIsEnabledToAssignPoints = createSelector(
     return false;
   },
 );
+
+export const getIsEnabledToDistributePoints = createSelector(
+  getTotalPointsTeamAwards,
+  getAvailableScore,
+  (totalPointsTeamAwards: number, availableScore: number): boolean => {
+    if (!totalPointsTeamAwards) return false;
+
+    return availableScore === 0;
+  },
+);

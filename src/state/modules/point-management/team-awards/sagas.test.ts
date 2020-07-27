@@ -17,7 +17,6 @@ import mainSaga, {
   workerAssignPoints,
   workerDistributeEqually,
   workerSetSelectedRolesAll,
-  workerDistributePoints,
 } from './sagas';
 import {
   subsidiaries,
@@ -176,15 +175,6 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
             isFetching: false,
             error,
           },
-          // distributeEqually: false,
-          // pointsToDistribute: '',
-          // scoredParticipants: scoredParticipants.map(
-          //   (scoredParticipant: ScoredParticipant) => ({
-          //     ...scoredParticipant,
-          //     points: pointsToDistributeEqually,
-          //     assigned: true,
-          //   }),
-          // ),
         })
         .run();
     });
@@ -364,7 +354,6 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
           workerDistributeEqually,
         ),
         takeEvery(constants.SET_SELECTED_ROLES_ALL, workerSetSelectedRolesAll),
-        takeEvery(constants.DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
       ])
       .finish()
       .isDone();

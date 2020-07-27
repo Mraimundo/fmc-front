@@ -6,7 +6,9 @@ import {
 
 export interface FetchSubsidiariesRawData {
   id: number;
+  establishment_id: number;
   name: string;
+  city: string;
 }
 
 export interface FetchParticipantsRawData {
@@ -14,21 +16,6 @@ export interface FetchParticipantsRawData {
     count: number;
     list: Participant[];
   };
-}
-
-export type ScoredParticipantsDataDistribution = {
-  id: number;
-  value: number;
-};
-
-export interface DataDistribution {
-  id: number;
-  establishment: {
-    id: number;
-    marketplace: number;
-    rebate: number;
-  };
-  participants: ScoredParticipantsDataDistribution[];
 }
 
 interface FetchParticipantsServiceFilters {
@@ -53,15 +40,4 @@ export const fetchParticipantsService = async (
   });
 
   return Object.values(response.data).length > 0 ? response.data : null;
-};
-
-export const distributePointsService = async (
-  dataDistribution: DataDistribution,
-): Promise<any> => {
-  const { data: response } = await pluginApi.post<any>(
-    `undistributed-points/distribute`,
-    dataDistribution,
-  );
-
-  return response;
 };

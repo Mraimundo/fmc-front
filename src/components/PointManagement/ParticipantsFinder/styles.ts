@@ -5,7 +5,6 @@ import { FONTS } from 'styles/font/globals';
 export const Input = styled.input`
   border: 1.2px solid #707070;
   border-radius: 0;
-  width: 100%;
   height: 60px;
   outline: none;
   padding: 5px 10px;
@@ -25,5 +24,15 @@ export const Wrapper = styled.div`
     height: 35px;
     width: 35px;
     transform: translateY(-17.5px);
+  }
+`;
+
+export const LabelWrapper = styled.div`
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+
+    ${Input} {
+      width: 100%;
+    }
   }
 `;

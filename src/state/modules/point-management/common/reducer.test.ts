@@ -143,4 +143,47 @@ describe('src/state/modules/point-management/common/reducer', () => {
       selectedEstablishment,
     });
   });
+
+  it('should can handle DISTRIBUTE_POINTS_ACTION', () => {
+    const result = reducer(undefined, actions.distributePoints());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: true,
+      },
+    });
+  });
+
+  it('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
+    const result = reducer(undefined, actions.distributePointsFailure(error));
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: false,
+        error,
+      },
+    });
+  });
+
+  it('should can handle DISTRIBUTE_POINTS_SUCCESS', () => {
+    const result = reducer(undefined, actions.distributePointsSuccess());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: false,
+      },
+    });
+  });
+
+  it('should can handle SET_FINISHED_DISTRIBUTION', () => {
+    const result = reducer(undefined, actions.setFinishedDistribution());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      finishedDistribution: true,
+    });
+  });
 });

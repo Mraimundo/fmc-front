@@ -1,16 +1,11 @@
 import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
-import {
-  fetchParticipantsService,
-  distributePointsService,
-} from 'services/point-management/team-awards';
+import { fetchParticipantsService } from 'services/point-management/team-awards';
 import { getProtectedRoles } from 'services/role/protectedRoles';
 import fetchSubsidiariesService from 'services/establishment/getSubsidiaryList';
-import {
-  transformSubsidiariesRawData,
-  transformScoredParticipantsToDataDistribution,
-} from 'services/point-management/transformers/team-awards';
+import { transformSubsidiariesRawData } from 'services/point-management/transformers/team-awards';
+import { FetchSubsidiariesRawData } from 'services/point-management/team-awards';
 import * as constants from './constants';
 import {
   fetchSubsidiariesFailure,
@@ -20,25 +15,16 @@ import {
   fetchParticipantsFailure,
   fetchParticipantsSuccess,
   setTotalForEachParticipantDistributedEqually,
-  toggleDistributeEqually,
-  setPointsToDistribute,
   scoreAllParticipantsEqually,
   selectAllParticipants,
   deselectAllParticipants,
   assignPointsFailure,
   assignPointsSuccess,
-  distributePointsFailure,
-  distributePointsSuccess,
-  setSelectedRolesAll,
 } from './actions';
 import * as selectors from './selectors';
 import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
-import { Subsidiary, Role, ParticipantsList } from './types';
+import { Role, ParticipantsList } from './types';
 import { Establishment } from '../common/types';
-import {
-  getInvoicePoints,
-  getMarketplacePoints,
-} from '../resale-cooperative/selectors';
 
 export function* workerFetchSubsidiaries() {
   try {
@@ -49,7 +35,7 @@ export function* workerFetchSubsidiaries() {
     if (!selectedEstablishment)
       throw 'Você não possui nenhum estabelecimento selecionado';
 
-    const subsidiaries: Subsidiary[] = yield call(
+    const subsidiaries: FetchSubsidiariesRawData[] = yield call(
       fetchSubsidiariesService,
       selectedEstablishment.value,
     );
@@ -157,37 +143,16 @@ interface IWorkerSetSelectedRolesAll {
 export function* workerSetSelectedRolesAll({
   meta: { role },
 }: IWorkerSetSelectedRolesAll) {
-  const selectedRolesAll: string[] | null = yield select(selectors.getSelectedRolesAll);
+  const selectedRolesAll: string[] | null = yield select(
+    selectors.getSelectedRolesAll,
+  );
 
   if (selectedRolesAll && selectedRolesAll.includes(role)) {
     yield put(selectAllParticipants(role));
-    // yield call(workerDistributeEqually);
     return;
   }
 
   yield put(deselectAllParticipants(role));
-}
-
-export function* workerDistributePoints() {
-  try {
-    const scoredParticipants = yield select(selectors.getScoredParticipants);
-    const establishmentId = yield select(getSelectedEstablishment);
-    const invoicePoints = yield select(getInvoicePoints);
-    const marketplacePoints = yield select(getMarketplacePoints);
-
-    const dataDistribuion = transformScoredParticipantsToDataDistribution({
-      scoredParticipants,
-      establishmentId,
-      invoicePoints,
-      marketplacePoints,
-      pointId: 1,
-    });
-
-    const response = yield call<any>(distributePointsService, dataDistribuion);
-    console.log('response on workerDistributePoints -> ', response);
-  } catch (error) {
-    yield call(handlerErrors, error, distributePointsFailure);
-  }
 }
 
 export default function* teamAwardsSagas() {
@@ -217,6 +182,5 @@ export default function* teamAwardsSagas() {
       constants.SET_SELECTED_ROLES_ALL,
       workerSetSelectedRolesAll,
     ),
-    takeEvery(constants.DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
   ]);
 }

@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg';
 import { Label } from 'components/PointManagement';
 import searchIcon from 'assets/images/point-management/search-icon.svg';
 import useDebounce from 'hooks/use-debounce';
-import { Wrapper, Input } from './styles';
+import { Wrapper, Input, LabelWrapper } from './styles';
 
 type Props = {
   onChange: (v: string) => void;
@@ -23,11 +23,11 @@ const ParticipantsFinder: React.FC<Props> = ({ onChange }) => {
   }, [debouncedSearchTerm, onChange]);
 
   return (
-    <div>
+    <LabelWrapper>
       <Label htmlFor="filter-branch">Localize um participante</Label>
       <Wrapper>
         <Input
-          id="filter-branch"
+          id="participants-finder"
           type="text"
           value={searchTerm}
           onChange={({ target }) => setSearchTerm(target.value)}
@@ -35,7 +35,7 @@ const ParticipantsFinder: React.FC<Props> = ({ onChange }) => {
         />
         <ReactSVG src={searchIcon} />
       </Wrapper>
-    </div>
+    </LabelWrapper>
   );
 };
 

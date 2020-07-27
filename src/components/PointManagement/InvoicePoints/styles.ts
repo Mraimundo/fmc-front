@@ -17,6 +17,12 @@ export const Wrapper = styled.div`
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   }
+
+  @media screen and (max-width: 480px) {
+    &:before {
+      display: none;
+    }
+  }
 `;
 
 export const Title = styled.h4`
@@ -29,6 +35,14 @@ export const Title = styled.h4`
   right: 50%;
   transform: translateX(175px);
   font-family: ${FONTS.medium};
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    right: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+  }
 `;
 
 export const Image = styled.img`

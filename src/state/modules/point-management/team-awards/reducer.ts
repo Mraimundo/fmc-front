@@ -36,9 +36,6 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
 } from './constants';
 import {
   toggleRoleSelection,
@@ -57,7 +54,6 @@ export type TeamAwardsState = {
   fetchRoles: FetchState;
   fetchParticipants: FetchState;
   assignPoints: FetchState;
-  distributePoints: FetchState;
   subsidiaries: Subsidiary[] | null;
   roles: Role[] | null;
   participants: ParticipantsList | null;
@@ -78,7 +74,6 @@ export const initialState: TeamAwardsState = {
   fetchRoles: emptyFetchState,
   fetchParticipants: emptyFetchState,
   assignPoints: emptyFetchState,
-  distributePoints: emptyFetchState,
   subsidiaries: null,
   roles: null,
   participants: null,
@@ -269,15 +264,6 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
         ...state,
         scoredParticipants: null,
       };
-
-    case DISTRIBUTE_POINTS_ACTION:
-      return { ...state, distributePoints: fetchingState };
-
-    case DISTRIBUTE_POINTS_FAILURE:
-      return { ...state, distributePoints: fetchErrorState(action) };
-
-    case DISTRIBUTE_POINTS_SUCCESS:
-      return { ...state, distributePoints: emptyFetchState };
 
     default:
       return state;

@@ -1,19 +1,27 @@
-import * as Sentry from '@sentry/browser';
+import { AxiosError } from 'axios';
 import { put } from 'redux-saga/effects';
 
 import { ActionCreatorFailureType } from '@types';
-
-export const captureException = (error: Error) =>
-  Sentry.captureException(error);
+import { isString } from 'util';
 
 export function* handlerErrors(
-  error: Error | string,
+  error:
+    | string
+    | AxiosError<{
+        message: string;
+        url: string;
+        code: number;
+      }>,
   actionCreatorFailure: ActionCreatorFailureType,
 ) {
-  if (error instanceof Error) {
-    captureException(error);
+  if (typeof error === 'string') {
+    yield put(actionCreatorFailure(error));
     return;
   }
 
-  yield put(actionCreatorFailure(error));
+  yield put(
+    actionCreatorFailure(
+      error.response?.data.message || 'Ocorreu um erro inesperado',
+    ),
+  );
 }

@@ -6,8 +6,10 @@ export const error = 'Generic Error';
 
 export const pointsToDistribute: PointsToDistribute = {
   general: null,
+  generalPointId: 1,
   teamAwards: null,
   resaleCooperative: {
+    pointId: 1,
     maxInvoicePercentage: 20,
     points: 1500,
   },
@@ -52,6 +54,10 @@ const state: CommonState = {
     isFetching: false,
     error: '',
   },
+  distributePoints: {
+    isFetching: false,
+    error: '',
+  },
   isReadyToDistribute: false,
   pointsToDistribute,
   totalPointsResaleCooperative: 10000,
@@ -59,6 +65,7 @@ const state: CommonState = {
   establishments,
   selectedEstablishment,
   establishmentType: 'Revenda',
+  finishedDistribution: false,
 };
 
 export default state;

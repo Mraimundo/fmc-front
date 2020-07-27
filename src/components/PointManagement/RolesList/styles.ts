@@ -18,7 +18,7 @@ export const Item = styled.li`
   color: #193b4e;
   font-family: ${FONTS.medium};
   cursor: pointer;
-  height: 45px;
+  height: 3em;
   display: flex;
   align-items: center;
   justify-content: center;

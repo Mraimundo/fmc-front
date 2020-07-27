@@ -10,6 +10,7 @@ import mainSaga, {
   workerFetchPointsToDistribute,
   workerSetIsReadyToDistribute,
   workerAfterGetPointsToDistribution,
+  workerDistributePoints,
 } from './sagas';
 import {
   establishments,
@@ -55,10 +56,13 @@ describe('src/state/modules/point-management/common/sagas', () => {
           ],
         ])
         .put(actions.setSelectedEstablishment(establishments[0]))
+        .put(actions.setEstablishmentType(rawEstablishments[0].type.name))
+        .returns(undefined)
         .dispatch(actions.fetchEstablishments())
         .hasFinalState({
           ...initialState,
           establishments: null,
+          establishmentType: rawEstablishments[0].type.name,
           selectedEstablishment: establishments[0],
         })
         .run();
@@ -97,7 +101,9 @@ describe('src/state/modules/point-management/common/sagas', () => {
             matchers.call.fn(fetchTotalPointsToDistributeService),
             pointsToDistribute,
           ],
+          [matchers.call.fn(workerAfterGetPointsToDistribution), null],
         ])
+        .select(selectors.getSelectedEstablishment)
         .call(fetchTotalPointsToDistributeService, selectedEstablishment.value)
         .call(workerAfterGetPointsToDistribution)
         .put(actions.fetchPointsToDistributeSuccess(pointsToDistribute))
@@ -119,6 +125,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([[select(selectors.getSelectedEstablishment), null]])
+        .not.call.fn(fetchTotalPointsToDistributeService)
         .call(handlerErrors, error, actions.fetchPointsToDistributeFailure)
         .put(actions.fetchPointsToDistributeFailure(error))
         .dispatch(actions.fetchPointsToDistribute())
@@ -144,6 +151,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
           [matchers.call.fn(fetchTotalPointsToDistributeService), null],
         ])
         .call(fetchTotalPointsToDistributeService, selectedEstablishment.value)
+        .not.call.fn(workerAfterGetPointsToDistribution)
         .put(actions.fetchPointsToDistributeFailure(error))
         .call(handlerErrors, error, actions.fetchPointsToDistributeFailure)
         .dispatch(actions.fetchPointsToDistribute())
@@ -190,6 +198,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
           [select(selectors.getHasAutonomyToDistribute), true],
         ])
         .put(setMaxInvoicePercentage(20))
+        .returns(undefined)
         .dispatch(actions.setIsReadyToDistribute(true))
         .hasFinalState({
           ...initialState,
@@ -225,9 +234,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
       await expectSaga(workerAfterGetPointsToDistribution)
         .withReducer(reducer)
         .withState(initialState)
-        .provide([
-          [select(selectors.getHasAutonomyToDistribute), false],
-        ])
+        .provide([[select(selectors.getHasAutonomyToDistribute), false]])
         .put(actions.setIsReadyToDistribute(true))
         .hasFinalState({
           ...initialState,
@@ -240,9 +247,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
       await expectSaga(workerAfterGetPointsToDistribution)
         .withReducer(reducer)
         .withState(initialState)
-        .provide([
-          [select(selectors.getHasAutonomyToDistribute), true],
-        ])
+        .provide([[select(selectors.getHasAutonomyToDistribute), true]])
         .hasFinalState({
           ...initialState,
           isReadyToDistribute: false,
@@ -270,6 +275,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
           constants.SET_IS_READY_TO_DISTRIBUTE,
           workerSetIsReadyToDistribute,
         ),
+        takeEvery(constants.DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
       ])
       .finish()
       .isDone();

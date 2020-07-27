@@ -66,12 +66,13 @@ const FilterFields: React.FC<Props> = ({
   );
 
   const selectedSubsidiariesList = useMemo(
-    () => (
-      <SelectedSubsidiaries
-        subsidiaries={selectedSubsidiariesWithName}
-        onRemove={handleSelectSubsidiary}
-      />
-    ),
+    () =>
+      !!selectedSubsidiariesWithName && (
+        <SelectedSubsidiaries
+          subsidiaries={selectedSubsidiariesWithName}
+          onRemove={handleSelectSubsidiary}
+        />
+      ),
     [selectedSubsidiariesWithName, handleSelectSubsidiary],
   );
 
