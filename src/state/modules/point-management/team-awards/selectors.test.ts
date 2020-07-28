@@ -20,14 +20,18 @@ import {
   getSelectedParticipants,
   getTotalForEachParticipantDistributedEqually,
   getSelectedRolesAll,
+  getTotalParticipants,
+  getIsOpenModalMissingParticipants,
   getSelectedParticipantsWithoutScore,
   getSelectedSubsidiariesWithName,
   getScoredParticipantsResume,
   getTotalWaitingScoredParticipants,
-  getTotalScoredParticipants,
+  getTotalScoreScoredParticipants,
   getHasEnoughScore,
   getAvailableScore,
   getIsEnabledToAssignPoints,
+  getIsEnabledToDistributePoints,
+  getMissingParticipants,
 } from './selectors';
 import teamAwardsMock, {
   subsidiaries,
@@ -111,6 +115,14 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       expect(getSelectedRolesAll(state)).to.be.equal(
         teamAwardsMock.selectedRolesAll,
       );
+    });
+
+    it('check getTotalParticipants', () => {
+      expect(getTotalParticipants(state)).to.be.equal(3);
+    });
+
+    it('check getIsOpenModalMissingParticipants', () => {
+      expect(getIsOpenModalMissingParticipants(state)).to.be.false;
     });
   });
 
@@ -204,9 +216,9 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
     });
   });
 
-  describe('getTotalScoredParticipants', () => {
+  describe('getTotalScoreScoredParticipants', () => {
     it('should return 431 with default state', () => {
-      expect(getTotalScoredParticipants(state)).to.be.equal(431);
+      expect(getTotalScoreScoredParticipants(state)).to.be.equal(431);
     });
 
     it('should return 0 when dont have scored participants', () => {
@@ -221,7 +233,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
         },
       };
 
-      expect(getTotalScoredParticipants(modifiedState)).to.be.equal(0);
+      expect(getTotalScoreScoredParticipants(modifiedState)).to.be.equal(0);
     });
   });
 
@@ -370,6 +382,70 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       };
 
       expect(getIsEnabledToAssignPoints(modifiedState)).to.be.true;
+    });
+  });
+
+  describe('getIsEnabledToDistributePoints', () => {
+    it('should return false with default state', () => {
+      expect(getIsEnabledToDistributePoints(state)).to.be.false;
+    });
+
+    it('should return false when dont have total points team awards', () => {
+      expect(getIsEnabledToDistributePoints({
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 0,
+          }
+        }
+      })).to.be.false;
+    });
+
+    it('should return false when dont have total points team awards', () => {
+      expect(getIsEnabledToDistributePoints({
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 0,
+          }
+        }
+      })).to.be.false;
+    });
+
+    it('should return true when dont have more points to distribute', () => {
+      expect(getIsEnabledToDistributePoints({
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          common: {
+            ...commonMock,
+            totalPointsTeamAwards: 431,
+          }
+        }
+      })).to.be.true;
+    });
+  });
+
+  describe('getMissingParticipants', () => {
+    it('should return 0 with default state', () => {
+      expect(getMissingParticipants(state)).to.be.equal(0);
+    });
+
+    it('should return 7 with totalParticipants 10', () => {
+      expect(getMissingParticipants({
+        ...state,
+        pointManagement: {
+          ...pointManagementMock,
+          teamAwards: {
+            ...teamAwardsMock,
+            totalParticipants: 10,
+          }
+        }
+      })).to.be.equal(7);
     });
   });
 });

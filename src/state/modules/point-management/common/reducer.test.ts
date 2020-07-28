@@ -155,6 +155,17 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
+  it('should can handle DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
+    const result = reducer(undefined, actions.distributePointsFinally());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      distributePoints: {
+        isFetching: true,
+      },
+    });
+  });
+
   it('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
     const result = reducer(undefined, actions.distributePointsFailure(error));
 

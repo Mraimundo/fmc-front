@@ -16,6 +16,7 @@ import {
   SET_SELECTED_ESTABLISHMENT,
   SET_ESTABLISHMENT_TYPE,
   DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
@@ -122,6 +123,8 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       };
 
     case DISTRIBUTE_POINTS_ACTION:
+      return { ...state, distributePoints: fetchingState };
+    case DISTRIBUTE_POINTS_FINALLY_ACTION:
       return { ...state, distributePoints: fetchingState };
     case DISTRIBUTE_POINTS_FAILURE:
       return { ...state, distributePoints: fetchErrorState(action) };

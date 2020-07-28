@@ -20,6 +20,7 @@ import {
   deselectAllParticipants,
   assignPointsFailure,
   assignPointsSuccess,
+  setTotalParticipants,
 } from './actions';
 import * as selectors from './selectors';
 import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
@@ -73,7 +74,10 @@ export function* workerFetchParticipants() {
     if (!selectedEstablishment)
       throw 'Você não possui nenhum estabelecimento selecionado';
 
-    const participants: ParticipantsList = yield call(
+    const { participants, totalParticipants }: {
+      participants: ParticipantsList | null;
+      totalParticipants: number;
+    } = yield call(
       fetchParticipantsService,
       selectedEstablishment.value,
       {
@@ -83,6 +87,7 @@ export function* workerFetchParticipants() {
       },
     );
 
+    yield put(setTotalParticipants(totalParticipants));
     yield put(fetchParticipantsSuccess(participants));
   } catch (error) {
     yield call(handlerErrors, error, fetchParticipantsFailure);

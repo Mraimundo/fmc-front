@@ -56,7 +56,20 @@ export const scoreParticipant = (
   points: number,
   waitingScoredParticipants: WaitingScoredParticipant[] | null,
 ): WaitingScoredParticipant[] | null => {
-  if (!points) return waitingScoredParticipants;
+  if (!points && !waitingScoredParticipants) return null;
+
+  if (
+    !points &&
+    waitingScoredParticipants &&
+    waitingScoredParticipants.length > 0
+  ) {
+    const newWaitingScoredParticipants = waitingScoredParticipants.filter(
+      ({ id }) => id !== participant.id,
+    );
+    return newWaitingScoredParticipants.length > 0
+      ? newWaitingScoredParticipants
+      : null;
+  }
 
   const scored: WaitingScoredParticipant = {
     ...participant,
@@ -64,10 +77,6 @@ export const scoreParticipant = (
   };
 
   if (!waitingScoredParticipants) return [scored];
-
-  // if (!points) {
-  //   return waitingScoredParticipants.filter(({ id }) => id !== participant.id);
-  // }
 
   const participantAlreadyScored = waitingScoredParticipants.find(
     ({ id }): boolean => id === participant.id,

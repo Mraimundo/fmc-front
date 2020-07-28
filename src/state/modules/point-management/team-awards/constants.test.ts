@@ -25,6 +25,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 
 describe('src/state/modules/point-management/team-awards/constants', () => {
@@ -326,6 +328,30 @@ describe('src/state/modules/point-management/team-awards/constants', () => {
     it('should return correct value', () => {
       expect(REMOVE_ALL_SCORES).to.be.equal(
         '@fmc/point-management/team-awards/REMOVE_ALL_SCORES',
+      );
+    });
+  });
+
+  describe('SET_TOTAL_PARTICIPANTS', () => {
+    it('should return a string', () => {
+      expect(SET_TOTAL_PARTICIPANTS).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(SET_TOTAL_PARTICIPANTS).to.be.equal(
+        '@fmc/point-management/team-awards/SET_TOTAL_PARTICIPANTS',
+      );
+    });
+  });
+
+  describe('TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS', () => {
+    it('should return a string', () => {
+      expect(TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS).to.be.equal(
+        '@fmc/point-management/team-awards/TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS',
       );
     });
   });

@@ -12,6 +12,7 @@ import {
   SET_SELECTED_ESTABLISHMENT,
   SET_ESTABLISHMENT_TYPE,
   DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
@@ -158,6 +159,18 @@ describe('src/state/modules/point-management/common/constants', () => {
     it('should return correct value', () => {
       expect(DISTRIBUTE_POINTS_ACTION).to.be.equal(
         '@fmc/point-management/common/DISTRIBUTE_POINTS_ACTION',
+      );
+    });
+  });
+
+  describe('DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
+    it('should return a string', () => {
+      expect(DISTRIBUTE_POINTS_FINALLY_ACTION).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(DISTRIBUTE_POINTS_FINALLY_ACTION).to.be.equal(
+        '@fmc/point-management/common/DISTRIBUTE_POINTS_FINALLY_ACTION',
       );
     });
   });

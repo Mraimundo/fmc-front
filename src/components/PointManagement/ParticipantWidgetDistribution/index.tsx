@@ -16,16 +16,15 @@ import {
 } from './styles';
 import { getFirstAndLastName, limitChars } from 'util/string';
 
-type Props = {
+interface ParticipantWidgetDistributionProps {
   participant: Participant;
   onScoreParticipant(e: number): void;
   score: number;
   isSelected: boolean;
   onToggleParticipant(e: number): void;
   isAllowedToScore: boolean;
-};
-
-const ParticipantWidgetDistribution: React.FC<Props> = ({
+}
+const ParticipantWidgetDistribution: React.FC<ParticipantWidgetDistributionProps> = ({
   participant: { id, picture, name, subsidiary },
   onScoreParticipant,
   score,

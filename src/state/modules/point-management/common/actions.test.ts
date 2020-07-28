@@ -13,6 +13,7 @@ import {
   setSelectedEstablishment,
   setEstablishmentType,
   distributePoints,
+  distributePointsFinally,
   distributePointsFailure,
   distributePointsSuccess,
   setFinishedDistribution,
@@ -228,6 +229,22 @@ describe('src/state/modules/point-management/common/actions', () => {
     it('should return a valid object', () => {
       expect(distributePoints()).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_ACTION,
+      });
+    });
+  });
+
+  describe('distributePointsFinally', () => {
+    it('should be a function', () => {
+      expect(distributePointsFinally).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsFinally()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsFinally()).to.be.deep.equal({
+        type: constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
       });
     });
   });

@@ -5,13 +5,14 @@ import { StoreState } from 'state/root-reducer';
 import * as selectors from 'state/modules/point-management/team-awards/selectors';
 import * as actions from 'state/modules/point-management/team-awards/actions';
 import { Participant } from 'state/modules/point-management/team-awards/types';
+import { distributePointsFinally } from 'state/modules/point-management/common/actions';
 import {
   Loader,
   Title,
   FilterFields,
   ParticipantsList,
 } from 'components/PointManagement';
-// import ModalMissingParticipants from './ModalMissingParticipants';
+import ModalMissingParticipants from './ModalMissingParticipants';
 
 const TeamAwardsTabContent: React.FC = () => {
   const [
@@ -27,6 +28,8 @@ const TeamAwardsTabContent: React.FC = () => {
     isFetchingParticipant,
     selectedRolesAll,
     selectedParticipants,
+    isOpenModalMissingParticipants,
+    missingParticipants,
   ] = useSelector((state: StoreState) => [
     selectors.getSubsidiaries(state),
     selectors.getSelectedSubsidiaries(state),
@@ -40,6 +43,8 @@ const TeamAwardsTabContent: React.FC = () => {
     selectors.fetchParticipantIsFetching(state),
     selectors.getSelectedRolesAll(state),
     selectors.getSelectedParticipants(state),
+    selectors.getIsOpenModalMissingParticipants(state),
+    selectors.getMissingParticipants(state),
   ]);
 
   const dispatch = useDispatch();
@@ -92,6 +97,15 @@ const TeamAwardsTabContent: React.FC = () => {
     [dispatch],
   );
 
+  const handleCloseMissingModal = useCallback(() => {
+    dispatch(actions.toggleIsOpenModalMissingParticipants());
+  }, [dispatch]);
+
+  const handleDistributePoints = useCallback(() => {
+    dispatch(distributePointsFinally());
+    dispatch(actions.toggleIsOpenModalMissingParticipants());
+  }, [dispatch]);
+
   return (
     <>
       <Title>1. Selecione filiais e cargos que deseja enviar premiação</Title>
@@ -120,12 +134,12 @@ const TeamAwardsTabContent: React.FC = () => {
       ) : (
         <Loader>buscando participantes...</Loader>
       )}
-      {/* <ModalMissingParticipants
-        isOpen
-        total={20}
-        onClose={() => console.log('close')}
-        onConfirm={() => console.log('confirm')}
-      /> */}
+      <ModalMissingParticipants
+        isOpen={isOpenModalMissingParticipants}
+        total={missingParticipants}
+        onClose={handleCloseMissingModal}
+        onConfirm={handleDistributePoints}
+      />
     </>
   );
 };

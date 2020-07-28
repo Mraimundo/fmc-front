@@ -121,6 +121,8 @@ const state: TeamAwardsState = {
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: 1666.6666666666667,
   selectedRolesAll: null,
+  totalParticipants: 3,
+  isOpenModalMissingParticipants: false,
 };
 
 export default state;

@@ -260,7 +260,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
       waitingScoredParticipants: null,
       assignPoints: {
         isFetching: false,
-      }
+      },
     });
   });
 
@@ -342,6 +342,24 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     expect(reducer(undefined, actions.removeAllScores())).to.be.deep.equal({
       ...initialState,
       scoredParticipants: null,
+    });
+  });
+
+  it('should can handle SET_TOTAL_PARTICIPANTS', () => {
+    expect(
+      reducer(undefined, actions.setTotalParticipants(1)),
+    ).to.be.deep.equal({
+      ...initialState,
+      totalParticipants: 1,
+    });
+  });
+
+  it('should can handle TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS', () => {
+    expect(
+      reducer(undefined, actions.toggleIsOpenModalMissingParticipants()),
+    ).to.be.deep.equal({
+      ...initialState,
+      isOpenModalMissingParticipants: true,
     });
   });
 });

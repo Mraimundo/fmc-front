@@ -20,8 +20,9 @@ const PointsInput: React.FC<Props> = ({
   disabled = false,
 }) => {
   const handleChange = useCallback(
-    ({ floatValue }: NumberFormatValues) =>
-      onChange(floatValue ? floatValue / 100 : 0),
+    ({ floatValue }: NumberFormatValues) => {
+      onChange(floatValue ? floatValue / 100 : 0);
+    },
     [onChange],
   );
 
