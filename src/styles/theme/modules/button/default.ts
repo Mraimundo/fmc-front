@@ -10,9 +10,9 @@ export default {
     borderRadius: '7px',
   },
   tertiary: {
-    backgroundColor: '#193f4e',
+    backgroundColor: '#808285',
     fontColor: '#fff',
-    borderRadius: '7px',
+    borderRadius: '10px',
   },
   quaternary: {
     backgroundColor: '#193f4e',

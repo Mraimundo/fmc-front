@@ -22,6 +22,7 @@ export const Content = styled.div`
     margin: 25px 0;
     align-self: center;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    border-radius: 0;
   }
 
   > h3 {

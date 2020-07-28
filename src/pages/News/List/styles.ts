@@ -22,6 +22,7 @@ export const Content = styled.div`
     margin: 25px 0;
     height: 45px;
     align-self: center;
+    border-radius: 0;
   }
 
   > h3 {

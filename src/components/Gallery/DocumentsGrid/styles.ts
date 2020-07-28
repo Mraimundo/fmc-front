@@ -44,21 +44,22 @@ export const MiniBox = styled.div`
     span {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
       transform: translateY(-2px);
       display: block;
-      margin-top: 2px;
+      margin-top: 8px;
     }
 
     h3 {
       font-size: 16px;
-      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
       color: ${({ theme }) => theme.font.color.primary};
     }
 
     p {
       font-size: 16px;
       color: ${({ theme }) => theme.font.color.primary};
-      margin-top: 6px;
+      margin-top: 10px;
     }
   }
 

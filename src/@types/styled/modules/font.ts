@@ -8,6 +8,8 @@ export default interface Font {
     medium2: string;
     bold2: string;
     regular2: string;
+    coondensed: string;
+    coondensed2: string;
   };
   color: {
     primary: string;

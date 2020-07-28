@@ -10,13 +10,13 @@ interface ListProps {
 export const Container = styled.div<ListProps>`
   border: 1px solid ${({ theme, type }) => theme.accordion[type].borderColor};
   transition: max-height 0.2s, min-height 0.2s;
-  max-height: 65px;
-  min-height: 40px;
+  max-height: 79px;
+  min-height: 79px;
   ${({ open }) =>
     open &&
     css`
-      max-height: 300px;
-      min-height: 300px;
+      max-height: 407px;
+      min-height: 407px;
     `}
 `;
 
@@ -28,11 +28,13 @@ export const ListValuesTitle = styled.div<ListProps>`
   /*color: $ { ({ theme, type }) => theme.regulation[type].fontColor};*/
   padding: 5px;
   position: relative;
-  min-height: 55px;
+  min-height: 79px;
 
   > h3 {
     color: ${({ theme, type }) => theme.accordion[type].fontColor};
-    margin-left: 95px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 16px;
+    margin-left: 130px;
   }
 
   &:after {
@@ -45,7 +47,8 @@ export const ListValuesTitle = styled.div<ListProps>`
         : theme.accordion[type].openIconColor};
     transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
     position: absolute;
-    left: 30px;
+    left: 45px;
+    top: 26px;
     background-repeat: no-repeat;
     width: 23px;
     height: 23px;
@@ -58,13 +61,14 @@ export const ListValuesTitle = styled.div<ListProps>`
       open
         ? theme.accordion[type].backgroundCloseIconColor
         : theme.accordion[type].backgroundOpenIconColor};
-    width: 75px;
-    height: 45px;
+    width: 105px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
     position: absolute;
+    top: 4px;
   }
 `;
 
