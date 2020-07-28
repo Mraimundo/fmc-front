@@ -14,7 +14,9 @@ const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 const middlewares: Middleware<{}, StoreState>[] = [sagaMiddleware];
 
 if (process.env.REACT_APP_DEBUG_LOGGER) {
-  const logger = createLogger();
+  const logger = createLogger({
+    collapsed: true,
+  });
   middlewares.push(logger);
 }
 

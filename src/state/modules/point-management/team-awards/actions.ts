@@ -81,7 +81,7 @@ export const fetchParticipantsFailure = (
   };
 
 export const fetchParticipantsSuccess = (
-  participants: ParticipantsList,
+  participants: ParticipantsList | null,
 ): ActionCreatorPayload<
   typeof constants.FETCH_PARTICIPANTS_SUCCESS,
   Pick<TeamAwardsState, 'participants'>
@@ -227,6 +227,24 @@ export const removeAllScores = (): ActionCreator<
     type: constants.REMOVE_ALL_SCORES,
   };
 
+export const setTotalParticipants = (
+  totalParticipants: number,
+): ActionCreatorPayload<
+  typeof constants.SET_TOTAL_PARTICIPANTS,
+  Pick<TeamAwardsState, 'totalParticipants'>
+> =>
+  <const>{
+    type: constants.SET_TOTAL_PARTICIPANTS,
+    payload: { totalParticipants },
+  };
+
+export const toggleIsOpenModalMissingParticipants = (): ActionCreator<
+  typeof constants.TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS
+> =>
+  <const>{
+    type: constants.TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
+  };
+
 export type TeamAwardsActions = ReturnType<
   | typeof fetchSubsidiaries
   | typeof fetchSubsidiariesFailure
@@ -253,4 +271,6 @@ export type TeamAwardsActions = ReturnType<
   | typeof deselectAllParticipants
   | typeof toggleSelectedParticipant
   | typeof removeAllScores
+  | typeof setTotalParticipants
+  | typeof toggleIsOpenModalMissingParticipants
 >;

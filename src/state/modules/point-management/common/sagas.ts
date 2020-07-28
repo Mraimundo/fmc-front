@@ -1,7 +1,11 @@
 import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
-import { setMaxInvoicePercentage } from 'state/modules/point-management/resale-cooperative/actions';
+import {
+  setMaxInvoicePercentage,
+  setInvoicePoints,
+  setMarketplacePoints,
+} from 'state/modules/point-management/resale-cooperative/actions';
 import { transformScoredParticipantsToDataDistribution } from 'services/point-management/transformers/common';
 import { distributePointsService } from 'services/point-management/common';
 import { fetchTotalPointsToDistributeService } from 'services/point-management/common';
@@ -17,7 +21,12 @@ import {
 import {
   getScoredParticipants,
   getIsEnabledToDistributePoints,
+  getMissingParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
+import {
+  toggleIsOpenModalMissingParticipants,
+  removeAllScores,
+} from 'state/modules/point-management/team-awards/actions';
 import fetchEstablishmentsService, {
   Establishment as IEstablishment,
 } from 'services/auth/getEstablishments';
@@ -27,6 +36,8 @@ import {
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
   DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
+  SET_FINISHED_DISTRIBUTION,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -123,7 +134,7 @@ export function* workerAfterGetPointsToDistribution() {
   }
 }
 
-export function* workerDistributePoints() {
+export function* workerVerifyDistributePointsPossibility() {
   try {
     const isEnabledToRescue: boolean = yield select(getIsEnabledToRescue);
     const isEnabledToDistributePoints: boolean = yield select(
@@ -138,6 +149,20 @@ export function* workerDistributePoints() {
     if (!isEnabledToDistributePoints)
       throw 'É necessário distribuir todos os pontos para a equipe antes de finalizar';
 
+    const missingParticipants: number = yield select(getMissingParticipants);
+    if (missingParticipants > 0) {
+      yield put(toggleIsOpenModalMissingParticipants());
+      return;
+    }
+
+    yield call(workerDistributePoints);
+  } catch (error) {
+    yield call(handlerErrors, error, actions.distributePointsFailure);
+  }
+}
+
+export function* workerDistributePoints() {
+  try {
     const scoredParticipants: ScoredParticipant[] = yield select(
       getScoredParticipants,
     );
@@ -150,7 +175,7 @@ export function* workerDistributePoints() {
       getPointsToDistribute,
     );
 
-    const dataDistribuion = transformScoredParticipantsToDataDistribution({
+    const dataDistribution = transformScoredParticipantsToDataDistribution({
       scoredParticipants,
       establishmentId: selectedEstablishment.value,
       invoicePoints,
@@ -158,12 +183,22 @@ export function* workerDistributePoints() {
       pointsToDistribute,
     });
 
-    yield call<any>(distributePointsService, dataDistribuion);
-    yield put(actions.distributePointsSuccess());
-    yield put(actions.setFinishedDistribution());
+    yield call<any>(distributePointsService, dataDistribution);
+    yield all([
+      put(actions.distributePointsSuccess()),
+      put(actions.setFinishedDistribution()),
+    ]);
   } catch (error) {
     yield call(handlerErrors, error, actions.distributePointsFailure);
   }
+}
+
+export function* workerFinishedDistribution() {
+  yield put(removeAllScores());
+  yield put(actions.setTotalPointsTeamAwards(0));
+  yield put(actions.setTotalPointsResaleCooperative(0));
+  yield put(setInvoicePoints(0));
+  yield put(setMarketplacePoints(0));
 }
 
 export default function* commonSagas() {
@@ -174,6 +209,11 @@ export default function* commonSagas() {
       workerFetchPointsToDistribute,
     ),
     takeEvery(SET_IS_READY_TO_DISTRIBUTE, workerSetIsReadyToDistribute),
-    takeEvery(DISTRIBUTE_POINTS_ACTION, workerDistributePoints),
+    takeEvery(
+      DISTRIBUTE_POINTS_ACTION,
+      workerVerifyDistributePointsPossibility,
+    ),
+    takeEvery(DISTRIBUTE_POINTS_FINALLY_ACTION, workerDistributePoints),
+    takeEvery(SET_FINISHED_DISTRIBUTION, workerFinishedDistribution),
   ]);
 }

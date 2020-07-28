@@ -116,14 +116,16 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
           [select(selectors.getSelectedRoles), selectedRoles],
           [select(selectors.getParticipantFinder), 'Gabriel'],
           [select(getSelectedEstablishment), selectedEstablishment],
-          [matchers.call.fn(fetchParticipantsService), participants],
+          [matchers.call.fn(fetchParticipantsService), { participants, totalParticipants: 2 }],
         ])
         .call(fetchParticipantsService, selectedEstablishment.value, params)
+        .put(actions.setTotalParticipants(2))
         .put(actions.fetchParticipantsSuccess(participants))
         .dispatch(actions.fetchParticipants())
         .hasFinalState({
           ...initialState,
           participants,
+          totalParticipants: 2,
           fetchParticipants: {
             isFetching: false,
           },

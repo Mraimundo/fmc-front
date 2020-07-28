@@ -29,6 +29,8 @@ export const SET_ESTABLISHMENT_TYPE =
 
 export const DISTRIBUTE_POINTS_ACTION =
   '@fmc/point-management/common/DISTRIBUTE_POINTS_ACTION';
+export const DISTRIBUTE_POINTS_FINALLY_ACTION =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_FINALLY_ACTION';
 export const DISTRIBUTE_POINTS_FAILURE =
   '@fmc/point-management/common/DISTRIBUTE_POINTS_FAILURE';
 export const DISTRIBUTE_POINTS_SUCCESS =

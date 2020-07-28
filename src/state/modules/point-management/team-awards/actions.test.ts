@@ -26,9 +26,8 @@ import {
   deselectAllParticipants,
   toggleSelectedParticipant,
   removeAllScores,
-  distributePoints,
-  distributePointsFailure,
-  distributePointsSuccess,
+  setTotalParticipants,
+  toggleIsOpenModalMissingParticipants,
 } from './actions';
 import {
   FETCH_SUBSIDIARIES_ACTION,
@@ -56,9 +55,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 import { error, subsidiaries, roles, participant, participants } from './mock';
 
@@ -487,6 +485,39 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     it('should return a valid object', () => {
       expect(removeAllScores()).to.be.deep.equal({
         type: REMOVE_ALL_SCORES,
+      });
+    });
+  });
+
+  describe('setTotalParticipants', () => {
+    it('should be a function', () => {
+      expect(setTotalParticipants).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(setTotalParticipants(3)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(setTotalParticipants(3)).to.be.deep.equal({
+        type: SET_TOTAL_PARTICIPANTS,
+        payload: { totalParticipants: 3 },
+      });
+    });
+  });
+
+  describe('toggleIsOpenModalMissingParticipants', () => {
+    it('should be a function', () => {
+      expect(toggleIsOpenModalMissingParticipants).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(toggleIsOpenModalMissingParticipants()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(toggleIsOpenModalMissingParticipants()).to.be.deep.equal({
+        type: TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
       });
     });
   });

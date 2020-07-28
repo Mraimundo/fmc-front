@@ -36,6 +36,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 import {
   toggleRoleSelection,
@@ -67,6 +69,8 @@ export type TeamAwardsState = {
   distributeEqually: boolean;
   totalForEachParticipantDistributedEqually: number | null;
   selectedRolesAll: string[] | null;
+  totalParticipants: number;
+  isOpenModalMissingParticipants: boolean;
 };
 
 export const initialState: TeamAwardsState = {
@@ -87,6 +91,8 @@ export const initialState: TeamAwardsState = {
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: null,
   selectedRolesAll: null,
+  totalParticipants: 0,
+  isOpenModalMissingParticipants: false,
 };
 
 const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
@@ -263,6 +269,18 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
       return {
         ...state,
         scoredParticipants: null,
+      };
+
+    case SET_TOTAL_PARTICIPANTS:
+      return {
+        ...state,
+        totalParticipants: action.payload.totalParticipants,
+      };
+
+    case TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS:
+      return {
+        ...state,
+        isOpenModalMissingParticipants: !state.isOpenModalMissingParticipants,
       };
 
     default:

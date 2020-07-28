@@ -62,6 +62,12 @@ export const getTotalForEachParticipantDistributedEqually = (
 export const getSelectedRolesAll = (state: StoreState): string[] | null =>
   state.pointManagement.teamAwards.selectedRolesAll;
 
+export const getTotalParticipants = (state: StoreState): number =>
+  state.pointManagement.teamAwards.totalParticipants;
+
+export const getIsOpenModalMissingParticipants = (state: StoreState): boolean =>
+  state.pointManagement.teamAwards.isOpenModalMissingParticipants;
+
 export const getSelectedParticipantsWithoutScore = createSelector(
   getSelectedParticipants,
   getScoredParticipants,
@@ -99,7 +105,7 @@ export const getTotalWaitingScoredParticipants = createSelector(
   },
 );
 
-export const getTotalScoredParticipants = createSelector(
+export const getTotalScoreScoredParticipants = createSelector(
   getScoredParticipants,
   (scoredParticipants: ScoredParticipant[] | null): number => {
     if (!scoredParticipants) return 0;
@@ -113,7 +119,7 @@ export const getTotalScoredParticipants = createSelector(
 
 export const getHasEnoughScore = createSelector(
   getTotalWaitingScoredParticipants,
-  getTotalScoredParticipants,
+  getTotalScoreScoredParticipants,
   getTotalPointsTeamAwards,
   (totalWaiting: number, totalScored: number, totalTeamAwards: number) =>
     totalTeamAwards >= totalWaiting + totalScored,
@@ -136,7 +142,7 @@ export const getSelectedSubsidiariesWithName = createSelector(
 
 export const getAvailableScore = createSelector(
   getTotalPointsTeamAwards,
-  getTotalScoredParticipants,
+  getTotalScoreScoredParticipants,
   (totalPointsTeamAwards, totalScored): number => {
     if (!totalPointsTeamAwards) return 0;
 
@@ -203,5 +209,22 @@ export const getIsEnabledToDistributePoints = createSelector(
     if (!totalPointsTeamAwards) return false;
 
     return availableScore === 0;
+  },
+);
+
+export const getTotalScoredParticipants = createSelector(
+  getScoredParticipants,
+  (scoredParticipants: ScoredParticipant[] | null): number => {
+    if (!scoredParticipants) return 0;
+
+    return scoredParticipants.length;
+  },
+);
+
+export const getMissingParticipants = createSelector(
+  getTotalScoredParticipants,
+  getTotalParticipants,
+  (totalScoredParticipants: number, totalParticipants: number): number => {
+    return totalParticipants - totalScoredParticipants;
   },
 );

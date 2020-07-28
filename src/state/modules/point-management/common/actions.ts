@@ -16,6 +16,7 @@ import {
   SET_SELECTED_ESTABLISHMENT,
   SET_ESTABLISHMENT_TYPE,
   DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
@@ -141,6 +142,13 @@ export const distributePoints = (): ActionCreator<
     type: DISTRIBUTE_POINTS_ACTION,
   };
 
+export const distributePointsFinally = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_FINALLY_ACTION
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_FINALLY_ACTION,
+  };
+
 export const distributePointsFailure = (
   error: string,
 ): ActionCreatorFailure<typeof DISTRIBUTE_POINTS_FAILURE> =>
@@ -184,6 +192,7 @@ export type CommonActions = ReturnType<
   | typeof setSelectedEstablishment
   | typeof setEstablishmentType
   | typeof distributePoints
+  | typeof distributePointsFinally
   | typeof distributePointsFailure
   | typeof distributePointsSuccess
   | typeof setFinishedDistribution
