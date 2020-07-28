@@ -8,7 +8,7 @@ export const Container = styled(Link)`
   background: ${({ theme }) => theme.font.color.primary};
   transition: color 0.2s;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   align-self: center;
   display: flex;
   justify-content: center;

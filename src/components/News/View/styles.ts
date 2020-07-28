@@ -23,14 +23,14 @@ export const Container = styled.div`
   > span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 6px;
   }
 
   > p {
     font-size: 18px;
     color: ${({ theme }) => theme.font.color.quartenary};
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed2};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed2};
     margin-top: 32px;
     margin-bottom: 23px;
     text-align: justify;

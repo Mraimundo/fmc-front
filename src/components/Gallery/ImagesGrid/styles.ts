@@ -32,7 +32,7 @@ export const MiniBox = styled.div`
   > span {
     font-size: 12px;
     margin-top: 6px;
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     color: ${({ theme }) => theme.font.color.secondary};
   }
 
@@ -52,13 +52,13 @@ export const MiniBox = styled.div`
     > span {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
-      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     }
 
     > a {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
-      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
       transition: color 0.2s;
       &:hover {
         color: ${({ theme }) => lighten(0.2, theme.font.color.secondary)};

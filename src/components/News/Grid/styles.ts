@@ -30,7 +30,7 @@ export const MiniBox = styled(Link)`
   span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 8px;
   }
 
@@ -44,7 +44,7 @@ export const MiniBox = styled(Link)`
   p {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 6px;
   }
 

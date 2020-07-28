@@ -29,7 +29,7 @@ export const MiniBox = styled.div`
   span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
   }
 
   h3 {
@@ -41,7 +41,7 @@ export const MiniBox = styled.div`
 
   p {
     font-size: 16px;
-    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }

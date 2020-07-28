@@ -8,7 +8,7 @@ export const Container = styled.div`
   > span {
     width: 232px;
     height: 48px;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: transparent;
     border: 1px solid ${({ theme }) => theme.font.color.primary};
     font-size: 16px;
@@ -30,6 +30,7 @@ export const Container = styled.div`
     > span {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     }
 
     h3 {
@@ -48,6 +49,7 @@ export const Container = styled.div`
       > span {
         font-size: 12px;
         color: ${({ theme }) => theme.font.color.secondary};
+        font-family: ${({ theme }) => theme.font.fontFamily.condensed};
       }
     }
   }

@@ -21,6 +21,8 @@ export const MiniBox = styled.div`
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  background: #f6f6f6;
+
   img {
     max-width: 100%;
     height: 165px;
@@ -31,14 +33,15 @@ export const MiniBox = styled.div`
   span {
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
-    margin-top: 6px;
+    margin-top: 14px;
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
   }
 
   h3 {
     font-size: 16px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
-    margin: 4px 0 2px 0;
+    margin: 0 0 2px 0;
   }
 
   > div {
@@ -49,6 +52,7 @@ export const MiniBox = styled.div`
     > span {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     }
   }
 
@@ -67,7 +71,7 @@ export const MiniBox = styled.div`
     justify-content: center;
     align-items: center;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    margin-top: 10px;
+    margin-top: 14px;
 
     background-position: center;
     transition: background 0.5s;

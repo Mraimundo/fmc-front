@@ -4,7 +4,7 @@ import DefaultModal from 'components/shared/Modal';
 export const Modal = styled(DefaultModal)`
   ._modalContainer {
     padding: 0;
-    max-width: 600px;
+    max-width: 743px;
     width: 100%;
     height: 100%;
     max-height: 377px;
@@ -31,8 +31,11 @@ export const Container = styled.div`
   > button {
     width: 137px;
     height: 36px;
+    text-transform: uppercase;
     align-self: center;
     margin-bottom: 25px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 16px;
   }
 `;
 
@@ -42,27 +45,31 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 127px;
 
   > h3 {
-    width: 335px;
     font-size: 28px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
   }
 
   > h4 {
-    width: 335px;
     font-size: 21px;
     color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.medium};
   }
 
   > a {
-    width: 335px;
     margin-top: 25px;
     font-size: 21px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
+  }
+
+  @media screen and (max-width: 720px) {
+    padding-left: 5px;
   }
 `;
 

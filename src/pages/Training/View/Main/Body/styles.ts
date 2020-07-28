@@ -14,6 +14,7 @@ export const Container = styled.div`
   > h3 {
     font-size: 18px;
     color: ${({ theme }) => theme.font.color.quartenary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: justify;
@@ -33,9 +34,11 @@ export const Container = styled.div`
 
     > p {
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
       text-align: justify;
       margin-left: 15px;
       width: 50%;
+      font-size: 14px;
     }
   }
 `;

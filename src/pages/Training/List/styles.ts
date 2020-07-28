@@ -45,7 +45,7 @@ export const Box = styled.div`
   padding: 25px 25px;
   margin-top: 35px;
   > h3 {
-    font-size: 18px;
+    font-size: 24px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;

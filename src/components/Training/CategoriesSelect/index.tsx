@@ -34,6 +34,7 @@ const CategoriesSelect: React.FC<Props> = ({
       className={className}
       value={value}
       setValue={setValue}
+      placeholder="Categoria"
     />
   );
 };
