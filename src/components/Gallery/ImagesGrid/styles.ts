@@ -21,6 +21,7 @@ export const MiniBox = styled.div`
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  background: #f6f6f6;
   img {
     max-width: 100%;
     height: 165px;
@@ -28,8 +29,10 @@ export const MiniBox = styled.div`
     cursor: pointer;
   }
 
-  span {
+  > span {
     font-size: 12px;
+    margin-top: 6px;
+    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
     color: ${({ theme }) => theme.font.color.secondary};
   }
 
@@ -44,15 +47,18 @@ export const MiniBox = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-top: 10px;
 
     > span {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
     }
 
     > a {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
+      font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
       transition: color 0.2s;
       &:hover {
         color: ${({ theme }) => lighten(0.2, theme.font.color.secondary)};

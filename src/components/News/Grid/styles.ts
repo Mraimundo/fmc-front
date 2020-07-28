@@ -30,6 +30,8 @@ export const MiniBox = styled(Link)`
   span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    margin-top: 8px;
   }
 
   h3 {
@@ -42,6 +44,8 @@ export const MiniBox = styled(Link)`
   p {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    margin-top: 6px;
   }
 
   @media screen and (max-width: 720px) {

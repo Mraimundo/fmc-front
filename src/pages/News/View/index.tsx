@@ -6,10 +6,9 @@ import getLastNews from 'services/news/getLastNewsList';
 import history from 'services/history';
 import { News as INews } from 'services/news/interfaces';
 import News from 'components/News/View';
-import Grid from 'components/News/Grid';
 import { Button } from 'components/shared';
 
-import { Container, Content, Separator } from './styles';
+import { Container, Content, Separator, Grid } from './styles';
 
 interface Params {
   id: string;

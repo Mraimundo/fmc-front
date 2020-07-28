@@ -73,7 +73,7 @@ const RegulationBox: React.FC<Props> = ({
           <ReactToPrint
             trigger={() => {
               return (
-                <Button buttonRole="secondary" type="button">
+                <Button buttonRole="tertiary" type="button">
                   Download
                 </Button>
               );

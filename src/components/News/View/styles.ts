@@ -9,6 +9,7 @@ export const Container = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
+    line-height: 1;
   }
 
   > h4 {
@@ -22,14 +23,16 @@ export const Container = styled.div`
   > span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.coondensed};
+    margin-top: 6px;
   }
 
   > p {
     font-size: 18px;
-    color: ${({ theme }) => theme.font.color.secondary};
-    margin-top: 20px;
-    margin-bottom: 20px;
-    opacity: 0.7;
+    color: ${({ theme }) => theme.font.color.quartenary};
+    font-family: ${({ theme }) => theme.font.fontFamily.coondensed2};
+    margin-top: 32px;
+    margin-bottom: 23px;
     text-align: justify;
   }
 `;
