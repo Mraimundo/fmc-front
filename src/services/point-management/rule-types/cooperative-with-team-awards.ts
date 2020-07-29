@@ -1,10 +1,10 @@
 import {
   DataDistribution,
   ScoredParticipantsDataDistribution,
+  UndistributedPoint,
 } from 'services/point-management/common';
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
 import { RulesParams } from './types';
-import { UndistributedPoint } from '../common';
 import {
   constructPointsToDistribute,
   rebateWithTeamReceivesPoints,
@@ -43,7 +43,7 @@ export const cooperativeWithTeamAwardsRule = (
 };
 
 // prepare array to send distribution
-interface IConstructDataDistribution {
+interface ConstructDataDistribution {
   generalPointId: number;
   establishmentId: number | string;
   marketplacePoints: number;
@@ -56,7 +56,7 @@ export const constructDataDistribution = ({
   marketplacePoints,
   invoicePoints,
   participants,
-}: IConstructDataDistribution): DataDistribution[] => [
+}: ConstructDataDistribution): DataDistribution[] => [
   {
     id: generalPointId,
     establishment: {

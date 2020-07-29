@@ -391,42 +391,48 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
     });
 
     it('should return false when dont have total points team awards', () => {
-      expect(getIsEnabledToDistributePoints({
-        ...state,
-        pointManagement: {
-          ...pointManagementMock,
-          common: {
-            ...commonMock,
-            totalPointsTeamAwards: 0,
-          }
-        }
-      })).to.be.false;
+      expect(
+        getIsEnabledToDistributePoints({
+          ...state,
+          pointManagement: {
+            ...pointManagementMock,
+            common: {
+              ...commonMock,
+              totalPointsTeamAwards: 0,
+            },
+          },
+        }),
+      ).to.be.false;
     });
 
     it('should return false when dont have total points team awards', () => {
-      expect(getIsEnabledToDistributePoints({
-        ...state,
-        pointManagement: {
-          ...pointManagementMock,
-          common: {
-            ...commonMock,
-            totalPointsTeamAwards: 0,
-          }
-        }
-      })).to.be.false;
+      expect(
+        getIsEnabledToDistributePoints({
+          ...state,
+          pointManagement: {
+            ...pointManagementMock,
+            common: {
+              ...commonMock,
+              totalPointsTeamAwards: 0,
+            },
+          },
+        }),
+      ).to.be.false;
     });
 
     it('should return true when dont have more points to distribute', () => {
-      expect(getIsEnabledToDistributePoints({
-        ...state,
-        pointManagement: {
-          ...pointManagementMock,
-          common: {
-            ...commonMock,
-            totalPointsTeamAwards: 431,
-          }
-        }
-      })).to.be.true;
+      expect(
+        getIsEnabledToDistributePoints({
+          ...state,
+          pointManagement: {
+            ...pointManagementMock,
+            common: {
+              ...commonMock,
+              totalPointsTeamAwards: 431,
+            },
+          },
+        }),
+      ).to.be.true;
     });
   });
 
@@ -436,16 +442,18 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
     });
 
     it('should return 7 with totalParticipants 10', () => {
-      expect(getMissingParticipants({
-        ...state,
-        pointManagement: {
-          ...pointManagementMock,
-          teamAwards: {
-            ...teamAwardsMock,
-            totalParticipants: 10,
-          }
-        }
-      })).to.be.equal(7);
+      expect(
+        getMissingParticipants({
+          ...state,
+          pointManagement: {
+            ...pointManagementMock,
+            teamAwards: {
+              ...teamAwardsMock,
+              totalParticipants: 10,
+            },
+          },
+        }),
+      ).to.be.equal(7);
     });
   });
 });

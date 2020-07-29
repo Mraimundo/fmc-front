@@ -64,4 +64,10 @@ export const Input = styled.input`
   left: 50%;
   transform: translateX(-175px);
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1607843137254902);
+
+  @media screen and (max-width: 490px) {
+    width: 200px;
+    transform: translateX(-100px);
+    bottom: 15px;
+  }
 `;

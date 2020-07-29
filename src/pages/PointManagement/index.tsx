@@ -7,8 +7,14 @@ import { useToast } from 'context/ToastContext';
 import {
   fetchEstablishments,
   setSelectedEstablishment,
+  distributePointsFinally,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
+import {
+  getIsOpenModalMissingParticipants,
+  getMissingParticipants,
+} from 'state/modules/point-management/team-awards/selectors';
+import { toggleIsOpenModalMissingParticipants } from 'state/modules/point-management/team-awards/actions';
 import { Establishment } from 'state/modules/point-management/common/types';
 import {
   Header,
@@ -17,6 +23,7 @@ import {
   ResumeDistribution,
   EstablishmentSelection,
 } from 'components/PointManagement';
+import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
 import {
   Wrapper,
   Panel,
@@ -39,6 +46,8 @@ const PointManagement: React.FC = () => {
     establishmentType,
     distributePoints,
     finishedDistribution,
+    isOpenModalMissingParticipants,
+    missingParticipants,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
@@ -48,6 +57,8 @@ const PointManagement: React.FC = () => {
     useSelector(selectors.getEstablishmentType),
     useSelector(selectors.getDistributePoints),
     useSelector(selectors.getFinishedDistribution),
+    useSelector(getIsOpenModalMissingParticipants),
+    useSelector(getMissingParticipants),
   ];
 
   const dispatch = useDispatch();
@@ -82,6 +93,15 @@ const PointManagement: React.FC = () => {
     },
     [dispatch],
   );
+
+  const handleCloseMissingModal = useCallback(() => {
+    dispatch(toggleIsOpenModalMissingParticipants());
+  }, [dispatch]);
+
+  const handleDistributePoints = useCallback(() => {
+    dispatch(distributePointsFinally());
+    dispatch(toggleIsOpenModalMissingParticipants());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -127,6 +147,12 @@ const PointManagement: React.FC = () => {
           </Tabs>
         )}
       </Wrapper>
+      <ModalMissingParticipants
+        isOpen={isOpenModalMissingParticipants}
+        total={missingParticipants}
+        onClose={handleCloseMissingModal}
+        onConfirm={handleDistributePoints}
+      />
     </Container>
   );
 };

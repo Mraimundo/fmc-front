@@ -8,27 +8,6 @@ import {
   fetchTotalPointsToDistributeService,
   distributePointsService,
 } from 'services/point-management/common';
-import { transformScoredParticipantsToDataDistribution } from 'services/point-management/transformers/common';
-import mainSaga, {
-  workerFetchEstablishments,
-  workerFetchPointsToDistribute,
-  workerSetIsReadyToDistribute,
-  workerAfterGetPointsToDistribution,
-  workerVerifyDistributePointsPossibility,
-  workerDistributePoints,
-} from './sagas';
-import {
-  establishments,
-  rawEstablishments,
-  pointsToDistribute,
-  selectedEstablishment,
-} from './mock';
-import teamAwardsMock from 'state/modules/point-management/team-awards/mock';
-import resaleCooperativeMock from 'state/modules/point-management/resale-cooperative/mock';
-import * as actions from './actions';
-import * as constants from './constants';
-import * as selectors from './selectors';
-import { setMaxInvoicePercentage } from 'state/modules/point-management/resale-cooperative/actions';
 import {
   getIsEnabledToRescue,
   getInvoicePoints,
@@ -39,7 +18,35 @@ import {
   getMissingParticipants,
   getScoredParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
-import { toggleIsOpenModalMissingParticipants } from 'state/modules/point-management/team-awards/actions';
+import {
+  toggleIsOpenModalMissingParticipants,
+  removeAllScores,
+} from 'state/modules/point-management/team-awards/actions';
+import { transformScoredParticipantsToDataDistribution } from 'services/point-management/transformers/common';
+import teamAwardsMock from 'state/modules/point-management/team-awards/mock';
+import {
+  setMaxInvoicePercentage,
+  setMarketplacePoints,
+  setInvoicePoints,
+} from 'state/modules/point-management/resale-cooperative/actions';
+import mainSaga, {
+  workerFetchEstablishments,
+  workerFetchPointsToDistribute,
+  workerSetIsReadyToDistribute,
+  workerAfterGetPointsToDistribution,
+  workerVerifyDistributePointsPossibility,
+  workerDistributePoints,
+  workerFinishedDistribution,
+} from './sagas';
+import {
+  establishments,
+  rawEstablishments,
+  pointsToDistribute,
+  selectedEstablishment,
+} from './mock';
+import * as actions from './actions';
+import * as constants from './constants';
+import * as selectors from './selectors';
 import reducer, { initialState, emptyPointsToDistribute } from './reducer';
 
 describe('src/state/modules/point-management/common/sagas', () => {
@@ -419,6 +426,22 @@ describe('src/state/modules/point-management/common/sagas', () => {
     });
   });
 
+  describe('workerFinishedDistribution', () => {
+    it('should put any actions after finish distribution', async () => {
+      await expectSaga(workerFinishedDistribution)
+        .withReducer(reducer)
+        .withState(initialState)
+        .put(removeAllScores())
+        .put(actions.setTotalPointsTeamAwards(0))
+        .put(actions.setTotalPointsResaleCooperative(0))
+        .put(setInvoicePoints(0))
+        .put(setMarketplacePoints(0))
+        .dispatch(actions.setFinishedDistribution())
+        .hasFinalState(initialState)
+        .run();
+    });
+  });
+
   it('main saga takes actions', () => {
     testSaga(mainSaga)
       .next()
@@ -445,6 +468,10 @@ describe('src/state/modules/point-management/common/sagas', () => {
         takeEvery(
           constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
           workerDistributePoints,
+        ),
+        takeEvery(
+          constants.SET_FINISHED_DISTRIBUTION,
+          workerFinishedDistribution,
         ),
       ])
       .finish()

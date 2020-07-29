@@ -62,7 +62,7 @@ export const transformTotalPointsToDistributeRawData = (
   return null;
 };
 
-interface ITransformScoredParticipantsToDataDistribution {
+interface TransformScoredParticipantsToDataDistribution {
   scoredParticipants: ScoredParticipant[] | null;
   establishmentId: number | string;
   pointsToDistribute: PointsToDistribute;
@@ -75,10 +75,9 @@ export const transformScoredParticipantsToDataDistribution = ({
   pointsToDistribute,
   marketplacePoints,
   invoicePoints,
-}: ITransformScoredParticipantsToDataDistribution):
+}: TransformScoredParticipantsToDataDistribution):
   | DataDistribution[]
   | null => {
-
   const participants = scoredParticipants
     ? extractIdAndPointsFromScoredParticipants<
         ScoredParticipantsDataDistribution[]
@@ -113,12 +112,12 @@ export const transformScoredParticipantsToDataDistribution = ({
   }
 
   if (isResale(pointsToDistribute)) {
-    if (!teamAwards?.pointId || !resaleCooperative?.pointId) return null;
+    if (!teamAwards?.pointId) return null;
 
     return constructDataDistributionResale({
       ...commonValues,
       participants,
-      resaleCooperativePointId: resaleCooperative.pointId,
+      resaleCooperativePointId: resaleCooperative?.pointId || 0,
       teamAwardsPointId: teamAwards.pointId,
     });
   }
