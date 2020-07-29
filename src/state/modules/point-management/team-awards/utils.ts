@@ -139,7 +139,7 @@ export const extractParticipantsFromList = (
   );
 };
 
-interface IScoreAllParticipantsEqually {
+interface ScoreAllParticipantsEqually {
   selectedParticipants: number[] | null;
   waitingScoredParticipants: WaitingScoredParticipant[] | null;
   participants: ParticipantsList | null;
@@ -150,7 +150,7 @@ export const scoreAllParticipantsEqually = ({
   waitingScoredParticipants,
   participants: participantsList,
   points,
-}: IScoreAllParticipantsEqually): ScoredParticipant[] | null => {
+}: ScoreAllParticipantsEqually): ScoredParticipant[] | null => {
   const participants = extractParticipantsFromList(participantsList);
 
   if (!participants || !selectedParticipants) return null;
@@ -191,7 +191,7 @@ export const isScoredParticipant = (
   return !!scoredParticipants.find(({ id }) => id === participantId);
 };
 
-interface ISelectAllParticipantsByRole {
+interface SelectAllParticipantsByRole {
   selectedParticipants: number[] | null;
   scoredParticipants: ScoredParticipant[] | null;
   participants: ParticipantsList | null;
@@ -202,7 +202,7 @@ export const selectAllParticipantsByRole = ({
   scoredParticipants,
   participants,
   role,
-}: ISelectAllParticipantsByRole): number[] | null => {
+}: SelectAllParticipantsByRole): number[] | null => {
   if (!participants) return null;
 
   const participantsWithoutScore = participants[role].list

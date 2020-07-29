@@ -1,33 +1,34 @@
 import {
   DataDistribution,
   ScoredParticipantsDataDistribution,
+  UndistributedPoint,
 } from 'services/point-management/common';
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
 import { RulesParams } from './types';
-import { UndistributedPoint } from '../common';
-import {
-  constructPointsToDistribute,
-  sellerAward,
-  rebateWithoutTeamReceivePoints,
-} from './index';
+import { constructPointsToDistribute, sellerAward, rebate } from '.';
 
 const getResponse = (
   undistributedPoints: UndistributedPoint[],
 ): PointsToDistribute | null => {
   const sellerAwardValues = sellerAward(undistributedPoints);
-  const rebateWithoutTeamReceivePointsValues = rebateWithoutTeamReceivePoints(
-    undistributedPoints,
-  );
+  const rebatePoints = rebate(undistributedPoints);
 
-  if (!sellerAwardValues || !rebateWithoutTeamReceivePointsValues) return null;
+  const hasSellerAwardAndRebate = !!sellerAwardValues && !!rebatePoints;
+  const isResale = sellerAwardValues?.establishment.type_name === 'Revenda';
+
+  const checked =
+    hasSellerAwardAndRebate ||
+    (!!sellerAwardValues && !rebatePoints && isResale);
+
+  if (!checked) return null;
 
   return constructPointsToDistribute({
-    teamAwardsPoints: sellerAwardValues.point.value,
-    teamAwardsPointId: sellerAwardValues.point.id,
-    resaleCooperativePoints: rebateWithoutTeamReceivePointsValues.point.value,
-    resaleCooperativePointId: rebateWithoutTeamReceivePointsValues.point.id,
+    teamAwardsPoints: sellerAwardValues?.point.value || 0,
+    teamAwardsPointId: sellerAwardValues?.point.id || 0,
+    resaleCooperativePoints: rebatePoints?.point.value || 0,
+    resaleCooperativePointId: rebatePoints?.point.id || 0,
     resaleCooperativeMaxInvoicePercentage:
-      rebateWithoutTeamReceivePointsValues.establishment.dc_max_percentage,
+      rebatePoints?.establishment.dc_max_percentage || 0,
   });
 };
 
@@ -35,11 +36,14 @@ export const resaleRule = (
   undistributedPoints: UndistributedPoint[],
 ): RulesParams => {
   const sellerAwardValues = sellerAward(undistributedPoints);
-  const rebateWithoutTeamReceivePointsValues = rebateWithoutTeamReceivePoints(
-    undistributedPoints,
-  );
+  const rebatePoints = rebate(undistributedPoints);
 
-  const checked = !!sellerAwardValues && !!rebateWithoutTeamReceivePointsValues;
+  const hasSellerAwardAndRebate = !!sellerAwardValues && !!rebatePoints;
+  const isResale = sellerAwardValues?.establishment.type_name === 'Revenda';
+
+  const checked =
+    hasSellerAwardAndRebate ||
+    (!!sellerAwardValues && !rebatePoints && isResale);
 
   return {
     checked,
@@ -48,7 +52,7 @@ export const resaleRule = (
 };
 
 // prepare array to send distribution
-interface IConstructDataDistribution {
+interface ConstructDataDistribution {
   resaleCooperativePointId: number;
   teamAwardsPointId: number;
   establishmentId: number | string;
@@ -63,22 +67,31 @@ export const constructDataDistribution = ({
   marketplacePoints,
   invoicePoints,
   participants,
-}: IConstructDataDistribution): DataDistribution[] => [
-  {
+}: ConstructDataDistribution): DataDistribution[] => {
+  const resaleCooperativePoints = {
     id: resaleCooperativePointId,
     establishment: {
       id: establishmentId,
       marketplace: marketplacePoints,
       rebate: invoicePoints,
     },
-  },
-  {
+  };
+
+  const teamAwardsPoints = {
     id: teamAwardsPointId,
     establishment: {
       id: establishmentId,
-      marketplace: marketplacePoints,
-      rebate: invoicePoints,
+      marketplace: 0,
+      rebate: 0,
     },
     participants,
-  },
-];
+  };
+
+  if (!resaleCooperativePointId && !!teamAwardsPointId)
+    return [teamAwardsPoints];
+
+  if (!!resaleCooperativePointId && !teamAwardsPointId)
+    return [resaleCooperativePoints];
+
+  return [resaleCooperativePoints, teamAwardsPoints];
+};

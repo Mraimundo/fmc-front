@@ -4,4 +4,3 @@ export interface RulesParams {
   checked: boolean;
   getResponse(): PointsToDistribute | null;
 }
-

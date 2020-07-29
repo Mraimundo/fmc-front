@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import headerImage from 'assets/images/point-management/header-image-2.png';
 import { formatPoints } from 'util/points';
 import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { PointsInput } from 'components/PointManagement';
@@ -12,8 +13,6 @@ import {
   InputsWrapper,
   DistributeButton,
 } from './styles';
-
-import headerImage from 'assets/images/point-management/header-image-2.png';
 
 interface Props {
   generalPoints: number;

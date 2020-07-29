@@ -46,20 +46,24 @@ describe('src/services/point-management/transformers/team-awards', () => {
     });
 
     it('should transform correctly form', () => {
-      expect(transformParticipantsRawData({
-        data: participants,
-        info: { total_participants: 2 },
-      })).to.be.deep.equal({
+      expect(
+        transformParticipantsRawData({
+          data: participants,
+          info: { total_participants: 2 },
+        }),
+      ).to.be.deep.equal({
         participants,
         totalParticipants: 2,
       });
     });
 
     it('should return null when participants empty', () => {
-      expect(transformParticipantsRawData({
-        data: {},
-        info: { total_participants: 0 },
-      })).to.be.deep.equal({
+      expect(
+        transformParticipantsRawData({
+          data: {},
+          info: { total_participants: 0 },
+        }),
+      ).to.be.deep.equal({
         participants: null,
         totalParticipants: 0,
       });

@@ -32,7 +32,7 @@ export const fetchParticipantsService = async (
   establishmentId: number | string,
   params: FetchParticipantsServiceFilters,
 ): Promise<{
-  participants: ParticipantsList | null,
+  participants: ParticipantsList | null;
   totalParticipants: number;
 }> => {
   const { subsidiaries, roles, participantFinder: participant } = params;
