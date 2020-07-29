@@ -27,7 +27,12 @@ export const Container = styled.div`
   }
 `;
 
-export const Button = styled(DefaultButton)``;
+export const Button = styled(DefaultButton)`
+  width: 137px;
+  height: 36px;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 16px;
+`;
 
 export const RolesSelect = styled(DefaultRolesSelect)`
   flex: 1;
@@ -36,7 +41,7 @@ export const RolesSelect = styled(DefaultRolesSelect)`
   > span {
     color: ${({ theme }) => theme.font.color.primary};
     margin-left: 0;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   ._inputContainer {
@@ -55,7 +60,7 @@ export const FilialSelect = styled(DefaultFilialSelect)`
   > span {
     color: ${({ theme }) => theme.font.color.primary};
     margin-left: 0;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   margin-right: 20px;

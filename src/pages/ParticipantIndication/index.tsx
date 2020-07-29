@@ -246,9 +246,9 @@ const ParticipantIndication: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>
-          Indique um participante
-          {` na ${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
+        <h3>Indique um participante</h3>
+        <h5>
+          {`${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
           {establishments.length > 1 && (
             <Establishments
               establishments={establishments}
@@ -256,7 +256,7 @@ const ParticipantIndication: React.FC = () => {
               value={establishmentSelected}
             />
           )}
-        </h3>
+        </h5>
         <StatusBox
           percentActivated={activePercentage}
           onAddClick={() => setFormOpened(!formOpened)}

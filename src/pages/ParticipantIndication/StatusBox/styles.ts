@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import plusButton from 'assets/images/indication/add.svg';
-import minusButton from 'assets/images/indication/minus.svg';
+import plusButton from 'assets/images/indication/plus.svg';
+import minusButton from 'assets/images/indication/minus2.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     text-transform: uppercase;
     margin-right: 10px;
-    width: 225px;
+    width: 243px;
   }
   @media screen and (max-width: 720px) {
     flex-direction: column;
@@ -41,7 +41,7 @@ export const AddButton = styled.button<AddButtonProps>`
   border-radius: 50%;
   border: none;
   background: transparent;
-  transition: background 0.5s ease, transform 0.3s;
+  transition: background 0.2s ease, transform 0.3s;
   background: url(${({ opened }) => (opened ? minusButton : plusButton)}) center
     center;
   background-repeat: no-repeat;

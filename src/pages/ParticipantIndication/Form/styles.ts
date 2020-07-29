@@ -34,6 +34,7 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    margin: 18px 0;
     > div {
       margin-top: 10px;
     }

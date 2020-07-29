@@ -24,6 +24,14 @@ export const Content = styled.div`
     display: flex;
   }
 
+  > h5 {
+    font-size: 21px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.quartenary};
+    display: flex;
+    margin-top: 10px;
+  }
+
   > span {
     font-size: 18px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
