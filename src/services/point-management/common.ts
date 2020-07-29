@@ -1,9 +1,7 @@
 import { pluginApi } from 'services/api';
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
 import { Points } from 'state/modules/point-management/constants';
-import {
-  transformTotalPointsToDistributeRawData,
-} from './transformers/common';
+import { transformTotalPointsToDistributeRawData } from './transformers/common';
 
 export type ScoredParticipantsDataDistribution = {
   id: number;
@@ -37,7 +35,7 @@ export type UndistributedPoint = {
     type_name: string;
     dc_max_percentage: number;
   };
-}
+};
 
 export interface FetchTotalPointsToDistributeRawData {
   undistributed_points: UndistributedPoint[];
@@ -56,10 +54,7 @@ export const fetchTotalPointsToDistributeService = async (
 export const distributePointsService = async (
   dataDistribution: DataDistribution,
 ): Promise<void> => {
-  await pluginApi.post<void>(
-    `undistributed-points/distribute`,
-    {
-      undistributed_points: dataDistribution
-    },
-  );
+  await pluginApi.post<void>(`undistributed-points/distribute`, {
+    undistributed_points: dataDistribution,
+  });
 };

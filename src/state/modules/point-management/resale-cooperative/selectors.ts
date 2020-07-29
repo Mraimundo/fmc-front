@@ -16,7 +16,11 @@ export const getIsEnabledToRescue = createSelector(
   getTotalPointsResaleCooperative,
   getMarketplacePoints,
   getInvoicePoints,
-  (totalPointsResaleCooperative: number, marketplacePoints: number, invoicePoints: number) => {
-    return totalPointsResaleCooperative === (marketplacePoints + invoicePoints);
+  (
+    totalPointsResaleCooperative: number,
+    marketplacePoints: number,
+    invoicePoints: number,
+  ) => {
+    return totalPointsResaleCooperative === marketplacePoints + invoicePoints;
   },
 );

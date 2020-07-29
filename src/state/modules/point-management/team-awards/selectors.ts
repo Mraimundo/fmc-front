@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { StoreState } from 'state/root-reducer';
+import { getTotalPointsTeamAwards } from 'state/modules/point-management/common/selectors';
 import {
   Subsidiary,
   Role,
@@ -8,7 +9,6 @@ import {
   ScoredParticipant,
   WaitingScoredParticipant,
 } from './types';
-import { getTotalPointsTeamAwards } from 'state/modules/point-management/common/selectors';
 
 export const getSubsidiaries = (state: StoreState): Subsidiary[] | null =>
   state.pointManagement.teamAwards.subsidiaries;
@@ -121,8 +121,11 @@ export const getHasEnoughScore = createSelector(
   getTotalWaitingScoredParticipants,
   getTotalScoreScoredParticipants,
   getTotalPointsTeamAwards,
-  (totalWaiting: number, totalScored: number, totalTeamAwards: number) =>
-    totalTeamAwards >= totalWaiting + totalScored,
+  (
+    totalWaiting: number,
+    totalScored: number,
+    totalTeamAwards: number,
+  ): boolean => totalTeamAwards >= totalWaiting + totalScored,
 );
 
 export const getSelectedSubsidiariesWithName = createSelector(

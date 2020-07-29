@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { formatPoints } from 'util/points';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
+import headerImage from 'assets/images/point-management/header-image.png';
+
 import {
   HeaderImageWrapper,
   WrapperBoxPoints,
   BoxPoints,
   PointsText,
 } from './styles';
-
-import { EstablishmentType } from 'state/modules/point-management/common/types';
-import headerImage from 'assets/images/point-management/header-image.png';
 
 interface Props {
   resaleCooperativePoints: number;
@@ -21,19 +21,28 @@ const HeaderTeamAwardsAndResaleCooperativePoints: React.FC<Props> = ({
   teamAwardsPoints,
   establishmentType,
 }: Props) => {
+  const resaleCooperativeText = useMemo(
+    () =>
+      `TOTAL ${establishmentType} ${formatPoints(
+        resaleCooperativePoints,
+      )} PONTOS`,
+    [establishmentType, resaleCooperativePoints],
+  );
+
+  const teamAwardsText = useMemo(
+    () => `TOTAL PREMIAÇÃO EQUIPE ${formatPoints(teamAwardsPoints)} PONTOS`,
+    [teamAwardsPoints],
+  );
+
   return (
     <HeaderImageWrapper>
-      <img src={headerImage} />
+      <img src={headerImage} alt="" title="" />
       <WrapperBoxPoints>
         <BoxPoints type="resaleCooperative">
-          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(
-            resaleCooperativePoints,
-          )} PONTOS`}</PointsText>
+          <PointsText>{resaleCooperativeText}</PointsText>
         </BoxPoints>
         <BoxPoints type="teamAwards">
-          <PointsText>{`TOTAL PREMIAÇÃO EQUIPE ${formatPoints(
-            teamAwardsPoints,
-          )} PONTOS`}</PointsText>
+          <PointsText>{teamAwardsText}</PointsText>
         </BoxPoints>
       </WrapperBoxPoints>
     </HeaderImageWrapper>

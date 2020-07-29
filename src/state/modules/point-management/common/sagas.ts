@@ -7,8 +7,10 @@ import {
   setMarketplacePoints,
 } from 'state/modules/point-management/resale-cooperative/actions';
 import { transformScoredParticipantsToDataDistribution } from 'services/point-management/transformers/common';
-import { distributePointsService } from 'services/point-management/common';
-import { fetchTotalPointsToDistributeService } from 'services/point-management/common';
+import {
+  distributePointsService,
+  fetchTotalPointsToDistributeService,
+} from 'services/point-management/common';
 import {
   getSelectedEstablishment,
   getPointsToDistribute,
@@ -72,6 +74,16 @@ export function* workerFetchEstablishments() {
   }
 }
 
+export function* workerAfterGetPointsToDistribution() {
+  const hasAutonomyToDistribute = yield select(
+    selectors.getHasAutonomyToDistribute,
+  );
+
+  if (!hasAutonomyToDistribute) {
+    yield put(actions.setIsReadyToDistribute(true));
+  }
+}
+
 export function* workerFetchPointsToDistribute() {
   try {
     const selectedEstablishment: Establishment | null = yield select(
@@ -121,16 +133,6 @@ export function* workerSetIsReadyToDistribute() {
 
   if (isResaleCooperativeAndTeamAwardPoints) {
     yield put(actions.setTotalPointsTeamAwards(teamAwards?.points || 0));
-  }
-}
-
-export function* workerAfterGetPointsToDistribution() {
-  const hasAutonomyToDistribute = yield select(
-    selectors.getHasAutonomyToDistribute,
-  );
-
-  if (!hasAutonomyToDistribute) {
-    yield put(actions.setIsReadyToDistribute(true));
   }
 }
 

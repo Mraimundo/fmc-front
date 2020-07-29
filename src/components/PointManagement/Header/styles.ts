@@ -48,9 +48,26 @@ export const HeaderImageWrapper = styled.div`
     top: 0;
     z-index: -1;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 992px) {
       display: none;
     }
+  }
+
+  @media screen and (max-width: 1600px) {
+    height: 205px;
+    font-size: 12px;
+
+    img {
+      height: 205px;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    height: auto;
+  }
+
+  @media screen and (max-width: 510px) {
+    height: auto;
   }
 `;
 
@@ -67,17 +84,41 @@ export const HeaderAutonomyWrapper = styled(HeaderImageWrapper)`
     bottom: 40px;
     left: 18px;
     height: calc(100% - 65px);
+
+    @media screen and (max-width: 992px) {
+      height: auto;
+      width: 100%;
+      position: relative;
+      flex-wrap: wrap;
+      left: inherit;
+      bottom: inherit;
+    }
   }
 `;
 
 export const TextDistributeWrapper = styled.div`
   width: 30%;
+
+  @media screen and (max-width: 992px) {
+    width 100%;
+    text-align: center;
+  }
 `;
 
 export const InputsWrapper = styled.div`
   display: flex;
   width: 45%;
   height: 100%;
+
+  @media screen and (max-width: 992px) {
+    width: 70%;
+    height: 100%;
+    margin: 2em;
+  }
+
+  @media screen and (max-width: 576px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const BoxInput = styled.div`
@@ -101,6 +142,13 @@ export const BoxInput = styled.div`
 
   > span {
     font-size: 0.8em;
+  }
+
+  @media screen and (max-width: 576px) {
+    &:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: 0.5em;
+    }
   }
 `;
 
@@ -127,6 +175,10 @@ export const WrapperBoxPoints = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  @media screen and (max-width: 510px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const boxPointsColors = {
@@ -148,9 +200,14 @@ export const BoxPoints = styled.div`
   justify-content: center;
   width: 380px;
   text-align: center;
+
+  @media screen and (max-width: 1600px) {
+    width: 280px;
+  }
 `;
 
 export const PointsText = styled.h2`
   font-family: ${FONTS.bold};
   text-transform: uppercase;
+  font-size: 1.3em;
 `;

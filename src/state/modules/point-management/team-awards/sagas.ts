@@ -1,11 +1,14 @@
 import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
-import { fetchParticipantsService } from 'services/point-management/team-awards';
+import {
+  fetchParticipantsService,
+  FetchSubsidiariesRawData,
+} from 'services/point-management/team-awards';
 import { getProtectedRoles } from 'services/role/protectedRoles';
 import fetchSubsidiariesService from 'services/establishment/getSubsidiaryList';
 import { transformSubsidiariesRawData } from 'services/point-management/transformers/team-awards';
-import { FetchSubsidiariesRawData } from 'services/point-management/team-awards';
+import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
 import * as constants from './constants';
 import {
   fetchSubsidiariesFailure,
@@ -23,7 +26,6 @@ import {
   setTotalParticipants,
 } from './actions';
 import * as selectors from './selectors';
-import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
 import { Role, ParticipantsList } from './types';
 import { Establishment } from '../common/types';
 
@@ -74,18 +76,17 @@ export function* workerFetchParticipants() {
     if (!selectedEstablishment)
       throw 'Você não possui nenhum estabelecimento selecionado';
 
-    const { participants, totalParticipants }: {
+    const {
+      participants,
+      totalParticipants,
+    }: {
       participants: ParticipantsList | null;
       totalParticipants: number;
-    } = yield call(
-      fetchParticipantsService,
-      selectedEstablishment.value,
-      {
-        subsidiaries,
-        roles,
-        participantFinder,
-      },
-    );
+    } = yield call(fetchParticipantsService, selectedEstablishment.value, {
+      subsidiaries,
+      roles,
+      participantFinder,
+    });
 
     yield put(setTotalParticipants(totalParticipants));
     yield put(fetchParticipantsSuccess(participants));
@@ -141,13 +142,13 @@ export function* workerDistributeEqually() {
   yield put(setTotalForEachParticipantDistributedEqually(points));
 }
 
-interface IWorkerSetSelectedRolesAll {
+interface WorkerSetSelectedRolesAll {
   type: typeof constants.SET_SELECTED_ROLES_ALL;
   meta: { role: string };
 }
 export function* workerSetSelectedRolesAll({
   meta: { role },
-}: IWorkerSetSelectedRolesAll) {
+}: WorkerSetSelectedRolesAll) {
   const selectedRolesAll: string[] | null = yield select(
     selectors.getSelectedRolesAll,
   );
@@ -183,7 +184,7 @@ export default function* teamAwardsSagas() {
       ],
       workerDistributeEqually,
     ),
-    takeEvery<IWorkerSetSelectedRolesAll>(
+    takeEvery<WorkerSetSelectedRolesAll>(
       constants.SET_SELECTED_ROLES_ALL,
       workerSetSelectedRolesAll,
     ),

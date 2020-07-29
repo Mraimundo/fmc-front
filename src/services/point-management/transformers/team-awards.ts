@@ -3,7 +3,10 @@ import {
   FetchParticipantsRawData,
   FetchParticipantsRawInfo,
 } from 'services/point-management/team-awards';
-import { Subsidiary, ParticipantsList } from 'state/modules/point-management/team-awards/types';
+import {
+  Subsidiary,
+  ParticipantsList,
+} from 'state/modules/point-management/team-awards/types';
 
 export const transformSubsidiariesRawData = (
   subsidiaries: FetchSubsidiariesRawData[],
@@ -13,12 +16,12 @@ export const transformSubsidiariesRawData = (
   return subsidiariesResult.length > 0 ? subsidiariesResult : null;
 };
 
-interface ITransformParticipantsRawData {
+interface TransformParticipantsRawData {
   data: FetchParticipantsRawData;
   info: FetchParticipantsRawInfo;
 }
 export const transformParticipantsRawData = (
-  response: ITransformParticipantsRawData,
+  response: TransformParticipantsRawData,
 ): {
   participants: ParticipantsList | null;
   totalParticipants: number;

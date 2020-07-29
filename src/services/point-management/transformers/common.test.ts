@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 
 import { Points } from 'state/modules/point-management/constants';
+import { FetchTotalPointsToDistributeRawData } from 'services/point-management/common';
+import { pointsToDistribute } from 'state/modules/point-management/common/mock';
+import { scoredParticipants } from 'state/modules/point-management/team-awards/mock';
 import {
   transformTotalPointsToDistributeRawData,
   transformScoredParticipantsToDataDistribution,
 } from './common';
-import { FetchTotalPointsToDistributeRawData } from 'services/point-management/common';
-import { pointsToDistribute } from 'state/modules/point-management/common/mock';
-import { scoredParticipants } from 'state/modules/point-management/team-awards/mock';
 
 describe('src/services/point-management/transformers/common', () => {
   describe('transformTotalPointsToDistributeRawData', () => {
@@ -234,7 +234,7 @@ describe('src/services/point-management/transformers/common', () => {
             points: 200,
             maxInvoicePercentage: 20,
             pointId: null,
-          }
+          },
         },
         scoredParticipants,
       });
@@ -274,8 +274,8 @@ describe('src/services/point-management/transformers/common', () => {
           id: 1,
           establishment: {
             id: commonValues.establishmentId,
-            marketplace: commonValues.marketplacePoints,
-            rebate: commonValues.invoicePoints,
+            marketplace: 0,
+            rebate: 0,
           },
           participants: [
             { id: 1, value: 200 },
@@ -327,7 +327,21 @@ describe('src/services/point-management/transformers/common', () => {
         scoredParticipants,
       });
 
-      expect(result).to.be.null;
+      expect(result).to.be.deep.equal([
+        {
+          id: 1,
+          establishment: {
+            id: commonValues.establishmentId,
+            marketplace: 0,
+            rebate: 0,
+          },
+          participants: [
+            { id: 1, value: 200 },
+            { id: 2, value: 210 },
+            { id: 3, value: 21 },
+          ],
+        },
+      ]);
     });
 
     it('should return null on resale when dont have resale cooperative and team awards point id', () => {

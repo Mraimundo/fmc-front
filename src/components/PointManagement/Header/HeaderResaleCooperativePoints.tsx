@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
+import headerImage from 'assets/images/point-management/header-image.png';
 import { formatPoints } from 'util/points';
 import { EstablishmentType } from 'state/modules/point-management/common/types';
 import {
@@ -8,19 +9,26 @@ import {
   BoxPoints,
   PointsText,
 } from './styles';
-import headerImage from 'assets/images/point-management/header-image.png';
 
 interface Props {
   points: number;
   establishmentType: EstablishmentType | '';
 }
-const HeaderResaleCooperativePoints: React.FC<Props> = ({ points, establishmentType }) => {
+const HeaderResaleCooperativePoints: React.FC<Props> = ({
+  points,
+  establishmentType,
+}) => {
+  const pointsText = useMemo(
+    () => `TOTAL ${establishmentType} ${formatPoints(points)} PONTOS`,
+    [points, establishmentType],
+  );
+
   return (
     <HeaderImageWrapper>
       <img src={headerImage} alt="" title="" />
       <WrapperBoxPoints>
         <BoxPoints type="resaleCooperative">
-          <PointsText>{`TOTAL ${establishmentType} ${formatPoints(points)} PONTOS`}</PointsText>
+          <PointsText>{pointsText}</PointsText>
         </BoxPoints>
       </WrapperBoxPoints>
     </HeaderImageWrapper>

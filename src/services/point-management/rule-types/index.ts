@@ -2,7 +2,7 @@ import { PointsToDistribute } from 'state/modules/point-management/common/types'
 import { Points } from 'state/modules/point-management/constants';
 import { UndistributedPoint } from '../common';
 
-interface IConstructPointsToDistribute {
+interface ConstructPointsToDistribute {
   general?: number;
   generalPointId?: number;
   teamAwardsPoints?: number;
@@ -12,7 +12,7 @@ interface IConstructPointsToDistribute {
   resaleCooperativeMaxInvoicePercentage?: number;
 }
 export const constructPointsToDistribute = (
-  params: IConstructPointsToDistribute,
+  params: ConstructPointsToDistribute,
 ): PointsToDistribute => ({
   general: params.general || 0,
   generalPointId: params.generalPointId || null,
@@ -35,6 +35,11 @@ export const sellerAward = (
   undistributedPoints.find(
     ({ point }) => point.type_name === Points.SellerAward,
   );
+
+export const rebate = (
+  undistributedPoints: UndistributedPoint[],
+): UndistributedPoint | undefined =>
+  undistributedPoints.find(({ point }) => point.type_name === Points.Rebate);
 
 export const rebateWithTeamReceivesPoints = (
   undistributedPoints: UndistributedPoint[],
