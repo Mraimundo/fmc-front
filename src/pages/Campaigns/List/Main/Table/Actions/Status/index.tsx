@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
   CAMPAIGN_STATUS_TEXT,
   StatusText,

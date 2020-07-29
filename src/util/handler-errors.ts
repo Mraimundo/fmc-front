@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { put } from 'redux-saga/effects';
 
 import { ActionCreatorFailureType } from '@types';
-import { isString } from 'util';
 
 export function* handlerErrors(
   error:

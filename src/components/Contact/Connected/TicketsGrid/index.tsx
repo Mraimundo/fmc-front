@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Tooltip } from 'components/shared';
 
 import { SendMessageDTO } from 'services/contact/connected/dtos';
-import { Contact, Message } from 'services/contact/connected/interfaces';
+import { Contact } from 'services/contact/connected/interfaces';
 import transformer, {
   Response as GridDataItem,
   StatusText,
@@ -17,13 +17,6 @@ import check from 'assets/images/contact/check.svg';
 import clock from 'assets/images/contact/clock.svg';
 import message from 'assets/images/contact/message.svg';
 import notAllowed from 'assets/images/contact/not-allowed.svg';
-
-import {
-  FiClock,
-  FiCheckCircle,
-  FiSlash,
-  FiMessageCircle,
-} from 'react-icons/fi';
 
 import Form from './Form';
 import Messages from './Messages';

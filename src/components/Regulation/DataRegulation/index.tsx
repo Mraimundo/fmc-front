@@ -2,7 +2,6 @@ import React, { useCallback, useState, useRef } from 'react';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import parser from 'html-react-parser';
 import ReactToPrint from 'react-to-print';
-import getPdfDownload from 'services/pdf/generatePdfDownloadFromHtml';
 
 import pdfIcon from 'assets/images/pdf.svg';
 import printIcon from 'assets/images/print.svg';

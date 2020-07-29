@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useMenu } from 'context/MenuContext';
 import { useLocation } from 'react-router-dom';
 
@@ -22,26 +22,29 @@ const Popups: React.FC = () => {
       });
     }
   }, [menuSelected, pathname]);
-  return (
-    <>
-      {popups.map(item => (
-        <Popup
-          key={`popup-${item.id}`}
-          popup={item}
-          isOpen={item.opened}
-          onRequestClose={() => {
-            setPopups(e =>
-              e.map(i => {
-                if (i.id === item.id) {
-                  i.opened = false;
-                }
-                return i;
-              }),
-            );
-          }}
-        />
-      ))}
-    </>
+  return useMemo(
+    () => (
+      <>
+        {popups.map(item => (
+          <Popup
+            key={`popup-${item.id}`}
+            popup={item}
+            isOpen={item.opened}
+            onRequestClose={() => {
+              setPopups(e =>
+                e.map(i => {
+                  if (i.id === item.id) {
+                    i.opened = false;
+                  }
+                  return i;
+                }),
+              );
+            }}
+          />
+        ))}
+      </>
+    ),
+    [popups],
   );
 };
 

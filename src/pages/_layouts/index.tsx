@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
@@ -29,19 +29,24 @@ const Dashboard: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!participant || !participant.id) return;
-    if (participant.establishment.type_name === 'Cooperativa')
+    if (participant.establishment.type_name === 'Cooperativa') {
       setTheme(cooperativaTheme);
+    }
   }, [participant]);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <Container>
-        {showLogo && <Logo />}
-        {children}
-        {!shouldShowRegulationsModal && <Popups />}
-        <ModalRegulations />
-      </Container>
-    </ThemeContext.Provider>
+    <>
+      <ThemeContext.Provider value={theme}>
+        <Container>
+          {showLogo && <Logo />}
+          {children}
+          {!shouldShowRegulationsModal && <Popups />}
+        </Container>
+      </ThemeContext.Provider>
+      {shouldShowRegulationsModal && (
+        <ModalRegulations opened={shouldShowRegulationsModal} />
+      )}
+    </>
   );
 };
 

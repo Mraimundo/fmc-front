@@ -8,9 +8,6 @@ import { Separator } from './Filters/styles';
 import { Container, Content } from './styles';
 
 const Main: React.FC = () => {
-  const handleAction = async (): Promise<void> => {
-    console.log('s');
-  };
   return (
     <Container>
       <Content>

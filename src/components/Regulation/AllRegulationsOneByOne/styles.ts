@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button as DefaultButton } from 'components/shared';
 import DefaultModal from 'components/shared/Modal';
-import { darken, lighten, shade } from 'polished';
+import { lighten, shade } from 'polished';
 import background from 'assets/images/background.svg';
 import backgroundHeader from 'assets/images/background-header.svg';
 

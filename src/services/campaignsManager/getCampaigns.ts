@@ -1,6 +1,6 @@
 import { pluginApi } from 'services/api';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
-import { Campaign, Status, Mechanic, StatusText } from './interfaces/Campaign';
+import { Campaign, Status, StatusText } from './interfaces/Campaign';
 import getPtStatus from './util/getPtStatusText';
 
 interface EstablishmentApi {

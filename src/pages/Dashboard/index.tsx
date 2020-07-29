@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth } from 'context/AuthContext';
-import { Button } from 'components/shared';
 import Menu from 'components/Menu';
 
 import { GoSignOut } from 'react-icons/go';

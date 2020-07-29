@@ -25,7 +25,7 @@ const TableResume: React.FC<TableResumeProps> = ({
   const total = useMemo(() => {
     if (zeroedValues) return `0 pontos`;
     return formatPoints(totalPoints);
-  }, [totalPoints, zeroedValues, formatPoints]);
+  }, [totalPoints, zeroedValues]);
 
   const invoice = useMemo(() => {
     if (zeroedValues) return `0 pontos`;
@@ -33,12 +33,12 @@ const TableResume: React.FC<TableResumeProps> = ({
     return maxInvoicePercentage
       ? `${formatPoints(invoicePoints)} (máx. ${maxInvoicePercentage}%)`
       : 'não permitido';
-  }, [formatPoints, invoicePoints, maxInvoicePercentage, zeroedValues]);
+  }, [invoicePoints, maxInvoicePercentage, zeroedValues]);
 
   const marketplace = useMemo(() => {
     if (zeroedValues) return `0 pontos`;
     return formatPoints(marketplacePoints);
-  }, [formatPoints, marketplacePoints, zeroedValues]);
+  }, [marketplacePoints, zeroedValues]);
 
   return (
     <ResumeTableWrapper>

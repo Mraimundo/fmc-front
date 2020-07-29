@@ -34,6 +34,7 @@ export const Accordion = styled(DefaultAccordion)`
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  border-color: ${({ theme }) => theme.font.color.primary};
 
   > ._listWrapperContainer {
   }
@@ -43,8 +44,8 @@ export const FaqBox = styled.div`
   border: 1px solid ${({ theme }) => theme.regulation.primary.borderColor};
   border-bottom: 0;
   overflow-y: auto;
-  margin-left: 78px;
-  transform: translateX(1px);
+  margin-left: 110px;
+  border: none;
   padding: 10px;
   flex: 1;
 `;

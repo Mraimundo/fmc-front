@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import getFaqList from 'services/faq/getFaqList';
 import { Faq as IFaq } from 'services/faq/interfaces';
 import FaqList from 'components/Contact/Faq';

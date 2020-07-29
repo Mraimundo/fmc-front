@@ -3,7 +3,6 @@ import { News } from 'services/news/interfaces';
 import transformer, {
   Response as Data,
 } from 'services/news/transformers/toNewsList';
-import { Link } from 'react-router-dom';
 
 import { Container, MiniBox } from './styles';
 

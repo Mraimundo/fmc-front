@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { useToast } from 'context/ToastContext';
 import uploadFileToStorage from 'services/storage/sendFile';
 import sendFile from 'services/participantIndication/importFile';
 import forceDownload from 'services/storage/getUrlToForceDownload';
@@ -12,7 +11,6 @@ const ImportFile: React.FC = () => {
   const [attachingFile, setAttachingFile] = useState(false);
   const [fileUrl, setFileUrl] = useState('');
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const { addToast } = useToast();
   const [downloadLink, setDownloadLink] = useState('');
   const [modalOpened, setModalOpened] = useState(false);
   const [importedLines, setImportedLines] = useState(0);

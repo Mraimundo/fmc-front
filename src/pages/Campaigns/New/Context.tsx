@@ -16,7 +16,7 @@ const NewCampaignContext = createContext<NewCampaignContextState>(
 );
 
 export const NewCampaignProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   const { addToast } = useToast();
 
@@ -31,7 +31,6 @@ export const NewCampaignProvider: React.FC = ({ children }) => {
         });
         history.push('/gerenciamento-de-campanhas/lista');
       } catch (e) {
-        console.log('erro pagina registrar', e);
         addToast({
           title:
             e?.response?.data?.message ||

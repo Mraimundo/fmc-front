@@ -4,7 +4,7 @@ import { useTraining } from '../../Context';
 import { Container } from './styles';
 
 const Header: React.FC = () => {
-  const { training, approved, canAnswer } = useTraining();
+  const { training, approved } = useTraining();
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import { pluginApi } from 'services/api';
+// import { pluginApi } from 'services/api';
 import { ParticipantGroup } from './interfaces';
 
 const mock: ParticipantGroup[] = [

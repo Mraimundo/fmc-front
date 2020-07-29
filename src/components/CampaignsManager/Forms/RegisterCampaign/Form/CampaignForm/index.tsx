@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Option } from 'components/shared/Select';
 import DatePicker from 'components/shared/DatePicker';
 import { ReactSVG } from 'react-svg';
 import deleteIcon from 'assets/images/campaigns/delete-icon.svg';

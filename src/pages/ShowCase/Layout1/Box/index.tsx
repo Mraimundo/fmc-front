@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getProducts } from 'services/showcase';
 import { Product, Participant } from 'services/showcase/interfaces';
 

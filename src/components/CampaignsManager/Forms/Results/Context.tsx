@@ -9,7 +9,7 @@ const ResultsFormContext = createContext<ResultsFormContextState>(
 );
 
 export const ResultsFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   return (
     <ResultsFormContext.Provider value={{ test }}>

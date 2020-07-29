@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import produce from 'immer';
 
-import { useAuth } from 'context/AuthContext';
-import { INACTIVE, PRECHARGE, ACTIVE } from 'config/constants/vendavallStatus';
+import { INACTIVE, ACTIVE } from 'config/constants/vendavallStatus';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
@@ -45,7 +44,6 @@ const ParticipantIndication: React.FC = () => {
   ] = useState<Establishment | null>(null);
 
   const { addToast } = useToast();
-  const { participant } = useAuth();
 
   const filter = useCallback(
     async (establishmentId, roleId = 0, subsidiaryId = 0) => {

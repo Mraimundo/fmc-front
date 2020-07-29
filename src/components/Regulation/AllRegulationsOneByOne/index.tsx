@@ -20,7 +20,11 @@ import {
   Header,
 } from './styles';
 
-const AllRegulationsOneByOne: React.FC = () => {
+interface Props {
+  opened: boolean;
+}
+
+const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const { addToast } = useToast();
   const { updateParticipantData } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -36,7 +40,6 @@ const AllRegulationsOneByOne: React.FC = () => {
   useEffect(() => {
     getAllRegulations().then(data => {
       const regulationsToAccept = data.filter(item => !item.accepted);
-
       if (regulationsToAccept.length > 0) {
         setRegulations(regulationsToAccept);
         setShowModal(true);
@@ -99,7 +102,7 @@ const AllRegulationsOneByOne: React.FC = () => {
   };
 
   return (
-    <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
+    <Modal isOpen={opened} onRequestClose={() => setShowModal(false)}>
       <Container>
         <Header>
           <img src={logoImg} alt="Logo" />
