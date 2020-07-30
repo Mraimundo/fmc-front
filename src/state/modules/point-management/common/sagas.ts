@@ -14,6 +14,7 @@ import {
 import {
   getSelectedEstablishment,
   getPointsToDistribute,
+  getIsResaleCooperativePointsOnly,
 } from 'state/modules/point-management/common/selectors';
 import {
   getInvoicePoints,
@@ -36,14 +37,14 @@ import {
   FETCH_ESTABLISHMENTS_ACTION,
   FETCH_POINTS_TO_DISTRIBUTE_ACTION,
   SET_IS_READY_TO_DISTRIBUTE,
-  SET_SELECTED_ESTABLISHMENT,
   DISTRIBUTE_POINTS_ACTION,
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   SET_FINISHED_DISTRIBUTION,
+  SET_SELECTED_ESTABLISHMENT,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
-import { PointsToDistribute, Establishment, EstablishmentType } from './types';
+import { PointsToDistribute, Establishment } from './types';
 import { ScoredParticipant } from '../team-awards/types';
 
 export function* workerFetchEstablishments() {
@@ -52,19 +53,21 @@ export function* workerFetchEstablishments() {
       fetchEstablishmentsService,
     );
 
-    if (!establishments) throw 'Você não possui estabelecimentos';
+    if (!establishments) {
+      throw new Error('Você não possui estabelecimentos');
+    }
 
     const transformedEstablishments: Establishment[] = establishments.map(
-      ({ id, name }: IEstablishment): Establishment => ({
+      ({ id, name, type }: IEstablishment): Establishment => ({
         value: `${id}`,
         title: name,
+        type: type.name,
       }),
     );
 
     if (establishments.length === 1) {
       const [establishment]: Establishment[] = transformedEstablishments;
       yield put(actions.setSelectedEstablishment(establishment));
-      yield put(actions.setEstablishmentType(establishments[0].type.name));
       return;
     }
 
@@ -90,16 +93,18 @@ export function* workerFetchPointsToDistribute() {
       selectors.getSelectedEstablishment,
     );
 
-    if (!selectedEstablishment)
-      throw 'Você não selecionou nenhum estabelecimento';
+    if (!selectedEstablishment) {
+      throw new Error('Você não selecionou nenhum estabelecimento');
+    }
 
     const pointsToDistribute: PointsToDistribute = yield call(
       fetchTotalPointsToDistributeService,
       selectedEstablishment.value,
     );
 
-    if (!pointsToDistribute)
-      throw 'Você não possui pontos a serem distribuidos';
+    if (!pointsToDistribute) {
+      throw new Error('Você não possui pontos a serem distribuidos');
+    }
 
     yield put(actions.fetchPointsToDistributeSuccess(pointsToDistribute));
     yield call(workerAfterGetPointsToDistribution);
@@ -136,33 +141,6 @@ export function* workerSetIsReadyToDistribute() {
   }
 }
 
-export function* workerVerifyDistributePointsPossibility() {
-  try {
-    const isEnabledToRescue: boolean = yield select(getIsEnabledToRescue);
-    const isEnabledToDistributePoints: boolean = yield select(
-      getIsEnabledToDistributePoints,
-    );
-    const establishmentType: EstablishmentType | '' = yield select(
-      selectors.getEstablishmentType,
-    );
-
-    if (!isEnabledToRescue)
-      throw `É necessário distribuir todos os pontos para ${establishmentType} antes de finalizar`;
-    if (!isEnabledToDistributePoints)
-      throw 'É necessário distribuir todos os pontos para a equipe antes de finalizar';
-
-    const missingParticipants: number = yield select(getMissingParticipants);
-    if (missingParticipants > 0) {
-      yield put(toggleIsOpenModalMissingParticipants());
-      return;
-    }
-
-    yield call(workerDistributePoints);
-  } catch (error) {
-    yield call(handlerErrors, error, actions.distributePointsFailure);
-  }
-}
-
 export function* workerDistributePoints() {
   try {
     const scoredParticipants: ScoredParticipant[] = yield select(
@@ -190,6 +168,44 @@ export function* workerDistributePoints() {
       put(actions.distributePointsSuccess()),
       put(actions.setFinishedDistribution()),
     ]);
+  } catch (error) {
+    yield call(handlerErrors, error, actions.distributePointsFailure);
+  }
+}
+
+export function* workerVerifyDistributePointsPossibility() {
+  try {
+    const isEnabledToRescue: boolean = yield select(getIsEnabledToRescue);
+    const selectedEstablishment: Establishment = yield select(
+      selectors.getSelectedEstablishment,
+    );
+
+    if (!isEnabledToRescue) {
+      throw new Error(
+        `É necessário distribuir todos os pontos para ${selectedEstablishment.type} antes de finalizar`,
+      );
+    }
+
+    const isResaleCooperativePointsOnly = yield select(
+      getIsResaleCooperativePointsOnly,
+    );
+    const isEnabledToDistributePoints: boolean = yield select(
+      getIsEnabledToDistributePoints,
+    );
+
+    if (!isResaleCooperativePointsOnly && !isEnabledToDistributePoints) {
+      throw new Error(
+        'É necessário distribuir todos os pontos para a equipe antes de finalizar',
+      );
+    }
+
+    const missingParticipants: number = yield select(getMissingParticipants);
+    if (missingParticipants > 0) {
+      yield put(toggleIsOpenModalMissingParticipants());
+      return;
+    }
+
+    yield call(workerDistributePoints);
   } catch (error) {
     yield call(handlerErrors, error, actions.distributePointsFailure);
   }

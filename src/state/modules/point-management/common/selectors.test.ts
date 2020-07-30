@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import { StoreState } from 'state/root-reducer';
 import state from 'state/modules/mock';
+import pointManagementMock from 'state/modules/point-management/mock';
 import {
   getFetchPointsToDistribute,
   getIsReadyToDistribute,
@@ -14,7 +15,6 @@ import {
   getIsResaleCooperativePointsOnly,
   getHasAutonomyToDistribute,
   getIsResaleCooperativeAndTeamAwardPoints,
-  getEstablishmentType,
   getDistributePoints,
   getFinishedDistribution,
 } from './selectors';
@@ -23,7 +23,6 @@ import commonMock, {
   pointsToDistribute,
   selectedEstablishment,
 } from './mock';
-import pointManagementMock from 'state/modules/point-management/mock';
 
 describe('src/state/modules/point-management/common/selectors', () => {
   describe('state getters', () => {
@@ -60,12 +59,10 @@ describe('src/state/modules/point-management/common/selectors', () => {
       );
     });
 
-    it('check getEstablishmentType', () => {
-      expect(getEstablishmentType(state)).to.be.equal('Revenda');
-    });
-
     it('check getDistributePoints', () => {
-      expect(getDistributePoints(state)).to.be.equal(commonMock.distributePoints);
+      expect(getDistributePoints(state)).to.be.equal(
+        commonMock.distributePoints,
+      );
     });
 
     it('check getFinishedDistribution', () => {

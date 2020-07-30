@@ -2,14 +2,14 @@ import { takeEvery, select } from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 
+import { handlerErrors } from 'util/handler-errors';
 import { fetchParticipantsService } from 'services/point-management/team-awards';
-import reducer, { initialState } from './reducer';
 import fetchSubsidiariesService from 'services/establishment/getSubsidiaryList';
 import { getProtectedRoles } from 'services/role/protectedRoles';
+import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
-import { getSelectedEstablishment } from 'state/modules/point-management/common/selectors';
 import mainSaga, {
   workerFetchSubsidiaries,
   workerFetchRoles,
@@ -29,12 +29,12 @@ import {
   selectedParticipants,
 } from './mock';
 import { selectedEstablishment } from '../common/mock';
-import { handlerErrors } from 'util/handler-errors';
 import {
   migrateWaitingScoredToScored,
   selectAllParticipantsByRole,
   deselectAllParticipants,
 } from './utils';
+import reducer, { initialState } from './reducer';
 
 describe('src/state/modules/point-management/team-awards/sagas', () => {
   describe('workerFetchSubsidiaries', () => {
@@ -66,7 +66,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([[select(getSelectedEstablishment), null]])
-        .call(handlerErrors, error, actions.fetchSubsidiariesFailure)
+        .call(handlerErrors, new Error(error), actions.fetchSubsidiariesFailure)
         .put(actions.fetchSubsidiariesFailure(error))
         .dispatch(actions.fetchSubsidiaries())
         .hasFinalState({
@@ -116,7 +116,10 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
           [select(selectors.getSelectedRoles), selectedRoles],
           [select(selectors.getParticipantFinder), 'Gabriel'],
           [select(getSelectedEstablishment), selectedEstablishment],
-          [matchers.call.fn(fetchParticipantsService), { participants, totalParticipants: 2 }],
+          [
+            matchers.call.fn(fetchParticipantsService),
+            { participants, totalParticipants: 2 },
+          ],
         ])
         .call(fetchParticipantsService, selectedEstablishment.value, params)
         .put(actions.setTotalParticipants(2))
@@ -145,7 +148,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
           [select(selectors.getParticipantFinder), 'Gabriel'],
           [select(getSelectedEstablishment), null],
         ])
-        .call(handlerErrors, error, actions.fetchParticipantsFailure)
+        .call(handlerErrors, new Error(error), actions.fetchParticipantsFailure)
         .put(actions.fetchParticipantsFailure(error))
         .dispatch(actions.fetchParticipants())
         .hasFinalState({
@@ -161,7 +164,6 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
 
   describe('workerAssignPoints', () => {
     it('try assign points without enought score', async () => {
-      // const pointsToDistributeEqually = '5000';
       const error =
         'Você não possui saldo suficiente para atribuir estes pontos';
 
@@ -169,7 +171,8 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([[select(selectors.getHasEnoughScore), false]])
-        .call(handlerErrors, error, actions.assignPointsFailure)
+        .call(handlerErrors, new Error(error), actions.assignPointsFailure)
+        .put(actions.assignPointsFailure(error))
         .dispatch(actions.assignPoints())
         .hasFinalState({
           ...initialState,

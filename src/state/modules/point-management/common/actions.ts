@@ -14,7 +14,6 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
-  SET_ESTABLISHMENT_TYPE,
   DISTRIBUTE_POINTS_ACTION,
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
@@ -22,7 +21,7 @@ import {
   SET_FINISHED_DISTRIBUTION,
 } from './constants';
 import { CommonState } from './reducer';
-import { PointsToDistribute, Establishment, EstablishmentType } from './types';
+import { PointsToDistribute, Establishment } from './types';
 
 export const fetchEstablishments = (): ActionCreator<
   typeof FETCH_ESTABLISHMENTS_ACTION
@@ -124,17 +123,6 @@ export const setSelectedEstablishment = (
     payload: { selectedEstablishment },
   };
 
-export const setEstablishmentType = (
-  establishmentType: EstablishmentType,
-): ActionCreatorPayload<
-  typeof SET_ESTABLISHMENT_TYPE,
-  Pick<CommonState, 'establishmentType'>
-> =>
-  <const>{
-    type: SET_ESTABLISHMENT_TYPE,
-    payload: { establishmentType },
-  };
-
 export const distributePoints = (): ActionCreator<
   typeof DISTRIBUTE_POINTS_ACTION
 > =>
@@ -190,7 +178,6 @@ export type CommonActions = ReturnType<
   | typeof setTotalPointsResaleCooperative
   | typeof setIsReadyToDistribute
   | typeof setSelectedEstablishment
-  | typeof setEstablishmentType
   | typeof distributePoints
   | typeof distributePointsFinally
   | typeof distributePointsFailure

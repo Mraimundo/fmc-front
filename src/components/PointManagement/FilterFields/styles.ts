@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const SubsidiariesParticipantWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+
+  @media screen and (max-width: 1200px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const SubsidiariesWrapper = styled.div`

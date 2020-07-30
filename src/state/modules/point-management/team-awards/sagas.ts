@@ -35,8 +35,9 @@ export function* workerFetchSubsidiaries() {
       getSelectedEstablishment,
     );
 
-    if (!selectedEstablishment)
-      throw 'Você não possui nenhum estabelecimento selecionado';
+    if (!selectedEstablishment) {
+      throw new Error('Você não possui nenhum estabelecimento selecionado');
+    }
 
     const subsidiaries: FetchSubsidiariesRawData[] = yield call(
       fetchSubsidiariesService,
@@ -73,8 +74,9 @@ export function* workerFetchParticipants() {
       getSelectedEstablishment,
     );
 
-    if (!selectedEstablishment)
-      throw 'Você não possui nenhum estabelecimento selecionado';
+    if (!selectedEstablishment) {
+      throw new Error('Você não possui nenhum estabelecimento selecionado');
+    }
 
     const {
       participants,
@@ -98,8 +100,11 @@ export function* workerFetchParticipants() {
 export function* workerAssignPoints() {
   try {
     const hasEnoughScore: boolean = yield select(selectors.getHasEnoughScore);
-    if (!hasEnoughScore)
-      throw 'Você não possui saldo suficiente para atribuir estes pontos';
+    if (!hasEnoughScore) {
+      throw Error(
+        'Você não possui saldo suficiente para atribuir estes pontos',
+      );
+    }
 
     const distributeEqually: boolean = yield select(
       selectors.getDistributeEqually,

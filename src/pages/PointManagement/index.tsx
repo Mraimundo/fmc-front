@@ -43,7 +43,6 @@ const PointManagement: React.FC = () => {
     establishments,
     isResaleCooperativePointsOnly,
     fetchPointsToDistribute,
-    establishmentType,
     distributePoints,
     finishedDistribution,
     isOpenModalMissingParticipants,
@@ -54,7 +53,6 @@ const PointManagement: React.FC = () => {
     useSelector(selectors.getEstablishments),
     useSelector(selectors.getIsResaleCooperativePointsOnly),
     useSelector(selectors.getFetchPointsToDistribute),
-    useSelector(selectors.getEstablishmentType),
     useSelector(selectors.getDistributePoints),
     useSelector(selectors.getFinishedDistribution),
     useSelector(getIsOpenModalMissingParticipants),
@@ -114,18 +112,18 @@ const PointManagement: React.FC = () => {
           />
         )}
         {!!selectedEstablishment && (
-          <Header establishmentType={establishmentType} />
+          <Header establishmentType={selectedEstablishment.type} />
         )}
         {isReadyToDistribute && (
           <Tabs>
             <List>
-              <Tab>PONTOS {establishmentType}</Tab>
+              <Tab>PONTOS {selectedEstablishment?.type || ''}</Tab>
               {!isResaleCooperativePointsOnly && <Tab>PREMIAÇÃO EQUIPE</Tab>}
             </List>
 
             <Panel>
               <ResaleCooperativePointsTabContent
-                establishmentType={establishmentType}
+                establishmentType={selectedEstablishment?.type || ''}
               />
             </Panel>
             {!isResaleCooperativePointsOnly && (

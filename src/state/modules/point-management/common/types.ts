@@ -12,9 +12,10 @@ export type PointsToDistribute = {
   } | null;
 };
 
+export type EstablishmentType = 'Revenda' | 'Cooperativa';
+
 export type Establishment = {
   value: string;
   title: string;
+  type: EstablishmentType;
 };
-
-export type EstablishmentType = 'Revenda' | 'Cooperativa';
