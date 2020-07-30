@@ -80,7 +80,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const { addToast } = useToast();
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (!apiToken) return;
     setToken(apiToken);
     setTimeout(() => {
@@ -94,7 +94,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         }
       });
     }, 800);
-  }, [addToast, signOut, apiToken]); */
+  }, [addToast, signOut, apiToken]);
 
   const setTokenFn = useCallback(
     (tokenParam: string) => {

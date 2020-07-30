@@ -10,6 +10,8 @@ import save from 'services/register/saveParticipant';
 import numbersOnly from 'util/numbersOnly';
 import DataRegulation from 'components/Regulation/DataRegulation';
 
+import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
+
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
@@ -30,6 +32,7 @@ const FirstAccess: React.FC = () => {
   const [hasAcceptedDataRegulation, setHasAcceptedDataRegulation] = useState(
     false,
   );
+  const [modalOpened, setModalOpened] = useState(false);
   const location = useLocation<Participant>();
 
   const onAcceptRegulation = useCallback(() => {
@@ -72,11 +75,7 @@ const FirstAccess: React.FC = () => {
         } as Participant;
 
         await save(request);
-        addToast({
-          title: 'Cadastro realizado com sucesso!',
-          type: 'success',
-        });
-        history.push('/');
+        setModalOpened(true);
       } catch (e) {
         addToast({
           title:
@@ -88,6 +87,11 @@ const FirstAccess: React.FC = () => {
     },
     [participant, dataRegulation, addToast],
   );
+
+  const handleCloseModal = useCallback(() => {
+    setModalOpened(false);
+    history.push('/');
+  }, []);
 
   return (
     <>
@@ -118,6 +122,10 @@ const FirstAccess: React.FC = () => {
           </Container>
         )
       )}
+      <SuccessSignUpModal
+        isOpen={modalOpened}
+        onRequestClose={handleCloseModal}
+      />
     </>
   );
 };

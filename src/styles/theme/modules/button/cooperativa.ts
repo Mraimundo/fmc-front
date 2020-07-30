@@ -15,8 +15,8 @@ export default {
     borderRadius: '7px',
   },
   quaternary: {
-    backgroundColor: '#2a4207',
-    fontColor: '#fff',
+    backgroundColor: '#fff',
+    fontColor: '#e63027',
     borderRadius: '7px',
   },
 };

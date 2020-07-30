@@ -30,7 +30,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const [loading, setLoading] = useState(false);
   const [accepting, setAccepting] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [, setShowModal] = useState(false);
   const [regulations, setRegulations] = useState<Omit<Regulation, 'content'>[]>(
     [],
   );

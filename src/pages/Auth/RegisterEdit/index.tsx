@@ -8,6 +8,7 @@ import { Participant } from 'services/auth/interfaces/Participant';
 import save from 'services/auth/editParticipant';
 import numbersOnly from 'util/numbersOnly';
 
+import SuccessEditModal from 'components/Auth/Modals/SuccessEditRegister';
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
@@ -18,6 +19,7 @@ const RegisterEdit: React.FC = () => {
   const { addToast } = useToast();
   const { updateParticipantData } = useAuth();
   const [participant, setParticipant] = useState<Participant | null>(null);
+  const [modalOpened, setModalOpened] = useState(false);
 
   useEffect(() => {
     async function load(): Promise<void> {
@@ -45,12 +47,8 @@ const RegisterEdit: React.FC = () => {
         } as Participant;
 
         await save(request);
-        addToast({
-          title: 'Cadastro alterado com sucesso!',
-          type: 'success',
-        });
         updateParticipantData();
-        history.push('/');
+        setModalOpened(true);
       } catch (e) {
         addToast({
           title:
@@ -62,6 +60,11 @@ const RegisterEdit: React.FC = () => {
     },
     [participant, addToast, updateParticipantData],
   );
+
+  const handleCloseModal = useCallback(() => {
+    setModalOpened(false);
+    history.push('/');
+  }, []);
 
   return (
     <>
@@ -75,6 +78,10 @@ const RegisterEdit: React.FC = () => {
               editing
             />
           </Content>
+          <SuccessEditModal
+            isOpen={modalOpened}
+            onRequestClose={handleCloseModal}
+          />
         </Container>
       )}
     </>
