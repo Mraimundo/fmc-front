@@ -1,3 +1,4 @@
+import audienceToSelectOptions from './audienceToSelectOptions';
 import campaignStatusToSelectOptions from './campaignStatusToSelectOptions';
 import campaignToCreateNewCampaignDTO from './campaignToCreateNewCampaignDTO';
 import categoriesToSelectOptions from './categoriesToSelectOptions';
@@ -10,6 +11,7 @@ import regionalToSelectOptions from './regionalToSelectOptions';
 import titlesToSelectOptions from './titlesToSelectOptions';
 
 export {
+  audienceToSelectOptions,
   campaignStatusToSelectOptions,
   campaignToCreateNewCampaignDTO,
   categoriesToSelectOptions,

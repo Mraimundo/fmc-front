@@ -43,20 +43,20 @@ export const scoredParticipants: ScoredParticipant[] = [
     points: 200,
   },
   {
+    id: 2,
+    name: 'Mayconn Oliveira',
+    subsidiary: 'Unidade DEF',
+    points: 210,
+    picture: null,
+    role: roles[1],
+  },
+  {
     id: 3,
     name: 'Centi',
     subsidiary: 'Unidade GHI',
     points: 21,
-    picture: 'photo.jpg',
+    picture: 'https://storage.vendavall.com.br/teste/avatars/1593899963.5f00fbbb16a4d5.55411308.jpg',
     role: roles[0],
-  },
-  {
-    id: 2,
-    name: 'Mayconn',
-    subsidiary: 'Unidade DEF',
-    points: 210,
-    picture: 'photo.jpg',
-    role: roles[1],
   },
 ];
 
@@ -108,10 +108,6 @@ const state: TeamAwardsState = {
     isFetching: false,
     error: '',
   },
-  distributePoints: {
-    isFetching: false,
-    error: '',
-  },
   subsidiaries,
   roles,
   participants,
@@ -125,6 +121,8 @@ const state: TeamAwardsState = {
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: 1666.6666666666667,
   selectedRolesAll: null,
+  totalParticipants: 3,
+  isOpenModalMissingParticipants: false,
 };
 
 export default state;

@@ -15,7 +15,7 @@ export const Container = styled.button<ContainerProps>`
   padding: 0 16px;
   width: 100%;
   color: ${({ theme, buttonRole }) => theme.button[buttonRole].fontColor};
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 16px;
   margin-top: 16px;
   display: flex;

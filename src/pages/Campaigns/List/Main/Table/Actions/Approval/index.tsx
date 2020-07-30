@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusResponse } from 'services/campaignsManager/getCampaignStatus';
+import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import ApprovalIcon from 'assets/images/campaigns/approval-icon.svg';
 
@@ -7,7 +7,7 @@ import { Container } from './style';
 
 interface Props {
   id: number;
-  status: StatusResponse;
+  status: StatusText;
 }
 
 const Approval: React.FC<Props> = ({ id, status }) => {

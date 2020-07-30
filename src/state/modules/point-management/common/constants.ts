@@ -23,3 +23,15 @@ export const SET_IS_READY_TO_DISTRIBUTE =
 
 export const SET_SELECTED_ESTABLISHMENT =
   '@fmc/point-management/common/SET_SELECTED_ESTABLISHMENT';
+
+export const DISTRIBUTE_POINTS_ACTION =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_ACTION';
+export const DISTRIBUTE_POINTS_FINALLY_ACTION =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_FINALLY_ACTION';
+export const DISTRIBUTE_POINTS_FAILURE =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_FAILURE';
+export const DISTRIBUTE_POINTS_SUCCESS =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_SUCCESS';
+
+export const SET_FINISHED_DISTRIBUTION =
+  '@fmc/point-management/common/SET_FINISHED_DISTRIBUTION';

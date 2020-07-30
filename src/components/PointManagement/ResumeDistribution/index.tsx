@@ -10,6 +10,8 @@ import {
   assignPoints,
   removeAllScores,
 } from 'state/modules/point-management/team-awards/actions';
+import { distributePoints } from 'state/modules/point-management/common/actions';
+import { getFinishedDistribution } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
   getAvailableScore,
@@ -18,6 +20,7 @@ import {
   getTotalForEachParticipantDistributedEqually,
   getSelectedParticipantsWithoutScore,
   getIsEnabledToAssignPoints,
+  getIsEnabledToDistributePoints,
 } from 'state/modules/point-management/team-awards/selectors';
 import ResumeWidget from './ResumeWidget';
 import PointsToDistribute from './PointsToDistribute';
@@ -33,6 +36,8 @@ const ResumeDistribution: React.FC = () => {
     totalForEachParticipantDistributedEqually,
     selectedParticipantsWithoutScore,
     isEnabledToAssignPoints,
+    isEnabledToDistributePoints,
+    finishedDistribution,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -41,13 +46,15 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getTotalForEachParticipantDistributedEqually),
     useSelector(getSelectedParticipantsWithoutScore),
     useSelector(getIsEnabledToAssignPoints),
+    useSelector(getIsEnabledToDistributePoints),
+    useSelector(getFinishedDistribution),
   ];
 
   const dispatch = useDispatch();
 
   const handleChangePointsToDistribute = useCallback(
     (points: number) => {
-      return dispatch(setPointsToDistribute(points));
+      dispatch(setPointsToDistribute(points));
     },
     [dispatch],
   );
@@ -58,7 +65,11 @@ const ResumeDistribution: React.FC = () => {
 
   const handleRemoveAllScores = useCallback(() => {
     dispatch(removeAllScores());
-  }, []);
+  }, [dispatch]);
+
+  const handleDistributePoints = useCallback(() => {
+    dispatch(distributePoints());
+  }, [dispatch]);
 
   const isDisabledDistributeEqually = useMemo(() => {
     if (distributeEqually) return false;
@@ -77,7 +88,7 @@ const ResumeDistribution: React.FC = () => {
         maxLength={availableScore}
       />
       <AvailableScoreText>
-        Saldo disponível: {formatPoints(availableScore)}
+        Saldo disponível: {formatPoints(availableScore)} pontos
       </AvailableScoreText>
       <Checkbox
         checked={distributeEqually}
@@ -100,16 +111,23 @@ const ResumeDistribution: React.FC = () => {
       >
         ATRIBUIR PONTOS
       </Button>
-      <Title center>Resumo da distribuição</Title>
+      <Title center>Resumo da Distribuição</Title>
       {!!scoredParticipants && (
         <>
           <ResumeWidget scoredParticipants={scoredParticipants} />
           <RemoveAllScores onClick={handleRemoveAllScores} />
         </>
       )}
-      <Button buttonRole="tertiary" type="button">
-        DISTRIBUIR PREMIAÇÃO
-      </Button>
+      {!finishedDistribution && (
+        <Button
+          buttonRole="tertiary"
+          type="button"
+          onClick={handleDistributePoints}
+          disabled={!isEnabledToDistributePoints}
+        >
+          DISTRIBUIR PREMIAÇÃO
+        </Button>
+      )}
     </div>
   );
 };

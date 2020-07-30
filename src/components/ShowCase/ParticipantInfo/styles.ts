@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -20,7 +19,7 @@ export const Content = styled.div`
 
   > h3 {
     font-size: 14px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.quartenary};
     margin-top: 15px;
     text-align: center;
@@ -28,7 +27,7 @@ export const Content = styled.div`
 
   > h4 {
     font-size: 14px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.quartenary};
     margin-top: 8px;
   }
@@ -45,7 +44,7 @@ export const Content = styled.div`
     border-radius: 5px;
     text-decoration: none;
     font-size: 14px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 `;
 

@@ -36,9 +36,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 import {
   toggleRoleSelection,
@@ -57,7 +56,6 @@ export type TeamAwardsState = {
   fetchRoles: FetchState;
   fetchParticipants: FetchState;
   assignPoints: FetchState;
-  distributePoints: FetchState;
   subsidiaries: Subsidiary[] | null;
   roles: Role[] | null;
   participants: ParticipantsList | null;
@@ -71,6 +69,8 @@ export type TeamAwardsState = {
   distributeEqually: boolean;
   totalForEachParticipantDistributedEqually: number | null;
   selectedRolesAll: string[] | null;
+  totalParticipants: number;
+  isOpenModalMissingParticipants: boolean;
 };
 
 export const initialState: TeamAwardsState = {
@@ -78,7 +78,6 @@ export const initialState: TeamAwardsState = {
   fetchRoles: emptyFetchState,
   fetchParticipants: emptyFetchState,
   assignPoints: emptyFetchState,
-  distributePoints: emptyFetchState,
   subsidiaries: null,
   roles: null,
   participants: null,
@@ -92,6 +91,8 @@ export const initialState: TeamAwardsState = {
   distributeEqually: false,
   totalForEachParticipantDistributedEqually: null,
   selectedRolesAll: null,
+  totalParticipants: 0,
+  isOpenModalMissingParticipants: false,
 };
 
 const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
@@ -194,6 +195,7 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
     case ASSIGN_POINTS_SUCCESS:
       return {
         ...state,
+        assignPoints: emptyFetchState,
         distributeEqually: false,
         pointsToDistribute: 0,
         selectedParticipants: null,
@@ -269,14 +271,17 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
         scoredParticipants: null,
       };
 
-    case DISTRIBUTE_POINTS_ACTION:
-      return { ...state, distributePoints: fetchingState };
+    case SET_TOTAL_PARTICIPANTS:
+      return {
+        ...state,
+        totalParticipants: action.payload.totalParticipants,
+      };
 
-    case DISTRIBUTE_POINTS_FAILURE:
-      return { ...state, distributePoints: fetchErrorState(action) };
-
-    case DISTRIBUTE_POINTS_SUCCESS:
-      return { ...state, distributePoints: emptyFetchState };
+    case TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS:
+      return {
+        ...state,
+        isOpenModalMissingParticipants: !state.isOpenModalMissingParticipants,
+      };
 
     default:
       return state;

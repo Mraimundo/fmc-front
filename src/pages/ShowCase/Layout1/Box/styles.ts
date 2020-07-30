@@ -16,7 +16,7 @@ export const ContentBox = styled.div`
 
   > h3 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 8px;
   }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1937.517" height="179" viewBox="0 0 1937.517 179">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.001" y1="-0.225" x2="0.29" y2="0.804" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#40535b"/>
+      <stop offset="0.012" stop-color="#3e525a"/>
+      <stop offset="0.313" stop-color="#283f48"/>
+      <stop offset="0.504" stop-color="#203842"/>
+      <stop offset="0.796" stop-color="#0e2b34"/>
+      <stop offset="1" stop-color="#002128"/>
+    </linearGradient>
+    <filter id="Retângulo_266" x="0" y="0" width="1937.517" height="179" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.435"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Retângulo_266)">
+    <rect id="Retângulo_266-2" data-name="Retângulo 266" width="1919.517" height="161" transform="translate(6 6)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

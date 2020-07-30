@@ -14,6 +14,7 @@ const SubjectsSelect: React.FC<Props> = ({ name, className }) => {
       label="Assunto"
       loadItems={getPrivateSubjectsForSelect}
       className={className}
+      inputRole="secondary"
     />
   );
 };

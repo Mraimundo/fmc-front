@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import DefaultMechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
-import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Customers';
+import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
 
 export const Container = styled.div`
   display: flex;
@@ -8,10 +8,18 @@ export const Container = styled.div`
 
   > h4 {
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 30px;
     margin-bottom: 10px;
+  }
+
+  > input[type='text'] {
+    width: 100%;
+    max-width: 435px;
+    height: 44px;
+    padding: 0 15px;
+    color: ${({ theme }) => theme.font.color.quartenary};
   }
 `;
 
@@ -28,6 +36,7 @@ export const CustomersSelect = styled(DefaultCustomersSelect)`
     width: 100%;
     max-width: 435px;
     height: 44px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -53,10 +62,14 @@ export const CostumerDetails = styled.div`
   display: flex;
   align-items: center;
   padding: 0 16px;
-  margin-top: 14px;
+  margin-top: 10px;
+
+  svg {
+    cursor: pointer;
+  }
 
   > h3 {
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.quartenary};
   }
@@ -64,7 +77,7 @@ export const CostumerDetails = styled.div`
   > h4 {
     flex: 1;
     text-align: right;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
     padding-right: 30px;

@@ -8,12 +8,12 @@ export const Container = styled(Link)`
   background: ${({ theme }) => theme.font.color.primary};
   transition: color 0.2s;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   align-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   width: 86px;
   height: 29px;
 

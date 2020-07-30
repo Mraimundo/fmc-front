@@ -1,0 +1,7 @@
+<svg id="Componente_6_1" data-name="Componente 6 – 1" xmlns="http://www.w3.org/2000/svg" width="17" height="28" viewBox="0 0 17 28">
+  <text id="x" transform="translate(2 23)" fill="#e63027" font-size="24" font-family="HelveticaNeue, Helvetica Neue"><tspan x="0" y="0">x</tspan></text>
+  <g id="Retângulo_368" data-name="Retângulo 368" transform="translate(0 8)" fill="none" stroke="#2a4207" stroke-width="1">
+    <rect width="17" height="17" rx="2" stroke="none"/>
+    <rect x="0.5" y="0.5" width="16" height="16" rx="1.5" fill="none"/>
+  </g>
+</svg>

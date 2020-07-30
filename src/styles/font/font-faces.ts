@@ -2,6 +2,15 @@ import { css } from 'styled-components';
 
 export default css`
   @font-face {
+    font-family: 'Helvetica-Neue-Condensed';
+    src: url('/fonts/HelveticaNeue-Condensed.ttf');
+    src: local('HelveticaNeue Condensed'), local('HelveticaNeueCondensed'),
+      url('/fonts/HelveticaNeue-Condensed.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
     font-family: 'Helvetica-Neue-Bold';
     src: url('/fonts/hinted-HelveticaNeueBold.eot');
     src: local('HelveticaNeue Bold'), local('HelveticaNeueBold'),

@@ -6,18 +6,24 @@ export const Container = styled.div`
   overflow-x: hidden;
   padding: 12px;
 
-  &::-webkit-scrollbar-track {
+  /*&::-webkit-scrollbar-track {
     background-color: #fff;
-  }
+  }*/
   padding-right: 12px;
-  &::-webkit-scrollbar {
+  /*&::-webkit-scrollbar {
     width: 12px;
-  }
-  &::-webkit-scrollbar-thumb {
+  }*/
+  /*&::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #dbded6;
+  }*/
+
+  &::-webkit-scrollbar {
+    display: none;
   }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export const Content = styled.div`
@@ -44,7 +50,7 @@ export const MessageBox = styled.div<MessageBoxProps>`
     width: 100%;
     font-size: 15px;
     color: ${({ theme }) => theme.font.color.secondary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   p {

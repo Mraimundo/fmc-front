@@ -29,7 +29,7 @@ const Form: React.FC = () => {
           </div>
           <div>
             <Box>
-              <img src={mock.emailImage} alt="Imagem exemplo do email" />
+              <img src={mock.emailImage} alt="Imagem exemplo do E-mail" />
               <span>
                 <Checkbox color="default" /> Disparo automático do E-mail da
                 campanha

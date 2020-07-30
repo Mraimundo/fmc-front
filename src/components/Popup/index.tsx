@@ -3,6 +3,8 @@ import parser from 'html-react-parser';
 import { Popup as IPopup } from 'services/popup/interfaces';
 import { Button } from 'components/shared';
 import markPopupRead from 'services/popup/markPopupRead';
+import { ReactSVG } from 'react-svg';
+import closeIcon from 'assets/images/training/close-icon.svg';
 
 import { Modal, Container, Content, Close } from './styles';
 
@@ -25,10 +27,8 @@ const Popup: React.FC<Props> = ({ isOpen, onRequestClose, popup }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={handleClose} type="primary">
       <Container>
-        <Close>
-          <button type="button" onClick={handleClose}>
-            X
-          </button>
+        <Close onClick={handleClose}>
+          <ReactSVG src={closeIcon} />
         </Close>
         <Content>{parser(popup.body)}</Content>
         {popup.canMarkAsRead && (

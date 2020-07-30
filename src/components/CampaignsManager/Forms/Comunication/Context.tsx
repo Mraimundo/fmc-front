@@ -9,7 +9,7 @@ const ComunicationFormContext = createContext<ComunicationFormContextState>(
 );
 
 export const ComunicationFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   return (
     <ComunicationFormContext.Provider value={{ test }}>

@@ -25,9 +25,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 
 describe('src/state/modules/point-management/team-awards/constants', () => {
@@ -333,38 +332,26 @@ describe('src/state/modules/point-management/team-awards/constants', () => {
     });
   });
 
-  describe('DISTRIBUTE_POINTS_ACTION', () => {
+  describe('SET_TOTAL_PARTICIPANTS', () => {
     it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_ACTION).to.be.a('string');
+      expect(SET_TOTAL_PARTICIPANTS).to.be.a('string');
     });
 
     it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_ACTION).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_ACTION',
+      expect(SET_TOTAL_PARTICIPANTS).to.be.equal(
+        '@fmc/point-management/team-awards/SET_TOTAL_PARTICIPANTS',
       );
     });
   });
 
-  describe('DISTRIBUTE_POINTS_FAILURE', () => {
+  describe('TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS', () => {
     it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_FAILURE).to.be.a('string');
+      expect(TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS).to.be.a('string');
     });
 
     it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_FAILURE).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_FAILURE',
-      );
-    });
-  });
-
-  describe('DISTRIBUTE_POINTS_SUCCESS', () => {
-    it('should return a string', () => {
-      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.a('string');
-    });
-
-    it('should return correct value', () => {
-      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.equal(
-        '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_SUCCESS',
+      expect(TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS).to.be.equal(
+        '@fmc/point-management/team-awards/TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS',
       );
     });
   });

@@ -14,11 +14,17 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
+  SET_FINISHED_DISTRIBUTION,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
 export const emptyPointsToDistribute: PointsToDistribute = {
   general: null,
+  generalPointId: null,
   resaleCooperative: null,
   teamAwards: null,
 };
@@ -26,23 +32,27 @@ export const emptyPointsToDistribute: PointsToDistribute = {
 export type CommonState = {
   fetchEstablishments: FetchState;
   fetchPointsToDistribute: FetchState;
+  distributePoints: FetchState;
   isReadyToDistribute: boolean;
   pointsToDistribute: PointsToDistribute;
   totalPointsTeamAwards: number;
   totalPointsResaleCooperative: number;
   establishments: Establishment[] | null;
   selectedEstablishment: Establishment | null;
+  finishedDistribution: boolean;
 };
 
 export const initialState: CommonState = {
   fetchEstablishments: emptyFetchState,
   fetchPointsToDistribute: emptyFetchState,
+  distributePoints: emptyFetchState,
   isReadyToDistribute: false,
   pointsToDistribute: emptyPointsToDistribute,
   totalPointsTeamAwards: 0,
   totalPointsResaleCooperative: 0,
   establishments: null,
   selectedEstablishment: null,
+  finishedDistribution: false,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -101,6 +111,21 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       return {
         ...state,
         selectedEstablishment: action.payload.selectedEstablishment,
+      };
+
+    case DISTRIBUTE_POINTS_ACTION:
+      return { ...state, distributePoints: fetchingState };
+    case DISTRIBUTE_POINTS_FINALLY_ACTION:
+      return { ...state, distributePoints: fetchingState };
+    case DISTRIBUTE_POINTS_FAILURE:
+      return { ...state, distributePoints: fetchErrorState(action) };
+    case DISTRIBUTE_POINTS_SUCCESS:
+      return { ...state, distributePoints: emptyFetchState };
+
+    case SET_FINISHED_DISTRIBUTION:
+      return {
+        ...state,
+        finishedDistribution: action.payload.finishedDistribution,
       };
 
     default:

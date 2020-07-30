@@ -20,7 +20,7 @@ export const Content = styled.div`
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-left: 35px;
     margin-bottom: 15px;
     font-size: 24px;
@@ -45,8 +45,8 @@ export const Box = styled.div`
   padding: 25px 25px;
   margin-top: 35px;
   > h3 {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 24px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;
   }

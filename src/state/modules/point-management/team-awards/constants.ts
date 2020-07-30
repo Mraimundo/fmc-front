@@ -64,9 +64,8 @@ export const TOGGLE_SELECTED_PARTICIPANT =
 export const REMOVE_ALL_SCORES =
   '@fmc/point-management/team-awards/REMOVE_ALL_SCORES';
 
-export const DISTRIBUTE_POINTS_ACTION =
-  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_ACTION';
-export const DISTRIBUTE_POINTS_FAILURE =
-  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_FAILURE';
-export const DISTRIBUTE_POINTS_SUCCESS =
-  '@fmc/point-management/team-awards/DISTRIBUTE_POINTS_SUCCESS';
+export const SET_TOTAL_PARTICIPANTS =
+  '@fmc/point-management/team-awards/SET_TOTAL_PARTICIPANTS';
+
+export const TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS =
+  '@fmc/point-management/team-awards/TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS';

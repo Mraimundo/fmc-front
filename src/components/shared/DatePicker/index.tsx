@@ -13,7 +13,6 @@ import { ReactSVG } from 'react-svg';
 import calendarIcon from 'assets/images/campaigns/calendar-icon.svg';
 import { formatDate } from 'util/datetime';
 
-import { AiFillEye } from 'react-icons/ai';
 import {
   Container,
   InputContainer,
@@ -133,6 +132,7 @@ const DatePicker: React.FC<InputProps> = ({
       onInputFocus,
       onChange,
       value,
+      placeholder,
     ],
   );
 };

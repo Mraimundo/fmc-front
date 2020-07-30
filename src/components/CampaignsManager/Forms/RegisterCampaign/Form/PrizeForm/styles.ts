@@ -20,7 +20,7 @@ export const Header = styled.div`
 
   > h4 {
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     text-transform: uppercase;
     color: ${({ theme }) => theme.font.color.primary};
     padding-top: 15px;
@@ -31,7 +31,7 @@ export const Header = styled.div`
     flex: 1;
     text-align: right;
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     padding-right: 30px;
     padding-top: 15px;
     color: ${({ theme }) => theme.font.color.primary};

@@ -19,14 +19,22 @@ export const Content = styled.div`
 
   > h3 {
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     display: flex;
   }
 
+  > h5 {
+    font-size: 21px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.quartenary};
+    display: flex;
+    margin-top: 10px;
+  }
+
   > span {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 35px;
   }

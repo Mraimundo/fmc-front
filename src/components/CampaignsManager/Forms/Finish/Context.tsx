@@ -9,7 +9,7 @@ const FinishFormContext = createContext<FinishFormContextState>(
 );
 
 export const FinishFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   return (
     <FinishFormContext.Provider value={{ test }}>

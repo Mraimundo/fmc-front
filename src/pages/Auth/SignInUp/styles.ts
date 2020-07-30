@@ -3,6 +3,7 @@ import ContactBallon from 'components/Contact';
 import { animated } from 'react-spring';
 import { shade } from 'polished';
 import { Button } from 'components/shared';
+import background from 'assets/images/background.svg';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -10,12 +11,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
-
+  background: url(${background});
   padding: 70px 20px 0 20px;
 
   > img {
@@ -134,7 +130,7 @@ export const Content = styled(animated.div)`
 
 export const Title = styled.h3`
   font-size: 18px;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   color: ${({ theme }) => theme.font.color.tertiary};
   width: 100%;
   @media screen and (min-width: 1367px) {
@@ -169,6 +165,7 @@ export const ItemList = styled.li<ItemListProps>`
   cursor: pointer;
   padding: 8px 20px;
   font-size: 14px;
+  flex: 1;
 
   & + li {
     margin-left: 20px;

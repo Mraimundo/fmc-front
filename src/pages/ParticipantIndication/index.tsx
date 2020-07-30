@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import produce from 'immer';
 
-import { useAuth } from 'context/AuthContext';
-import { INACTIVE, PRECHARGE, ACTIVE } from 'config/constants/vendavallStatus';
+import { INACTIVE, ACTIVE } from 'config/constants/vendavallStatus';
 import getTableListData from 'services/participantIndication/getParticipantsList';
 import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
@@ -45,7 +44,6 @@ const ParticipantIndication: React.FC = () => {
   ] = useState<Establishment | null>(null);
 
   const { addToast } = useToast();
-  const { participant } = useAuth();
 
   const filter = useCallback(
     async (establishmentId, roleId = 0, subsidiaryId = 0) => {
@@ -128,13 +126,13 @@ const ParticipantIndication: React.FC = () => {
       try {
         await resendIndicationEmail(indicationId);
         addToast({
-          title: 'Indicação reenviada no email do participante com sucesso',
+          title: 'Indicação reenviada no E-mail do participante com sucesso',
         });
       } catch (e) {
         addToast({
           title:
             e.response?.data?.message ||
-            'Falha no reenvio do email. Por favor entre em contato com o suporte',
+            'Falha no reenvio do E-mail. Por favor entre em contato com o suporte',
           type: 'error',
         });
       }
@@ -246,9 +244,9 @@ const ParticipantIndication: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>
-          Indique um participante
-          {` na ${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
+        <h3>Indique um participante</h3>
+        <h5>
+          {`${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
           {establishments.length > 1 && (
             <Establishments
               establishments={establishments}
@@ -256,7 +254,7 @@ const ParticipantIndication: React.FC = () => {
               value={establishmentSelected}
             />
           )}
-        </h3>
+        </h5>
         <StatusBox
           percentActivated={activePercentage}
           onAddClick={() => setFormOpened(!formOpened)}

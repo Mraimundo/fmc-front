@@ -11,6 +11,11 @@ import {
   setTotalPointsResaleCooperative,
   setIsReadyToDistribute,
   setSelectedEstablishment,
+  distributePoints,
+  distributePointsFinally,
+  distributePointsFailure,
+  distributePointsSuccess,
+  setFinishedDistribution,
 } from './actions';
 import * as constants from './constants';
 
@@ -190,6 +195,95 @@ describe('src/state/modules/point-management/common/actions', () => {
       expect(setSelectedEstablishment(selectedEstablishment)).to.be.deep.equal({
         type: constants.SET_SELECTED_ESTABLISHMENT,
         payload: { selectedEstablishment },
+      });
+    });
+  });
+
+  describe('distributePoints', () => {
+    it('should be a function', () => {
+      expect(distributePoints).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePoints()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePoints()).to.be.deep.equal({
+        type: constants.DISTRIBUTE_POINTS_ACTION,
+      });
+    });
+  });
+
+  describe('distributePointsFinally', () => {
+    it('should be a function', () => {
+      expect(distributePointsFinally).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsFinally()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsFinally()).to.be.deep.equal({
+        type: constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
+      });
+    });
+  });
+
+  describe('distributePointsFailure', () => {
+    it('should be a function', () => {
+      expect(distributePointsFailure).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsFailure(error)).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsFailure(error)).to.be.deep.equal({
+        type: constants.DISTRIBUTE_POINTS_FAILURE,
+        payload: { error },
+      });
+    });
+  });
+
+  describe('distributePointsSuccess', () => {
+    it('should be a function', () => {
+      expect(distributePointsSuccess).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(distributePointsSuccess()).to.be.a('object');
+    });
+
+    it('should return a valid object', () => {
+      expect(distributePointsSuccess()).to.be.deep.equal({
+        type: constants.DISTRIBUTE_POINTS_SUCCESS,
+      });
+    });
+  });
+
+  describe('setFinishedDistribution', () => {
+    it('should be a function', () => {
+      expect(setFinishedDistribution).to.be.a('function');
+    });
+
+    it('should return a object', () => {
+      expect(setFinishedDistribution()).to.be.a('object');
+    });
+
+    it('should return a valid object with defualt param', () => {
+      expect(setFinishedDistribution()).to.be.deep.equal({
+        type: constants.SET_FINISHED_DISTRIBUTION,
+        payload: { finishedDistribution: true },
+      });
+    });
+
+    it('should return a valid object with param', () => {
+      expect(setFinishedDistribution(false)).to.be.deep.equal({
+        type: constants.SET_FINISHED_DISTRIBUTION,
+        payload: { finishedDistribution: false },
       });
     });
   });

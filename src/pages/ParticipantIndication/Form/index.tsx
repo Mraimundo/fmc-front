@@ -14,14 +14,14 @@ import ImportFileForm from './ImportFile';
 import { Container, Input, BoxPhone, Button, PanelIndication } from './styles';
 
 export interface FormData {
-  role_select: Option;
+  subsidiary_select: Option | null;
+  role_select: Option | null;
   cpf: string;
   email: string;
   name: string;
   area_code: string;
   cell_phone: string;
   establishment_id: number;
-  subsidiary_select: Option;
 }
 
 interface Props {
@@ -57,21 +57,21 @@ const Form: React.FC<Props> = ({
   const { handleSubmit, reset } = methods;
 
   useEffect(() => {
-    reset(indicationData || {});
+    reset(indicationData || { subsidiary_select: null, role_select: null });
   }, [indicationData, reset]);
 
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
     if (
       await saveIndication({
-        role_id: parseInt(data.role_select.value, 0),
+        role_id: parseInt(data.role_select?.value || '0', 0),
         cpf: data.cpf,
         email: data.email,
         name: data.name,
         area_code: data.area_code,
         cell_phone: data.cell_phone,
         establishment_id: establishment.id,
-        subsidiary_id: parseInt(data.subsidiary_select.value, 0),
+        subsidiary_id: parseInt(data.subsidiary_select?.value || '0', 0),
       })
     ) {
       reset();
@@ -99,60 +99,53 @@ const Form: React.FC<Props> = ({
           </button>
         </PanelIndication>
       )}
-      {editing ? <h3>Editando indicação</h3> : <h3>Indique um participante</h3>}
+      {editing && <h3>Editando indicação</h3>}
       {type === 'multiple' ? (
         <ImportFileForm />
       ) : (
-        <>
-          <h4>
-            Indique os participantes da sua
-            {` ${establishment.type.name}`}
-          </h4>
-          <span>{establishment.name}</span>
-          <FormContext {...methods}>
-            <form onSubmit={onSubmit}>
-              <FilialSelect
-                name="subsidiary_select"
-                inputRole="secondary"
-                establishmentId={establishment.id}
-                disabled={editing}
-              />
-              <RolesSelect
-                name="role_select"
-                inputRole="secondary"
-                disabled={editing}
-              />
-              <Input name="name" label="Nome completo*" inputRole={inputRole} />
+        <FormContext {...methods}>
+          <form onSubmit={onSubmit}>
+            <FilialSelect
+              name="subsidiary_select"
+              inputRole="secondary"
+              establishmentId={establishment.id}
+              disabled={editing}
+            />
+            <RolesSelect
+              name="role_select"
+              inputRole="secondary"
+              disabled={editing}
+            />
+            <Input name="name" label="Nome completo*" inputRole={inputRole} />
+            <Input
+              name="cpf"
+              label="CPF*"
+              numbersOnly
+              pattern="XXX.XXX.XXX-XX"
+              inputRole={inputRole}
+            />
+            <BoxPhone>
               <Input
-                name="cpf"
-                label="CPF*"
+                name="area_code"
                 numbersOnly
-                pattern="XXX.XXX.XXX-XX"
+                pattern="(XX)"
+                label="DDD"
                 inputRole={inputRole}
               />
-              <BoxPhone>
-                <Input
-                  name="area_code"
-                  numbersOnly
-                  pattern="(XX)"
-                  label="DDD"
-                  inputRole={inputRole}
-                />
-                <Input
-                  name="cell_phone"
-                  numbersOnly
-                  label="Celular"
-                  pattern="X XXXX-XXXX"
-                  inputRole={inputRole}
-                />
-              </BoxPhone>
-              <Input name="email" label="Email*" inputRole={inputRole} />
-              <Button type="submit" buttonRole="tertiary" loading={loading}>
-                Salvar
-              </Button>
-            </form>
-          </FormContext>
-        </>
+              <Input
+                name="cell_phone"
+                numbersOnly
+                label="Celular"
+                pattern="X XXXX-XXXX"
+                inputRole={inputRole}
+              />
+            </BoxPhone>
+            <Input name="email" label="E-mail*" inputRole={inputRole} />
+            <Button type="submit" buttonRole="primary" loading={loading}>
+              Salvar
+            </Button>
+          </form>
+        </FormContext>
       )}
     </Container>
   );

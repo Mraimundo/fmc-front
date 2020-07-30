@@ -21,12 +21,13 @@ export const Content = styled.div`
   > button {
     margin: 25px 0;
     align-self: center;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    border-radius: 0;
   }
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bolder;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-left: 35px;
     margin-bottom: 15px;
   }

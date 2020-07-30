@@ -1,18 +1,24 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, Middleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
 
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 
-import rootReducer from './root-reducer';
+import rootReducer, { StoreState } from './root-reducer';
 import rootSaga from './root-saga';
 
 export const history = createBrowserHistory();
 
-const sagaMiddleware = createSagaMiddleware();
-const logger = createLogger();
+const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware, logger];
+const middlewares: Middleware<{}, StoreState>[] = [sagaMiddleware];
+
+if (process.env.REACT_APP_DEBUG_LOGGER) {
+  const logger = createLogger({
+    collapsed: true,
+  });
+  middlewares.push(logger);
+}
 
 const store = createStore(
   rootReducer,

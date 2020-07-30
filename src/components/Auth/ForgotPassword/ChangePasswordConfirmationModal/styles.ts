@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding: 60px 100px;
 
   h3 {
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 26px;
     margin-bottom: 60px;
   }
@@ -18,6 +18,6 @@ export const Container = styled.div`
     width: 160px;
     height: 40px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 `;

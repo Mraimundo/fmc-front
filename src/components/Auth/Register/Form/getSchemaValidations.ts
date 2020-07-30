@@ -2,14 +2,19 @@ import * as Yup from 'yup';
 import { IProfile } from 'config/constants';
 import validateCpf from 'util/validations/cpf';
 import validMobilePhone from 'util/validations/mobilePhone';
-import { hasLowerCase, hasNumber, hasUpperCase } from 'util/validations/string';
+import {
+  hasLowerCase,
+  hasNumber,
+  hasUpperCase,
+  hasSpecialCharacteres,
+} from 'util/validations/string';
 
 const mandatoryMessage = 'Campo obrigatório';
 
 const commomValidations = {
   nick_name: Yup.string().required(mandatoryMessage),
   name: Yup.string().required(mandatoryMessage),
-  email: Yup.string().required(mandatoryMessage).email('Email inválido'),
+  email: Yup.string().required(mandatoryMessage).email('E-mail inválido'),
   cpf: Yup.string()
     .required(mandatoryMessage)
     .test('valid-cpf', 'CPF inválido', validateCpf),
@@ -37,6 +42,11 @@ const passwordFields = (editing: boolean) => {
                 hasUpperCase,
               )
               .test('lower-case', 'Deve conter pelo menos um número', hasNumber)
+              .test(
+                'has-special-characteres',
+                'Deve conter pelo menos um desses caracteres (!, $, #, %, @, &)',
+                hasSpecialCharacteres,
+              )
           : Yup.string(),
       ),
       password_confirmation: Yup.string().oneOf(
@@ -59,7 +69,12 @@ const passwordFields = (editing: boolean) => {
         'Deve conter pelo menos uma letra maiúscula',
         hasUpperCase,
       )
-      .test('lower-case', 'Deve conter pelo menos um número', hasNumber),
+      .test('lower-case', 'Deve conter pelo menos um número', hasNumber)
+      .test(
+        'has-special-characteres',
+        'Deve conter pelo menos um desses caracteres (!, $, #, %, @, &)',
+        hasSpecialCharacteres,
+      ),
     password_confirmation: Yup.string()
       .required(mandatoryMessage)
       .oneOf(
@@ -124,7 +139,7 @@ export default (
           /* logradouro: Yup.string().required(mandatoryMessage), */
           street: Yup.string().required(mandatoryMessage),
           number: Yup.string().required(mandatoryMessage),
-          complement: Yup.string().required(mandatoryMessage),
+          complement: Yup.string(),
           district: Yup.string().required(mandatoryMessage),
           city: Yup.string().required(mandatoryMessage),
           /* state_code: Yup.string().required(mandatoryMessage), */

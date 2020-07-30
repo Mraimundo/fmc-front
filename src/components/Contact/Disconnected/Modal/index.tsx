@@ -106,7 +106,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               pattern="XXX.XXX.XXX-XX"
               inputRole={inputRole}
             />
-            <Input name="email" label="Email" inputRole={inputRole} />
+            <Input name="email" label="E-mail" inputRole={inputRole} />
             <BoxPhone>
               <Input
                 name="dddMobile"

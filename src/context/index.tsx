@@ -11,16 +11,22 @@ import { disconnectedTheme } from 'styles/theme';
 import { AuthProvider } from './AuthContext';
 import { ToastProvider } from './ToastContext';
 
-const AppProvider: React.FC = ({ children }) => (
-  <Provider store={store}>
-    <ThemeContext.Provider value={disconnectedTheme}>
-      <ToastProvider>
-        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
-          <AuthProvider>{children}</AuthProvider>
-        </MuiPickersUtilsProvider>
-      </ToastProvider>
-    </ThemeContext.Provider>
-  </Provider>
-);
+const AppProvider: React.FC = ({ children }) => {
+  return (
+    <>
+      <Provider store={store}>
+        <ThemeContext.Provider value={disconnectedTheme}>
+          <ToastProvider>
+            <AuthProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
+                {children}
+              </MuiPickersUtilsProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </ThemeContext.Provider>
+      </Provider>
+    </>
+  );
+};
 
 export default AppProvider;

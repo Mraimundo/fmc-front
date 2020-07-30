@@ -22,11 +22,12 @@ export const Content = styled.div`
     margin: 25px 0;
     height: 45px;
     align-self: center;
+    border-radius: 0;
   }
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 24px;
     margin-left: 35px;
     margin-bottom: 15px;

@@ -2,7 +2,7 @@ export default {
   primary: {
     backgroundColor: '#2a4207',
     fontColor: '#fff',
-    borderRadius: '7px',
+    borderRadius: '10px',
   },
   secondary: {
     backgroundColor: '#2a4207',
@@ -15,8 +15,8 @@ export default {
     borderRadius: '7px',
   },
   quaternary: {
-    backgroundColor: '#2a4207',
-    fontColor: '#fff',
+    backgroundColor: '#fff',
+    fontColor: '#e63027',
     borderRadius: '7px',
   },
 };

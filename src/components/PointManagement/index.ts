@@ -10,3 +10,4 @@ export { default as Checkbox } from './Checkbox';
 export { default as PointsInput } from './PointsInput';
 export { default as FilterFields } from './FilterFields';
 export { default as ParticipantsList } from './ParticipantsList';
+export { default as EstablishmentSelection } from './EstablishmentSelection';

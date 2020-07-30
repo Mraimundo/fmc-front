@@ -1,19 +1,22 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { ReactSVG } from 'react-svg';
 
-import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
+import { Tooltip } from 'components/shared';
+import { limitChars } from 'util/string';
 import useOnClickOutside from 'hooks/use-on-click-outside';
 import { Subsidiary } from 'state/modules/point-management/team-awards/types';
 import { Label, Checkbox } from 'components/PointManagement';
 import { Input, WrapperInput, Wrapper, Dropdown } from './styles';
 
-type Props = {
+import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
+
+interface SubsidiarySelectProps {
   subsidiaries: Subsidiary[] | null;
   selectedSubsidiaries: number[] | null;
   onSelect: (value: number) => void;
 };
-const SubsidiarySelect: React.FC<Props> = ({
-  subsidiaries = [],
+const SubsidiarySelect: React.FC<SubsidiarySelectProps> = ({
+  subsidiaries,
   selectedSubsidiaries,
   onSelect,
 }) => {
@@ -23,13 +26,14 @@ const SubsidiarySelect: React.FC<Props> = ({
   useOnClickOutside(dropdownRef, () => isVisible(false));
 
   const selectedSubsidiariesText = useMemo(() => {
+    if (!subsidiaries) return 'Você não possui filiais';
     if (!selectedSubsidiaries) return 'Todas filiais';
 
     const subsidiariesCount = selectedSubsidiaries.length;
     return subsidiariesCount > 1
       ? `${subsidiariesCount} filiais selecionadas`
       : `${subsidiariesCount} filial selecionada`;
-  }, [selectedSubsidiaries]);
+  }, [selectedSubsidiaries, subsidiaries]);
 
   return (
     <Wrapper ref={dropdownRef}>
@@ -39,7 +43,7 @@ const SubsidiarySelect: React.FC<Props> = ({
           id="filter-branch"
           type="text"
           value={selectedSubsidiariesText}
-          data-testid="participants-finder-input"
+          data-testid="subsidiary-select"
           readOnly
         />
         <ReactSVG src={arrowDownIcon} />
@@ -55,11 +59,13 @@ const SubsidiarySelect: React.FC<Props> = ({
 
                 return (
                   <li key={id}>
-                    <Checkbox
-                      checked={isChecked}
-                      onChange={() => onSelect(id)}
-                      label={name}
-                    />
+                    <Tooltip title={name} type="primary">
+                      <Checkbox
+                        checked={isChecked}
+                        onChange={() => onSelect(id)}
+                        label={limitChars(name, 40)}
+                      />
+                    </Tooltip>
                   </li>
                 );
               })}

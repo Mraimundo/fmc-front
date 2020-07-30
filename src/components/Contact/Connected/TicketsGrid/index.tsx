@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Tooltip } from 'components/shared';
 
 import { SendMessageDTO } from 'services/contact/connected/dtos';
-import { Contact, Message } from 'services/contact/connected/interfaces';
+import { Contact } from 'services/contact/connected/interfaces';
 import transformer, {
   Response as GridDataItem,
   StatusText,
@@ -13,16 +13,14 @@ import transformerMessages, {
 } from 'services/contact/connected/transformers/toMessagesListTransformer';
 import sendMessage from 'services/contact/connected/sendMessage';
 
-import {
-  FiClock,
-  FiCheckCircle,
-  FiSlash,
-  FiMessageCircle,
-} from 'react-icons/fi';
+import check from 'assets/images/contact/check.svg';
+import clock from 'assets/images/contact/clock.svg';
+import message from 'assets/images/contact/message.svg';
+import notAllowed from 'assets/images/contact/not-allowed.svg';
 
 import Form from './Form';
 import Messages from './Messages';
-import { Container, GridHeader, TicketGrid } from './styles';
+import { Container, GridHeader, TicketGrid, Icon } from './styles';
 
 interface Props {
   className?: string;
@@ -42,25 +40,25 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
       case 'pending':
         return (
           <Tooltip title="Pendente" type="primary">
-            <FiClock size={26} />
+            <Icon src={clock} defaultcolor />
           </Tooltip>
         );
       case 'answered':
         return (
           <Tooltip title="Respondido" type="primary">
-            <FiCheckCircle size={26} color="green" />
+            <Icon src={check} />
           </Tooltip>
         );
       case 'closed':
         return (
           <Tooltip title="Fechado" type="primary">
-            <FiSlash size={26} color="#e63027" />
+            <Icon src={notAllowed} />
           </Tooltip>
         );
       default:
         return (
           <Tooltip title="Status não definido" type="primary">
-            <FiClock size={26} />
+            <Icon src={clock} />
           </Tooltip>
         );
     }
@@ -119,7 +117,7 @@ const TicketsGrid: React.FC<Props> = ({ className, contacts }) => {
             <h4>{`${item.subject} / ${item.category}`}</h4>
             <div>{getIcon(item.statusText)}</div>
             <div>
-              <FiMessageCircle size={26} />
+              <Icon src={message} defaultcolor />
             </div>
           </header>
           <div className="_contentMessage">

@@ -5,7 +5,7 @@ import Loader from '.';
 
 describe('<Loader />', () => {
   it('should render correctly', () => {
-    const { getByText } = render(<Loader>titulo de teste</Loader>);
+    const { getByText } = render(<Loader>buscando cargos...</Loader>);
 
     expect(getByText(/buscando cargos.../)).toBeInTheDocument();
   });

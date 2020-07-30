@@ -1,12 +1,16 @@
+import { pluginApi } from 'services/api';
 import { Category } from './interfaces/Campaign';
 
-const mock: Category[] = [
-  {
-    id: 1,
-    name: 'test',
-  },
-];
+interface ApiResponse {
+  segments: string[];
+}
 
 export default async (): Promise<Category[]> => {
-  return mock;
+  const {
+    data: { segments },
+  } = await pluginApi.get<ApiResponse>('products/segments');
+  return segments.map(item => ({
+    id: item,
+    name: item,
+  }));
 };

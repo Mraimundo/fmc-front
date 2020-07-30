@@ -24,7 +24,8 @@ export default async (fileUrl: string): Promise<Response> => {
   } catch (e) {
     if (
       (e as AxiosError<Response>).response?.data?.errors &&
-      (e as AxiosError<Response>).response?.data?.success_count
+      typeof (e as AxiosError<Response>).response?.data?.success_count ===
+        'number'
     ) {
       return {
         success_count: e.response.data.success_count,

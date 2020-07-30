@@ -6,16 +6,18 @@ export const error = 'Generic Error';
 
 export const pointsToDistribute: PointsToDistribute = {
   general: null,
+  generalPointId: 1,
   teamAwards: null,
   resaleCooperative: {
+    pointId: 1,
     maxInvoicePercentage: 20,
     points: 1500,
   },
 };
 
 export const establishments: Establishment[] = [
-  { value: '1', title: 'Estabelecimento 1' },
-  { value: '2', title: 'Estabelecimento 2' },
+  { value: '1', title: 'Estabelecimento 1', type: 'Revenda' },
+  { value: '2', title: 'Estabelecimento 2', type: 'Cooperativa' },
 ];
 
 export const rawEstablishments: RawEstablishment[] = [
@@ -26,7 +28,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '00000000000000',
     type: {
       id: 1,
-      name: 'a',
+      name: 'Revenda',
     },
   },
   {
@@ -36,7 +38,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '11111111111111',
     type: {
       id: 2,
-      name: 'b',
+      name: 'Cooperativa',
     },
   },
 ];
@@ -52,12 +54,17 @@ const state: CommonState = {
     isFetching: false,
     error: '',
   },
+  distributePoints: {
+    isFetching: false,
+    error: '',
+  },
   isReadyToDistribute: false,
   pointsToDistribute,
   totalPointsResaleCooperative: 10000,
   totalPointsTeamAwards: 5000,
   establishments,
   selectedEstablishment,
+  finishedDistribution: false,
 };
 
 export default state;

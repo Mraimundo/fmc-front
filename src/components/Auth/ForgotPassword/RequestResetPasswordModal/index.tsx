@@ -51,7 +51,7 @@ const RequestResetPasswordModal: React.FC<ModalProps> = ({
       addToast({
         title:
           e.response?.data?.message ||
-          'Falha ao enviar Email. Por favor tente novamente',
+          'Falha ao enviar E-mail. Por favor tente novamente',
         type: 'error',
       });
     }

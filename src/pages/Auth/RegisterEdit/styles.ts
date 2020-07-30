@@ -63,7 +63,7 @@ export const RegulationContainer = styled.div`
   button {
     height: 45px;
     text-transform: uppercase;
-    font-weight: 700;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 `;
 

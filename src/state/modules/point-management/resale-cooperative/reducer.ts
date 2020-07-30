@@ -8,14 +8,14 @@ import {
 } from './constants';
 
 export type ResaleCooperativeState = {
-  marketplacePoints: number | null;
-  invoicePoints: number | null;
+  marketplacePoints: number;
+  invoicePoints: number;
   maxInvoicePercentage: number | null;
 };
 
 export const initialState: ResaleCooperativeState = {
-  marketplacePoints: null,
-  invoicePoints: null,
+  marketplacePoints: 0,
+  invoicePoints: 0,
   maxInvoicePercentage: null,
 };
 

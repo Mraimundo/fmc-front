@@ -1,49 +1,37 @@
 import {
   FetchSubsidiariesRawData,
-  DataDistribution,
-  ScoredParticipantsDataDistribution,
+  FetchParticipantsRawData,
+  FetchParticipantsRawInfo,
 } from 'services/point-management/team-awards';
 import {
   Subsidiary,
-  ScoredParticipant,
+  ParticipantsList,
 } from 'state/modules/point-management/team-awards/types';
-import { extractIdAndPointsFromScoredParticipants } from 'state/modules/point-management/team-awards/utils';
 
 export const transformSubsidiariesRawData = (
   subsidiaries: FetchSubsidiariesRawData[],
-): Subsidiary[] => subsidiaries.map(({ id, name }) => ({ id, name }));
+): Subsidiary[] | null => {
+  const subsidiariesResult = subsidiaries.map(({ id, name }) => ({ id, name }));
 
-interface ITransformScoredParticipantsToDataDistribution {
-  scoredParticipants: ScoredParticipant[] | null;
-  establishmentId: number;
-  pointId: number;
-  marketplacePoints: number;
-  invoicePoints: number;
+  return subsidiariesResult.length > 0 ? subsidiariesResult : null;
+};
+
+interface TransformParticipantsRawData {
+  data: FetchParticipantsRawData;
+  info: FetchParticipantsRawInfo;
 }
-export const transformScoredParticipantsToDataDistribution = ({
-  scoredParticipants,
-  establishmentId,
-  pointId,
-  marketplacePoints,
-  invoicePoints,
-}: ITransformScoredParticipantsToDataDistribution): DataDistribution[] => {
-  const participants = extractIdAndPointsFromScoredParticipants<
-    ScoredParticipantsDataDistribution[]
-  >(scoredParticipants);
+export const transformParticipantsRawData = (
+  response: TransformParticipantsRawData,
+): {
+  participants: ParticipantsList | null;
+  totalParticipants: number;
+} => {
+  const participants =
+    Object.values(response.data).length > 0 ? response.data : null;
+  const totalParticipants = response.info.total_participants;
 
-  const points = {
-    undistributed_points: [
-      {
-        id: pointId,
-        establishment: {
-          id: establishmentId,
-          marketplace: marketplacePoints,
-          rebate: invoicePoints,
-        },
-        participants,
-      }
-    ],
-  }
-console.log('points on transformer -> ', points)
-  return [] as DataDistribution[];
+  return {
+    participants,
+    totalParticipants,
+  };
 };

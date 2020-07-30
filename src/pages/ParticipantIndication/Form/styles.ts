@@ -10,14 +10,14 @@ export const Container = styled.div`
 
   > h3 {
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 10px;
   }
 
   > h4 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
   }
@@ -25,7 +25,7 @@ export const Container = styled.div`
   > span {
     font-size: 18px;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     opacity: 0.7;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -34,6 +34,7 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    margin: 18px 0;
     > div {
       margin-top: 10px;
     }

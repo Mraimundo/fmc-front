@@ -7,7 +7,7 @@ export default Yup.object().shape({
   cpf: Yup.string()
     .required('CPF é obrigatório')
     .test('valid-cpf', 'CPF inválido', validateCpf),
-  email: Yup.string().email('Email inválido').required('Email é obrigatório'),
+  email: Yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
   dddMobile: Yup.string().required('DDD é obrigatório'),
   mobile: Yup.string()
     .required('Número é obrigatório')

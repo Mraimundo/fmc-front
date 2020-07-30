@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
 import { Input, Button } from 'components/shared';
-import { FiUser } from 'react-icons/fi';
 
 import history from 'services/history';
 

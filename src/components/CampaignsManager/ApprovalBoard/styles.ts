@@ -21,7 +21,7 @@ export const Row = styled.div`
 
   > h5 {
     font-size: 18px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     flex: 1;
   }

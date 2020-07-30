@@ -25,7 +25,7 @@ export const fetchSubsidiariesFailure = (
   };
 
 export const fetchSubsidiariesSuccess = (
-  subsidiaries: Subsidiary[],
+  subsidiaries: Subsidiary[] | null,
 ): ActionCreatorPayload<
   typeof constants.FETCH_SUBSIDIARIES_SUCCESS,
   Pick<TeamAwardsState, 'subsidiaries'>
@@ -81,7 +81,7 @@ export const fetchParticipantsFailure = (
   };
 
 export const fetchParticipantsSuccess = (
-  participants: ParticipantsList,
+  participants: ParticipantsList | null,
 ): ActionCreatorPayload<
   typeof constants.FETCH_PARTICIPANTS_SUCCESS,
   Pick<TeamAwardsState, 'participants'>
@@ -227,28 +227,22 @@ export const removeAllScores = (): ActionCreator<
     type: constants.REMOVE_ALL_SCORES,
   };
 
-export const distributePoints = (): ActionCreator<
-  typeof constants.DISTRIBUTE_POINTS_ACTION
+export const setTotalParticipants = (
+  totalParticipants: number,
+): ActionCreatorPayload<
+  typeof constants.SET_TOTAL_PARTICIPANTS,
+  Pick<TeamAwardsState, 'totalParticipants'>
 > =>
   <const>{
-    type: constants.DISTRIBUTE_POINTS_ACTION,
+    type: constants.SET_TOTAL_PARTICIPANTS,
+    payload: { totalParticipants },
   };
 
-export const distributePointsFailure = (
-  error: string,
-): ActionCreatorFailure<typeof constants.DISTRIBUTE_POINTS_FAILURE> =>
-  <const>{
-    type: constants.DISTRIBUTE_POINTS_FAILURE,
-    payload: {
-      error,
-    },
-  };
-
-export const distributePointsSuccess = (): ActionCreator<
-  typeof constants.DISTRIBUTE_POINTS_SUCCESS
+export const toggleIsOpenModalMissingParticipants = (): ActionCreator<
+  typeof constants.TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS
 > =>
   <const>{
-    type: constants.DISTRIBUTE_POINTS_SUCCESS,
+    type: constants.TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
   };
 
 export type TeamAwardsActions = ReturnType<
@@ -277,7 +271,6 @@ export type TeamAwardsActions = ReturnType<
   | typeof deselectAllParticipants
   | typeof toggleSelectedParticipant
   | typeof removeAllScores
-  | typeof distributePoints
-  | typeof distributePointsFailure
-  | typeof distributePointsSuccess
+  | typeof setTotalParticipants
+  | typeof toggleIsOpenModalMissingParticipants
 >;

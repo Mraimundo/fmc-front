@@ -9,7 +9,7 @@ const ConfigurationFormContext = createContext<ConfigurationFormContextState>(
 );
 
 export const ConfigurationFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   return (
     <ConfigurationFormContext.Provider value={{ test }}>

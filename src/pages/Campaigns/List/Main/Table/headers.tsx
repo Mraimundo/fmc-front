@@ -1,6 +1,5 @@
 import React from 'react';
-import { StatusResponse } from 'services/campaignsManager/getCampaignStatus';
-import { number } from 'yup';
+import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';
 import ApprovalAction from './Actions/Approval';
@@ -19,21 +18,21 @@ export default [
   {
     column: 'Editar',
     dataValue: 'edit',
-    fn: ({ id, status }: { id: number; status: StatusResponse }) => (
+    fn: ({ id, status }: { id: number; status: StatusText }) => (
       <EditAction id={id} status={status} />
     ),
   },
   {
     column: 'Status da campanha',
     dataValue: 'status',
-    fn: ({ status }: { status: StatusResponse }) => (
+    fn: ({ status }: { status: { status: StatusText; name: string } }) => (
       <StatusAction status={status} />
     ),
   },
   {
     column: 'Aprovação',
     dataValue: 'approval',
-    fn: ({ id, status }: { id: number; status: StatusResponse }) => (
+    fn: ({ id, status }: { id: number; status: StatusText }) => (
       <ApprovalAction status={status} id={id} />
     ),
   },

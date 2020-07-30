@@ -2,6 +2,9 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { Button } from 'components/shared';
 import { useToast } from 'context/ToastContext';
 import { FormControl, Radio } from '@material-ui/core';
+import { ReactSVG } from 'react-svg';
+import wrongIcon from 'assets/images/training/wrong-icon.svg';
+import rightIcon from 'assets/images/training/right-icon.svg';
 import { useTraining, Question } from '../../Context';
 
 import {
@@ -105,7 +108,14 @@ const Quiz: React.FC = () => {
                   status={quizAlreadyAnswered ? !!item.correct : undefined}
                 >
                   <span>{key + 1}</span>
-                  <strong />
+                  <strong>
+                    {quizAlreadyAnswered &&
+                      (item.correct ? (
+                        <ReactSVG src={rightIcon} />
+                      ) : (
+                        <ReactSVG src={wrongIcon} />
+                      ))}
+                  </strong>
                 </QuestionNumber>
               ))}
             </BoxNumbers>

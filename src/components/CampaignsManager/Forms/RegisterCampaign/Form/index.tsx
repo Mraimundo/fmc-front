@@ -25,9 +25,12 @@ const Form: React.FC = () => {
       <PrizeForm />
       <BudgetForm />
       <ProductForm />
-      <span>Observações</span>
-      <textarea />
-      <Button type="button" buttonRole="primary">
+      <Button
+        type="button"
+        buttonRole="primary"
+        onClick={handleButtonClick}
+        loading={loading}
+      >
         Enviar
       </Button>
     </Container>

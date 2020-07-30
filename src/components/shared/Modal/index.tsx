@@ -31,13 +31,19 @@ const Modal: React.FC<ModalProps> = ({
           div.style.marginRight = '15px';
         }
         div.style.overflowY = 'hidden';
-        return;
+      } else {
+        (document.getElementById('root') as HTMLInputElement).style.overflowY =
+          'auto';
+        document.getElementsByTagName('body')[0].style.overflowY = 'auto';
+        document.getElementsByTagName('body')[0].style.marginRight = '0';
       }
+    }
+    return () => {
       (document.getElementById('root') as HTMLInputElement).style.overflowY =
         'auto';
       document.getElementsByTagName('body')[0].style.overflowY = 'auto';
       document.getElementsByTagName('body')[0].style.marginRight = '0';
-    }
+    };
   }, [isOpen]);
 
   useEffect(() => {

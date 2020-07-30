@@ -1,21 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 import { Tab, TabPanel } from 'react-tabs';
 
 import { useToast } from 'context/ToastContext';
+import {
+  fetchEstablishments,
+  setSelectedEstablishment,
+  distributePointsFinally,
+} from 'state/modules/point-management/common/actions';
+import * as selectors from 'state/modules/point-management/common/selectors';
+import {
+  getIsOpenModalMissingParticipants,
+  getMissingParticipants,
+} from 'state/modules/point-management/team-awards/selectors';
+import { toggleIsOpenModalMissingParticipants } from 'state/modules/point-management/team-awards/actions';
+import { Establishment } from 'state/modules/point-management/common/types';
 import {
   Header,
   ResaleCooperativePointsTabContent,
   TeamAwardsTabContent,
   ResumeDistribution,
+  EstablishmentSelection,
 } from 'components/PointManagement';
-import EstablishmentSelection from 'components/PointManagement/EstablishmentSelection';
-import {
-  fetchEstablishments,
-  setSelectedEstablishment,
-} from 'state/modules/point-management/common/actions';
-import * as selectors from 'state/modules/point-management/common/selectors';
+import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
 import {
   Wrapper,
   Panel,
@@ -23,8 +31,10 @@ import {
   Tabs,
   TeamAwardsWrapper,
   TeamAwardsResumeWrapper,
+  Row,
+  ResumeCol,
+  ParticipantsCol,
 } from './styles';
-import { Establishment } from 'state/modules/point-management/common/types';
 
 const PointManagement: React.FC = () => {
   const [
@@ -33,25 +43,62 @@ const PointManagement: React.FC = () => {
     establishments,
     isResaleCooperativePointsOnly,
     fetchPointsToDistribute,
+    distributePoints,
+    finishedDistribution,
+    isOpenModalMissingParticipants,
+    missingParticipants,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
     useSelector(selectors.getEstablishments),
     useSelector(selectors.getIsResaleCooperativePointsOnly),
     useSelector(selectors.getFetchPointsToDistribute),
+    useSelector(selectors.getDistributePoints),
+    useSelector(selectors.getFinishedDistribution),
+    useSelector(getIsOpenModalMissingParticipants),
+    useSelector(getMissingParticipants),
   ];
 
   const dispatch = useDispatch();
   const { addToast } = useToast();
 
   const { error } = fetchPointsToDistribute;
+  const { error: errorOnDistribute } = distributePoints;
 
   useEffect(() => {
     if (error) addToast({ title: error, type: 'info' });
-  }, [error]);
+  }, [error, addToast]);
+
+  useEffect(() => {
+    if (errorOnDistribute) addToast({ title: errorOnDistribute, type: 'info' });
+  }, [errorOnDistribute, addToast]);
+
+  useEffect(() => {
+    if (finishedDistribution)
+      addToast({
+        title: 'Parabéns, você finalizou a distribuição de pontos!',
+        type: 'success',
+      });
+  }, [finishedDistribution, addToast]);
 
   useEffect(() => {
     dispatch(fetchEstablishments());
+  }, [dispatch]);
+
+  const handleChangeEstablishment = useCallback(
+    (establishment: Establishment) => {
+      dispatch(setSelectedEstablishment(establishment));
+    },
+    [dispatch],
+  );
+
+  const handleCloseMissingModal = useCallback(() => {
+    dispatch(toggleIsOpenModalMissingParticipants());
+  }, [dispatch]);
+
+  const handleDistributePoints = useCallback(() => {
+    dispatch(distributePointsFinally());
+    dispatch(toggleIsOpenModalMissingParticipants());
   }, [dispatch]);
 
   return (
@@ -60,42 +107,50 @@ const PointManagement: React.FC = () => {
         {!!establishments && establishments.length > 1 && (
           <EstablishmentSelection
             establishments={establishments}
-            onChange={(establishment: Establishment) =>
-              dispatch(setSelectedEstablishment(establishment))
-            }
+            onChange={handleChangeEstablishment}
             selectedEstablishment={selectedEstablishment}
           />
         )}
-        {!!selectedEstablishment && <Header />}
+        {!!selectedEstablishment && (
+          <Header establishmentType={selectedEstablishment.type} />
+        )}
         {isReadyToDistribute && (
           <Tabs>
             <List>
-              <Tab>PONTOS REVENDA</Tab>
+              <Tab>PONTOS {selectedEstablishment?.type || ''}</Tab>
               {!isResaleCooperativePointsOnly && <Tab>PREMIAÇÃO EQUIPE</Tab>}
             </List>
 
             <Panel>
-              <ResaleCooperativePointsTabContent />
+              <ResaleCooperativePointsTabContent
+                establishmentType={selectedEstablishment?.type || ''}
+              />
             </Panel>
             {!isResaleCooperativePointsOnly && (
               <TabPanel>
                 <Row>
-                  <Col md={9}>
+                  <ParticipantsCol>
                     <TeamAwardsWrapper>
                       <TeamAwardsTabContent />
                     </TeamAwardsWrapper>
-                  </Col>
-                  <Col md={3}>
+                  </ParticipantsCol>
+                  <ResumeCol>
                     <TeamAwardsResumeWrapper>
                       <ResumeDistribution />
                     </TeamAwardsResumeWrapper>
-                  </Col>
+                  </ResumeCol>
                 </Row>
               </TabPanel>
             )}
           </Tabs>
         )}
       </Wrapper>
+      <ModalMissingParticipants
+        isOpen={isOpenModalMissingParticipants}
+        total={missingParticipants}
+        onClose={handleCloseMissingModal}
+        onConfirm={handleDistributePoints}
+      />
     </Container>
   );
 };

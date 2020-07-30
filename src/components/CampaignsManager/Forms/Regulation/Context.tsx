@@ -9,7 +9,7 @@ const RegulationFormContext = createContext<RegulationFormContextState>(
 );
 
 export const RegulationFormProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
   return (
     <RegulationFormContext.Provider value={{ test }}>

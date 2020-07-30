@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { useToast } from 'context/ToastContext';
 import uploadFileToStorage from 'services/storage/sendFile';
 import sendFile from 'services/participantIndication/importFile';
 import forceDownload from 'services/storage/getUrlToForceDownload';
+import FinishModal from 'components/ParticipantIndication/Modals/FinishImport';
 
 import { Container, SaveButton } from './styles';
 
@@ -11,8 +11,10 @@ const ImportFile: React.FC = () => {
   const [attachingFile, setAttachingFile] = useState(false);
   const [fileUrl, setFileUrl] = useState('');
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const { addToast } = useToast();
   const [downloadLink, setDownloadLink] = useState('');
+  const [modalOpened, setModalOpened] = useState(false);
+  const [importedLines, setImportedLines] = useState(0);
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     setDownloadLink(
@@ -37,32 +39,14 @@ const ImportFile: React.FC = () => {
   );
 
   const handleImport = useCallback(async () => {
-    try {
-      setLoading(true);
-      await sendFile(fileUrl);
-      addToast({
-        title: 'Indicação em lote realizada com sucesso',
-        type: 'success',
-      });
-    } catch (e) {
-      if (e.response?.data?.errors) {
-        e.response?.data?.errors?.map((err: string) => {
-          addToast({
-            title: err,
-            type: 'error',
-          });
-        });
-      } else {
-        addToast({
-          title:
-            'Falha ao carregar arquivo, por favor entre em contato com o suporte',
-          type: 'error',
-        });
-      }
-    }
+    setLoading(true);
+    const result = await sendFile(fileUrl);
+    setImportedLines(result.success_count);
+    setErrors(result.errors);
     setFileUrl('');
     setLoading(false);
-  }, [fileUrl, addToast]);
+    setModalOpened(true);
+  }, [fileUrl]);
 
   return (
     <Container>
@@ -104,6 +88,12 @@ const ImportFile: React.FC = () => {
       >
         Enviar
       </SaveButton>
+      <FinishModal
+        isOpen={modalOpened}
+        onRequestClose={() => setModalOpened(false)}
+        importedLines={importedLines}
+        errors={errors}
+      />
     </Container>
   );
 };

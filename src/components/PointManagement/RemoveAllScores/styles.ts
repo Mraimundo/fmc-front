@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   color: #193f4e;
   font-size: 0.9em;
   margin-bottom: 2em;
+  margin-top: 1em;
   cursor: pointer;
   transition: color 150ms ease;
 

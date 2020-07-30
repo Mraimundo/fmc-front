@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import Draggable from 'react-draggable';
 import { Container, Content } from './styles';
 import Modal from './Disconnected/Modal';
 

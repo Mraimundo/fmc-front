@@ -10,6 +10,8 @@ import save from 'services/register/saveParticipant';
 import numbersOnly from 'util/numbersOnly';
 import DataRegulation from 'components/Regulation/DataRegulation';
 
+import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
+
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
@@ -19,6 +21,7 @@ import {
   contentAnimation,
   RegulationContainer,
   RegulationContent,
+  Header,
 } from './styles';
 
 const FirstAccess: React.FC = () => {
@@ -29,6 +32,7 @@ const FirstAccess: React.FC = () => {
   const [hasAcceptedDataRegulation, setHasAcceptedDataRegulation] = useState(
     false,
   );
+  const [modalOpened, setModalOpened] = useState(false);
   const location = useLocation<Participant>();
 
   const onAcceptRegulation = useCallback(() => {
@@ -71,11 +75,7 @@ const FirstAccess: React.FC = () => {
         } as Participant;
 
         await save(request);
-        addToast({
-          title: 'Cadastro realizado com sucesso!',
-          type: 'success',
-        });
-        history.push('/');
+        setModalOpened(true);
       } catch (e) {
         addToast({
           title:
@@ -88,11 +88,18 @@ const FirstAccess: React.FC = () => {
     [participant, dataRegulation, addToast],
   );
 
+  const handleCloseModal = useCallback(() => {
+    setModalOpened(false);
+    history.push('/');
+  }, []);
+
   return (
     <>
       {!hasAcceptedDataRegulation ? (
         <RegulationContainer>
-          <img src={logoImg} alt="Logo" />
+          <Header>
+            <img src={logoImg} alt="Logo" />
+          </Header>
           <RegulationContent>
             <DataRegulation
               onAccept={onAcceptRegulation}
@@ -103,7 +110,9 @@ const FirstAccess: React.FC = () => {
       ) : (
         !!participant && (
           <Container>
-            <img src={logoImg} alt="Logo" />
+            <Header>
+              <img src={logoImg} alt="Logo" />
+            </Header>
             <Content style={props}>
               <Form
                 participant={participant}
@@ -113,6 +122,10 @@ const FirstAccess: React.FC = () => {
           </Container>
         )
       )}
+      <SuccessSignUpModal
+        isOpen={modalOpened}
+        onRequestClose={handleCloseModal}
+      />
     </>
   );
 };

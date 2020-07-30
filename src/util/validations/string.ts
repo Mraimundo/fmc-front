@@ -9,3 +9,7 @@ export const hasUpperCase = (str: string): boolean => {
 export const hasNumber = (str: string): boolean => {
   return /[0-9]/.test(str);
 };
+
+export const hasSpecialCharacteres = (str: string): boolean => {
+  return /[!$#%@&]/.test(str);
+};

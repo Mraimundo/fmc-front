@@ -25,14 +25,17 @@ export default [
   {
     column: 'Iniciado em',
     dataValue: 'startDateParticipation',
+    className: '_customWidthDate',
   },
   {
     column: 'Concluído em',
     dataValue: 'endDateParticipation',
+    className: '_customWidthDate',
   },
   {
     column: 'Status',
     dataValue: 'status',
+    className: '_customWidthStatus',
   },
   {
     column: ' ',

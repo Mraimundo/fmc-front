@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   > h3 {
     font-size: 20px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 10px;
   }
@@ -22,7 +22,7 @@ export const Container = styled.div`
     align-items: center;
     margin-top: 20px;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     background: #efefef;
   }
 
@@ -37,7 +37,7 @@ export const Container = styled.div`
       align-items: center;
       margin-top: 20px;
       color: ${({ theme }) => theme.font.color.primary};
-      font-weight: bold;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       background: #efefef;
     }
 

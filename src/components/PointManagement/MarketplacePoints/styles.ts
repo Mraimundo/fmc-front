@@ -18,6 +18,16 @@ export const Wrapper = styled.div`
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   }
+
+  @media screen and (max-width: 992px) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 480px) {
+    &:before {
+      display: none;
+    }
+  }
 `;
 
 export const Title = styled.h4`
@@ -30,6 +40,14 @@ export const Title = styled.h4`
   right: 50%;
   transform: translateX(175px);
   font-family: ${FONTS.medium};
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    right: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+  }
 `;
 
 export const Image = styled.img`
@@ -51,4 +69,10 @@ export const Input = styled.input`
   left: 50%;
   transform: translateX(-175px);
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1607843137254902);
+
+  @media screen and (max-width: 490px) {
+    width: 200px;
+    transform: translateX(-100px);
+    bottom: 15px;
+  }
 `;

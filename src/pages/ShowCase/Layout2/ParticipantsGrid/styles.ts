@@ -7,7 +7,7 @@ export const Container = styled(Table)`
     background: transparent;
     color: #193f4e;
     font-size: 14px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   ._customWidth {

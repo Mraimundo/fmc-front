@@ -84,9 +84,12 @@ const TeamAwardsTabContent: React.FC = () => {
     [dispatch],
   );
 
-  const handleToggleParticipant = useCallback((participantId: number) => {
-    dispatch(actions.toggleSelectedParticipant(participantId));
-  }, []);
+  const handleToggleParticipant = useCallback(
+    (participantId: number) => {
+      dispatch(actions.toggleSelectedParticipant(participantId));
+    },
+    [dispatch],
+  );
 
   return (
     <>

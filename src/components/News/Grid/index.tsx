@@ -3,15 +3,15 @@ import { News } from 'services/news/interfaces';
 import transformer, {
   Response as Data,
 } from 'services/news/transformers/toNewsList';
-import { Link } from 'react-router-dom';
 
 import { Container, MiniBox } from './styles';
 
 interface Props {
   news: News[];
+  className?: string;
 }
 
-const Grid: React.FC<Props> = ({ news }) => {
+const Grid: React.FC<Props> = ({ news, className }) => {
   const [data, setData] = useState<Data[]>([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Grid: React.FC<Props> = ({ news }) => {
   }, [news]);
 
   return (
-    <Container>
+    <Container className={className}>
       {data.map(item => (
         <MiniBox key={`key-news-${item.id}`} to={`/news/${item.id}`}>
           <img src={item.pictureUrl} alt={item.title} />

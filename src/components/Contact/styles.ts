@@ -25,7 +25,7 @@ export const Content = styled.div`
 
   span {
     font-size: 40px;
-    font-weight: bolder;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   transition: transform 150ms ease;

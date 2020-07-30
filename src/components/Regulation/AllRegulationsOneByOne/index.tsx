@@ -11,15 +11,26 @@ import {
 } from 'services/register/regulation';
 import Loading from './Loading';
 
-import { Container, Content, RegulationContent, Button, Modal } from './styles';
+import {
+  Container,
+  Content,
+  RegulationContent,
+  Button,
+  Modal,
+  Header,
+} from './styles';
 
-const AllRegulationsOneByOne: React.FC = () => {
+interface Props {
+  opened: boolean;
+}
+
+const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const { addToast } = useToast();
   const { updateParticipantData } = useAuth();
   const [loading, setLoading] = useState(false);
   const [accepting, setAccepting] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [, setShowModal] = useState(false);
   const [regulations, setRegulations] = useState<Omit<Regulation, 'content'>[]>(
     [],
   );
@@ -29,7 +40,6 @@ const AllRegulationsOneByOne: React.FC = () => {
   useEffect(() => {
     getAllRegulations().then(data => {
       const regulationsToAccept = data.filter(item => !item.accepted);
-
       if (regulationsToAccept.length > 0) {
         setRegulations(regulationsToAccept);
         setShowModal(true);
@@ -92,9 +102,11 @@ const AllRegulationsOneByOne: React.FC = () => {
   };
 
   return (
-    <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
+    <Modal isOpen={opened} onRequestClose={() => setShowModal(false)}>
       <Container>
-        <img src={logoImg} alt="Logo" />
+        <Header>
+          <img src={logoImg} alt="Logo" />
+        </Header>
         <Content>
           {loading ? (
             <RegulationContent

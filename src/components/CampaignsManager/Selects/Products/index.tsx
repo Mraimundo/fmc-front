@@ -10,6 +10,7 @@ interface Props {
   setValue(value: Option | null): void;
   value: Option | null;
   placeholder?: string;
+  segment?: string;
 }
 
 const ProductsSelect: React.FC<Props> = ({
@@ -18,12 +19,13 @@ const ProductsSelect: React.FC<Props> = ({
   setValue,
   label,
   placeholder,
+  segment = '',
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    getData().then(data => setOptions(transformer(data)));
-  }, []);
+    getData(segment).then(data => setOptions(transformer(data)));
+  }, [segment]);
 
   const loadItems = useCallback(() => {
     return options;

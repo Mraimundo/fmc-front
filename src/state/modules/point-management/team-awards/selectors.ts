@@ -1,15 +1,14 @@
 import { createSelector } from 'reselect';
 
 import { StoreState } from 'state/root-reducer';
+import { getTotalPointsTeamAwards } from 'state/modules/point-management/common/selectors';
 import {
   Subsidiary,
   Role,
   ParticipantsList,
-  Participant,
   ScoredParticipant,
   WaitingScoredParticipant,
 } from './types';
-import { getTotalPointsTeamAwards } from 'state/modules/point-management/common/selectors';
 
 export const getSubsidiaries = (state: StoreState): Subsidiary[] | null =>
   state.pointManagement.teamAwards.subsidiaries;
@@ -63,6 +62,12 @@ export const getTotalForEachParticipantDistributedEqually = (
 export const getSelectedRolesAll = (state: StoreState): string[] | null =>
   state.pointManagement.teamAwards.selectedRolesAll;
 
+export const getTotalParticipants = (state: StoreState): number =>
+  state.pointManagement.teamAwards.totalParticipants;
+
+export const getIsOpenModalMissingParticipants = (state: StoreState): boolean =>
+  state.pointManagement.teamAwards.isOpenModalMissingParticipants;
+
 export const getSelectedParticipantsWithoutScore = createSelector(
   getSelectedParticipants,
   getScoredParticipants,
@@ -100,7 +105,7 @@ export const getTotalWaitingScoredParticipants = createSelector(
   },
 );
 
-export const getTotalScoredParticipants = createSelector(
+export const getTotalScoreScoredParticipants = createSelector(
   getScoredParticipants,
   (scoredParticipants: ScoredParticipant[] | null): number => {
     if (!scoredParticipants) return 0;
@@ -114,10 +119,13 @@ export const getTotalScoredParticipants = createSelector(
 
 export const getHasEnoughScore = createSelector(
   getTotalWaitingScoredParticipants,
-  getTotalScoredParticipants,
+  getTotalScoreScoredParticipants,
   getTotalPointsTeamAwards,
-  (totalWaiting: number, totalScored: number, totalTeamAwards: number) =>
-    totalTeamAwards >= totalWaiting + totalScored,
+  (
+    totalWaiting: number,
+    totalScored: number,
+    totalTeamAwards: number,
+  ): boolean => totalTeamAwards >= totalWaiting + totalScored,
 );
 
 export const getSelectedSubsidiariesWithName = createSelector(
@@ -137,7 +145,7 @@ export const getSelectedSubsidiariesWithName = createSelector(
 
 export const getAvailableScore = createSelector(
   getTotalPointsTeamAwards,
-  getTotalScoredParticipants,
+  getTotalScoreScoredParticipants,
   (totalPointsTeamAwards, totalScored): number => {
     if (!totalPointsTeamAwards) return 0;
 
@@ -194,5 +202,32 @@ export const getIsEnabledToAssignPoints = createSelector(
     if (waitingScoredParticipnts) return true;
 
     return false;
+  },
+);
+
+export const getIsEnabledToDistributePoints = createSelector(
+  getTotalPointsTeamAwards,
+  getAvailableScore,
+  (totalPointsTeamAwards: number, availableScore: number): boolean => {
+    if (!totalPointsTeamAwards) return false;
+
+    return availableScore === 0;
+  },
+);
+
+export const getTotalScoredParticipants = createSelector(
+  getScoredParticipants,
+  (scoredParticipants: ScoredParticipant[] | null): number => {
+    if (!scoredParticipants) return 0;
+
+    return scoredParticipants.length;
+  },
+);
+
+export const getMissingParticipants = createSelector(
+  getTotalScoredParticipants,
+  getTotalParticipants,
+  (totalScoredParticipants: number, totalParticipants: number): number => {
+    return totalParticipants - totalScoredParticipants;
   },
 );

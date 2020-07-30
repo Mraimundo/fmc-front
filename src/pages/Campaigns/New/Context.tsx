@@ -3,6 +3,8 @@ import { createNewCampaign } from 'services/campaignsManager';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { CreateNewCampaignDTO } from 'services/campaignsManager/dtos';
 import { campaignToCreateNewCampaignDTO } from 'services/campaignsManager/transformers';
+import { useToast } from 'context/ToastContext';
+import history from 'services/history';
 
 export interface NewCampaignContextState {
   test: string;
@@ -14,17 +16,31 @@ const NewCampaignContext = createContext<NewCampaignContextState>(
 );
 
 export const NewCampaignProvider: React.FC = ({ children }) => {
-  const [test, setTest] = useState('');
+  const [test] = useState('');
 
-  const handleSave = useCallback(async (data: Campaign) => {
-    const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
-    try {
-      await createNewCampaign(dto);
-    } catch (e) {
-      console.log(e);
-      console.log('add a message here later');
-    }
-  }, []);
+  const { addToast } = useToast();
+
+  const handleSave = useCallback(
+    async (data: Campaign) => {
+      const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
+      try {
+        await createNewCampaign(dto);
+        addToast({
+          title: 'Campanha requisitada com sucesso',
+          type: 'success',
+        });
+        history.push('/gerenciamento-de-campanhas/lista');
+      } catch (e) {
+        addToast({
+          title:
+            e?.response?.data?.message ||
+            'Falha ao registrar campanha. Por favor contate o suporte.',
+          type: 'error',
+        });
+      }
+    },
+    [addToast],
+  );
 
   return (
     <NewCampaignContext.Provider value={{ test, handleSave }}>

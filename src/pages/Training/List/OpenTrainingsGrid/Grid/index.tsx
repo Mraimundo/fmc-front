@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import startTraining from 'services/training/startTraining';
 import history from 'services/history';
 

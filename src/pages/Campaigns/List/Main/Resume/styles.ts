@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   > h4 {
     font-size: 21px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 30px;
     margin-bottom: 10px;
@@ -33,7 +33,7 @@ export const Box = styled.div`
   > h6 {
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-bottom: 14px;
   }
 
@@ -61,7 +61,7 @@ export const Action = styled.div`
   display: flex;
   align-items: center;
   > span {
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
     color: ${({ theme }) => theme.font.color.primary};
     margin-right: 25px;

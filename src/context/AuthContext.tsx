@@ -32,11 +32,11 @@ interface AuthContextState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [tries, setTries] = useState(0);
+  // const [tries, setTries] = useState(0);
+  const [apiToken, setApiToken] = useState<string>('');
   const [participant, setParticipant] = useState<Participant>(
     {} as Participant,
   );
-
   const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
     false,
   );
@@ -46,31 +46,21 @@ export const AuthProvider: React.FC = ({ children }) => {
       getLoggedParticipant(),
       isThereAnyRegulationToAccept(),
     ]);
-    if (!data.id) {
-      setTimeout(() => {
-        updateParticipantData();
-      }, 5000);
-      return;
-    }
     setShouldShowRegulationsModal(isThereRegulationsToAccept);
     setParticipant(data);
   }, []);
 
-  const [apiToken, setApiToken] = useState<string>(() => {
+  useEffect(() => {
     const token = localStorage.getItem('@Vendavall:token');
-
     if (token) {
       setToken(token);
-      return token;
+      setApiToken(token);
     }
-
-    return '';
-  });
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (apiToken) updateParticipantData();
-    }, 1000);
+    if (!apiToken) return;
+    updateParticipantData();
   }, [apiToken, updateParticipantData]);
 
   const signIn = useCallback(async (data: Credentials | string) => {

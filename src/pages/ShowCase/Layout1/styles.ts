@@ -20,7 +20,7 @@ export const Content = styled.div`
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-left: 35px;
     margin-bottom: 30px;
   }

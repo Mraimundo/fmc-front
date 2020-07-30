@@ -5,7 +5,6 @@ import { FONTS } from 'styles/font/globals';
 export const Input = styled.input`
   border: 1.2px solid #707070;
   border-radius: 0;
-  width: 100%;
   height: 60px;
   outline: none;
   padding: 5px 10px;
@@ -13,10 +12,19 @@ export const Input = styled.input`
   margin-top: 5px;
   width: 280px;
   font-family: ${FONTS.medium};
+  font-size: 1em;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const Wrapper = styled.div`
   position: relative;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const WrapperInput = styled.div`
@@ -44,8 +52,10 @@ export const Dropdown = styled.div`
   padding: 1em;
   border: 1.2px solid #707070;
   height: auto;
-  max-height: 250px;
+  max-height: 300px;
   overflow: auto;
+  z-index: 1;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.58);
 
   ul {
     list-style-type: none;
@@ -57,6 +67,7 @@ export const Dropdown = styled.div`
       min-height: 35px;
       display: flex;
       align-items: center;
+      margin-bottom: 0.5em;
     }
   }
 `;

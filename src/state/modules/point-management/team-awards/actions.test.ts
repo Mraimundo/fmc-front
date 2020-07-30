@@ -26,9 +26,8 @@ import {
   deselectAllParticipants,
   toggleSelectedParticipant,
   removeAllScores,
-  distributePoints,
-  distributePointsFailure,
-  distributePointsSuccess,
+  setTotalParticipants,
+  toggleIsOpenModalMissingParticipants,
 } from './actions';
 import {
   FETCH_SUBSIDIARIES_ACTION,
@@ -56,9 +55,8 @@ import {
   DESELECT_ALL_PARTICIPANTS,
   TOGGLE_SELECTED_PARTICIPANT,
   REMOVE_ALL_SCORES,
-  DISTRIBUTE_POINTS_ACTION,
-  DISTRIBUTE_POINTS_FAILURE,
-  DISTRIBUTE_POINTS_SUCCESS,
+  SET_TOTAL_PARTICIPANTS,
+  TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
 } from './constants';
 import { error, subsidiaries, roles, participant, participants } from './mock';
 
@@ -491,51 +489,35 @@ describe('src/state/modules/point-management/team-awards/actions', () => {
     });
   });
 
-  describe('distributePoints', () => {
+  describe('setTotalParticipants', () => {
     it('should be a function', () => {
-      expect(distributePoints).to.be.a('function');
+      expect(setTotalParticipants).to.be.a('function');
     });
 
     it('should return a object', () => {
-      expect(distributePoints()).to.be.a('object');
+      expect(setTotalParticipants(3)).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(distributePoints()).to.be.deep.equal({
-        type: DISTRIBUTE_POINTS_ACTION,
+      expect(setTotalParticipants(3)).to.be.deep.equal({
+        type: SET_TOTAL_PARTICIPANTS,
+        payload: { totalParticipants: 3 },
       });
     });
   });
 
-  describe('distributePointsFailure', () => {
+  describe('toggleIsOpenModalMissingParticipants', () => {
     it('should be a function', () => {
-      expect(distributePointsFailure).to.be.a('function');
+      expect(toggleIsOpenModalMissingParticipants).to.be.a('function');
     });
 
     it('should return a object', () => {
-      expect(distributePointsFailure(error)).to.be.a('object');
+      expect(toggleIsOpenModalMissingParticipants()).to.be.a('object');
     });
 
     it('should return a valid object', () => {
-      expect(distributePointsFailure(error)).to.be.deep.equal({
-        type: DISTRIBUTE_POINTS_FAILURE,
-        payload: { error },
-      });
-    });
-  });
-
-  describe('distributePointsSuccess', () => {
-    it('should be a function', () => {
-      expect(distributePointsSuccess).to.be.a('function');
-    });
-
-    it('should return a object', () => {
-      expect(distributePointsSuccess()).to.be.a('object');
-    });
-
-    it('should return a valid object', () => {
-      expect(distributePointsSuccess()).to.be.deep.equal({
-        type: DISTRIBUTE_POINTS_SUCCESS,
+      expect(toggleIsOpenModalMissingParticipants()).to.be.deep.equal({
+        type: TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
       });
     });
   });

@@ -10,6 +10,11 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
+  SET_FINISHED_DISTRIBUTION,
 } from './constants';
 
 describe('src/state/modules/point-management/common/constants', () => {
@@ -129,6 +134,66 @@ describe('src/state/modules/point-management/common/constants', () => {
     it('should return correct value', () => {
       expect(SET_SELECTED_ESTABLISHMENT).to.be.equal(
         '@fmc/point-management/common/SET_SELECTED_ESTABLISHMENT',
+      );
+    });
+  });
+
+  describe('DISTRIBUTE_POINTS_ACTION', () => {
+    it('should return a string', () => {
+      expect(DISTRIBUTE_POINTS_ACTION).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(DISTRIBUTE_POINTS_ACTION).to.be.equal(
+        '@fmc/point-management/common/DISTRIBUTE_POINTS_ACTION',
+      );
+    });
+  });
+
+  describe('DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
+    it('should return a string', () => {
+      expect(DISTRIBUTE_POINTS_FINALLY_ACTION).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(DISTRIBUTE_POINTS_FINALLY_ACTION).to.be.equal(
+        '@fmc/point-management/common/DISTRIBUTE_POINTS_FINALLY_ACTION',
+      );
+    });
+  });
+
+  describe('DISTRIBUTE_POINTS_FAILURE', () => {
+    it('should return a string', () => {
+      expect(DISTRIBUTE_POINTS_FAILURE).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(DISTRIBUTE_POINTS_FAILURE).to.be.equal(
+        '@fmc/point-management/common/DISTRIBUTE_POINTS_FAILURE',
+      );
+    });
+  });
+
+  describe('DISTRIBUTE_POINTS_SUCCESS', () => {
+    it('should return a string', () => {
+      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(DISTRIBUTE_POINTS_SUCCESS).to.be.equal(
+        '@fmc/point-management/common/DISTRIBUTE_POINTS_SUCCESS',
+      );
+    });
+  });
+
+  describe('SET_FINISHED_DISTRIBUTION', () => {
+    it('should return a string', () => {
+      expect(SET_FINISHED_DISTRIBUTION).to.be.a('string');
+    });
+
+    it('should return correct value', () => {
+      expect(SET_FINISHED_DISTRIBUTION).to.be.equal(
+        '@fmc/point-management/common/SET_FINISHED_DISTRIBUTION',
       );
     });
   });

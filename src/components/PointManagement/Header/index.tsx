@@ -1,14 +1,18 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-grid-system';
 
 import * as selectors from 'state/modules/point-management/common/selectors';
 import * as actions from 'state/modules/point-management/common/actions';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import HeaderResaleCooperativePoints from './HeaderResaleCooperativePoints';
 import HeaderWithAutonomyPoints from './HeaderWithAutonomyPoints';
 import HeaderTeamAwardsAndResaleCooperativePoints from './HeaderTeamAwardsAndResaleCooperativePoints';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  establishmentType: EstablishmentType | '';
+}
+const Header: React.FC<HeaderProps> = ({ establishmentType }) => {
   const [
     pointsToDistribute,
     totalPointsTeamAwards,
@@ -33,15 +37,33 @@ const Header: React.FC = () => {
 
   const handleReadyToDistribute = useCallback(() => {
     dispatch(actions.setIsReadyToDistribute(true));
-  }, []);
+  }, [dispatch]);
 
-  const handleSetResaleCooperativePoints = useCallback((points: number) => {
-    dispatch(actions.setTotalPointsResaleCooperative(points));
-  }, []);
+  const handleSetResaleCooperativePoints = useCallback(
+    (points: number) => {
+      dispatch(actions.setTotalPointsResaleCooperative(points));
+    },
+    [dispatch],
+  );
 
-  const handleSetTeamAwardsPoints = useCallback((points: number) => {
-    dispatch(actions.setTotalPointsTeamAwards(points));
-  }, []);
+  const handleSetTeamAwardsPoints = useCallback(
+    (points: number) => {
+      dispatch(actions.setTotalPointsTeamAwards(points));
+    },
+    [dispatch],
+  );
+
+  // using different header to change layout only
+  const headerWithAutonomyPointsAfterConfirm = useMemo(
+    () => (
+      <HeaderTeamAwardsAndResaleCooperativePoints
+        resaleCooperativePoints={totalPointsResaleCooperative}
+        teamAwardsPoints={totalPointsTeamAwards}
+        establishmentType={establishmentType}
+      />
+    ),
+    [totalPointsResaleCooperative, totalPointsTeamAwards, establishmentType],
+  );
 
   const { general, resaleCooperative, teamAwards } = pointsToDistribute;
 
@@ -50,24 +72,27 @@ const Header: React.FC = () => {
       {isResaleCooperativePointsOnly && (
         <HeaderResaleCooperativePoints
           points={resaleCooperative?.points || 0}
+          establishmentType={establishmentType}
         />
       )}
-      {hasAutonomyToDistribute  && (
+      {hasAutonomyToDistribute && !isReadyToDistribute && (
         <HeaderWithAutonomyPoints
           generalPoints={general || 0}
           totalResaleCooperativePoints={totalPointsResaleCooperative}
           totalTeamAwardPoints={totalPointsTeamAwards}
-          isAllowedToEdit={isReadyToDistribute}
           isAllowedToStartDistribution={isAllowedToStartDistribution}
           onReadyToDistribute={handleReadyToDistribute}
           onSetResaleCooperativePoints={handleSetResaleCooperativePoints}
           onSetTeamAwardPoints={handleSetTeamAwardsPoints}
+          establishmentType={establishmentType}
         />
       )}
+      {hasAutonomyToDistribute && isReadyToDistribute && headerWithAutonomyPointsAfterConfirm}
       {isResaleCooperativeAndTeamAwardPoints && (
         <HeaderTeamAwardsAndResaleCooperativePoints
           resaleCooperativePoints={resaleCooperative?.points || 0}
           teamAwardsPoints={teamAwards?.points || 0}
+          establishmentType={establishmentType}
         />
       )}
     </Container>

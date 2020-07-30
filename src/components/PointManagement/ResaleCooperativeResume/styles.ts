@@ -16,6 +16,14 @@ export const Wrapper = styled.div`
   > div > h2 {
     font-size: 1.4em;
     font-family: ${FONTS.regular};
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    padding: 1em;
   }
 `;
 
@@ -28,6 +36,11 @@ export const ResumeTableWrapper = styled.div`
   background-color: #efefef;
   padding: 1em;
   border-radius: 0 10px 10px 0;
+
+  @media screen and (max-width: 768px) {
+    border-radius: 10px;
+    margin: 0.5em;
+  }
 `;
 
 export const ResumeTableTitle = styled.span`
@@ -48,9 +61,29 @@ export const ResumeTable = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-transform: uppercase;
 
     &:not(:last-child) {
       margin-bottom: 0.5em;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    width: auto;
+
+    li span:nth-child(1) {
+      margin-right: 1em;
+      text-align: left;
+    }
+
+    li span:nth-child(2) {
+      text-align: right;
+    }
+  }
+`;
+
+export const CongratsText = styled.h2`
+  font-size: 1.4em;
+  font-family: ${FONTS.bold} !important;
+  text-transform: inherit !important;
 `;

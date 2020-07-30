@@ -5,7 +5,7 @@ import Label from '.';
 
 describe('<Label />', () => {
   it('should render correctly', () => {
-    const { getByText } = render(<Label>titulo de teste</Label>);
+    const { getByText } = render(<Label>filtrar filial</Label>);
 
     expect(getByText(/filtrar filial/)).toBeInTheDocument();
   });

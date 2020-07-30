@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { FetchState } from '@types';
 import { StoreState } from 'state/root-reducer';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -24,6 +25,12 @@ export const getEstablishments = (state: StoreState): Establishment[] | null =>
 export const getSelectedEstablishment = (
   state: StoreState,
 ): Establishment | null => state.pointManagement.common.selectedEstablishment;
+
+export const getDistributePoints = (state: StoreState): FetchState =>
+  state.pointManagement.common.distributePoints;
+
+export const getFinishedDistribution = (state: StoreState): boolean =>
+  state.pointManagement.common.finishedDistribution;
 
 export const getIsResaleCooperativePointsOnly = createSelector(
   getPointsToDistribute,
@@ -57,19 +64,9 @@ export const getIsAllowedToStartDistribution = createSelector(
   getTotalPointsResaleCooperative,
   (
     pointsToDistribute: PointsToDistribute,
-    totalPointsTeamAwards: number | null,
-    totalPointsResaleCooperative: number | null,
-  ): boolean => {
-    if (
-      !totalPointsTeamAwards ||
-      !totalPointsResaleCooperative ||
-      !pointsToDistribute
-    )
-      return false;
-
-    return (
-      totalPointsTeamAwards + totalPointsResaleCooperative ===
-      pointsToDistribute.general
-    );
-  },
+    totalPointsTeamAwards: number,
+    totalPointsResaleCooperative: number,
+  ): boolean =>
+    totalPointsTeamAwards + totalPointsResaleCooperative ===
+    pointsToDistribute.general,
 );

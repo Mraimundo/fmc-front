@@ -1,25 +1,6 @@
 import { pluginApi } from 'services/api';
 import { Participant } from './interfaces';
 
-const mock: Participant[] = [
-  {
-    id: 1,
-    imageUrl: '',
-    name: 'Participante X',
-    points: 1500,
-    type: 'cpf',
-    urlPi: '#',
-  },
-  {
-    id: 2,
-    imageUrl: '',
-    name: 'Estabelecimento X',
-    points: 1000,
-    type: 'cnpj',
-    urlPi: '#',
-  },
-];
-
 interface ApiResponse {
   participant?: {
     id?: number;

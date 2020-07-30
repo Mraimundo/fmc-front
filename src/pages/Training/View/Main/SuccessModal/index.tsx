@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from 'components/shared';
+import { ReactSVG } from 'react-svg';
+import closeIcon from 'assets/images/training/close-icon.svg';
 
 import { Modal, Container, Content, Close } from './styles';
 
@@ -14,7 +16,7 @@ const PopupSuccess: React.FC<Props> = ({ isOpen, onRequestClose }) => {
       <Container>
         <Close>
           <button type="button" onClick={onRequestClose}>
-            X
+            <ReactSVG src={closeIcon} />
           </button>
         </Close>
         <Content>

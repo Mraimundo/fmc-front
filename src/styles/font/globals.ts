@@ -7,4 +7,6 @@ export const FONTS = {
   medium2: 'Helvetica-Neue-Medium-Ext',
   bold2: 'Helvetica-Neue-Bold-Ext',
   regular2: 'Helvetica-Neue-Regular-Ext',
+  condensed: 'Helvetica-Neue-Condensed',
+  condensed2: 'Helvetica-Neue-Italic',
 };

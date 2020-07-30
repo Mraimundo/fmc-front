@@ -12,14 +12,14 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   width: fit-content;
   img {
-    width: 121px;
+    width: 171px;
     object-fit: cover;
 
     ${({ avatarSelected }) =>
       avatarSelected &&
       css`
         border-radius: 50%;
-        height: 121px;
+        height: 171px;
       `}
   }
 

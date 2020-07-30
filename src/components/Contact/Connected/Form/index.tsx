@@ -101,7 +101,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
       <Container onSubmit={onSubmit} className={className}>
         <SubjectSelect name="subject" />
         <CategorySelect name="category" subjectId={subjectId} />
-        <TextArea name="message" label="Mensagem" />
+        <TextArea name="message" label="Mensagem" inputRole="secondary" />
 
         <label htmlFor="fileId">
           <input
@@ -120,7 +120,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
             {fileUrl !== '' ? (
               <>Arquivo anexado</>
             ) : (
-              <>{attachingFile ? 'Carregando ... ' : 'Anexar um arquivo'}</>
+              <>{attachingFile ? 'Carregando ... ' : 'Anexar arquivo'}</>
             )}
           </button>
         </label>

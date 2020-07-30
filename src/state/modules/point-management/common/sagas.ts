@@ -1,7 +1,35 @@
 import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
-import { fetchTotalPointsToDistributeService } from 'services/point-management/common';
+import {
+  setMaxInvoicePercentage,
+  setInvoicePoints,
+  setMarketplacePoints,
+} from 'state/modules/point-management/resale-cooperative/actions';
+import { transformScoredParticipantsToDataDistribution } from 'services/point-management/transformers/common';
+import {
+  distributePointsService,
+  fetchTotalPointsToDistributeService,
+} from 'services/point-management/common';
+import {
+  getSelectedEstablishment,
+  getPointsToDistribute,
+  getIsResaleCooperativePointsOnly,
+} from 'state/modules/point-management/common/selectors';
+import {
+  getInvoicePoints,
+  getMarketplacePoints,
+  getIsEnabledToRescue,
+} from 'state/modules/point-management/resale-cooperative/selectors';
+import {
+  getScoredParticipants,
+  getIsEnabledToDistributePoints,
+  getMissingParticipants,
+} from 'state/modules/point-management/team-awards/selectors';
+import {
+  toggleIsOpenModalMissingParticipants,
+  removeAllScores,
+} from 'state/modules/point-management/team-awards/actions';
 import fetchEstablishmentsService, {
   Establishment as IEstablishment,
 } from 'services/auth/getEstablishments';
@@ -9,12 +37,15 @@ import {
   FETCH_ESTABLISHMENTS_ACTION,
   FETCH_POINTS_TO_DISTRIBUTE_ACTION,
   SET_IS_READY_TO_DISTRIBUTE,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
+  SET_FINISHED_DISTRIBUTION,
   SET_SELECTED_ESTABLISHMENT,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
-import { setMaxInvoicePercentage } from 'state/modules/point-management/resale-cooperative/actions';
 import { PointsToDistribute, Establishment } from './types';
+import { ScoredParticipant } from '../team-awards/types';
 
 export function* workerFetchEstablishments() {
   try {
@@ -22,12 +53,15 @@ export function* workerFetchEstablishments() {
       fetchEstablishmentsService,
     );
 
-    if (!establishments) throw 'Você não possui estabelecimentos';
+    if (!establishments) {
+      throw new Error('Você não possui estabelecimentos');
+    }
 
     const transformedEstablishments: Establishment[] = establishments.map(
-      ({ id, name }: IEstablishment): Establishment => ({
+      ({ id, name, type }: IEstablishment): Establishment => ({
         value: `${id}`,
         title: name,
+        type: type.name,
       }),
     );
 
@@ -43,22 +77,34 @@ export function* workerFetchEstablishments() {
   }
 }
 
+export function* workerAfterGetPointsToDistribution() {
+  const hasAutonomyToDistribute = yield select(
+    selectors.getHasAutonomyToDistribute,
+  );
+
+  if (!hasAutonomyToDistribute) {
+    yield put(actions.setIsReadyToDistribute(true));
+  }
+}
+
 export function* workerFetchPointsToDistribute() {
   try {
     const selectedEstablishment: Establishment | null = yield select(
       selectors.getSelectedEstablishment,
     );
 
-    if (!selectedEstablishment)
-      throw 'Você não selecionou nenhum estabelecimento';
+    if (!selectedEstablishment) {
+      throw new Error('Você não selecionou nenhum estabelecimento');
+    }
 
     const pointsToDistribute: PointsToDistribute = yield call(
       fetchTotalPointsToDistributeService,
       selectedEstablishment.value,
     );
 
-    if (!pointsToDistribute)
-      throw 'Você não possui pontos a serem distribuidos';
+    if (!pointsToDistribute) {
+      throw new Error('Você não possui pontos a serem distribuidos');
+    }
 
     yield put(actions.fetchPointsToDistributeSuccess(pointsToDistribute));
     yield call(workerAfterGetPointsToDistribution);
@@ -95,14 +141,82 @@ export function* workerSetIsReadyToDistribute() {
   }
 }
 
-export function* workerAfterGetPointsToDistribution() {
-  const hasAutonomyToDistribute = yield select(
-    selectors.getHasAutonomyToDistribute,
-  );
+export function* workerDistributePoints() {
+  try {
+    const scoredParticipants: ScoredParticipant[] = yield select(
+      getScoredParticipants,
+    );
+    const selectedEstablishment: Establishment = yield select(
+      getSelectedEstablishment,
+    );
+    const invoicePoints: number = yield select(getInvoicePoints);
+    const marketplacePoints: number = yield select(getMarketplacePoints);
+    const pointsToDistribute: PointsToDistribute = yield select(
+      getPointsToDistribute,
+    );
 
-  if (!hasAutonomyToDistribute) {
-    yield put(actions.setIsReadyToDistribute(true));
+    const dataDistribution = transformScoredParticipantsToDataDistribution({
+      scoredParticipants,
+      establishmentId: selectedEstablishment.value,
+      invoicePoints,
+      marketplacePoints,
+      pointsToDistribute,
+    });
+
+    yield call<any>(distributePointsService, dataDistribution);
+    yield all([
+      put(actions.distributePointsSuccess()),
+      put(actions.setFinishedDistribution()),
+    ]);
+  } catch (error) {
+    yield call(handlerErrors, error, actions.distributePointsFailure);
   }
+}
+
+export function* workerVerifyDistributePointsPossibility() {
+  try {
+    const isEnabledToRescue: boolean = yield select(getIsEnabledToRescue);
+    const selectedEstablishment: Establishment = yield select(
+      selectors.getSelectedEstablishment,
+    );
+
+    if (!isEnabledToRescue) {
+      throw new Error(
+        `É necessário distribuir todos os pontos para ${selectedEstablishment.type} antes de finalizar`,
+      );
+    }
+
+    const isResaleCooperativePointsOnly = yield select(
+      getIsResaleCooperativePointsOnly,
+    );
+    const isEnabledToDistributePoints: boolean = yield select(
+      getIsEnabledToDistributePoints,
+    );
+
+    if (!isResaleCooperativePointsOnly && !isEnabledToDistributePoints) {
+      throw new Error(
+        'É necessário distribuir todos os pontos para a equipe antes de finalizar',
+      );
+    }
+
+    const missingParticipants: number = yield select(getMissingParticipants);
+    if (missingParticipants > 0) {
+      yield put(toggleIsOpenModalMissingParticipants());
+      return;
+    }
+
+    yield call(workerDistributePoints);
+  } catch (error) {
+    yield call(handlerErrors, error, actions.distributePointsFailure);
+  }
+}
+
+export function* workerFinishedDistribution() {
+  yield put(removeAllScores());
+  yield put(actions.setTotalPointsTeamAwards(0));
+  yield put(actions.setTotalPointsResaleCooperative(0));
+  yield put(setInvoicePoints(0));
+  yield put(setMarketplacePoints(0));
 }
 
 export default function* commonSagas() {
@@ -113,5 +227,11 @@ export default function* commonSagas() {
       workerFetchPointsToDistribute,
     ),
     takeEvery(SET_IS_READY_TO_DISTRIBUTE, workerSetIsReadyToDistribute),
+    takeEvery(
+      DISTRIBUTE_POINTS_ACTION,
+      workerVerifyDistributePointsPossibility,
+    ),
+    takeEvery(DISTRIBUTE_POINTS_FINALLY_ACTION, workerDistributePoints),
+    takeEvery(SET_FINISHED_DISTRIBUTION, workerFinishedDistribution),
   ]);
 }

@@ -7,16 +7,18 @@ export const Container = styled.div`
   flex-direction: column;
 
   > button {
-    width: 160px;
-    height: 40px;
-    font-size: 14px;
+    width: 232px;
+    height: 48px;
+    font-size: 16px;
     align-self: center;
+    text-transform: uppercase;
     margin-top: 20px;
+    border-radius: 5px;
   }
 
   > h4 {
     font-size: 24px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 20px 35px;
   }
@@ -29,6 +31,8 @@ export const Content = styled.div`
 
   > p {
     color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    font-size: 14px;
     text-align: justify;
     margin-top: 25px;
   }
@@ -48,13 +52,13 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 74px;
+  height: 74px;
   border: 1px solid ${({ theme }) => theme.font.color.primary};
   border-radius: 50%;
   background: transparent;
-  font-weight: bold;
-  font-size: 20px;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 24px;
   color: ${({ theme }) => theme.font.color.primary};
   cursor: pointer;
   position: relative;
@@ -79,36 +83,8 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
     typeof status === 'boolean' &&
     css`
       strong {
-        width: 12px;
-        height: 12px;
-        border: 1px solid #000;
-        top: calc(100% - 6px);
+        top: calc(100% - 17px);
         left: calc(100% - 6px);
-        ${status
-          ? css`
-              &::after {
-                content: 'L';
-                position: absolute;
-                color: green;
-                font-size: 15px;
-                font-weight: bold;
-                transform: scaleX(-1) rotate(-35deg);
-                top: -6px;
-                left: 2px;
-              }
-            `
-          : css`
-              &::after {
-                content: 'X';
-                position: absolute;
-                color: red;
-                font-size: 13px;
-                font-weight: bold;
-                top: -3px;
-                left: 1px;
-              }
-            `}
-      }
     `};
 `;
 
@@ -119,7 +95,7 @@ export const Asnwers = styled.div`
 
   > h5 {
     color: ${({ theme }) => theme.font.color.primary};
-    font-size: 20px;
+    font-size: 21px;
     margin-bottom: 10px;
   }
 
@@ -129,6 +105,12 @@ export const Asnwers = styled.div`
 
   .Mui-checked {
     color: green;
+  }
+
+  .MuiFormControlLabel-label {
+    color: #707070;
+    font-size: 18px;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
   }
 
   ._rightAnswer {
@@ -149,7 +131,7 @@ export const Asnwers = styled.div`
       &::after {
         content: 'L';
         font-size: 22px;
-        font-weight: bold;
+        font-family: ${({ theme }) => theme.font.fontFamily.bold};
         position: absolute;
         color: #fff;
         transform: scaleX(-1) rotate(-35deg);
@@ -180,9 +162,12 @@ export const Actions = styled.div`
   width: 100%;
 
   button {
-    width: 160px;
-    height: 40px;
-    font-size: 14px;
+    width: 232px;
+    height: 48px;
+    font-size: 16px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    text-transform: uppercase;
+    border-radius: 5px;
     align-self: center;
     margin-top: 20px;
   }

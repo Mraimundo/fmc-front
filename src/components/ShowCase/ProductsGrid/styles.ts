@@ -36,14 +36,14 @@ export const MiniBox = styled(Link)`
 
   h3 {
     font-size: 13px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
   }
 
   a {
     font-size: 13px;
-    font-weight: bold;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     text-transform: uppercase;
     margin: 6px 0 12px 0;

@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 
+import headerImage from 'assets/images/point-management/header-image-2.png';
 import { formatPoints } from 'util/points';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { PointsInput } from 'components/PointManagement';
 import {
   HeaderAutonomyWrapper,
@@ -12,8 +14,6 @@ import {
   DistributeButton,
 } from './styles';
 
-import headerImage from 'assets/images/point-management/header-image-2.png';
-
 interface Props {
   generalPoints: number;
   totalTeamAwardPoints: number;
@@ -21,8 +21,8 @@ interface Props {
   onSetTeamAwardPoints(points: number): void;
   onSetResaleCooperativePoints(points: number): void;
   onReadyToDistribute(): void;
-  isAllowedToEdit: boolean;
   isAllowedToStartDistribution: boolean;
+  establishmentType: EstablishmentType | '';
 }
 const HeaderWithAutonomyPoints: React.FC<Props> = ({
   generalPoints,
@@ -31,51 +31,68 @@ const HeaderWithAutonomyPoints: React.FC<Props> = ({
   onSetTeamAwardPoints,
   onSetResaleCooperativePoints,
   onReadyToDistribute,
-  isAllowedToEdit,
   isAllowedToStartDistribution,
+  establishmentType,
 }: Props) => {
   const totalPoints = useMemo(
     () => generalPoints - (totalResaleCooperativePoints + totalTeamAwardPoints),
     [generalPoints, totalResaleCooperativePoints, totalTeamAwardPoints],
   );
 
+  const totalPointsText = useMemo(
+    () =>
+      `TOTAL PONTOS ${establishmentType} PARA DISTRIBUIR ${formatPoints(
+        totalPoints,
+      )}`,
+    [establishmentType, totalPoints],
+  );
+
+  const teamAwardsMaxLength = useMemo(() => {
+    if (generalPoints === totalResaleCooperativePoints) return 0;
+
+    return generalPoints - totalResaleCooperativePoints;
+  }, [generalPoints, totalResaleCooperativePoints]);
+
+  const resaleCooperativeMaxLength = useMemo(() => {
+    if (generalPoints === totalTeamAwardPoints) return 0;
+
+    return generalPoints - totalTeamAwardPoints;
+  }, [generalPoints, totalTeamAwardPoints]);
+
   return (
     <HeaderAutonomyWrapper>
-      <img src={headerImage} />
+      <img src={headerImage} alt="" title="" />
       <div>
         <TextDistributeWrapper>
           <TotalPointsToDistributeText>
-            {`TOTAL PONTOS COOPERATIVA PARA DISTRIBUIR ${formatPoints(
-              totalPoints,
-            )}`}
+            {totalPointsText}
           </TotalPointsToDistributeText>
           <p>
             Defina como deseja utilizar seus e pontos. Eles podem ser
-            distribuídos entre equipe e/ou cooperativa.
+            distribuídos entre equipe e/ou {establishmentType}.
           </p>
         </TextDistributeWrapper>
         <InputsWrapper>
           <BoxInput>
-            <h2>PONTOS EQUIPE</h2>
-            <span>Pontos para distribuir</span>
-            <PointsInput
-              value={totalTeamAwardPoints}
-              onChange={onSetTeamAwardPoints}
-              component={DistributeInput}
-              maxLength={generalPoints - totalResaleCooperativePoints}
-              disabled={isAllowedToEdit}
-            />
-          </BoxInput>
-          <BoxInput>
-            <h2>PONTOS COOPERATIVA</h2>
+            <h2>PONTOS {establishmentType}</h2>
             <span>Pontos para distribuir</span>
 
             <PointsInput
               value={totalResaleCooperativePoints}
               onChange={onSetResaleCooperativePoints}
               component={DistributeInput}
-              maxLength={generalPoints - totalTeamAwardPoints}
-              disabled={isAllowedToEdit}
+              maxLength={resaleCooperativeMaxLength}
+            />
+          </BoxInput>
+          <BoxInput>
+            <h2>PONTOS EQUIPE</h2>
+            <span>Pontos para distribuir</span>
+
+            <PointsInput
+              value={totalTeamAwardPoints}
+              onChange={onSetTeamAwardPoints}
+              component={DistributeInput}
+              maxLength={teamAwardsMaxLength}
             />
           </BoxInput>
         </InputsWrapper>

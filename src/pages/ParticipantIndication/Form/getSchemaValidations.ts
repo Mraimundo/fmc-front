@@ -7,7 +7,7 @@ const mandatoryMessage = 'Campo obrigatório';
 export default (): Yup.ObjectSchema<object> => {
   return Yup.object().shape({
     name: Yup.string().required(mandatoryMessage),
-    email: Yup.string().required(mandatoryMessage).email('Email inválido'),
+    email: Yup.string().required(mandatoryMessage).email('E-mail inválido'),
     cpf: Yup.string()
       .required(mandatoryMessage)
       .test('valid-cpf', 'CPF inválido', validateCpf),

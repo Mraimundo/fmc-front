@@ -13,7 +13,6 @@ interface Request {
 }
 
 export default async (message: SendMessageDTO): Promise<ContactResponse> => {
-  console.log(message);
   const request: Request = {
     message: message.message,
     file: message.fileUrl,

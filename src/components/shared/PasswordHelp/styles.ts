@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   h5 {
     font-size: 14px;
-    font-weight: bolder;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }
 
   ul {

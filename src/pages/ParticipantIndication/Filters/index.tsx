@@ -42,7 +42,7 @@ const Filters: React.FC<Props> = ({ filter, establishmentId }) => {
             establishmentId={establishmentId}
           />
           <RolesSelect name="roles" inputRole="secondary" />
-          <Button type="submit" buttonRole="tertiary">
+          <Button type="submit" buttonRole="primary">
             Filtrar
           </Button>
         </form>

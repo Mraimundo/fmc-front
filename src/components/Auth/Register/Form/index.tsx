@@ -137,7 +137,7 @@ const Form: React.FC<Props> = ({
         />
         <Input
           name="email"
-          label="Email*"
+          label="E-mail*"
           inputRole={inputRole}
           disabled={
             participant.profile === 'FMC' ||

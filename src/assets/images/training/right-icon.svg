@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20.795" height="18.169" viewBox="0 0 20.795 18.169">
+  <defs>
+    <filter id="Caminho_1323" x="1.662" y="0" width="19.133" height="15.31" filterUnits="userSpaceOnUse">
+      <feOffset dx="0.5" dy="0.5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.25" result="blur"/>
+      <feFlood flood-opacity="0.737"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Componente_5_1" data-name="Componente 5 – 1" transform="translate(0 1.169)">
+    <g id="Componente_4_1" data-name="Componente 4 – 1">
+      <g id="Retângulo_367" data-name="Retângulo 367" fill="none" stroke="#2a4207" stroke-width="1">
+        <rect width="17" height="17" rx="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="16" height="16" rx="1.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Componente_3_1" data-name="Componente 3 – 1" transform="translate(3.326 0.492)">
+      <g transform="matrix(1, 0, 0, 1, -3.33, -1.66)" filter="url(#Caminho_1323)">
+        <path id="Caminho_1323-2" data-name="Caminho 1323" d="M-17444.674,11994l5.186,5.413,9.623-10.921" transform="translate(17448 -11986.83)" fill="none" stroke="#2a4207" stroke-linecap="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

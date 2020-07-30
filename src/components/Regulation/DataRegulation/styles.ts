@@ -20,29 +20,18 @@ export const RegulationContent = styled.div<RegulationProps>`
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 20px;
+  padding: 50px 90px;
   overflow-y: auto;
-
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarBackgroundColor};
-  }
-  padding-right: 12px;
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarColor};
-  }
 `;
 
 export const Button = styled(DefaultButton)`
   width: 100%;
-  max-width: 500px;
+  max-width: 617px;
   margin-top: 30px;
+  height: 45px;
+  text-transform: uppercase;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 18px;
 `;
 
 export const BoxActions = styled.div`
@@ -56,7 +45,7 @@ export const BoxActions = styled.div`
     align-items: center;
     border: none;
     background: transparent;
-    opacity: 0.7;
+    opacity: 1;
     font-size: 14px;
 
     img {
@@ -70,10 +59,9 @@ export const BoxActions = styled.div`
       margin-left: 20px;
     }
 
-    transition: opacity 0.2s, transform 0.2s;
+    transition: transform 0.2s;
     will-change: opacity, transform;
     &:hover {
-      opacity: 1;
      /* color: ${({ theme }) => shade(0.2, theme.link.fontColor)};*/
      img {
        transform: scale(1.1);

@@ -14,6 +14,11 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
+  DISTRIBUTE_POINTS_ACTION,
+  DISTRIBUTE_POINTS_FINALLY_ACTION,
+  DISTRIBUTE_POINTS_FAILURE,
+  DISTRIBUTE_POINTS_SUCCESS,
+  SET_FINISHED_DISTRIBUTION,
 } from './constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
@@ -118,6 +123,50 @@ export const setSelectedEstablishment = (
     payload: { selectedEstablishment },
   };
 
+export const distributePoints = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_ACTION
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_ACTION,
+  };
+
+export const distributePointsFinally = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_FINALLY_ACTION
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_FINALLY_ACTION,
+  };
+
+export const distributePointsFailure = (
+  error: string,
+): ActionCreatorFailure<typeof DISTRIBUTE_POINTS_FAILURE> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const distributePointsSuccess = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_SUCCESS
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_SUCCESS,
+  };
+
+export const setFinishedDistribution = (
+  finishedDistribution = true,
+): ActionCreatorPayload<
+  typeof SET_FINISHED_DISTRIBUTION,
+  Pick<CommonState, 'finishedDistribution'>
+> =>
+  <const>{
+    type: SET_FINISHED_DISTRIBUTION,
+    payload: {
+      finishedDistribution,
+    },
+  };
+
 export type CommonActions = ReturnType<
   | typeof fetchEstablishments
   | typeof fetchEstablishmentsFailure
@@ -129,4 +178,9 @@ export type CommonActions = ReturnType<
   | typeof setTotalPointsResaleCooperative
   | typeof setIsReadyToDistribute
   | typeof setSelectedEstablishment
+  | typeof distributePoints
+  | typeof distributePointsFinally
+  | typeof distributePointsFailure
+  | typeof distributePointsSuccess
+  | typeof setFinishedDistribution
 >;
