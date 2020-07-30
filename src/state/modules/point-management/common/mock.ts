@@ -16,8 +16,8 @@ export const pointsToDistribute: PointsToDistribute = {
 };
 
 export const establishments: Establishment[] = [
-  { value: '1', title: 'Estabelecimento 1' },
-  { value: '2', title: 'Estabelecimento 2' },
+  { value: '1', title: 'Estabelecimento 1', type: 'Revenda' },
+  { value: '2', title: 'Estabelecimento 2', type: 'Cooperativa' },
 ];
 
 export const rawEstablishments: RawEstablishment[] = [
@@ -64,7 +64,6 @@ const state: CommonState = {
   totalPointsTeamAwards: 5000,
   establishments,
   selectedEstablishment,
-  establishmentType: 'Revenda',
   finishedDistribution: false,
 };
 

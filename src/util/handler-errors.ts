@@ -3,24 +3,23 @@ import { put } from 'redux-saga/effects';
 
 import { ActionCreatorFailureType } from '@types';
 
+type TAxios = AxiosError<{
+  message: string;
+  url: string;
+  code: number;
+}>;
+
 export function* handlerErrors(
-  error:
-    | string
-    | AxiosError<{
-        message: string;
-        url: string;
-        code: number;
-      }>,
+  error: TAxios & Error,
   actionCreatorFailure: ActionCreatorFailureType,
 ) {
-  if (typeof error === 'string') {
-    yield put(actionCreatorFailure(error));
+  if (error && error.stack && error.message) {
+    yield put(actionCreatorFailure(error.message));
     return;
   }
 
-  yield put(
-    actionCreatorFailure(
-      error.response?.data.message || 'Ocorreu um erro inesperado',
-    ),
-  );
+  const errorMessage =
+    error.response?.data.message || 'Ocorreu um erro inesperado';
+
+  yield put(actionCreatorFailure(errorMessage));
 }

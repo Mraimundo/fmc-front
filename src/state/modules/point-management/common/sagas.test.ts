@@ -81,13 +81,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
           ],
         ])
         .put(actions.setSelectedEstablishment(establishments[0]))
-        .put(actions.setEstablishmentType(rawEstablishments[0].type.name))
         .returns(undefined)
         .dispatch(actions.fetchEstablishments())
         .hasFinalState({
           ...initialState,
           establishments: null,
-          establishmentType: rawEstablishments[0].type.name,
           selectedEstablishment: establishments[0],
         })
         .run();
@@ -100,6 +98,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([[matchers.call.fn(fetchEstablishmentsService), null]])
+        .call(
+          handlerErrors,
+          new Error(error),
+          actions.fetchEstablishmentsFailure,
+        )
         .put(actions.fetchEstablishmentsFailure(error))
         .dispatch(actions.fetchEstablishments())
         .hasFinalState({
@@ -151,7 +154,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withState(initialState)
         .provide([[select(selectors.getSelectedEstablishment), null]])
         .not.call.fn(fetchTotalPointsToDistributeService)
-        .call(handlerErrors, error, actions.fetchPointsToDistributeFailure)
+        .call(
+          handlerErrors,
+          new Error(error),
+          actions.fetchPointsToDistributeFailure,
+        )
         .put(actions.fetchPointsToDistributeFailure(error))
         .dispatch(actions.fetchPointsToDistribute())
         .hasFinalState({
@@ -178,7 +185,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .call(fetchTotalPointsToDistributeService, selectedEstablishment.value)
         .not.call.fn(workerAfterGetPointsToDistribution)
         .put(actions.fetchPointsToDistributeFailure(error))
-        .call(handlerErrors, error, actions.fetchPointsToDistributeFailure)
+        .call(
+          handlerErrors,
+          new Error(error),
+          actions.fetchPointsToDistributeFailure,
+        )
         .dispatch(actions.fetchPointsToDistribute())
         .hasFinalState({
           ...initialState,
@@ -291,17 +302,16 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .provide([
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), true],
-          [
-            select(selectors.getEstablishmentType),
-            rawEstablishments[0].type.name,
-          ],
+          [select(selectors.getSelectedEstablishment), establishments[0]],
           [select(getMissingParticipants), 0],
+          [select(selectors.getIsResaleCooperativePointsOnly), false],
           [matchers.call.fn(workerDistributePoints), null],
         ])
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
-        .select(selectors.getEstablishmentType)
+        .select(selectors.getSelectedEstablishment)
         .select(getMissingParticipants)
+        .select(selectors.getIsResaleCooperativePointsOnly)
         .call(workerDistributePoints)
         .dispatch(actions.distributePoints())
         .hasFinalState(initialState)
@@ -309,54 +319,54 @@ describe('src/state/modules/point-management/common/sagas', () => {
     });
 
     it('should throw an error when try distribute without permission to rescue resale/cooperative', async () => {
+      const error = `É necessário distribuir todos os pontos para ${establishments[0].type} antes de finalizar`;
+
       await expectSaga(workerVerifyDistributePointsPossibility)
         .withReducer(reducer)
         .withState(initialState)
         .provide([
           [select(getIsEnabledToRescue), false],
-          [select(getIsEnabledToDistributePoints), true],
-          [
-            select(selectors.getEstablishmentType),
-            rawEstablishments[0].type.name,
-          ],
+          [select(selectors.getSelectedEstablishment), establishments[0]],
         ])
         .select(getIsEnabledToRescue)
-        .select(getIsEnabledToDistributePoints)
-        .select(selectors.getEstablishmentType)
+        .select(selectors.getSelectedEstablishment)
+        .call(handlerErrors, new Error(error), actions.distributePointsFailure)
         .not.call.fn(workerDistributePoints)
         .dispatch(actions.distributePoints())
         .hasFinalState({
           ...initialState,
           distributePoints: {
             isFetching: false,
-            error: `É necessário distribuir todos os pontos para ${rawEstablishments[0].type.name} antes de finalizar`,
+            error,
           },
         })
         .run();
     });
 
     it('should throw an error when try distribute without scored participants', async () => {
+      const error = `É necessário distribuir todos os pontos para a equipe antes de finalizar`;
+
       await expectSaga(workerVerifyDistributePointsPossibility)
         .withReducer(reducer)
         .withState(initialState)
         .provide([
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), false],
-          [
-            select(selectors.getEstablishmentType),
-            rawEstablishments[0].type.name,
-          ],
+          [select(selectors.getSelectedEstablishment), establishments[0]],
+          [select(selectors.getIsResaleCooperativePointsOnly), false],
         ])
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
-        .select(selectors.getEstablishmentType)
+        .select(selectors.getSelectedEstablishment)
+        .select(selectors.getIsResaleCooperativePointsOnly)
+        .call(handlerErrors, new Error(error), actions.distributePointsFailure)
         .not.call.fn(workerDistributePoints)
         .dispatch(actions.distributePoints())
         .hasFinalState({
           ...initialState,
           distributePoints: {
             isFetching: false,
-            error: `É necessário distribuir todos os pontos para a equipe antes de finalizar`,
+            error,
           },
         })
         .run();
@@ -369,16 +379,15 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .provide([
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), true],
-          [
-            select(selectors.getEstablishmentType),
-            rawEstablishments[0].type.name,
-          ],
+          [select(selectors.getSelectedEstablishment), establishments[0]],
           [select(getMissingParticipants), 1],
+          [select(selectors.getIsResaleCooperativePointsOnly), false],
         ])
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
-        .select(selectors.getEstablishmentType)
+        .select(selectors.getSelectedEstablishment)
         .select(getMissingParticipants)
+        .select(selectors.getIsResaleCooperativePointsOnly)
         .put(toggleIsOpenModalMissingParticipants())
         .returns(undefined)
         .not.call.fn(workerDistributePoints)

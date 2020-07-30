@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { FetchState } from '@types';
 import { StoreState } from 'state/root-reducer';
-import { PointsToDistribute, Establishment, EstablishmentType } from './types';
+import { PointsToDistribute, Establishment } from './types';
 
 export const getFetchPointsToDistribute = (state: StoreState) =>
   state.pointManagement.common.fetchPointsToDistribute;
@@ -25,10 +25,6 @@ export const getEstablishments = (state: StoreState): Establishment[] | null =>
 export const getSelectedEstablishment = (
   state: StoreState,
 ): Establishment | null => state.pointManagement.common.selectedEstablishment;
-
-export const getEstablishmentType = (
-  state: StoreState,
-): EstablishmentType | '' => state.pointManagement.common.establishmentType;
 
 export const getDistributePoints = (state: StoreState): FetchState =>
   state.pointManagement.common.distributePoints;

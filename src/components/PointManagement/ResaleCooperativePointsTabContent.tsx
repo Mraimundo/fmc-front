@@ -62,8 +62,8 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     [dispatch],
   );
 
-  const maxLengthInvoicePoints = useMemo(() => {
-    if (!maxInvoicePercentage || !totalPointsResaleCooperative) return null;
+  const maxLengthInvoicePoints = useMemo<number>(() => {
+    if (!maxInvoicePercentage || !totalPointsResaleCooperative) return 0;
 
     return totalPointsResaleCooperative * (maxInvoicePercentage / 100);
   }, [maxInvoicePercentage, totalPointsResaleCooperative]);

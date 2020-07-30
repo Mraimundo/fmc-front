@@ -10,7 +10,6 @@ import {
   SET_TOTAL_POINTS_RESALE_COOPERATIVE,
   SET_IS_READY_TO_DISTRIBUTE,
   SET_SELECTED_ESTABLISHMENT,
-  SET_ESTABLISHMENT_TYPE,
   DISTRIBUTE_POINTS_ACTION,
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
@@ -135,18 +134,6 @@ describe('src/state/modules/point-management/common/constants', () => {
     it('should return correct value', () => {
       expect(SET_SELECTED_ESTABLISHMENT).to.be.equal(
         '@fmc/point-management/common/SET_SELECTED_ESTABLISHMENT',
-      );
-    });
-  });
-
-  describe('SET_ESTABLISHMENT_TYPE', () => {
-    it('should return a string', () => {
-      expect(SET_ESTABLISHMENT_TYPE).to.be.a('string');
-    });
-
-    it('should return correct value', () => {
-      expect(SET_ESTABLISHMENT_TYPE).to.be.equal(
-        '@fmc/point-management/common/SET_ESTABLISHMENT_TYPE',
       );
     });
   });
