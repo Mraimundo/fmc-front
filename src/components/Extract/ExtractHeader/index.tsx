@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import getSummary from 'services/extract/getSummary';
+import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
 import {
   AccumulatedBalance,
@@ -9,14 +11,13 @@ import {
   ContainerReseller,
 } from './styles';
 
-const blocks = [
-  { title: 'Rebate', value: '200 mil' },
-  { title: 'Ações Compartilhadas FMC*', value: '200 mil' },
-  { title: 'Premiação Vendedores', value: '200 mil' },
-  { title: 'Pontos Extra', value: '200 mil' },
-];
-
 const ExtractHeader: React.FC = () => {
+  const [summary, setSummary] = useState<ExtractSummary[]>([]);
+
+  useEffect(() => {
+    getSummary().then(data => setSummary(data));
+  }, []);
+
   return (
     <ContainerReseller>
       <AccumulatedBalance>
@@ -24,9 +25,11 @@ const ExtractHeader: React.FC = () => {
           Saldo acumulado: <strong>500 mil pontos</strong>
         </h2>
         <BalanceBoxContainer>
-          {blocks.map(item => (
+          {summary.map(item => (
             <BalanceItem>
-              <div className="title"><span>{item.title}</span></div>
+              <div className="title">
+                <span>{item.balance_unit.name}</span>
+              </div>
               <div className="value">{item.value}</div>
             </BalanceItem>
           ))}
@@ -45,7 +48,10 @@ const ExtractHeader: React.FC = () => {
           >
             RESGATAR
           </Button>
-          <p>Saldo Ações Compartilhadas FMC: 150.000 pontos</p>
+          <p>
+            Saldo Ações Compartilhadas FMC:
+            <span>150.000 pontos</span>
+          </p>
         </CalltoActionBox>
       </CalltoActionContainer>
     </ContainerReseller>
