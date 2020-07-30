@@ -3,7 +3,9 @@ import { css } from 'styled-components';
 export default css`
   @font-face {
     font-family: 'Helvetica-Neue-Condensed';
-    src: url('/fonts/helveticaneue-condensed.ttf') format('ttf');
+    src: url('/fonts/HelveticaNeue-Condensed.ttf');
+    src: local('HelveticaNeue Condensed'), local('HelveticaNeueCondensed'),
+      url('/fonts/HelveticaNeue-Condensed.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
   }
