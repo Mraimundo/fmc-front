@@ -1,9 +1,8 @@
 import React from 'react';
 
+import marketplaceImage from 'assets/images/point-management/marketplace-image.png';
 import { PointsInput } from 'components/PointManagement';
 import { Wrapper, Title, Image, Input } from './styles';
-
-import marketplaceImage from 'assets/images/point-management/marketplace-image.png';
 
 interface MarketplacePointsProps {
   onChange(points: number): void;
@@ -18,7 +17,11 @@ const MarketplacePoints: React.FC<MarketplacePointsProps> = ({
   return (
     <Wrapper>
       <Title>RESGATE NO MARKETPLACE</Title>
-      <Image src={marketplaceImage} alt="Marketplace Imagem" title="Marketplace" />
+      <Image
+        src={marketplaceImage}
+        alt="Marketplace Imagem"
+        title="Marketplace"
+      />
       <PointsInput
         onChange={onChange}
         value={marketplacePoints}
