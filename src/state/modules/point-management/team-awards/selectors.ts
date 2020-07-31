@@ -153,7 +153,7 @@ export const getAvailableScore = createSelector(
   },
 );
 
-export type TScoredParticipantResume = {
+export type ScoredParticipantResume = {
   [role: string]: {
     count: number;
     totalPoints: number;
@@ -163,11 +163,11 @@ export const getScoredParticipantsResume = createSelector(
   getScoredParticipants,
   (
     scoredParticipants: ScoredParticipant[] | null,
-  ): TScoredParticipantResume | null => {
+  ): ScoredParticipantResume | null => {
     if (!scoredParticipants) return null;
 
     return scoredParticipants.reduce(
-      (acc: TScoredParticipantResume, scoredParticipant: ScoredParticipant) => {
+      (acc: ScoredParticipantResume, scoredParticipant: ScoredParticipant) => {
         const {
           role: { name: roleName },
           points,
@@ -183,7 +183,7 @@ export const getScoredParticipantsResume = createSelector(
           },
         };
       },
-      {} as TScoredParticipantResume,
+      {} as ScoredParticipantResume,
     );
   },
 );

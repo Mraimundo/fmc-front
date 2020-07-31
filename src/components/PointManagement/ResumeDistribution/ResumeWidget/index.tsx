@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-import { TScoredParticipantResume } from 'state/modules/point-management/team-awards/selectors';
+import { ScoredParticipantResume } from 'state/modules/point-management/team-awards/selectors';
 import { formatPoints } from 'util/points';
 
 import { List, RoleName, RoleItem, TotalResume } from './styles';
 
-type Props = {
-  scoredParticipants: TScoredParticipantResume;
-};
-const ResumeWidget: React.FC<Props> = ({ scoredParticipants }) => {
+interface ResumeWidgetProps {
+  scoredParticipants: ScoredParticipantResume;
+}
+const ResumeWidget: React.FC<ResumeWidgetProps> = ({ scoredParticipants }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const totalResumePoints = Object.values(scoredParticipants).reduce(
-      (acc: any, { totalPoints }: any) => acc + totalPoints,
+      (acc: number, { totalPoints }: { totalPoints: number }): number =>
+        acc + totalPoints,
       0,
     );
 
@@ -22,29 +23,25 @@ const ResumeWidget: React.FC<Props> = ({ scoredParticipants }) => {
 
   return (
     <List>
-      <>
-        {Object.keys(scoredParticipants).map((role: string) => {
-          const { count, totalPoints } = scoredParticipants[role];
-          const scoredParticipantsText =
-            count > 1
-              ? `${count} pessoas contempladas`
-              : '1 pessoa contemplada';
+      {Object.keys(scoredParticipants).map((role: string) => {
+        const { count, totalPoints } = scoredParticipants[role];
+        const scoredParticipantsText =
+          count > 1 ? `${count} pessoas contempladas` : '1 pessoa contemplada';
 
-          return (
-            <RoleItem key={`${role}-${count}`}>
-              <RoleName>{role}</RoleName>
-              <div>
-                <span>{scoredParticipantsText}</span>
-                <span>{formatPoints(totalPoints)}</span>
-              </div>
-            </RoleItem>
-          );
-        })}
-        <TotalResume>
-          <span>Total distribuído</span>
-          <span>{formatPoints(total)}</span>
-        </TotalResume>
-      </>
+        return (
+          <RoleItem key={`${role}-${count}`}>
+            <RoleName>{role}</RoleName>
+            <div>
+              <span>{scoredParticipantsText}</span>
+              <span>{formatPoints(totalPoints)}</span>
+            </div>
+          </RoleItem>
+        );
+      })}
+      <TotalResume>
+        <span>Total distribuído</span>
+        <span>{formatPoints(total)}</span>
+      </TotalResume>
     </List>
   );
 };

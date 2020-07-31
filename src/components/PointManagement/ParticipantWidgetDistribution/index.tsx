@@ -4,6 +4,7 @@ import { Tooltip } from 'components/shared';
 import Avatar from 'components/Avatar';
 import { PointsInput } from 'components/PointManagement';
 import { Participant } from 'state/modules/point-management/team-awards/types';
+import { getFirstAndLastName, limitChars } from 'util/string';
 import {
   Name,
   Subsidiary,
@@ -14,7 +15,6 @@ import {
   SelectIcon,
   SelectedIcon,
 } from './styles';
-import { getFirstAndLastName, limitChars } from 'util/string';
 
 interface ParticipantWidgetDistributionProps {
   participant: Participant;
