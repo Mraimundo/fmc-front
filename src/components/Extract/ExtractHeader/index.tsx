@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import getSummary from 'services/extract/getSummary';
+import React from 'react';
 import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
 import {
@@ -11,13 +10,11 @@ import {
   ContainerReseller,
 } from './styles';
 
-const ExtractHeader: React.FC = () => {
-  const [summary, setSummary] = useState<ExtractSummary[]>([]);
+interface Props {
+  summary: ExtractSummary[];
+}
 
-  useEffect(() => {
-    getSummary().then(data => setSummary(data));
-  }, []);
-
+const ExtractHeader: React.FC<Props> = ({ summary }) => {
   return (
     <ContainerReseller>
       <AccumulatedBalance>
@@ -26,11 +23,11 @@ const ExtractHeader: React.FC = () => {
         </h2>
         <BalanceBoxContainer>
           {summary.map(item => (
-            <BalanceItem>
+            <BalanceItem key={item.balance_unit.id}>
               <div className="title">
                 <span>{item.balance_unit.name}</span>
               </div>
-              <div className="value">{item.value}</div>
+              <div className="value">{item.value} mil</div>
             </BalanceItem>
           ))}
         </BalanceBoxContainer>

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import headerBackground from 'assets/images/extract/headerBackground.svg';
 
 export const ContainerReseller = styled.div`
   margin-top: 25px;
   align-items: center;
-  background: #395389;
+  background: #395389 url(${headerBackground}) no-repeat;
+  background-size: cover;
   color: ${({ theme }) => theme.font.color.secondary};
   display: flex;
 `;
@@ -28,7 +30,7 @@ export const BalanceBoxContainer = styled.div`
 `;
 
 export const BalanceItem = styled.div`
-  background: #fff;
+  background: ${({ theme }) => theme.layout.secondary.backgroundColor};
   border-radius: 5px;
   color: #193b4e;
 
@@ -53,7 +55,7 @@ export const CalltoActionContainer = styled.div`
 `;
 
 export const CalltoActionBox = styled.div`
-  background: #fff;
+  background: ${({ theme }) => theme.layout.secondary.backgroundColor};
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
