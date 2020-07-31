@@ -2,10 +2,7 @@ import React, { useMemo } from 'react';
 
 import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { formatPoints } from 'util/points';
-import {
-  Wrapper,
-  TotalPointsResume,
-} from './styles';
+import { Wrapper, TotalPointsResume } from './styles';
 import TableResume from './TableResume';
 
 interface ResaleCooperativeResumeProps {

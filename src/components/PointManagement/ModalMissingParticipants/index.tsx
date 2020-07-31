@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 
-import { Modal, WrapperText, Text, WrapperButtons } from './styles';
 import { Button } from 'components/shared';
+import { Modal, WrapperText, Text, WrapperButtons } from './styles';
 
-interface IModalMissingParticipants {
+interface ModalMissingParticipants {
   total: number;
   isOpen?: boolean;
   onClose(): void;
   onConfirm(): void;
 }
-const ModalMissingParticipants: React.FC<IModalMissingParticipants> = ({
+const ModalMissingParticipants: React.FC<ModalMissingParticipants> = ({
   total,
   isOpen = false,
   onClose,
