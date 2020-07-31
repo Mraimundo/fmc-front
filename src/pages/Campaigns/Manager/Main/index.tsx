@@ -22,7 +22,7 @@ import { useCampaignsManager } from '../Context';
 import { Container, Content } from './styles';
 
 const Main: React.FC = () => {
-  const { tabSelected } = useCampaignsManager();
+  const { tabSelected, campaign } = useCampaignsManager();
 
   const handleAction = async (): Promise<void> => {
     console.log('t');
@@ -33,7 +33,10 @@ const Main: React.FC = () => {
       <Content>
         <TabsNavigation />
         {tabSelected === SOLICITATION_TAB && (
-          <RegisterCampaignForm handleAction={handleAction} />
+          <RegisterCampaignForm
+            handleAction={handleAction}
+            initialValues={campaign}
+          />
         )}
         {tabSelected === CONFIGURATION_TAB && <ConfigurationForm />}
         {tabSelected === COMUNICATION_TAB && <ComunicationForm />}

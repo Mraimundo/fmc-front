@@ -20,7 +20,12 @@ const Main: React.FC = () => {
   const params = useParams<Params>();
   const { addToast } = useToast();
 
-  const { loadTraining, successModalOpened, closeSuccessModal } = useTraining();
+  const {
+    loadTraining,
+    successModalOpened,
+    closeSuccessModal,
+    certificate,
+  } = useTraining();
 
   useEffect(() => {
     if (!params.id) return;
@@ -39,6 +44,7 @@ const Main: React.FC = () => {
         <SuccessModal
           isOpen={successModalOpened}
           onRequestClose={closeSuccessModal}
+          certificate={certificate}
         />
       </Content>
     </Container>

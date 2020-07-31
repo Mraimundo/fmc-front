@@ -1,5 +1,6 @@
 import createNewCampaign from './createNewCampaign';
 import getAudience from './getAudience';
+import getCampaign from './getCampaign';
 import getCampaigns from './getCampaigns';
 import getCampaignsDetails from './getCampaignsDetails';
 import getChannels from './getChannels';
@@ -16,6 +17,7 @@ import newEmptyCampaignObject from './newEmptyCampaignObject';
 export {
   createNewCampaign,
   getAudience,
+  getCampaign,
   getCampaigns,
   getCampaignsDetails,
   getChannels,

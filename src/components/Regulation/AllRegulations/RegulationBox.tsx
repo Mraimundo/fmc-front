@@ -4,6 +4,7 @@ import ReactToPrint from 'react-to-print';
 import { Button } from 'components/shared';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import getRegulationById from 'services/register/regulation/getRegulationById';
+import getUrl from 'services/register/regulation/getUrlRegulationToDownload';
 
 import { ContentRegulation, Actions, PrintRef } from './styles';
 
@@ -51,6 +52,20 @@ const RegulationBox: React.FC<Props> = ({
     setLoading(false);
   }, [regulation, handleAcceptRegulation]);
 
+  const handleSavePdf = useCallback(async () => {
+    if (!regulation) return;
+    setLoading(true);
+    const url = await getUrl(regulation.id);
+    setLoading(false);
+
+    const linkClick = document.createElement('a');
+    linkClick.href = url;
+    linkClick.download = 'Regulamento.pdf';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [regulation]);
+
   return (
     regulation && (
       <>
@@ -70,16 +85,9 @@ const RegulationBox: React.FC<Props> = ({
             </Button>
           )}
 
-          <ReactToPrint
-            trigger={() => {
-              return (
-                <Button buttonRole="tertiary" type="button">
-                  Download
-                </Button>
-              );
-            }}
-            content={() => t.current}
-          />
+          <Button buttonRole="tertiary" type="button" onClick={handleSavePdf}>
+            Download
+          </Button>
         </Actions>
       </>
     )

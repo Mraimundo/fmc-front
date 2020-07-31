@@ -1,25 +1,37 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
+import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import tabs from './tabs';
 
 export interface CampaignsManagerContextState {
   tabs: string[];
   tabSelected: string;
   selectTab(tab: string): void;
+  campaign: Campaign;
 }
 
 const CampaignsManagerContext = createContext<CampaignsManagerContextState>(
   {} as CampaignsManagerContextState,
 );
 
-export const CampaignsManagerProvider: React.FC = ({ children }) => {
+interface ProviderProps {
+  campaign: Campaign;
+}
+
+export const CampaignsManagerProvider: React.FC<ProviderProps> = ({
+  campaign: initialValues,
+  children,
+}) => {
   const [tabSelected, setTabSelected] = useState(() => tabs[0]);
+  const [campaign, setCampaign] = useState<Campaign>(initialValues);
 
   const selectTab = useCallback((tab: string) => {
     setTabSelected(tab);
   }, []);
 
   return (
-    <CampaignsManagerContext.Provider value={{ tabs, tabSelected, selectTab }}>
+    <CampaignsManagerContext.Provider
+      value={{ tabs, tabSelected, selectTab, campaign }}
+    >
       {children}
     </CampaignsManagerContext.Provider>
   );

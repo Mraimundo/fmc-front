@@ -19,9 +19,15 @@ interface ApiResponse {
   completed: number;
 }
 
-export default async (): Promise<Response[]> => {
+export default async (participantId?: number): Promise<Response[]> => {
   /* ?status[0]=published&establishments[0]=1&types[0]=1&regional[0]=Arroz&directorships[0]=Sul&participants[0]=1 */
-  const { data } = await pluginApi.get<ApiResponse>('campaigns/details');
+  let extraSearch = '';
+  if (participantId) {
+    extraSearch = `?participants[0]=${participantId}`;
+  }
+  const { data } = await pluginApi.get<ApiResponse>(
+    `campaigns/details${extraSearch}`,
+  );
 
   return [
     {

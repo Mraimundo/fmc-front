@@ -2,6 +2,7 @@ import React, { useCallback, useState, useRef } from 'react';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import parser from 'html-react-parser';
 import ReactToPrint from 'react-to-print';
+import getUrl from 'services/register/regulation/getUrlRegulationToDownload';
 
 import pdfIcon from 'assets/images/pdf.svg';
 import printIcon from 'assets/images/print.svg';
@@ -44,18 +45,16 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   };
 
   const handlePdfDownload = useCallback(async () => {
-    console.log('todo');
-    /* const data = await getPdfDownload(regulation?.content || '');
-    const blob = new Blob([data], { type: 'application/pdf' });
-    const url = window.URL.createObjectURL(blob);
+    if (!regulation) return;
+    const url = await getUrl(regulation.id);
 
     const linkClick = document.createElement('a');
     linkClick.href = url;
     linkClick.download = 'Regulamento.pdf';
     document.body.appendChild(linkClick);
     linkClick.click();
-    document.body.removeChild(linkClick); */
-  }, []);
+    document.body.removeChild(linkClick);
+  }, [regulation]);
 
   return (
     <Container>

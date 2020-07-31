@@ -25,12 +25,15 @@ export const Container = styled.div`
     align-self: center;
     margin: 30px 0;
     text-transform: uppercase;
+    border-radius: 5px;
   }
 `;
 
 export const Separator = styled.div`
-  width: 100%;
+  width: calc(100% + 90px);
   height: 2px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 4px;
+  transform: translateX(-45px);
+  margin-bottom: 2px;
+  margin-top: 3px;
 `;

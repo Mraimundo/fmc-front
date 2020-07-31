@@ -7,7 +7,6 @@ import { useToast } from 'context/ToastContext';
 import history from 'services/history';
 
 export interface NewCampaignContextState {
-  test: string;
   handleSave(data: Campaign): Promise<void>;
 }
 
@@ -16,8 +15,6 @@ const NewCampaignContext = createContext<NewCampaignContextState>(
 );
 
 export const NewCampaignProvider: React.FC = ({ children }) => {
-  const [test] = useState('');
-
   const { addToast } = useToast();
 
   const handleSave = useCallback(
@@ -43,7 +40,7 @@ export const NewCampaignProvider: React.FC = ({ children }) => {
   );
 
   return (
-    <NewCampaignContext.Provider value={{ test, handleSave }}>
+    <NewCampaignContext.Provider value={{ handleSave }}>
       {children}
     </NewCampaignContext.Provider>
   );
