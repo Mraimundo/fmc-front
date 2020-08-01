@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 import DefaultTitlesOptionsForCampaign from 'components/CampaignsManager/Selects/TitlesOptionsForCampaign';
-import DefaultChannelsSelect from 'components/CampaignsManager/Selects/Channels';
+import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 35px;
+
+  > input[type='text'] {
+    width: 100%;
+    max-width: 435px;
+    height: 44px;
+    padding: 0 15px;
+  }
 
   > h4 {
     color: ${({ theme }) => theme.font.color.primary};
@@ -32,15 +39,7 @@ export const Container = styled.div`
   }
 `;
 
-export const TitlesSelect = styled(DefaultTitlesOptionsForCampaign)`
-  ._inputContainer {
-    width: 100%;
-    max-width: 435px;
-    height: 44px;
-  }
-`;
-
-export const ChannelsSelect = styled(DefaultChannelsSelect)`
+export const CustomersSelect = styled(DefaultCustomersSelect)`
   ._inputContainer {
     width: 100%;
     max-width: 435px;

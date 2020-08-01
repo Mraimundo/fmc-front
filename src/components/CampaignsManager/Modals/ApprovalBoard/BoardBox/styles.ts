@@ -4,9 +4,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 532px;
-  padding: 2px 12px;
+  max-width: 598px;
+  padding: 17px 20px;
   border: 1px solid ${({ theme }) => theme.font.color.primary};
+  margin-top: 30px;
 `;
 
 export const Row = styled.div`
@@ -20,7 +21,7 @@ export const Row = styled.div`
   }
 
   > h5 {
-    font-size: 18px;
+    font-size: 21px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     flex: 1;
@@ -28,11 +29,12 @@ export const Row = styled.div`
 `;
 
 export const Icon = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   margin-right: 20px;
   color: ${({ theme }) => theme.font.color.quartenary};
+  font-family: ${({ theme }) => theme.font.fontFamily.medium};
 
   svg {
     margin-right: 8px;

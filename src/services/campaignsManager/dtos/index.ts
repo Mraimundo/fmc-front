@@ -25,3 +25,7 @@ export interface CreateNewCampaignDTO {
   establishments: number[];
   products: Product[];
 }
+
+export interface UpdateCampaignDTO extends CreateNewCampaignDTO {
+  id: number;
+}

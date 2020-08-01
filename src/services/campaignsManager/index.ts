@@ -10,9 +10,15 @@ import getMechanics from './getMechanics';
 import getProducts from './getProducts';
 import getProductsCategories from './getProductsCategories';
 import getRegional from './getRegional';
+import getRegulation from './getRegulation';
 import getCampaignStatus from './getCampaignStatus';
 import getTitlesOptionsForCampaign from './getTitlesOptionsForCampaign';
 import newEmptyCampaignObject from './newEmptyCampaignObject';
+import updateCampaign from './updateCampaign';
+import cancelCampaign from './cancelCampaign';
+import approveCampaign from './approveCampaign';
+import disapproveCampaign from './disapproveCampaign';
+import requestForApprovalCampaign from './requestForApprovalCampaign';
 
 export {
   createNewCampaign,
@@ -27,7 +33,13 @@ export {
   getProducts,
   getProductsCategories,
   getRegional,
+  getRegulation,
   getCampaignStatus,
   getTitlesOptionsForCampaign,
   newEmptyCampaignObject,
+  updateCampaign,
+  cancelCampaign,
+  approveCampaign,
+  disapproveCampaign,
+  requestForApprovalCampaign,
 };

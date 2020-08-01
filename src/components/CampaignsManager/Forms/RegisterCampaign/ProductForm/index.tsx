@@ -4,7 +4,13 @@ import { ReactSVG } from 'react-svg';
 import deleteIcon from 'assets/images/campaigns/delete-icon.svg';
 import InputValue from 'components/CampaignsManager/Inputs/NumberMaskInput';
 import { formatProductsInput } from 'util/products';
-import { useRegisterForm } from '../../Context';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import {
+  addGoal,
+  removeGoal,
+  setFieldValue,
+} from 'state/modules/campaigns-manager/actions';
 import {
   Container,
   ProductsSelect,
@@ -18,22 +24,25 @@ const CampaignForm: React.FC = () => {
   const [categorySelected, setCategorySelected] = useState<Option | null>(null);
   const [productSelected, setProductSelected] = useState<Option | null>(null);
 
-  const { campaign, addGoal, removeGoal, setTextsValue } = useRegisterForm();
+  const dispatch = useDispatch();
+  const campaign = useSelector(getCampaign);
 
   useEffect(() => {
     if (productSelected) {
-      addGoal({
-        product: {
-          id: parseInt(productSelected.value, 0),
-          name: productSelected.title,
-        },
-        expectedVolume: 0,
-      });
+      dispatch(
+        addGoal({
+          product: {
+            id: parseInt(productSelected.value, 0),
+            name: productSelected.title,
+          },
+          expectedVolume: 0,
+        }),
+      );
       setTimeout(() => {
         setProductSelected(null);
       }, 1000);
     }
-  }, [addGoal, productSelected]);
+  }, [productSelected, dispatch]);
 
   return useMemo(
     () => (
@@ -54,11 +63,14 @@ const CampaignForm: React.FC = () => {
           <ProductDetails key={`goal-${item.product.id}`}>
             <div>
               <h3>{item.product.name}</h3>
-              <ReactSVG src={deleteIcon} onClick={() => removeGoal(item)} />
+              <ReactSVG
+                src={deleteIcon}
+                onClick={() => dispatch(removeGoal(item))}
+              />
             </div>
             <h5>Volume previsto</h5>
             <InputValue
-              onChange={e => addGoal({ ...item, expectedVolume: e })}
+              onChange={e => dispatch(addGoal({ ...item, expectedVolume: e }))}
               value={item.expectedVolume}
               component={Input}
               formatValue={formatProductsInput}
@@ -69,19 +81,24 @@ const CampaignForm: React.FC = () => {
           <span>Observações</span>
           <textarea
             value={campaign.observation}
-            onChange={e => setTextsValue('observation', e.target.value)}
+            onChange={e =>
+              dispatch(
+                setFieldValue({
+                  fieldName: 'observation',
+                  value: e.target.value,
+                }),
+              )
+            }
           />
         </ObservatioBox>
       </Container>
     ),
     [
-      addGoal,
       categorySelected,
       productSelected,
-      removeGoal,
       campaign.goals,
       campaign.observation,
-      setTextsValue,
+      dispatch,
     ],
   );
 };

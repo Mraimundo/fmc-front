@@ -1,6 +1,43 @@
-import { Campaign } from '../interfaces/Campaign';
-import { CampaignApi } from '../interfaces/CampaignApi';
+import {
+  Campaign,
+  Approver,
+  ApproverProfile,
+  ApprovalStatus,
+  Comment,
+} from '../interfaces/Campaign';
+import { CampaignApi, ApproverApi } from '../interfaces/CampaignApi';
 import getPtStatus from '../util/getPtStatusText';
+
+const extractApprovers = (data: ApproverApi[]): Approver[] => {
+  const approvers: ApproverProfile[] = ['GRV', 'DN', 'CRM', 'MKT'];
+
+  return approvers.map(item => {
+    const filteredData = data.filter(i => i.profile === item);
+    let approvedStatus: ApprovalStatus = 'pending';
+    if (filteredData.length > 0) {
+      approvedStatus = filteredData.find(
+        i => i.type === 'approve' && i.status === 1,
+      )
+        ? 'approved'
+        : 'disapproved';
+    }
+    return {
+      profile: item,
+      status: approvedStatus,
+      comments: filteredData.map(i => i.comment),
+    };
+  });
+};
+
+const extractComments = (data: ApproverApi[]): Comment[] => {
+  return data.map(item => ({
+    name: item.name,
+    email: item.email,
+    cpf: item.cpf,
+    date: item.created,
+    message: item.comment,
+  }));
+};
 
 export default (campaignApi: CampaignApi): Campaign => ({
   id: campaignApi.id,
@@ -50,4 +87,6 @@ export default (campaignApi: CampaignApi): Campaign => ({
     description: campaignApi.reward_description,
     name: campaignApi.reward_name,
   },
+  approvers: extractApprovers(campaignApi.approvers),
+  comments: extractComments(campaignApi.approvers),
 });

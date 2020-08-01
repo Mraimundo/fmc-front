@@ -32,5 +32,7 @@ export default (): Campaign => {
       statusText: CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS,
     },
     createdAt: null,
+    approvers: [],
+    comments: [],
   };
 };

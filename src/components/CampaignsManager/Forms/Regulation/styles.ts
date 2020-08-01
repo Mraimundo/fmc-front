@@ -28,26 +28,12 @@ interface RegulationProps {
 }
 export const RegulationContent = styled.div<RegulationProps>`
   width: 100%;
+  max-width: 740px;
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
   padding: 20px 20px 20px 0;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarBackgroundColor};
-  }
-  padding-right: 12px;
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: ${({ theme, type }) =>
-      theme.regulation[type].scrollBarColor};
-  }
 `;
 
 export const RegulationDownload = styled.button`

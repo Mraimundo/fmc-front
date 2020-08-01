@@ -1,13 +1,16 @@
 import React, { useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import { setPointsValue } from 'state/modules/campaigns-manager/actions';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputValue from 'components/CampaignsManager/Inputs/NumberMaskInput';
 import { formatPointsInput, formatRebatePointsInput } from 'util/points';
-import { useRegisterForm } from '../../Context';
 
 import { Container, Box, Input } from './styles';
 
 const BudgetForm: React.FC = () => {
-  const { campaign, setPointsValue } = useRegisterForm();
+  const dispatch = useDispatch();
+  const campaign = useSelector(getCampaign);
 
   return useMemo(
     () => (
@@ -18,7 +21,7 @@ const BudgetForm: React.FC = () => {
           <h6>Pontos Rebate</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('affordPoints', value);
+              dispatch(setPointsValue({ fieldName: 'affordPoints', value }));
             }}
             value={campaign.affordPoints}
             component={Input}
@@ -32,7 +35,12 @@ const BudgetForm: React.FC = () => {
           <h6>Pontos Rebate</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('complementaryAffordPoints', value);
+              dispatch(
+                setPointsValue({
+                  fieldName: 'complementaryAffordPoints',
+                  value,
+                }),
+              );
             }}
             value={campaign.complementaryAffordPoints}
             component={Input}
@@ -45,7 +53,12 @@ const BudgetForm: React.FC = () => {
           <h6>Budget Local</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('complementaryLocalBudget', value);
+              dispatch(
+                setPointsValue({
+                  fieldName: 'complementaryLocalBudget',
+                  value,
+                }),
+              );
             }}
             value={campaign.complementaryLocalBudget}
             component={Input}
@@ -58,7 +71,9 @@ const BudgetForm: React.FC = () => {
           <h6>Budget CRM</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('complementaryCrmBudget', value);
+              dispatch(
+                setPointsValue({ fieldName: 'complementaryCrmBudget', value }),
+              );
             }}
             value={campaign.complementaryCrmBudget}
             component={Input}
@@ -72,7 +87,7 @@ const BudgetForm: React.FC = () => {
           <h6>Sell-in</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('expectedSellIn', value);
+              dispatch(setPointsValue({ fieldName: 'expectedSellIn', value }));
             }}
             value={campaign.expectedSellIn}
             component={Input}
@@ -85,7 +100,7 @@ const BudgetForm: React.FC = () => {
           <h6>Sell-out</h6>
           <InputValue
             onChange={value => {
-              setPointsValue('expectedSellOut', value);
+              dispatch(setPointsValue({ fieldName: 'expectedSellOut', value }));
             }}
             value={campaign.expectedSellOut}
             component={Input}
@@ -102,7 +117,7 @@ const BudgetForm: React.FC = () => {
       campaign.complementaryLocalBudget,
       campaign.expectedSellIn,
       campaign.expectedSellOut,
-      setPointsValue,
+      dispatch,
     ],
   );
 };

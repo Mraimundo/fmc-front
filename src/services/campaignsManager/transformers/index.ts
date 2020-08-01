@@ -10,6 +10,7 @@ import mechanicsToSelectOptions from './mechanicsToSelectOptions';
 import productsToSelectOptions from './productsToSelectOptions';
 import regionalToSelectOptions from './regionalToSelectOptions';
 import titlesToSelectOptions from './titlesToSelectOptions';
+import campaignToUpdateCampaignDTO from './campaignToUpdateCampaignDTO';
 
 export {
   audienceToSelectOptions,
@@ -24,4 +25,5 @@ export {
   productsToSelectOptions,
   regionalToSelectOptions,
   titlesToSelectOptions,
+  campaignToUpdateCampaignDTO,
 };

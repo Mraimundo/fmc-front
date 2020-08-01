@@ -1,0 +1,13 @@
+export const ADD_GOAL = '@fmc/campaigns/ADD_GOAL';
+export const REMOVE_GOAL = '@fmc/campaigns/REMOVE_GOAL';
+export const SET_FIELD_VALUE = '@fmc/campaigns/SET_FIELD_VALUE';
+export const SET_PRIZE_NAME = '@fmc/campaigns/SET_PRIZE_NAME';
+export const SET_PRIZE_DESCRIPTION = '@fmc/campaigns/SET_PRIZE_DESCRIPTION';
+export const SET_POINTS_VALUE = '@fmc/campaigns/SET_POINTS_VALUE';
+export const ADD_AUDIENCE = '@fmc/campaigns/ADD_AUDIENCE';
+export const REMOVE_AUDIENCE = '@fmc/campaigns/REMOVE_AUDIENCE';
+export const SET_START_DATE = '@fmc/campaigns/SET_START_DATE';
+export const SET_END_DATE = '@fmc/campaigns/SET_END_DATE';
+export const SET_MECHANIC = '@fmc/campaigns/SET_MECHANIC';
+export const SET_CAMPAIGN = '@fmc/campaigns/SET_CAMPAIGN';
+export const RESET = '@fmc/campaigns/RESET';

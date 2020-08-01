@@ -1,4 +1,4 @@
-import { Status, StatusText } from './Campaign';
+import { Status, StatusText, ApproverProfile } from './Campaign';
 
 interface EstablishmentApi {
   id: number;
@@ -30,6 +30,20 @@ interface MechanicApi {
   modified: Date;
 }
 
+export interface ApproverApi {
+  id: number;
+  name: string;
+  cpf: string;
+  email: string;
+  participant_id: number;
+  profile: ApproverProfile;
+  comment: 'Aprovado!';
+  type: 'approve' | 'disapprove';
+  status: 0 | 1;
+  created: Date;
+  modified: Date;
+}
+
 export interface CampaignApi {
   id: number;
   name: string;
@@ -56,7 +70,7 @@ export interface CampaignApi {
   modified: Date;
   participant_id: number;
   status_text: StatusText;
-  /* approvers: []; TODOMAYCONN */
+  approvers: ApproverApi[];
   establishments: EstablishmentApi[];
   products: ProductApi[];
   fmc_campaign_type: MechanicApi;

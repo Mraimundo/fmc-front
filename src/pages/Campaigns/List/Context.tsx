@@ -16,6 +16,11 @@ export interface CampaignsListContextState {
   isFetching: boolean;
   resume: IDetails[];
   applyFilters(filters?: FilterOptions): Promise<void>;
+  approvalModalOpened: boolean;
+  openApprovalModal(): void;
+  closeApprovalModal(): void;
+  campaignSelected: Campaign | null;
+  selectCampaign(campaignId: number): void;
 }
 
 const CampaignsListContext = createContext<CampaignsListContextState>(
@@ -25,7 +30,11 @@ const CampaignsListContext = createContext<CampaignsListContextState>(
 export const CampaignsListProvider: React.FC = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [campaignSelected, setCampaignSelected] = useState<Campaign | null>(
+    null,
+  );
   const [resume, setResume] = useState<IDetails[]>([]);
+  const [approvalModalOpened, setApprovalModalOpened] = useState(false);
 
   const { participant } = useAuth();
 
@@ -50,9 +59,37 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     setIsFetching(false);
   }, []);
 
+  const openApprovalModal = useCallback(() => {
+    setApprovalModalOpened(true);
+  }, []);
+
+  const closeApprovalModal = useCallback(() => {
+    setApprovalModalOpened(false);
+  }, []);
+
+  const selectCampaign = useCallback(
+    (campaignId: number) => {
+      const foundItem = campaigns.find(item => item.id === campaignId);
+      if (foundItem) {
+        setCampaignSelected(foundItem);
+      }
+    },
+    [campaigns],
+  );
+
   return (
     <CampaignsListContext.Provider
-      value={{ campaigns, isFetching, resume, applyFilters }}
+      value={{
+        campaigns,
+        isFetching,
+        resume,
+        applyFilters,
+        approvalModalOpened,
+        openApprovalModal,
+        closeApprovalModal,
+        campaignSelected,
+        selectCampaign,
+      }}
     >
       {children}
     </CampaignsListContext.Provider>

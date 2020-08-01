@@ -6,31 +6,30 @@ export interface CampaignsManagerContextState {
   tabs: string[];
   tabSelected: string;
   selectTab(tab: string): void;
-  campaign: Campaign;
+  nextTab(): void;
 }
 
 const CampaignsManagerContext = createContext<CampaignsManagerContextState>(
   {} as CampaignsManagerContextState,
 );
 
-interface ProviderProps {
-  campaign: Campaign;
-}
-
-export const CampaignsManagerProvider: React.FC<ProviderProps> = ({
-  campaign: initialValues,
-  children,
-}) => {
+export const CampaignsManagerProvider: React.FC = ({ children }) => {
   const [tabSelected, setTabSelected] = useState(() => tabs[0]);
-  const [campaign, setCampaign] = useState<Campaign>(initialValues);
 
   const selectTab = useCallback((tab: string) => {
     setTabSelected(tab);
   }, []);
 
+  const nextTab = useCallback(() => {
+    const tabIndex = tabs.indexOf(tabSelected);
+    if (tabIndex < tabs.length - 1) {
+      setTabSelected(tabs[tabIndex + 1]);
+    }
+  }, [tabSelected]);
+
   return (
     <CampaignsManagerContext.Provider
-      value={{ tabs, tabSelected, selectTab, campaign }}
+      value={{ tabs, tabSelected, selectTab, nextTab }}
     >
       {children}
     </CampaignsManagerContext.Provider>

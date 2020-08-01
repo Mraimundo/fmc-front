@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCampaign } from 'state/modules/campaigns-manager/actions';
 import { useParams } from 'react-router-dom';
 import { getCampaign } from 'services/campaignsManager';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import history from 'services/history';
 import { CampaignsManagerProvider } from './Context';
 import Main from './Main';
@@ -12,7 +13,7 @@ interface Params {
 
 const CampaignsManager: React.FC = () => {
   const params = useParams<Params>();
-  const [campaign, setCampaign] = useState<Campaign | null>(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!params.id) {
@@ -21,17 +22,15 @@ const CampaignsManager: React.FC = () => {
     }
     getCampaign(parseInt(params.id, 0))
       .then(data => {
-        setCampaign(data);
+        dispatch(setCampaign(data));
       })
       .catch(() => history.push('/'));
-  }, [params]);
+  }, [params, dispatch]);
 
   return (
-    campaign && (
-      <CampaignsManagerProvider campaign={campaign}>
-        <Main />
-      </CampaignsManagerProvider>
-    )
+    <CampaignsManagerProvider>
+      <Main />
+    </CampaignsManagerProvider>
   );
 };
 

@@ -103,6 +103,23 @@ export interface Goal {
   expectedVolume: number;
 }
 
+export type ApproverProfile = 'GRV' | 'DN' | 'CRM' | 'MKT';
+export type ApprovalStatus = 'approved' | 'disapproved' | 'pending';
+
+export interface Approver {
+  profile: ApproverProfile;
+  status: ApprovalStatus;
+  comments: string[];
+}
+
+export interface Comment {
+  message: string;
+  name: string;
+  cpf: string;
+  email: string;
+  date: Date;
+}
+
 export interface Campaign {
   id: number | null;
   title: string;
@@ -122,4 +139,6 @@ export interface Campaign {
   observation: string;
   status: CampaignStatus;
   createdAt: Date | null;
+  approvers: Approver[];
+  comments: Comment[];
 }

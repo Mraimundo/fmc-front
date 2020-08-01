@@ -35,7 +35,7 @@ export const Content = styled.div`
 `;
 
 interface MessageBoxProps {
-  side: 'l' | 'r';
+  side: 'left' | 'right';
 }
 export const MessageBox = styled.div<MessageBoxProps>`
   background-color: ${({ theme }) => lighten(0.75, theme.font.color.primary)};
@@ -78,7 +78,7 @@ export const MessageBox = styled.div<MessageBoxProps>`
 
   grid-area: p;
   ${({ side }) =>
-    side === 'r' &&
+    side === 'right' &&
     css`
       grid-area: r;
       margin-left: 0;
@@ -98,4 +98,14 @@ export const MessageBox = styled.div<MessageBoxProps>`
         right: -36px;
       }
     `};
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  > button {
+    text-transform: uppercase;
+    & + button {
+      margin-left: 8px;
+    }
+  }
 `;
