@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { Extract as IExtract } from 'services/extract/interfaces';
 import { Container, Header, Content } from './styles';
 
-const AccordionItem: React.FC = () => {
+interface Props {
+  campaignExtract: IExtract;
+}
+
+const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { statement } = campaignExtract;
+  const [currentExtract] = statement;
 
   const handleClick = () => setIsOpen(!isOpen);
 
@@ -11,12 +18,12 @@ const AccordionItem: React.FC = () => {
       <Header onClick={handleClick}>
         <div>
           Safra
-          <div>2020/21</div>
+          <div>{currentExtract.campaign.title}</div>
         </div>
         <div className="divider" />
         <div>
           <div className="text-right">Total</div>
-          <div>500 mil pontos</div>
+          <div>{currentExtract.campaign.total} mil pontos</div>
         </div>
         <div className={`chevron ${isOpen ? 'open' : ''}`} />
       </Header>

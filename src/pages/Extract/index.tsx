@@ -1,58 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { ExtractSummary } from 'services/extract/interfaces';
+import {
+  Campaign,
+  ExtractSummary,
+  Extract as IExtract,
+} from 'services/extract/interfaces';
+import getCampaigns from 'services/extract/getCampaigns';
+import getExtract from 'services/extract/getExtract';
 import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
-import AccordionItem from 'components/Extract/Accordion/Item';
 
 import { Container, Content, PageTitle } from './styles';
 
 const Extract: React.FC = () => {
-  const [summary, setSummary] = useState<ExtractSummary[]>([]);
+  const [summary, setSummary] = useState<ExtractSummary>();
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
 
   useEffect(() => {
-    // getSummary().then(data => setSummary(data));
-    setSummary([
-      {
-        value: 100,
-        balance_unit: {
-          id: 1,
-          name: 'Pontos',
-          description: 'Pontos',
-        },
-      },
-      {
-        value: 200,
-        balance_unit: {
-          id: 2,
-          name: 'Mais Pontos',
-          description: 'Mais Pontos',
-        },
-      },
-      {
-        value: 200,
-        balance_unit: {
-          id: 3,
-          name: 'Premiação do Vendedor',
-          description: 'Premiação do Vendedor',
-        },
-      },
-      {
-        value: 500,
-        balance_unit: {
-          id: 4,
-          name: 'Mais Pontos',
-          description: 'Mais Pontos',
-        },
-      },
-    ]);
+    getCampaigns().then(data => setCampaigns(data));
   }, []);
+
+  useEffect(() => {
+    if (campaigns.length > 0) {
+      campaigns.map(item =>
+        getExtract(item.id).then(data =>
+          setExtractDetails(currentValues => [...currentValues, data]),
+        ),
+      );
+    }
+  }, [campaigns]);
+
+  useEffect(() => {
+    if (!summary && extractDetails.length > 0) {
+      const currentHeaderInfo = extractDetails[0];
+      const headerSummary = {
+        balance: {
+          available: currentHeaderInfo.balance.available,
+          sharedActions: currentHeaderInfo.balance.sharedActions,
+        },
+        points: currentHeaderInfo.resume.points,
+      };
+      setSummary(headerSummary);
+    }
+  }, [extractDetails, summary]);
 
   return (
     <Container>
       <Content>
         <PageTitle>Extrato de Pontos</PageTitle>
-        <ExtractHeader summary={summary} />
-        <ExtractDetails />
+        {summary && <ExtractHeader summary={summary} />}
+        <ExtractDetails details={extractDetails} />
       </Content>
     </Container>
   );

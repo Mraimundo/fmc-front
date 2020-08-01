@@ -11,10 +11,11 @@ import {
 } from './styles';
 
 interface Props {
-  summary: ExtractSummary[];
+  summary: ExtractSummary;
 }
 
 const ExtractHeader: React.FC<Props> = ({ summary }) => {
+  const { points, balance } = summary;
   return (
     <ContainerReseller>
       <AccumulatedBalance>
@@ -22,12 +23,12 @@ const ExtractHeader: React.FC<Props> = ({ summary }) => {
           Saldo acumulado: <strong>500 mil pontos</strong>
         </h2>
         <BalanceBoxContainer>
-          {summary.map(item => (
-            <BalanceItem key={item.balance_unit.id}>
+          {points.map(point => (
+            <BalanceItem key={point.id}>
               <div className="title">
-                <span>{item.balance_unit.name}</span>
+                <span>{point.name}</span>
               </div>
-              <div className="value">{item.value} mil</div>
+              <div className="value">{point.total} mil</div>
             </BalanceItem>
           ))}
         </BalanceBoxContainer>
@@ -36,7 +37,7 @@ const ExtractHeader: React.FC<Props> = ({ summary }) => {
         <CalltoActionBox>
           <p>
             Saldo disponível para resgate:
-            <strong>100 mil pontos</strong>
+            <strong>{balance.available} mil pontos</strong>
           </p>
           <Button
             type="button"
@@ -47,7 +48,7 @@ const ExtractHeader: React.FC<Props> = ({ summary }) => {
           </Button>
           <p>
             Saldo Ações Compartilhadas FMC:
-            <span>150.000 pontos</span>
+            <span>{balance.sharedActions} pontos</span>
           </p>
         </CalltoActionBox>
       </CalltoActionContainer>

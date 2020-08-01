@@ -1,8 +1,114 @@
+export interface Campaign {
+  id: number;
+  description: string;
+  title: string;
+}
+
+interface Point {
+  id: number;
+  name: string;
+  description: string;
+  total: number;
+}
+
 export interface ExtractSummary {
+  balance: {
+    available: number;
+    sharedActions: number;
+  };
+  points: Point[];
+}
+
+export interface ExtractApi {
+  balance: {
+    available: number;
+    shared_actions: number;
+  };
+  resume: {
+    total: number;
+    points: Point[];
+  };
+  statement: [
+    {
+      campaign: {
+        id: number;
+        title: string;
+        description: string;
+        total: number;
+      };
+      points: [
+        {
+          id: number;
+          value: number;
+          description: string;
+          date_ref: Date;
+          type: string;
+          origin_type: string;
+          origin_id: number;
+          created: Date;
+          balance_unit: {
+            id: number;
+            name: string;
+            description: string;
+          };
+          balance_status: {
+            id: number;
+            name: string;
+          };
+          campaign: {
+            id: number;
+            title: string;
+            description: string;
+          };
+        },
+      ];
+    },
+  ];
+}
+
+interface StatementPoints {
+  id: number;
   value: number;
-  balance_unit: {
+  description: string;
+  dateRef: Date;
+  type: string;
+  originType: string;
+  originId: number;
+  created: Date;
+  balanceUnit: {
     id: number;
     name: string;
     description: string;
   };
+  balanceStatus: {
+    id: number;
+    name: string;
+  };
+  campaign: {
+    id: number;
+    title: string;
+    description: string;
+  };
+}
+
+interface Statement {
+  campaign: {
+    id: number;
+    title: string;
+    description: string;
+    total: number;
+  };
+  points: StatementPoints[] | [];
+}
+
+export interface Extract {
+  balance: {
+    available: number;
+    sharedActions: number;
+  };
+  resume: {
+    total: number;
+    points: Point[] | [];
+  };
+  statement: Statement[] | [];
 }
