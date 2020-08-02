@@ -1,24 +1,26 @@
 import React from 'react';
 import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import {
   AccumulatedBalance,
   BalanceItem,
   BalanceBoxContainer,
   CalltoActionContainer,
   CalltoActionBox,
-  ContainerReseller,
+  Container,
 } from './styles';
 
 interface Props {
   summary: ExtractSummary;
+  userType: EstablishmentType;
 }
 
-const ExtractHeader: React.FC<Props> = ({ summary }) => {
+const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
   const { points, balance, total } = summary;
 
   return (
-    <ContainerReseller>
+    <Container userType={userType}>
       <AccumulatedBalance>
         <h2>
           Saldo acumulado: <strong>{total} mil pontos</strong>
@@ -54,7 +56,7 @@ const ExtractHeader: React.FC<Props> = ({ summary }) => {
           </p>
         </CalltoActionBox>
       </CalltoActionContainer>
-    </ContainerReseller>
+    </Container>
   );
 };
 

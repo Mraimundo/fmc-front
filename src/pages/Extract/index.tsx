@@ -11,29 +11,36 @@ import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
 import { useAuth } from 'context/AuthContext';
 
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { Container, Content, PageTitle } from './styles';
 
 const Extract: React.FC = () => {
   const [summary, setSummary] = useState<ExtractSummary>();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
+  const [userType, setUserType] = useState<EstablishmentType>('Revenda');
   const { participant } = useAuth();
 
   useEffect(() => {
     getCampaigns().then(data => setCampaigns(data));
   }, []);
 
+  const getExtractFn = (typeName: EstablishmentType) => {
+    return typeName === 'Revenda' ? getExtract : getExtractEstablishment;
+  };
+
   useEffect(() => {
     if (campaigns.length > 0) {
       const { establishment } = participant;
-      console.log(establishment);
-      campaigns.map(item =>
-        getExtractEstablishment(item.id).then(data =>
+      const extractFn = getExtractFn(establishment.type_name);
+      setUserType(establishment.type_name);
+      campaigns.map(campaign =>
+        extractFn(campaign.id).then(data =>
           setExtractDetails(currentValues => [...currentValues, data]),
         ),
       );
     }
-  }, [campaigns]);
+  }, [campaigns, participant]);
 
   useEffect(() => {
     if (!summary && extractDetails.length > 0) {
@@ -54,7 +61,7 @@ const Extract: React.FC = () => {
     <Container>
       <Content>
         <PageTitle>Extrato de Pontos</PageTitle>
-        {summary && <ExtractHeader summary={summary} />}
+        {summary && <ExtractHeader summary={summary} userType={userType} />}
         <ExtractDetails details={extractDetails} />
       </Content>
     </Container>

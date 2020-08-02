@@ -1,11 +1,28 @@
 import styled from 'styled-components';
-import headerBackground from 'assets/images/extract/headerBackground.svg';
+import bgRevenda from 'assets/images/extract/bgRevenda.svg';
+import bgCooperativa from 'assets/images/extract/bgCooperativa.svg';
+import { EstablishmentType } from 'state/modules/point-management/common/types';
 
-export const ContainerReseller = styled.div`
+interface ContainerProps {
+  userType: EstablishmentType;
+}
+
+export const Container = styled.div<ContainerProps>`
   margin-top: 25px;
   align-items: center;
-  background: #395389 url(${headerBackground}) no-repeat;
+  background: #395389 url(${bgRevenda});
+  ${({ userType }) =>
+    userType !== 'Revenda' &&
+    `
+    background: #395389 url(${bgRevenda});
+  `};
+  ${({ userType }) =>
+    userType !== 'Cooperativa' &&
+    `
+    background: #395389 url(${bgCooperativa});
+  `};
   background-size: cover;
+  background-repeat: no-repeat;
   color: ${({ theme }) => theme.font.color.secondary};
   display: flex;
 `;
@@ -33,7 +50,6 @@ export const BalanceItem = styled.div`
   background: ${({ theme }) => theme.layout.secondary.backgroundColor};
   border-radius: 5px;
   color: #193b4e;
-
   margin: 5px;
   padding: 5px;
 
