@@ -51,6 +51,17 @@ export const Content = styled.div`
       width: 40px;
       height: 40px;
     }
+    margin-bottom: 30px;
+  }
+
+  > textarea {
+    width: 100%;
+    max-width: 598px;
+    padding: 15px;
+    border: 1px solid ${({ theme }) => theme.font.color.primary};
+    height: 100%;
+    overflow-y: scroll;
+    resize: none;
   }
 `;
 

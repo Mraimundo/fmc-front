@@ -7,7 +7,6 @@ export const Container = styled.div`
   max-width: 598px;
   padding: 17px 20px;
   border: 1px solid ${({ theme }) => theme.font.color.primary};
-  margin-top: 30px;
 `;
 
 export const Row = styled.div`
@@ -35,6 +34,7 @@ export const Icon = styled.span`
   margin-right: 20px;
   color: ${({ theme }) => theme.font.color.quartenary};
   font-family: ${({ theme }) => theme.font.fontFamily.medium};
+  cursor: pointer;
 
   svg {
     margin-right: 8px;

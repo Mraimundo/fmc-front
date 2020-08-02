@@ -16,9 +16,10 @@ import {
 
 interface Props {
   approvers: Approver[];
+  onCommentClick(approver: Approver): void;
 }
 
-const ApprovalBoard: React.FC<Props> = ({ approvers }) => {
+const ApprovalBoard: React.FC<Props> = ({ approvers, onCommentClick }) => {
   return (
     <Container>
       {approvers.map(item => (
@@ -35,7 +36,7 @@ const ApprovalBoard: React.FC<Props> = ({ approvers }) => {
             />
             Não Aprovada
           </DisapprovedIconContainer>
-          <Icon>
+          <Icon onClick={() => onCommentClick(item)}>
             <ReactSVG
               src={messagesIcon}
               style={{ transform: 'translateY(2px)' }}
