@@ -6,7 +6,7 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
 
   svg {
     cursor: pointer;

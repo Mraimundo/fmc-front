@@ -7,6 +7,6 @@ export const Container = styled(Table)`
     color: ${({ theme }) => theme.font.color.quartenary};
   }
   > thead tr {
-    text-align: center;
+    /*text-align: center;*/
   }
 `;

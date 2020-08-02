@@ -27,7 +27,7 @@ const Main: React.FC = () => {
         <Resume />
         <Filters />
         <Separator />
-        <Table />
+        <Table profile={participant.profile_value} />
         {campaignSelected && (
           <ApprovalModal
             isOpen={approvalModalOpened}
