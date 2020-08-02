@@ -1,5 +1,9 @@
 import { formatDate } from 'util/datetime';
-import { Campaign, StatusText } from '../interfaces/Campaign';
+import {
+  Campaign,
+  StatusText,
+  CAMPAIGN_STATUS_TEXT,
+} from '../interfaces/Campaign';
 import getPtStatus from '../util/getPtStatusText';
 
 export interface Response {
@@ -55,7 +59,7 @@ export default (data: Campaign[]): Response[] => {
     },
     activated: {
       id: item.id || 0,
-      activated: false, // A fazer
+      activated: item.status.statusText === CAMPAIGN_STATUS_TEXT.PUBLISHED,
     },
   }));
 };

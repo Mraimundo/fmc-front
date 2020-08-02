@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  highlight: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
 
   svg {
     cursor: pointer;
@@ -14,4 +18,13 @@ export const Container = styled.div`
       transform: scale(1.1);
     }
   }
+
+  ${({ highlight }) =>
+    highlight &&
+    css`
+      svg path {
+        fill: #e1dc1b;
+        stroke: #e1dc1b;
+      }
+    `};
 `;

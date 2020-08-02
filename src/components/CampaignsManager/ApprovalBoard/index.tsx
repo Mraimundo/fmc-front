@@ -1,37 +1,47 @@
 import React from 'react';
 
+import { Approver } from 'services/campaignsManager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import thumbUpIcon from 'assets/images/campaigns/thumb-up-icon.svg';
 import thumbDownIcon from 'assets/images/campaigns/thumb-down-icon.svg';
 import messagesIcon from 'assets/images/campaigns/messages-icon.svg';
 
-import { Container, Row } from './styles';
+import {
+  Container,
+  Row,
+  Icon,
+  ApprovedIconContainer,
+  DisapprovedIconContainer,
+} from './styles';
 
-const ApprovalBoard: React.FC = () => {
-  const m = ['GRV', 'DN', 'CRM', 'MKT'];
+interface Props {
+  approvers: Approver[];
+}
+
+const ApprovalBoard: React.FC<Props> = ({ approvers }) => {
   return (
     <Container>
-      {m.map(item => (
-        <Row key={item}>
-          <h5>{item}</h5>
-          <span>
+      {approvers.map(item => (
+        <Row key={`approver-${item.profile}`}>
+          <h5>{item.profile}</h5>
+          <ApprovedIconContainer approved={item.status === 'approved'}>
             <ReactSVG src={thumbUpIcon} />
             Aprovada
-          </span>
-          <span>
+          </ApprovedIconContainer>
+          <DisapprovedIconContainer disapproved={item.status === 'disapproved'}>
             <ReactSVG
               src={thumbDownIcon}
               style={{ transform: 'translateY(5px)' }}
             />
             Não Aprovada
-          </span>
-          <span>
+          </DisapprovedIconContainer>
+          <Icon>
             <ReactSVG
               src={messagesIcon}
               style={{ transform: 'translateY(2px)' }}
             />
             Comentários
-          </span>
+          </Icon>
         </Row>
       ))}
     </Container>

@@ -5,7 +5,7 @@ import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/gerenciamento-de-campanhas',
+    path: '/gerenciamento-de-campanhas/editar/:id',
     component: CampaignManager,
     accessPage: 'Página de edição e gerenciamento de uma campanha',
   },

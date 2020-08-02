@@ -1,4 +1,5 @@
 import audienceToSelectOptions from './audienceToSelectOptions';
+import campaignApiToCampaign from './campaignApiToCampaign';
 import campaignStatusToSelectOptions from './campaignStatusToSelectOptions';
 import campaignToCreateNewCampaignDTO from './campaignToCreateNewCampaignDTO';
 import categoriesToSelectOptions from './categoriesToSelectOptions';
@@ -9,9 +10,11 @@ import mechanicsToSelectOptions from './mechanicsToSelectOptions';
 import productsToSelectOptions from './productsToSelectOptions';
 import regionalToSelectOptions from './regionalToSelectOptions';
 import titlesToSelectOptions from './titlesToSelectOptions';
+import campaignToUpdateCampaignDTO from './campaignToUpdateCampaignDTO';
 
 export {
   audienceToSelectOptions,
+  campaignApiToCampaign,
   campaignStatusToSelectOptions,
   campaignToCreateNewCampaignDTO,
   categoriesToSelectOptions,
@@ -22,4 +25,5 @@ export {
   productsToSelectOptions,
   regionalToSelectOptions,
   titlesToSelectOptions,
+  campaignToUpdateCampaignDTO,
 };

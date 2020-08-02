@@ -1,11 +1,6 @@
 import React from 'react';
-import Actions from './Actions';
-
-interface Props {
-  edit?(id: number): Promise<void> | void;
-  resendIndicationEmail?(id: number): Promise<void> | void;
-  inactivaParticipantIndication?(id: number): Promise<void> | void;
-}
+import DefaultAction from './Actions/Default';
+import CertificateAction from './Actions/Certificate';
 
 interface CustomProps {
   id: number;
@@ -42,7 +37,7 @@ export default [
     dataValue: 'custom',
     fn: ({ id, approved }: CustomProps) =>
       approved ? (
-        <Actions name="Gabarito" actionUrl={`/training/${id}`} />
+        <DefaultAction name="Gabarito" actionUrl={`/training/${id}`} />
       ) : (
         <></>
       ),
@@ -51,11 +46,11 @@ export default [
   {
     column: ' ',
     dataValue: 'custom',
-    fn: ({ id, approved, certificateUrl }: CustomProps) =>
+    fn: ({ id, approved }: CustomProps) =>
       approved ? (
-        <Actions name="Certificado" actionUrl={certificateUrl} />
+        <CertificateAction id={id} />
       ) : (
-        <Actions name="Acessar" actionUrl={`/training/${id}`} />
+        <DefaultAction name="Acessar" actionUrl={`/training/${id}`} />
       ),
     className: '_customWidth',
   },

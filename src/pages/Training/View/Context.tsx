@@ -1,11 +1,14 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
 import {
-  getTraining,
-  getQuestions,
   answerTraining,
-  checkIfParticipantHasBeenApproved,
   canAnswerTraininig,
+  checkIfParticipantHasBeenApproved,
+  getQuestions,
+  getTraining,
 } from 'services/training';
+import getCertificate, {
+  Response as ICertificate,
+} from 'services/training/getCertificate';
 import setVideoWatchedService from 'services/training/setVideoWatched';
 import getMyAnswers, {
   Answer as IAnswer,
@@ -41,6 +44,7 @@ interface TrainingContextState {
   closeSuccessModal(): void;
   approved: boolean;
   canAnswer: { canAnswer: boolean; reason: string };
+  certificate: ICertificate;
 }
 
 const TrainingContext = createContext<TrainingContextState>(
@@ -56,6 +60,11 @@ export const TrainingProvider: React.FC = ({ children }) => {
   const [successModalOpened, setSuccessModalOpened] = useState(false);
   const [approved, setApproved] = useState(false);
   const [canAnswer, setCanAnswer] = useState({ canAnswer: false, reason: '' });
+  const [certificate, setCertificate] = useState<ICertificate>({
+    url: '',
+    message: '',
+    hasCertificate: false,
+  });
   const { addToast } = useToast();
 
   const closeSuccessModal = useCallback(() => setSuccessModalOpened(false), []);
@@ -146,6 +155,8 @@ export const TrainingProvider: React.FC = ({ children }) => {
       );
       setQuizAlreadyAnswered(true);
       if (approvedApi) {
+        const certificateResponse = await getCertificate(training.id);
+        setCertificate(certificateResponse);
         setApproved(approvedApi);
         setSuccessModalOpened(true);
         loadTraining(training.id);
@@ -204,6 +215,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
         closeSuccessModal,
         approved,
         canAnswer,
+        certificate,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import { Button } from 'components/shared';
 import { Option } from 'components/shared/Select';
@@ -13,35 +13,58 @@ import { useCampaignsList } from '../../Context';
 import { Container, Separator } from './styles';
 
 const Filters: React.FC = () => {
-  const { resume } = useCampaignsList();
-  const [categorySelected, setCategorySelected] = useState<Option | null>(null);
+  const { applyFilters, campaigns } = useCampaignsList();
+  const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
+  const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
+  const [customerSelected, setCustomerSelected] = useState<Option | null>(null);
+  const [statusSelected, setStatusSelected] = useState<Option | null>(null);
   const [mechanicSelected, setMechanicSelected] = useState<Mechanic | null>(
     null,
   );
 
+  const handleFilterClick = useCallback(() => {
+    const directorId = directorSelected?.value
+      ? parseInt(directorSelected.value, 0)
+      : undefined;
+    const regionalId = regionalSelected?.value || undefined;
+    const customerId = customerSelected?.value
+      ? parseInt(customerSelected.value, 0)
+      : undefined;
+    const status = statusSelected?.value || undefined;
+    const mechanicId = mechanicSelected?.id || undefined;
+    applyFilters({ directorId, customerId, mechanicId, regionalId, status });
+  }, [
+    directorSelected,
+    regionalSelected,
+    customerSelected,
+    statusSelected,
+    mechanicSelected,
+    applyFilters,
+  ]);
+
   return useMemo(
     () => (
       <Container>
-        <h4>Campanhas solicitadas ({resume.length})</h4>
+        <h4>Campanhas solicitadas ({campaigns.length})</h4>
         <Separator />
         <DirectorsSelect
-          setValue={value => setCategorySelected(value)}
-          value={categorySelected}
+          setValue={value => setDirectorSelected(value)}
+          value={directorSelected}
           placeholder="Diretoria"
         />
         <RegionalSelect
-          setValue={value => setCategorySelected(value)}
-          value={categorySelected}
+          setValue={value => setRegionalSelected(value)}
+          value={regionalSelected}
           placeholder="Regional"
         />
         <CustomersSelect
-          setValue={value => setCategorySelected(value)}
-          value={categorySelected}
+          setValue={value => setCustomerSelected(value)}
+          value={customerSelected}
           placeholder="Grupo de cliente"
         />
         <CampaignStatusSelect
-          setValue={value => setCategorySelected(value)}
-          value={categorySelected}
+          setValue={value => setStatusSelected(value)}
+          value={statusSelected}
           placeholder="Status"
         />
         <MechanicsSelect
@@ -49,12 +72,20 @@ const Filters: React.FC = () => {
           value={mechanicSelected}
           placeholder="Mecânica"
         />
-        <Button type="button" buttonRole="primary">
+        <Button type="button" buttonRole="primary" onClick={handleFilterClick}>
           Filtrar
         </Button>
       </Container>
     ),
-    [categorySelected, mechanicSelected, resume],
+    [
+      handleFilterClick,
+      directorSelected,
+      regionalSelected,
+      customerSelected,
+      statusSelected,
+      mechanicSelected,
+      campaigns,
+    ],
   );
 };
 

@@ -1,12 +1,22 @@
 import React from 'react';
 import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
+import {
+  ApproverProfile,
+  CRM,
+  DN,
+  GRM,
+  GRV,
+  KAM,
+  MKT,
+  RTC,
+} from 'config/constants';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';
 import ApprovalAction from './Actions/Approval';
 import HighlightAction from './Actions/Highlight';
 import ActivatedAction from './Actions/Active';
 
-export default [
+const common = [
   {
     column: 'Solicitado em',
     dataValue: 'solicitationDate',
@@ -15,13 +25,9 @@ export default [
     column: 'Campanha',
     dataValue: 'campaign',
   },
-  {
-    column: 'Editar',
-    dataValue: 'edit',
-    fn: ({ id, status }: { id: number; status: StatusText }) => (
-      <EditAction id={id} status={status} />
-    ),
-  },
+];
+
+const status = [
   {
     column: 'Status da campanha',
     dataValue: 'status',
@@ -29,6 +35,19 @@ export default [
       <StatusAction status={status} />
     ),
   },
+];
+
+const edit = [
+  {
+    column: 'Editar',
+    dataValue: 'edit',
+    fn: ({ id, status }: { id: number; status: StatusText }) => (
+      <EditAction id={id} status={status} />
+    ),
+  },
+];
+
+const approval = [
   {
     column: 'Aprovação',
     dataValue: 'approval',
@@ -36,6 +55,9 @@ export default [
       <ApprovalAction status={status} id={id} />
     ),
   },
+];
+
+const highlight = [
   {
     column: 'Destaque home',
     dataValue: 'highlight',
@@ -43,6 +65,9 @@ export default [
       <HighlightAction highlight={highlight} id={id} />
     ),
   },
+];
+
+const publish = [
   {
     column: '',
     dataValue: 'activated',
@@ -51,3 +76,27 @@ export default [
     ),
   },
 ];
+
+export default (profile: ApproverProfile) => {
+  switch (profile) {
+    case DN:
+      return [...common, ...status, ...approval];
+    case GRM:
+      return [...common, ...edit, ...status];
+    case MKT:
+      return [...common, ...status, ...approval];
+    case GRV:
+      return [...common, ...status, ...approval];
+    case CRM:
+      return [
+        ...common,
+        ...edit,
+        ...status,
+        ...approval,
+        ...highlight,
+        ...publish,
+      ];
+    default:
+      return [...common, ...status];
+  }
+};

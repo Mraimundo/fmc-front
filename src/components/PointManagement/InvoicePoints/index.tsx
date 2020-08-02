@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { PointsInput } from 'components/PointManagement';
-import { Wrapper, Image, Title, Input } from './styles';
-
 import invoiceImage from 'assets/images/point-management/invoice-image.png';
+import { Wrapper, Image, Title, Input } from './styles';
 
 interface InvoicePointsProps {
   onChange(points: number): void;

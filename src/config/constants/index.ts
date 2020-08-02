@@ -12,7 +12,23 @@ import {
   REGISTER_TO_COMPLETE,
 } from './vendavallStatus';
 
+export const GRV = 'GRV';
+export const DN = 'DN';
+export const CRM = 'CRM';
+export const MKT = 'MKT';
+export const RTC = 'RTC';
+export const KAM = 'KAM';
+export const GRM = 'GRM';
+
 export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE';
+export type ApproverProfile =
+  | typeof GRV
+  | typeof DN
+  | typeof CRM
+  | typeof MKT
+  | typeof RTC
+  | typeof KAM
+  | typeof GRM;
 
 export const PROFILES = {
   focalPoint: 'FOCALPOINT',

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { ReactSVG } from 'react-svg';
 
+import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
 import { Tooltip } from 'components/shared';
 import { limitChars } from 'util/string';
 import useOnClickOutside from 'hooks/use-on-click-outside';
@@ -8,13 +9,11 @@ import { Subsidiary } from 'state/modules/point-management/team-awards/types';
 import { Label, Checkbox } from 'components/PointManagement';
 import { Input, WrapperInput, Wrapper, Dropdown } from './styles';
 
-import arrowDownIcon from 'assets/images/point-management/arrow-down.svg';
-
 interface SubsidiarySelectProps {
   subsidiaries: Subsidiary[] | null;
   selectedSubsidiaries: number[] | null;
   onSelect: (value: number) => void;
-};
+}
 const SubsidiarySelect: React.FC<SubsidiarySelectProps> = ({
   subsidiaries,
   selectedSubsidiaries,

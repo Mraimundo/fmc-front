@@ -68,6 +68,13 @@ export const Content = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
   }
 
+  > span {
+    margin-top: 25px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 720px) {
     padding-left: 5px;
   }

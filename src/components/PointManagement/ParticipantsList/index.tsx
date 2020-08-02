@@ -43,7 +43,7 @@ const ParticipantsList: React.FC<Props> = ({
   selectedParticipants,
 }) => (
   <div>
-    {!!participants ? (
+    {participants ? (
       Object.keys(participants).map((role: string) => {
         const totalMembers = participants[role].count;
         const totalMembersText =
@@ -82,7 +82,10 @@ const ParticipantsList: React.FC<Props> = ({
                   participant.id,
                 );
 
-                const isAllowedToScore = isScoredParticipant(scoredParticipants, participant.id);
+                const isAllowedToScore = isScoredParticipant(
+                  scoredParticipants,
+                  participant.id,
+                );
 
                 return (
                   <ParticipantWidgetDistribution

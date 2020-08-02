@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -25,16 +25,44 @@ export const Row = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     flex: 1;
   }
+`;
 
-  > span {
-    font-size: 12px;
-    color: ${({ theme }) => theme.font.color.quartenary};
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+export const Icon = styled.span`
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  color: ${({ theme }) => theme.font.color.quartenary};
 
-    svg {
-      margin-right: 8px;
-    }
+  svg {
+    margin-right: 8px;
   }
+`;
+
+interface ApprovedProps {
+  approved: boolean;
+}
+export const ApprovedIconContainer = styled(Icon)<ApprovedProps>`
+  ${({ approved }) =>
+    approved &&
+    css`
+      color: green;
+      svg path {
+        fill: green;
+      }
+    `}
+`;
+
+interface DisapprovedProps {
+  disapproved: boolean;
+}
+export const DisapprovedIconContainer = styled(Icon)<DisapprovedProps>`
+  ${({ disapproved }) =>
+    disapproved &&
+    css`
+      color: red;
+      svg path {
+        fill: red;
+      }
+    `}
 `;

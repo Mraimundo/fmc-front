@@ -5,6 +5,7 @@ export interface CampaignsManagerContextState {
   tabs: string[];
   tabSelected: string;
   selectTab(tab: string): void;
+  nextTab(): void;
 }
 
 const CampaignsManagerContext = createContext<CampaignsManagerContextState>(
@@ -18,8 +19,17 @@ export const CampaignsManagerProvider: React.FC = ({ children }) => {
     setTabSelected(tab);
   }, []);
 
+  const nextTab = useCallback(() => {
+    const tabIndex = tabs.indexOf(tabSelected);
+    if (tabIndex < tabs.length - 1) {
+      setTabSelected(tabs[tabIndex + 1]);
+    }
+  }, [tabSelected]);
+
   return (
-    <CampaignsManagerContext.Provider value={{ tabs, tabSelected, selectTab }}>
+    <CampaignsManagerContext.Provider
+      value={{ tabs, tabSelected, selectTab, nextTab }}
+    >
       {children}
     </CampaignsManagerContext.Provider>
   );
