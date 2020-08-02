@@ -45,6 +45,11 @@ export default (data: ExtractApi): IExtract => {
           title: point.campaign.title,
           description: point.campaign.description,
         },
+        distributed: point.distributed?.map(distributedItem => ({
+          value: distributedItem.value,
+          balanceUnitId: distributedItem.balance_unit_id,
+          balanceUnitName: distributedItem.balance_unit_name,
+        })),
       })),
     })),
   };

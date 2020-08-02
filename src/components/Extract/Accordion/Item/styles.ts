@@ -10,7 +10,13 @@ export const Container = styled.div`
 export const Header = styled.div`
   cursor: pointer;
   display: flex;
+  font-size: 18px;
   justify-content: space-between;
+  strong {
+    display: block;
+    font-size: 21px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
   .divider {
     flex: 1;
     border-bottom: 1px solid #444;
@@ -30,16 +36,20 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   margin-right: 40px;
+  margin-top: 20px;
   .content-row {
     margin-bottom: 10px;
   }
   .row-header {
     background: #fff;
     display: flex;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     justify-content: space-between;
+    padding: 10px;
   }
   .row-details {
     display: flex;
     justify-content: space-between;
+    padding: 5px 10px;
   }
 `;

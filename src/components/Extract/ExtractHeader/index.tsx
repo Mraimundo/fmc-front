@@ -15,22 +15,24 @@ interface Props {
 }
 
 const ExtractHeader: React.FC<Props> = ({ summary }) => {
-  const { points, balance } = summary;
+  const { points, balance, total } = summary;
+
   return (
     <ContainerReseller>
       <AccumulatedBalance>
         <h2>
-          Saldo acumulado: <strong>500 mil pontos</strong>
+          Saldo acumulado: <strong>{total} mil pontos</strong>
         </h2>
         <BalanceBoxContainer>
-          {points.map(point => (
-            <BalanceItem key={point.id}>
-              <div className="title">
-                <span>{point.name}</span>
-              </div>
-              <div className="value">{point.total} mil</div>
-            </BalanceItem>
-          ))}
+          {points &&
+            points.map(point => (
+              <BalanceItem key={point.id}>
+                <div className="title">
+                  <span>{point.name}</span>
+                </div>
+                <div className="value">{point.total} mil</div>
+              </BalanceItem>
+            ))}
         </BalanceBoxContainer>
       </AccumulatedBalance>
       <CalltoActionContainer>

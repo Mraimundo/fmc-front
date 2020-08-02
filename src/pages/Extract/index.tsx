@@ -6,6 +6,7 @@ import {
 } from 'services/extract/interfaces';
 import getCampaigns from 'services/extract/getCampaigns';
 import getExtract from 'services/extract/getExtract';
+import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
 
@@ -23,9 +24,12 @@ const Extract: React.FC = () => {
   useEffect(() => {
     if (campaigns.length > 0) {
       campaigns.map(item =>
-        getExtract(item.id).then(data =>
+        getExtractEstablishment(item.id).then(data =>
           setExtractDetails(currentValues => [...currentValues, data]),
         ),
+        // getExtract(item.id).then(data =>
+        //   setExtractDetails(currentValues => [...currentValues, data]),
+        // ),
       );
     }
   }, [campaigns]);
@@ -38,6 +42,7 @@ const Extract: React.FC = () => {
           available: currentHeaderInfo.balance.available,
           sharedActions: currentHeaderInfo.balance.sharedActions,
         },
+        total: currentHeaderInfo.resume.total,
         points: currentHeaderInfo.resume.points,
       };
       setSummary(headerSummary);

@@ -16,7 +16,20 @@ export interface ExtractSummary {
     available: number;
     sharedActions: number;
   };
-  points: Point[];
+  total: number;
+  points?: Point[];
+}
+
+interface DistributedPointApi {
+  value: number;
+  balance_unit_id: number;
+  balance_unit_name: string;
+}
+
+interface DistributedPoint {
+  value: number;
+  balanceUnitId: number;
+  balanceUnitName: string;
 }
 
 export interface ExtractApi {
@@ -60,6 +73,7 @@ export interface ExtractApi {
             title: string;
             description: string;
           };
+          distributed?: DistributedPointApi[];
         },
       ];
     },
@@ -89,6 +103,7 @@ interface StatementPoints {
     title: string;
     description: string;
   };
+  distributed?: DistributedPoint[];
 }
 
 interface Statement {
@@ -98,7 +113,7 @@ interface Statement {
     description: string;
     total: number;
   };
-  points: StatementPoints[] | [];
+  points?: StatementPoints[];
 }
 
 export interface Extract {
@@ -108,7 +123,7 @@ export interface Extract {
   };
   resume: {
     total: number;
-    points: Point[] | [];
+    points: Point[];
   };
-  statement: Statement[] | [];
+  statement?: Statement[];
 }

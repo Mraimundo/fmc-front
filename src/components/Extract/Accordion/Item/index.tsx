@@ -9,55 +9,51 @@ interface Props {
 const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { statement } = campaignExtract;
-  const [currentExtract] = statement;
-
   const handleClick = () => setIsOpen(!isOpen);
 
-  return (
-    <Container>
-      <Header onClick={handleClick}>
-        <div>
-          Safra
-          <div>{currentExtract.campaign.title}</div>
-        </div>
-        <div className="divider" />
-        <div>
-          <div className="text-right">Total</div>
-          <div>{currentExtract.campaign.total} mil pontos</div>
-        </div>
-        <div className={`chevron ${isOpen ? 'open' : ''}`} />
-      </Header>
-      {isOpen && (
-        <Content>
-          <div className="content-row">
-            <div className="row-header">
-              <div>Rebate</div>
-              <div>200.000</div>
-            </div>
-            <div className="row-details">
-              <div>Descrição do ponto</div>
-              <div>100.000</div>
-            </div>
+  if (statement && statement.length > 0) {
+    const [currentExtract] = statement;
+    return (
+      <Container>
+        <Header onClick={handleClick}>
+          <div>
+            Safra
+            <strong>{currentExtract.campaign.title}</strong>
           </div>
-
-          <div className="content-row">
-            <div className="row-header">
-              <div>Rebate</div>
-              <div>200.000</div>
-            </div>
-            <div className="row-details">
-              <div>Descrição do ponto</div>
-              <div>100.000</div>
-            </div>
-            <div className="row-details">
-              <div>Descrição do ponto</div>
-              <div>100.000</div>
-            </div>
+          <div className="divider" />
+          <div>
+            <div className="text-right">Total</div>
+            <strong>{currentExtract.campaign.total} mil pontos</strong>
           </div>
-        </Content>
-      )}
-    </Container>
-  );
+          <div className={`chevron ${isOpen ? 'open' : ''}`} />
+        </Header>
+        {isOpen && (
+          <Content>
+            {currentExtract.points &&
+              currentExtract.points.map(point => (
+                <div className="content-row" key={point.id}>
+                  <div className="row-header">
+                    <div>{point.description}</div>
+                    <div>{point.value}</div>
+                  </div>
+                  {point?.distributed?.length &&
+                    point.distributed.map(distributed => (
+                      <div
+                        className="row-details"
+                        key={distributed.balanceUnitId}
+                      >
+                        <div>{distributed.balanceUnitName}</div>
+                        <div>{distributed.value}</div>
+                      </div>
+                    ))}
+                </div>
+              ))}
+          </Content>
+        )}
+      </Container>
+    );
+  }
+  return <div />;
 };
 
 export default AccordionItem;
