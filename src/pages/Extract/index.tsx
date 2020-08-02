@@ -9,6 +9,7 @@ import getExtract from 'services/extract/getExtract';
 import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
+import { useAuth } from 'context/AuthContext';
 
 import { Container, Content, PageTitle } from './styles';
 
@@ -16,6 +17,7 @@ const Extract: React.FC = () => {
   const [summary, setSummary] = useState<ExtractSummary>();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
+  const { participant } = useAuth();
 
   useEffect(() => {
     getCampaigns().then(data => setCampaigns(data));
@@ -23,13 +25,12 @@ const Extract: React.FC = () => {
 
   useEffect(() => {
     if (campaigns.length > 0) {
+      const { establishment } = participant;
+      console.log(establishment);
       campaigns.map(item =>
         getExtractEstablishment(item.id).then(data =>
           setExtractDetails(currentValues => [...currentValues, data]),
         ),
-        // getExtract(item.id).then(data =>
-        //   setExtractDetails(currentValues => [...currentValues, data]),
-        // ),
       );
     }
   }, [campaigns]);

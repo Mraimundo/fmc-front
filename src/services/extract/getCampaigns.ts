@@ -16,8 +16,8 @@ const mock = [
 
 export default async (): Promise<Campaign[]> => {
   try {
-    const { data } = await pluginApi.get('statement/campaigns');
-    const { campaigns } = data;
+    // const { data } = await pluginApi.get('statement/campaigns');
+    // const { campaigns } = data;
     return mock;
     // return campaigns;
   } catch {

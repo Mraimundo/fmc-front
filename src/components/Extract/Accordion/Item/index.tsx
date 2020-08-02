@@ -11,26 +11,26 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
   const { statement } = campaignExtract;
   const handleClick = () => setIsOpen(!isOpen);
 
-  if (statement && statement.length > 0) {
-    const [currentExtract] = statement;
+  if (statement) {
+
     return (
       <Container>
         <Header onClick={handleClick}>
           <div>
             Safra
-            <strong>{currentExtract.campaign.title}</strong>
+            <strong>{statement.campaign.title}</strong>
           </div>
           <div className="divider" />
           <div>
             <div className="text-right">Total</div>
-            <strong>{currentExtract.campaign.total} mil pontos</strong>
+            <strong>{statement.campaign.total} mil pontos</strong>
           </div>
           <div className={`chevron ${isOpen ? 'open' : ''}`} />
         </Header>
         {isOpen && (
           <Content>
-            {currentExtract.points &&
-              currentExtract.points.map(point => (
+            {statement.points &&
+              statement.points.map(point => (
                 <div className="content-row" key={point.id}>
                   <div className="row-header">
                     <div>{point.description}</div>

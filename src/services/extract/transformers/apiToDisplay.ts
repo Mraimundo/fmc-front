@@ -15,14 +15,14 @@ export default (data: ExtractApi): IExtract => {
         total: item.total,
       })),
     },
-    statement: data.statement.map(item => ({
+    statement: data.statement && {
       campaign: {
-        id: item.campaign.id,
-        title: item.campaign.title,
-        description: item.campaign.description,
-        total: item.campaign.total,
+        id: data.statement.campaign.id,
+        title: data.statement.campaign.title,
+        description: data.statement.campaign.description,
+        total: data.statement.campaign.total,
       },
-      points: item.points.map(point => ({
+      points: data.statement?.points?.map(point => ({
         id: point.id,
         value: point.value,
         description: point.description,
@@ -51,6 +51,6 @@ export default (data: ExtractApi): IExtract => {
           balanceUnitName: distributedItem.balance_unit_name,
         })),
       })),
-    })),
+    },
   };
 };

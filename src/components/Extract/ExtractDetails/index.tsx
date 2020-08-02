@@ -14,11 +14,10 @@ const ExtractDetails: React.FC<Props> = ({ details }) => {
       <AccordionContainer>
         {details.map(item => {
           const { statement } = item;
-          if (statement && statement.length > 0) {
-            const currentStatement = statement[0];
+          if (statement) {
             return (
               <AccordionItem
-                key={currentStatement.campaign.id}
+                key={statement.campaign.id}
                 campaignExtract={item}
               />
             );

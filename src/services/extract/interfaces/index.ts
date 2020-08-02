@@ -32,6 +32,32 @@ interface DistributedPoint {
   balanceUnitName: string;
 }
 
+interface StatementPointApi {
+  id: number;
+  value: number;
+  description: string;
+  date_ref: Date;
+  type: string;
+  origin_type: string;
+  origin_id: number;
+  created: Date;
+  balance_unit: {
+    id: number;
+    name: string;
+    description: string;
+  };
+  balance_status: {
+    id: number;
+    name: string;
+  };
+  campaign: {
+    id: number;
+    title: string;
+    description: string;
+  };
+  distributed?: DistributedPointApi[];
+}
+
 export interface ExtractApi {
   balance: {
     available: number;
@@ -41,43 +67,15 @@ export interface ExtractApi {
     total: number;
     points: Point[];
   };
-  statement: [
-    {
-      campaign: {
-        id: number;
-        title: string;
-        description: string;
-        total: number;
-      };
-      points: [
-        {
-          id: number;
-          value: number;
-          description: string;
-          date_ref: Date;
-          type: string;
-          origin_type: string;
-          origin_id: number;
-          created: Date;
-          balance_unit: {
-            id: number;
-            name: string;
-            description: string;
-          };
-          balance_status: {
-            id: number;
-            name: string;
-          };
-          campaign: {
-            id: number;
-            title: string;
-            description: string;
-          };
-          distributed?: DistributedPointApi[];
-        },
-      ];
-    },
-  ];
+  statement?: {
+    campaign: {
+      id: number;
+      title: string;
+      description: string;
+      total: number;
+    };
+    points?: StatementPointApi[];
+  };
 }
 
 interface StatementPoints {
@@ -125,5 +123,5 @@ export interface Extract {
     total: number;
     points: Point[];
   };
-  statement?: Statement[];
+  statement?: Statement;
 }
