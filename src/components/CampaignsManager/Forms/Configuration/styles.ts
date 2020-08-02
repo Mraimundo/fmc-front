@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import DefaultTitlesOptionsForCampaign from 'components/CampaignsManager/Selects/TitlesOptionsForCampaign';
 import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
 
 export const Container = styled.div`

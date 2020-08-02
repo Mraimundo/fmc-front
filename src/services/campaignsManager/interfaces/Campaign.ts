@@ -1,3 +1,5 @@
+import { ApproverProfile as IApproverProfile } from 'config/constants';
+
 export const CAMPAIGN_STATUS = {
   WAITING_APPROVAL: 3,
   BUILDING: 2,
@@ -103,7 +105,7 @@ export interface Goal {
   expectedVolume: number;
 }
 
-export type ApproverProfile = 'GRV' | 'DN' | 'CRM' | 'MKT';
+export type ApproverProfile = IApproverProfile;
 export type ApprovalStatus = 'approved' | 'disapproved' | 'pending';
 
 export interface Approver {

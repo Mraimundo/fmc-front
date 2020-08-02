@@ -5,10 +5,21 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import { getCampaigns, getCampaignsDetails } from 'services/campaignsManager';
+import {
+  getCampaigns,
+  getCampaignsDetails,
+  approveCampaign,
+  disapproveCampaign,
+  toggleCampaignPublishedStatus,
+  addHighlightToCampaign,
+  removeHighlightFromCampaign,
+} from 'services/campaignsManager';
 import { FilterOptions } from 'services/campaignsManager/getCampaigns';
 import { Response as IDetails } from 'services/campaignsManager/getCampaignsDetails';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import {
+  Campaign,
+  Approver,
+} from 'services/campaignsManager/interfaces/Campaign';
 import { useAuth } from 'context/AuthContext';
 
 export interface CampaignsListContextState {
@@ -21,6 +32,11 @@ export interface CampaignsListContextState {
   closeApprovalModal(): void;
   campaignSelected: Campaign | null;
   selectCampaign(campaignId: number): void;
+  disapprove(approver: Approver): Promise<void>;
+  approve(approver: Approver): Promise<void>;
+  togglePublishedStatus(campaignId: number): Promise<void>;
+  addHighlight(campaignId: number): Promise<void>;
+  removeHighlight(campaignId: number): Promise<void>;
 }
 
 const CampaignsListContext = createContext<CampaignsListContextState>(
@@ -77,6 +93,40 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     [campaigns],
   );
 
+  const approve = useCallback(
+    async ({ comments }: Approver) => {
+      if (!campaignSelected || !campaignSelected.id) return;
+      await approveCampaign(campaignSelected.id, comments[0]);
+    },
+    [campaignSelected],
+  );
+
+  const disapprove = useCallback(
+    async ({ comments }: Approver) => {
+      if (!campaignSelected || !campaignSelected.id) return;
+      await disapproveCampaign(campaignSelected.id, comments[0]);
+    },
+    [campaignSelected],
+  );
+
+  const togglePublishedStatus = useCallback(async (campaignId: number): Promise<
+    void
+  > => {
+    await toggleCampaignPublishedStatus(campaignId);
+  }, []);
+
+  const addHighlight = useCallback(async (campaignId: number): Promise<
+    void
+  > => {
+    await addHighlightToCampaign(campaignId);
+  }, []);
+
+  const removeHighlight = useCallback(async (campaignId: number): Promise<
+    void
+  > => {
+    await removeHighlightFromCampaign(campaignId);
+  }, []);
+
   return (
     <CampaignsListContext.Provider
       value={{
@@ -89,6 +139,11 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
         closeApprovalModal,
         campaignSelected,
         selectCampaign,
+        approve,
+        disapprove,
+        togglePublishedStatus,
+        addHighlight,
+        removeHighlight,
       }}
     >
       {children}

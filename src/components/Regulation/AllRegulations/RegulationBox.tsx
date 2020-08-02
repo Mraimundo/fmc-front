@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import parser from 'html-react-parser';
-import ReactToPrint from 'react-to-print';
 import { Button } from 'components/shared';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import getRegulationById from 'services/register/regulation/getRegulationById';

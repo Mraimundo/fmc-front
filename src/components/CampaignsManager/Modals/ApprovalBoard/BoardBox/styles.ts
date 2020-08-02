@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ApprovalStatus } from 'services/campaignsManager/interfaces/Campaign';
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +10,11 @@ export const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.font.color.primary};
 `;
 
-export const Row = styled.div`
+interface RowProps {
+  myline: boolean;
+  status: ApprovalStatus;
+}
+export const Row = styled.div<RowProps>`
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
@@ -25,9 +30,20 @@ export const Row = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     flex: 1;
   }
+
+  ${({ myline, theme }) =>
+    myline &&
+    css`
+      background: #efefef;
+    `};
+
+  ${({ status }) => status === 'approved' && css``};
 `;
 
-export const Icon = styled.span`
+interface IconProps {
+  myline?: boolean;
+}
+export const Icon = styled.span<IconProps>`
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -39,6 +55,23 @@ export const Icon = styled.span`
   svg {
     margin-right: 8px;
   }
+
+  ${({ myline, theme }) =>
+    myline &&
+    css`
+      color: ${theme.font.color.secondary};
+      svg path {
+        fill: ${theme.font.color.secondary};
+      }
+    `};
+`;
+
+export const CommentIconContainer = styled(Icon)`
+  ${({ myline }) =>
+    myline &&
+    css`
+      text-decoration: underline;
+    `};
 `;
 
 interface ApprovedProps {
@@ -53,6 +86,11 @@ export const ApprovedIconContainer = styled(Icon)<ApprovedProps>`
         fill: green;
       }
     `}
+  ${({ myline }) =>
+    !myline &&
+    css`
+      cursor: auto;
+    `};
 `;
 
 interface DisapprovedProps {
@@ -66,5 +104,10 @@ export const DisapprovedIconContainer = styled(Icon)<DisapprovedProps>`
       svg path {
         fill: red;
       }
-    `}
+    `};
+  ${({ myline }) =>
+    !myline &&
+    css`
+      cursor: auto;
+    `};
 `;

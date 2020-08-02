@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { shade, lighten } from 'polished';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.button`
   font-size: 12px;

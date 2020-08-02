@@ -13,6 +13,7 @@ import {
 } from './vendavallStatus';
 
 export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE';
+export type ApproverProfile = 'GRV' | 'DN' | 'CRM' | 'MKT';
 
 export const PROFILES = {
   focalPoint: 'FOCALPOINT',

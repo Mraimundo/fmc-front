@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  StatusText,
-  Approver,
-} from 'services/campaignsManager/interfaces/Campaign';
+import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';
 import ApprovalAction from './Actions/Approval';

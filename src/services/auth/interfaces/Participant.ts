@@ -1,4 +1,4 @@
-import { IProfile } from 'config/constants';
+import { IProfile, ApproverProfile } from 'config/constants';
 
 interface Address {
   id: number;
@@ -67,4 +67,5 @@ export interface Participant {
   password_confirmation: string;
   education_level: string;
   regulations_accepted: Regulation[];
+  profile_value: ApproverProfile;
 }

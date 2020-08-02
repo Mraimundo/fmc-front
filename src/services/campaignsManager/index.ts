@@ -19,8 +19,13 @@ import cancelCampaign from './cancelCampaign';
 import approveCampaign from './approveCampaign';
 import disapproveCampaign from './disapproveCampaign';
 import requestForApprovalCampaign from './requestForApprovalCampaign';
+import toggleCampaignPublishedStatus from './toggleCampaignPublishedStatus';
+import addHighlightToCampaign from './addHighlightToCampaign';
+import removeHighlightFromCampaign from './removeHighlightFromCampaign';
 
 export {
+  addHighlightToCampaign,
+  removeHighlightFromCampaign,
   createNewCampaign,
   getAudience,
   getCampaign,
@@ -42,4 +47,5 @@ export {
   approveCampaign,
   disapproveCampaign,
   requestForApprovalCampaign,
+  toggleCampaignPublishedStatus,
 };

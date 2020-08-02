@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import tabs from './tabs';
 
 export interface CampaignsManagerContextState {
