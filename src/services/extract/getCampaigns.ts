@@ -16,10 +16,10 @@ const mock = [
 
 export default async (): Promise<Campaign[]> => {
   try {
-    // const { data } = await pluginApi.get('statement/campaigns');
-    // const { campaigns } = data;
-    return mock;
-    // return campaigns;
+    const { data } = await pluginApi.get('statement/campaigns');
+    const { campaigns } = data;
+    return campaigns;
+    // return mock;
   } catch {
     return [];
   }

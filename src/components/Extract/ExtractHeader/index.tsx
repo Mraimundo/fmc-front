@@ -22,9 +22,11 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
   return (
     <Container userType={userType}>
       <AccumulatedBalance>
-        <h2>
-          Saldo acumulado: <strong>{total} mil pontos</strong>
-        </h2>
+        {total > 0 && (
+          <h2>
+            Saldo acumulado: <strong>{total} mil pontos</strong>
+          </h2>
+        )}
         <BalanceBoxContainer>
           {points &&
             points.map(point => (
@@ -39,10 +41,12 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
       </AccumulatedBalance>
       <CalltoActionContainer>
         <CalltoActionBox>
-          <p>
-            Saldo disponível para resgate:
-            <strong>{balance.available} mil pontos</strong>
-          </p>
+          {(balance.available > 0 && (
+            <p>
+              Saldo disponível para resgate:
+              <strong>{balance.available} mil pontos</strong>
+            </p>
+          )) || <p>&nbsp;</p>}
           <Button
             type="button"
             buttonRole="primary"
@@ -50,10 +54,13 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
           >
             RESGATAR
           </Button>
-          <p>
-            Saldo Ações Compartilhadas FMC:
-            <span>{balance.sharedActions} pontos</span>
-          </p>
+
+          {(balance.sharedActions && (
+            <p>
+              Saldo Ações Compartilhadas FMC:
+              <span>{balance.sharedActions} pontos</span>
+            </p>
+          )) || <p>&nbsp;</p>}
         </CalltoActionBox>
       </CalltoActionContainer>
     </Container>

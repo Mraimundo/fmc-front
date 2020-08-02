@@ -111,7 +111,7 @@ function getMock(campaignId: number): ExtractApi {
 }
 
 export default async (campaignId: number): Promise<IExtract> => {
-  // const { data } = await pluginApi.get<ExtractApi>(`statement/${campaignId}`);
-  // return transformer(data);
-  return transformer(getMock(campaignId));
+  const { data } = await pluginApi.get<ExtractApi>(`statement/${campaignId}`);
+  return transformer(data);
+  // return transformer(getMock(campaignId));
 };

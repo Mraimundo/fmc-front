@@ -17,10 +17,10 @@ export default (data: ExtractApi): IExtract => {
     },
     statement: data.statement && {
       campaign: {
-        id: data.statement.campaign.id,
-        title: data.statement.campaign.title,
-        description: data.statement.campaign.description,
-        total: data.statement.campaign.total,
+        id: data.statement.campaign?.id,
+        title: data.statement.campaign?.title,
+        description: data.statement?.campaign?.description,
+        total: data.statement?.campaign?.total,
       },
       points: data.statement?.points?.map(point => ({
         id: point.id,

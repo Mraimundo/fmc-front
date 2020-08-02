@@ -12,12 +12,12 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   background: #395389 url(${bgRevenda});
   ${({ userType }) =>
-    userType !== 'Revenda' &&
+    userType === 'Revenda' &&
     `
     background: #395389 url(${bgRevenda});
   `};
   ${({ userType }) =>
-    userType !== 'Cooperativa' &&
+    userType === 'Cooperativa' &&
     `
     background: #395389 url(${bgCooperativa});
   `};

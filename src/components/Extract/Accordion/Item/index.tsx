@@ -11,8 +11,7 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
   const { statement } = campaignExtract;
   const handleClick = () => setIsOpen(!isOpen);
 
-  if (statement) {
-
+  if (statement?.campaign.id) {
     return (
       <Container>
         <Header onClick={handleClick}>
