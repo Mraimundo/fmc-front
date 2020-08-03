@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import numbersOnly from './numbersOnly';
 
 describe('src/util', () => {
-  it('numbersOnly should be a function', () => {
+  test('numbersOnly should be a function', () => {
     expect(numbersOnly).to.be.a('function');
   });
 

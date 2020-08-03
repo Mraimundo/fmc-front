@@ -7,7 +7,7 @@ import commonSagas from 'state/modules/point-management/common/sagas';
 import teamAwardsSagas from 'state/modules/point-management/team-awards/sagas';
 
 describe('src/state/modules/point-management/sagas', () => {
-  it('main saga forks other sagas', () => {
+  test('main saga forks other sagas', () => {
     testSaga(mainSaga)
       .next()
       .all([fork(commonSagas), fork(teamAwardsSagas)])

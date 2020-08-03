@@ -24,17 +24,17 @@ import {
 } from './mock';
 
 describe('src/state/modules/point-management/team-awards/reducer', () => {
-  it('should be a function', () => {
+  test('should be a function', () => {
     expect(reducer).to.be.a('function');
   });
 
-  it('should return a initial state', () => {
+  test('should return a initial state', () => {
     const result = reducer(undefined, { type: 'unknown' });
 
     expect(result).to.be.deep.equal(initialState);
   });
 
-  it('should can handle FETCH_SUBSIDIARIES_ACTION', () => {
+  test('should can handle FETCH_SUBSIDIARIES_ACTION', () => {
     const result = reducer(undefined, actions.fetchSubsidiaries());
 
     expect(result).to.be.deep.equal({
@@ -45,7 +45,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_SUBSIDIARIES_FAILURE', () => {
+  test('should can handle FETCH_SUBSIDIARIES_FAILURE', () => {
     const result = reducer(undefined, actions.fetchSubsidiariesFailure(error));
 
     expect(result).to.be.deep.equal({
@@ -57,7 +57,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_SUBSIDIARIES_SUCCESS', () => {
+  test('should can handle FETCH_SUBSIDIARIES_SUCCESS', () => {
     const result = reducer(
       undefined,
       actions.fetchSubsidiariesSuccess(subsidiaries),
@@ -72,7 +72,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ROLES_ACTION', () => {
+  test('should can handle FETCH_ROLES_ACTION', () => {
     const result = reducer(undefined, actions.fetchRoles());
 
     expect(result).to.be.deep.equal({
@@ -83,7 +83,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ROLES_FAILURE', () => {
+  test('should can handle FETCH_ROLES_FAILURE', () => {
     const result = reducer(undefined, actions.fetchRolesFailure(error));
 
     expect(result).to.be.deep.equal({
@@ -95,7 +95,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ROLES_SUCCESS', () => {
+  test('should can handle FETCH_ROLES_SUCCESS', () => {
     const result = reducer(undefined, actions.fetchRolesSuccess(roles));
 
     expect(result).to.be.deep.equal({
@@ -107,7 +107,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_PARTICIPANTS_ACTION', () => {
+  test('should can handle FETCH_PARTICIPANTS_ACTION', () => {
     const result = reducer(undefined, actions.fetchParticipants());
 
     expect(result).to.be.deep.equal({
@@ -118,7 +118,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_PARTICIPANTS_FAILURE', () => {
+  test('should can handle FETCH_PARTICIPANTS_FAILURE', () => {
     const result = reducer(undefined, actions.fetchParticipantsFailure(error));
 
     expect(result).to.be.deep.equal({
@@ -130,7 +130,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_PARTICIPANTS_SUCCESS', () => {
+  test('should can handle FETCH_PARTICIPANTS_SUCCESS', () => {
     const result = reducer(
       undefined,
       actions.fetchParticipantsSuccess(participants),
@@ -145,7 +145,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SELECT_SUBSIDIARY', () => {
+  test('should can handle SELECT_SUBSIDIARY', () => {
     const result = reducer(undefined, actions.selectSubsidiary(1));
 
     expect(result).to.be.deep.equal({
@@ -160,7 +160,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SELECT_ROLE', () => {
+  test('should can handle SELECT_ROLE', () => {
     const result = reducer(undefined, actions.selectRole(1));
 
     expect(result).to.be.deep.equal({
@@ -172,7 +172,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SET_PARTICIPANT_FINDER', () => {
+  test('should can handle SET_PARTICIPANT_FINDER', () => {
     const result = reducer(undefined, actions.setParticipantFinder('Gabriel'));
 
     expect(result).to.be.deep.equal({
@@ -184,7 +184,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SET_POINTS_TO_DISTRIBUTE', () => {
+  test('should can handle SET_POINTS_TO_DISTRIBUTE', () => {
     const result = reducer(undefined, actions.setPointsToDistribute(5000));
 
     expect(result).to.be.deep.equal({
@@ -195,7 +195,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle TOGGLE_DISTRIBUTE_EQUALLY', () => {
+  test('should can handle TOGGLE_DISTRIBUTE_EQUALLY', () => {
     const result = reducer(undefined, actions.toggleDistributeEqually());
 
     expect(result).to.be.deep.equal({
@@ -204,7 +204,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SCORE_PARTICIPANT', () => {
+  test('should can handle SCORE_PARTICIPANT', () => {
     const result = reducer(
       undefined,
       actions.scoreParticipant(participant, 200),
@@ -220,7 +220,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle ASSIGN_POINTS_ACTION', () => {
+  test('should can handle ASSIGN_POINTS_ACTION', () => {
     const result = reducer(undefined, actions.assignPoints());
 
     expect(result).to.be.deep.equal({
@@ -231,7 +231,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle ASSIGN_POINTS_FAILURE', () => {
+  test('should can handle ASSIGN_POINTS_FAILURE', () => {
     const result = reducer(undefined, actions.assignPointsFailure(error));
 
     expect(result).to.be.deep.equal({
@@ -243,7 +243,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle ASSIGN_POINTS_SUCCESS', () => {
+  test('should can handle ASSIGN_POINTS_SUCCESS', () => {
     const result = reducer(undefined, actions.assignPointsSuccess());
 
     expect(result).to.be.deep.equal({
@@ -264,7 +264,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY', () => {
+  test('should can handle SET_TOTAL_FOR_EACH_PARTICIPANT_DISTRIBUTED_EQUALLY', () => {
     const result = reducer(
       undefined,
       actions.setTotalForEachParticipantDistributedEqually(2000),
@@ -276,7 +276,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SCORE_ALL_PARTICIPANTS_EQUALLY', () => {
+  test('should can handle SCORE_ALL_PARTICIPANTS_EQUALLY', () => {
     const result = reducer(
       undefined,
       actions.scoreAllParticipantsEqually(1000),
@@ -293,7 +293,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SET_SELECTED_ROLES_ALL', () => {
+  test('should can handle SET_SELECTED_ROLES_ALL', () => {
     expect(
       reducer(undefined, actions.setSelectedRolesAll(roles[0].name)),
     ).to.be.deep.equal({
@@ -302,7 +302,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle SELECT_ALL_PARTICIPANTS', () => {
+  test('should can handle SELECT_ALL_PARTICIPANTS', () => {
     expect(
       reducer(undefined, actions.selectAllParticipants(roles[0].name)),
     ).to.be.deep.equal({
@@ -316,7 +316,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle DESELECT_ALL_PARTICIPANTS', () => {
+  test('should can handle DESELECT_ALL_PARTICIPANTS', () => {
     expect(
       reducer(undefined, actions.deselectAllParticipants(roles[0].name)),
     ).to.be.deep.equal({
@@ -329,7 +329,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle TOGGLE_SELECTED_PARTICIPANT', () => {
+  test('should can handle TOGGLE_SELECTED_PARTICIPANT', () => {
     expect(
       reducer(undefined, actions.toggleSelectedParticipant(1)),
     ).to.be.deep.equal({
@@ -338,14 +338,14 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle REMOVE_ALL_SCORES', () => {
+  test('should can handle REMOVE_ALL_SCORES', () => {
     expect(reducer(undefined, actions.removeAllScores())).to.be.deep.equal({
       ...initialState,
       scoredParticipants: null,
     });
   });
 
-  it('should can handle SET_TOTAL_PARTICIPANTS', () => {
+  test('should can handle SET_TOTAL_PARTICIPANTS', () => {
     expect(
       reducer(undefined, actions.setTotalParticipants(1)),
     ).to.be.deep.equal({
@@ -354,7 +354,7 @@ describe('src/state/modules/point-management/team-awards/reducer', () => {
     });
   });
 
-  it('should can handle TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS', () => {
+  test('should can handle TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS', () => {
     expect(
       reducer(undefined, actions.toggleIsOpenModalMissingParticipants()),
     ).to.be.deep.equal({

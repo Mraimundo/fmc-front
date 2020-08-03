@@ -11,11 +11,11 @@ import {
 
 describe('src/services/point-management/transformers/common', () => {
   describe('transformTotalPointsToDistributeRawData', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(transformTotalPointsToDistributeRawData).to.be.a('function');
     });
 
-    it('should return null when undistributed points are empty', () => {
+    test('should return null when undistributed points are empty', () => {
       const mock: FetchTotalPointsToDistributeRawData = {
         undistributed_points: [],
       };
@@ -23,7 +23,7 @@ describe('src/services/point-management/transformers/common', () => {
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.null;
     });
 
-    it('cooperative without team awards rules', () => {
+    test('cooperative without team awards rules', () => {
       const mock: FetchTotalPointsToDistributeRawData = {
         undistributed_points: [
           {
@@ -59,7 +59,7 @@ describe('src/services/point-management/transformers/common', () => {
       });
     });
 
-    it('cooperative with team awards rules', () => {
+    test('cooperative with team awards rules', () => {
       const mock: FetchTotalPointsToDistributeRawData = {
         undistributed_points: [
           {
@@ -95,7 +95,7 @@ describe('src/services/point-management/transformers/common', () => {
       });
     });
 
-    it('resale rule', () => {
+    test('resale rule', () => {
       const mock: FetchTotalPointsToDistributeRawData = {
         undistributed_points: [
           {
@@ -160,11 +160,11 @@ describe('src/services/point-management/transformers/common', () => {
       marketplacePoints: 1000,
     };
 
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(transformScoredParticipantsToDataDistribution).to.be.a('function');
     });
 
-    it('should return with array structure to cooperative with team awards', () => {
+    test('should return with array structure to cooperative with team awards', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -192,7 +192,7 @@ describe('src/services/point-management/transformers/common', () => {
       ]);
     });
 
-    it('should return null to cooperative with team awards without point id', () => {
+    test('should return null to cooperative with team awards without point id', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -206,7 +206,7 @@ describe('src/services/point-management/transformers/common', () => {
       expect(result).to.be.null;
     });
 
-    it('should return with array structure to cooperative without team awards', () => {
+    test('should return with array structure to cooperative without team awards', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute,
@@ -225,7 +225,7 @@ describe('src/services/point-management/transformers/common', () => {
       ]);
     });
 
-    it('should return null to cooperative without team awards without point id', () => {
+    test('should return null to cooperative without team awards without point id', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -242,7 +242,7 @@ describe('src/services/point-management/transformers/common', () => {
       expect(result).to.be.null;
     });
 
-    it('should return with array structure to resale', () => {
+    test('should return with array structure to resale', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -286,7 +286,7 @@ describe('src/services/point-management/transformers/common', () => {
       ]);
     });
 
-    it('should return null on resale when dont have team award point id', () => {
+    test('should return null on resale when dont have team award point id', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -308,7 +308,7 @@ describe('src/services/point-management/transformers/common', () => {
       expect(result).to.be.null;
     });
 
-    it('should return null on resale when dont have resale cooperative point id', () => {
+    test('should return null on resale when dont have resale cooperative point id', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -344,7 +344,7 @@ describe('src/services/point-management/transformers/common', () => {
       ]);
     });
 
-    it('should return null on resale when dont have resale cooperative and team awards point id', () => {
+    test('should return null on resale when dont have resale cooperative and team awards point id', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {
@@ -366,7 +366,7 @@ describe('src/services/point-management/transformers/common', () => {
       expect(result).to.be.null;
     });
 
-    it('should return null when doesnt match any conditions', () => {
+    test('should return null when doesnt match any conditions', () => {
       const result = transformScoredParticipantsToDataDistribution({
         ...commonValues,
         pointsToDistribute: {

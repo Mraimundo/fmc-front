@@ -15,7 +15,7 @@ describe('src/state/modules/generic/sagas', () => {
       email: 'hi.gabrielferreira@gmail.com',
     };
 
-    it('fetch anything', async () => {
+    test('fetch anything', async () => {
       await expectSaga(workerFetchAnything)
         .withReducer(reducer)
         .provide([[matchers.call.fn(isTokenValid), { data }]])
@@ -30,7 +30,7 @@ describe('src/state/modules/generic/sagas', () => {
     });
   });
 
-  it('main saga takes actions', () => {
+  test('main saga takes actions', () => {
     testSaga(mainSaga)
       .next()
       .all([takeEvery(FETCH_ANYTHING_ACTION, workerFetchAnything)])

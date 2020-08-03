@@ -4,7 +4,7 @@ import { getNameAbbr, getFirstAndLastName, limitChars } from './string';
 
 describe('src/util/string', () => {
   describe('getNameAbbr', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(getNameAbbr).to.be.a('function');
     });
 
@@ -25,7 +25,7 @@ describe('src/util/string', () => {
     });
   });
   describe('getFirstAndLastName', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(getFirstAndLastName).to.be.a('function');
     });
 
@@ -42,7 +42,7 @@ describe('src/util/string', () => {
     });
   });
   describe('limitChars', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(limitChars).to.be.a('function');
     });
 

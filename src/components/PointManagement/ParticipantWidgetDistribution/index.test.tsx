@@ -7,7 +7,7 @@ import { participant } from 'state/modules/point-management/team-awards/mock';
 import ParticipantWidgetDistribution from '.';
 
 describe('<ParticipantWidgetDistribution />', () => {
-  it('should render correctly', () => {
+  test('should render correctly', () => {
     const { getByAltText, getByText, container } = render(
       <ThemeContext.Provider value={defaultTheme}>
         <ParticipantWidgetDistribution

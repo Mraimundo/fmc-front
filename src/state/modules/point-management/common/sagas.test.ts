@@ -51,7 +51,7 @@ import reducer, { initialState, emptyPointsToDistribute } from './reducer';
 
 describe('src/state/modules/point-management/common/sagas', () => {
   describe('workerFetchEstablishments', () => {
-    it('fetch establishments with more than one', async () => {
+    test('fetch establishments with more than one', async () => {
       await expectSaga(workerFetchEstablishments)
         .withReducer(reducer)
         .withState(initialState)
@@ -70,7 +70,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('fetch establishments with one', async () => {
+    test('fetch establishments with one', async () => {
       await expectSaga(workerFetchEstablishments)
         .withReducer(reducer)
         .withState(initialState)
@@ -91,7 +91,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('fetch establishments without data', async () => {
+    test('fetch establishments without data', async () => {
       const error = 'Você não possui estabelecimentos';
 
       await expectSaga(workerFetchEstablishments)
@@ -119,7 +119,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerFetchPointsToDistribute', () => {
-    it('fetch points to distribute with happy way', async () => {
+    test('fetch points to distribute with happy way', async () => {
       await expectSaga(workerFetchPointsToDistribute)
         .withReducer(reducer)
         .withState(initialState)
@@ -146,7 +146,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('fetch points to distribute without selected establishment', async () => {
+    test('fetch points to distribute without selected establishment', async () => {
       const error = 'Você não selecionou nenhum estabelecimento';
 
       await expectSaga(workerFetchPointsToDistribute)
@@ -172,7 +172,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('fetch points to distribute with empty return', async () => {
+    test('fetch points to distribute with empty return', async () => {
       const error = 'Você não possui pontos a serem distribuidos';
 
       await expectSaga(workerFetchPointsToDistribute)
@@ -204,7 +204,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerSetIsReadyToDistribute', () => {
-    it('should handle with resale coopeartive and team award points', async () => {
+    test('should handle with resale coopeartive and team award points', async () => {
       await expectSaga(workerSetIsReadyToDistribute)
         .withReducer(reducer)
         .withState(initialState)
@@ -225,7 +225,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('should handle with autonomy to distribute points', async () => {
+    test('should handle with autonomy to distribute points', async () => {
       await expectSaga(workerSetIsReadyToDistribute)
         .withReducer(reducer)
         .withState(initialState)
@@ -244,7 +244,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('should handle with resale coopeartive points only', async () => {
+    test('should handle with resale coopeartive points only', async () => {
       await expectSaga(workerSetIsReadyToDistribute)
         .withReducer(reducer)
         .withState(initialState)
@@ -266,7 +266,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerAfterGetPointsToDistribution', () => {
-    it('without autonomy to distribute, allow start distribution', async () => {
+    test('without autonomy to distribute, allow start distribution', async () => {
       await expectSaga(workerAfterGetPointsToDistribution)
         .withReducer(reducer)
         .withState(initialState)
@@ -280,7 +280,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('with autonomy to distribute, not allow start distribution', async () => {
+    test('with autonomy to distribute, not allow start distribution', async () => {
       await expectSaga(workerAfterGetPointsToDistribution)
         .withReducer(reducer)
         .withState(initialState)
@@ -295,7 +295,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerVerifyDistributePointsPossibility', () => {
-    it('should call to distribute points with happy way', async () => {
+    test('should call to distribute points with happy way', async () => {
       await expectSaga(workerVerifyDistributePointsPossibility)
         .withReducer(reducer)
         .withState(initialState)
@@ -318,7 +318,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('should throw an error when try distribute without permission to rescue resale/cooperative', async () => {
+    test('should throw an error when try distribute without permission to rescue resale/cooperative', async () => {
       const error = `É necessário distribuir todos os pontos para ${establishments[0].type} antes de finalizar`;
 
       await expectSaga(workerVerifyDistributePointsPossibility)
@@ -343,7 +343,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('should throw an error when try distribute without scored participants', async () => {
+    test('should throw an error when try distribute without scored participants', async () => {
       const error = `É necessário distribuir todos os pontos para a equipe antes de finalizar`;
 
       await expectSaga(workerVerifyDistributePointsPossibility)
@@ -372,7 +372,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .run();
     });
 
-    it('should open modal missing participants', async () => {
+    test('should open modal missing participants', async () => {
       await expectSaga(workerVerifyDistributePointsPossibility)
         .withReducer(reducer)
         .withState(initialState)
@@ -398,7 +398,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerDistributePoints', () => {
-    it('should distribute points with happy way', async () => {
+    test('should distribute points with happy way', async () => {
       const dataDistribution = transformScoredParticipantsToDataDistribution({
         scoredParticipants: teamAwardsMock.scoredParticipants,
         establishmentId: selectedEstablishment.value,
@@ -436,7 +436,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerFinishedDistribution', () => {
-    it('should put any actions after finish distribution', async () => {
+    test('should put any actions after finish distribution', async () => {
       await expectSaga(workerFinishedDistribution)
         .withReducer(reducer)
         .withState(initialState)
@@ -451,7 +451,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
     });
   });
 
-  it('main saga takes actions', () => {
+  test('main saga takes actions', () => {
     testSaga(mainSaga)
       .next()
       .all([

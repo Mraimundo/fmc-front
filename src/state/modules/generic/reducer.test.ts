@@ -9,17 +9,17 @@ import {
 import { FetchAnythingData } from './types';
 
 describe('src/state/modules/generic/reducer', () => {
-  it('should be a function', () => {
+  test('should be a function', () => {
     expect(reducer).to.be.a('function');
   });
 
-  it('should return a initial state', () => {
+  test('should return a initial state', () => {
     const result = reducer(undefined, { type: 'unknown' });
 
     expect(result).to.be.deep.equal(initialState);
   });
 
-  it('should can handle FETCH_ANYTHING_ACTION', () => {
+  test('should can handle FETCH_ANYTHING_ACTION', () => {
     const result = reducer(undefined, {
       type: FETCH_ANYTHING_ACTION,
       payload: { isFetching: true },
@@ -31,7 +31,7 @@ describe('src/state/modules/generic/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ANYTHING_FAILURE', () => {
+  test('should can handle FETCH_ANYTHING_FAILURE', () => {
     const error = 'Generic Error';
     const result = reducer(undefined, {
       type: FETCH_ANYTHING_FAILURE,
@@ -45,7 +45,7 @@ describe('src/state/modules/generic/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ANYTHING_SUCCESS', () => {
+  test('should can handle FETCH_ANYTHING_SUCCESS', () => {
     const data: FetchAnythingData = {
       name: 'Gabriel',
       email: 'hi.gabrielferreira@gmail.com',

@@ -28,15 +28,15 @@ import {
 
 describe('src/state/modules/point-management/common/actions', () => {
   describe('fetchEstablishments', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchEstablishments).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchEstablishments()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchEstablishments()).to.be.deep.equal({
         type: constants.FETCH_ESTABLISHMENTS_ACTION,
       });
@@ -44,15 +44,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('fetchEstablishmentsFailure', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchEstablishmentsFailure).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchEstablishmentsFailure(error)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchEstablishmentsFailure(error)).to.be.deep.equal({
         type: constants.FETCH_ESTABLISHMENTS_FAILURE,
         payload: { error },
@@ -61,15 +61,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('fetchEstablishmentsSuccess', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchEstablishmentsSuccess).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchEstablishmentsSuccess(establishments)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchEstablishmentsSuccess(establishments)).to.be.deep.equal({
         type: constants.FETCH_ESTABLISHMENTS_SUCCESS,
         payload: { establishments },
@@ -78,15 +78,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('fetchPointsToDistribute', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchPointsToDistribute).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchPointsToDistribute()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchPointsToDistribute()).to.be.deep.equal({
         type: constants.FETCH_POINTS_TO_DISTRIBUTE_ACTION,
       });
@@ -94,15 +94,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('fetchPointsToDistributeFailure', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchPointsToDistributeFailure).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchPointsToDistributeFailure(error)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchPointsToDistributeFailure(error)).to.be.deep.equal({
         type: constants.FETCH_POINTS_TO_DISTRIBUTE_FAILURE,
         payload: { error },
@@ -111,17 +111,17 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('fetchPointsToDistributeSuccess', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchPointsToDistributeSuccess).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchPointsToDistributeSuccess(pointsToDistribute)).to.be.a(
         'object',
       );
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(
         fetchPointsToDistributeSuccess(pointsToDistribute),
       ).to.be.deep.equal({
@@ -132,15 +132,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setTotalPointsTeamAwards', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(setTotalPointsTeamAwards).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(setTotalPointsTeamAwards(5)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(setTotalPointsTeamAwards(5)).to.be.deep.equal({
         type: constants.SET_TOTAL_POINTS_TEAM_AWARDS,
         payload: { totalPointsTeamAwards: 5 },
@@ -149,15 +149,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setTotalPointsResaleCooperative', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(setTotalPointsResaleCooperative).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(setTotalPointsResaleCooperative(5)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(setTotalPointsResaleCooperative(5)).to.be.deep.equal({
         type: constants.SET_TOTAL_POINTS_RESALE_COOPERATIVE,
         payload: { totalPointsResaleCooperative: 5 },
@@ -166,15 +166,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setIsReadyToDistribute', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(setIsReadyToDistribute).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(setIsReadyToDistribute(true)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(setIsReadyToDistribute(true)).to.be.deep.equal({
         type: constants.SET_IS_READY_TO_DISTRIBUTE,
         payload: { isReadyToDistribute: true },
@@ -183,15 +183,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setSelectedEstablishment', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(setSelectedEstablishment).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(setSelectedEstablishment(selectedEstablishment)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(setSelectedEstablishment(selectedEstablishment)).to.be.deep.equal({
         type: constants.SET_SELECTED_ESTABLISHMENT,
         payload: { selectedEstablishment },
@@ -200,15 +200,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('distributePoints', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(distributePoints).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(distributePoints()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(distributePoints()).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_ACTION,
       });
@@ -216,15 +216,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('distributePointsFinally', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(distributePointsFinally).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(distributePointsFinally()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(distributePointsFinally()).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
       });
@@ -232,15 +232,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('distributePointsFailure', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(distributePointsFailure).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(distributePointsFailure(error)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(distributePointsFailure(error)).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_FAILURE,
         payload: { error },
@@ -249,15 +249,15 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('distributePointsSuccess', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(distributePointsSuccess).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(distributePointsSuccess()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(distributePointsSuccess()).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_SUCCESS,
       });
@@ -265,22 +265,22 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setFinishedDistribution', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(setFinishedDistribution).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(setFinishedDistribution()).to.be.a('object');
     });
 
-    it('should return a valid object with defualt param', () => {
+    test('should return a valid object with defualt param', () => {
       expect(setFinishedDistribution()).to.be.deep.equal({
         type: constants.SET_FINISHED_DISTRIBUTION,
         payload: { finishedDistribution: true },
       });
     });
 
-    it('should return a valid object with param', () => {
+    test('should return a valid object with param', () => {
       expect(setFinishedDistribution(false)).to.be.deep.equal({
         type: constants.SET_FINISHED_DISTRIBUTION,
         payload: { finishedDistribution: false },

@@ -47,91 +47,91 @@ import teamAwardsMock, {
 
 describe('src/state/modules/point-management/team-awards/selectors', () => {
   describe('state getters', () => {
-    it('check getSubsidiaries', () => {
+    test('check getSubsidiaries', () => {
       expect(getSubsidiaries(state)).to.be.equal(subsidiaries);
     });
 
-    it('check getSelectedSubsidiaries', () => {
+    test('check getSelectedSubsidiaries', () => {
       expect(getSelectedSubsidiaries(state)).to.be.equal(selectedSubsidiaries);
     });
 
-    it('check getRoles', () => {
+    test('check getRoles', () => {
       expect(getRoles(state)).to.be.equal(roles);
     });
 
-    it('check fetchRolesIsFetching', () => {
+    test('check fetchRolesIsFetching', () => {
       expect(fetchRolesIsFetching(state)).to.be.false;
     });
 
-    it('check getSelectedRoles', () => {
+    test('check getSelectedRoles', () => {
       expect(getSelectedRoles(state)).to.be.equal(selectedRoles);
     });
 
-    it('check getParticipantFinder', () => {
+    test('check getParticipantFinder', () => {
       expect(getParticipantFinder(state)).to.be.equal(
         state.pointManagement.teamAwards.participantFinder,
       );
     });
 
-    it('check getPointsToDistribute', () => {
+    test('check getPointsToDistribute', () => {
       expect(getPointsToDistribute(state)).to.be.equal(
         state.pointManagement.teamAwards.pointsToDistribute,
       );
     });
 
-    it('check getScoredParticipants', () => {
+    test('check getScoredParticipants', () => {
       expect(getScoredParticipants(state)).to.be.equal(scoredParticipants);
     });
 
-    it('check getWaitingScoredParticipants', () => {
+    test('check getWaitingScoredParticipants', () => {
       expect(getWaitingScoredParticipants(state)).to.be.equal(
         waitingScoredParticipants,
       );
     });
 
-    it('check getParticipantsList', () => {
+    test('check getParticipantsList', () => {
       expect(getParticipantsList(state)).to.be.equal(participants);
     });
 
-    it('check fetchParticipantIsFetching', () => {
+    test('check fetchParticipantIsFetching', () => {
       expect(fetchParticipantIsFetching(state)).to.be.false;
     });
 
-    it('check getDistributeEqually', () => {
+    test('check getDistributeEqually', () => {
       expect(getDistributeEqually(state)).to.be.false;
     });
 
-    it('check getSelectedParticipants', () => {
+    test('check getSelectedParticipants', () => {
       expect(getSelectedParticipants(state)).to.be.equal(selectedParticipants);
     });
 
-    it('check getTotalForEachParticipantDistributedEqually', () => {
+    test('check getTotalForEachParticipantDistributedEqually', () => {
       expect(getTotalForEachParticipantDistributedEqually(state)).to.be.equal(
         1666.6666666666667,
       );
     });
 
-    it('check getSelectedRolesAll', () => {
+    test('check getSelectedRolesAll', () => {
       expect(getSelectedRolesAll(state)).to.be.equal(
         teamAwardsMock.selectedRolesAll,
       );
     });
 
-    it('check getTotalParticipants', () => {
+    test('check getTotalParticipants', () => {
       expect(getTotalParticipants(state)).to.be.equal(3);
     });
 
-    it('check getIsOpenModalMissingParticipants', () => {
+    test('check getIsOpenModalMissingParticipants', () => {
       expect(getIsOpenModalMissingParticipants(state)).to.be.false;
     });
   });
 
   describe('getSelectedParticipantsWithoutScore', () => {
-    it('should return 0 with default state', () => {
+    test('should return 0 with default state', () => {
       expect(getSelectedParticipantsWithoutScore(state)).to.be.equal(0);
     });
 
-    it('should return 0 with selected participants null', () => {
+    test('should return 0 with selected participants null', () => {
       expect(
         getSelectedParticipantsWithoutScore({
           ...state,
@@ -146,7 +146,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       ).to.be.equal(0);
     });
 
-    it('should return 1 with selected participants and without scored', () => {
+    test('should return 1 with selected participants and without scored', () => {
       expect(
         getSelectedParticipantsWithoutScore({
           ...state,
@@ -162,7 +162,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       ).to.be.equal(1);
     });
 
-    it('should return 0 when selected participant already has score', () => {
+    test('should return 0 when selected participant already has score', () => {
       expect(
         getSelectedParticipantsWithoutScore({
           ...state,
@@ -178,7 +178,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       ).to.be.equal(0);
     });
 
-    it('should return 1 when selected participant dont have score', () => {
+    test('should return 1 when selected participant dont have score', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -196,11 +196,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getTotalWaitingScoredParticipants', () => {
-    it('should return 0 with default state', () => {
+    test('should return 0 with default state', () => {
       expect(getTotalWaitingScoredParticipants(state)).to.be.equal(0);
     });
 
-    it('should return 431 when has waiting scored participants (clone scoredParticipants total)', () => {
+    test('should return 431 when has waiting scored participants (clone scoredParticipants total)', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -217,11 +217,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getTotalScoreScoredParticipants', () => {
-    it('should return 431 with default state', () => {
+    test('should return 431 with default state', () => {
       expect(getTotalScoreScoredParticipants(state)).to.be.equal(431);
     });
 
-    it('should return 0 when dont have scored participants', () => {
+    test('should return 0 when dont have scored participants', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -238,11 +238,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getHasEnoughScore', () => {
-    it('should return true with default state', () => {
+    test('should return true with default state', () => {
       expect(getHasEnoughScore(state)).to.be.true;
     });
 
-    it('should return false dont have enough points', () => {
+    test('should return false dont have enough points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -259,14 +259,14 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getSelectedSubsidiariesWithName', () => {
-    it('should return default status subsidiaries with label name', () => {
+    test('should return default status subsidiaries with label name', () => {
       expect(getSelectedSubsidiariesWithName(state)).to.be.deep.equal([
         { id: 1, name: 'Filial 1' },
         { id: 2, name: 'Filial 2' },
       ]);
     });
 
-    it('should return null when dont have selected subsidiaries', () => {
+    test('should return null when dont have selected subsidiaries', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -280,7 +280,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       expect(getSelectedSubsidiariesWithName(modifiedState)).to.be.null;
     });
 
-    it('should return null when dont have subsidiaries', () => {
+    test('should return null when dont have subsidiaries', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -297,11 +297,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getAvailableScore', () => {
-    it('should be return 0 with default state', () => {
+    test('should be return 0 with default state', () => {
       expect(getAvailableScore(state)).to.be.equal(4569);
     });
 
-    it('should return 0 with total points team awards 0', () => {
+    test('should return 0 with total points team awards 0', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -318,7 +318,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getScoredParticipantsResume', () => {
-    it('check getScoredParticipantsResume', () => {
+    test('check getScoredParticipantsResume', () => {
       expect(getScoredParticipantsResume(state)).to.be.deep.equal({
         'Gerente Comercial': {
           count: 2,
@@ -333,11 +333,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getIsEnabledToAssignPoints', () => {
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getIsEnabledToAssignPoints(state)).to.be.false;
     });
 
-    it('should return true point to distribute and distribute equally true', () => {
+    test('should return true point to distribute and distribute equally true', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -352,7 +352,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       expect(getIsEnabledToAssignPoints(modifiedState)).to.be.true;
     });
 
-    it('should return false when dont have waiting scored points', () => {
+    test('should return false when dont have waiting scored points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -368,7 +368,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       expect(getIsEnabledToAssignPoints(modifiedState)).to.be.false;
     });
 
-    it('should return true when have waiting scored points', () => {
+    test('should return true when have waiting scored points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -386,11 +386,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getIsEnabledToDistributePoints', () => {
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getIsEnabledToDistributePoints(state)).to.be.false;
     });
 
-    it('should return false when dont have total points team awards', () => {
+    test('should return false when dont have total points team awards', () => {
       expect(
         getIsEnabledToDistributePoints({
           ...state,
@@ -405,7 +405,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       ).to.be.false;
     });
 
-    it('should return false when dont have total points team awards', () => {
+    test('should return false when dont have total points team awards', () => {
       expect(
         getIsEnabledToDistributePoints({
           ...state,
@@ -420,7 +420,7 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
       ).to.be.false;
     });
 
-    it('should return true when dont have more points to distribute', () => {
+    test('should return true when dont have more points to distribute', () => {
       expect(
         getIsEnabledToDistributePoints({
           ...state,
@@ -437,11 +437,11 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
   });
 
   describe('getMissingParticipants', () => {
-    it('should return 0 with default state', () => {
+    test('should return 0 with default state', () => {
       expect(getMissingParticipants(state)).to.be.equal(0);
     });
 
-    it('should return 7 with totalParticipants 10', () => {
+    test('should return 7 with totalParticipants 10', () => {
       expect(
         getMissingParticipants({
           ...state,

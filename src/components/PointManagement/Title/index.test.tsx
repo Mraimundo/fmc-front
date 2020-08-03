@@ -6,7 +6,7 @@ import { defaultTheme } from 'styles/theme';
 import Title from '.';
 
 describe('<Title />', () => {
-  it('should render correctly', () => {
+  test('should render correctly', () => {
     const { getByText } = render(
       <ThemeContext.Provider value={defaultTheme}>
         <Title>titulo de teste</Title>

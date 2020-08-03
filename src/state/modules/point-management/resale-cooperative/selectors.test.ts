@@ -13,19 +13,19 @@ import resaleCooperativeState from './mock';
 
 describe('src/state/modules/point-management/resale-cooperative/selectors', () => {
   describe('state getters', () => {
-    it('check getMarketplacePoints', () => {
+    test('check getMarketplacePoints', () => {
       expect(getMarketplacePoints(state)).to.be.equal(
         resaleCooperativeState.marketplacePoints,
       );
     });
 
-    it('check getInvoicePoints', () => {
+    test('check getInvoicePoints', () => {
       expect(getInvoicePoints(state)).to.be.equal(
         resaleCooperativeState.invoicePoints,
       );
     });
 
-    it('check getMaxInvoicePercentage', () => {
+    test('check getMaxInvoicePercentage', () => {
       expect(getMaxInvoicePercentage(state)).to.be.equal(
         resaleCooperativeState.maxInvoicePercentage,
       );
@@ -33,15 +33,15 @@ describe('src/state/modules/point-management/resale-cooperative/selectors', () =
   });
 
   describe('getIsEnabledToRescue', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(getIsEnabledToRescue).to.be.a('function');
     });
 
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getIsEnabledToRescue(state)).to.be.false;
     });
 
-    it('should return true when marketplace + invoice === resale cooperative total points', () => {
+    test('should return true when marketplace + invoice === resale cooperative total points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {

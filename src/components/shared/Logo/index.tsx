@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactSVG } from 'react-svg';
 import { Link } from 'react-router-dom';
 
 import logoFmc from 'assets/images/indication/logo-fmc.svg';
@@ -14,9 +15,9 @@ const Logo: React.FC<Props> = ({ className }) => {
     <Container className={className}>
       <Content>
         <Link to="/">
-          <img src={logoFmc} alt="Logo FMC" />
+          <ReactSVG src={logoFmc} />
         </Link>
-        <img src={logoJuntos} alt="Logo Juntos" />
+        <ReactSVG src={logoJuntos} />
       </Content>
     </Container>
   );

@@ -4,7 +4,7 @@ import { hasLowerCase, hasUpperCase, hasNumber } from './string';
 
 describe('src/util/validations/string', () => {
   describe('hasLowerCase fn', () => {
-    it('hasLowerCase should be a function', () => {
+    test('hasLowerCase should be a function', () => {
       expect(hasLowerCase).to.be.a('function');
     });
 
@@ -22,7 +22,7 @@ describe('src/util/validations/string', () => {
   });
 
   describe('hasUpperCase fn', () => {
-    it('hasUpperCase should be a function', () => {
+    test('hasUpperCase should be a function', () => {
       expect(hasUpperCase).to.be.a('function');
     });
 
@@ -40,7 +40,7 @@ describe('src/util/validations/string', () => {
   });
 
   describe('hasNumber fn', () => {
-    it('hasNumber should be a function', () => {
+    test('hasNumber should be a function', () => {
       expect(hasNumber).to.be.a('function');
     });
 

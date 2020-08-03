@@ -6,7 +6,7 @@ import { defaultTheme } from 'styles/theme';
 import Button from '.';
 
 describe('<Button />', () => {
-  it('should render loader', () => {
+  test('should render loader', () => {
     const text = 'Click here!';
     const { container } = render(
       <ThemeContext.Provider value={defaultTheme}>
@@ -19,7 +19,7 @@ describe('<Button />', () => {
     expect(queryByTestId(container, /button-loader/)).toBeInTheDocument();
   });
 
-  it('should render with children', () => {
+  test('should render with children', () => {
     const text = 'Click here!';
     const { getByText } = render(
       <ThemeContext.Provider value={defaultTheme}>

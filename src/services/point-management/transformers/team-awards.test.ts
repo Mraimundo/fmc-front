@@ -24,28 +24,28 @@ describe('src/services/point-management/transformers/team-awards', () => {
       },
     ];
 
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(transformSubsidiariesRawData).to.be.a('function');
     });
 
-    it('should transform with id and name only', () => {
+    test('should transform with id and name only', () => {
       expect(transformSubsidiariesRawData(rawSubsidiaries)).to.be.deep.equal([
         { id: 1, name: 'Filial 1' },
         { id: 2, name: 'Filial 2' },
       ]);
     });
 
-    it('should return null when dont have subsidiaries', () => {
+    test('should return null when dont have subsidiaries', () => {
       expect(transformSubsidiariesRawData([])).to.be.null;
     });
   });
 
   describe('transformParticipantsRawData', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(transformParticipantsRawData).to.be.a('function');
     });
 
-    it('should transform correctly form', () => {
+    test('should transform correctly form', () => {
       expect(
         transformParticipantsRawData({
           data: participants,
@@ -57,7 +57,7 @@ describe('src/services/point-management/transformers/team-awards', () => {
       });
     });
 
-    it('should return null when participants empty', () => {
+    test('should return null when participants empty', () => {
       expect(
         transformParticipantsRawData({
           data: {},

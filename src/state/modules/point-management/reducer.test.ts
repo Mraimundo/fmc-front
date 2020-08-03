@@ -9,7 +9,7 @@ import teamAwards from './team-awards/reducer';
 describe('src/state/modules/point-management/reducer', () => {
   const store = createStore(reducer);
 
-  it('should return initial state', () => {
+  test('should return initial state', () => {
     expect(store.getState().common).to.be.deep.equal(
       common(undefined, { type: 'unknown' }),
     );

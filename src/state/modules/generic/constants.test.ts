@@ -7,11 +7,11 @@ import {
 
 describe('src/state/modules/generic/constants', () => {
   describe('FETCH_ANYTHING_ACTION', () => {
-    it('should return a string', () => {
+    test('should return a string', () => {
       expect(FETCH_ANYTHING_ACTION).to.be.a('string');
     });
 
-    it('should return correct value', () => {
+    test('should return correct value', () => {
       expect(FETCH_ANYTHING_ACTION).to.be.equal(
         '@skeleton/generic/FETCH_ANYTHING_ACTION',
       );
@@ -19,11 +19,11 @@ describe('src/state/modules/generic/constants', () => {
   });
 
   describe('FETCH_ANYTHING_FAILURE', () => {
-    it('should return a string', () => {
+    test('should return a string', () => {
       expect(FETCH_ANYTHING_FAILURE).to.be.a('string');
     });
 
-    it('should return correct value', () => {
+    test('should return correct value', () => {
       expect(FETCH_ANYTHING_FAILURE).to.be.equal(
         '@skeleton/generic/FETCH_ANYTHING_FAILURE',
       );
@@ -31,11 +31,11 @@ describe('src/state/modules/generic/constants', () => {
   });
 
   describe('FETCH_ANYTHING_SUCCESS', () => {
-    it('should return a string', () => {
+    test('should return a string', () => {
       expect(FETCH_ANYTHING_SUCCESS).to.be.a('string');
     });
 
-    it('should return correct value', () => {
+    test('should return correct value', () => {
       expect(FETCH_ANYTHING_SUCCESS).to.be.equal(
         '@skeleton/generic/FETCH_ANYTHING_SUCCESS',
       );
