@@ -23,6 +23,8 @@ const Extract: React.FC = () => {
   const [userType, setUserType] = useState<EstablishmentType>('Revenda');
   const { participant } = useAuth();
 
+  const [key, setKey] = useState('Revenda');
+
   useEffect(() => {
     getCampaigns().then(data => setCampaigns(data));
   }, []);
@@ -32,11 +34,14 @@ const Extract: React.FC = () => {
   };
 
   useEffect(() => {
+    setExtractDetails([]);
     const { pathname } = location;
     if (campaigns.length > 0) {
       const { establishment } = participant;
       const extractFn = getExtractFn(pathname);
       setUserType(establishment.type_name);
+      setKey(pathname);
+
       campaigns.map(campaign =>
         extractFn(campaign.id).then(data =>
           setExtractDetails(currentValues => [...currentValues, data]),
@@ -46,7 +51,7 @@ const Extract: React.FC = () => {
   }, [campaigns, participant, location]);
 
   useEffect(() => {
-    if (!summary && extractDetails.length > 0) {
+    if (extractDetails.length > 0) {
       const currentHeaderInfo = extractDetails[0];
       const headerSummary = {
         balance: {
@@ -58,10 +63,10 @@ const Extract: React.FC = () => {
       };
       setSummary(headerSummary);
     }
-  }, [extractDetails, summary]);
+  }, [extractDetails]);
 
   return (
-    <Container>
+    <Container key={key}>
       <Content>
         <PageTitle>Extrato de Pontos</PageTitle>
         {summary && <ExtractHeader summary={summary} userType={userType} />}
