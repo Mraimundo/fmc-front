@@ -12,7 +12,6 @@ import messagesIcon from 'assets/images/campaigns/messages-icon.svg';
 import {
   Container,
   Row,
-  Icon,
   ApprovedIconContainer,
   DisapprovedIconContainer,
   CommentIconContainer,

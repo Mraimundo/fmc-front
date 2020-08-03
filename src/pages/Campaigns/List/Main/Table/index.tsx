@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { ParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
 import transformer, {
   Response as ITableItemData,
 } from 'services/campaignsManager/transformers/campaignsToCampaignsTable';
