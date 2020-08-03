@@ -51,6 +51,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
             type="button"
             buttonRole="primary"
             onClick={() => console.log('test')}
+            disabled={balance.available === 0}
           >
             RESGATAR
           </Button>
