@@ -1,20 +1,12 @@
 import React from 'react';
 import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
-import {
-  ApproverProfile,
-  CRM,
-  DN,
-  GRM,
-  GRV,
-  KAM,
-  MKT,
-  RTC,
-} from 'config/constants';
+import { ApproverProfile, CRM, DN, GRM, GRV, MKT } from 'config/constants';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';
 import ApprovalAction from './Actions/Approval';
 import HighlightAction from './Actions/Highlight';
 import ActivatedAction from './Actions/Active';
+import ViewAction from './Actions/View';
 
 const common = [
   {
@@ -27,7 +19,7 @@ const common = [
   },
 ];
 
-const status = [
+const statusColumn = [
   {
     column: 'Status da campanha',
     dataValue: 'status',
@@ -57,7 +49,7 @@ const approval = [
   },
 ];
 
-const highlight = [
+const highlightColumn = [
   {
     column: 'Destaque home',
     dataValue: 'highlight',
@@ -77,26 +69,34 @@ const publish = [
   },
 ];
 
+const view = [
+  {
+    column: '',
+    dataValue: 'id',
+    fn: (id: string) => <ViewAction id={id} />,
+  },
+];
+
 export default (profile: ApproverProfile) => {
   switch (profile) {
     case DN:
-      return [...common, ...status, ...approval];
+      return [...common, ...statusColumn, ...approval];
     case GRM:
-      return [...common, ...edit, ...status];
+      return [...common, ...edit, ...statusColumn];
     case MKT:
-      return [...common, ...status, ...approval];
+      return [...common, ...statusColumn, ...approval];
     case GRV:
-      return [...common, ...status, ...approval];
+      return [...common, ...statusColumn, ...approval];
     case CRM:
       return [
         ...common,
         ...edit,
-        ...status,
+        ...statusColumn,
         ...approval,
-        ...highlight,
+        ...highlightColumn,
         ...publish,
       ];
     default:
-      return [...common, ...status];
+      return [...common, ...view, ...statusColumn];
   }
 };

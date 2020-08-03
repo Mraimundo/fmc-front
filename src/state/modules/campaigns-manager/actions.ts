@@ -112,10 +112,14 @@ export const setMechanic = (
 
 export const setCampaign = (
   data: Campaign,
-): ActionCreatorPayload<typeof SET_CAMPAIGN, Campaign> =>
+  canEdit = true,
+): ActionCreatorPayload<
+  typeof SET_CAMPAIGN,
+  { campaign: Campaign; canEdit: boolean }
+> =>
   <const>{
     type: SET_CAMPAIGN,
-    payload: data,
+    payload: { campaign: data, canEdit },
   };
 
 export const reset = (): ActionCreator<typeof RESET> => <const>{ type: RESET };

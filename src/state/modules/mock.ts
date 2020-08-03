@@ -6,7 +6,7 @@ import home from './home/mock';
 
 const state: StoreState = {
   pointManagement,
-  campaignsManager: { campaign: newEmptyCampaign() },
+  campaignsManager: { campaign: newEmptyCampaign(), canEdit: true },
   header,
   home,
 };

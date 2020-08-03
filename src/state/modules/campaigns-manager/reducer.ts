@@ -22,10 +22,12 @@ import {
 
 export type CampaignsManagerState = {
   campaign: Campaign;
+  canEdit: boolean;
 };
 
 export const initialState: CampaignsManagerState = {
   campaign: newEmptyCampaignObject(),
+  canEdit: true,
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -35,9 +37,16 @@ const CampaignsManagerReducer: Reducer<
   state = initialState,
   action: CampaignsManagerActions,
 ): CampaignsManagerState => {
+  if (action.type !== SET_CAMPAIGN && !state.canEdit) {
+    return state;
+  }
+
   switch (action.type) {
     case SET_CAMPAIGN:
-      return { campaign: action.payload };
+      return {
+        canEdit: action.payload.canEdit,
+        campaign: action.payload.campaign,
+      };
     case ADD_GOAL:
       return produce(state, draft => {
         const goals = draft.campaign.goals.filter(
@@ -57,6 +66,7 @@ const CampaignsManagerReducer: Reducer<
       });
     case SET_FIELD_VALUE:
       return {
+        ...state,
         campaign: {
           ...state.campaign,
           [action.payload.fieldName]: action.payload.value,
@@ -72,6 +82,7 @@ const CampaignsManagerReducer: Reducer<
       });
     case SET_POINTS_VALUE:
       return {
+        ...state,
         campaign: {
           ...state.campaign,
           [action.payload.fieldName]: action.payload.value,
