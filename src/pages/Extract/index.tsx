@@ -28,7 +28,8 @@ const Extract: React.FC = () => {
   }, []);
 
   const getExtractFn = (typeName: string) => {
-    return typeName === 'myextract' ? getExtract : getExtractEstablishment;
+    console.log(typeName);
+    return typeName === '/myextract' ? getExtract : getExtractEstablishment;
   };
 
   useEffect(() => {
