@@ -12,7 +12,9 @@ export const Header = styled.div`
   display: flex;
   font-size: 18px;
   justify-content: space-between;
+  color: #193b4e;
   strong {
+    color: #193b4e;
     display: block;
     font-size: 21px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -42,6 +44,7 @@ export const Content = styled.div`
   }
   .row-header {
     background: #fff;
+    color: #193b4e;
     display: flex;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     justify-content: space-between;
@@ -51,5 +54,6 @@ export const Content = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
+    color: ${({ theme }) => theme.font.color.primary};
   }
 `;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Campaign,
   ExtractSummary,
@@ -15,6 +16,7 @@ import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { Container, Content, PageTitle } from './styles';
 
 const Extract: React.FC = () => {
+  const location = useLocation();
   const [summary, setSummary] = useState<ExtractSummary>();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
@@ -25,14 +27,15 @@ const Extract: React.FC = () => {
     getCampaigns().then(data => setCampaigns(data));
   }, []);
 
-  const getExtractFn = (typeName: EstablishmentType) => {
-    return typeName === 'Revenda' ? getExtract : getExtractEstablishment;
+  const getExtractFn = (typeName: string) => {
+    return typeName === 'myextract' ? getExtract : getExtractEstablishment;
   };
 
   useEffect(() => {
+    const { pathname } = location;
     if (campaigns.length > 0) {
       const { establishment } = participant;
-      const extractFn = getExtractFn(establishment.type_name);
+      const extractFn = getExtractFn(pathname);
       setUserType(establishment.type_name);
       campaigns.map(campaign =>
         extractFn(campaign.id).then(data =>
@@ -40,7 +43,7 @@ const Extract: React.FC = () => {
         ),
       );
     }
-  }, [campaigns, participant]);
+  }, [campaigns, participant, location]);
 
   useEffect(() => {
     if (!summary && extractDetails.length > 0) {

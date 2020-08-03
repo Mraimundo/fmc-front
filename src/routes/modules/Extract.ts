@@ -7,6 +7,11 @@ const routes: RouteModule[] = [
     component: Extract,
     accessPage: 'Página de extrato',
   },
+  {
+    path: '/myextract',
+    component: Extract,
+    accessPage: 'Página de extrato',
+  },
 ];
 
 export default routes;
