@@ -33,7 +33,7 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
                 <div className="content-row" key={point.id}>
                   <div className="row-header">
                     <div>{point.description}</div>
-                    <div>{`${point.value}.000`}</div>
+                    <div>{`${point.value}`}</div>
                   </div>
                   {point?.distributed?.length &&
                     point.distributed.map(distributed => (
