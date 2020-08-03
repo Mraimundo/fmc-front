@@ -13,13 +13,11 @@ export const Container = styled.div<ContainerProps>`
   background: #395389 url(${bgRevenda});
   ${({ userType }) =>
     userType === 'Revenda' &&
-    `
-    background: #395389 url(${bgRevenda});
+    `background: #395389 url(${bgRevenda});
   `};
   ${({ userType }) =>
     userType === 'Cooperativa' &&
-    `
-    background: #395389 url(${bgCooperativa});
+    `background: #395389 url(${bgCooperativa});
   `};
   background-size: cover;
   background-repeat: no-repeat;
@@ -32,10 +30,12 @@ export const AccumulatedBalance = styled.div`
   padding: 0 15px;
   h2 {
     color: ${({ theme }) => theme.font.color.tertiary};
+    font-family: ${({ theme }) => theme.font.fontFamily.medium};
     font-size: 16px;
     margin-left: 7px;
     strong {
       font-size: 28px;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
     }
   }
 `;
@@ -55,42 +55,53 @@ export const BalanceItem = styled.div`
 
   .title {
     font-size: 16px;
+    font-family: ${({ theme }) => theme.font.fontFamily.medium};
     line-height: 20px;
     margin-top: 15px;
     min-height: 40px;
     text-align: center;
   }
   .value {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 28px;
     text-align: center;
   }
 `;
 
 export const CalltoActionContainer = styled.div`
-  flex: 1.5;
+  flex: 1.4;
 `;
 
 export const CalltoActionBox = styled.div`
   background: ${({ theme }) => theme.layout.secondary.backgroundColor};
   border-radius: 5px;
+  font-size: 14px;
   margin: 10px;
-  padding: 5px;
-  strong {
-    display: block;
-    font-size: 18px;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-  }
+
   span {
     display: block;
     text-align: center;
   }
   button {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 16px;
     height: 42px;
     max-width: 156px;
     margin: auto;
   }
-  p {
+  .available {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 14px;
-    padding: 15px 10px;
+    padding: 15px 22px;
+    strong {
+      display: block;
+      font-size: 18px;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    }
+  }
+  .shared-actions {
+    font-size: 14px;
+    padding: 15px;
   }
 `;

@@ -24,7 +24,7 @@ export const Content = styled.div`
 `;
 
 export const PageTitle = styled.p`
-  font-weight: bold;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px;
-  color: #193b4e;
 `;

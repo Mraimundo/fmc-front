@@ -6,8 +6,8 @@ function getMock(campaignId: number): ExtractApi {
   const db: ExtractApi[] = [];
   db.push({
     balance: {
-      available: 0,
-      shared_actions: 0,
+      available: 150,
+      shared_actions: 150,
     },
     resume: {
       total: 100,
@@ -58,8 +58,8 @@ function getMock(campaignId: number): ExtractApi {
 
   db.push({
     balance: {
-      available: 0,
-      shared_actions: 0,
+      available: 100,
+      shared_actions: 100,
     },
     resume: {
       total: 100,
@@ -112,6 +112,6 @@ function getMock(campaignId: number): ExtractApi {
 
 export default async (campaignId: number): Promise<IExtract> => {
   const { data } = await pluginApi.get<ExtractApi>(`statement/${campaignId}`);
-  return transformer(data);
-  // return transformer(getMock(campaignId));
+  // return transformer(data);
+  return transformer(getMock(campaignId));
 };

@@ -190,6 +190,6 @@ export default async (campaignId: number): Promise<IExtract> => {
   const { data } = await pluginApi.get<ExtractApi>(
     `statement/establishment/${campaignId}`,
   );
-  return transformer(data);
-  // return transformer(getMock(campaignId));
+  // return transformer(data);
+  return transformer(getMock(campaignId));
 };

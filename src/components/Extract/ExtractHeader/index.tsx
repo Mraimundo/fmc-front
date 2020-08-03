@@ -42,7 +42,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
       <CalltoActionContainer>
         <CalltoActionBox>
           {(balance.available > 0 && (
-            <p>
+            <p className="available">
               Saldo disponível para resgate:
               <strong>{balance.available} mil pontos</strong>
             </p>
@@ -56,7 +56,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
           </Button>
 
           {(balance.sharedActions && (
-            <p>
+            <p className="shared-actions">
               Saldo Ações Compartilhadas FMC:
               <span>{balance.sharedActions} pontos</span>
             </p>
