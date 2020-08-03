@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
-import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
-import { useAuth } from 'context/AuthContext';
 import { useLocation } from 'react-router-dom';
 
-import { defaultTheme, cooperativaTheme } from 'styles/theme';
-
+import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
+import { useAuth } from 'context/AuthContext';
+import Header from 'components/Header';
 import Logo from 'components/shared/Logo';
+import { defaultTheme, cooperativaTheme } from 'styles/theme';
 import Popups from './Popups';
 
 import { Container } from './styles';
@@ -39,6 +39,7 @@ const Dashboard: React.FC = ({ children }) => {
       <ThemeContext.Provider value={theme}>
         <Container>
           {showLogo && <Logo />}
+          <Header />
           {children}
           {!shouldShowRegulationsModal && <Popups />}
         </Container>

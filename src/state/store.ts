@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 
+import env from 'config/env';
 import rootReducer, { StoreState } from './root-reducer';
 import rootSaga from './root-saga';
 
@@ -13,7 +14,7 @@ const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 
 const middlewares: Middleware<{}, StoreState>[] = [sagaMiddleware];
 
-if (process.env.REACT_APP_DEBUG_LOGGER) {
+if (env.loggerDebug) {
   const logger = createLogger({
     collapsed: true,
   });

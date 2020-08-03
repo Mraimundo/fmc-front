@@ -38,7 +38,7 @@ import reducer, { initialState } from './reducer';
 
 describe('src/state/modules/point-management/team-awards/sagas', () => {
   describe('workerFetchSubsidiaries', () => {
-    it('fetch subsidiaries with happy way', async () => {
+    test('fetch subsidiaries with happy way', async () => {
       await expectSaga(workerFetchSubsidiaries)
         .withReducer(reducer)
         .withState(initialState)
@@ -59,7 +59,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('try fetch subsidiaries without selected establishments', async () => {
+    test('try fetch subsidiaries without selected establishments', async () => {
       const error = 'Você não possui nenhum estabelecimento selecionado';
 
       await expectSaga(workerFetchSubsidiaries)
@@ -81,7 +81,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
   });
 
   describe('workerFetchRoles', () => {
-    it('fetch roles', async () => {
+    test('fetch roles', async () => {
       await expectSaga(workerFetchRoles)
         .withReducer(reducer)
         .withState(initialState)
@@ -107,7 +107,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
       participantFinder: 'Gabriel',
     };
 
-    it('fetch participants', async () => {
+    test('fetch participants', async () => {
       await expectSaga(workerFetchParticipants)
         .withReducer(reducer)
         .withState(initialState)
@@ -136,7 +136,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('try fetch participants without selected establishment', async () => {
+    test('try fetch participants without selected establishment', async () => {
       const error = 'Você não possui nenhum estabelecimento selecionado';
 
       await expectSaga(workerFetchParticipants)
@@ -163,7 +163,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
   });
 
   describe('workerAssignPoints', () => {
-    it('try assign points without enought score', async () => {
+    test('try assign points without enought score', async () => {
       const error =
         'Você não possui saldo suficiente para atribuir estes pontos';
 
@@ -184,7 +184,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('assign points process without distribute equally', async () => {
+    test('assign points process without distribute equally', async () => {
       await expectSaga(workerAssignPoints)
         .withReducer(reducer)
         .withState(initialState)
@@ -213,7 +213,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('assign points process distribute equally rule', async () => {
+    test('assign points process distribute equally rule', async () => {
       await expectSaga(workerAssignPoints)
         .withReducer(reducer)
         .withState(initialState)
@@ -249,7 +249,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
   });
 
   describe('workerDistributeEqually', () => {
-    it('distribute equally process with distribute equally false and without select participants', async () => {
+    test('distribute equally process with distribute equally false and without select participants', async () => {
       await expectSaga(workerDistributeEqually)
         .withReducer(reducer)
         .withState(initialState)
@@ -263,7 +263,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('distribute equally process with happy way', async () => {
+    test('distribute equally process with happy way', async () => {
       await expectSaga(workerDistributeEqually)
         .withReducer(reducer)
         .withState(initialState)
@@ -285,7 +285,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
   describe('workerSetSelectedRolesAll', () => {
     const role = 'Supervisor';
 
-    it('select all participants by role string', async () => {
+    test('select all participants by role string', async () => {
       await expectSaga(workerSetSelectedRolesAll, {
         meta: {
           role,
@@ -309,7 +309,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
         .run();
     });
 
-    it('deselect all participants by role string', async () => {
+    test('deselect all participants by role string', async () => {
       await expectSaga(workerSetSelectedRolesAll, {
         meta: {
           role,
@@ -333,7 +333,7 @@ describe('src/state/modules/point-management/team-awards/sagas', () => {
     });
   });
 
-  it('main saga takes actions', () => {
+  test('main saga takes actions', () => {
     testSaga(mainSaga)
       .next()
       .all([

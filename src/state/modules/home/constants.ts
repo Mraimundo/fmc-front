@@ -1,0 +1,3 @@
+export const FETCH_BANNERS_ACTION = '@fmc/home/FETCH_BANNERS_ACTION';
+export const FETCH_BANNERS_FAILURE = '@fmc/home/FETCH_BANNERS_FAILURE';
+export const FETCH_BANNERS_SUCCESS = '@fmc/home/FETCH_BANNERS_SUCCESS';

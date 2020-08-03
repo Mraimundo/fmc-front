@@ -6,7 +6,7 @@ import { roles } from 'state/modules/point-management/team-awards/mock';
 import RolesList from '.';
 
 describe('<RolesList />', () => {
-  it('should render correctly', () => {
+  test('should render correctly', () => {
     const { getByText, container } = render(
       <RolesList
         roles={roles}

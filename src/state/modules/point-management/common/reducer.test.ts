@@ -10,17 +10,17 @@ import {
 } from './mock';
 
 describe('src/state/modules/point-management/common/reducer', () => {
-  it('should be a function', () => {
+  test('should be a function', () => {
     expect(reducer).to.be.a('function');
   });
 
-  it('should return a initial state', () => {
+  test('should return a initial state', () => {
     const result = reducer(undefined, { type: 'unknown' });
 
     expect(result).to.be.deep.equal(initialState);
   });
 
-  it('should can handle FETCH_ESTABLISHMENTS_ACTION', () => {
+  test('should can handle FETCH_ESTABLISHMENTS_ACTION', () => {
     const result = reducer(undefined, actions.fetchEstablishments());
 
     expect(result).to.be.deep.equal({
@@ -31,7 +31,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ESTABLISHMENTS_FAILURE', () => {
+  test('should can handle FETCH_ESTABLISHMENTS_FAILURE', () => {
     const result = reducer(
       undefined,
       actions.fetchEstablishmentsFailure(error),
@@ -46,7 +46,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_ESTABLISHMENTS_SUCCESS', () => {
+  test('should can handle FETCH_ESTABLISHMENTS_SUCCESS', () => {
     const result = reducer(
       undefined,
       actions.fetchEstablishmentsSuccess(establishments),
@@ -61,7 +61,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_POINTS_TO_DISTRIBUTE_ACTION', () => {
+  test('should can handle FETCH_POINTS_TO_DISTRIBUTE_ACTION', () => {
     const result = reducer(undefined, actions.fetchPointsToDistribute());
 
     expect(result).to.be.deep.equal({
@@ -72,7 +72,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_POINTS_TO_DISTRIBUTE_FAILURE', () => {
+  test('should can handle FETCH_POINTS_TO_DISTRIBUTE_FAILURE', () => {
     const result = reducer(
       undefined,
       actions.fetchPointsToDistributeFailure(error),
@@ -87,7 +87,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle FETCH_POINTS_TO_DISTRIBUTE_SUCCESS', () => {
+  test('should can handle FETCH_POINTS_TO_DISTRIBUTE_SUCCESS', () => {
     const result = reducer(
       undefined,
       actions.fetchPointsToDistributeSuccess(pointsToDistribute),
@@ -102,7 +102,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_TOTAL_POINTS_TEAM_AWARDS', () => {
+  test('should can handle SET_TOTAL_POINTS_TEAM_AWARDS', () => {
     const result = reducer(undefined, actions.setTotalPointsTeamAwards(10));
 
     expect(result).to.be.deep.equal({
@@ -111,7 +111,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_TOTAL_POINTS_RESALE_COOPERATIVE', () => {
+  test('should can handle SET_TOTAL_POINTS_RESALE_COOPERATIVE', () => {
     const result = reducer(
       undefined,
       actions.setTotalPointsResaleCooperative(10),
@@ -123,7 +123,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_IS_READY_TO_DISTRIBUTE', () => {
+  test('should can handle SET_IS_READY_TO_DISTRIBUTE', () => {
     const result = reducer(undefined, actions.setIsReadyToDistribute(true));
 
     expect(result).to.be.deep.equal({
@@ -132,7 +132,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_SELECTED_ESTABLISHMENT', () => {
+  test('should can handle SET_SELECTED_ESTABLISHMENT', () => {
     const result = reducer(
       undefined,
       actions.setSelectedEstablishment(selectedEstablishment),
@@ -144,7 +144,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle DISTRIBUTE_POINTS_ACTION', () => {
+  test('should can handle DISTRIBUTE_POINTS_ACTION', () => {
     const result = reducer(undefined, actions.distributePoints());
 
     expect(result).to.be.deep.equal({
@@ -155,7 +155,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
+  test('should can handle DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
     const result = reducer(undefined, actions.distributePointsFinally());
 
     expect(result).to.be.deep.equal({
@@ -166,7 +166,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
+  test('should can handle DISTRIBUTE_POINTS_FAILURE', () => {
     const result = reducer(undefined, actions.distributePointsFailure(error));
 
     expect(result).to.be.deep.equal({
@@ -178,7 +178,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle DISTRIBUTE_POINTS_SUCCESS', () => {
+  test('should can handle DISTRIBUTE_POINTS_SUCCESS', () => {
     const result = reducer(undefined, actions.distributePointsSuccess());
 
     expect(result).to.be.deep.equal({
@@ -189,7 +189,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
     });
   });
 
-  it('should can handle SET_FINISHED_DISTRIBUTION', () => {
+  test('should can handle SET_FINISHED_DISTRIBUTION', () => {
     const result = reducer(undefined, actions.setFinishedDistribution());
 
     expect(result).to.be.deep.equal({

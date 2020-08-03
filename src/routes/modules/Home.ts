@@ -1,17 +1,11 @@
-import Dashboard from 'pages/Dashboard';
-import Dashboard2 from 'pages/Dashboard2';
+import Home from 'pages/Home';
 import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/dashboard',
-    component: Dashboard,
+    path: '/home',
+    component: Home,
     accessPage: 'Home',
-  },
-  {
-    path: '/dashboard2',
-    component: Dashboard2,
-    accessPage: 'Home 2',
   },
 ];
 

@@ -6,7 +6,7 @@ const CORRECT_CPF = `09788471994`;
 const INCORRECT_CPF = `09788471993`;
 
 describe('src/util/validations/cpf', () => {
-  it('isValidCpf should be a function', () => {
+  test('isValidCpf should be a function', () => {
     expect(isValidCpf).to.be.a('function');
   });
 

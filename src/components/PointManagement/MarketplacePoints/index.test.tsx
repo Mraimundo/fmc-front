@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import MarketplacePoints from '.';
 
 describe('<MarketplacePoints />', () => {
-  it('should be in the document', () => {
+  test('should be in the document', () => {
     const onChange = jest.fn();
     const { getByText } = render(
       <MarketplacePoints onChange={onChange} marketplacePoints={200} />,

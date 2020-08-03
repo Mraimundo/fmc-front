@@ -4,11 +4,11 @@ import { Points } from './constants';
 
 describe('src/state/modules/point-management/constants', () => {
   describe('Points', () => {
-    it('should be a object', () => {
+    test('should be a object', () => {
       expect(Points).to.be.a('object');
     });
 
-    it('Points.Rebate should return a string', () => {
+    test('Points.Rebate should return a string', () => {
       expect(Points.Rebate).to.be.a('string');
     });
 
@@ -16,7 +16,7 @@ describe('src/state/modules/point-management/constants', () => {
       expect(Points.Rebate).to.be.equal('Rebate');
     });
 
-    it('Points.SellerAward should return a string', () => {
+    test('Points.SellerAward should return a string', () => {
       expect(Points.SellerAward).to.be.a('string');
     });
 

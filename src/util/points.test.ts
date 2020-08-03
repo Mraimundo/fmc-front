@@ -4,7 +4,7 @@ import { formatPoints, formatPointsInput } from './points';
 
 describe('src/util/points', () => {
   describe('formatPoints', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(formatPoints).to.be.a('function');
     });
 
@@ -30,7 +30,7 @@ describe('src/util/points', () => {
   });
 
   describe('formatPointsInput', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(formatPointsInput).to.be.a('function');
     });
 

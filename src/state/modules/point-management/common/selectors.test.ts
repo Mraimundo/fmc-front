@@ -26,56 +26,56 @@ import commonMock, {
 
 describe('src/state/modules/point-management/common/selectors', () => {
   describe('state getters', () => {
-    it('check getFetchPointsToDistribute', () => {
+    test('check getFetchPointsToDistribute', () => {
       expect(getFetchPointsToDistribute(state)).to.be.deep.equal({
         isFetching: false,
         error: '',
       });
     });
 
-    it('check getIsReadyToDistribute', () => {
+    test('check getIsReadyToDistribute', () => {
       expect(getIsReadyToDistribute(state)).to.be.false;
     });
 
-    it('check getPointsToDistribute', () => {
+    test('check getPointsToDistribute', () => {
       expect(getPointsToDistribute(state)).to.be.equal(pointsToDistribute);
     });
 
-    it('check getTotalPointsTeamAwards', () => {
+    test('check getTotalPointsTeamAwards', () => {
       expect(getTotalPointsTeamAwards(state)).to.be.equal(5000);
     });
 
-    it('check getTotalPointsResaleCooperative', () => {
+    test('check getTotalPointsResaleCooperative', () => {
       expect(getTotalPointsResaleCooperative(state)).to.be.equal(10000);
     });
 
-    it('check getEstablishments', () => {
+    test('check getEstablishments', () => {
       expect(getEstablishments(state)).to.be.equal(establishments);
     });
 
-    it('check getSelectedEstablishment', () => {
+    test('check getSelectedEstablishment', () => {
       expect(getSelectedEstablishment(state)).to.be.equal(
         selectedEstablishment,
       );
     });
 
-    it('check getDistributePoints', () => {
+    test('check getDistributePoints', () => {
       expect(getDistributePoints(state)).to.be.equal(
         commonMock.distributePoints,
       );
     });
 
-    it('check getFinishedDistribution', () => {
+    test('check getFinishedDistribution', () => {
       expect(getFinishedDistribution(state)).to.be.false;
     });
   });
 
   describe('getIsResaleCooperativePointsOnly', () => {
-    it('should return true with default state', () => {
+    test('should return true with default state', () => {
       expect(getIsResaleCooperativePointsOnly(state)).to.be.true;
     });
 
-    it('should return false when dont have points to distribute in general', () => {
+    test('should return false when dont have points to distribute in general', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -95,7 +95,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsResaleCooperativePointsOnly(modifiedState)).to.be.false;
     });
 
-    it('should return false when have team awards', () => {
+    test('should return false when have team awards', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -118,7 +118,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsResaleCooperativePointsOnly(modifiedState)).to.be.false;
     });
 
-    it('should return false when have general and resale cooperative points', () => {
+    test('should return false when have general and resale cooperative points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -142,7 +142,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsResaleCooperativePointsOnly(modifiedState)).to.be.false;
     });
 
-    it('should return true when have resale cooperative points only', () => {
+    test('should return true when have resale cooperative points only', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -168,11 +168,11 @@ describe('src/state/modules/point-management/common/selectors', () => {
   });
 
   describe('getHasAutonomyToDistribute', () => {
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getHasAutonomyToDistribute(state)).to.be.false;
     });
 
-    it('should return false when has team award points', () => {
+    test('should return false when has team award points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -199,7 +199,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getHasAutonomyToDistribute(modifiedState)).to.be.false;
     });
 
-    it('should return true when has only general and resale cooperative points', () => {
+    test('should return true when has only general and resale cooperative points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -223,7 +223,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getHasAutonomyToDistribute(modifiedState)).to.be.true;
     });
 
-    it('should return false when dont have general points', () => {
+    test('should return false when dont have general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -252,11 +252,11 @@ describe('src/state/modules/point-management/common/selectors', () => {
   });
 
   describe('getIsResaleCooperativeAndTeamAwardPoints', () => {
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getIsResaleCooperativeAndTeamAwardPoints(state)).to.be.false;
     });
 
-    it('should return true when have resale cooperative and team award points', () => {
+    test('should return true when have resale cooperative and team award points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -284,7 +284,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
         .true;
     });
 
-    it('should return false when have only team award points', () => {
+    test('should return false when have only team award points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -308,7 +308,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
         .false;
     });
 
-    it('should return false when have only general points', () => {
+    test('should return false when have only general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -331,11 +331,11 @@ describe('src/state/modules/point-management/common/selectors', () => {
   });
 
   describe('getIsAllowedToStartDistribution,', () => {
-    it('should return false with default state', () => {
+    test('should return false with default state', () => {
       expect(getIsAllowedToStartDistribution(state)).to.be.false;
     });
 
-    it('should return false when resale cooperative + team awards < general points', () => {
+    test('should return false when resale cooperative + team awards < general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -357,7 +357,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsAllowedToStartDistribution(modifiedState)).to.be.false;
     });
 
-    it('should return true when resale cooperative + team awards === general points', () => {
+    test('should return true when resale cooperative + team awards === general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -379,7 +379,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsAllowedToStartDistribution(modifiedState)).to.be.true;
     });
 
-    it('should return true when total team awards === general points', () => {
+    test('should return true when total team awards === general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -401,7 +401,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsAllowedToStartDistribution(modifiedState)).to.be.true;
     });
 
-    it('should return true when total resale cooperative === general points', () => {
+    test('should return true when total resale cooperative === general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {
@@ -423,7 +423,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
       expect(getIsAllowedToStartDistribution(modifiedState)).to.be.true;
     });
 
-    it('should return false when dont have general points', () => {
+    test('should return false when dont have general points', () => {
       const modifiedState: StoreState = {
         ...state,
         pointManagement: {

@@ -5,7 +5,7 @@ import { render, getByTestId, fireEvent } from '@testing-library/react';
 import ParticipantsFinder from '.';
 
 describe('<ParticipantsFinder />', () => {
-  it('should render correctly', () => {
+  test('should render correctly', () => {
     const handleChange = jest.fn();
     const { container } = render(
       <ParticipantsFinder onChange={handleChange} />,
@@ -16,7 +16,7 @@ describe('<ParticipantsFinder />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should handle chang correctly', () => {
+  test('should handle chang correctly', () => {
     const handleChange = jest.fn();
     const { container } = render(
       <ParticipantsFinder onChange={handleChange} />,

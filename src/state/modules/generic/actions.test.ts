@@ -16,15 +16,15 @@ const error = 'Generic Error';
 
 describe('src/state/modules/generic/actions', () => {
   describe('fetchAnythingAction', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchAnythingAction).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchAnythingAction()).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchAnythingAction()).to.be.deep.equal({
         type: FETCH_ANYTHING_ACTION,
       });
@@ -32,15 +32,15 @@ describe('src/state/modules/generic/actions', () => {
   });
 
   describe('fetchAnythingFailure', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchAnythingFailure).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchAnythingFailure(error)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchAnythingFailure(error)).to.be.deep.equal({
         type: FETCH_ANYTHING_FAILURE,
         payload: {
@@ -56,15 +56,15 @@ describe('src/state/modules/generic/actions', () => {
       email: 'hi.gabrielferreira@gmail.com',
     };
 
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(fetchAnythingSuccess).to.be.a('function');
     });
 
-    it('should return a object', () => {
+    test('should return a object', () => {
       expect(fetchAnythingSuccess(data)).to.be.a('object');
     });
 
-    it('should return a valid object', () => {
+    test('should return a valid object', () => {
       expect(fetchAnythingSuccess(data)).to.be.deep.equal({
         type: FETCH_ANYTHING_SUCCESS,
         payload: data,
