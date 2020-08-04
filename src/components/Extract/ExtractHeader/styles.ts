@@ -77,6 +77,7 @@ export const CalltoActionBox = styled.div`
   border-radius: 5px;
   font-size: 14px;
   margin: 10px;
+  min-height: 150px;
 
   span {
     display: block;

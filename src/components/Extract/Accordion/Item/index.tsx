@@ -22,7 +22,7 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
           <div className="divider" />
           <div>
             <div className="text-right">Total</div>
-            <strong>{statement.campaign.total} mil pontos</strong>
+            <strong>{statement.campaign.total} pontos</strong>
           </div>
           <div className={`chevron ${isOpen ? 'open' : ''}`} />
         </Header>
@@ -32,10 +32,11 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
               statement.points.map(point => (
                 <div className="content-row" key={point.id}>
                   <div className="row-header">
-                    <div>{point.description}</div>
+                    <div>{point.balanceUnit.name}</div>
                     <div>{`${point.value}`}</div>
                   </div>
-                  {point?.distributed?.length &&
+                  {!!point?.distributed?.length &&
+                    point?.distributed?.length > 1 &&
                     point.distributed.map(distributed => (
                       <div
                         className="row-details"
