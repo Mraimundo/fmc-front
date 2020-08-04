@@ -1,9 +1,13 @@
 import React, { useCallback } from 'react';
-import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
+import {
+  StatusText,
+  CAMPAIGN_STATUS_TEXT,
+} from 'services/campaignsManager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import EditIcon from 'assets/images/campaigns/edit-icon.svg';
 import history from 'services/history';
 
+import { useToast } from 'context/ToastContext';
 import { Container } from './style';
 
 interface Props {
@@ -12,9 +16,17 @@ interface Props {
 }
 
 const Edit: React.FC<Props> = ({ id, status }) => {
+  const { addToast } = useToast();
   const handleAction = useCallback(() => {
+    if (status === CAMPAIGN_STATUS_TEXT.CANCELED) {
+      addToast({
+        title: 'Campanha não pode ser editada',
+        type: 'error',
+      });
+      return;
+    }
     history.push(`/gerenciamento-de-campanhas/editar/${id}`);
-  }, [id]);
+  }, [id, status]);
   return (
     <Container>
       <ReactSVG src={EditIcon} onClick={handleAction} />

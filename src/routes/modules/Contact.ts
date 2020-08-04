@@ -3,7 +3,7 @@ import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/contact',
+    path: '/fale-conosco',
     component: Contact,
     accessPage: 'Página fale conosco',
   },

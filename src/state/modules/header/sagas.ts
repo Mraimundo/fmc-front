@@ -21,11 +21,13 @@ export function* workerFetchCoinQuotation() {
 export function* workerFetchMenu() {
   try {
     const result: MenuItem[] | null = yield call(fetchMenuService);
+    console.log(result);
 
     if (!result) throw new Error('Não foi encontrado nenhum item para o menu');
 
     yield put(actions.fetchMenuSuccess(result));
   } catch (error) {
+    console.log(error);
     yield call(handlerErrors, error, actions.fetchMenuFailure);
   }
 }

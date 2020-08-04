@@ -26,6 +26,10 @@ const Header: React.FC = () => {
     dispatch(fetchMenu());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log(menu);
+  }, [menu]);
+
   return (
     <Nav>
       {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}

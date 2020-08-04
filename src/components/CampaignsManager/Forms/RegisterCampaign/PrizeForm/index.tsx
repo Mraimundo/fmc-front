@@ -22,8 +22,6 @@ const PrizeForm: React.FC = () => {
         <Header>
           <ReactSVG src={trophyIcon} />
           <h4>Prêmio</h4>
-          <span>Pesquisar no Marketplace</span>
-          <ReactSVG src={searchIcon} />
         </Header>
         <Separator />
         <Body>

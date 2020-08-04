@@ -55,5 +55,7 @@ export const fetchMenuService = async (): Promise<MenuItem[] | null> => {
     data: FetchMenuService[] | null;
   }>('menus');
 
+  console.log('data', response.data);
+
   return transformMenuRawData(response.data);
 };

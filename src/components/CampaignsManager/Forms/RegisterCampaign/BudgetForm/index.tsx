@@ -26,7 +26,7 @@ const BudgetForm: React.FC = () => {
             value={campaign.affordPoints}
             component={Input}
             formatValue={formatRebatePointsInput}
-            placeholder="1.000 pontos"
+            placeholder="0 pontos"
           />
         </Box>
         <h5>Precisa de verba complementar?</h5>
