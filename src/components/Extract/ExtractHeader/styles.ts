@@ -102,6 +102,8 @@ export const CalltoActionBox = styled.div`
     }
   }
   .shared-actions {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 14px;
     padding: 15px;
   }

@@ -53,13 +53,10 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
           >
             RESGATAR
           </Button>
-
-          {balance.sharedActions > 0 && (
-            <p className="shared-actions">
-              Saldo Ações Compartilhadas FMC:
-              <span>{balance.sharedActions} pontos</span>
-            </p>
-          )}
+          <p className="shared-actions">
+            Saldo Ações Compartilhadas FMC:
+            <span>{balance.sharedActions} pontos</span>
+          </p>
         </CalltoActionBox>
       </CalltoActionContainer>
     </Container>

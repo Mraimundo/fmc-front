@@ -13,7 +13,7 @@ import ExtractDetails from 'components/Extract/ExtractDetails';
 import { useAuth } from 'context/AuthContext';
 
 import { EstablishmentType } from 'state/modules/point-management/common/types';
-import { Container, Content, PageTitle } from './styles';
+import { Container, Content, PageTitle, ExtractLegend } from './styles';
 
 const Extract: React.FC = () => {
   const location = useLocation();
@@ -72,6 +72,12 @@ const Extract: React.FC = () => {
         {summary && <ExtractHeader summary={summary} userType={userType} />}
         <ExtractDetails details={extractDetails} />
       </Content>
+      <ExtractLegend>
+        *Ações Compartilhadas: é a verba reservada para você e seu RTC/KAM
+        definirem juntos quais as melhores ações e práticas para ajudar a
+        prosperar
+        {userType === 'Revenda' ? ` seu negócio` : ' a sua cooperativa.'}.
+      </ExtractLegend>
     </Container>
   );
 };
