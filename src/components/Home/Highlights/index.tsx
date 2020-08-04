@@ -35,7 +35,7 @@ const Highlights: React.FC<HighlightsProps> = ({ items }) => {
     <div>
       <Slider {...settings}>
         {items.map(item => (
-          <div key={item.id}>
+          <div key={item.title}>
             <Item highlight={item} />
           </div>
         ))}

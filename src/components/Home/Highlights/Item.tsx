@@ -1,6 +1,8 @@
 import React from 'react';
+import parse from 'html-react-parser';
 
 import { Highlight } from 'state/modules/home/types';
+import { getHighlightLink } from 'state/modules/home/utils';
 import {
   HighlightItem,
   Cover,
@@ -27,8 +29,12 @@ const Item: React.FC<ItemProps> = ({ highlight }) => {
           </CoverText>
         </Cover>
         <Resume>
-          <ResumeText>{highlight.resume}</ResumeText>
-          <KnowMore to={`/destaque/${highlight.id}`}>SAIBA MAIS</KnowMore>
+          <ResumeText>{parse(highlight.resume)}</ResumeText>
+          <KnowMore
+            to={getHighlightLink(highlight.type, highlight.referenceId)}
+          >
+            SAIBA MAIS
+          </KnowMore>
         </Resume>
       </HighlightItem>
     </div>

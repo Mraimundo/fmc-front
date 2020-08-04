@@ -7,9 +7,12 @@ import {
   FETCH_BANNERS_ACTION,
   FETCH_BANNERS_FAILURE,
   FETCH_BANNERS_SUCCESS,
+  FETCH_HIGHLIGHTS_ACTION,
+  FETCH_HIGHLIGHTS_FAILURE,
+  FETCH_HIGHLIGHTS_SUCCESS,
 } from './constants';
 import { HomeState } from './reducer';
-import { Banner } from './types';
+import { Banner, Highlight } from './types';
 
 export const fetchBanners = (): ActionCreator<typeof FETCH_BANNERS_ACTION> =>
   <const>{
@@ -37,6 +40,39 @@ export const fetchBannersSuccess = (
     payload: { banners },
   };
 
+export const fetchHighlights = (): ActionCreator<
+  typeof FETCH_HIGHLIGHTS_ACTION
+> =>
+  <const>{
+    type: FETCH_HIGHLIGHTS_ACTION,
+  };
+
+export const fetchHighlightsFailure = (
+  error: string,
+): ActionCreatorFailure<typeof FETCH_HIGHLIGHTS_FAILURE> =>
+  <const>{
+    type: FETCH_HIGHLIGHTS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchHighlightsSuccess = (
+  highlights: Highlight[] | null,
+): ActionCreatorPayload<
+  typeof FETCH_HIGHLIGHTS_SUCCESS,
+  Pick<HomeState, 'highlights'>
+> =>
+  <const>{
+    type: FETCH_HIGHLIGHTS_SUCCESS,
+    payload: { highlights },
+  };
+
 export type HomeActions = ReturnType<
-  typeof fetchBanners | typeof fetchBannersFailure | typeof fetchBannersSuccess
+  | typeof fetchBanners
+  | typeof fetchBannersFailure
+  | typeof fetchBannersSuccess
+  | typeof fetchHighlights
+  | typeof fetchHighlightsFailure
+  | typeof fetchHighlightsSuccess
 >;

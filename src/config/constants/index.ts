@@ -43,30 +43,39 @@ export const REGULATIONS_TYPE = {
 };
 
 export const VENDAVALL_PARTICIPANT_STATUS = (statusNumber: number): string => {
-  switch (statusNumber) {
-    case PRECHARGE:
-      return 'Pré cadastro';
-    case ACTIVE:
-      return 'Ativo';
-    case INACTIVE:
-      return 'Inativo';
-    case APPROVAL:
-      return 'Aprovado';
-    case REPROVED:
-      return 'Reprovado';
-    case CATALOG:
-      return 'Catálogo';
-    case TO_CONFIRM:
-      return 'Em confirmação';
-    case BLOCKED:
-      return 'Bloqueado';
-    case REJECTED:
-      return 'Rejeitado';
-    case BLACKLIST:
-      return 'Blacklist';
-    case REGISTER_TO_COMPLETE:
-      return 'Completar cadastro';
-    default:
-      return 'Status não mapeado';
-  }
+  const statusMap: { [key: number]: string } = {
+    [PRECHARGE]: 'Pré cadastro',
+    [ACTIVE]: 'Ativo',
+    [INACTIVE]: 'Inativo',
+    [APPROVAL]: 'Aprovado',
+    [REPROVED]: 'Reprovado',
+    [CATALOG]: 'Catálogo',
+    [TO_CONFIRM]: 'Em confirmação',
+    [BLOCKED]: 'Bloqueado',
+    [REJECTED]: 'Rejeitado',
+    [BLACKLIST]: 'Blacklist',
+    [REGISTER_TO_COMPLETE]: 'Completar cadastro',
+  };
+
+  return statusMap[statusNumber] || 'Status não mapeado';
+};
+
+export const socialMediaLinks = {
+  instagram: 'https://www.instagram.com/fmcagricola/',
+  facebook: 'https://www.facebook.com/fmcagricola/',
+  linkedin: 'https://www.linkedin.com/company/fmc-agricola',
+  youtube: 'https://www.youtube.com/user/FmcAgricolaBrasil',
+  site: 'https://www.fmcagricola.com.br/',
+};
+
+export const appDownloadLinks = {
+  juntos: {
+    googlePlay: '',
+    appleStore: '',
+  },
+  fmc: {
+    googlePlay:
+      'https://play.google.com/store/apps/details?id=com.oomovil.fmc&hl=en_US',
+    appleStore: 'https://apps.apple.com/br/app/fmc-agr%C3%ADcola/id830744935',
+  },
 };

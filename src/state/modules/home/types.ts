@@ -1,3 +1,5 @@
+import { HighlightTypes } from './constants';
+
 export interface Banner {
   title: string;
   picture: string;
@@ -5,7 +7,8 @@ export interface Banner {
 }
 
 export interface Highlight {
-  id: number;
+  referenceId: number | null;
+  type: HighlightTypes | null;
   title: string;
   picture: string;
   created: string;

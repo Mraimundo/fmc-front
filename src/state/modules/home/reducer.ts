@@ -7,17 +7,24 @@ import {
   FETCH_BANNERS_ACTION,
   FETCH_BANNERS_FAILURE,
   FETCH_BANNERS_SUCCESS,
+  FETCH_HIGHLIGHTS_ACTION,
+  FETCH_HIGHLIGHTS_FAILURE,
+  FETCH_HIGHLIGHTS_SUCCESS,
 } from './constants';
-import { Banner } from './types';
+import { Banner, Highlight } from './types';
 
 export interface HomeState {
   fetchBanners: FetchState;
+  fetchHighlights: FetchState;
   banners: Banner[] | null;
+  highlights: Highlight[] | null;
 }
 
 export const initialState: HomeState = {
   fetchBanners: emptyFetchState,
+  fetchHighlights: emptyFetchState,
   banners: null,
+  highlights: null,
 };
 
 const homeReducer: Reducer<HomeState, HomeActions> = (
@@ -34,6 +41,17 @@ const homeReducer: Reducer<HomeState, HomeActions> = (
         ...state,
         fetchBanners: emptyFetchState,
         banners: action.payload.banners,
+      };
+
+    case FETCH_HIGHLIGHTS_ACTION:
+      return { ...state, fetchHighlights: fetchingState };
+    case FETCH_HIGHLIGHTS_FAILURE:
+      return { ...state, fetchHighlights: fetchErrorState(action) };
+    case FETCH_HIGHLIGHTS_SUCCESS:
+      return {
+        ...state,
+        fetchHighlights: emptyFetchState,
+        highlights: action.payload.highlights,
       };
 
     default:

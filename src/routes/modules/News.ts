@@ -1,15 +1,16 @@
+import routeMap from 'routes/route-map';
 import News from 'pages/News/List';
 import View from 'pages/News/View';
 import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/news',
+    path: routeMap.news,
     component: News,
     accessPage: 'Página de Notícias',
   },
   {
-    path: '/news/:id',
+    path: `${routeMap.news}/:id`,
     component: View,
     accessPage: 'Página de Visualiazação de Notícia',
   },

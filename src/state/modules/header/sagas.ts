@@ -1,4 +1,4 @@
-import { all, takeEvery, call, put, select } from 'redux-saga/effects';
+import { all, takeEvery, call, put } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
 import { fetchCoinQuotationsService, fetchMenuService } from 'services/header';

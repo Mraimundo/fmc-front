@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import Logo from 'components/shared/Logo';
 import { defaultTheme, cooperativaTheme } from 'styles/theme';
 import Popups from './Popups';
@@ -42,6 +43,7 @@ const Dashboard: React.FC = ({ children }) => {
           <Header />
           {children}
           {!shouldShowRegulationsModal && <Popups />}
+          <Footer />
         </Container>
       </ThemeContext.Provider>
       {shouldShowRegulationsModal && (
