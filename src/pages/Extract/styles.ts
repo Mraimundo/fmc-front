@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 95px);
+  min-height: calc(100vh - 200px);
   color: ${({ theme }) => theme.font.color.secondary};
 `;
 
@@ -27,4 +27,11 @@ export const PageTitle = styled.p`
   color: ${({ theme }) => theme.font.color.primary};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px;
+  margin-top: 30px;
+`;
+
+export const ExtractLegend = styled.div`
+  color: #000;
+  font-family: ${({ theme }) => theme.font.fontFamily.medium};
+  font-size: 12px;
 `;
