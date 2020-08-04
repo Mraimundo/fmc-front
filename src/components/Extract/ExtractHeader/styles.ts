@@ -10,14 +10,13 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   margin-top: 25px;
   align-items: center;
-  background: #395389 url(${bgRevenda});
   ${({ userType }) =>
     userType === 'Revenda' &&
     `background: #395389 url(${bgRevenda});
   `};
   ${({ userType }) =>
     userType === 'Cooperativa' &&
-    `background: #395389 url(${bgCooperativa});
+    `background: #325107 url(${bgCooperativa});
   `};
   background-size: cover;
   background-repeat: no-repeat;
