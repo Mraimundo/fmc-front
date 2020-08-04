@@ -23,6 +23,7 @@ interface Establishment {
   name: string;
   cnpj: string;
   type_name: 'Revenda' | 'Cooperativa';
+  category: 'Água' | 'Semente' | 'Terra' | 'Raiz';
 }
 
 interface Subsidiary {

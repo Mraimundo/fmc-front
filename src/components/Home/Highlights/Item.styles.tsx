@@ -50,6 +50,7 @@ export const Title = styled.h2`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 1.3em;
   color: #fff;
+  margin-bottom: 0.3em;
 `;
 
 export const Created = styled.p`
@@ -65,6 +66,9 @@ export const ResumeText = styled.p`
   color: ${({ theme }) => theme.font.color.primary};
   font-family: ${({ theme }) => theme.font.fontFamily.regular};
   font-size: 0.8em;
+  height: 35px;
+  display: flex;
+  align-items: center;
 `;
 
 export const KnowMore = styled(Link)`

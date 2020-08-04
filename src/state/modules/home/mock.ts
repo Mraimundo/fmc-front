@@ -1,4 +1,5 @@
 import { HomeState } from './reducer';
+import { HighlightTypes } from './constants';
 import { Banner, Highlight } from './types';
 
 export const banners: Banner[] = [
@@ -8,7 +9,8 @@ export const banners: Banner[] = [
 
 export const highlights: Highlight[] = [
   {
-    id: 1,
+    referenceId: 1,
+    type: HighlightTypes.Report,
     picture:
       'https://storage.vendavall.com.br/teste/avatars/1596425890.5f2786a20ad1c1.48572106.jpg',
     resume:
@@ -17,7 +19,8 @@ export const highlights: Highlight[] = [
     created: '10/10/2019',
   },
   {
-    id: 2,
+    referenceId: 2,
+    type: HighlightTypes.Quiz,
     picture:
       'https://storage.vendavall.com.br/teste/avatars/1596430131.5f279733c56167.72906234.jpg!d',
     resume:
@@ -31,7 +34,11 @@ const state: HomeState = {
   fetchBanners: {
     isFetching: false,
   },
+  fetchHighlights: {
+    isFetching: false,
+  },
   banners,
+  highlights,
 };
 
 export default state;

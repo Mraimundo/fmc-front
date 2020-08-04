@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchCoinQuotation, fetchMenu } from 'state/modules/header/actions';
 import { getCoinQuotations, getMenu } from 'state/modules/header/selectors';
-import { Badge } from 'state/modules/header/constants';
+import { getParticipantBadgeByPortugueseTerm } from 'state/modules/header/utils';
 import { useAuth } from 'context/AuthContext';
 import CoinQuotation from './CoinQuotation';
 import Menu from './Menu';
@@ -32,7 +32,13 @@ const Header: React.FC = () => {
       {!!menu && <Menu items={menu} />}
       <ParticipantWrapper>
         <HelpBalloon />
-        <ParticipantBadge badge={Badge.Root} />
+        {!!participant?.establishment?.category && (
+          <ParticipantBadge
+            badge={getParticipantBadgeByPortugueseTerm(
+              participant.establishment.category,
+            )}
+          />
+        )}
         <Participant
           name={participant.nick_name}
           picture={participant.picture}
