@@ -14,9 +14,10 @@ import {
 interface Props {
   summary: ExtractSummary;
   userType: EstablishmentType;
+  pathKey: string;
 }
 
-const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
+const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
   const { points, balance, total } = summary;
 
   return (
@@ -53,10 +54,12 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType }) => {
           >
             RESGATAR
           </Button>
-          <p className="shared-actions">
-            Saldo Ações Compartilhadas FMC:
-            <span>{balance.sharedActions} pontos</span>
-          </p>
+          {pathKey === '/extract' && (
+            <p className="shared-actions">
+              Saldo Ações Compartilhadas FMC:
+              <span>{balance.sharedActions} pontos</span>
+            </p>
+          )}
         </CalltoActionBox>
       </CalltoActionContainer>
     </Container>
