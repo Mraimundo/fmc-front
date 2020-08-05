@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     content: '';
     width: 100%;
     height: 15px;
-    background-color #193b4e;
+    background-color ${({ theme }) => theme.font.color.primary};
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +35,7 @@ export const Title = styled.h4`
   position: absolute;
   width: 350px;
   text-align: center;
-  background-color: #193b4e;
+  background-color: ${({ theme }) => theme.font.color.primary};
   border-radius: 23px;
   right: 50%;
   transform: translateX(175px);
@@ -59,9 +59,9 @@ export const Input = styled.input`
   border: none;
   background-color: #fff;
   text-align: center;
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   border-radius: 6px;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   font-size: 1.4em;
   padding: 1em;
   position: absolute;

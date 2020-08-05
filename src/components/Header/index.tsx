@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchCoinQuotation, fetchMenu } from 'state/modules/header/actions';
-import { getCoinQuotations, getMenu } from 'state/modules/header/selectors';
+import {
+  fetchCoinQuotation,
+  fetchMenu,
+} from 'state/modules/header/actions';
+import { getCoinQuotations } from 'state/modules/header/selectors';
 import { getParticipantBadgeByPortugueseTerm } from 'state/modules/header/utils';
+import useMenu from 'state/hooks/use-menu';
 import { useAuth } from 'context/AuthContext';
 import CoinQuotation from './CoinQuotation';
 import Menu from './Menu';
@@ -15,25 +19,24 @@ import { Nav, ParticipantWrapper } from './styles';
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { participant, signOut } = useAuth();
+  const { selectedMenu, menu } = useMenu();
 
-  const [coinQuotations, menu] = [
-    useSelector(getCoinQuotations),
-    useSelector(getMenu),
-  ];
+  const coinQuotations = useSelector(getCoinQuotations);
 
   useEffect(() => {
     dispatch(fetchCoinQuotation());
     dispatch(fetchMenu());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(menu);
-  }, [menu]);
-
   return (
     <Nav>
       {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
-      {!!menu && <Menu items={menu} />}
+      {!!menu && (
+        <Menu
+          items={menu}
+          selectedMenu={selectedMenu}
+        />
+      )}
       <ParticipantWrapper>
         <HelpBalloon />
         {!!participant?.establishment?.category && (
@@ -46,8 +49,8 @@ const Header: React.FC = () => {
         <Participant
           name={participant.nick_name}
           picture={participant.picture}
-          establishment={participant?.establishment?.name || ''}
-          points={320}
+          establishment={participant.establishment}
+          points={0}
           signOut={signOut}
         />
       </ParticipantWrapper>

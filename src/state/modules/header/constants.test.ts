@@ -6,6 +6,7 @@ import {
   FETCH_MENU_ACTION,
   FETCH_MENU_FAILURE,
   FETCH_MENU_SUCCESS,
+  SET_SELECTED_MENU,
 } from './constants';
 
 describe('src/state/modules/header/constants', () => {

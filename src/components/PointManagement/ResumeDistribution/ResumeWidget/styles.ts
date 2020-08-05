@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { FONTS } from 'styles/font/globals';
-
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -9,11 +7,11 @@ export const List = styled.ul`
   background-color: #efefef;
   border-radius: 10px;
   margin-top: 1em;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
 `;
 
 export const RoleName = styled.h4`
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   width: 100%;
 `;
 
@@ -39,5 +37,5 @@ export const TotalResume = styled.li`
   flex-wrap: wrap;
   border-top: 1.2px solid #fff;
   padding-top: 1em;
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
 `;

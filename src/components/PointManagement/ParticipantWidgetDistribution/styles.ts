@@ -6,13 +6,13 @@ import { FONTS } from 'styles/font/globals';
 export const Name = styled.h1`
   text-transform: uppercase;
   font-size: 0.7em;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   font-family: ${FONTS.medium};
 `;
 
 export const Subsidiary = styled.h1`
   font-size: 0.65em;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   margin-top: 2px;
 `;
 
@@ -20,7 +20,7 @@ export const Card = styled.li`
   position: relative;
   width: calc((100% / 3) - 15px);
   border-radius: 6px;
-  border: 1.2px solid #193b4e;
+  border: 1.2px solid ${({ theme }) => theme.font.color.primary};
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@ export const InputWrapper = styled.div`
 
   span {
     font-size: 0.8em;
-    color: #193b4e;
+    color: ${({ theme }) => theme.font.color.primary};
   }
 `;
 

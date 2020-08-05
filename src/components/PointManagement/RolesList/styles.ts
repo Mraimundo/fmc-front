@@ -12,10 +12,10 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   border-radius: 6px;
-  border: 1.2px solid #193b4e;
+  border: 1.2px solid ${({ theme }) => theme.font.color.primary};
   background-color: #fff;
   padding: 0 15px;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   font-family: ${FONTS.medium};
   cursor: pointer;
   height: 3em;
@@ -27,14 +27,14 @@ export const Item = styled.li`
   font-size: 0.9em;
 
   &:hover {
-    background-color: #193b4e;
+    background-color: ${({ theme }) => theme.font.color.primary};
     color: #fff;
   }
 
   ${({ selected }: { selected: boolean }) =>
     !!selected &&
     css`
-      background-color: #193b4e;
+      background-color: ${({ theme }) => theme.font.color.primary};
       color: #fff;
     `}
 `;

@@ -18,12 +18,14 @@ interface Role {
   name: string;
 }
 
-interface Establishment {
+export interface Establishment {
   id: number;
   name: string;
   cnpj: string;
   type_name: 'Revenda' | 'Cooperativa';
   category: 'Água' | 'Semente' | 'Terra' | 'Raiz';
+  rtc_id: number | null;
+  rtc_name: string | null;
 }
 
 interface Subsidiary {

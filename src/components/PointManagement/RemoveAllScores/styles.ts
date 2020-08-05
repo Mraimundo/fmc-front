@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-import { FONTS } from 'styles/font/globals';
-
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   justify-content: center;
-  color: #193f4e;
+  color: ${({ theme }) => theme.font.color.primary};
   font-size: 0.9em;
   margin-bottom: 2em;
   margin-top: 1em;

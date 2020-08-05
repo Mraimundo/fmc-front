@@ -18,8 +18,8 @@ export const SubsidiaryItem = styled.li`
   background-color: #fff;
   padding: 0.3em 1em;
   border-radius: 6px;
-  border: 1px solid #193b4e;
-  color: #193b4e;
+  border: 1px solid ${({ theme }) => theme.font.color.primary};
+  color: ${({ theme }) => theme.font.color.primary};
   font-family: ${FONTS.medium};
   margin-right: 0.3em;
   margin-bottom: 0.3em;
@@ -28,7 +28,7 @@ export const SubsidiaryItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    background-color: #193b4e;
+    background-color: ${({ theme }) => theme.font.color.primary};
     color: #fff;
   }
 `;

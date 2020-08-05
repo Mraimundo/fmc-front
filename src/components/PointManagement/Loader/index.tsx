@@ -8,7 +8,7 @@ type Props = {
 const Loader: React.FC<Props> = ({ children }) => {
   return (
     <Wrapper>
-      <StyledLoader type="ThreeDots" color="#193b4e" height={25} width={25} />
+      <StyledLoader type="ThreeDots" height={25} width={25} />
       {children}
     </Wrapper>
   );

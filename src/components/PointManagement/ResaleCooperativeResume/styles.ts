@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   border: 1.5px solid #efefef;
   border-radius: 10px;
   background: #fff;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   margin-bottom: 0.5em;
   padding-left: 2em;
 
@@ -44,8 +44,8 @@ export const ResumeTableWrapper = styled.div`
 `;
 
 export const ResumeTableTitle = styled.span`
-  font-family: ${FONTS.bold};
-  color: #193b4e;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  color: ${({ theme }) => theme.font.color.primary};
   font-size: 0.9em;
 `;
 

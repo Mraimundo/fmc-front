@@ -5,7 +5,10 @@ import {
   HEADER_BACKGROUND_COLOR_DROPDOWN,
 } from 'components/Header/constants';
 
-export const MenuItem = styled.li`
+interface MenuItemProps {
+  selectedMenu: boolean;
+}
+export const MenuItem = styled.li<MenuItemProps>`
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -16,6 +19,7 @@ export const MenuItem = styled.li`
   cursor: pointer;
   font-family: ${({ theme }) => theme.font.fontFamily.regular};
   transition: color 250ms ease, background-color 150ms ease;
+  width: max-content;
 
   &:not(:last-child) {
     margin-right: 3px;
@@ -34,9 +38,16 @@ export const MenuItem = styled.li`
     }
   }
 
+  ${({ selectedMenu }) => selectedMenu && css`
+    background-color: #fff;
+
+    a {
+      color: ${({ theme }) => theme.font.color.primary};
+    }
+  `}
+
   &:hover {
     background-color: #fff;
-    color: ${({ theme }) => theme.font.color.primary};
 
     a {
       color: ${({ theme }) => theme.font.color.primary};

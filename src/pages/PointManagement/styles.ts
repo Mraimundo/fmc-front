@@ -37,8 +37,8 @@ export const List = styled(TabList)`
   > li {
     padding: 0.8em 2.5em;
     border-radius: 15px 15px 0 0;
-    border: 1.5px solid #193b4e;
-    background-color: #193b4e;
+    border: 1.5px solid ${({ theme }) => theme.font.color.primary};
+    background-color: ${({ theme }) => theme.font.color.primary};
     color: #fff;
     font-family: ${FONTS.medium};
     transition: padding 150ms ease;
@@ -57,7 +57,7 @@ export const List = styled(TabList)`
 
 export const Panel = styled(TabPanel)`
   padding: 1em 2em;
-  border: 1.5px solid #193b4e;
+  border: 1.5px solid ${({ theme }) => theme.font.color.primary};
   border-radius: 0 10px 10px 10px;
   background-color: #fff;
   display: none;
@@ -73,7 +73,7 @@ export const Panel = styled(TabPanel)`
 
 export const TeamAwardsWrapper = styled.div`
   padding: 2em;
-  border: 1.1px solid #193f4e;
+  border: 1.1px solid ${({ theme }) => theme.font.color.primary};
   border-radius: 0 10px 10px 10px;
   height: 100%;
 
@@ -84,7 +84,7 @@ export const TeamAwardsWrapper = styled.div`
 
 export const TeamAwardsResumeWrapper = styled.div`
   padding: 1em;
-  border: 1.1px solid #193f4e;
+  border: 1.1px solid ${({ theme }) => theme.font.color.primary};
   border-radius: 10px;
   height: 100%;
 `;
