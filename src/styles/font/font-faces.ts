@@ -3,9 +3,14 @@ import { css } from 'styled-components';
 export default css`
   @font-face {
     font-family: 'Helvetica-Neue-Condensed';
-    src: url('/fonts/HelveticaNeue-Condensed.ttf');
+    src: url('/fonts/Helvetica-Neue-57-Condensed.eot');
     src: local('HelveticaNeue Condensed'), local('HelveticaNeueCondensed'),
-      url('/fonts/HelveticaNeue-Condensed.ttf') format('truetype');
+      url('/fonts/Helvetica-Neue-57-Condensed.eot?#iefix')
+        format('embedded-opentype'),
+      url('/fonts/Helvetica-Neue-57-Condensed.woff2') format('woff2'),
+      url('/fonts/Helvetica-Neue-57-Condensed.woff') format('woff'),
+      url('/fonts/Helvetica-Neue-57-Condensed.ttf') format('truetype'),
+      url('/fonts/Helvetica-Neue-57-Condensed.svg#Helvetica Neue') format('svg');
     font-weight: 400;
     font-style: normal;
   }

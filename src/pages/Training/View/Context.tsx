@@ -153,7 +153,6 @@ export const TrainingProvider: React.FC = ({ children }) => {
           setCanAnswer({ canAnswer: can_answer, reason });
         },
       );
-      setQuizAlreadyAnswered(true);
       if (approvedApi) {
         const certificateResponse = await getCertificate(training.id);
         setCertificate(certificateResponse);
@@ -166,7 +165,14 @@ export const TrainingProvider: React.FC = ({ children }) => {
           type: 'success',
         });
       }
+      setQuizAlreadyAnswered(true);
     } catch (e) {
+      setQuestions(data =>
+        data.map(item => ({
+          ...item,
+          myAnswerId: null,
+        })),
+      );
       addToast({
         title:
           e?.response?.data?.message ||

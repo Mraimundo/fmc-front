@@ -46,7 +46,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
 
   const handlePdfDownload = useCallback(async () => {
     if (!regulation) return;
-    const url = await getUrl(regulation.id);
+    const url = await getUrl(regulation.id, 'Termo_de_segurança_de_dados.pdf');
 
     const linkClick = document.createElement('a');
     linkClick.href = url;
@@ -59,7 +59,12 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   return (
     <Container>
       <RegulationContent type="primary" onScroll={handleDivScroll}>
-        <PrintRef ref={printRef}>{parser(regulation?.content || '')}</PrintRef>
+        <h3>{regulation?.name}</h3>
+        <div>
+          <PrintRef ref={printRef}>
+            {parser(regulation?.content || '')}
+          </PrintRef>
+        </div>
       </RegulationContent>
       <BoxActions>
         <button type="submit" onClick={handlePdfDownload}>

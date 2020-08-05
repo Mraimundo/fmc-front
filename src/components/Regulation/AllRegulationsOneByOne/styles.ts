@@ -9,12 +9,30 @@ interface RegulationProps {
   type: 'primary' | 'secondary';
 }
 export const RegulationContent = styled.div<RegulationProps>`
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 50px 90px;
+  padding: 50px 0 0 90px;
   overflow-y: auto;
+
+  > h3 {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.quartenary};
+    font-size: 18px;
+  }
+
+  > div {
+    width: 100%;
+    flex: 1;
+    background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
+    color: ${({ theme, type }) => theme.regulation[type].fontColor};
+    overflow-y: auto;
+    padding: 30px 90px 50px 0;
+  }
 `;
 
 export const Button = styled(DefaultButton)`

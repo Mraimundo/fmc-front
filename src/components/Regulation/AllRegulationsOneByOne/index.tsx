@@ -122,7 +122,8 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
               onScroll={handleDivScroll}
               key={`regulation-${regulation?.id}`}
             >
-              {parser(regulation?.content || '')}
+              <h3>{regulation?.name}</h3>
+              <div>{parser(regulation?.content || '')}</div>
             </RegulationContent>
           )}
 

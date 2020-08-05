@@ -52,11 +52,12 @@ export const MiniBox = styled.div`
 
     h3 {
       font-size: 16px;
-      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       color: ${({ theme }) => theme.font.color.primary};
     }
 
     p {
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
       font-size: 16px;
       color: ${({ theme }) => theme.font.color.primary};
       margin-top: 10px;
