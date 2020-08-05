@@ -64,7 +64,6 @@ export const fetchMenuSuccess = (
     type: FETCH_MENU_SUCCESS,
     payload: { menu },
   };
-
 export type HeaderActions = ReturnType<
   | typeof fetchCoinQuotation
   | typeof fetchCoinQuotationFailure

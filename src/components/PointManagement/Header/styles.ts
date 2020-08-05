@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-import { FONTS } from 'styles/font/globals';
-
 export const DistributeButton = styled.button`
-  color: #2a4207;
+  color: ${({ theme }) => theme.font.color.primary};
   text-transform: uppercase;
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
@@ -28,7 +26,7 @@ export const DistributeButton = styled.button`
 
 export const TotalPointsToDistributeText = styled.h1`
   font-size: 1.6em;
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   margin-bottom: 5px;
   text-transform: uppercase;
 `;
@@ -124,7 +122,7 @@ export const InputsWrapper = styled.div`
 export const BoxInput = styled.div`
   padding: 1em 2em;
   background-color: #fff;
-  color: #2a4207;
+  color: ${({ theme }) => theme.font.color.primary};
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -135,7 +133,7 @@ export const BoxInput = styled.div`
   }
 
   > h2 {
-    font-family: ${FONTS.bold};
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 1.1em;
     text-transform: uppercase;
   }
@@ -155,10 +153,10 @@ export const BoxInput = styled.div`
 export const DistributeInput = styled.input`
   height: 40px;
   width: 100%;
-  color: #2a4207;
-  font-family: ${FONTS.bold};
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   border-radius: 0;
-  border: 1.5px solid #2a4207;
+  border: 1.5px solid ${({ theme }) => theme.font.color.primary};
   margin-top: 1em;
   padding: 1em;
   text-align: center;
@@ -181,17 +179,13 @@ export const WrapperBoxPoints = styled.div`
   }
 `;
 
-const boxPointsColors = {
-  teamAwards: '#193B4E',
-  resaleCooperative: '#A4B0B7',
-};
-export const BoxPoints = styled.div`
+interface BoxPointsProps {
+  type: 'teamAwards' | 'resaleCooperative';
+}
+export const BoxPoints = styled.div<BoxPointsProps>`
   border-radius: 20px;
-  background-color: ${({
-    type,
-  }: {
-    type: 'teamAwards' | 'resaleCooperative';
-  }) => boxPointsColors[type]};
+  background-color: ${({ type, theme }) =>
+    type === 'teamAwards' ? theme.font.color.primary : '#A4B0B7'};
   padding: 2em;
   margin: 5px;
   height: calc(100% - 33%);
@@ -207,7 +201,7 @@ export const BoxPoints = styled.div`
 `;
 
 export const PointsText = styled.h2`
-  font-family: ${FONTS.bold};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
   text-transform: uppercase;
   font-size: 1.3em;
 `;

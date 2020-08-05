@@ -1,6 +1,8 @@
 import React from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 
+import { Establishment } from 'services/auth/interfaces/Participant';
+import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
 import Dropdown from './Dropdown';
 import { Wrapper, WelcomeText, Hello } from './styles';
@@ -8,7 +10,7 @@ import { Wrapper, WelcomeText, Hello } from './styles';
 interface ParticipantProps {
   picture: string | null;
   name: string;
-  establishment: string;
+  establishment: Establishment;
   points: number;
   signOut(): void;
 }
@@ -23,7 +25,7 @@ const Participant: React.FC<ParticipantProps> = ({
     <Wrapper>
       <Avatar name={name} picture={picture} circleDimension={40} />
       <WelcomeText>
-        <Hello>Olá {name}!</Hello>
+        <Hello>Olá {getFirstName(name)}!</Hello>
         <span>Meus pontos: {points}</span>
       </WelcomeText>
       <AiFillCaretDown />

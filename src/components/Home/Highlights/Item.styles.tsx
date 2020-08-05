@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 export const HighlightItem = styled.div`
   width: 330px;
   border-radius: 10px;
-  cursor: pointer;
   box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
+  cursor: pointer;
   position: relative;
+  background-color: #fff;
 
   img {
     width: 100%;

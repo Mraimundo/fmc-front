@@ -20,7 +20,7 @@ export const WrapperText = styled.div`
 export const Text = styled.h3`
   font-family: ${FONTS.medium};
   text-align: center;
-  color: #193B4E;
+  color: ${({ theme }) => theme.font.color.primary};
 `;
 
 export const WrapperButtons = styled.div`

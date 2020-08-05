@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Establishment as IEstablishment } from 'services/auth/interfaces/Participant';
 import {
   DropdownList,
   ParticipantMenuList,
@@ -9,22 +10,21 @@ import {
 } from './Dropdown.styles';
 
 interface DropdownProps {
-  establishment: string;
+  establishment: IEstablishment;
   signOut(): void;
 }
 const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
   return (
     <DropdownList>
-      <ProfileInfo>
-        <Establishment>{establishment}</Establishment>
-        <span>RTC: Alfredo Silva</span>
-      </ProfileInfo>
+      {!!establishment && (
+        <ProfileInfo>
+          <Establishment>{establishment.name}</Establishment>
+          {establishment.rtc_name && <span>RTC: Alfredo Silva</span>}
+        </ProfileInfo>
+      )}
       <ParticipantMenuList>
         <li>
           <Link to="/edit">Meu perfil</Link>
-        </li>
-        <li>
-          <Link to="/alterar-senha">Alterar senha</Link>
         </li>
         <li>
           <a href="#sair" onClick={signOut}>

@@ -3,8 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchBanners, fetchHighlights } from 'state/modules/home/actions';
 import { getBanners, getHighlights } from 'state/modules/home/selectors';
-import { Banners, Title, Highlights } from 'components/Home';
-import { Wrapper, ShowCaseWrapper } from './styles';
+import {
+  Banners,
+  Title,
+  Highlights,
+  Performance,
+  MyPoints,
+} from 'components/Home';
+import {
+  Wrapper,
+  ShowCaseWrapper,
+  PerformanceMyPointsWrapper,
+  PerformanceWrapper,
+  MyPointsWrapper,
+} from './styles';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,7 +37,16 @@ const Home: React.FC = () => {
       <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
-        <Title>Performance</Title>
+        <PerformanceMyPointsWrapper>
+          <PerformanceWrapper>
+            <Title>Performance</Title>
+            <Performance />
+          </PerformanceWrapper>
+          <MyPointsWrapper>
+            <Title>Meus pontos</Title>
+            <MyPoints />
+          </MyPointsWrapper>
+        </PerformanceMyPointsWrapper>
       </Wrapper>
       <ShowCaseWrapper>
         <Wrapper>

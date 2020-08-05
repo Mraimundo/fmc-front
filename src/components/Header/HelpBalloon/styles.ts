@@ -53,6 +53,10 @@ export const HelpMenu = styled.ul`
       margin-right: 0.5em;
     }
 
+    svg path {
+      fill: ${({ theme }) => theme.font.color.primary};
+    }
+
     &:hover {
       a {
         transform: translateX(3px);
@@ -103,7 +107,8 @@ export const HelpMenu = styled.ul`
 
 export const HelpBallonWrapper = styled.div`
   position: relative;
-  margin-right: 0.5em;
+  margin: 0 0.5em;
+  cursor: pointer;
 
   &:hover {
     ${HelpMenu} {

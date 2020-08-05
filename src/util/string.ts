@@ -13,6 +13,14 @@ export const getNameAbbr = (name?: string): string => {
   return `${firstNameInitial}${lastNameInitial}`;
 };
 
+export const getFirstName = (name: string): string => {
+  if (!name) return '';
+
+  const [firstName] = name.split(' ');
+
+  return firstName;
+}
+
 export const getFirstAndLastName = (name: string): string => {
   if (!name) return '';
 
