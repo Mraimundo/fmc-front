@@ -71,13 +71,13 @@ const Extract: React.FC = () => {
     }
   }, [extractDetails]);
 
-  if (!summary) {
+  if (!summary || summary.total === 0) {
     return (
       <Container key={pathKey}>
         <Content>
           <PageTitle>Extrato de Pontos</PageTitle>
           <ExtractEmpty>
-            <div>Você não não possui pontos para visualizar</div>
+            <div>Você não possui pontos para visualizar.</div>
             <StyledLink to="/home">Voltar</StyledLink>
           </ExtractEmpty>
         </Content>
