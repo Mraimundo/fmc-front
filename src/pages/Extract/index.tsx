@@ -77,7 +77,7 @@ const Extract: React.FC = () => {
         <Content>
           <PageTitle>Extrato de Pontos</PageTitle>
           <ExtractEmpty>
-            <div>Você não não possui pontos para visualizar</div>
+            <div>Você não possui pontos para visualizar</div>
             <StyledLink to="/home">Voltar</StyledLink>
           </ExtractEmpty>
         </Content>
