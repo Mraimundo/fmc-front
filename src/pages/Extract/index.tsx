@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import {
   Campaign,
   ExtractSummary,
@@ -11,9 +12,16 @@ import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
 import { useAuth } from 'context/AuthContext';
-
 import { EstablishmentType } from 'state/modules/point-management/common/types';
-import { Container, Content, PageTitle, ExtractLegend } from './styles';
+
+import {
+  Container,
+  Content,
+  PageTitle,
+  ExtractLegend,
+  ExtractEmpty,
+  StyledLink,
+} from './styles';
 
 const Extract: React.FC = () => {
   const location = useLocation();
@@ -62,6 +70,20 @@ const Extract: React.FC = () => {
       setSummary(headerSummary);
     }
   }, [extractDetails]);
+
+  if (!summary) {
+    return (
+      <Container key={pathKey}>
+        <Content>
+          <PageTitle>Extrato de Pontos</PageTitle>
+          <ExtractEmpty>
+            <div>Você não não possui pontos para visualizar</div>
+            <StyledLink to="/home">Voltar</StyledLink>
+          </ExtractEmpty>
+        </Content>
+      </Container>
+    );
+  }
 
   return (
     <Container key={pathKey}>
