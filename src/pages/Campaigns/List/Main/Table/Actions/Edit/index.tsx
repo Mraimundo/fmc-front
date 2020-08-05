@@ -26,7 +26,7 @@ const Edit: React.FC<Props> = ({ id, status }) => {
       return;
     }
     history.push(`/gerenciamento-de-campanhas/editar/${id}`);
-  }, [id, status]);
+  }, [id, status, addToast]);
   return (
     <Container>
       <ReactSVG src={EditIcon} onClick={handleAction} />

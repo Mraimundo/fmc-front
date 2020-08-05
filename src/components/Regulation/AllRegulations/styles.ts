@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import background from 'assets/images/background.svg';
-import backgroundHeader from 'assets/images/background-header.svg';
 import { Accordion as DefaultAccordion } from 'components/shared';
 
 interface ContainerProps {
@@ -11,27 +9,11 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background: url(${background});
   background-size: cover;
   color: #000;
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  /*&::-webkit-scrollbar-track {
-    background-color: {({ theme, type }) =>
-      theme.regulation[type].scrollBarBackgroundColor};
-  }
-  padding-right: 12px;
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: {({ theme, type }) =>
-      theme.regulation[type].scrollBarColor};
-  }*/
 `;
 
 export const Content = styled.div`
@@ -90,19 +72,5 @@ export const PrintRef = styled.div`
   @media print {
     margin: 50px;
     color: #000;
-  }
-`;
-
-export const Header = styled.div`
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  height: 161px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: url(${backgroundHeader});
-  > img {
-    width: 364px;
   }
 `;

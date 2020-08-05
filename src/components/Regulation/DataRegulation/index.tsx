@@ -50,7 +50,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
 
     const linkClick = document.createElement('a');
     linkClick.href = url;
-    linkClick.download = 'Regulamento.pdf';
+    linkClick.download = 'Termo_de_segurança_de_dados.pdf';
     document.body.appendChild(linkClick);
     linkClick.click();
     document.body.removeChild(linkClick);

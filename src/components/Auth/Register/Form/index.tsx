@@ -112,7 +112,7 @@ const Form: React.FC<Props> = ({
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
         <Title>
-          Ativar cadastro -{' '}
+          {editing ? 'Editar cadastro' : 'Ativar cadastro'} -{' '}
           <strong>
             {participant.profile === 'FMC' && 'Equipe FMC'}
             {participant.profile === 'FOCALPOINT' && 'Focal Point'}

@@ -6,11 +6,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
 
   > img {
     width: 260px;
@@ -44,12 +39,6 @@ export const RegulationContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: linear-gradient(
-    90deg,
-    rgba(4, 36, 44, 1) 0%,
-    rgba(56, 77, 85, 1) 100%
-  );
 
   > img {
     width: 240px;

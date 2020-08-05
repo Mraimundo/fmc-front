@@ -9,7 +9,6 @@ import save from 'services/auth/editParticipant';
 import numbersOnly from 'util/numbersOnly';
 
 import SuccessEditModal from 'components/Auth/Modals/SuccessEditRegister';
-import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
 import { Container, Content, contentAnimation } from './styles';
@@ -70,7 +69,6 @@ const RegisterEdit: React.FC = () => {
     <>
       {!!participant && (
         <Container>
-          <img src={logoImg} alt="Logo" />
           <Content style={props}>
             <Form
               participant={participant}

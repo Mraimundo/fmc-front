@@ -85,7 +85,7 @@ const Form: React.FC<Props> = ({ sendMessage, contactId }) => {
     <FormContext {...methods}>
       <Container onSubmit={onSubmit}>
         <BoxText>
-          <TextArea name="message" label="Responder" />
+          <TextArea name="message" label="Responder" inputRole="secondary" />
           <label htmlFor="fileId">
             <input
               type="file"

@@ -8,7 +8,6 @@ import {
 
 import { ReactSVG } from 'react-svg';
 import trophyIcon from 'assets/images/campaigns/trophy-icon.svg';
-import searchIcon from 'assets/images/campaigns/search-icon.svg';
 
 import { Container, Separator, Header, Body } from './styles';
 

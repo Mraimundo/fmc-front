@@ -60,6 +60,12 @@ const Form: React.FC<Props> = ({
     reset(indicationData || { subsidiary_select: null, role_select: null });
   }, [indicationData, reset]);
 
+  useEffect(() => {
+    if (editing) {
+      setType('individual');
+    }
+  }, [editing]);
+
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
     if (

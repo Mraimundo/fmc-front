@@ -8,18 +8,10 @@ import {
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 import { REGULATIONS_TYPE } from 'config/constants';
-import logoImg from 'assets/images/logo.png';
 
 import RegulationBox from './RegulationBox';
 
-import {
-  Container,
-  Content,
-  Header,
-  Title,
-  SubTitle,
-  Accordion,
-} from './styles';
+import { Container, Content, Title, SubTitle, Accordion } from './styles';
 
 const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
@@ -141,9 +133,6 @@ const AllRegulations: React.FC = () => {
 
   return (
     <Container type="primary">
-      <Header>
-        <img src={logoImg} alt="Logo" />
-      </Header>
       <Content>
         <Title>Regulamentos</Title>
         {dataRegulations.length > 0 &&

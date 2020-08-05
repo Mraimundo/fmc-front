@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
@@ -12,44 +11,37 @@ import Popups from './Popups';
 
 import { Container } from './styles';
 
-const PATHS_TO_NOT_SHOW_LOGO = ['/edit', '/regulation'];
-
 const Dashboard: React.FC = ({ children }) => {
   const { shouldShowRegulationsModal, participant } = useAuth();
-  const [showLogo, setShowLogo] = useState(false);
-  const { pathname } = useLocation();
   const [theme, setTheme] = useState(defaultTheme);
-
-  useEffect(() => {
-    if (PATHS_TO_NOT_SHOW_LOGO.indexOf(pathname) >= 0) {
-      setShowLogo(false);
-      return;
-    }
-    setShowLogo(true);
-  }, [pathname]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!participant || !participant.id) return;
     if (participant.establishment.type_name === 'Cooperativa') {
       setTheme(cooperativaTheme);
     }
+    setLoading(false);
   }, [participant]);
 
-  return (
+  return !loading ? (
     <>
       <ThemeContext.Provider value={theme}>
-        <Container>
-          {showLogo && <Logo />}
-          <Header />
-          {children}
-          {!shouldShowRegulationsModal && <Popups />}
-          <Footer />
-        </Container>
+        {shouldShowRegulationsModal ? (
+          <ModalRegulations opened={shouldShowRegulationsModal} />
+        ) : (
+          <Container>
+            <Logo logoType={participant.establishment.type_name} />
+            <Header />
+            {children}
+            {!shouldShowRegulationsModal && <Popups />}
+            <Footer />
+          </Container>
+        )}
       </ThemeContext.Provider>
-      {shouldShowRegulationsModal && (
-        <ModalRegulations opened={shouldShowRegulationsModal} />
-      )}
     </>
+  ) : (
+    <></>
   );
 };
 
