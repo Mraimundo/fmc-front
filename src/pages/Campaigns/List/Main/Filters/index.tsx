@@ -7,12 +7,20 @@ import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
 import CustomersSelect from 'components/CampaignsManager/Selects/Customers';
 import CampaignStatusSelect from 'components/CampaignsManager/Selects/CampaignStatus';
 import MechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
-import { Mechanic } from 'services/campaignsManager/interfaces/Campaign';
+import {
+  Mechanic,
+  ApproverProfile,
+} from 'services/campaignsManager/interfaces/Campaign';
+import { GRM, RTC, KAM } from 'config/constants';
 import { useCampaignsList } from '../../Context';
 
 import { Container, Separator } from './styles';
 
-const Filters: React.FC = () => {
+interface Props {
+  profile: ApproverProfile;
+}
+
+const Filters: React.FC<Props> = ({ profile }) => {
   const { applyFilters, campaigns } = useCampaignsList();
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
@@ -21,6 +29,9 @@ const Filters: React.FC = () => {
   const [mechanicSelected, setMechanicSelected] = useState<Mechanic | null>(
     null,
   );
+
+  const profilesToNotShowDirectors: ApproverProfile[] = [GRM, RTC, KAM];
+  const profilesTONotShowRegional: ApproverProfile[] = [RTC, KAM];
 
   const handleFilterClick = useCallback(() => {
     const directorId = directorSelected?.value
@@ -47,16 +58,20 @@ const Filters: React.FC = () => {
       <Container>
         <h4>Campanhas solicitadas ({campaigns.length})</h4>
         <Separator />
-        <DirectorsSelect
-          setValue={value => setDirectorSelected(value)}
-          value={directorSelected}
-          placeholder="Diretoria"
-        />
-        <RegionalSelect
-          setValue={value => setRegionalSelected(value)}
-          value={regionalSelected}
-          placeholder="Regional"
-        />
+        {profilesToNotShowDirectors.indexOf(profile) === -1 && (
+          <DirectorsSelect
+            setValue={value => setDirectorSelected(value)}
+            value={directorSelected}
+            placeholder="Diretoria"
+          />
+        )}
+        {profilesTONotShowRegional.indexOf(profile) === -1 && (
+          <RegionalSelect
+            setValue={value => setRegionalSelected(value)}
+            value={regionalSelected}
+            placeholder="Regional"
+          />
+        )}
         <CustomersSelect
           setValue={value => setCustomerSelected(value)}
           value={customerSelected}
