@@ -136,6 +136,10 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
           >
             Aceito participar
           </Button>
+          <span>
+            O botão "Aceito Participar" será habilitado após a leitura do
+            regulamento na integra.
+          </span>
         </Content>
       </Container>
     </Modal>

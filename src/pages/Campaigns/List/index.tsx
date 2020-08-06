@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import routesMap from 'routes/route-map';
+import history from 'services/history';
 
 import { Button } from 'components/shared';
 import { Container, Content, CampaignBox } from './styles';
@@ -6,7 +8,7 @@ import { Container, Content, CampaignBox } from './styles';
 const List: React.FC = () => {
   const mock = [
     {
-      id: 1,
+      id: 50,
       imageUrl:
         'https://storage.vendavall.com.br/tinymce/1595038632.5f125ba8a66501.23325933.png',
       title: 'Título da campanha',
@@ -14,6 +16,11 @@ const List: React.FC = () => {
       endDate: '25/02/2020',
     },
   ];
+
+  const handleButtonClick = useCallback((id: number) => {
+    history.push(`${routesMap.campaign}/${id}`);
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -26,7 +33,11 @@ const List: React.FC = () => {
                 <h3>{item.title}</h3>
                 <span>{`Início: ${item.startDate} Término: ${item.endDate}`}</span>
               </div>
-              <Button buttonRole="primary" type="button">
+              <Button
+                buttonRole="primary"
+                type="button"
+                onClick={() => handleButtonClick(item.id)}
+              >
                 Saiba mais
               </Button>
             </div>

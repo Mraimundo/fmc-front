@@ -56,6 +56,15 @@ export const Content = styled.div`
   max-height: calc(100% - 161px);
   display: flex;
   flex-direction: column;
+
+  > span {
+    color: ${({ theme }) => theme.font.color.quartenary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 35px;
+  }
 `;
 
 export const Container = styled.div`
@@ -84,7 +93,7 @@ export const Container = styled.div`
     background-color: #dd0022;
     width: 275px;
     align-self: center;
-    margin-bottom: 65px;
+    margin-bottom: 10px;
     font-size: 18px;
 
     &:hover {

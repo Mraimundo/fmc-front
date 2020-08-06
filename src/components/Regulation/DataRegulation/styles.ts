@@ -10,6 +10,14 @@ export const Container = styled.div`
   align-items: center;
   justify-content: stretch;
   padding: 20px 20px 50px 20px;
+
+  > span {
+    color: ${({ theme }) => theme.font.color.quartenary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+  }
 `;
 
 interface RegulationProps {
