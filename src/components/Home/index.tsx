@@ -3,3 +3,4 @@ export { default as Title } from './Title';
 export { default as Highlights } from './Highlights';
 export { default as Performance } from './Performance';
 export { default as MyPoints } from './MyPoints';
+export { default as Showcase } from './Showcase';

@@ -14,3 +14,11 @@ export interface Highlight {
   created: string;
   resume: string;
 }
+
+export interface ShowcaseProduct {
+  id: number;
+  name: string;
+  picture: string;
+  price: number;
+  link: string;
+}
