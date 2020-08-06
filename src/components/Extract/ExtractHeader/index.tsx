@@ -2,6 +2,7 @@ import React from 'react';
 import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
 import { EstablishmentType } from 'state/modules/point-management/common/types';
+import { formatPointsExtract } from 'util/points';
 import {
   AccumulatedBalance,
   BalanceItem,
@@ -25,7 +26,8 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
       <AccumulatedBalance>
         {total > 0 && (
           <h2>
-            Saldo acumulado: <strong>{total} pontos</strong>
+            Saldo acumulado:
+            <strong>{formatPointsExtract(total)} pontos</strong>
           </h2>
         )}
         <BalanceBoxContainer>
@@ -35,7 +37,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
                 <div className="title">
                   <span>{point.name}</span>
                 </div>
-                <div className="value">{point.total} </div>
+                <div className="value">{formatPointsExtract(point.total)} </div>
               </BalanceItem>
             ))}
         </BalanceBoxContainer>
@@ -44,7 +46,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
         <CalltoActionBox>
           <p className="available">
             Saldo disponível para resgate:
-            <strong>{balance.available} pontos</strong>
+            <strong>{formatPointsExtract(balance.available)} pontos</strong>
           </p>
           <Button
             type="button"
@@ -57,7 +59,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
           {pathKey === '/extract' && (
             <p className="shared-actions">
               Saldo Ações Compartilhadas FMC:
-              <span>{balance.sharedActions} pontos</span>
+              <span>{formatPointsExtract(balance.sharedActions)} pontos</span>
             </p>
           )}
         </CalltoActionBox>
