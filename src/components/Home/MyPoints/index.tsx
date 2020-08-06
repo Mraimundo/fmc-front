@@ -1,9 +1,36 @@
 import React from 'react';
 
-import { Wrapper } from './styles';
+import history from 'services/history';
+import { Button } from 'components/shared';
+import {
+  Wrapper,
+  Period,
+  PeriodText,
+  PointsWrapper,
+  TotalPointsText,
+  Points,
+} from './styles';
 
 const MyPoints: React.FC = () => {
-  return <Wrapper style={{ color: '#000' }}>em breve</Wrapper>;
+  return (
+    <Wrapper style={{ color: '#000' }}>
+      <Period>
+        <span>Safra</span>
+        <PeriodText>2020/21</PeriodText>
+      </Period>
+      <PointsWrapper>
+        <TotalPointsText>Total pontos</TotalPointsText>
+        <Points>R$ 0,00</Points>
+      </PointsWrapper>
+      <Button
+        type="submit"
+        buttonRole="primary"
+        onClick={() => history.push('/extrato')}
+      >
+        VER EXTRATO
+      </Button>
+    </Wrapper>
+  );
 };
 
 export default MyPoints;
