@@ -3,4 +3,5 @@ export default {
   training: '/training',
   news: '/news',
   campaignManagement: '/gerenciamento-de-campanhas',
+  campaign: '/campanhas',
 };

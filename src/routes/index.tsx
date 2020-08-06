@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 import { RouteModule } from './modules/RouteModule';
 
 import Auth from './modules/Auth';
+import Campaigns from './modules/Campaigns';
 import CampaignsManager from './modules/CampaignsManager';
 import Contact from './modules/Contact';
 import Extract from './modules/Extract';
@@ -19,6 +20,7 @@ import Route from './Route';
 
 const routesArray: RouteModule[][] = [
   Auth,
+  Campaigns,
   CampaignsManager,
   Contact,
   Extract,

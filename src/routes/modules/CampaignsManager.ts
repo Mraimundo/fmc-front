@@ -1,8 +1,8 @@
 import routeMap from 'routes/route-map';
-import CampaignManager from 'pages/Campaigns/Manager';
-import NewCampaign from 'pages/Campaigns/New';
-import ViewCampaign from 'pages/Campaigns/View';
-import CampaignsList from 'pages/Campaigns/List';
+import CampaignManager from 'pages/CampaignsManagement/Manager';
+import NewCampaign from 'pages/CampaignsManagement/New';
+import ViewCampaign from 'pages/CampaignsManagement/View';
+import CampaignsList from 'pages/CampaignsManagement/List';
 import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
