@@ -31,7 +31,7 @@ const Filters: React.FC<Props> = ({ profile }) => {
   );
 
   const profilesToNotShowDirectors: ApproverProfile[] = [GRM, RTC, KAM];
-  const profilesTONotShowRegional: ApproverProfile[] = [RTC, KAM];
+  const profilesToNotShowRegional: ApproverProfile[] = [RTC, KAM];
 
   const handleFilterClick = useCallback(() => {
     const directorId = directorSelected?.value
@@ -65,7 +65,7 @@ const Filters: React.FC<Props> = ({ profile }) => {
             placeholder="Diretoria"
           />
         )}
-        {profilesTONotShowRegional.indexOf(profile) === -1 && (
+        {profilesToNotShowRegional.indexOf(profile) === -1 && (
           <RegionalSelect
             setValue={value => setRegionalSelected(value)}
             value={regionalSelected}
@@ -100,6 +100,9 @@ const Filters: React.FC<Props> = ({ profile }) => {
       statusSelected,
       mechanicSelected,
       campaigns,
+      profilesToNotShowRegional,
+      profilesToNotShowDirectors,
+      profile,
     ],
   );
 };
