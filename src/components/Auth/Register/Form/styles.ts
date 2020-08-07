@@ -20,6 +20,10 @@ export const UfSelect = styled(DefaultUfSelect)`
   }
 `;
 
+export const UfSelectRG = styled(UfSelect)`
+  max-width: 180px;
+`;
+
 export const Avatar = styled(DefaultAvatar)`
   margin-top: 15px;
   margin-bottom: 5px;
