@@ -1,14 +1,18 @@
 import React from 'react';
 import { expect as expectChai } from 'chai';
 import { render, getByTestId, fireEvent } from '@testing-library/react';
+import { ThemeContext } from 'styled-components';
 
+import { defaultTheme } from 'styles/theme';
 import ParticipantsFinder from '.';
 
 describe('<ParticipantsFinder />', () => {
   test('should render correctly', () => {
     const handleChange = jest.fn();
     const { container } = render(
-      <ParticipantsFinder onChange={handleChange} />,
+      <ThemeContext.Provider value={defaultTheme}>
+        <ParticipantsFinder onChange={handleChange} />
+      </ThemeContext.Provider>,
     );
 
     expect(
@@ -19,7 +23,9 @@ describe('<ParticipantsFinder />', () => {
   test('should handle chang correctly', () => {
     const handleChange = jest.fn();
     const { container } = render(
-      <ParticipantsFinder onChange={handleChange} />,
+      <ThemeContext.Provider value={defaultTheme}>
+        <ParticipantsFinder onChange={handleChange} />
+      </ThemeContext.Provider>,
     );
 
     fireEvent.change(getByTestId(container, /participants-finder-input/), {
