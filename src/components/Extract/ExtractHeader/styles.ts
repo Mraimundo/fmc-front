@@ -48,7 +48,7 @@ export const BalanceBoxContainer = styled.div`
 export const BalanceItem = styled.div`
   background: ${({ theme }) => theme.layout.secondary.backgroundColor};
   border-radius: 5px;
-  color: #193b4e;
+  color: ${({ theme }) => theme.font.color.primary};
   margin: 5px;
   padding: 5px;
 
