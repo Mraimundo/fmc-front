@@ -35,6 +35,7 @@ const RegisterEdit: React.FC = () => {
 
   const saveParticipant = useCallback(
     async (data: Participant): Promise<void> => {
+      console.log(data.rg_emitter_uf);
       try {
         const request = {
           ...participant,
