@@ -15,6 +15,13 @@ export const menu: MenuItem[] = [
     type: MenuTypes.Internal,
     children: null,
   },
+  {
+    label: 'Extrato',
+    to: '/extrato',
+    externalLink: '',
+    type: MenuTypes.Internal,
+    children: null,
+  },
 ];
 
 const state: HeaderState = {

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import reducer, { initialState } from './reducer';
 import * as actions from './actions';
-import { banners } from './mock';
+import { banners, highlights } from './mock';
 
 describe('src/state/modules/home/reducer', () => {
   test('should be a function', () => {
@@ -46,6 +46,45 @@ describe('src/state/modules/home/reducer', () => {
       ...initialState,
       banners,
       fetchBanners: {
+        isFetching: false,
+      },
+    });
+  });
+
+  test('should can handle FETCH_HIGHLIGHTS_ACTION', () => {
+    const result = reducer(undefined, actions.fetchHighlights());
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      fetchHighlights: {
+        isFetching: true,
+      },
+    });
+  });
+
+  test('should can handle FETCH_HIGHLIGHTS_FAILURE', () => {
+    const error = 'generic error';
+    const result = reducer(undefined, actions.fetchHighlightsFailure(error));
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      fetchHighlights: {
+        isFetching: false,
+        error,
+      },
+    });
+  });
+
+  test('should can handle FETCH_HIGHLIGHTS_SUCCESS', () => {
+    const result = reducer(
+      undefined,
+      actions.fetchHighlightsSuccess(highlights),
+    );
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      highlights,
+      fetchHighlights: {
         isFetching: false,
       },
     });

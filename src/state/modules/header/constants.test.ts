@@ -6,7 +6,7 @@ import {
   FETCH_MENU_ACTION,
   FETCH_MENU_FAILURE,
   FETCH_MENU_SUCCESS,
-  SET_SELECTED_MENU,
+  COINS_TO_QUOTE,
 } from './constants';
 
 describe('src/state/modules/header/constants', () => {
@@ -73,6 +73,16 @@ describe('src/state/modules/header/constants', () => {
 
     test('should return correct value', () => {
       expect(FETCH_MENU_SUCCESS).to.be.equal('@fmc/header/FETCH_MENU_SUCCESS');
+    });
+  });
+
+  describe('COINS_TO_QUOTE', () => {
+    test('should return a string', () => {
+      expect(COINS_TO_QUOTE).to.be.a('string');
+    });
+
+    test('should return correct value', () => {
+      expect(COINS_TO_QUOTE).to.be.equal('USD-BRL,USDT-BRL');
     });
   });
 });
