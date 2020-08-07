@@ -13,7 +13,6 @@ export const Container = styled(Table)`
   > thead tr {
     text-align: center;
     th {
-      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       font-size: 16px;
     }
   }

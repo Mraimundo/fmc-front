@@ -1,17 +1,20 @@
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, opacify } from 'polished';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 5px;
 
-  > h4 {
-    color: ${({ theme }) => theme.font.color.primary};
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    font-size: 21px;
-    margin-bottom: 12px;
-    margin-top: 35px;
+  > .extraPadding {
+    padding: 0 40px;
+    > h4 {
+      color: ${({ theme }) => theme.font.color.primary};
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      font-size: 21px;
+      margin-bottom: 12px;
+      margin-top: 35px;
+    }
   }
 `;
 
@@ -102,8 +105,19 @@ export const MessageBox = styled.div<MessageBoxProps>`
 
 export const Actions = styled.div`
   display: flex;
+  margin-top: 35px;
   > button {
     text-transform: uppercase;
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.medium};
+    font-size: 14px;
+    height: 49px;
+    border-radius: 7px;
+    min-width: 136px;
+    padding: 0 30px;
+    border: 1px dashed ${({ theme }) => opacify(0.5, theme.font.color.primary)};
+
+    background: transparent;
     & + button {
       margin-left: 8px;
     }

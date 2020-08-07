@@ -22,8 +22,11 @@ const New: React.FC = () => {
 
   const handleSave = useCallback(
     async (data: Campaign) => {
-      const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
       try {
+        if (data.goals.length === 0) {
+          throw new Error('Você não adicionou nenhum produto na Campanha');
+        }
+        const dto: CreateNewCampaignDTO = campaignToCreateNewCampaignDTO(data);
         await createNewCampaign(dto);
         addToast({
           title: 'Campanha requisitada com sucesso',
@@ -34,6 +37,7 @@ const New: React.FC = () => {
         addToast({
           title:
             e?.response?.data?.message ||
+            e.message ||
             'Falha ao registrar campanha. Por favor contate o suporte.',
           type: 'error',
         });

@@ -56,21 +56,23 @@ const Finish: React.FC<Props> = ({
             Cancelar Campanha
           </button>
         </Actions>
-        <h4>Aprovação</h4>
-        <ApprovalBoard approvers={campaign.approvers} />
-        <h4>Histórico</h4>
-        <Box>
-          {messages.map(message => (
-            <Content>
-              <MessageBox side={message.side}>
-                <span>
-                  {`${message.date} - ${message.time} - ${message.name}`}
-                </span>
-                <p>{message.message}</p>
-              </MessageBox>
-            </Content>
-          ))}
-        </Box>
+        <div className="extraPadding">
+          <h4>Aprovação</h4>
+          <ApprovalBoard approvers={campaign.approvers} />
+          <h4>Histórico</h4>
+          <Box>
+            {messages.map(message => (
+              <Content>
+                <MessageBox side={message.side}>
+                  <span>
+                    {`${message.date} - ${message.time} - ${message.name}`}
+                  </span>
+                  <p>{message.message}</p>
+                </MessageBox>
+              </Content>
+            ))}
+          </Box>
+        </div>
       </Container>
     ),
     [

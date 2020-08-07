@@ -19,6 +19,8 @@ export interface Response {
   prizeTitle: string;
   prizeDescription: string;
   products: Product[];
+  signed: boolean;
+  accepted: string;
 }
 
 export default (data: Campaign): Response => {
@@ -36,5 +38,7 @@ export default (data: Campaign): Response => {
       title: item.product.name,
       value: formatProductsInput(item.expectedVolume),
     })),
+    signed: true,
+    accepted: '02/02/2020',
   };
 };
