@@ -12,6 +12,7 @@ import {
   GenderSelect,
   PublicPlaceSelect,
   UfSelect,
+  UfSelectRG,
 } from './styles';
 
 interface Props {
@@ -76,8 +77,8 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <Input name="rg_emitter" label="Órgão emissor" inputRole={inputRole} />
 
-      <Input
-        name="rg_emitter_uf"
+      <UfSelectRG
+        name="rg_emitter_uf_select"
         label="UF do Órgão Emissor"
         inputRole={inputRole}
       />
