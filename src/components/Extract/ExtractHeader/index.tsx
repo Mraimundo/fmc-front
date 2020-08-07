@@ -27,7 +27,7 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
         {total > 0 && (
           <h2>
             Saldo acumulado:
-            <strong>{formatPointsExtract(total)} pontos</strong>
+            <strong> {formatPointsExtract(total)} pontos</strong>
           </h2>
         )}
         <BalanceBoxContainer>
