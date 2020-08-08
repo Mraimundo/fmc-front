@@ -1,5 +1,6 @@
 import React from 'react';
 
+import routeMap from 'routes/route-map';
 import history from 'services/history';
 import { Button } from 'components/shared';
 import {
@@ -25,7 +26,7 @@ const MyPoints: React.FC = () => {
       <Button
         type="submit"
         buttonRole="primary"
-        onClick={() => history.push('/extrato')}
+        onClick={() => history.push(routeMap.extract.my)}
       >
         VER EXTRATO
       </Button>

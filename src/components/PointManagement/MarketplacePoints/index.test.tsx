@@ -14,6 +14,6 @@ describe('<MarketplacePoints />', () => {
       </ThemeContext.Provider>,
     );
 
-    expect(getByText(/RESGATE NO MARKETPLACE/)).toBeInTheDocument();
+    expect(getByText(/RESGATE NO CATÁLOGO DE PRÊMIOS/)).toBeInTheDocument();
   });
 });

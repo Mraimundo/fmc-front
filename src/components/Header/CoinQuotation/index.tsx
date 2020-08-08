@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { formatQuotedCoin } from 'util/points';
 import { Coin } from 'state/modules/header/types';
 import { QuotationsList, Value } from './styles';
 
@@ -11,7 +12,7 @@ const CoinQuotation: React.FC<CoinQuotationProps> = ({ quotations }) => {
     <QuotationsList data-testid="coin-quotations-list">
       {quotations.map((coin: Coin) => (
         <li key={coin.name}>
-          {coin.name}: <Value>R$ {coin.value}</Value>
+          {coin.name}: <Value>R$ {formatQuotedCoin(coin.value)}</Value>
         </li>
       ))}
     </QuotationsList>

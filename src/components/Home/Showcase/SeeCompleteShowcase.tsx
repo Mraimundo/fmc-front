@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import {
   ProductItemStyled,
   ImageWrapper,
@@ -17,7 +18,7 @@ const SeeCompleteShowcase: React.FC<SeeCompleteShowcaseProps> = ({
 }) => {
   return (
     <ProductItemStyled>
-      <a href={link} target="_blank" rel="noopener noreferrer">
+      <Link to={link}>
         <ImageWrapper>
           <img src={picture} alt="" title="" />
         </ImageWrapper>
@@ -26,7 +27,7 @@ const SeeCompleteShowcase: React.FC<SeeCompleteShowcaseProps> = ({
             VEJA A VITRINE DE PRÊMIOS COMPLETA
           </SeeCompleteShowcaseText>
         </NameWrapper>
-      </a>
+      </Link>
     </ProductItemStyled>
   );
 };

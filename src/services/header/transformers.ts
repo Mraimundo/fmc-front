@@ -11,7 +11,7 @@ export const transformCoinQuotationsRawData = (
       ...acc,
       {
         name,
-        value: high,
+        value: Number.parseFloat(high),
       },
     ],
     [] as Coin[],

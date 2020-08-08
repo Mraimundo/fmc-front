@@ -3,8 +3,8 @@ import { Coin, MenuItem } from './types';
 import { MenuTypes } from './constants';
 
 export const coinQuotations: Coin[] = [
-  { name: 'Dolar Comercial', value: '4,00' },
-  { name: 'Dolar Turismo', value: '5,00' },
+  { name: 'Dolar Comercial', value: 4.232 },
+  { name: 'Dolar Turismo', value: 5.329 },
 ];
 
 export const menu: MenuItem[] = [
