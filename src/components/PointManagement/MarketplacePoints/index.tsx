@@ -16,11 +16,11 @@ const MarketplacePoints: React.FC<MarketplacePointsProps> = ({
 }) => {
   return (
     <Wrapper>
-      <Title>RESGATE NO MARKETPLACE</Title>
+      <Title>RESGATE NO CATÁLOGO DE PRÊMIOS</Title>
       <Image
         src={marketplaceImage}
-        alt="Marketplace Imagem"
-        title="Marketplace"
+        alt="Catálogo de Prêmios Imagem"
+        title="Catálogo de Prêmios"
       />
       <PointsInput
         onChange={onChange}

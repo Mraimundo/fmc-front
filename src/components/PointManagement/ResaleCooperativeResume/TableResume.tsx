@@ -12,6 +12,7 @@ interface TableResumeProps {
   maxInvoicePercentage: number;
   textTitle?: string;
   zeroedValues?: boolean;
+  hasInvoicePoints: boolean;
 }
 const TableResume: React.FC<TableResumeProps> = ({
   establishmentType,
@@ -21,6 +22,7 @@ const TableResume: React.FC<TableResumeProps> = ({
   invoicePoints,
   textTitle = 'Resumo',
   zeroedValues = false,
+  hasInvoicePoints,
 }) => {
   const total = useMemo(() => {
     if (zeroedValues) return `0 pontos`;
@@ -48,12 +50,14 @@ const TableResume: React.FC<TableResumeProps> = ({
           <span>{`TOTAL PARA ${establishmentType}`}</span>
           <span>{total}</span>
         </li>
+        {hasInvoicePoints && (
+          <li>
+            <span>RETORNO FINANCEIRO</span>
+            <span>{invoice}</span>
+          </li>
+        )}
         <li>
-          <span>DESCONTO DE DUPLICATA</span>
-          <span>{invoice}</span>
-        </li>
-        <li>
-          <span>MARKETPLACE</span>
+          <span>CATÁLOGO DE PRÊMIOS</span>
           <span>{marketplace}</span>
         </li>
       </ResumeTable>

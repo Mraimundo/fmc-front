@@ -2,7 +2,7 @@ import { MenuTypes } from './constants';
 
 export interface Coin {
   name: string;
-  value: string;
+  value: number;
 }
 
 export interface MenuItem {

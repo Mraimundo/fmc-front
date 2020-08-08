@@ -10,6 +10,7 @@ interface ResaleCooperativeResumeProps {
   invoicePoints: number;
   maxInvoicePercentage: number;
   establishmentType: EstablishmentType | '';
+  hasInvoicePoints: boolean;
 }
 const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   totalPoints,
@@ -17,12 +18,13 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   invoicePoints,
   maxInvoicePercentage,
   establishmentType,
+  hasInvoicePoints,
 }) => (
   <Wrapper>
     <div>
       <h2>PARABÉNS!</h2>
       <CongratsText>
-        Agora você pode acessar o Marketplace e trocar seus pontos por prêmios
+        Agora você pode acessar o Catálogo de Prêmios e trocar seus pontos
       </CongratsText>
     </div>
     <TableResume
@@ -32,6 +34,7 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
       maxInvoicePercentage={maxInvoicePercentage}
       textTitle="Resumo: você está sem pontos para distribuir"
       totalPoints={totalPoints}
+      hasInvoicePoints={hasInvoicePoints}
       zeroedValues
     />
   </Wrapper>

@@ -28,3 +28,9 @@ export const formatPointsExtract = (value: number) =>
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
+
+export const formatQuotedCoin = (value: number) =>
+  value.toLocaleString('pt-br', {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
+  });

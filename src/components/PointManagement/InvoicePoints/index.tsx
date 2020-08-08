@@ -18,7 +18,7 @@ const InvoicePoints: React.FC<InvoicePointsProps> = ({
 }) => {
   return (
     <Wrapper>
-      <Title>DESCONTO EM DUPLICATA FUTURA</Title>
+      <Title>RETORNO FINANCEIRO</Title>
       <Image src={invoiceImage} alt="" title="" />
       <PointsInput
         onChange={onChange}
