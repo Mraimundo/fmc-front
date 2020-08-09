@@ -4,7 +4,10 @@ import {
   Audience,
 } from 'services/campaignsManager/interfaces/Campaign';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import {
+  getCampaign,
+  getErrors,
+} from 'state/modules/campaigns-manager/selectors';
 import {
   addAudience,
   removeAudience,
@@ -19,6 +22,8 @@ import {
   CustomersSelect,
   CostumerDetails,
   ActionBox,
+  Input,
+  TextArea,
 } from './styles';
 
 export interface Props {
@@ -27,6 +32,7 @@ export interface Props {
 
 const Configuration: React.FC<Props> = ({ handleAction }) => {
   const campaign = useSelector(getCampaign);
+  const errors = useSelector(getErrors);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [audienceSelected, setAudienceSelected] = useState<Audience | null>(
@@ -52,7 +58,7 @@ const Configuration: React.FC<Props> = ({ handleAction }) => {
     () => (
       <Container>
         <h4>Descrição da campanha</h4>
-        <input
+        <Input
           type="text"
           value={campaign.title}
           onChange={e =>
@@ -61,9 +67,11 @@ const Configuration: React.FC<Props> = ({ handleAction }) => {
             )
           }
           placeholder="Título da campanha"
+          inputRole="secondary"
+          error={errors.title}
         />
         <span>Resumo da campanha</span>
-        <textarea
+        <TextArea
           value={campaign.description}
           onChange={e =>
             dispatch(
@@ -73,12 +81,15 @@ const Configuration: React.FC<Props> = ({ handleAction }) => {
               }),
             )
           }
+          inputRole="secondary"
+          error={errors.description}
         />
         <h4>Público</h4>
         <CustomersSelect
           setValue={value => setAudienceSelected(value)}
           value={audienceSelected}
           placeholder="Selecionar Canais"
+          error={errors.audience}
         />
         {campaign.audience.map(item => (
           <CostumerDetails key={`audience${item.customer.id}`}>

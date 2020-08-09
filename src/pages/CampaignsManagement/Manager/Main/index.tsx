@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import history from 'services/history';
+import { useDispatch } from 'react-redux';
 import { useToast } from 'context/ToastContext';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { campaignToUpdateCampaignDTO } from 'services/campaignsManager/transformers';
@@ -8,6 +9,7 @@ import {
   cancelCampaign,
   requestForApprovalCampaign,
 } from 'services/campaignsManager';
+import { setErrors } from 'state/modules/campaigns-manager/actions';
 
 import {
   RegisterCampaignForm,
@@ -17,7 +19,9 @@ import {
   ComunicationForm,
   RegulationForm,
 } from 'components/CampaignsManager';
+import useSchema from 'util/validations/useSchema';
 import TabsNavigation from './TabsNavigation';
+import schema from '../schemaValidation';
 
 import {
   SOLICITATION_TAB,
@@ -33,6 +37,8 @@ import { Container, Content } from './styles';
 const Main: React.FC = () => {
   const { tabSelected, nextTab } = useCampaignsManager();
   const { addToast } = useToast();
+  const { isValid, getErrors } = useSchema<Campaign>(schema);
+  const dispatch = useDispatch();
 
   const handleNextTab = async (): Promise<void> => {
     nextTab();
@@ -84,8 +90,15 @@ const Main: React.FC = () => {
 
   const handleSave = useCallback(
     async (data: Campaign) => {
-      const dto = campaignToUpdateCampaignDTO(data);
       try {
+        if (!(await isValid(data))) {
+          const errors = await getErrors(data);
+          dispatch(setErrors(errors));
+          throw new Error(
+            'Por favor confira o preenchimento do formulário nas abas anteriores',
+          );
+        }
+        const dto = campaignToUpdateCampaignDTO(data);
         await updateCampaign(dto);
         addToast({
           title: 'Campanha alterada com sucesso',
@@ -96,12 +109,13 @@ const Main: React.FC = () => {
         addToast({
           title:
             e?.response?.data?.message ||
+            e?.message ||
             'Falha ao atualizar campanha. Por favor contate o suporte.',
           type: 'error',
         });
       }
     },
-    [addToast],
+    [addToast, dispatch, getErrors, isValid],
   );
 
   return (
