@@ -11,6 +11,7 @@ interface Props {
   setValue(value: Mechanic | null): void; // (value: Option | null): void;
   value: Mechanic | null; // Option | null;
   placeholder?: string;
+  error?: string;
 }
 
 const MechanicsSelect: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const MechanicsSelect: React.FC<Props> = ({
   setValue,
   label,
   placeholder,
+  error,
 }) => {
   const [options, setOptions] = useState<Mechanic[]>([]);
   const [internalValue, setInternalValue] = useState<Option | null>(null);
@@ -62,6 +64,7 @@ const MechanicsSelect: React.FC<Props> = ({
       setValue={handleSetValue}
       placeholder={placeholder}
       inputRole="secondary"
+      error={error}
     />
   );
 };

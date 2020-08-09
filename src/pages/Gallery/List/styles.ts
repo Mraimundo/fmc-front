@@ -34,6 +34,14 @@ export const Content = styled.div`
 
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
+
+    > h3 {
+      margin-left: 0;
+    }
+
+    > button {
+      width: 100%;
+    }
   }
 `;
 

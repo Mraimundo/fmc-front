@@ -25,6 +25,14 @@ export const Content = styled.div`
     margin-bottom: 15px;
     font-size: 24px;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 20px;
+
+    h3 {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const Separator = styled.div`

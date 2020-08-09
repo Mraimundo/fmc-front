@@ -22,6 +22,13 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     margin: 20px 35px;
   }
+
+  @media screen and (max-width: 720px) {
+    > button {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+  }
 `;
 
 export const Content = styled.div`
@@ -36,11 +43,19 @@ export const Content = styled.div`
     text-align: justify;
     margin-top: 25px;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 20px;
+  }
 `;
 
 export const BoxNumbers = styled.div`
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 720px) {
+    flex-wrap: wrap;
+  }
 `;
 
 interface QuestionNumberProps {
@@ -86,6 +101,11 @@ export const QuestionNumber = styled.div<QuestionNumberProps>`
         top: calc(100% - 17px);
         left: calc(100% - 6px);
     `};
+
+  @media screen and (max-width: 720px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const Asnwers = styled.div`
@@ -111,6 +131,11 @@ export const Asnwers = styled.div`
     color: #707070;
     font-size: 18px;
     font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    text-align: justify;
+
+    @media screen and (max-width: 720px) {
+      font-size: 16px;
+    }
   }
 
   ._rightAnswer {
@@ -170,5 +195,14 @@ export const Actions = styled.div`
     border-radius: 5px;
     align-self: center;
     margin-top: 20px;
+  }
+
+  @media screen and (max-width: 720px) {
+    > div {
+      width: 48%;
+      button {
+        width: 100%;
+      }
+    }
   }
 `;

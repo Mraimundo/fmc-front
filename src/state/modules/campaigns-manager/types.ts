@@ -16,3 +16,7 @@ export interface ValueField {
   fieldName: PointsFieldsNames;
   value: number;
 }
+
+export interface Errors {
+  [key: string]: string;
+}

@@ -41,6 +41,24 @@ export const Container = styled.div`
       font-size: 14px;
     }
   }
+
+  @media screen and (max-width: 720px) {
+    > div {
+      flex-direction: column;
+
+      > div {
+        width: 100%;
+        min-height: auto;
+        margin-bottom: 25px;
+      }
+
+      > p {
+        margin: 0;
+        width: 100%;
+        min-height: auto;
+      }
+    }
+  }
 `;
 
 export const Player = styled(ReactPlayer)`

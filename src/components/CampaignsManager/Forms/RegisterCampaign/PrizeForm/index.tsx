@@ -1,6 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import {
+  getCampaign,
+  getErrors,
+} from 'state/modules/campaigns-manager/selectors';
 import {
   setPrizeName,
   setPrizeDescription,
@@ -9,11 +12,12 @@ import {
 import { ReactSVG } from 'react-svg';
 import trophyIcon from 'assets/images/campaigns/trophy-icon.svg';
 
-import { Container, Separator, Header, Body } from './styles';
+import { Container, Separator, Header, Body, Input, TextArea } from './styles';
 
 const PrizeForm: React.FC = () => {
   const dispatch = useDispatch();
   const campaign = useSelector(getCampaign);
+  const errors = useSelector(getErrors);
 
   return useMemo(
     () => (
@@ -24,16 +28,20 @@ const PrizeForm: React.FC = () => {
         </Header>
         <Separator />
         <Body>
-          <input
+          <Input
             type="text"
             placeholder="Nome do produto"
             value={campaign.prize.name}
+            error={errors['prize.name']}
             onChange={e => dispatch(setPrizeName(e.target.value))}
+            inputRole="secondary"
           />
-          <textarea
+          <TextArea
             placeholder="Descrição do produto"
             value={campaign.prize.description}
+            error={errors['prize.description']}
             onChange={e => dispatch(setPrizeDescription(e.target.value))}
+            inputRole="secondary"
           />
           <span>
             Após a aprovação da sua campanha acesse o Personal Class no seu
@@ -43,7 +51,7 @@ const PrizeForm: React.FC = () => {
         </Body>
       </Container>
     ),
-    [campaign.prize, dispatch],
+    [campaign.prize, dispatch, errors],
   );
 };
 

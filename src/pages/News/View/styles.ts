@@ -36,6 +36,10 @@ export const Content = styled.div`
 
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
+
+    > button {
+      width: 100%;
+    }
   }
 `;
 

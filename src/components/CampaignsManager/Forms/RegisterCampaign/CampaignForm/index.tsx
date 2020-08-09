@@ -4,7 +4,11 @@ import { ReactSVG } from 'react-svg';
 import deleteIcon from 'assets/images/campaigns/delete-icon.svg';
 import { Audience } from 'services/campaignsManager/interfaces/Campaign';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import Input from 'components/shared/Input/BaseInput';
+import {
+  getCampaign,
+  getErrors,
+} from 'state/modules/campaigns-manager/selectors';
 import {
   setFieldValue,
   addAudience,
@@ -26,6 +30,7 @@ const CampaignForm: React.FC = () => {
     null,
   );
   const campaign = useSelector(getCampaign);
+  const errors = useSelector(getErrors);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,11 +50,14 @@ const CampaignForm: React.FC = () => {
           setValue={value => dispatch(setMechanic(value))}
           value={campaign.mechanic}
           placeholder="Mecânica"
+          error={errors.mechanic}
         />
         <h4>Título da Campanha</h4>
-        <input
+        <Input
           type="text"
+          inputRole="secondary"
           value={campaign.title}
+          error={errors.title}
           onChange={e =>
             dispatch(
               setFieldValue({ fieldName: 'title', value: e.target.value }),
@@ -60,6 +68,7 @@ const CampaignForm: React.FC = () => {
         <CustomersSelect
           setValue={value => setAudienceSelected(value)}
           value={audienceSelected}
+          error={errors.audience}
           placeholder="Selecionar Clientes"
         />
         {campaign.audience.map(item => (
@@ -78,11 +87,15 @@ const CampaignForm: React.FC = () => {
             value={campaign.startDate}
             onChange={e => dispatch(setStartDate(e))}
             placeholder="Data inicial"
+            inputRole="secondary"
+            error={errors.startDate}
           />
           <DatePicker
             value={campaign.endDate}
             onChange={e => dispatch(setEndDate(e))}
             placeholder="Data final"
+            inputRole="secondary"
+            error={errors.endDate}
           />
         </Box>
       </Container>
@@ -94,6 +107,7 @@ const CampaignForm: React.FC = () => {
       campaign.audience,
       campaign.mechanic,
       campaign.title,
+      errors,
       dispatch,
     ],
   );

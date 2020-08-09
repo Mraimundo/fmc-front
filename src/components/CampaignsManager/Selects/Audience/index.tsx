@@ -11,6 +11,7 @@ interface Props {
   setValue(value: Audience | null): void;
   value: Audience | null;
   placeholder?: string;
+  error?: string;
 }
 
 const AudienceSelect: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const AudienceSelect: React.FC<Props> = ({
   setValue,
   label,
   placeholder,
+  error,
 }) => {
   const [options, setOptions] = useState<Audience[]>([]);
   const [internalValue, setInternalValue] = useState<Option | null>(null);
@@ -65,6 +67,7 @@ const AudienceSelect: React.FC<Props> = ({
       setValue={handleSetValue}
       placeholder={placeholder}
       inputRole="secondary"
+      error={error}
     />
   );
 };

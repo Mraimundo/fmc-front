@@ -11,6 +11,7 @@ interface Props {
   value: Option | null;
   placeholder?: string;
   segment?: string;
+  error?: string;
 }
 
 const ProductsSelect: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const ProductsSelect: React.FC<Props> = ({
   label,
   placeholder,
   segment = '',
+  error,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -40,6 +42,7 @@ const ProductsSelect: React.FC<Props> = ({
       setValue={setValue}
       placeholder={placeholder}
       inputRole="secondary"
+      error={error}
     />
   );
 };

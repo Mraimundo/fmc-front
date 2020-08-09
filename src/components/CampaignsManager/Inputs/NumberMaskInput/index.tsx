@@ -1,23 +1,32 @@
 import React, { useCallback } from 'react';
-import NumberFormat, { NumberFormatValues } from 'react-number-format';
+import NumberFormat, {
+  NumberFormatValues,
+  NumberFormatProps,
+} from 'react-number-format';
 
-interface Props {
+type BaseProps = Pick<
+  NumberFormatProps,
+  Exclude<keyof NumberFormatProps, 'onChange'>
+>;
+
+interface Props extends BaseProps {
   component: React.FunctionComponent;
   placeholder?: string;
   onChange(v: number): void;
   value: number;
-  maxLength?: number | null;
+  maxLength?: number;
   disabled?: boolean;
   formatValue(value: string | number): string;
 }
 const PointsInput: React.FC<Props> = ({
   component,
   placeholder = '0 Kg/L',
-  onChange,
   value,
-  maxLength = null,
+  maxLength,
   disabled = false,
   formatValue,
+  onChange,
+  ...rest
 }) => {
   const handleChange = useCallback(
     ({ floatValue }: NumberFormatValues) =>
@@ -32,9 +41,9 @@ const PointsInput: React.FC<Props> = ({
       value={value * 100}
       format={formatValue}
       allowNegative={false}
+      onValueChange={handleChange}
       placeholder={placeholder}
       customInput={component}
-      onValueChange={handleChange}
       isAllowed={(props: NumberFormatValues) => {
         const { formattedValue, floatValue } = props;
         if (!maxLength || !floatValue || !formattedValue) return true;
@@ -42,6 +51,7 @@ const PointsInput: React.FC<Props> = ({
         return floatValue <= maxLength * 100;
       }}
       disabled={disabled}
+      {...rest}
     />
   );
 };

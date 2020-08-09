@@ -21,6 +21,13 @@ export const Container = styled.div`
     padding: 0 15px;
     color: ${({ theme }) => theme.font.color.quartenary};
   }
+
+  ._inputContainer {
+    width: 100%;
+    max-width: 435px;
+    height: 44px;
+    padding: 0 15px;
+  }
 `;
 
 export const MechanicsSelect = styled(DefaultMechanicsSelect)`

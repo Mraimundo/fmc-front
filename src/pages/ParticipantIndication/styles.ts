@@ -41,7 +41,7 @@ export const Content = styled.div`
   }
 
   @media screen and (max-width: 720px) {
-    padding: 20px 8px;
+    padding: 20px;
 
     > h3 {
       font-size: 18px;

@@ -31,6 +31,10 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+  }
 `;
 
 export const Separator = styled.div`

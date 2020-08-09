@@ -56,7 +56,7 @@ export const AddButton = styled.button<AddButtonProps>`
     margin-top: 10px;
     width: 50px;
     height: 50px;
-    background-size: 50px;
+    background-size: 50%;
   }
 `;
 

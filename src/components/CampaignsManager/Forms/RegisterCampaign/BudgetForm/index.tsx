@@ -1,6 +1,9 @@
 import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import {
+  getCampaign,
+  getErrors,
+} from 'state/modules/campaigns-manager/selectors';
 import { setPointsValue } from 'state/modules/campaigns-manager/actions';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputValue from 'components/CampaignsManager/Inputs/NumberMaskInput';
@@ -11,6 +14,7 @@ import { Container, Box, Input } from './styles';
 const BudgetForm: React.FC = () => {
   const dispatch = useDispatch();
   const campaign = useSelector(getCampaign);
+  const errors = useSelector(getErrors);
 
   return useMemo(
     () => (
@@ -27,6 +31,7 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatRebatePointsInput}
             placeholder="0 pontos"
+            inputRole="secondary"
           />
         </Box>
         <h5>Precisa de verba complementar?</h5>
@@ -46,6 +51,7 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatPointsInput}
             placeholder="R$ 0,00"
+            inputRole="secondary"
           />
         </Box>
         <Box>
@@ -64,6 +70,7 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatPointsInput}
             placeholder="R$ 0,00"
+            inputRole="secondary"
           />
         </Box>
         <Box>
@@ -79,6 +86,7 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatPointsInput}
             placeholder="R$ 0,00"
+            inputRole="secondary"
           />
         </Box>
         <h4>Retorno esperado da campanha:</h4>
@@ -93,6 +101,8 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatPointsInput}
             placeholder="R$ 0,00"
+            inputRole="secondary"
+            error={errors.expectedSellIn}
           />
         </Box>
         <Box>
@@ -106,6 +116,8 @@ const BudgetForm: React.FC = () => {
             component={Input}
             formatValue={formatPointsInput}
             placeholder="R$ 0,00"
+            inputRole="secondary"
+            error={errors.expectedSellOut}
           />
         </Box>
       </Container>
@@ -117,6 +129,7 @@ const BudgetForm: React.FC = () => {
       campaign.complementaryLocalBudget,
       campaign.expectedSellIn,
       campaign.expectedSellOut,
+      errors,
       dispatch,
     ],
   );
