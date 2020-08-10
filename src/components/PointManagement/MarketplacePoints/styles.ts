@@ -5,7 +5,6 @@ import { FONTS } from 'styles/font/globals';
 export const Wrapper = styled.div`
   width: 100%;
   position: relative;
-  margin-right: 3em;
 
   &:before {
     content: '';

@@ -14,4 +14,15 @@ export const Container = styled(Table)`
     width: 94px;
     padding-left: 0;
   }
+
+  @media screen and (max-width: 720px) {
+    td._customWidth {
+      width: 100%;
+      padding: 5px !important;
+      a {
+        margin-bottom: 0px;
+        width: 100%;
+      }
+    }
+  }
 `;

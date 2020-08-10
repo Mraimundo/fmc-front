@@ -5,12 +5,15 @@ interface ApiResponse {
   url: string;
 }
 
-export default async (regulationId: number): Promise<string> => {
+export default async (
+  regulationId: number,
+  filename = 'regulamento.pdf',
+): Promise<string> => {
   const {
     data: { url },
   } = await pluginApi.get<ApiResponse>(
     `/participants/regulations/${regulationId}/download-html`,
   );
 
-  return forceDownload({ url, filename: 'regulamento.pdf' });
+  return forceDownload({ url, filename });
 };

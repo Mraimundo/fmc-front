@@ -5,7 +5,10 @@ import deleteIcon from 'assets/images/campaigns/delete-icon.svg';
 import InputValue from 'components/CampaignsManager/Inputs/NumberMaskInput';
 import { formatProductsInput } from 'util/products';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCampaign } from 'state/modules/campaigns-manager/selectors';
+import {
+  getCampaign,
+  getErrors,
+} from 'state/modules/campaigns-manager/selectors';
 import {
   addGoal,
   removeGoal,
@@ -26,6 +29,7 @@ const CampaignForm: React.FC = () => {
 
   const dispatch = useDispatch();
   const campaign = useSelector(getCampaign);
+  const errors = useSelector(getErrors);
 
   useEffect(() => {
     if (productSelected) {
@@ -58,10 +62,11 @@ const CampaignForm: React.FC = () => {
           value={productSelected}
           placeholder="Selecionar produtos"
           segment={categorySelected?.value}
+          error={errors.goals}
         />
-        {campaign.goals?.map(item => (
+        {campaign.goals?.map((item, index) => (
           <ProductDetails key={`goal-${item.product.id}`}>
-            <div>
+            <div className="_productName">
               <h3>{item.product.name}</h3>
               <ReactSVG
                 src={deleteIcon}
@@ -74,6 +79,8 @@ const CampaignForm: React.FC = () => {
               value={item.expectedVolume}
               component={Input}
               formatValue={formatProductsInput}
+              inputRole="secondary"
+              error={errors[`goals[${index}].expectedVolume`]}
             />
           </ProductDetails>
         ))}
@@ -99,6 +106,7 @@ const CampaignForm: React.FC = () => {
       campaign.goals,
       campaign.observation,
       dispatch,
+      errors,
     ],
   );
 };

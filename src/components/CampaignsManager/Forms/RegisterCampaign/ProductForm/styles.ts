@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import DefaultCategoriesProductsSelect from 'components/CampaignsManager/Selects/CategoriesProducts';
 import DefaultProductsSelect from 'components/CampaignsManager/Selects/Products';
+import DefaultInput from 'components/shared/Input/BaseInput';
 
 export const Container = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ export const ProductDetails = styled.div`
     text-align: right;
   }
 
-  > div {
+  > ._productName {
     width: 100%;
     max-width: 435px;
     height: 44px;
@@ -80,7 +81,17 @@ export const ProductDetails = styled.div`
   }
 `;
 
-export const Input = styled.input``;
+export const Input = styled(DefaultInput)`
+  max-width: 280px;
+  ._inputContainer {
+    width: 100%;
+    max-width: 280px;
+    height: 44px;
+    input {
+      text-align: right;
+    }
+  }
+`;
 
 export const ObservatioBox = styled.div`
   display: flex;

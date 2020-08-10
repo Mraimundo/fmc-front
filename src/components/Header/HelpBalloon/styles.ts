@@ -53,7 +53,8 @@ export const HelpMenu = styled.ul`
       margin-right: 0.5em;
     }
 
-    svg path {
+    svg path,
+    text {
       fill: ${({ theme }) => theme.font.color.primary};
     }
 

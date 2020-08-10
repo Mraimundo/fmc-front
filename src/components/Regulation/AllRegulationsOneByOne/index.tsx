@@ -66,10 +66,9 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     const isAgreementTerm = selectedRegulation.type === 'safra_term';
 
     if (isAgreementTerm) {
-      fetchAgreementTerm(selectedRegulation.id)
-        .then(resp => {
-          setAgreementTermIsAccepted(resp.is_accepted);
-        });
+      fetchAgreementTerm(selectedRegulation.id).then(resp => {
+        setAgreementTermIsAccepted(resp.is_accepted);
+      });
     }
 
     setTimeout(() => {
@@ -155,6 +154,10 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
               >
                 Aceito participar
               </Button>
+              <span>
+                {`O botão "Aceito Participar" será habilitado após a leitura do
+                regulamento na integra.`}
+              </span>
             </div>
           )}
         </Content>

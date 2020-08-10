@@ -30,9 +30,9 @@ const FinishImportModal: React.FC<Props> = ({
           <h3>Resultado da importação</h3>
           <h4>
             A importação foi finalizada com{' '}
-            {errors?.length > 0 ? 'errors!' : 'sucesso!'}
+            {errors?.length > 0 ? 'erros!' : 'sucesso!'}
           </h4>
-          <h5>Total de linhas importadas: {importedLines}</h5>
+          <h5>Total de linhas importadas com sucesso: {importedLines}</h5>
           {errors.length > 0 && (
             <>
               <span>Erros encontrados: </span>

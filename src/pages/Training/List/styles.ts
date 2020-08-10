@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: calc(100vh - 95px);
+  background: #fff;
 `;
 
 export const Content = styled.div`
@@ -25,6 +26,13 @@ export const Content = styled.div`
     margin-bottom: 15px;
     font-size: 24px;
   }
+  @media screen and (max-width: 720px) {
+    padding: 30px 10px;
+
+    > h3 {
+      margin-left: 10px;
+    }
+  }
 `;
 
 export const CategoriesSelect = styled(DefaultCategoriesSelect)`
@@ -37,6 +45,13 @@ export const CategoriesSelect = styled(DefaultCategoriesSelect)`
     width: 100%;
     max-width: 360px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  @media screen and (max-width: 720px) {
+    margin: 0;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    padding: 0 10px;
   }
 `;
 

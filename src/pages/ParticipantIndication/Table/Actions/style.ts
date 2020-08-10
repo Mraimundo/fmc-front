@@ -45,13 +45,13 @@ export const ActionsBox = styled.div`
   flex-wrap: wrap;
 
   > button {
-    width: 61px;
-    height: 19px;
-    font-size: 8px;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    width: 64px;
+    height: 28px;
+    font-size: 11px;
     margin-top: 8px;
     margin-bottom: 2px;
     border-radius: 6px;
+    line-height: 1;
     & + button {
       margin-left: 8px;
     }

@@ -12,6 +12,19 @@ export const Container = styled.div<ListProps>`
   transition: max-height 0.2s, min-height 0.2s;
   max-height: 79px;
   min-height: 79px;
+
+  @media screen and (max-width: 720px) {
+    max-height: 56px;
+    min-height: 56px;
+
+    ${({ open }) =>
+      open &&
+      css`
+        max-height: 407px;
+        min-height: 407px;
+      `}
+  }
+
   ${({ open }) =>
     open &&
     css`
@@ -69,6 +82,25 @@ export const ListValuesTitle = styled.div<ListProps>`
     margin-right: 10px;
     position: absolute;
     top: 4px;
+  }
+
+  @media screen and (max-width: 720px) {
+    min-height: 54px;
+
+    > h3 {
+      margin-left: 75px;
+      font-size: 14px;
+    }
+
+    &:before {
+      width: 65px;
+      height: 45px;
+    }
+
+    &:after {
+      left: 27px;
+      top: 16px;
+    }
   }
 `;
 

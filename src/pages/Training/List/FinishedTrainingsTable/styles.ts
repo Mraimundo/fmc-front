@@ -28,4 +28,25 @@ export const Container = styled(Table)`
   ._customWidthStatus {
     padding-right: 15px;
   }
+
+  @media screen and (max-width: 720px) {
+    ._customWidthDate {
+      width: 100%;
+    }
+
+    td._customWidth {
+      width: 100%;
+      padding: 5px !important;
+      a {
+        margin-bottom: 0px;
+        width: 100%;
+      }
+
+      & + td._customWidth {
+        a {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 `;

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { formatPoints, formatPointsInput } from './points';
+import { formatPoints, formatPointsInput, formatQuotedCoin } from './points';
 
 describe('src/util/points', () => {
   describe('formatPoints', () => {
@@ -54,5 +54,30 @@ describe('src/util/points', () => {
       expect(formatPointsInput(231923)).to.be.equal('2,319.23');
     });
   });
-});
 
+  describe('formatQuotedCoin', () => {
+    test('should be a function', () => {
+      expect(formatQuotedCoin).to.be.a('function');
+    });
+
+    it(`formatQuotedCoin(2.191) should return a string`, () => {
+      expect(formatQuotedCoin(2.191)).to.be.a('string');
+    });
+
+    it(`formatQuotedCoin(0) should return '0.000'`, () => {
+      expect(formatQuotedCoin(0)).to.be.equal('0.000');
+    });
+
+    it(`formatQuotedCoin(3.129) should return 3.129`, () => {
+      expect(formatQuotedCoin(3.129)).to.be.equal('3.129');
+    });
+
+    it(`formatQuotedCoin(3.12) should return 3.120`, () => {
+      expect(formatQuotedCoin(3.12)).to.be.equal('3.120');
+    });
+
+    it(`formatQuotedCoin(3.1249) should return 3.125`, () => {
+      expect(formatQuotedCoin(3.1249)).to.be.equal('3.125');
+    });
+  });
+});

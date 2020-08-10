@@ -7,6 +7,8 @@ import transformer, {
   Response as Data,
 } from 'services/training/transformers/toTrainingsGrid';
 
+import NoData from './NoData';
+
 import { Container, MiniBox } from './styles';
 
 interface Props {
@@ -27,8 +29,12 @@ const Grid: React.FC<Props> = ({ data }) => {
 
   return (
     <Container>
+      {gridData.length === 0 && <NoData />}
       {gridData.map(item => (
-        <MiniBox key={`key-training-${item.id}`}>
+        <MiniBox
+          key={`key-training-${item.id}`}
+          onClick={() => handleStartTraining(item.id)}
+        >
           <img src={item.imageUrl} alt={item.title} />
           <span>{item.category.join(', ')} </span>
           <h3>{item.title}</h3>

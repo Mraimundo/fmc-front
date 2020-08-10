@@ -77,6 +77,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           invoicePoints={invoicePoints || 0}
           maxInvoicePercentage={maxInvoicePercentage || 0}
           establishmentType={establishmentType}
+          hasInvoicePoints={!!maxInvoicePercentage}
         />
       )}
       {finishedDistribution && (
@@ -86,6 +87,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           invoicePoints={invoicePoints || 0}
           maxInvoicePercentage={maxInvoicePercentage || 0}
           establishmentType={establishmentType}
+          hasInvoicePoints={!!maxInvoicePercentage}
         />
       )}
       <WrapperPoints>
@@ -94,12 +96,14 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           onChange={handleSetMarketplacePoints}
           maxLength={totalPointsResaleCooperative - (invoicePoints || 0)}
         />
-        <InvoicePoints
-          invoicePoints={invoicePoints || 0}
-          onChange={handleSetInvoicePoints}
-          disabled={!maxInvoicePercentage}
-          maxLength={maxLengthInvoicePoints}
-        />
+        {!!maxInvoicePercentage && (
+          <InvoicePoints
+            invoicePoints={invoicePoints || 0}
+            onChange={handleSetInvoicePoints}
+            disabled={!maxInvoicePercentage}
+            maxLength={maxLengthInvoicePoints}
+          />
+        )}
       </WrapperPoints>
       {!finishedDistribution && (
         <RescueResaleCooperativeButton

@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: calc(100vh - 95px);
+  background: #fff;
 `;
 
 export const Content = styled.div`
@@ -35,6 +36,10 @@ export const Content = styled.div`
 
   @media screen and (max-width: 720px) {
     padding: 20px 20px;
+
+    > button {
+      width: 100%;
+    }
   }
 `;
 

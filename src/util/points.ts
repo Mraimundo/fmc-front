@@ -22,3 +22,15 @@ export const formatRebatePointsInput = (value: string | number) => {
 
   return `${amount} pontos`;
 };
+
+export const formatPointsExtract = (value: number) =>
+  value.toLocaleString('pt-br', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  });
+
+export const formatQuotedCoin = (value: number) =>
+  value.toLocaleString('pt-br', {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
+  });

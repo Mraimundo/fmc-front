@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import DefaultInput from 'components/shared/Input/BaseInput';
 
 export const Container = styled.div`
   display: flex;
@@ -50,13 +51,11 @@ export const Box = styled.div`
     padding: 0 16px;
     border: 1px solid ${({ theme }) => theme.font.color.quartenary};
   }
-
-  > input[type='tel'] {
-    width: 194px;
-    height: 36px;
-    padding: 0 16px;
-    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
-  }
 `;
 
-export const Input = styled.input``;
+export const Input = styled(DefaultInput)`
+  ._inputContainer {
+    width: 194px;
+    height: 36px;
+  }
+`;

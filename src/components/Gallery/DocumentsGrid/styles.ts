@@ -52,11 +52,12 @@ export const MiniBox = styled.div`
 
     h3 {
       font-size: 16px;
-      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
       color: ${({ theme }) => theme.font.color.primary};
     }
 
     p {
+      font-family: ${({ theme }) => theme.font.fontFamily.condensed};
       font-size: 16px;
       color: ${({ theme }) => theme.font.color.primary};
       margin-top: 10px;
@@ -64,11 +65,25 @@ export const MiniBox = styled.div`
   }
 
   @media screen and (max-width: 720px) {
+    flex-direction: column;
     max-width: 500px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     & + div {
       margin-top: 40px;
+    }
+
+    > div {
+      padding: 0;
+      margin-top: 10px;
+
+      > h3 {
+        text-align: justify;
+      }
+
+      > p {
+        text-align: justify;
+      }
     }
 
     > span {
@@ -77,6 +92,12 @@ export const MiniBox = styled.div`
 
     > img {
       width: 100%;
+    }
+
+    > a {
+      align-self: flex-end;
+      margin-top: 10px;
+      margin-right: 0;
     }
   }
 `;

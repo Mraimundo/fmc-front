@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding: 1em 1.5em;
+  padding: 1em 1.5em 2em 1.5em;
 `;
 
 export const ShowCaseWrapper = styled.div`

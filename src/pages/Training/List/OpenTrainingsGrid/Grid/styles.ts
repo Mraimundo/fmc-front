@@ -113,5 +113,12 @@ export const MiniBox = styled.div`
     > img {
       width: 100%;
     }
+
+    > button {
+      width: 100%;
+      height: 40px;
+      font-size: 16px;
+      padding: 0;
+    }
   }
 `;

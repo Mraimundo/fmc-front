@@ -85,6 +85,7 @@ const Quiz: React.FC = () => {
   const handleSave = useCallback(async () => {
     setLoading(true);
     await sendAnswers();
+    setQuestionSelected(0);
     setLoading(false);
   }, [sendAnswers]);
 

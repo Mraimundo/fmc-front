@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Extract as IExtract } from 'services/extract/interfaces';
 import { Container, Header, Content } from './styles';
+import { formatPointsExtract } from 'util/points';
 
 interface Props {
   campaignExtract: IExtract;
@@ -22,7 +23,9 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
           <div className="divider" />
           <div>
             <div className="text-right">Total</div>
-            <strong>{statement.campaign.total} pontos</strong>
+            <strong>
+              {formatPointsExtract(statement.campaign.total)} pontos
+            </strong>
           </div>
           <div className={`chevron ${isOpen ? 'open' : ''}`} />
         </Header>
@@ -33,7 +36,7 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
                 <div className="content-row" key={point.id}>
                   <div className="row-header">
                     <div>{point.balanceUnit.name}</div>
-                    <div>{`${point.value}`}</div>
+                    <div>{formatPointsExtract(point.value)}</div>
                   </div>
                   {!!point?.distributed?.length &&
                     point?.distributed?.length > 1 &&
@@ -43,7 +46,7 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
                         key={distributed.balanceUnitId}
                       >
                         <div>{distributed.balanceUnitName}</div>
-                        <div>{distributed.value}</div>
+                        <div>{formatPointsExtract(distributed.value)}</div>
                       </div>
                     ))}
                 </div>

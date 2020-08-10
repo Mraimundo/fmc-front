@@ -25,7 +25,7 @@ const Main: React.FC = () => {
     <Container>
       <Content>
         <Resume />
-        <Filters />
+        <Filters profile={participant.profile_value} />
         <Separator />
         <Table profile={participant.profile_value} />
         {campaignSelected && (

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import logoFmc from 'assets/images/indication/logo-fmc.svg';
 import logoRevenda from 'assets/images/indication/logo-juntos.svg';
-import logoCooperativa from 'assets/images/indication/logo-fmc.svg';
+import logoCooperativa from 'assets/images/indication/logo-cooperativa.svg';
 
 import { Container, Content } from './styles';
 

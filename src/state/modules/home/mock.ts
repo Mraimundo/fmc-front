@@ -1,6 +1,6 @@
 import { HomeState } from './reducer';
 import { HighlightTypes } from './constants';
-import { Banner, Highlight } from './types';
+import { Banner, Highlight, ShowcaseProduct } from './types';
 
 export const banners: Banner[] = [
   { title: 'Banner 1', picture: 'https://photo1.com.br', mobilePicture: '' },
@@ -27,6 +27,41 @@ export const highlights: Highlight[] = [
       'Há mais de 10 anos a FMC é líder em soluções para a cana de açucar',
     title: 'Safra',
     created: '10/10/2019',
+  },
+];
+
+export const showcase: ShowcaseProduct[] = [
+  {
+    id: 1,
+    link: '#',
+    name: 'Televisor 40" Hi Vision Full HD',
+    picture:
+      'https://storage.vendavall.com.br/teste/avatars/1596678572.5f2b61ac138d40.17192068.png',
+    price: 1328.9,
+  },
+  {
+    id: 2,
+    link: '#',
+    name: 'IPhone XS - 1G memória',
+    picture:
+      'https://storage.vendavall.com.br/teste/avatars/1596678743.5f2b6257522cc4.16019629.png',
+    price: 3428.9,
+  },
+  {
+    id: 3,
+    link: '#',
+    name: 'Monitor dinavision gamer - DLC, 42" OLED - 144Hz',
+    picture:
+      'https://storage.vendavall.com.br/teste/avatars/1596678800.5f2b62906eb787.14848461.png',
+    price: 1540.9,
+  },
+  {
+    id: 4,
+    link: '#',
+    name: 'Camera Canon K297 - Optcal',
+    picture:
+      'https://storage.vendavall.com.br/teste/avatars/1596678835.5f2b62b35b7399.96031746.png',
+    price: 488.9,
   },
 ];
 

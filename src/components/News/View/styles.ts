@@ -10,6 +10,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 25px;
     line-height: 1;
+    text-align: justify;
   }
 
   > h4 {
@@ -34,6 +35,12 @@ export const Container = styled.div`
     margin-top: 32px;
     margin-bottom: 23px;
     text-align: justify;
+  }
+
+  @media screen and (max-width: 720px) {
+    > h4 {
+      margin-left: 0;
+    }
   }
 `;
 

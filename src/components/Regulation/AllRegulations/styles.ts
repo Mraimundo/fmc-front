@@ -36,6 +36,11 @@ export const SubTitle = styled.h3`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 18px;
   color: ${({ theme }) => theme.font.color.primary};
+
+  @media screen and (max-width: 720px) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const Accordion = styled(DefaultAccordion)`
@@ -51,6 +56,14 @@ export const ContentRegulation = styled.div`
   margin-left: 109px;
   transform: translateY(-7px) translateX(1px);
   padding: 10px;
+
+  @media screen and (max-width: 720px) {
+    margin-left: 0;
+    border-left: none;
+    font-size: 14px;
+    transform: translateY(0);
+    border-right: none;
+  }
 `;
 
 export const Actions = styled.div`

@@ -1,5 +1,6 @@
 import React from 'react';
 import range from 'lodash.range';
+import { closestIndexTo } from 'date-fns/fp';
 
 interface SeparatorProps {
   turns: number;
@@ -30,7 +31,7 @@ const RadialSeparators = ({ count, style }: RadialSeparatorsProps) => {
   return (
     <>
       {range(count).map((index: number) => (
-        <Separator turns={index * turns} style={style} />
+        <Separator turns={index * turns} style={style} key={index} />
       ))}
     </>
   );

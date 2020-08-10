@@ -11,6 +11,7 @@ import productsToSelectOptions from './productsToSelectOptions';
 import regionalToSelectOptions from './regionalToSelectOptions';
 import titlesToSelectOptions from './titlesToSelectOptions';
 import campaignToUpdateCampaignDTO from './campaignToUpdateCampaignDTO';
+import campaignToParticipantCampaignPage from './campaignToParticipantCampaignPage';
 
 export {
   audienceToSelectOptions,
@@ -26,4 +27,5 @@ export {
   regionalToSelectOptions,
   titlesToSelectOptions,
   campaignToUpdateCampaignDTO,
+  campaignToParticipantCampaignPage,
 };

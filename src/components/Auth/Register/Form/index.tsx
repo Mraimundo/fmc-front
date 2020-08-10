@@ -31,6 +31,7 @@ interface FormData extends Participant {
   public_place_select: { title: string; value: string } | null;
   formatted_birth_date: string;
   state_code_select: { title: string; value: string } | null;
+  rg_emitter_uf_select: { title: string; value: string } | null;
 }
 
 const Form: React.FC<Props> = ({
@@ -56,36 +57,42 @@ const Form: React.FC<Props> = ({
         ) || '',
       gender_select: participant.gender
         ? {
-            value: participant.gender,
-            title:
-              participant.gender.toLowerCase() === 'm'
-                ? 'Masculino'
-                : 'Feminino',
-          }
+          value: participant.gender,
+          title:
+            participant.gender.toLowerCase() === 'm'
+              ? 'Masculino'
+              : 'Feminino',
+        }
         : null,
       public_place_select: participant.address.public_place
         ? {
-            title: participant.address.public_place || '',
-            value: participant.address.public_place || '',
-          }
+          title: participant.address.public_place || '',
+          value: participant.address.public_place || '',
+        }
         : null,
       marital_status_select: participant.marital_status
         ? {
-            title: participant.marital_status || '',
-            value: participant.marital_status || '',
-          }
+          title: participant.marital_status || '',
+          value: participant.marital_status || '',
+        }
         : null,
       education_level_select: participant.education_level
         ? {
-            title: participant.education_level || '',
-            value: participant.education_level || '',
-          }
+          title: participant.education_level || '',
+          value: participant.education_level || '',
+        }
         : null,
       state_code_select: participant.address?.state_code
         ? {
-            title: participant.address.state_code || '',
-            value: participant.address.state_code || '',
-          }
+          title: participant.address.state_code || '',
+          value: participant.address.state_code || '',
+        }
+        : null,
+      rg_emitter_uf_select: participant.rg_emitter_uf
+        ? {
+          title: participant.rg_emitter_uf,
+          value: participant.rg_emitter_uf,
+        }
         : null,
     },
   });
@@ -104,6 +111,7 @@ const Form: React.FC<Props> = ({
         state_code: data?.state_code_select?.value || '',
       },
       birth_date: data.formatted_birth_date,
+      rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
     });
     setLoading(false);
   });

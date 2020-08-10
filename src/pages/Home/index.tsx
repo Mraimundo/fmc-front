@@ -9,6 +9,7 @@ import {
   Highlights,
   Performance,
   MyPoints,
+  Showcase,
 } from 'components/Home';
 import {
   Wrapper,
@@ -51,7 +52,7 @@ const Home: React.FC = () => {
       <ShowCaseWrapper>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios</Title>
-          <h4>em breve</h4>
+          <Showcase />
         </Wrapper>
       </ShowCaseWrapper>
     </div>

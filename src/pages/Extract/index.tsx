@@ -100,7 +100,7 @@ const Extract: React.FC = () => {
       </Content>
       {pathKey === '/extract' && (
         <ExtractLegend>
-          *Ações Compartilhadas: é a verba reservada para você e seu RTC/KAM
+          *Ações Compartilhadas: é a verba reservada para você e seu RTC
           definirem juntos quais as melhores ações e práticas para ajudar a
           prosperar
           {userType === 'Revenda' ? ` seu negócio` : ' a sua cooperativa.'}.

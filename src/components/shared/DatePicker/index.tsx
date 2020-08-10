@@ -30,6 +30,7 @@ interface InputProps {
   onChange(value: Date | null): void;
   className?: string;
   placeholder?: string;
+  error?: string;
 }
 
 const DatePicker: React.FC<InputProps> = ({
@@ -40,11 +41,11 @@ const DatePicker: React.FC<InputProps> = ({
   value,
   onChange,
   placeholder,
+  error,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [datePickerOpened, setDatePickerOpened] = useState(false);
-  const error = '';
   const inputRef = useRef<HTMLInputElement>(null);
   const [formattedValue, setFormattedValue] = useState('');
 

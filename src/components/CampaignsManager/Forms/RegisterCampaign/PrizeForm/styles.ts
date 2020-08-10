@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import DefaultInput from 'components/shared/Input/BaseInput';
+import DefaultTextArea from 'components/shared/TextArea/BaseTextArea';
 
 export const Container = styled.div`
   display: flex;
@@ -43,29 +45,28 @@ export const Body = styled.div`
   flex-direction: column;
   margin-top: 20px;
 
-  > input {
-    width: 100%;
-    max-width: 586px;
-    height: 44px;
-    padding: 0 16px;
-    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
-  }
-
-  > textarea {
-    resize: none;
-    width: 100%;
-    max-width: 586px;
-    height: 95px;
-    padding: 16px;
-    margin-top: 12px;
-    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
-  }
-
   > span {
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.quartenary};
     max-width: 586px;
     margin-top: 12px;
     text-align: justify;
+  }
+`;
+
+export const Input = styled(DefaultInput)`
+  ._inputContainer {
+    width: 100%;
+    max-width: 586px;
+    height: 44px;
+  }
+`;
+
+export const TextArea = styled(DefaultTextArea)`
+  margin-top: 12px;
+  ._inputContainer {
+    width: 100%;
+    max-width: 586px;
+    height: 95px;
   }
 `;

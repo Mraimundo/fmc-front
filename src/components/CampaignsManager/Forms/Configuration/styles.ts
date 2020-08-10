@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
+import DefaultInput from 'components/shared/Input/BaseInput';
+import DefaultTextArea from 'components/shared/TextArea/BaseTextArea';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 35px;
-
-  > input[type='text'] {
-    width: 100%;
-    max-width: 435px;
-    height: 44px;
-    padding: 0 15px;
-  }
 
   > h4 {
     color: ${({ theme }) => theme.font.color.primary};
@@ -25,16 +20,6 @@ export const Container = styled.div`
     font-size: 16px;
     margin-bottom: 2px;
     margin-top: 25px;
-  }
-
-  > textarea {
-    resize: none;
-    width: 100%;
-    max-width: 435px;
-    height: 132px;
-    padding: 16px;
-    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
-    margin-bottom: 35px;
   }
 `;
 
@@ -84,5 +69,23 @@ export const ActionBox = styled.div`
     width: 232px;
     height: 48px;
     text-transform: uppercase;
+  }
+`;
+
+export const Input = styled(DefaultInput)`
+  ._inputContainer {
+    width: 100%;
+    max-width: 435px;
+    height: 44px;
+  }
+`;
+
+export const TextArea = styled(DefaultTextArea)`
+  margin-top: 12px;
+  margin-bottom: 35px;
+  ._inputContainer {
+    width: 100%;
+    max-width: 435px;
+    height: 132px;
   }
 `;

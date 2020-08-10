@@ -8,5 +8,5 @@ export const FONTS = {
   bold2: 'Helvetica-Neue-Bold-Ext',
   regular2: 'Helvetica-Neue-Regular-Ext',
   condensed: 'Helvetica-Neue-Condensed',
-  condensed2: 'Helvetica-Neue-Italic',
+  condensed2: 'Helvetica-Neue-Condensed',
 };

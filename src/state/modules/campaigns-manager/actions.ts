@@ -19,8 +19,9 @@ import {
   SET_MECHANIC,
   SET_CAMPAIGN,
   RESET,
+  SET_ERRORS,
 } from './constants';
-import { TextField, ValueField } from './types';
+import { TextField, ValueField, Errors } from './types';
 
 export const addGoal = (
   data: Goal,
@@ -124,6 +125,14 @@ export const setCampaign = (
 
 export const reset = (): ActionCreator<typeof RESET> => <const>{ type: RESET };
 
+export const setErrors = (
+  data: Errors,
+): ActionCreatorPayload<typeof SET_ERRORS, Errors> =>
+  <const>{
+    type: SET_ERRORS,
+    payload: data,
+  };
+
 export type CampaignsManagerActions = ReturnType<
   | typeof addGoal
   | typeof removeGoal
@@ -138,4 +147,5 @@ export type CampaignsManagerActions = ReturnType<
   | typeof setMechanic
   | typeof setCampaign
   | typeof reset
+  | typeof setErrors
 >;

@@ -11,6 +11,7 @@ interface ResaleCooperativeResumeProps {
   invoicePoints: number;
   maxInvoicePercentage: number;
   establishmentType: EstablishmentType | '';
+  hasInvoicePoints: boolean;
 }
 const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   totalPoints,
@@ -18,6 +19,7 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
   invoicePoints,
   maxInvoicePercentage,
   establishmentType,
+  hasInvoicePoints,
 }) => {
   const resaleCooperativeTotalPoints = useMemo(
     () => totalPoints - (invoicePoints + marketplacePoints),
@@ -38,6 +40,7 @@ const ResaleCooperativeResume: React.FC<ResaleCooperativeResumeProps> = ({
         marketplacePoints={marketplacePoints}
         maxInvoicePercentage={maxInvoicePercentage}
         totalPoints={totalPoints}
+        hasInvoicePoints={hasInvoicePoints}
       />
     </Wrapper>
   );

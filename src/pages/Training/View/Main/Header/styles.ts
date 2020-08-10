@@ -55,16 +55,29 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: 720px) {
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    > span {
+      width: 100%;
+    }
+
     > div {
+      padding: 10px 0;
       max-width: 500px;
       justify-content: center;
       align-items: center;
+
+      > h3 {
+        text-align: center;
+      }
+
       & + div {
         margin-top: 40px;
       }
 
-      > span {
-        align-self: flex-start;
+      > div {
+        justify-content: center;
       }
 
       > img {

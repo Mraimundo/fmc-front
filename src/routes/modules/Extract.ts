@@ -1,14 +1,15 @@
+import routeMap from 'routes/route-map';
 import Extract from 'pages/Extract';
 import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/extract',
+    path: routeMap.extract.channel,
     component: Extract,
     accessPage: 'Página de extrato',
   },
   {
-    path: '/myextract',
+    path: routeMap.extract.my,
     component: Extract,
     accessPage: 'Página de extrato',
   },

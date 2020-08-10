@@ -26,7 +26,7 @@ const DocumentsGrid: React.FC<Props> = ({ gallery }) => {
           <img src={item.coverPictureUrl} alt={item.title} />
           <div>
             <h3>
-              {item.title || 'Título não informaro'}
+              {item.title || 'Título não informado'}
               {` (.${item.fileType})`}
             </h3>
             <span>{`${item.date}`} </span>

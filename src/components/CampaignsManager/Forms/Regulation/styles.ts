@@ -50,6 +50,11 @@ export const RegulationDownload = styled.button`
   align-self: flex-start;
   height: 38px;
 
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
   svg {
     margin-right: 12px;
     fill: ${({ theme }) => theme.font.color.primary};

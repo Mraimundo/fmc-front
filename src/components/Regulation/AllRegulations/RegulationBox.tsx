@@ -54,12 +54,12 @@ const RegulationBox: React.FC<Props> = ({
   const handleSavePdf = useCallback(async () => {
     if (!regulation) return;
     setLoading(true);
-    const url = await getUrl(regulation.id);
+    const url = await getUrl(regulation.id, `${regulation.name}.pdf`);
     setLoading(false);
 
     const linkClick = document.createElement('a');
     linkClick.href = url;
-    linkClick.download = 'Regulamento.pdf';
+    linkClick.download = `${regulation.name}.pdf`;
     document.body.appendChild(linkClick);
     linkClick.click();
     document.body.removeChild(linkClick);

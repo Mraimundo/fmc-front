@@ -8,21 +8,26 @@ export const getParticipantBadgeByPortugueseTerm = (
     Água: Badge.Water,
     Semente: Badge.Seed,
     Terra: Badge.Land,
-    Root: Badge.Root,
+    Raiz: Badge.Root,
   };
 
   return portugueseTermsMap[term];
 };
 
-export const getMenuByUrl = (url: string, menus: MenuItem[] | null): MenuItem | null => {
+export const getMenuByUrl = (
+  url: string,
+  menus: MenuItem[] | null,
+): MenuItem | null => {
   if (!menus) return null;
 
-  return menus.find((menu: MenuItem) => {
-    const hasChildren = menu.children && menu.children.length > 0;
-    if (!hasChildren) return menu.to === url;
+  return (
+    menus.find((menu: MenuItem) => {
+      const hasChildren = menu.children && menu.children.length > 0;
+      if (!hasChildren) return menu.to === url;
 
-    return getMenuByUrl(url, menu.children);
-  }) || null;
+      return getMenuByUrl(url, menu.children);
+    }) || null
+  );
 };
 
 export const isSelectedMenu = (

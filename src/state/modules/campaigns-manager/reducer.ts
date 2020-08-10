@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { newEmptyCampaignObject } from 'services/campaignsManager';
 import produce from 'immer';
+import { Errors } from './types';
 
 import { CampaignsManagerActions } from './actions';
 import {
@@ -18,16 +19,19 @@ import {
   SET_MECHANIC,
   SET_CAMPAIGN,
   RESET,
+  SET_ERRORS,
 } from './constants';
 
 export type CampaignsManagerState = {
   campaign: Campaign;
   canEdit: boolean;
+  errors: Errors;
 };
 
 export const initialState: CampaignsManagerState = {
   campaign: newEmptyCampaignObject(),
   canEdit: true,
+  errors: {},
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -40,12 +44,12 @@ const CampaignsManagerReducer: Reducer<
   if (action.type !== SET_CAMPAIGN && !state.canEdit) {
     return state;
   }
-
   switch (action.type) {
     case SET_CAMPAIGN:
       return {
         canEdit: action.payload.canEdit,
         campaign: action.payload.campaign,
+        errors: {},
       };
     case ADD_GOAL:
       return produce(state, draft => {
@@ -116,6 +120,10 @@ const CampaignsManagerReducer: Reducer<
     case SET_MECHANIC:
       return produce(state, draft => {
         draft.campaign.mechanic = action.payload;
+      });
+    case SET_ERRORS:
+      return produce(state, draft => {
+        draft.errors = action.payload;
       });
     case RESET:
       return initialState;
