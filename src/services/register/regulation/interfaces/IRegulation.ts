@@ -14,9 +14,18 @@ export interface Regulation {
   accepted: boolean;
 }
 
+export interface AgreementTerm {
+  id: number;
+  is_accepted: boolean;
+}
+
 export interface RegulationResponse extends Omit<Regulation, 'accepted'> {
   regulation_accepted_logs: {
     id: number;
     created: Date;
   }[];
+}
+
+export interface AgreementTermResponse extends Omit<AgreementTerm, 'accepted'> {
+  is_accepted: boolean;
 }

@@ -8,6 +8,7 @@ import {
   getAllRegulations,
   getRegulationById,
   acceptRegulation,
+  fetchAgreementTerm,
 } from 'services/register/regulation';
 import Loading from './Loading';
 
@@ -19,6 +20,7 @@ import {
   Modal,
   Header,
 } from './styles';
+import AgreementTerm from '../AgreementTerm';
 
 interface Props {
   opened: boolean;
@@ -36,6 +38,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   );
   const [selectedRegulationIndex, setSelectedRegulationIndex] = useState(-1);
   const [regulation, setRegulation] = useState<Regulation | null>(null);
+  const [agreementTermIsAccepted, setAgreementTermIsAccepted] = useState(false);
 
   useEffect(() => {
     getAllRegulations().then(data => {
@@ -57,8 +60,20 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     if (selectedRegulationIndex === -1) return;
     if (!regulations) return;
     setLoading(true);
+
+    const selectedRegulation = regulations[selectedRegulationIndex];
+
+    const isAgreementTerm = selectedRegulation.type === 'safra_term';
+
+    if (isAgreementTerm) {
+      fetchAgreementTerm(selectedRegulation.id)
+        .then(resp => {
+          setAgreementTermIsAccepted(resp.is_accepted);
+        });
+    }
+
     setTimeout(() => {
-      getRegulationById(regulations[selectedRegulationIndex].id)
+      getRegulationById(selectedRegulation.id)
         .then(data => {
           setRegulation(data);
           setCanAccept(false);
@@ -108,7 +123,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
           <img src={logoImg} alt="Logo" />
         </Header>
         <Content>
-          {loading ? (
+          {loading && (
             <RegulationContent
               type="primary"
               onScroll={handleDivScroll}
@@ -116,25 +131,32 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
             >
               <Loading />
             </RegulationContent>
-          ) : (
-            <RegulationContent
-              type="primary"
-              onScroll={handleDivScroll}
-              key={`regulation-${regulation?.id}`}
-            >
-              {parser(regulation?.content || '')}
-            </RegulationContent>
           )}
 
-          <Button
-            type="button"
-            buttonRole="primary"
-            onClick={handleAcceptClick}
-            loading={accepting}
-            disabled={!canAccept || loading}
-          >
-            Aceito participar
-          </Button>
+          {!loading &&
+            regulation?.type === 'safra_term' &&
+            !agreementTermIsAccepted && <AgreementTerm filePath="" />}
+
+          {!loading && regulation?.type !== 'safra_term' && (
+            <div>
+              <RegulationContent
+                type="primary"
+                onScroll={handleDivScroll}
+                key={`regulation-${regulation?.id}`}
+              >
+                {parser(regulation?.content || '')}
+              </RegulationContent>
+              <Button
+                type="button"
+                buttonRole="primary"
+                onClick={handleAcceptClick}
+                loading={accepting}
+                disabled={!canAccept || loading}
+              >
+                Aceito participar
+              </Button>
+            </div>
+          )}
         </Content>
       </Container>
     </Modal>
