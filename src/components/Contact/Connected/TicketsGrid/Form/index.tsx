@@ -39,7 +39,7 @@ const Form: React.FC<Props> = ({ sendMessage, contactId }) => {
         }
 
         setAttachingFile(true);
-        const { url } = await uploadFileToStorage(e.target.files[0], 'avatar');
+        const { url } = await uploadFileToStorage(e.target.files[0], 'contact');
         setFileUrl(url);
         setAttachingFile(false);
       }

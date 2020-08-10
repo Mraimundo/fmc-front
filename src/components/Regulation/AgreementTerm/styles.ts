@@ -100,3 +100,59 @@ export const Header = styled.div`
     width: 364px;
   }
 `;
+
+export const RegulationDownload = styled.button`
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: ${({ theme }) => theme.font.color.primary};
+  background: transparent;
+  width: auto;
+  margin-bottom: 14px;
+  margin-top: 20px;
+  border: none;
+  height: auto;
+  align-self: flex-start;
+  height: 38px;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  svg {
+    margin-right: 12px;
+    fill: ${({ theme }) => theme.font.color.primary};
+    path {
+      fill: ${({ theme }) => theme.font.color.primary};
+    }
+  }
+`;
+
+export const StyledUploadAgreementTerm = styled.button`
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: ${({ theme }) => theme.font.color.primary};
+  background: transparent;
+  width: auto;
+  margin-bottom: 14px;
+  margin-top: 20px;
+  border: none;
+  height: auto;
+  align-self: flex-start;
+  height: 38px;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  svg {
+    margin-right: 12px;
+    fill: ${({ theme }) => theme.font.color.primary};
+    path {
+      fill: ${({ theme }) => theme.font.color.primary};
+    }
+  }
+`;

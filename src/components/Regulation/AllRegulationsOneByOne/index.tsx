@@ -38,7 +38,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   );
   const [selectedRegulationIndex, setSelectedRegulationIndex] = useState(-1);
   const [regulation, setRegulation] = useState<Regulation | null>(null);
-  const [agreementTermIsAccepted, setAgreementTermIsAccepted] = useState(false);
+  const [agreementTermIsApproved, setAgreementTermIsApproved] = useState(false);
 
   useEffect(() => {
     getAllRegulations().then(data => {
@@ -67,7 +67,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
 
     if (isAgreementTerm) {
       fetchAgreementTerm(selectedRegulation.id).then(resp => {
-        setAgreementTermIsAccepted(resp.is_accepted);
+        setAgreementTermIsApproved(resp.is_approved);
       });
     }
 
@@ -133,11 +133,14 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
           )}
 
           {!loading &&
-            regulation?.type === 'safra_term' &&
-            !agreementTermIsAccepted && <AgreementTerm filePath="" />}
-
-          {!loading && regulation?.type !== 'safra_term' && (
-            <div>
+          regulation?.type === 'safra_term' &&
+          !agreementTermIsApproved ? (
+            <AgreementTerm
+              regulation={regulation}
+              handleIsResponsible={() => setAgreementTermIsApproved(true)}
+            />
+          ) : (
+            <>
               <RegulationContent
                 type="primary"
                 onScroll={handleDivScroll}
@@ -156,9 +159,9 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
               </Button>
               <span>
                 {`O botão "Aceito Participar" será habilitado após a leitura do
-                regulamento na integra.`}
+              regulamento na integra.`}
               </span>
-            </div>
+            </>
           )}
         </Content>
       </Container>
