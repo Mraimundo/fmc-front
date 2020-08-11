@@ -35,7 +35,9 @@ export const participant: Participant = {
     'https://storage.vendavall.com.br/teste/avatars/1593900044.5f00fc0c6bc0c1.33183597.jpg',
 };
 
-export const waitingScoredParticipants: WaitingScoredParticipant[] | null = null;
+export const waitingScoredParticipants:
+  | WaitingScoredParticipant[]
+  | null = null;
 
 export const scoredParticipants: ScoredParticipant[] = [
   {
@@ -55,7 +57,8 @@ export const scoredParticipants: ScoredParticipant[] = [
     name: 'Centi',
     subsidiary: 'Unidade GHI',
     points: 21,
-    picture: 'https://storage.vendavall.com.br/teste/avatars/1593899963.5f00fbbb16a4d5.55411308.jpg',
+    picture:
+      'https://storage.vendavall.com.br/teste/avatars/1593899963.5f00fbbb16a4d5.55411308.jpg',
     role: roles[0],
   },
 ];

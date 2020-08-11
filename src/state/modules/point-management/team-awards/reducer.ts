@@ -223,6 +223,7 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
           points: action.meta.points,
           waitingScoredParticipants: state.waitingScoredParticipants,
           selectedParticipants: state.selectedParticipants,
+          pointsToDistribute: state.pointsToDistribute,
         }),
       };
 

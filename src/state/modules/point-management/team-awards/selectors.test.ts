@@ -22,6 +22,7 @@ import {
   getSelectedRolesAll,
   getTotalParticipants,
   getIsOpenModalMissingParticipants,
+  getAssignPoints,
   getSelectedParticipantsWithoutScore,
   getSelectedSubsidiariesWithName,
   getScoredParticipantsResume,
@@ -31,6 +32,7 @@ import {
   getAvailableScore,
   getIsEnabledToAssignPoints,
   getIsEnabledToDistributePoints,
+  getTotalScoredParticipants,
   getMissingParticipants,
 } from './selectors';
 import teamAwardsMock, {
@@ -123,6 +125,13 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
 
     test('check getIsOpenModalMissingParticipants', () => {
       expect(getIsOpenModalMissingParticipants(state)).to.be.false;
+    });
+
+    test('check getAssignPoints', () => {
+      expect(getAssignPoints(state)).to.be.deep.equal({
+        isFetching: false,
+        error: '',
+      });
     });
   });
 
@@ -433,6 +442,27 @@ describe('src/state/modules/point-management/team-awards/selectors', () => {
           },
         }),
       ).to.be.true;
+    });
+  });
+
+  describe('getTotalScoredParticipants', () => {
+    test('should return 3 with default state', () => {
+      expect(getTotalScoredParticipants(state)).to.be.equal(3);
+    });
+
+    test('should return 0 when dont have scored participants', () => {
+      expect(
+        getTotalScoredParticipants({
+          ...state,
+          pointManagement: {
+            ...pointManagementMock,
+            teamAwards: {
+              ...teamAwardsMock,
+              scoredParticipants: null,
+            }
+          },
+        }),
+      ).to.be.equal(0);
     });
   });
 

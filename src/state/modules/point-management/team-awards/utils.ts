@@ -1,3 +1,6 @@
+import orderBy from 'lodash.orderby';
+import unionBy from 'lodash.unionby';
+
 import {
   Participant,
   WaitingScoredParticipant,
@@ -139,38 +142,91 @@ export const extractParticipantsFromList = (
   );
 };
 
+const cutDecimals = (num: number): number => {
+  const newNumber: RegExpMatchArray | null = num
+    .toString()
+    .match(/^-?\d+(?:\.\d{0,2})?/);
+
+  return newNumber ? Number(newNumber[0]) : num;
+};
+
+const isNotExactDivision = (num: number) => {
+  const [, decimals] = num.toString().split('.');
+
+  return decimals ? decimals.length > 2 : false;
+};
+
 interface ScoreAllParticipantsEqually {
   selectedParticipants: number[] | null;
   waitingScoredParticipants: WaitingScoredParticipant[] | null;
   participants: ParticipantsList | null;
   points: number;
+  pointsToDistribute: number;
 }
 export const scoreAllParticipantsEqually = ({
   selectedParticipants,
   waitingScoredParticipants,
   participants: participantsList,
   points,
+  pointsToDistribute,
 }: ScoreAllParticipantsEqually): ScoredParticipant[] | null => {
   const participants = extractParticipantsFromList(participantsList);
 
   if (!participants || !selectedParticipants) return null;
 
-  const participantsToScore: ScoredParticipant[] = participants
-    .filter((participant: Participant): boolean =>
-      selectedParticipants.includes(participant.id),
-    )
-    .map(
-      (participant: Participant): ScoredParticipant => ({
-        ...participant,
-        points,
-      }),
-    );
+  const isExactDivision = !isNotExactDivision(points);
 
-  if (waitingScoredParticipants) {
-    return [...waitingScoredParticipants, ...participantsToScore];
+  const participantsToScore: ScoredParticipant[] = orderBy<ScoredParticipant>(
+    participants
+      .filter((participant: Participant): boolean =>
+        selectedParticipants.includes(participant.id),
+      )
+      .map(
+        (participant: Participant): ScoredParticipant => {
+          return {
+            ...participant,
+            points: isExactDivision ? points : cutDecimals(points),
+          };
+        },
+      ),
+    ['id'],
+  );
+
+  const concatToWaitingScoredParticipants = (
+    scoredParticipants: ScoredParticipant[],
+  ) => {
+    if (waitingScoredParticipants) {
+      return [...waitingScoredParticipants, ...scoredParticipants];
+    }
+
+    return scoredParticipants;
+  };
+
+  if (isExactDivision) {
+    return concatToWaitingScoredParticipants(participantsToScore);
   }
 
-  return participantsToScore;
+  const totalScored = participantsToScore.reduce((acc, val) => {
+    return acc + val.points;
+  }, 0);
+
+  const qtdParticipantsToAddCents =
+    (Number((pointsToDistribute - totalScored).toFixed(2)) || 0.01) * 100;
+
+  const participantsWithMoreCents = participantsToScore
+    .slice(0, qtdParticipantsToAddCents)
+    .map((participant: ScoredParticipant) => ({
+      ...participant,
+      points: participant.points + 0.01,
+    }));
+
+  return concatToWaitingScoredParticipants(
+    unionBy<ScoredParticipant>(
+      participantsWithMoreCents,
+      participantsToScore,
+      'id',
+    ),
+  );
 };
 
 export const isSelectedParticipant = (

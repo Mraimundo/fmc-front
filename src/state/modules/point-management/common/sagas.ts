@@ -15,6 +15,8 @@ import {
   getSelectedEstablishment,
   getPointsToDistribute,
   getIsResaleCooperativePointsOnly,
+  getTotalPointsResaleCooperative,
+  getTotalPointsTeamAwards,
 } from 'state/modules/point-management/common/selectors';
 import {
   getInvoicePoints,
@@ -175,17 +177,23 @@ export function* workerDistributePoints() {
 
 export function* workerVerifyDistributePointsPossibility() {
   try {
+    const totalPointsResaleCooperative: number = yield select(
+      getTotalPointsResaleCooperative,
+    );
     const isEnabledToRescue: boolean = yield select(getIsEnabledToRescue);
     const selectedEstablishment: Establishment = yield select(
       selectors.getSelectedEstablishment,
     );
 
-    if (!isEnabledToRescue) {
+    if (!isEnabledToRescue && totalPointsResaleCooperative) {
       throw new Error(
         `É necessário distribuir todos os pontos para ${selectedEstablishment.type} antes de finalizar`,
       );
     }
 
+    const totalPointsTeamAwards: number = yield select(
+      getTotalPointsTeamAwards,
+    );
     const isResaleCooperativePointsOnly = yield select(
       getIsResaleCooperativePointsOnly,
     );
@@ -193,7 +201,11 @@ export function* workerVerifyDistributePointsPossibility() {
       getIsEnabledToDistributePoints,
     );
 
-    if (!isResaleCooperativePointsOnly && !isEnabledToDistributePoints) {
+    if (
+      !isResaleCooperativePointsOnly &&
+      !isEnabledToDistributePoints &&
+      totalPointsTeamAwards
+    ) {
       throw new Error(
         'É necessário distribuir todos os pontos para a equipe antes de finalizar',
       );
