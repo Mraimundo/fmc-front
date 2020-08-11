@@ -14,7 +14,7 @@ export default async (
   };
 
   const { data } = await pluginApi.post<ApiResponse>(
-    'regulations/save-agreement-term',
+    '/participants/regulations/save-agreement-term-url',
     request,
   );
 

@@ -35,10 +35,32 @@ export const RegulationContent = styled.div<RegulationProps>`
   }
 `;
 
-export const Button = styled(DefaultButton)`
-  width: 100%;
-  max-width: 500px;
+export const StyledButtonConfirm = styled(DefaultButton)`
+  max-width: 275px;
+  height: 48px;
   margin-top: 30px;
+  text-transform: uppercase;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  background-color: #dd0022;
+  align-self: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+
+  &:hover {
+    background: ${shade(0.2, '#dd0022')}
+      radial-gradient(circle, transparent 1%, ${shade(0.2, '#dd0022')} 1%)
+      center/15000%;
+  }
+
+  &:active {
+    background-color: ${lighten(0.1, '#dd0022')};
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+  &:disabled {
+    background-color: ${shade(0.2, '#dd0022')};
+  }
 `;
 
 export const Modal = styled(DefaultModal)`
@@ -84,33 +106,6 @@ export const Container = styled.div`
   ${Content} {
     max-width: 1100px;
     width: 100%;
-  }
-
-  button {
-    height: 48px;
-    text-transform: uppercase;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    background-color: #dd0022;
-    width: 275px;
-    align-self: center;
-    margin-bottom: 10px;
-    font-size: 18px;
-
-    &:hover {
-      background: ${shade(0.2, '#dd0022')}
-        radial-gradient(circle, transparent 1%, ${shade(0.2, '#dd0022')} 1%)
-        center/15000%;
-    }
-
-    &:active {
-      background-color: ${lighten(0.1, '#dd0022')};
-      background-size: 100%;
-      transition: background 0s;
-    }
-
-    &:disabled {
-      background-color: ${shade(0.2, '#dd0022')};
-    }
   }
 `;
 

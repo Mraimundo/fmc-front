@@ -5,7 +5,7 @@ export default async (
   regulationId: string | number,
 ): Promise<AgreementTerm> => {
   const { data } = await pluginApi.get<AgreementTerm>(
-    `participants/regulations/getAgreementTerm?regulation_id=${regulationId}`,
+    `participants/regulations/get-agreement-term?regulation_id=${regulationId}`,
   );
   return data;
 };

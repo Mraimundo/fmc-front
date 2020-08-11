@@ -11,79 +11,59 @@ interface RegulationProps {
 export const StyledAgreementTermContent = styled.div<RegulationProps>`
   width: 100%;
   flex: 1;
+  text-align: justify;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
   padding: 50px 90px;
   overflow-y: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  h4 {
+    margin: 15px 0;
+  }
 `;
 
-export const Button = styled(DefaultButton)`
-  width: 100%;
-  max-width: 500px;
+export const StyledButtonConfirm = styled(DefaultButton)`
+  max-width: 275px;
+  height: 72px;
   margin-top: 30px;
+  text-transform: uppercase;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  background-color: #dd0022;
+  align-self: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  padding: 36px 0;
+
+  &:hover {
+    background: ${shade(0.2, '#dd0022')}
+      radial-gradient(circle, transparent 1%, ${shade(0.2, '#dd0022')} 1%)
+      center/15000%;
+  }
+
+  &:active {
+    background-color: ${lighten(0.1, '#dd0022')};
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+  &:disabled {
+    background-color: ${shade(0.2, '#dd0022')};
+  }
 `;
 
 export const Modal = styled(DefaultModal)`
   padding: 0;
   ._modalContainer {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 400px;
     margin: 0;
     padding: 0;
     max-height: 100vh;
-  }
-`;
-
-export const Content = styled.div`
-  max-height: calc(100% - 161px);
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: url(${background});
-
-  > img {
-    width: 320px;
-    margin-top: 20px;
-    margin-bottom: 18px;
-  }
-
-  ${Content} {
-    max-width: 1100px;
-    width: 100%;
-  }
-
-  button {
-    height: 48px;
-    text-transform: uppercase;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    background-color: #dd0022;
-    width: 275px;
-    align-self: center;
-    margin-bottom: 65px;
-    font-size: 18px;
-
-    &:hover {
-      background: ${shade(0.2, '#dd0022')}
-        radial-gradient(circle, transparent 1%, ${shade(0.2, '#dd0022')} 1%)
-        center/15000%;
-    }
-
-    &:active {
-      background-color: ${lighten(0.1, '#dd0022')};
-      background-size: 100%;
-      transition: background 0s;
-    }
-
-    &:disabled {
-      background-color: ${shade(0.2, '#dd0022')};
-    }
+    color: #000;
   }
 `;
 
@@ -102,57 +82,59 @@ export const Header = styled.div`
 `;
 
 export const RegulationDownload = styled.button`
+  height: 60px;
+  width: 250px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 16px;
   color: ${({ theme }) => theme.font.color.primary};
-  background: transparent;
-  width: auto;
+  background: #ddd;
   margin-bottom: 14px;
   margin-top: 20px;
   border: none;
-  height: auto;
   align-self: flex-start;
-  height: 38px;
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-  }
-
-  svg {
-    margin-right: 12px;
-    fill: ${({ theme }) => theme.font.color.primary};
-    path {
-      fill: ${({ theme }) => theme.font.color.primary};
-    }
   }
 `;
 
 export const StyledUploadAgreementTerm = styled.button`
+  height: 60px;
+  width: 250px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 16px;
   color: ${({ theme }) => theme.font.color.primary};
-  background: transparent;
-  width: auto;
+  background: #ddd;
   margin-bottom: 14px;
   margin-top: 20px;
   border: none;
-  height: auto;
   align-self: flex-start;
-  height: 38px;
+
+  input {
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+
+  button {
+    height: 60px;
+    width: 250px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+  }
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
   }
+`;
 
-  svg {
-    margin-right: 12px;
-    fill: ${({ theme }) => theme.font.color.primary};
-    path {
-      fill: ${({ theme }) => theme.font.color.primary};
-    }
-  }
+export const StyledActions = styled.div`
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
 `;

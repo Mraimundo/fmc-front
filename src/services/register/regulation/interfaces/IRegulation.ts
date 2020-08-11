@@ -22,5 +22,5 @@ export interface RegulationResponse extends Omit<Regulation, 'accepted'> {
 }
 
 export interface AgreementTerm {
-  is_approved: boolean;
+  agreement_term: [{ approved: boolean }];
 }
