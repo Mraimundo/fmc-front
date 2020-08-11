@@ -30,8 +30,8 @@ const AgreementTerm: React.FC<Props> = ({
   const [fileUrl, setFileUrl] = useState('');
   const inputFileRef = useRef<HTMLInputElement>(null);
   const { addToast } = useToast();
-  const [, setShowModal] = useState(false);
   const [showUploadedModal, setShowUploadedModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleDownloadClick = useCallback(async () => {
     if (!regulation) return;
@@ -57,7 +57,9 @@ const AgreementTerm: React.FC<Props> = ({
 
   const saveUploadedUrl = useCallback(
     async (regulationId: number, url: string) => {
-      await saveUrlAgreementTerm(regulationId, url);
+      const { status } = await saveUrlAgreementTerm(regulationId, url);
+
+      return status;
     },
     [],
   );
@@ -81,8 +83,11 @@ const AgreementTerm: React.FC<Props> = ({
         );
         setFileUrl(url);
         setAttachingFile(false);
-        saveUploadedUrl(regulation.id, url);
-        setShowUploadedModal(true);
+        if ((await saveUploadedUrl(regulation.id, url)) === 'success') {
+          setShowUploadedModal(true);
+        } else {
+          setShowErrorModal(true);
+        }
       }
     },
     [addToast, saveUploadedUrl, regulation.id],
@@ -164,7 +169,7 @@ const AgreementTerm: React.FC<Props> = ({
       <Modal
         isOpen={showUploadedModal}
         onRequestClose={() => {
-          setShowModal(false);
+          setShowUploadedModal(false);
           handleSendAgreementTerm();
         }}
       >
@@ -178,8 +183,27 @@ const AgreementTerm: React.FC<Props> = ({
             type="button"
             buttonRole="primary"
             onClick={() => {
-              setShowModal(false);
+              setShowUploadedModal(false);
               handleSendAgreementTerm();
+            }}
+          >
+            Ok
+          </StyledButtonConfirm>
+        </ModalContent>
+      </Modal>
+      <Modal
+        isOpen={showErrorModal}
+        onRequestClose={() => {
+          setShowErrorModal(false);
+        }}
+      >
+        <ModalContent>
+          <h2>Ocorreu um erro ao enviar o Acordo de Safra, tente novamente.</h2>
+          <StyledButtonConfirm
+            type="button"
+            buttonRole="primary"
+            onClick={() => {
+              setShowErrorModal(false);
             }}
           >
             Ok

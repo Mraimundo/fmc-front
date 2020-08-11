@@ -1,6 +1,7 @@
 import { pluginApi } from 'services/api';
 
 interface ApiResponse {
+  status: string;
   message: string;
 }
 
