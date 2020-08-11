@@ -20,3 +20,7 @@ export interface RegulationResponse extends Omit<Regulation, 'accepted'> {
     created: Date;
   }[];
 }
+
+export interface AgreementTerm {
+  list_agreement_terms: [{ approved: boolean }];
+}
