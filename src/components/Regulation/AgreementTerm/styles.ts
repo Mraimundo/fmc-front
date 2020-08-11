@@ -8,36 +8,27 @@ import backgroundHeader from 'assets/images/background-header.svg';
 interface RegulationProps {
   type: 'primary' | 'secondary';
 }
-export const RegulationContent = styled.div<RegulationProps>`
-  display: flex;
-  flex-direction: column;
-
+export const StyledAgreementTermContent = styled.div<RegulationProps>`
   width: 100%;
   flex: 1;
+  text-align: justify;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 50px 0 0 90px;
+  padding: 50px 90px;
   overflow-y: auto;
 
-  > h3 {
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: ${({ theme }) => theme.font.color.quartenary};
-    font-size: 18px;
+  h1 {
+    text-align: center;
   }
 
-  > div {
-    width: 100%;
-    flex: 1;
-    background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
-    color: ${({ theme, type }) => theme.regulation[type].fontColor};
-    overflow-y: auto;
-    padding: 30px 90px 50px 0;
+  h4 {
+    margin: 15px 0;
   }
 `;
 
 export const StyledButtonConfirm = styled(DefaultButton)`
   max-width: 275px;
-  height: 48px;
+  height: 72px;
   margin-top: 30px;
   text-transform: uppercase;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -45,6 +36,7 @@ export const StyledButtonConfirm = styled(DefaultButton)`
   align-self: center;
   margin-bottom: 10px;
   font-size: 18px;
+  padding: 36px 0;
 
   &:hover {
     background: ${shade(0.2, '#dd0022')}
@@ -66,47 +58,23 @@ export const StyledButtonConfirm = styled(DefaultButton)`
 export const Modal = styled(DefaultModal)`
   padding: 0;
   ._modalContainer {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 400px;
     margin: 0;
     padding: 0;
     max-height: 100vh;
+    color: #000;
   }
 `;
 
-export const Content = styled.div`
-  max-height: calc(100% - 161px);
-  display: flex;
-  flex-direction: column;
-
-  > span {
-    color: ${({ theme }) => theme.font.color.quartenary};
-    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
-    font-size: 14px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 35px;
-  }
-`;
-
-export const Container = styled.div`
+export const ModalContent = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background: url(${background});
-
-  > img {
-    width: 320px;
-    margin-top: 20px;
-    margin-bottom: 18px;
-  }
-
-  ${Content} {
-    max-width: 1100px;
-    width: 100%;
-  }
+  padding: 40px 30px;
 `;
 
 export const Header = styled.div`
@@ -123,20 +91,60 @@ export const Header = styled.div`
   }
 `;
 
-export const StyledAgreementTermPending = styled.div<RegulationProps>`
-  width: 100%;
-  flex: 1;
-  text-align: center;
-  background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
-  color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 50px 90px;
-  overflow-y: auto;
+export const RegulationDownload = styled.button`
+  height: 60px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: ${({ theme }) => theme.font.color.primary};
+  background: #ddd;
+  margin-bottom: 14px;
+  margin-top: 20px;
+  border: none;
+  align-self: flex-start;
 
-  h1 {
-    text-align: center;
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export const StyledUploadAgreementTerm = styled.button`
+  height: 60px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: ${({ theme }) => theme.font.color.primary};
+  background: #ddd;
+  margin-bottom: 14px;
+  margin-top: 20px;
+  border: none;
+  align-self: flex-start;
+
+  input {
+    opacity: 0;
+    height: 0;
+    width: 0;
   }
 
-  h4 {
-    margin: 15px 0;
+  button {
+    height: 60px;
+    width: 250px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
   }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export const StyledActions = styled.div`
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
 `;

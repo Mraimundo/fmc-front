@@ -3,6 +3,7 @@ import getAllRegulations from './getAllRegulations';
 import getDataRegulation from './getDataRegulation';
 import getRegulationById from './getRegulationById';
 import isThereAnyRegulationToAccept from './isThereAnyRegulationToAccept';
+import fetchAgreementTerm from './fetchAgreementTerm';
 
 export {
   acceptRegulation,
@@ -10,4 +11,5 @@ export {
   getDataRegulation,
   getRegulationById,
   isThereAnyRegulationToAccept,
+  fetchAgreementTerm,
 };
