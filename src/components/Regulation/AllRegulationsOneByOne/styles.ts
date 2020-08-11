@@ -122,3 +122,21 @@ export const Header = styled.div`
     width: 364px;
   }
 `;
+
+export const StyledAgreementTermPending = styled.div<RegulationProps>`
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
+  color: ${({ theme, type }) => theme.regulation[type].fontColor};
+  padding: 50px 90px;
+  overflow-y: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  h4 {
+    margin: 15px 0;
+  }
+`;

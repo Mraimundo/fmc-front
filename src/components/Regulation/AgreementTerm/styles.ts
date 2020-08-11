@@ -67,6 +67,16 @@ export const Modal = styled(DefaultModal)`
   }
 `;
 
+export const ModalContent = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+`;
+
 export const Header = styled.div`
   width: 100%;
   padding: 0;

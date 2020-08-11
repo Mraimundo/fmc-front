@@ -11,6 +11,7 @@ import {
   StyledUploadAgreementTerm,
   StyledActions,
   Modal,
+  ModalContent,
 } from './styles';
 
 interface Props {
@@ -167,7 +168,23 @@ const AgreementTerm: React.FC<Props> = ({
           handleSendAgreementTerm();
         }}
       >
-        Acordo enviado
+        <ModalContent>
+          <h2>Obrigado por enviar o Acordo de Safra.</h2>
+          <div>
+            Em alguns dias iremos verificar a assinatura e se estiver tudo certo
+            você será avisado por email que seu acesso está liberado.
+          </div>
+          <StyledButtonConfirm
+            type="button"
+            buttonRole="primary"
+            onClick={() => {
+              setShowModal(false);
+              handleSendAgreementTerm();
+            }}
+          >
+            Ok
+          </StyledButtonConfirm>
+        </ModalContent>
       </Modal>
     </>
   );

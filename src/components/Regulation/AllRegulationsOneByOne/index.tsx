@@ -19,6 +19,7 @@ import {
   StyledButtonConfirm,
   Modal,
   Header,
+  StyledAgreementTermPending,
 } from './styles';
 import AgreementTerm from '../AgreementTerm';
 
@@ -157,9 +158,13 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
             <img src={logoImg} alt="Logo" />
           </Header>
           <Content>
-            <RegulationContent type="primary" key="loading">
-              Acordo de Safra em análise
-            </RegulationContent>
+            <StyledAgreementTermPending type="primary">
+              <h2>Acordo de Safra em análise.</h2>
+              <div>
+                Em alguns dias iremos verificar a assinatura e se estiver tudo
+                certo você será avisado por email que seu acesso está liberado.
+              </div>
+            </StyledAgreementTermPending>
           </Content>
         </Container>
       </Modal>
