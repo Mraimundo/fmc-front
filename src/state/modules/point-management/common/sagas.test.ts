@@ -300,17 +300,21 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([
+          [select(selectors.getTotalPointsResaleCooperative), 100],
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), true],
           [select(selectors.getSelectedEstablishment), establishments[0]],
           [select(getMissingParticipants), 0],
+          [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
           [matchers.call.fn(workerDistributePoints), null],
         ])
+        .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
         .select(selectors.getSelectedEstablishment)
         .select(getMissingParticipants)
+        .select(selectors.getTotalPointsTeamAwards)
         .select(selectors.getIsResaleCooperativePointsOnly)
         .call(workerDistributePoints)
         .dispatch(actions.distributePoints())
@@ -325,9 +329,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([
+          [select(selectors.getTotalPointsResaleCooperative), 100],
           [select(getIsEnabledToRescue), false],
           [select(selectors.getSelectedEstablishment), establishments[0]],
         ])
+        .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
         .select(selectors.getSelectedEstablishment)
         .call(handlerErrors, new Error(error), actions.distributePointsFailure)
@@ -350,14 +356,18 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([
+          [select(selectors.getTotalPointsResaleCooperative), 100],
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), false],
           [select(selectors.getSelectedEstablishment), establishments[0]],
+          [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
         ])
+        .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
         .select(selectors.getSelectedEstablishment)
+        .select(selectors.getTotalPointsTeamAwards)
         .select(selectors.getIsResaleCooperativePointsOnly)
         .call(handlerErrors, new Error(error), actions.distributePointsFailure)
         .not.call.fn(workerDistributePoints)
@@ -377,16 +387,20 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .withReducer(reducer)
         .withState(initialState)
         .provide([
+          [select(selectors.getTotalPointsResaleCooperative), 100],
           [select(getIsEnabledToRescue), true],
           [select(getIsEnabledToDistributePoints), true],
           [select(selectors.getSelectedEstablishment), establishments[0]],
           [select(getMissingParticipants), 1],
+          [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
         ])
+        .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
         .select(getIsEnabledToDistributePoints)
         .select(selectors.getSelectedEstablishment)
         .select(getMissingParticipants)
+        .select(selectors.getTotalPointsTeamAwards)
         .select(selectors.getIsResaleCooperativePointsOnly)
         .put(toggleIsOpenModalMissingParticipants())
         .returns(undefined)

@@ -21,6 +21,11 @@ export const List = styled(TabList)`
   margin: 0;
   border: none;
 
+  .disabled-tab {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
   @media screen and (max-width: 768px) {
     display: flex;
     justify-content: center;

@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { FetchState } from '@types';
 import { StoreState } from 'state/root-reducer';
 import { getTotalPointsTeamAwards } from 'state/modules/point-management/common/selectors';
 import {
@@ -67,6 +68,9 @@ export const getTotalParticipants = (state: StoreState): number =>
 
 export const getIsOpenModalMissingParticipants = (state: StoreState): boolean =>
   state.pointManagement.teamAwards.isOpenModalMissingParticipants;
+
+export const getAssignPoints = (state: StoreState): FetchState =>
+  state.pointManagement.teamAwards.assignPoints;
 
 export const getSelectedParticipantsWithoutScore = createSelector(
   getSelectedParticipants,

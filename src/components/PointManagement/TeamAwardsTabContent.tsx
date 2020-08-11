@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useToast } from 'context/ToastContext';
 import { StoreState } from 'state/root-reducer';
 import * as selectors from 'state/modules/point-management/team-awards/selectors';
 import * as actions from 'state/modules/point-management/team-awards/actions';
@@ -26,6 +27,7 @@ const TeamAwardsTabContent: React.FC = () => {
     isFetchingParticipant,
     selectedRolesAll,
     selectedParticipants,
+    assignPoints,
   ] = useSelector((state: StoreState) => [
     selectors.getSubsidiaries(state),
     selectors.getSelectedSubsidiaries(state),
@@ -39,8 +41,10 @@ const TeamAwardsTabContent: React.FC = () => {
     selectors.fetchParticipantIsFetching(state),
     selectors.getSelectedRolesAll(state),
     selectors.getSelectedParticipants(state),
+    selectors.getAssignPoints(state),
   ]);
 
+  const { addToast } = useToast();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -90,6 +94,11 @@ const TeamAwardsTabContent: React.FC = () => {
     },
     [dispatch],
   );
+
+  const { error } = assignPoints;
+  useEffect(() => {
+    if (error) addToast({ title: error, type: 'info' });
+  }, [error, addToast]);
 
   return (
     <>

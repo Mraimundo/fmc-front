@@ -114,7 +114,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
   });
 
   describe('scoreParticipant', () => {
-    const waitingScoredParticipants = scoredParticipants; //clone only
+    const waitingScoredParticipants = scoredParticipants; // clone only
     const points = 2000;
     const notScoredParticipant: Participant = {
       id: 4,
@@ -238,7 +238,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
       expect(extractParticipantsFromList(participants)).to.be.deep.equal([
         participants['Gerente Comercial'].list[0],
         participants['Gerente Comercial'].list[1],
-        participants['Supervisor'].list[0],
+        participants.Supervisor.list[0],
       ]);
     });
   });
@@ -255,6 +255,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
           waitingScoredParticipants: null,
           participants,
           points: 200,
+          pointsToDistribute: 0,
         }),
       ).to.be.an('array');
     });
@@ -266,6 +267,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
           waitingScoredParticipants: null,
           participants,
           points: 200,
+          pointsToDistribute: 0,
         }),
       ).to.be.null;
     });
@@ -277,6 +279,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
           waitingScoredParticipants: null,
           participants,
           points: 200,
+          pointsToDistribute: 0,
         }),
       ).to.be.deep.equal([
         {
@@ -293,6 +296,7 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
           waitingScoredParticipants: [{ ...participant, points: 10 }],
           participants,
           points: 500,
+          pointsToDistribute: 0,
         }),
       ).to.be.deep.equal([
         { ...participant, points: 10 },
@@ -301,6 +305,78 @@ describe('src/state/modules/point-management/team-awards/utils', () => {
           points: 500,
         },
       ]);
+    });
+
+    test('should return correct values with not exact division', () => {
+      const result = scoreAllParticipantsEqually({
+        selectedParticipants: [1, 2, 3],
+        waitingScoredParticipants: null,
+        participants,
+        points: 666.6666666666666,
+        pointsToDistribute: 2000,
+      });
+
+      const expectedResult = [
+        {
+          ...scoredParticipants[0],
+          points: 666.67,
+        },
+        {
+          ...scoredParticipants[1],
+          points: 666.67,
+        },
+        {
+          ...scoredParticipants[2],
+          points: 666.66,
+        },
+      ];
+
+      expect(result).to.have.lengthOf(expectedResult.length);
+      expectedResult.forEach(v => expect(result).to.deep.include(v));
+    });
+
+    test('should return correct values with not exact division and concating participant to already waiting to score', () => {
+      const fakeParticipant = {
+        id: 4,
+        name: 'Fernandinho',
+        subsidiary: 'Unidade B',
+        picture: null,
+        role: roles[0],
+        points: 20,
+      };
+
+      const result = scoreAllParticipantsEqually({
+        selectedParticipants: [1, 2, 3],
+        waitingScoredParticipants: [fakeParticipant],
+        participants: {
+          ...participants,
+          'Gerente Comercial': {
+            count: 3,
+            list: [...participants['Gerente Comercial'].list, fakeParticipant],
+          },
+        },
+        points: 72.6666666667,
+        pointsToDistribute: 218,
+      });
+
+      const expectedResult = [
+        {
+          ...scoredParticipants[0],
+          points: 72.67,
+        },
+        {
+          ...scoredParticipants[1],
+          points: 72.67,
+        },
+        {
+          ...scoredParticipants[2],
+          points: 72.66,
+        },
+        fakeParticipant,
+      ];
+
+      expect(result).to.have.lengthOf(expectedResult.length);
+      expectedResult.forEach(v => expect(result).to.deep.include(v));
     });
   });
 

@@ -38,13 +38,15 @@ export const MenuItem = styled.li<MenuItemProps>`
     }
   }
 
-  ${({ selectedMenu }) => selectedMenu && css`
-    background-color: #fff;
+  ${({ selectedMenu }) =>
+    selectedMenu &&
+    css`
+      background-color: #fff;
 
-    a {
-      color: ${({ theme }) => theme.font.color.primary};
-    }
-  `}
+      a {
+        color: ${({ theme }) => theme.font.color.primary};
+      }
+    `}
 
   &:hover {
     background-color: #fff;
@@ -82,7 +84,8 @@ export const SubMenuStyle = css`
 
   > li {
     width: 100%;
-    height: 35px;
+    height: auto;
+    min-height: 35px;
     color: transparent;
     background-color: transparent;
     text-transform: initial;

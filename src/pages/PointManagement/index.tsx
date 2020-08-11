@@ -45,6 +45,8 @@ const PointManagement: React.FC = () => {
     fetchPointsToDistribute,
     distributePoints,
     finishedDistribution,
+    totalPointsResaleCooperative,
+    totalPointsTeamAwards,
     isOpenModalMissingParticipants,
     missingParticipants,
   ] = [
@@ -55,6 +57,8 @@ const PointManagement: React.FC = () => {
     useSelector(selectors.getFetchPointsToDistribute),
     useSelector(selectors.getDistributePoints),
     useSelector(selectors.getFinishedDistribution),
+    useSelector(selectors.getTotalPointsResaleCooperative),
+    useSelector(selectors.getTotalPointsTeamAwards),
     useSelector(getIsOpenModalMissingParticipants),
     useSelector(getMissingParticipants),
   ];
@@ -115,10 +119,22 @@ const PointManagement: React.FC = () => {
           <Header establishmentType={selectedEstablishment.type} />
         )}
         {isReadyToDistribute && (
-          <Tabs>
+          <Tabs defaultIndex={!totalPointsResaleCooperative ? 1 : 0}>
             <List>
-              <Tab>PONTOS {selectedEstablishment?.type || ''}</Tab>
-              {!isResaleCooperativePointsOnly && <Tab>PREMIAÇÃO EQUIPE</Tab>}
+              <Tab
+                disabled={!totalPointsResaleCooperative}
+                disabledClassName="disabled-tab"
+              >
+                PONTOS {selectedEstablishment?.type || ''}
+              </Tab>
+              {!isResaleCooperativePointsOnly && (
+                <Tab
+                  disabled={!totalPointsTeamAwards}
+                  disabledClassName="disabled-tab"
+                >
+                  PREMIAÇÃO EQUIPE
+                </Tab>
+              )}
             </List>
 
             <Panel>

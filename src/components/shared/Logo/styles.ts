@@ -11,11 +11,20 @@ export const Container = styled.div`
 export const Content = styled.div`
   height: 95px;
   display: flex;
-  width: 100%;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 12px 20px;
   background: #fff;
-  // max-width: 1100px;
+
+  > a {
+    display: flex;
+    align-items: center;
+  }
+
+  > div svg {
+    margin-top: 1.5em;
+  }
 
   @media screen and (max-width: 720px) {
     justify-content: center;

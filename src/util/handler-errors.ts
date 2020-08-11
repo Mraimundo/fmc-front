@@ -13,7 +13,7 @@ export function* handlerErrors(
   error: TAxios & Error,
   actionCreatorFailure: ActionCreatorFailureType,
 ) {
-  if (error && error.stack && error.message) {
+  if (error && error.stack && error.message && !error?.response) {
     yield put(actionCreatorFailure(error.message));
     return;
   }
