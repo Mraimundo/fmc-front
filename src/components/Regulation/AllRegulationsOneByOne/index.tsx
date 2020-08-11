@@ -71,7 +71,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
 
     if (isAgreementTerm) {
       fetchAgreementTerm(selectedRegulation.id).then(resp => {
-        const hasPending = resp.agreement_term.filter(
+        const hasPending = resp.list_agreement_terms.filter(
           term => term.approved === null,
         );
 
@@ -79,7 +79,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
           setHasPendingAgreementTerm(true);
         }
 
-        const hasApproved = resp.agreement_term.filter(
+        const hasApproved = resp.list_agreement_terms.filter(
           term => term.approved === true,
         );
 
