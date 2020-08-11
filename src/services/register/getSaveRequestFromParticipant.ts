@@ -35,6 +35,7 @@ interface SaveRequest {
   establishment_id: number;
   role_id: number;
   regulations_accepted: Regulation[];
+  access_premio_ideall: boolean;
 }
 
 export default (participant: Participant): SaveRequest => {
@@ -66,10 +67,13 @@ export default (participant: Participant): SaveRequest => {
     district: participant.address.district,
     establishment_id: participant.establishment.id,
     role_id: participant.role.id,
-
     password: participant.password,
     password_confirmation: participant.password_confirmation,
     education_level: participant.education_level,
     regulations_accepted: participant.regulations_accepted,
+    access_premio_ideall:
+      participant.profile === 'FOCALPOINT'
+        ? participant.access_premio_ideall
+        : true,
   };
 };

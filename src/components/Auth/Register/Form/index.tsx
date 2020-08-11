@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
@@ -16,6 +16,7 @@ import {
   PasswordInput,
   Button,
   BoxPhone,
+  BoxAutoIndication,
 } from './styles';
 
 interface Props {
@@ -40,9 +41,20 @@ const Form: React.FC<Props> = ({
   editing = false,
 }) => {
   const [loading, setLoading] = useState(false);
+  const [autoindicate, setAutoindicate] = useState(false);
   const inputRole = 'secondary';
 
-  const schema = getschemaValidations(participant.profile, editing);
+  const schema = getschemaValidations(
+    participant.profile,
+    editing,
+    autoindicate,
+  );
+
+  useEffect(() => {
+    if (participant.profile === PROFILES.focalPoint) {
+      setAutoindicate(participant.access_premio_ideall);
+    }
+  }, [participant.profile, participant.access_premio_ideall]);
 
   const methods = useForm<FormData>({
     validationSchema: schema,
@@ -57,49 +69,58 @@ const Form: React.FC<Props> = ({
         ) || '',
       gender_select: participant.gender
         ? {
-          value: participant.gender,
-          title:
-            participant.gender.toLowerCase() === 'm'
-              ? 'Masculino'
-              : 'Feminino',
-        }
+            value: participant.gender,
+            title:
+              participant.gender.toLowerCase() === 'm'
+                ? 'Masculino'
+                : 'Feminino',
+          }
         : null,
       public_place_select: participant.address.public_place
         ? {
-          title: participant.address.public_place || '',
-          value: participant.address.public_place || '',
-        }
+            title: participant.address.public_place || '',
+            value: participant.address.public_place || '',
+          }
         : null,
       marital_status_select: participant.marital_status
         ? {
-          title: participant.marital_status || '',
-          value: participant.marital_status || '',
-        }
+            title: participant.marital_status || '',
+            value: participant.marital_status || '',
+          }
         : null,
       education_level_select: participant.education_level
         ? {
-          title: participant.education_level || '',
-          value: participant.education_level || '',
-        }
+            title: participant.education_level || '',
+            value: participant.education_level || '',
+          }
         : null,
       state_code_select: participant.address?.state_code
         ? {
-          title: participant.address.state_code || '',
-          value: participant.address.state_code || '',
-        }
+            title: participant.address.state_code || '',
+            value: participant.address.state_code || '',
+          }
         : null,
       rg_emitter_uf_select: participant.rg_emitter_uf
         ? {
-          title: participant.rg_emitter_uf,
-          value: participant.rg_emitter_uf,
-        }
+            title: participant.rg_emitter_uf,
+            value: participant.rg_emitter_uf,
+          }
         : null,
     },
   });
 
   const { handleSubmit } = methods;
+
+  /* Refatorar
+    -> Usar um DTO, transformas os dados antes do envio atraves de um serviço que
+      pegue uma interface participante e devolva um dto nos moldes que o end point precisa
+    -> Usar um transformer local que pegue a Interface Participante e transforme nos moldes
+      que o Form precisa
+    -> Isso facilitaria o entendimento da tela e futuros ajustes
+  */
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
+
     await saveParticipant({
       ...data,
       marital_status: data?.marital_status_select?.value || '',
@@ -112,6 +133,8 @@ const Form: React.FC<Props> = ({
       },
       birth_date: data.formatted_birth_date,
       rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
+      access_premio_ideall:
+        participant.profile !== PROFILES.focalPoint || autoindicate,
     });
     setLoading(false);
   });
@@ -177,10 +200,27 @@ const Form: React.FC<Props> = ({
           />
         </BoxPhone>
 
-        {participant.profile === PROFILES.participant && (
+        {editing &&
+          participant.profile === PROFILES.focalPoint &&
+          !participant.access_premio_ideall && (
+            <BoxAutoIndication>
+              <input
+                type="checkbox"
+                name="test"
+                checked={autoindicate}
+                onChange={() => setAutoindicate(e => !e)}
+              />
+              <span>Participar do MarketPlace</span>
+            </BoxAutoIndication>
+          )}
+
+        {(participant.profile === PROFILES.participant ||
+          (editing &&
+            autoindicate &&
+            participant.profile === PROFILES.focalPoint) ||
+          participant.access_premio_ideall) && (
           <ExtraFieldsForParticipant inputRole={inputRole} />
         )}
-
         <Separator />
         <Title>Segurança</Title>
         <PasswordInput

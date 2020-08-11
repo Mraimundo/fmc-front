@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -88,4 +89,19 @@ export const ContentForm = styled.div<ContentFormProps>`
         opacity: 0;
       }
     `}
+`;
+
+export const AutoindicateButton = styled.button`
+  border: none;
+  background: none;
+  width: fit-content;
+  cursor: pointer;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  size: 16px;
+
+  transition: color 0.2s;
+  &:hover {
+    color: ${({ theme }) => shade(0.5, theme.font.color.primary)};
+  }
 `;

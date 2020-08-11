@@ -19,19 +19,23 @@ import getEstablishments, {
   Establishment,
 } from 'services/auth/getEstablishments';
 import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
+import { useAuth } from 'context/AuthContext';
 import StatusBox from './StatusBox';
 import Filters from './Filters';
 import Table from './Table';
 import Form, { FormData } from './Form';
 import Establishments from './Establishments';
-import { Container, Content, ContentForm } from './styles';
+import AutoindicateModal from './AutoindicateModal';
+import { Container, Content, ContentForm, AutoindicateButton } from './styles';
 
 const ParticipantIndication: React.FC = () => {
+  const { participant } = useAuth();
   const [tableData, setTableData] = useState<IParticipantIndication[]>([]);
   const [formOpened, setFormOpened] = useState(false);
   const [activePercentage, setActivePercentage] = useState(0);
   const [refresh, setRefresh] = useState(true);
   const [isFetching, setFetching] = useState(false);
+  const [autoindicateModalOpened, setAutoindicateModalOpened] = useState(false);
   const [indicationDataEdit, setIndicationDataEdit] = useState<
     FormData | undefined
   >(undefined);
@@ -270,6 +274,14 @@ const ParticipantIndication: React.FC = () => {
             />
           </ContentForm>
         )}
+        {participant.profile === 'FOCALPOINT' &&
+          !participant.access_premio_ideall && (
+            <AutoindicateButton
+              onClick={() => setAutoindicateModalOpened(true)}
+            >
+              Participar do MarketPlace
+            </AutoindicateButton>
+          )}
         <span>Usuários indicados</span>
         <Filters
           filter={filter}
@@ -284,6 +296,12 @@ const ParticipantIndication: React.FC = () => {
           onActiveParticipantClick={handleActiveParticipant}
         />
       </Content>
+      <AutoindicateModal
+        isOpen={autoindicateModalOpened}
+        onRequestClose={() => {
+          setAutoindicateModalOpened(false);
+        }}
+      />
     </Container>
   );
 };
