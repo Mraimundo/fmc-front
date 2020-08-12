@@ -22,6 +22,7 @@ export const Table = styled(ResponsiveTable)<TableProps>`
     th {
       padding-left: 20px;
       height: 55px;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
     }
   }
 

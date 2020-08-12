@@ -15,6 +15,7 @@ import ParticipantsIndication from './modules/ParticipantsIndication';
 import PointsManagement from './modules/PointsManagement';
 import Showcase from './modules/Showcase';
 import Training from './modules/Training';
+import Goals from './modules/Goals';
 
 import Route from './Route';
 
@@ -32,6 +33,7 @@ const routesArray: RouteModule[][] = [
   PointsManagement,
   Showcase,
   Training,
+  Goals,
 ];
 
 const Routes: React.FC = () => (

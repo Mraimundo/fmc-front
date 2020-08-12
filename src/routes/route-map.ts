@@ -9,4 +9,5 @@ export default {
     my: '/myextract',
     channel: '/extract',
   },
+  goal: '/metas',
 };
