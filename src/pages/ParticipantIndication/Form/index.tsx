@@ -115,13 +115,8 @@ const Form: React.FC<Props> = ({
               name="subsidiary_select"
               inputRole="secondary"
               establishmentId={establishment.id}
-              disabled={editing}
             />
-            <RolesSelect
-              name="role_select"
-              inputRole="secondary"
-              disabled={editing}
-            />
+            <RolesSelect name="role_select" inputRole="secondary" />
             <Input name="name" label="Nome completo*" inputRole={inputRole} />
             <Input
               name="cpf"

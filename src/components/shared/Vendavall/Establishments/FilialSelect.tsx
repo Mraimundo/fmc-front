@@ -23,7 +23,7 @@ const FilialSelect: React.FC<Props> = ({
     getSubsidiaryList(establishmentId).then(list =>
       setData(
         list.map(item => ({
-          title: `${item.name} (${item.city})`,
+          title: `${item.name}`,
           value: `${item.id}`,
         })),
       ),

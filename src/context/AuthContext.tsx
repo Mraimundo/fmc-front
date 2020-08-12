@@ -41,6 +41,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     false,
   );
 
+  useEffect(() => {
+    console.log(participant);
+  }, [participant]);
+
   const updateParticipantData = useCallback(async () => {
     const [data, isThereRegulationsToAccept] = await Promise.all([
       getLoggedParticipant(),

@@ -101,7 +101,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
         .finally(() => {
           setLoading(false);
         });
-    }, 3000);
+    }, 1000);
   }, [selectedRegulationIndex, regulations]);
 
   const handleAcceptClick = useCallback(async () => {
