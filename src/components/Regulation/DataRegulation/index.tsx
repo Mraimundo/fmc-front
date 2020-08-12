@@ -13,6 +13,7 @@ import {
   Button,
   BoxActions,
   PrintRef,
+  BoxAccept,
 } from './styles';
 
 interface Props {
@@ -35,14 +36,14 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
     setLoading(false);
   }, [onAccept]);
 
-  const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
+  /* const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
     if (
       e.currentTarget.scrollHeight - e.currentTarget.scrollTop <=
       e.currentTarget.clientHeight + 2
     ) {
       setCanAccept(true);
     }
-  };
+  }; */
 
   const handlePdfDownload = useCallback(async () => {
     if (!regulation) return;
@@ -58,7 +59,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
 
   return (
     <Container>
-      <RegulationContent type="primary" onScroll={handleDivScroll}>
+      <RegulationContent type="primary">
         <h3>{regulation?.name}</h3>
         <div>
           <PrintRef ref={printRef}>
@@ -83,6 +84,19 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
           content={() => printRef.current}
         />
       </BoxActions>
+
+      <BoxAccept>
+        <input
+          type="checkbox"
+          name="test"
+          checked={canAccept}
+          onChange={() => {
+            setCanAccept(e => !e);
+          }}
+        />
+        <span>Concordo e aceito os termos de uso</span>
+      </BoxAccept>
+
       <Button
         type="button"
         buttonRole={buttonRole}

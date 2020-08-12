@@ -102,3 +102,22 @@ export const PrintRef = styled.div`
     color: #000;
   }
 `;
+
+export const BoxAccept = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 620px;
+
+  > input {
+    cursor: pointer;
+  }
+
+  > span {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 16px;
+    margin-left: 8px;
+  }
+`;
