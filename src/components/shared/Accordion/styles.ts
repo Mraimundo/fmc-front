@@ -9,7 +9,7 @@ interface ListProps {
 
 export const Container = styled.div<ListProps>`
   border: 1px solid ${({ theme, type }) => theme.accordion[type].borderColor};
-  transition: max-height 0.2s, min-height 0.2s;
+  transition: max-height 0.4s 0.3s, min-height 0.4s;
   max-height: 79px;
   min-height: 79px;
 
@@ -20,7 +20,7 @@ export const Container = styled.div<ListProps>`
     ${({ open }) =>
       open &&
       css`
-        max-height: 407px;
+        max-height: 800px;
         min-height: 407px;
       `}
   }
@@ -28,7 +28,7 @@ export const Container = styled.div<ListProps>`
   ${({ open }) =>
     open &&
     css`
-      max-height: 407px;
+      max-height: 800px;
       min-height: 407px;
     `}
 `;

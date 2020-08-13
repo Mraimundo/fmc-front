@@ -30,6 +30,7 @@ export const Content = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-left: 35px;
     margin-bottom: 15px;
+    font-size: 24px;
   }
 
   @media screen and (max-width: 720px) {

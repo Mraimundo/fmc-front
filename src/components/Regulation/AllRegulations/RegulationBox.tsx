@@ -5,6 +5,7 @@ import { Regulation } from 'services/register/regulation/interfaces/IRegulation'
 import getRegulationById from 'services/register/regulation/getRegulationById';
 import getUrl from 'services/register/regulation/getUrlRegulationToDownload';
 
+import { useToast } from 'context/ToastContext';
 import { ContentRegulation, Actions, PrintRef } from './styles';
 
 interface Props {
@@ -26,6 +27,8 @@ const RegulationBox: React.FC<Props> = ({
   const t = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [regulation, setRegulation] = useState<Regulation | null>(null);
+  const { addToast } = useToast();
+  const showDownloadButton = false;
 
   useEffect(() => {
     getRegulationById(regulationId).then(item => setRegulation(item));
@@ -65,11 +68,24 @@ const RegulationBox: React.FC<Props> = ({
     document.body.removeChild(linkClick);
   }, [regulation]);
 
+  const handleCopy = useCallback(
+    (e: React.ClipboardEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      addToast({
+        title: 'Cópia não permitida',
+        type: 'error',
+      });
+    },
+    [addToast],
+  );
+
   return (
     regulation && (
       <>
         <ContentRegulation onScroll={handleDivScroll}>
-          <PrintRef ref={t}>{parser(regulation.content || '')}</PrintRef>
+          <PrintRef onCopy={handleCopy} ref={t}>
+            {parser(regulation.content || '')}
+          </PrintRef>
         </ContentRegulation>
         <Actions>
           {acceptedIds.indexOf(regulation.id) === -1 && (
@@ -83,10 +99,11 @@ const RegulationBox: React.FC<Props> = ({
               Aceitar
             </Button>
           )}
-
-          <Button buttonRole="tertiary" type="button" onClick={handleSavePdf}>
-            Download
-          </Button>
+          {showDownloadButton && (
+            <Button buttonRole="tertiary" type="button" onClick={handleSavePdf}>
+              Download
+            </Button>
+          )}
         </Actions>
       </>
     )
