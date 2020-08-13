@@ -83,6 +83,7 @@ const List: React.FC = () => {
   return (
     <Container>
       <Content>
+        <h3>Biblioteca Juntos</h3>
         <h3>Imagens</h3>
         <ImagesGrid gallery={images} />
         {imagesPagination.current_page !== imagesPagination.last_page && (
