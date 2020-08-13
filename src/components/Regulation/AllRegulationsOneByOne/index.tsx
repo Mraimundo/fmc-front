@@ -29,7 +29,7 @@ interface Props {
 
 const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const { addToast } = useToast();
-  const { updateParticipantData } = useAuth();
+  const { updateParticipantData, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [accepting, setAccepting] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
@@ -165,6 +165,14 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
                 certo você será avisado por email que seu acesso está liberado.
               </div>
             </StyledAgreementTermPending>
+            <StyledButtonConfirm
+              type="button"
+              buttonRole="primary"
+              onClick={signOut}
+              loading={accepting}
+            >
+              Sair
+            </StyledButtonConfirm>
           </Content>
         </Container>
       </Modal>
