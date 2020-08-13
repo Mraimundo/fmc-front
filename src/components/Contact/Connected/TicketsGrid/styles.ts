@@ -78,6 +78,25 @@ export const TicketGrid = styled.div<TicketGridProps>`
         overflow-y: auto;
       `};
   }
+
+  @media screen and (max-width: 720px) {
+    header {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 10px;
+
+      h4 {
+        margin-top: 10px;
+      }
+
+      > div {
+        margin-top: 10px;
+        & + div {
+          display: none;
+        }
+      }
+    }
+  }
 `;
 
 export const GridHeader = styled.div`
@@ -95,6 +114,10 @@ export const GridHeader = styled.div`
     &:nth-child(3) {
       justify-self: center;
     }
+  }
+
+  @media screen and (max-width: 720px) {
+    display: none;
   }
 `;
 

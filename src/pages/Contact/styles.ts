@@ -50,10 +50,22 @@ export const BoxTickets = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 15px;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+
+    > h3 {
+      margin: 35px 0 20px 20px;
+    }
+  }
 `;
 
 export const TicketsGrid = styled(DefaultTicketsGrid)`
   padding: 20px;
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+  }
 `;
 
 export const Form = styled(DefaultForm)`

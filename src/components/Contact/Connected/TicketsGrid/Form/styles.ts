@@ -18,6 +18,16 @@ export const Container = styled.form`
       overflow-y: auto;
     }
   }
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+
+    > button {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
 `;
 
 export const BoxText = styled.div`
@@ -39,5 +49,9 @@ export const BoxText = styled.div`
     input {
       display: none;
     }
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 100%;
   }
 `;

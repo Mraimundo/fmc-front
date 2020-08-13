@@ -31,6 +31,11 @@ export const Content = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'p r';
   margin-top: 8px;
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 interface MessageBoxProps {
