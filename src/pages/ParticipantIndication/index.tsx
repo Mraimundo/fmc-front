@@ -248,7 +248,7 @@ const ParticipantIndication: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>Indique um participante</h3>
+        <h3>Indique um Participante</h3>
         <h5>
           {`${establishmentSelected?.type.name} ${establishmentSelected?.name}`}
           {establishments.length > 1 && (
@@ -279,7 +279,7 @@ const ParticipantIndication: React.FC = () => {
             <AutoindicateButton
               onClick={() => setAutoindicateModalOpened(true)}
             >
-              Participar do MarketPlace
+              Participar do Catálogo de Prêmios
             </AutoindicateButton>
           )}
         <span>Usuários indicados</span>

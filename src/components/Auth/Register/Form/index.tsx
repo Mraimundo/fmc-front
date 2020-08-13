@@ -210,7 +210,7 @@ const Form: React.FC<Props> = ({
                 checked={autoindicate}
                 onChange={() => setAutoindicate(e => !e)}
               />
-              <span>Participar do MarketPlace</span>
+              <span>Participar do Catálogo de Prêmios</span>
             </BoxAutoIndication>
           )}
 

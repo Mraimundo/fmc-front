@@ -40,20 +40,25 @@ export const Content = styled.div`
 
 export const ActionsBox = styled.div`
   display: flex;
-  width: 100%;
+  width: 287px;
   justify-content: center;
   flex-wrap: wrap;
 
   > button {
-    width: 64px;
+    width: 82px;
     height: 28px;
     font-size: 11px;
     margin-top: 8px;
     margin-bottom: 2px;
     border-radius: 6px;
     line-height: 1;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     & + button {
-      margin-left: 8px;
+      margin-left: 6px;
     }
+  }
+
+  > ._extraWidth {
+    width: 111px;
   }
 `;

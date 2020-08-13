@@ -105,6 +105,7 @@ const Actions: React.FC<Props> = ({
                 typeof resendIndication !== 'function' ||
                 personalData.status !== PRECHARGE
               }
+              className="_extraWidth"
             >
               Reenviar E-mail
             </Button>

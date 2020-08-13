@@ -16,7 +16,7 @@ import { Container, Content, Title, SubTitle, Accordion } from './styles';
 const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
   [REGULATIONS_TYPE.regulationOfCampaign]: 'Regulamento do Programa Juntos',
-  [REGULATIONS_TYPE.safraTerm]: 'Acordos de Safras',
+  [REGULATIONS_TYPE.safraTerm]: 'Termos de Safras',
 };
 
 const AllRegulations: React.FC = () => {

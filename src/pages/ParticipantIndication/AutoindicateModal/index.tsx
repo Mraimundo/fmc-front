@@ -26,14 +26,14 @@ const AutoindicateModal: React.FC<Props> = ({ isOpen, onRequestClose }) => {
           </button>
         </Close>
         <Content>
-          <h3>Auto Indicação para o MarketPlace</h3>
+          <h3>Auto Indicação para o Catálogo de Prêmios</h3>
           <p>
-            Para participar do MarketPlace você precisa preencher os dados
-            obrigatórios do MarketPlace.
+            Para participar do Catálogo de Prêmios você precisa preencher os
+            dados obrigatórios do Catálogo de Prêmios.
           </p>
           <p>
             {`Para isso, basta acessar o seu Perfil, marcar a opção "Participar do
-            MarketPlace" e preencher os dados obrigatórios.`}
+            Catálogo de Prêmios" e preencher os dados obrigatórios.`}
           </p>
         </Content>
         <Actions>

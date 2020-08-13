@@ -54,7 +54,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
     <>
       <Separator />
 
-      <Title>Completar dados - obrigatório para o marketplace</Title>
+      <Title>Completar dados - obrigatório para o Catálogo de Prêmios</Title>
 
       <GenderSelect name="gender_select" inputRole={inputRole} />
 
