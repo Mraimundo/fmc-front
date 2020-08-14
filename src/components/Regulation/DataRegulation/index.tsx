@@ -60,7 +60,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
   return (
     <Container>
       <RegulationContent type="primary">
-        <h3>{regulation?.name}</h3>
+        {/* <h3>{regulation?.name}</h3> */}
         <div>
           <PrintRef ref={printRef}>
             {parser(regulation?.content || '')}

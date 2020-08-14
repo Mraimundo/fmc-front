@@ -31,7 +31,8 @@ export const RegulationContent = styled.div<RegulationProps>`
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
   color: ${({ theme, type }) => theme.regulation[type].fontColor};
-  padding: 50px 0 0 90px;
+  /*padding: 50px 0 0 90px;*/
+  padding: 0 0 0 90px;
   overflow-y: auto;
 
   > h3 {

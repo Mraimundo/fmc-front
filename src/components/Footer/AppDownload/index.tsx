@@ -9,7 +9,7 @@ interface AppDownloadProps {
 }
 const AppDownload: React.FC<AppDownloadProps> = ({ onClick }) => {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} style={{ display: 'none' }}>
       <DownloadText>BAIXE O APP</DownloadText>
       <ReactSVG src={appStores} />
     </Wrapper>
