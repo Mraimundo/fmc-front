@@ -94,7 +94,12 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
             setCanAccept(e => !e);
           }}
         />
-        <span>Concordo e aceito os termos de uso</span>
+        <span>
+          Ao clicar na caixa “Li e aceito os Termos de Uso e Política de
+          Privacidade”, tenho compreensão e estou de acordo com esses Termos,
+          bem como concordo e autorizo para a finalidade a que se destina, sem
+          reservas.
+        </span>
       </BoxAccept>
 
       <Button

@@ -34,7 +34,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const [loading, setLoading] = useState(false);
   const [accepting, setAccepting] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
-  const [canAcceptConfirm, setCanAcceptConfirm] = useState(false);
   const [, setShowModal] = useState(false);
   const [regulations, setRegulations] = useState<Omit<Regulation, 'content'>[]>(
     [],
@@ -96,7 +95,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
         .then(data => {
           setRegulation(data);
           setCanAccept(false);
-          setCanAcceptConfirm(false);
         })
         .finally(() => {
           setLoading(false);
@@ -109,7 +107,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     setAccepting(true);
     try {
       setCanAccept(false);
-      setCanAcceptConfirm(false);
       await acceptRegulation(regulation.id, regulation.version);
       setSelectedRegulationIndex(i => {
         if (i >= regulations.length - 1) {
@@ -151,26 +148,29 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
               setCanAccept(e => !e);
             }}
           />
-          <span>Concordo e aceito os termos de uso</span>
-        </BoxAccept>
-        <BoxAccept>
-          <input
-            type="checkbox"
-            name="test"
-            disabled={loading}
-            checked={canAcceptConfirm}
-            onChange={() => {
-              setCanAcceptConfirm(e => !e);
-            }}
-          />
-          <span>Concordo e aceito os termos de uso</span>
+          {regulation?.type === 'regulation_of_campaign' && (
+            <span>
+              AO CLICAR NO ITEM “LI E ACEITO OS TERMOS DO REGULAMENTO” IMPLICARÁ
+              NO RECONHECIMENTO, DE QUE LERAM, ENTENDERAM E ACEITARAM
+              INCONDICIONALMENTE TODAS AS DISPOSIÇÕES CONSTANTES DO REGULAMENTO
+              DO PROGRAMA JUNTOS, SEM RESERVAS.
+            </span>
+          )}
+          {regulation?.type === 'safra_term' && (
+            <span>
+              AO CLICAR NO ITEM “LI E ACEITO O TERMO SAFRA” IMPLICARÁ NO
+              RECONHECIMENTO, DE QUE LERAM, ENTENDERAM E ACEITARAM
+              INCONDICIONALMENTE TODAS AS DISPOSIÇÕES CONSTANTES DO TERMO SAFRA,
+              SEM RESERVAS.
+            </span>
+          )}
         </BoxAccept>
         <StyledButtonConfirm
           type="button"
           buttonRole="primary"
           onClick={handleAcceptClick}
           loading={accepting}
-          disabled={!canAccept || !canAcceptConfirm || loading}
+          disabled={!canAccept || loading}
         >
           Aceito participar
         </StyledButtonConfirm>
@@ -180,7 +180,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
         </span>
       </>
     ),
-    [accepting, handleAcceptClick, canAccept, canAcceptConfirm, loading],
+    [accepting, handleAcceptClick, canAccept, loading, regulation],
   );
 
   if (loading) {
