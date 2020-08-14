@@ -16,7 +16,7 @@ const Goals: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tabs>(Tabs.Performance);
 
   return (
-    <Container>
+    <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
       <Wrapper>
         <TabWrapper>
           <TabsList>

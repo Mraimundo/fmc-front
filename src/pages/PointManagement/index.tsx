@@ -106,7 +106,7 @@ const PointManagement: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
       <Wrapper>
         {!!establishments && establishments.length > 1 && (
           <EstablishmentSelection
