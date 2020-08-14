@@ -43,7 +43,7 @@ const Performance: React.FC = () => {
         </ProgressWrapper>
       </PerformanceWrapper>
       <CompletePerformanceWrapper>
-        <Link to="/extrato">
+        <Link to="/metas">
           CONFIRA SEU DESEMPENHO COMPLETO
           <ReactSVG src={openLinkIcon} />
         </Link>
