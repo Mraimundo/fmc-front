@@ -157,5 +157,6 @@ export const BoxAccept = styled.div`
     color: ${({ theme }) => theme.font.color.quartenary};
     font-size: 16px;
     margin-left: 8px;
+    text-transform: uppercase;
   }
 `;

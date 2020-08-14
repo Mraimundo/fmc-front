@@ -119,5 +119,6 @@ export const BoxAccept = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     font-size: 16px;
     margin-left: 8px;
+    text-transform: uppercase;
   }
 `;
