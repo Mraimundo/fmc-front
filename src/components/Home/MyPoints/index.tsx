@@ -21,7 +21,7 @@ const MyPoints: React.FC = () => {
       </Period>
       <PointsWrapper>
         <TotalPointsText>Total pontos</TotalPointsText>
-        <Points>0,00</Points>
+        <Points>0</Points>
       </PointsWrapper>
       <Button
         type="submit"
