@@ -29,6 +29,7 @@ export const Title = styled.h1`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px;
   color: ${({ theme }) => theme.font.color.primary};
+  margin-left: 35px;
 `;
 
 export const SubTitle = styled.h3`
