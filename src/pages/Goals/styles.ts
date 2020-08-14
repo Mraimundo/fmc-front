@@ -2,7 +2,20 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   background-color: #fff;
-  padding: 1em;
+  padding: 40px 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > h3 {
+    width: 100%;
+    max-width: 710px;
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    margin-left: 35px;
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
 
   @media screen and (max-width: 1199px) {
     font-size: 12px;

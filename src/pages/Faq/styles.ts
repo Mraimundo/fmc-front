@@ -16,7 +16,14 @@ export const Content = styled.div`
   max-width: 1100px;
   flex-direction: column;
   background: #fff;
-  padding: 0 60px;
+  padding: 40px 60px;
+
+  > h3 {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    margin: 0 0 10px 35px;
+    font-size: 24px;
+  }
 
   @media screen and (max-width: 720px) {
     padding: 0 20px;

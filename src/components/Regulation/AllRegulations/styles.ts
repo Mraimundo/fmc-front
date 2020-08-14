@@ -14,6 +14,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #fff;
 `;
 
 export const Content = styled.div`
@@ -27,7 +28,7 @@ export const Content = styled.div`
 export const Title = styled.h1`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px;
-  color: ${({ theme }) => theme.font.color.quartenary};
+  color: ${({ theme }) => theme.font.color.primary};
 `;
 
 export const SubTitle = styled.h3`

@@ -84,7 +84,7 @@ const List: React.FC = () => {
     <Container>
       <Content>
         <h3>Biblioteca Juntos</h3>
-        <h3>Imagens</h3>
+        <h6>Imagens</h6>
         <ImagesGrid gallery={images} />
         {imagesPagination.current_page !== imagesPagination.last_page && (
           <Button
@@ -96,7 +96,7 @@ const List: React.FC = () => {
           </Button>
         )}
         <Separator />
-        <h3>Vídeos</h3>
+        <h6>Vídeos</h6>
         <VideosGrid gallery={videos} />
         {videosPagination.current_page !== videosPagination.last_page && (
           <Button
@@ -108,7 +108,7 @@ const List: React.FC = () => {
           </Button>
         )}
         <Separator />
-        <h3>Documentos</h3>
+        <h6>Documentos</h6>
         <DocumentsGrid gallery={documents} />
         {documentsPagination.current_page !== documentsPagination.last_page && (
           <Button

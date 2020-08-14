@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: #fff;
 
   > img {
     width: 260px;
@@ -16,7 +17,7 @@ export const Container = styled.div`
 export const Content = styled(animated.div)`
   width: 720px;
   background: #fff;
-  padding: 20px 30px;
+  padding: 40px 30px;
 
   @media screen and (max-width: 720px) {
     width: 100%;

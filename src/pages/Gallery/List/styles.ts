@@ -16,7 +16,7 @@ export const Content = styled.div`
   max-width: 1100px;
   flex-direction: column;
   background: #fff;
-  padding: 20px 60px;
+  padding: 40px 60px;
 
   > button {
     margin: 25px 0;
@@ -29,8 +29,16 @@ export const Content = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     margin-left: 35px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     font-size: 24px;
+  }
+
+  > h6 {
+    color: ${({ theme }) => theme.font.color.quartenary};
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    margin-left: 35px;
+    margin-bottom: 15px;
+    font-size: 20px;
   }
 
   @media screen and (max-width: 720px) {

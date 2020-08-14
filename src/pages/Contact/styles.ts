@@ -20,13 +20,14 @@ export const Content = styled.div`
   max-width: 1100px;
   flex-direction: column;
   background: #fff;
-  padding: 20px 60px;
+  padding: 40px 60px;
 
   > h3 {
-    font-size: 18px;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
-    margin: 35px 0 20px 25px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    margin-left: 35px;
+    margin-bottom: 25px;
+    font-size: 24px;
   }
 
   > button {

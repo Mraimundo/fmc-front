@@ -15,6 +15,7 @@ const Faq: React.FC = () => {
   return (
     <Container>
       <Content>
+        <h3>FAQ</h3>
         <FaqList data={faqList} />
       </Content>
     </Container>

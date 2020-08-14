@@ -18,7 +18,7 @@ export const Content = styled.div`
   max-width: 1100px;
   flex-direction: column;
   background: #fff;
-  padding: 20px 60px;
+  padding: 40px 60px;
 
   > h3 {
     color: ${({ theme }) => theme.font.color.primary};

@@ -29,7 +29,7 @@ export const PageTitle = styled.p`
   color: ${({ theme }) => theme.font.color.primary};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 export const ExtractLegend = styled.div`
