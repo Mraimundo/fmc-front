@@ -96,29 +96,26 @@ const AgreementTerm: React.FC<Props> = ({
   return (
     <>
       <StyledAgreementTermContent type="primary">
-        <h1>Voce é o representante legal de sua empresa?</h1>
+        <h1>Você é o Representante Legal de sua empresa?</h1>
         <h4>
-          O acordo de safra deve ser aceito somente pelo responsável em assumir
-          o compromisso de metas de faturamento POG.
+          O Termo Safra somente deve ser “Aceito” por aquele que possui poderes
+          legais para firma-lo.
         </h4>
         <div>
-          Caso você NÃO seja o responsável, é necessário que você siga os passos
-          seguintes:
+          Caso você NÃO seja o Representante Legal, é necessário que siga os
+          seguintes passos:
+        </div>
+        <div>1. Clique no botão “fazer download do Termo Safra”.</div>
+        <div>
+          2. Após: (i) Imprima o documento “Termo Safra”, (ii) Colete a
+          assinatura do Representante Legal e (iii) Digitalize o documento.
         </div>
         <div>
-          {`1. Clique no botão "FAZER DOWNLOAD DO ACORDO SAFRA" para fazer o
-          download do Acordo de Safra;`}
+          3. Concluído o procedimento indicado no item 2, faça o upload do
+          “Termo Safra” para envia-lo para análise da FMC.
         </div>
         <div>
-          2. Imprima e solicite que o responsável assine o acordo. Em seguida,
-          digitalize o Acordo rubricado e assinado;
-        </div>
-        <div>
-          {`3. Clique no botão "Fazer upload do Acordo de Safra" para enviá-lo
-          para análise;`}
-        </div>
-        <div>
-          4. Aguarde a aprovação da análise do documento para ter seu acesso
+          4. Aguarde a aprovação da análise do documento para ter o acesso
           liberado.
         </div>
       </StyledAgreementTermContent>
@@ -129,7 +126,7 @@ const AgreementTerm: React.FC<Props> = ({
           onClick={handleDownloadClick}
         >
           {/* <ReactSVG src={pdfIcon} /> */}
-          FAZER DOWNLOAD DO ACORDO SAFRA
+          FAZER DOWNLOAD DO TERMO SAFRA
         </RegulationDownload>
         <StyledUploadAgreementTerm>
           <label htmlFor="fileId">
@@ -152,7 +149,7 @@ const AgreementTerm: React.FC<Props> = ({
                 <>
                   {attachingFile
                     ? 'Carregando ... '
-                    : 'FAZER UPLOAD DO ACORDO SAFRA'}
+                    : 'FAZER UPLOAD DO TERMO SAFRA'}
                 </>
               )}
             </button>
