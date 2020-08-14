@@ -108,7 +108,7 @@ export const BoxAccept = styled.div`
   align-items: center;
   margin-top: 20px;
   width: 100%;
-  max-width: 620px;
+  text-align: justify;
 
   > input {
     cursor: pointer;
