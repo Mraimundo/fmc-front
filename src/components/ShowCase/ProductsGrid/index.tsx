@@ -3,7 +3,6 @@ import { Product } from 'services/showcase/interfaces';
 import transformer, {
   Response as Data,
 } from 'services/showcase/transformers/toProductsGridTransformer';
-import { Link } from 'react-router-dom';
 
 import { Container, MiniBox } from './styles';
 
@@ -25,7 +24,9 @@ const ProductsGrid: React.FC<Props> = ({ products }) => {
           <img src={item.imageUrl} alt={item.title} />
           <h4>{item.title}</h4>
           <h3>{item.points} pontos</h3>
-          <Link to={item.urlAccess}>Resgatar</Link>
+          <a href={item.urlAccess} rel="noreferrer" target="_blank">
+            Resgatar
+          </a>
         </MiniBox>
       ))}
     </Container>

@@ -32,6 +32,10 @@ export const Content = styled.div`
     margin-left: 35px;
     margin-bottom: 15px;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 40px 10px;
+  }
 `;
 
 export const Separator = styled.div`

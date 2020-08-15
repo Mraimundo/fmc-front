@@ -1,53 +1,40 @@
+import { useCallback } from 'react';
+import { pluginApi } from 'services/api';
+import { Participant } from 'services/auth/interfaces/Participant';
 import { Product } from './interfaces';
 
-const mock: Product[] = [
-  {
-    id: 8937893,
-    name: 'Caixa de Som Bluetooth Mondial Speaker Vibe Two',
-    description: '',
-    providerId: 130,
-    provider: 'Magazine Luiza XML',
-    priceFrom: 0,
-    price: 199.9,
-    saleOff: true,
-    status: 'Disponível',
-    imageUrl: 'https://i.mlcdn.com.br/1500x1500/030211800.jpg',
-    catalogUrl: '&prd=1&redir=yaZQVbF8Vzodvb6xBenAwr2umN4BsMHuBd36TB0cbQk=',
-    urlComplet:
-      'https://hlg.markup.com.br/premioideall/LoginIntegracao.aspx?cpf=ODY1MDM4NDc3MzQ=&campanha=MjA1&prd=1&redir=yaZQVbF8Vzodvb6xBenAwr2umN4BsMHuBd36TB0cbQk=',
-  },
-  {
-    id: 4122726,
-    name: 'Liquidificador Philco PH900 2L Preto com Filtro',
-    description: '',
-    providerId: 130,
-    provider: 'Magazine Luiza XML',
-    priceFrom: 199.9,
-    price: 139.9,
-    saleOff: false,
-    status: 'Disponível',
-    imageUrl: 'https://i.mlcdn.com.br/1500x1500/021749000.jpg',
-    catalogUrl: '&prd=1&redir=vwfmJDu9co+tFCqdTHBSxZYAI94TvttdxRqT4ps8uzc=',
-    urlComplet:
-      'https://hlg.markup.com.br/premioideall/LoginIntegracao.aspx?cpf=ODY1MDM4NDc3MzQ=&campanha=MjA1&prd=1&redir=vwfmJDu9co+tFCqdTHBSxZYAI94TvttdxRqT4ps8uzc=',
-  },
-  {
-    id: 5082551,
-    name: 'Fritadeira Elétrica Sem Óleo/Air Fryer Fama',
-    description: '',
-    providerId: 130,
-    provider: 'Magazine Luiza XML',
-    priceFrom: 0,
-    price: 249.9,
-    saleOff: true,
-    status: 'Disponível',
-    imageUrl: 'https://i.mlcdn.com.br/1500x1500/023315500.jpg',
-    catalogUrl: '&prd=1&redir=0Zul9ml/7FNG8QX3Roap/mhwRSZhxkRdq3uLivTYae0=',
-    urlComplet:
-      'https://hlg.markup.com.br/premioideall/LoginIntegracao.aspx?cpf=ODY1MDM4NDc3MzQ=&campanha=MjA1&prd=1&redir=0Zul9ml/7FNG8QX3Roap/mhwRSZhxkRdq3uLivTYae0=',
-  },
-];
+interface ProductApi {
+  id: number;
+  name: string;
+  description: string;
+  providerId: number;
+  provider: string;
+  priceFrom: number;
+  price: number;
+  saleOff: boolean;
+  status: string;
+  imageUrl: string;
+  catalogUrl: string;
+}
 
-export default async (): Promise<Product[]> => {
-  return mock;
+interface Response {
+  products: ProductApi[];
+  baseUrl: string;
+}
+
+interface Request {
+  type: 'participant' | 'establishment';
+  id: number;
+}
+
+const getProducts = async ({ type, id }: Request): Promise<Product[]> => {
+  const { data } = await pluginApi.get<Response>(
+    `premio-ideall/list-products-pi?id=${id}&type=${type}`,
+  );
+  return data.products.map(item => ({
+    ...item,
+    catalogUrl: `${data.baseUrl}${item.catalogUrl}`,
+  }));
 };
+
+export default getProducts;

@@ -74,9 +74,9 @@ const ParticipantInfo: React.FC<Props> = ({
           </Circle>
           <h3>{data.name}</h3>
           <h4>{data.points} pontos</h4>
-          <Link to={data.urlAccess}>
+          <a href={data.urlAccess} target="_blank" rel="noreferrer">
             {data.type === 'cnpj' ? 'Catálogo do canal' : 'Meu catálogo'}
-          </Link>
+          </a>
         </Content>
       )}
     </Container>

@@ -19,7 +19,6 @@ export interface Product {
   status: string;
   imageUrl: string;
   catalogUrl: string;
-  urlComplet: string;
 }
 
 export interface Category {
