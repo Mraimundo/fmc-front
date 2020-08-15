@@ -47,6 +47,7 @@ export const WrapperBox = styled.div<WrapperProps>`
 export const WrapperValues = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 export const Item = styled.div`

@@ -34,3 +34,12 @@ export const formatQuotedCoin = (value: number) =>
     minimumFractionDigits: 3,
     maximumFractionDigits: 3,
   });
+
+export const formatDollars = (value: number) =>
+  value.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+export const formatKgl = (value: number) =>
+  new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(value);

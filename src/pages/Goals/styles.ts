@@ -37,6 +37,10 @@ export const TabsList = styled.ul`
   display: flex;
   width: calc(100% - 30px);
   margin-bottom: 1.5em;
+
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+  }
 `;
 
 interface TabProps {
@@ -52,6 +56,7 @@ export const Tab = styled.li<TabProps>`
   height: 80px;
   position: relative;
   cursor: pointer;
+  font-size: 1.1em;
 
   ${({ active }) =>
     !active
@@ -83,5 +88,36 @@ export const Tab = styled.li<TabProps>`
     right: -30px;
     z-index: 1;
     transform: rotate(360deg);
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 50px;
+
+    &:before {
+      border-width: 25px 0 25px 15px;
+      right: -15px;
+    }
+  }
+`;
+
+export const CampaignsList = styled.ul`
+  list-style-type: none;
+  display: flex;
+
+  li {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.medium};
+    font-size: 1em;
+    margin: 0.5em 1.5em;
+    cursor: pointer;
+    transition: color 150ms ease;
+
+    &:hover {
+      color: #999999;
+    }
   }
 `;

@@ -11,10 +11,12 @@ import PercentageText from './PercentageText';
 interface CircularProgressProps {
   color: string;
   percent: number;
+  chidren?: React.ReactNode;
 }
 const CircularProgress: React.FC<CircularProgressProps> = ({
   percent,
   color,
+  children,
 }) => {
   return (
     <div>
@@ -38,7 +40,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
           />
         </div>
 
-        <PercentageText percent={percent} />
+        {!children ? <PercentageText percent={percent} /> : children}
         <RadialSeparators
           count={50}
           style={{
