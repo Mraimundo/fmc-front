@@ -5,6 +5,7 @@ import rootReducer from './root-reducer';
 import pointManagement from './modules/point-management/reducer';
 import header from './modules/header/reducer';
 import home from './modules/home/reducer';
+import goals from './modules/goals/reducer';
 
 describe('src/state/root-reducer', () => {
   const store = createStore(rootReducer);
@@ -20,6 +21,10 @@ describe('src/state/root-reducer', () => {
 
     expect(store.getState().home).to.be.deep.equal(
       home(undefined, { type: 'unknown' }),
+    );
+
+    expect(store.getState().goals).to.be.deep.equal(
+      goals(undefined, { type: 'unknown' }),
     );
   });
 });
