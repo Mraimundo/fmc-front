@@ -1,10 +1,12 @@
 import { vendavallApi, pluginApi } from 'services/api';
 
-import { Banner, Highlight } from 'state/modules/home/types';
+import { Banner, Highlight, ShowcaseProduct } from 'state/modules/home/types';
 import { HighlightTypes } from 'state/modules/home/constants';
+import { getProducts } from 'services/showcase';
 import {
   transformBannersRawData,
   transformHighlightsRawData,
+  transformProductToShowCaseProduct,
 } from './transformers';
 
 export interface FetchBannersService {
@@ -40,4 +42,16 @@ export const fetchHighlightsService = async (): Promise<Highlight[] | null> => {
   }>('highlights?limit=15&order=desc');
 
   return transformHighlightsRawData(response.data);
+};
+
+export const fetchShowcaseProductsService = async (
+  participantId: number,
+): Promise<ShowcaseProduct[] | null> => {
+  const products = await getProducts({
+    limit: 4,
+    id: participantId,
+    type: 'participant',
+  });
+
+  return transformProductToShowCaseProduct(products);
 };

@@ -7,12 +7,16 @@ import ProductItem from './ProductItem';
 import SeeCompleteShowcase from './SeeCompleteShowcase';
 import { ProductList, MobileSeeCompleteShowcase } from './styles';
 
-const Showcase: React.FC = () => {
+interface Props {
+  products: ShowcaseProduct[] | null;
+}
+
+const Showcase: React.FC<Props> = ({ products }) => {
   return (
     <>
       <ProductList>
-        {showcase.map((item: ShowcaseProduct) => (
-          <ProductItem product={item} key={item.id} />
+        {products?.map(item => (
+          <ProductItem product={item} key={`prod-${item.id}`} />
         ))}
         <SeeCompleteShowcase
           link={routeMap.showcase}

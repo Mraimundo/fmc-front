@@ -1,10 +1,15 @@
-import { all, takeEvery, call, put } from 'redux-saga/effects';
+import { all, takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { handlerErrors } from 'util/handler-errors';
-import { fetchBannersService, fetchHighlightsService } from 'services/home';
+import {
+  fetchBannersService,
+  fetchHighlightsService,
+  fetchShowcaseProductsService,
+} from 'services/home';
 import * as actions from './actions';
 import * as constants from './constants';
-import { Banner, Highlight } from './types';
+import * as selectors from './selectors';
+import { Banner, Highlight, ShowcaseProduct } from './types';
 
 export function* workerFetchBanners() {
   try {
@@ -30,9 +35,30 @@ export function* workerFetchHighlights() {
   }
 }
 
+export function* workerFetchShowcaseProducts() {
+  try {
+    const participantId = yield select(selectors.getParticipantId);
+
+    const result: ShowcaseProduct[] | null = yield call(
+      fetchShowcaseProductsService,
+      participantId,
+    );
+
+    if (!result) throw new Error('Não foi encontrado nenhum produto');
+
+    yield put(actions.fetchShowcaseSuccess(result));
+  } catch (error) {
+    yield call(handlerErrors, error, actions.fetchShowcaseFailure);
+  }
+}
+
 export default function* headerSagas() {
   yield all([
     takeEvery(constants.FETCH_BANNERS_ACTION, workerFetchBanners),
     takeEvery(constants.FETCH_HIGHLIGHTS_ACTION, workerFetchHighlights),
+    takeEvery(
+      constants.FETCH_SHOWCASEPRODUCTS_ACTION,
+      workerFetchShowcaseProducts,
+    ),
   ]);
 }
