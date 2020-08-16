@@ -1,4 +1,5 @@
-import { Banner, Highlight } from 'state/modules/home/types';
+import { Banner, Highlight, ShowcaseProduct } from 'state/modules/home/types';
+import { Product } from 'services/showcase/interfaces';
 import { formatDate } from 'util/datetime';
 import { limitChars } from 'util/string';
 import { FetchBannersService, FetchHighlightsService } from '.';
@@ -33,4 +34,18 @@ export const transformHighlightsRawData = (
       type: item.type,
     }),
   );
+};
+
+export const transformProductToShowCaseProduct = (
+  data: Product[] | null,
+): ShowcaseProduct[] | null => {
+  if (!data) return null;
+
+  return data.map(item => ({
+    id: item.id,
+    link: item.catalogUrl,
+    name: item.name,
+    picture: item.imageUrl,
+    price: item.price,
+  }));
 };

@@ -10,9 +10,12 @@ import {
   FETCH_HIGHLIGHTS_ACTION,
   FETCH_HIGHLIGHTS_FAILURE,
   FETCH_HIGHLIGHTS_SUCCESS,
+  FETCH_SHOWCASEPRODUCTS_ACTION,
+  FETCH_SHOWCASEPRODUCTS_FAILURE,
+  FETCH_SHOWCASEPRODUCTS_SUCCESS,
 } from './constants';
 import { HomeState } from './reducer';
-import { Banner, Highlight } from './types';
+import { Banner, Highlight, ShowcaseProduct } from './types';
 
 export const fetchBanners = (): ActionCreator<typeof FETCH_BANNERS_ACTION> =>
   <const>{
@@ -68,6 +71,35 @@ export const fetchHighlightsSuccess = (
     payload: { highlights },
   };
 
+export const fetchShowcase = (
+  participantId: number,
+): ActionCreatorPayload<typeof FETCH_SHOWCASEPRODUCTS_ACTION, number> =>
+  <const>{
+    type: FETCH_SHOWCASEPRODUCTS_ACTION,
+    payload: participantId,
+  };
+
+export const fetchShowcaseFailure = (
+  error: string,
+): ActionCreatorFailure<typeof FETCH_SHOWCASEPRODUCTS_FAILURE> =>
+  <const>{
+    type: FETCH_SHOWCASEPRODUCTS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchShowcaseSuccess = (
+  showcaseProducts: ShowcaseProduct[] | null,
+): ActionCreatorPayload<
+  typeof FETCH_SHOWCASEPRODUCTS_SUCCESS,
+  Pick<HomeState, 'showcaseProducts'>
+> =>
+  <const>{
+    type: FETCH_SHOWCASEPRODUCTS_SUCCESS,
+    payload: { showcaseProducts },
+  };
+
 export type HomeActions = ReturnType<
   | typeof fetchBanners
   | typeof fetchBannersFailure
@@ -75,4 +107,7 @@ export type HomeActions = ReturnType<
   | typeof fetchHighlights
   | typeof fetchHighlightsFailure
   | typeof fetchHighlightsSuccess
+  | typeof fetchShowcase
+  | typeof fetchShowcaseFailure
+  | typeof fetchShowcaseSuccess
 >;

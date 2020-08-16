@@ -2,8 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Visible, Hidden } from 'react-grid-system';
 
-import { fetchBanners, fetchHighlights } from 'state/modules/home/actions';
-import { getBanners, getHighlights } from 'state/modules/home/selectors';
+import { useAuth } from 'context/AuthContext';
+import {
+  fetchBanners,
+  fetchHighlights,
+  fetchShowcase,
+} from 'state/modules/home/actions';
+import {
+  getBanners,
+  getHighlights,
+  getShowcaseProducts,
+} from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import {
   Banners,
@@ -26,16 +35,21 @@ import {
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const coinQuotations = useSelector(getCoinQuotations);
+  const { participant } = useAuth();
 
-  const [banners, highlights] = [
+  const [banners, highlights, products] = [
     useSelector(getBanners),
     useSelector(getHighlights),
+    useSelector(getShowcaseProducts),
   ];
 
   useEffect(() => {
+    if (!participant.id) return;
+
     dispatch(fetchBanners());
     dispatch(fetchHighlights());
-  }, [dispatch]);
+    dispatch(fetchShowcase(participant.id));
+  }, [dispatch, participant.id]);
 
   return (
     <HomeWrapper>
@@ -62,7 +76,7 @@ const Home: React.FC = () => {
       <ShowCaseWrapper>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios</Title>
-          <Showcase />
+          <Showcase products={products} />
         </Wrapper>
       </ShowCaseWrapper>
     </HomeWrapper>

@@ -10,21 +10,30 @@ import {
   FETCH_HIGHLIGHTS_ACTION,
   FETCH_HIGHLIGHTS_FAILURE,
   FETCH_HIGHLIGHTS_SUCCESS,
+  FETCH_SHOWCASEPRODUCTS_ACTION,
+  FETCH_SHOWCASEPRODUCTS_FAILURE,
+  FETCH_SHOWCASEPRODUCTS_SUCCESS,
 } from './constants';
-import { Banner, Highlight } from './types';
+import { Banner, Highlight, ShowcaseProduct } from './types';
 
 export interface HomeState {
   fetchBanners: FetchState;
   fetchHighlights: FetchState;
+  fetchShowcaseProducts: FetchState;
   banners: Banner[] | null;
   highlights: Highlight[] | null;
+  showcaseProducts: ShowcaseProduct[] | null;
+  participantId: number | null;
 }
 
 export const initialState: HomeState = {
   fetchBanners: emptyFetchState,
   fetchHighlights: emptyFetchState,
+  fetchShowcaseProducts: emptyFetchState,
   banners: null,
   highlights: null,
+  showcaseProducts: null,
+  participantId: null,
 };
 
 const homeReducer: Reducer<HomeState, HomeActions> = (
@@ -52,6 +61,21 @@ const homeReducer: Reducer<HomeState, HomeActions> = (
         ...state,
         fetchHighlights: emptyFetchState,
         highlights: action.payload.highlights,
+      };
+
+    case FETCH_SHOWCASEPRODUCTS_ACTION:
+      return {
+        ...state,
+        fetchShowcaseProducts: fetchingState,
+        participantId: action.payload,
+      };
+    case FETCH_SHOWCASEPRODUCTS_FAILURE:
+      return { ...state, fetchShowcaseProducts: fetchErrorState(action) };
+    case FETCH_SHOWCASEPRODUCTS_SUCCESS:
+      return {
+        ...state,
+        fetchShowcaseProducts: emptyFetchState,
+        showcaseProducts: action.payload.showcaseProducts,
       };
 
     default:
