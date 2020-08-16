@@ -14,7 +14,7 @@ import RegulationBox from './RegulationBox';
 import { Container, Content, Title, SubTitle, Accordion } from './styles';
 
 const TITLES = {
-  [REGULATIONS_TYPE.dataTerm]: 'Termos da Lei de Segurança de Dados',
+  [REGULATIONS_TYPE.dataTerm]: 'Termos de Lei de Proteção de Dados',
   [REGULATIONS_TYPE.regulationOfCampaign]: 'Regulamento do Programa Juntos',
   [REGULATIONS_TYPE.safraTerm]: 'Termos de Safras',
 };
@@ -134,7 +134,7 @@ const AllRegulations: React.FC = () => {
   return (
     <Container type="primary">
       <Content>
-        <Title>Regulamentos</Title>
+        <Title>Regulamentos e Termos</Title>
         {dataRegulations.length > 0 &&
           printRegulation(dataRegulations, 'data_term')}
         {campaignRegulations.length > 0 &&
