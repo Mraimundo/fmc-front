@@ -11,6 +11,10 @@ export const Nav = styled.nav`
   width: 100%;
   padding: 0 1em;
   font-size: 14px;
+
+  @media screen and (max-width: 1220px) {
+    font-size: 12px;
+  }
 `;
 
 export const ParticipantWrapper = styled.div`

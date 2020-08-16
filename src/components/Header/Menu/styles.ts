@@ -107,6 +107,7 @@ export const SubMenuStyle = css`
 
 interface MenuListProps {
   readonly subMenu: boolean;
+  readonly width: number;
 }
 export const MenuList = styled.ul<MenuListProps>`
   height: 100%;
@@ -119,4 +120,12 @@ export const MenuList = styled.ul<MenuListProps>`
   font-size: 0.9em;
 
   ${({ subMenu }) => subMenu && SubMenuStyle};
+  ${({ subMenu, width }) =>
+    subMenu &&
+    css`
+      ul {
+        left: ${width}px;
+        top: 0;
+      }
+    `}
 `;

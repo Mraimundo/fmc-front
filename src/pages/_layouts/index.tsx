@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
+import { Visible } from 'react-grid-system';
 
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
+import MobileHeader from 'components/Header/MobileHeader';
 import Footer from 'components/Footer';
 import Logo from 'components/shared/Logo';
 import { defaultTheme, cooperativaTheme } from 'styles/theme';
@@ -32,7 +34,12 @@ const Dashboard: React.FC = ({ children }) => {
         ) : (
           <Container>
             <Logo logoType={participant.establishment.type_name} />
-            <Header />
+            <Visible xl xxl>
+              <Header />
+            </Visible>
+            <Visible xs sm md lg>
+              <MobileHeader />
+            </Visible>
             {children}
             {!shouldShowRegulationsModal && <Popups />}
             <Footer />

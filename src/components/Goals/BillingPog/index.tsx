@@ -1,6 +1,7 @@
 import React from 'react';
 
 import checkIcon from 'assets/images/goals/goals-check-icon.svg';
+import timesIcon from 'assets/images/goals/goals-times-icon.svg';
 import CircularProgress from 'components/Home/Performance/CircularProgress';
 import { BillingPog as BillingPogType } from 'state/modules/goals/types';
 import Box from '../Box';
@@ -58,7 +59,7 @@ const BillingPog: React.FC<BillingPogProps> = ({ billingPog }) => {
               {billingPog.devolution.checked ? (
                 <img src={checkIcon} alt="" title="" />
               ) : (
-                <h3>not checked</h3>
+                <img src={timesIcon} alt="" title="" />
               )}
             </CircularSectionItem>
           </Item>

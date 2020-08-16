@@ -17,12 +17,20 @@ export const HighlightItem = styled.div`
     filter: brightness(0.7);
     transition: filter 150ms ease;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 14%);
+
+    @media screen and (max-width: 480px) {
+      height: 120px;
+    }
   }
 
   &:hover {
     img {
       filter: brightness(1);
     }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
   }
 `;
 
@@ -57,6 +65,10 @@ export const Title = styled.h2`
 export const Created = styled.p`
   font-family: ${({ theme }) => theme.font.fontFamily.medium};
   font-size: 0.8em;
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 export const Resume = styled.div`

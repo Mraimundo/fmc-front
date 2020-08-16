@@ -7,7 +7,12 @@ export const FooterHead = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   height: 75px;
+
+  @media screen and (max-width: 580px) {
+    height: auto;
+  }
 `;
 
 export const FmcLogo = styled.div`
@@ -17,6 +22,12 @@ export const FmcLogo = styled.div`
 
   svg {
     width: 100%;
+  }
+
+  @media screen and (max-width: 580px) {
+    position: relative;
+    left: inherit;
+    margin: 0.5em;
   }
 `;
 

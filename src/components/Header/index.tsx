@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  fetchCoinQuotation,
-  fetchMenu,
-} from 'state/modules/header/actions';
+import { fetchCoinQuotation, fetchMenu } from 'state/modules/header/actions';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { getParticipantBadgeByPortugueseTerm } from 'state/modules/header/utils';
 import useMenu from 'state/hooks/use-menu';
@@ -31,12 +28,7 @@ const Header: React.FC = () => {
   return (
     <Nav>
       {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
-      {!!menu && (
-        <Menu
-          items={menu}
-          selectedMenu={selectedMenu}
-        />
-      )}
+      {!!menu && <Menu items={menu} selectedMenu={selectedMenu} />}
       <ParticipantWrapper>
         <HelpBalloon />
         {!!participant?.establishment?.category && (

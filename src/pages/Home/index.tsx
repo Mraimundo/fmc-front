@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Visible, Hidden } from 'react-grid-system';
 
 import { fetchBanners, fetchHighlights } from 'state/modules/home/actions';
 import { getBanners, getHighlights } from 'state/modules/home/selectors';
+import { getCoinQuotations } from 'state/modules/header/selectors';
 import {
   Banners,
   Title,
@@ -11,16 +13,19 @@ import {
   MyPoints,
   Showcase,
 } from 'components/Home';
+import CoinQuotation from 'components/Header/CoinQuotation';
 import {
   Wrapper,
   ShowCaseWrapper,
   PerformanceMyPointsWrapper,
   PerformanceWrapper,
   MyPointsWrapper,
+  HomeWrapper,
 } from './styles';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+  const coinQuotations = useSelector(getCoinQuotations);
 
   const [banners, highlights] = [
     useSelector(getBanners),
@@ -33,8 +38,13 @@ const Home: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      {!!banners && <Banners items={banners} />}
+    <HomeWrapper>
+      <Visible xs sm>
+        {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
+      </Visible>
+      <Hidden xs sm>
+        {!!banners && <Banners items={banners} />}
+      </Hidden>
       <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
@@ -55,7 +65,7 @@ const Home: React.FC = () => {
           <Showcase />
         </Wrapper>
       </ShowCaseWrapper>
-    </div>
+    </HomeWrapper>
   );
 };
 
