@@ -10,16 +10,14 @@ const settings: Settings = {
   arrows: false,
   infinite: false,
   speed: 500,
-  autoplay: true,
+  autoplay: false,
   slidesToShow: 4,
   slidesToScroll: 2,
-  lazyLoad: 'ondemand',
   variableWidth: true,
   responsive: [
     {
       breakpoint: 480,
       settings: {
-        centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
       },

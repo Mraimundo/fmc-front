@@ -19,10 +19,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-family: ${FONTS.regular}, sans-serif;
+    font-size: 16px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 
-  body, input, button {
-    font-size: 16px;
+  input, button {
+    font-size: 1em;
   }
 
   h1, h2, h3, h4, h5, h6, strong {

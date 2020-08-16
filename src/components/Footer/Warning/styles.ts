@@ -24,6 +24,23 @@ export const Wrapper = styled.div`
     background-color: rgb(255 255 255 / 18%);
     width: 20%;
   }
+
+  @media screen and (max-width: 580px) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    &:before {
+      left: 2.3em;
+      top: 1.6em;
+      position: relative;
+    }
+
+    &:after {
+      left: -19px;
+      top: 30%;
+      bottom: inherit;
+    }
+  }
 `;
 
 export const Rectangle = styled.div`
@@ -45,5 +62,14 @@ export const Rectangle = styled.div`
 
   span {
     display: block;
+  }
+
+  @media screen and (max-width: 1290px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 580px) {
+    border: none;
+    width: 100%;
   }
 `;

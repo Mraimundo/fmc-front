@@ -1,5 +1,7 @@
 import React from 'react';
+import isEmpty from 'lodash.isempty';
 
+import useDimensions from 'hooks/use-dimensions';
 import { MenuItem as TMenuItem } from 'state/modules/header/types';
 import { isSelectedMenu } from 'state/modules/header/utils';
 import Linker from './Linker';
@@ -15,15 +17,22 @@ const Menu: React.FC<MenuProps> = ({
   subMenu = false,
   selectedMenu,
 }) => {
+  const { ref, width } = useDimensions<HTMLUListElement>();
+
   return (
-    <MenuList subMenu={subMenu}>
+    <MenuList subMenu={subMenu} width={width} ref={ref}>
       {items.map((item: TMenuItem) => (
         <MenuItem
           key={item.label}
           selectedMenu={isSelectedMenu(item, selectedMenu)}
         >
-          <Linker menuItem={item} />
-          {!!item.children && <Menu items={item.children} subMenu />}
+          <Linker
+            menuItem={item}
+            subMenu={subMenu && !isEmpty(item.children)}
+          />
+          {!isEmpty(item.children) && (
+            <Menu items={item.children || []} subMenu />
+          )}
         </MenuItem>
       ))}
     </MenuList>

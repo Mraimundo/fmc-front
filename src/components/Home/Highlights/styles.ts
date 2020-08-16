@@ -6,7 +6,10 @@ import 'slick-carousel/slick/slick-theme.css';
 export const Slider = styled(Slick)`
   .slick-slide {
     margin-bottom: 1em;
-    // margin-right: 0.6em;
+
+    @media screen and (max-width: 480px) {
+      width: 200px;
+    }
   }
 
   .slick-track {
