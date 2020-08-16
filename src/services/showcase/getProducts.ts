@@ -25,11 +25,16 @@ interface Response {
 interface Request {
   type: 'participant' | 'establishment';
   id: number;
+  limit?: number;
 }
 
-const getProducts = async ({ type, id }: Request): Promise<Product[]> => {
+const getProducts = async ({
+  type,
+  id,
+  limit = 3,
+}: Request): Promise<Product[]> => {
   const { data } = await pluginApi.get<Response>(
-    `premio-ideall/list-products-pi?id=${id}&type=${type}`,
+    `premio-ideall/list-products-pi?id=${id}&type=${type}&limit=${limit}`,
   );
   return data.products.map(item => ({
     ...item,
