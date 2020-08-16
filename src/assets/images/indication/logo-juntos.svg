@@ -108,7 +108,7 @@
           </g>
         </g>
       </g>
-      <text id="revenda" transform="translate(240 17)" font-size="18" font-family="HelveticaNeue, Helvetica Neue" letter-spacing="0.55em"><tspan x="15.472" y="17">REVENDA</tspan></text>
+      <text id="revenda" transform="translate(240 17)" font-size="18" font-family="Helvetica-Neue-Regular, Helvetica Neue" letter-spacing="0.55em"><tspan x="15.472" y="17">REVENDA</tspan></text>
     </g>
   </g>
 </svg>

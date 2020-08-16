@@ -107,6 +107,6 @@
       </g>
     </g>
     <line id="Linha_15" data-name="Linha 15" y1="47" transform="translate(240.5 0.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"/>
-    <text id="Cooperativa" transform="translate(240 17)" font-size="18" font-family="HelveticaNeue, Helvetica Neue" letter-spacing="0.55em"><tspan x="10.166" y="17">COOPERATIVA</tspan></text>
+    <text id="Cooperativa" transform="translate(240 17)" font-size="18" font-family="Helvetica-Neue-Regular, Helvetica Neue" letter-spacing="0.55em"><tspan x="10.166" y="17">COOPERATIVA</tspan></text>
   </g>
 </svg>
