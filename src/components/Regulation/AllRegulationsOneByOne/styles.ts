@@ -30,7 +30,7 @@ export const RegulationContent = styled.div<RegulationProps>`
     flex: 1;
     background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
     color: ${({ theme, type }) => theme.regulation[type].fontColor};
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     padding: 30px 90px 50px 0;
   }
 `;
