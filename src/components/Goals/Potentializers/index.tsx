@@ -2,6 +2,7 @@ import React from 'react';
 
 import CircularProgress from 'components/Home/Performance/CircularProgress';
 import { Potentializer } from 'state/modules/goals/types';
+import { closestIndexTo } from 'date-fns/fp';
 import Box from '../Box';
 import {
   WrapperValues,
@@ -11,7 +12,6 @@ import {
   CircularSectionItem,
 } from '../Box/styles';
 import RealizedProgress from '../RealizedProgress';
-import { closestIndexTo } from 'date-fns/fp';
 
 const colors = ['#7C21F4', '#22BF43', '#E5C900'];
 
@@ -26,12 +26,12 @@ const Potentializers: React.FC<PotentializersProps> = ({ potentializers }) => {
           {potentializers.map((potentializer, index) => (
             <Item key={potentializer.name}>
               <ProgressTitle>{potentializer.name}</ProgressTitle>
-              <GoalText>Objetivo {potentializer.goal} Kg/L</GoalText>
+              <GoalText>Objetivo {potentializer.goal} L</GoalText>
               <CircularSectionItem>
                 <CircularProgress color={colors[index]} percent={0}>
                   <RealizedProgress
                     percent={potentializer.percentage}
-                    realized={`${potentializer.realized} Kg/L`}
+                    realized={`${potentializer.realized} L`}
                   />
                 </CircularProgress>
               </CircularSectionItem>
