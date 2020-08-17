@@ -10,13 +10,12 @@ export const Container = styled.button<ContainerProps>`
     theme.button[buttonRole].backgroundColor};
   border-radius: ${({ theme, buttonRole }) =>
     theme.button[buttonRole].borderRadius};
-  height: 56px;
+  height: 3.5em;
   border: 0;
   padding: 0 16px;
   width: 100%;
   color: ${({ theme, buttonRole }) => theme.button[buttonRole].fontColor};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
-  font-size: 16px;
   margin-top: 16px;
   display: flex;
   justify-content: center;
