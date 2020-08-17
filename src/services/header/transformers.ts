@@ -28,7 +28,7 @@ export const transformMenuRawData = (
       label: item.text,
       children: transformMenuRawData(
         Array.isArray(item?.children)
-          ? item?.children
+          ? item.children
           : Object.values(item?.children || {}),
       ),
       type: item.site_menu_type,
