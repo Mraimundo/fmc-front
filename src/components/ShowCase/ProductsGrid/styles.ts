@@ -15,7 +15,7 @@ export const Container = styled.div`
   }
 `;
 
-export const MiniBox = styled(Link)`
+export const MiniBox = styled.div`
   padding: 10px;
   border: 1px solid transparent;
   text-decoration: none;

@@ -232,15 +232,13 @@ export const ForgotPasswordButton = styled.button`
 `;
 
 export const SingleSignOnButton = styled(Button)`
-  background: ${({ theme }) => theme.font.color.quartenary};
-  width: 244px;
-  height: 48px;
+  width: 170px;
+  height: 39px;
   color: ${({ theme }) => theme.font.color.tertiary};
   display: flex;
   align-items: center;
-  > svg {
-    color: #fff;
-    margin-left: 8px;
-    transform: translateY(-1px);
-  }
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 12px;
+  margin-top: 2px;
+  margin-bottom: 30px;
 `;

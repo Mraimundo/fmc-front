@@ -20,7 +20,7 @@ const ProductsGrid: React.FC<Props> = ({ products }) => {
   return (
     <Container>
       {data.map(item => (
-        <MiniBox key={`key-news-${item.id}`} to={`/news/${item.id}`}>
+        <MiniBox key={`key-news-${item.id}`}>
           <img src={item.imageUrl} alt={item.title} />
           <h4>{item.title}</h4>
           <h3>{item.points} pontos</h3>

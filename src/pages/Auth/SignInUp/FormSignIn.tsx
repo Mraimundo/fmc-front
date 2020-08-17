@@ -74,11 +74,10 @@ const FormSignIn: React.FC = () => {
       <RecoverPasswordButton />
       <SingleSignOnButton
         type="button"
-        buttonRole="quaternary"
+        buttonRole="secondary"
         onClick={handleSingleSignOnClick}
       >
-        Funcionário FMC
-        <FaSignInAlt size={26} color="#fff" />
+        Single Sign On Fmc
       </SingleSignOnButton>
     </FormContext>
   );

@@ -15,7 +15,9 @@ if (env === 'production' && GA_ID) {
    * Registrar page view no GA
    * @param {String} segment pathname acessado
    */
-  gaPageView = segment => ReactGA.pageview(segment);
+  gaPageView = segment => {
+    return ReactGA.pageview(segment);
+  };
 }
 
 /**
