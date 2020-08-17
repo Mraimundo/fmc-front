@@ -5,10 +5,20 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
   height: 300px;
+
+  @media screen and (max-width: 768px) {
+    background-color: transparent;
+    height: auto;
+    box-shadow: none;
+  }
 `;
 
 export const PerformanceWrapper = styled.div`
   display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 interface ProgressWrapperProps {
@@ -17,6 +27,17 @@ interface ProgressWrapperProps {
 export const ProgressWrapper = styled.div<ProgressWrapperProps>`
   display: flex;
   width: 100%;
+
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
+
+    &:first-child {
+      margin-bottom: 1em;
+    }
+  }
 
   ${({ borderRight }) =>
     borderRight &&
@@ -33,6 +54,10 @@ export const ProgressWrapper = styled.div<ProgressWrapperProps>`
         background-color: #EEEEEE;
         top: 50%;
         transform: translateY(-25%);
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
       }
     `}
 `;

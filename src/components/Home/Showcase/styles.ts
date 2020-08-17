@@ -50,6 +50,7 @@ export const ImageWrapper = styled.div`
   justify-content: center;
   box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
   border-radius: 10px;
+  overflow: hidden;
 
   img {
     width: 100%;

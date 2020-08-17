@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Visible, Hidden } from 'react-grid-system';
 
+import { PROFILES } from 'config/constants';
 import { useAuth } from 'context/AuthContext';
 import {
   fetchBanners,
@@ -51,6 +52,8 @@ const Home: React.FC = () => {
     dispatch(fetchShowcase(participant.id));
   }, [dispatch, participant.id]);
 
+  const isParticipant = participant.profile === PROFILES.participant;
+
   return (
     <HomeWrapper>
       <Visible xs sm>
@@ -63,22 +66,28 @@ const Home: React.FC = () => {
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
         <PerformanceMyPointsWrapper>
-          <PerformanceWrapper>
-            <Title>Performance</Title>
-            <Performance />
-          </PerformanceWrapper>
-          <MyPointsWrapper>
-            <Title>Meus pontos</Title>
-            <MyPoints />
-          </MyPointsWrapper>
+          {!isParticipant && (
+            <>
+              <PerformanceWrapper>
+                <Title>Performance</Title>
+                <Performance />
+              </PerformanceWrapper>
+              <MyPointsWrapper>
+                <Title>Meus pontos</Title>
+                <MyPoints />
+              </MyPointsWrapper>
+            </>
+          )}
         </PerformanceMyPointsWrapper>
       </Wrapper>
-      <ShowCaseWrapper>
-        <Wrapper>
-          <Title reverse>Vitrine de Prêmios</Title>
-          <Showcase products={products} />
-        </Wrapper>
-      </ShowCaseWrapper>
+      {isParticipant && (
+        <ShowCaseWrapper>
+          <Wrapper>
+            <Title reverse>Vitrine de Prêmios</Title>
+            <Showcase products={products} />
+          </Wrapper>
+        </ShowCaseWrapper>
+      )}
     </HomeWrapper>
   );
 };
