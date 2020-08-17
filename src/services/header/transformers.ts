@@ -21,12 +21,16 @@ export const transformCoinQuotationsRawData = (
 export const transformMenuRawData = (
   data?: FetchMenuService[] | null,
 ): MenuItem[] | null => {
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
 
   return data.map<MenuItem>(
     (item: FetchMenuService): MenuItem => ({
       label: item.text,
-      children: transformMenuRawData(item?.children),
+      children: transformMenuRawData(
+        Array.isArray(item?.children)
+          ? item?.children
+          : Object.values(item?.children || {}),
+      ),
       type: item.site_menu_type,
       to: item.internal,
       externalLink: item.href,
