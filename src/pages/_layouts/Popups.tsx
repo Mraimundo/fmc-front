@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react';
-// import { useMenu } from 'context/MenuContext';
 import { useLocation } from 'react-router-dom';
 
 import getPopups from 'services/popup/getPopupsFromPage';
@@ -11,20 +10,16 @@ interface PopupInterface extends IPopup {
 }
 
 const Popups: React.FC = () => {
-  const menuSelected = {
-    address: '',
-  };
-  // const { menuSelected } = useMenu();
   const [popups, setPopups] = useState<PopupInterface[]>([]);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (menuSelected && pathname === menuSelected.address) {
-      getPopups(menuSelected.address).then(data => {
+    if (pathname) {
+      getPopups(pathname).then(data => {
         setPopups(data.map(item => ({ ...item, opened: true })));
       });
     }
-  }, [menuSelected, pathname]);
+  }, [pathname]);
   return useMemo(
     () => (
       <>
