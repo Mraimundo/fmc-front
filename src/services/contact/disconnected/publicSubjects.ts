@@ -6,7 +6,7 @@ interface Subject {
 }
 
 interface ApiResponse {
-  subjects: Subject[];
+  data: Subject[];
 }
 
 interface Option {
@@ -17,9 +17,9 @@ interface Option {
 const getPublicSubjects = async (): Promise<Subject[]> => {
   try {
     const {
-      data: { subjects },
+      data: { data },
     } = await vendavallApi.get<ApiResponse>(`contacts/public-subjects`);
-    return subjects || [];
+    return data || [];
   } catch (e) {
     return [];
   }
