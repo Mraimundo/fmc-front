@@ -12,6 +12,10 @@ export const RegulationContent = styled.div<RegulationProps>`
   display: flex;
   flex-direction: column;
 
+  ul {
+    margin-left: 25px;
+  }
+
   width: 100%;
   flex: 1;
   background: ${({ theme, type }) => theme.regulation[type].backgroundColor};
@@ -43,7 +47,7 @@ export const StyledButtonConfirm = styled(DefaultButton)`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   background-color: #dd0022;
   align-self: center;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   font-size: 18px;
 
   &:hover {

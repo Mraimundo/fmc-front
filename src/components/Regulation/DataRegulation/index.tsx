@@ -111,10 +111,10 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
       >
         Concordo com os termos e quero me cadastrar
       </Button>
-      <span>
+      {/* <span>
         O botão "Aceito Participar" será habilitado após a leitura do
         regulamento na integra.
-      </span>
+      </span> */}
     </Container>
   );
 };

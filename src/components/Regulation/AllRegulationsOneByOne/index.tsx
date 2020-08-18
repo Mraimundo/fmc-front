@@ -178,10 +178,10 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
         >
           Aceito participar
         </StyledButtonConfirm>
-        <span>
+        {/* <span>
           {`O botão "Aceito Participar" será habilitado após a leitura do
                 regulamento na integra.`}
-        </span>
+        </span> */}
       </>
     ),
     [accepting, handleAcceptClick, canAccept, loading, regulation],

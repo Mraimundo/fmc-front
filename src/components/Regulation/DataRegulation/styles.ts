@@ -55,6 +55,7 @@ export const Button = styled(DefaultButton)`
   width: 100%;
   max-width: 617px;
   margin-top: 30px;
+  margin-bottom: 25px;
   height: 45px;
   text-transform: uppercase;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
