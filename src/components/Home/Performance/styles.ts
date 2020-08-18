@@ -51,7 +51,7 @@ export const ProgressWrapper = styled.div<ProgressWrapperProps>`
         width: 2px;
         position: absolute;
         right: 0;
-        background-color: #EEEEEE;
+        background-color: #eeeeee;
         top: 50%;
         transform: translateY(-25%);
 
@@ -68,6 +68,14 @@ export const Label = styled.h3`
   font-size: 1em;
   text-align: center;
   margin: 0.5em 0 1em 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  > span {
+    font-size: 12px;
+    transform: translateY(1px);
+  }
 `;
 
 export const IndividualProgressWrapper = styled.div`

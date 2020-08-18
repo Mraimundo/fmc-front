@@ -29,15 +29,21 @@ const Performance: React.FC = () => {
         </ProgressWrapper>
         <ProgressWrapper>
           <IndividualProgressWrapper>
-            <Label>HERO</Label>
-            <CircularProgress color="#47C246" percent={0} />
-          </IndividualProgressWrapper>
-          <IndividualProgressWrapper>
-            <Label>PREMIO</Label>
+            <Label>
+              PREMIO<span>®</span>
+            </Label>
             <CircularProgress color="#913944" percent={0} />
           </IndividualProgressWrapper>
           <IndividualProgressWrapper>
-            <Label>TALISMAN</Label>
+            <Label>
+              HERO<span>®</span>
+            </Label>
+            <CircularProgress color="#47C246" percent={0} />
+          </IndividualProgressWrapper>
+          <IndividualProgressWrapper>
+            <Label>
+              TALISMAN<span>®</span>
+            </Label>
             <CircularProgress color="#838BC5" percent={0} />
           </IndividualProgressWrapper>
         </ProgressWrapper>
