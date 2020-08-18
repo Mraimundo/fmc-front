@@ -10,4 +10,5 @@ export default {
     channel: '/extract',
   },
   goal: '/metas',
+  howParticipate: '/como-participar',
 };
