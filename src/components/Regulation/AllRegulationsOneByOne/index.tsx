@@ -45,7 +45,11 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
 
   useEffect(() => {
     getAllRegulations().then(data => {
-      const regulationsToAccept = data.filter(item => !item.accepted);
+      const regulationsToAccept = data
+        .filter(item => !item.accepted)
+        .sort((itemA, itemB) =>
+          itemA.type === 'regulation_of_campaign' ? -1 : 1,
+        );
       if (regulationsToAccept.length > 0) {
         setRegulations(regulationsToAccept);
         setShowModal(true);
