@@ -1,3 +1,4 @@
+import routeMap from 'routes/route-map';
 import SignInUp from 'pages/Auth/SignInUp';
 import Autologin from 'pages/Auth/Autologin';
 import Sso from 'pages/Auth/Sso';
@@ -38,7 +39,7 @@ const routes: RouteModule[] = [
     isPublic: true,
   },
   {
-    path: '/edit',
+    path: routeMap.profile,
     component: RegisterEdit,
     accessPage: 'Página de edição de cadastro',
   },

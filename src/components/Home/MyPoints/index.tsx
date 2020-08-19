@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import routeMap from 'routes/route-map';
 import history from 'services/history';
@@ -12,7 +12,18 @@ import {
   Points,
 } from './styles';
 
-const MyPoints: React.FC = () => {
+interface MyPointsProps {
+  isParticipant: boolean;
+}
+const MyPoints: React.FC<MyPointsProps> = ({ isParticipant }) => {
+  const handleClickExtract = useCallback(() => {
+    if (isParticipant) {
+      return history.push(routeMap.extract.my);
+    }
+
+    return history.push(routeMap.extract.channel);
+  }, [isParticipant]);
+
   return (
     <Wrapper style={{ color: '#000' }}>
       <Period>
@@ -23,11 +34,7 @@ const MyPoints: React.FC = () => {
         <TotalPointsText>Total pontos</TotalPointsText>
         <Points>0</Points>
       </PointsWrapper>
-      <Button
-        type="submit"
-        buttonRole="primary"
-        onClick={() => history.push(routeMap.extract.my)}
-      >
+      <Button type="submit" buttonRole="primary" onClick={handleClickExtract}>
         VER EXTRATO
       </Button>
     </Wrapper>

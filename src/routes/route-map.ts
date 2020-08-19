@@ -11,4 +11,7 @@ export default {
   },
   goal: '/metas',
   howParticipate: '/como-participar',
+  profile: '/edit',
+  faq: '/faq',
+  contact: '/fale-conosco',
 };

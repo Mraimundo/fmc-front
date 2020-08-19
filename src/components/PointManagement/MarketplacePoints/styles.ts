@@ -18,10 +18,6 @@ export const Wrapper = styled.div`
     border-bottom-right-radius: 15px;
   }
 
-  @media screen and (max-width: 992px) {
-    margin-right: 0;
-  }
-
   @media screen and (max-width: 480px) {
     &:before {
       display: none;

@@ -138,9 +138,11 @@ const PointManagement: React.FC = () => {
             </List>
 
             <Panel>
-              <ResaleCooperativePointsTabContent
-                establishmentType={selectedEstablishment?.type || ''}
-              />
+              {!!selectedEstablishment && (
+                <ResaleCooperativePointsTabContent
+                  establishmentType={selectedEstablishment.type}
+                />
+              )}
             </Panel>
             {!isResaleCooperativePointsOnly && (
               <TabPanel>

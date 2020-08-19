@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
+import { EstablishmentTypes } from 'config/constants';
 import headerImage from 'assets/images/point-management/header-image.png';
 import { formatPoints } from 'util/points';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 import {
   HeaderImageWrapper,
   WrapperBoxPoints,
@@ -12,7 +12,7 @@ import {
 
 interface Props {
   points: number;
-  establishmentType: EstablishmentType | '';
+  establishmentType: EstablishmentTypes;
 }
 const HeaderResaleCooperativePoints: React.FC<Props> = ({
   points,

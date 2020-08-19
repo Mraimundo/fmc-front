@@ -33,7 +33,13 @@ const MobileMenu: React.FC<MenuProps> = ({
       {!subMenu && (
         <>
           <MobileMenuItem>
-            <Link to={routesMap.goal}>MEU PERFIL</Link>
+            <Link to={routesMap.faq}>FAQ</Link>
+          </MobileMenuItem>
+          <MobileMenuItem>
+            <Link to={routesMap.contact}>FALE CONOSCO</Link>
+          </MobileMenuItem>
+          <MobileMenuItem>
+            <Link to={routesMap.profile}>MEU PERFIL</Link>
           </MobileMenuItem>
           <MobileMenuItem>
             <a href="/" onClick={signOut}>

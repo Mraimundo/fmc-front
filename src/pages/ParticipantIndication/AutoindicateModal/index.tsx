@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
-import { Button } from 'components/shared';
 import { ReactSVG } from 'react-svg';
+
+import routeMap from 'routes/route-map';
+import { Button } from 'components/shared';
 import closeIcon from 'assets/images/training/close-icon.svg';
 import history from 'services/history';
 
@@ -14,7 +16,7 @@ interface Props {
 const AutoindicateModal: React.FC<Props> = ({ isOpen, onRequestClose }) => {
   const handleOkClick = useCallback(async () => {
     onRequestClose();
-    history.push('/edit');
+    history.push(routeMap.profile);
   }, [onRequestClose]);
 
   return (

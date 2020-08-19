@@ -2,15 +2,15 @@ import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-grid-system';
 
+import { EstablishmentTypes } from 'config/constants';
 import * as selectors from 'state/modules/point-management/common/selectors';
 import * as actions from 'state/modules/point-management/common/actions';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 import HeaderResaleCooperativePoints from './HeaderResaleCooperativePoints';
 import HeaderWithAutonomyPoints from './HeaderWithAutonomyPoints';
 import HeaderTeamAwardsAndResaleCooperativePoints from './HeaderTeamAwardsAndResaleCooperativePoints';
 
 interface HeaderProps {
-  establishmentType: EstablishmentType | '';
+  establishmentType: EstablishmentTypes;
 }
 const Header: React.FC<HeaderProps> = ({ establishmentType }) => {
   const [

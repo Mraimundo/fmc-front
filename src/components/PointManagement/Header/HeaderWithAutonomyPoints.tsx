@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
+import { EstablishmentTypes } from 'config/constants';
 import headerImage from 'assets/images/point-management/header-image-2.png';
 import { formatPoints } from 'util/points';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { PointsInput } from 'components/PointManagement';
 import {
   HeaderAutonomyWrapper,
@@ -22,7 +22,7 @@ interface Props {
   onSetResaleCooperativePoints(points: number): void;
   onReadyToDistribute(): void;
   isAllowedToStartDistribution: boolean;
-  establishmentType: EstablishmentType | '';
+  establishmentType: EstablishmentTypes;
 }
 const HeaderWithAutonomyPoints: React.FC<Props> = ({
   generalPoints,

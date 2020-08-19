@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Points } from 'state/modules/point-management/constants';
 import { List, Item } from './styles';
 
 interface Point {
@@ -19,12 +20,15 @@ const PerformancePotentialTable: React.FC<PerformancePotentialTableProps> = ({
     <List>
       <Item>
         <span>Potencial (US$)</span>
-        <span>US$ {potential}</span>
+        <span>{potential}</span>
       </Item>
       {points.map((point: Point) => (
         <Item key={point.name}>
           <span>{point.name}</span>
-          <span>R$ {point.value}</span>
+          <span>
+            {point.name === Points.Rebate ? 'R$ ': ''}
+            {point.value}
+          </span>
         </Item>
       ))}
     </List>

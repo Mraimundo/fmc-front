@@ -126,6 +126,10 @@ export const MenuList = styled.ul<MenuListProps>`
       ul {
         left: ${width}px;
         top: 0;
+
+        &:before {
+          display: none;
+        }
       }
     `}
 `;

@@ -77,13 +77,13 @@ const Goals: React.FC = () => {
               onClick={() => setActiveTab(Tabs.Performance)}
               active={activeTab === Tabs.Performance}
             >
-              PERFORMANCE
+              <span>PERFORMANCE</span>
             </Tab>
             <Tab
               onClick={() => setActiveTab(Tabs.Top10Products)}
               active={activeTab === Tabs.Top10Products}
             >
-              TOP 10 PRODUTOS
+              <span>TOP 10 PRODUTOS</span>
             </Tab>
           </TabsList>
           {activeTab === Tabs.Performance && (

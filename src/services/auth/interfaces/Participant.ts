@@ -1,4 +1,4 @@
-import { IProfile, ApproverProfile } from 'config/constants';
+import { IProfile, ApproverProfile, EstablishmentTypes } from 'config/constants';
 
 interface Address {
   id: number;
@@ -22,7 +22,7 @@ export interface Establishment {
   id: number;
   name: string;
   cnpj: string;
-  type_name: 'Revenda' | 'Cooperativa';
+  type_name: EstablishmentTypes;
   category: 'Água' | 'Semente' | 'Terra' | 'Raiz';
   rtc_id: number | null;
   rtc_name: string | null;

@@ -39,7 +39,7 @@ export const TabsList = styled.ul`
   margin-bottom: 1.5em;
 
   @media screen and (max-width: 480px) {
-    font-size: 10px;
+    font-size: 9px;
   }
 `;
 
@@ -57,6 +57,17 @@ export const Tab = styled.li<TabProps>`
   position: relative;
   cursor: pointer;
   font-size: 1.1em;
+
+  &:first-child {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+  }
+
+  &:last-child {
+    span {
+      transform: translateX(30px);
+    }
+  }
 
   ${({ active }) =>
     !active
@@ -92,6 +103,12 @@ export const Tab = styled.li<TabProps>`
 
   @media screen and (max-width: 480px) {
     height: 50px;
+
+    &:last-child {
+      span {
+        transform: translateX(15px);
+      }
+    }
 
     &:before {
       border-width: 25px 0 25px 15px;

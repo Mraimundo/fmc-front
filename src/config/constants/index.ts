@@ -79,3 +79,8 @@ export const appDownloadLinks = {
     appleStore: 'https://apps.apple.com/br/app/fmc-agr%C3%ADcola/id830744935',
   },
 };
+
+export enum EstablishmentTypes {
+  Resale = 'Revenda',
+  Cooperative = 'Cooperativa',
+}

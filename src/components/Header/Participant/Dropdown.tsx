@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import routeMap from 'routes/route-map';
 import { Establishment as IEstablishment } from 'services/auth/interfaces/Participant';
 import {
   DropdownList,
@@ -24,7 +25,7 @@ const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
       )}
       <ParticipantMenuList>
         <li>
-          <Link to="/edit">Meu perfil</Link>
+          <Link to={routeMap.profile}>Meu perfil</Link>
         </li>
         <li>
           <a href="#sair" onClick={signOut}>
