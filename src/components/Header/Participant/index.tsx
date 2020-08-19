@@ -11,7 +11,7 @@ interface ParticipantProps {
   picture: string | null;
   name: string;
   establishment: Establishment;
-  points: number;
+  points?: number;
   signOut(): void;
 }
 const Participant: React.FC<ParticipantProps> = ({
@@ -26,7 +26,7 @@ const Participant: React.FC<ParticipantProps> = ({
       <Avatar name={name} picture={picture} circleDimension={40} />
       <WelcomeText>
         <Hello>Olá {getFirstName(name)}!</Hello>
-        <span>Meus pontos: {points}</span>
+        {typeof points === 'number' && <span>Meus pontos: {points}</span>}
       </WelcomeText>
       <AiFillCaretDown />
       <Dropdown establishment={establishment} signOut={signOut} />

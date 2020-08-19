@@ -52,9 +52,16 @@ const Form: React.FC<Props> = ({
 
   useEffect(() => {
     if (participant.profile === PROFILES.focalPoint) {
-      setAutoindicate(participant.access_premio_ideall);
+      setAutoindicate(
+        participant.access_premio_ideall &&
+          participant.establishment.team_receives_points,
+      );
     }
-  }, [participant.profile, participant.access_premio_ideall]);
+  }, [
+    participant.profile,
+    participant.access_premio_ideall,
+    participant.establishment.team_receives_points,
+  ]);
 
   const methods = useForm<FormData>({
     validationSchema: schema,
@@ -202,6 +209,7 @@ const Form: React.FC<Props> = ({
 
         {editing &&
           participant.profile === PROFILES.focalPoint &&
+          participant.establishment.team_receives_points &&
           !participant.access_premio_ideall && (
             <BoxAutoIndication>
               <input

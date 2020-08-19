@@ -42,7 +42,9 @@ const Header: React.FC = () => {
           name={participant.nick_name}
           picture={participant.picture}
           establishment={participant.establishment}
-          points={0}
+          points={
+            participant.establishment.team_receives_points ? 0 : undefined
+          }
           signOut={signOut}
         />
       </ParticipantWrapper>

@@ -275,6 +275,7 @@ const ParticipantIndication: React.FC = () => {
           </ContentForm>
         )}
         {participant.profile === 'FOCALPOINT' &&
+          participant.establishment.team_receives_points &&
           !participant.access_premio_ideall && (
             <AutoindicateButton
               onClick={() => setAutoindicateModalOpened(true)}

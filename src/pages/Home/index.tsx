@@ -53,6 +53,7 @@ const Home: React.FC = () => {
   }, [dispatch, participant.id]);
 
   const isParticipant = participant.profile === PROFILES.participant;
+  const showCatalog = !!participant.establishment.team_receives_points;
 
   return (
     <HomeWrapper>
@@ -80,7 +81,7 @@ const Home: React.FC = () => {
           )}
         </PerformanceMyPointsWrapper>
       </Wrapper>
-      {isParticipant && (
+      {isParticipant && showCatalog && (
         <ShowCaseWrapper>
           <Wrapper>
             <Title reverse>Vitrine de Prêmios</Title>

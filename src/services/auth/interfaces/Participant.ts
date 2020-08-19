@@ -1,4 +1,8 @@
-import { IProfile, ApproverProfile, EstablishmentTypes } from 'config/constants';
+import {
+  IProfile,
+  ApproverProfile,
+  EstablishmentTypes,
+} from 'config/constants';
 
 interface Address {
   id: number;
@@ -26,6 +30,7 @@ export interface Establishment {
   category: 'Água' | 'Semente' | 'Terra' | 'Raiz';
   rtc_id: number | null;
   rtc_name: string | null;
+  team_receives_points: boolean;
 }
 
 interface Subsidiary {
