@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from 'services/showcase';
 import { Product, Participant } from 'services/showcase/interfaces';
+import { useAuth } from 'context/AuthContext';
 
 import { ProductsGrid } from 'components/ShowCase';
 import { Container, ParticipantInfo, ContentBox } from './styles';
@@ -9,28 +10,33 @@ interface Props {
   participant: Participant;
 }
 
-const Box: React.FC<Props> = ({ participant }) => {
+const Box: React.FC<Props> = ({ participant: data }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { participant } = useAuth();
 
   useEffect(() => {
+    if (!participant) return;
+    if (participant.profile === 'FOCALPOINT' && data.type === 'cnpj') return;
     getProducts({
-      id: participant.id,
-      type: participant.type === 'cpf' ? 'participant' : 'establishment',
-    }).then(data => {
-      setProducts(data);
+      id: data.id,
+      type: data.type === 'cpf' ? 'participant' : 'establishment',
+    }).then(dataProducts => {
+      setProducts(dataProducts);
     });
-  }, [participant]);
+  }, [participant, data]);
 
   return (
     <Container>
       <ParticipantInfo
-        participant={participant}
-        showChangePicture={participant.type === 'cnpj'}
+        participant={data}
+        showChangePicture={data.type === 'cnpj'}
       />
-      <ContentBox>
-        <h3>Produtos em destaque</h3>
-        <ProductsGrid products={products} />
-      </ContentBox>
+      {products.length > 0 && (
+        <ContentBox>
+          <h3>Produtos em destaque</h3>
+          <ProductsGrid products={products} />
+        </ContentBox>
+      )}
     </Container>
   );
 };

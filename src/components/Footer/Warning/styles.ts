@@ -62,6 +62,7 @@ export const Rectangle = styled.div`
 
   span {
     display: block;
+    font-size: 0.9em;
   }
 
   @media screen and (max-width: 1290px) {

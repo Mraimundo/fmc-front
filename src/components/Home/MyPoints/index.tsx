@@ -31,7 +31,7 @@ const MyPoints: React.FC<MyPointsProps> = ({ isParticipant }) => {
         <PeriodText>2020/21</PeriodText>
       </Period>
       <PointsWrapper>
-        <TotalPointsText>Total pontos</TotalPointsText>
+        <TotalPointsText>Total Pontos</TotalPointsText>
         <Points>0</Points>
       </PointsWrapper>
       <Button type="submit" buttonRole="primary" onClick={handleClickExtract}>
