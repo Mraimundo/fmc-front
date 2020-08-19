@@ -36,6 +36,10 @@ export const ExtractLegend = styled.div`
   color: #000;
   font-family: ${({ theme }) => theme.font.fontFamily.medium};
   font-size: 12px;
+
+  @media screen and (max-width: 500px) {
+    padding: 20px;
+  }
 `;
 
 export const ExtractEmpty = styled.div`

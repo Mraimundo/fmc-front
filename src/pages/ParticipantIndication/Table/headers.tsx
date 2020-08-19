@@ -17,6 +17,7 @@ export default ({
   {
     column: 'Nome',
     dataValue: 'personal',
+    className: '_customWidth',
     fn: (personalData: { id: number; status: number; name: string }) => (
       <Actions
         id={personalData.id}

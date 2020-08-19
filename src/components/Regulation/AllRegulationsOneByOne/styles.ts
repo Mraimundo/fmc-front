@@ -37,6 +37,13 @@ export const RegulationContent = styled.div<RegulationProps>`
     /*overflow-y: auto;*/
     padding: 30px 90px 50px 0;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 15px;
+    > div {
+      padding: 10px;
+    }
+  }
 `;
 
 export const StyledButtonConfirm = styled(DefaultButton)`
@@ -125,6 +132,12 @@ export const Header = styled.div`
   > img {
     width: 364px;
   }
+
+  @media screen and (max-width: 500px) {
+    > img {
+      width: 280px;
+    }
+  }
 `;
 
 export const StyledAgreementTermPending = styled.div<RegulationProps>`
@@ -162,5 +175,11 @@ export const BoxAccept = styled.div`
     margin-left: 8px;
     text-transform: uppercase;
     text-align: justify;
+  }
+
+  @media screen and (max-width: 500px) {
+    > span {
+      font-size: 12px;
+    }
   }
 `;

@@ -53,7 +53,7 @@ export const AddButton = styled.button<AddButtonProps>`
     `}
   @media screen and (max-width: 720px) {
     align-self: flex-end;
-    margin-top: 10px;
+    margin-top: 17px;
     width: 50px;
     height: 50px;
     background-size: 50%;

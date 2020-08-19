@@ -62,4 +62,10 @@ export const Header = styled.div`
   > img {
     width: 364px;
   }
+
+  @media screen and (max-width: 500px) {
+    > img {
+      width: 280px;
+    }
+  }
 `;

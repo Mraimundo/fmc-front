@@ -16,4 +16,11 @@ export const Container = styled(Table)`
       font-size: 16px;
     }
   }
+
+  @media screen and (max-width: 640px) {
+    td._customWidth {
+      width: 100%;
+      padding: 5px !important;
+    }
+  }
 `;

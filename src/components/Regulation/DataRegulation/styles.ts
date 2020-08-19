@@ -49,6 +49,13 @@ export const RegulationContent = styled.div<RegulationProps>`
     overflow-y: auto;
     padding: 30px 90px 50px 0;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 15px;
+    > div {
+      padding: 10px;
+    }
+  }
 `;
 
 export const Button = styled(DefaultButton)`
@@ -122,5 +129,11 @@ export const BoxAccept = styled.div`
     font-size: 16px;
     margin-left: 8px;
     text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 500px) {
+    > span {
+      font-size: 12px;
+    }
   }
 `;
