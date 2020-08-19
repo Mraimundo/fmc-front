@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
 import { Visible } from 'react-grid-system';
 
+import { EstablishmentTypes } from 'config/constants';
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
@@ -20,7 +21,9 @@ const Dashboard: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!participant || !participant.id) return;
-    if (participant.establishment.type_name === 'Cooperativa') {
+    if (
+      participant.establishment.type_name === EstablishmentTypes.Cooperative
+    ) {
       setTheme(cooperativaTheme);
     }
     setLoading(false);

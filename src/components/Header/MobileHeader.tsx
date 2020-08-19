@@ -34,9 +34,9 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     history.listen((_, action) => {
-      if (action === 'PUSH') toggleMenu();
+      if (action === 'PUSH' && menuIsOpen) toggleMenu();
     });
-  }, [toggleMenu]);
+  }, [toggleMenu, menuIsOpen]);
 
   return (
     <>

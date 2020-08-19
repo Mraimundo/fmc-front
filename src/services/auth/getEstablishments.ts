@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
+import { EstablishmentTypes } from 'config/constants';
 
 export interface Establishment {
   id: number;
@@ -8,7 +8,7 @@ export interface Establishment {
   cnpj: string;
   type: {
     id: number;
-    name: EstablishmentType;
+    name: EstablishmentTypes;
   };
 }
 

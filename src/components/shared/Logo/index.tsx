@@ -3,6 +3,7 @@ import { Visible } from 'react-grid-system';
 import { ReactSVG } from 'react-svg';
 import { Link } from 'react-router-dom';
 
+import { EstablishmentTypes } from 'config/constants';
 import juntosLogoMobile from 'assets/images/juntos-logo-mobile.svg';
 import logoFmc from 'assets/images/indication/logo-fmc.svg';
 import logoRevenda from 'assets/images/indication/logo-juntos.svg';
@@ -12,9 +13,12 @@ import { Container, Content, FmcLogoWrapper } from './styles';
 
 interface Props {
   className?: string;
-  logoType?: 'Revenda' | 'Cooperativa';
+  logoType?: EstablishmentTypes;
 }
-const Logo: React.FC<Props> = ({ className, logoType = 'Revenda' }) => {
+const Logo: React.FC<Props> = ({
+  className,
+  logoType = EstablishmentTypes.Resale,
+}) => {
   return (
     <Container className={className}>
       <Content>
@@ -27,7 +31,7 @@ const Logo: React.FC<Props> = ({ className, logoType = 'Revenda' }) => {
           <img src={juntosLogoMobile} alt="" title="" />
         </Visible>
         <Visible xl xxl>
-          {logoType === 'Revenda' ? (
+          {logoType === EstablishmentTypes.Resale ? (
             <ReactSVG src={logoRevenda} />
           ) : (
             <ReactSVG src={logoCooperativa} />

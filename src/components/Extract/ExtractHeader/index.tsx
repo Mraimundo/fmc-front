@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { EstablishmentTypes } from 'config/constants';
 import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 import { formatPointsExtract } from 'util/points';
 import {
   AccumulatedBalance,
@@ -14,7 +15,7 @@ import {
 
 interface Props {
   summary: ExtractSummary;
-  userType: EstablishmentType;
+  userType: EstablishmentTypes;
   pathKey: string;
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { EstablishmentTypes } from 'config/constants';
 import {
   Campaign,
   ExtractSummary,
@@ -12,7 +13,6 @@ import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
 import { useAuth } from 'context/AuthContext';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 
 import {
   Container,
@@ -28,8 +28,10 @@ const Extract: React.FC = () => {
   const [summary, setSummary] = useState<ExtractSummary>();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
-  const [userType, setUserType] = useState<EstablishmentType>('Revenda');
-  const [pathKey, setPathKey] = useState('Revenda');
+  const [userType, setUserType] = useState<EstablishmentTypes>(
+    EstablishmentTypes.Resale,
+  );
+  const [pathKey, setPathKey] = useState('');
   const { participant } = useAuth();
 
   useEffect(() => {
@@ -103,7 +105,9 @@ const Extract: React.FC = () => {
           *Ações Compartilhadas: é a verba reservada para você e seu RTC
           definirem juntos quais as melhores ações e práticas para ajudar a
           prosperar
-          {userType === 'Revenda' ? ` seu negócio` : ' a sua cooperativa.'}.
+          {userType === EstablishmentTypes.Resale
+            ? ' seu negócio.'
+            : ' a sua cooperativa.'}
         </ExtractLegend>
       )}
     </Container>

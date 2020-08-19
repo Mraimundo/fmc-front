@@ -1,21 +1,22 @@
 import styled from 'styled-components';
+
+import { EstablishmentTypes } from 'config/constants';
 import bgRevenda from 'assets/images/extract/bgRevenda.svg';
 import bgCooperativa from 'assets/images/extract/bgCooperativa.svg';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 
 interface ContainerProps {
-  userType: EstablishmentType;
+  userType: EstablishmentTypes;
 }
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 25px;
   align-items: center;
   ${({ userType }) =>
-    userType === 'Revenda' &&
+    userType === EstablishmentTypes.Resale &&
     `background: #395389 url(${bgRevenda});
   `};
   ${({ userType }) =>
-    userType === 'Cooperativa' &&
+    userType === EstablishmentTypes.Cooperative &&
     `background: #325107 url(${bgCooperativa});
   `};
   background-size: cover;

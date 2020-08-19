@@ -1,4 +1,5 @@
 import { pluginApi } from 'services/api';
+import { EstablishmentTypes } from 'config/constants';
 import { Audience } from './interfaces/Campaign';
 
 interface EstablishmentApi {
@@ -33,7 +34,7 @@ interface EstablishmentApi {
   regional_id: number;
   type: {
     id: number;
-    name: 'Revenda' | 'Cooperativa';
+    name: EstablishmentTypes;
   };
   balance: number;
 }

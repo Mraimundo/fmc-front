@@ -74,7 +74,7 @@ const Home: React.FC = () => {
               </PerformanceWrapper>
               <MyPointsWrapper>
                 <Title>Meus pontos</Title>
-                <MyPoints />
+                <MyPoints isParticipant={isParticipant} />
               </MyPointsWrapper>
             </>
           )}

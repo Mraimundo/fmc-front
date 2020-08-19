@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { EstablishmentTypes } from 'config/constants';
 import {
   getTotalPointsResaleCooperative,
   getFinishedDistribution,
@@ -16,7 +17,6 @@ import {
   setMarketplacePoints,
   setInvoicePoints,
 } from 'state/modules/point-management/resale-cooperative/actions';
-import { EstablishmentType } from 'state/modules/point-management/common/types';
 
 import ResaleCooperativeResume from './ResaleCooperativeResume';
 import Congrats from './ResaleCooperativeResume/Congrats';
@@ -25,7 +25,7 @@ import InvoicePoints from './InvoicePoints';
 import { WrapperPoints, RescueResaleCooperativeButton } from './styles';
 
 interface ResaleCooperativePointsTabContentProps {
-  establishmentType: EstablishmentType | '';
+  establishmentType: EstablishmentTypes;
 }
 const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabContentProps> = ({
   establishmentType,

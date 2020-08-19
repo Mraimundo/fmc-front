@@ -1,3 +1,4 @@
+import { EstablishmentTypes } from 'config/constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
 import { Establishment as RawEstablishment } from 'services/auth/getEstablishments';
@@ -16,8 +17,8 @@ export const pointsToDistribute: PointsToDistribute = {
 };
 
 export const establishments: Establishment[] = [
-  { value: '1', title: 'Estabelecimento 1', type: 'Revenda' },
-  { value: '2', title: 'Estabelecimento 2', type: 'Cooperativa' },
+  { value: '1', title: 'Estabelecimento 1', type: EstablishmentTypes.Resale },
+  { value: '2', title: 'Estabelecimento 2', type: EstablishmentTypes.Cooperative },
 ];
 
 export const rawEstablishments: RawEstablishment[] = [
@@ -28,7 +29,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '00000000000000',
     type: {
       id: 1,
-      name: 'Revenda',
+      name: EstablishmentTypes.Resale,
     },
   },
   {
@@ -38,7 +39,7 @@ export const rawEstablishments: RawEstablishment[] = [
     cnpj: '11111111111111',
     type: {
       id: 2,
-      name: 'Cooperativa',
+      name: EstablishmentTypes.Cooperative,
     },
   },
 ];

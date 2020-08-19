@@ -21,10 +21,12 @@ const PerformanceTabContent: React.FC<PerformanceTabContentProps> = ({
   potentializers,
   infos,
 }) => {
+  const hasPotentializers = !!potentializers && potentializers.length > 0;
+
   return (
     <>
       <BillingPog billingPog={billingPog} />
-      <Potentializers potentializers={potentializers} />
+      {hasPotentializers && <Potentializers potentializers={potentializers} />}
       {!!infos && (
         <>
           <PerformancePotentialTable

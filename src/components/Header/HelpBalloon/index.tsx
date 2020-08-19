@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 import { Link } from 'react-router-dom';
 
+import routeMap from 'routes/route-map';
 import helpBalloonIcon from 'assets/images/help-balloon.svg';
 import interrogationIcon from 'assets/images/interrogation-icon.svg';
 import phoneIcon from 'assets/images/phone-icon.svg';
@@ -15,11 +16,11 @@ const HelpBalloon: React.FC = () => {
       <HelpMenu data-testid="help-balloon-manu">
         <li>
           <ReactSVG src={interrogationIcon} />
-          <Link to="/faq">FAQ</Link>
+          <Link to={routeMap.faq}>FAQ</Link>
         </li>
         <li>
           <ReactSVG src={phoneIcon} />
-          <Link to="/fale-conosco">Fale conosco</Link>
+          <Link to={routeMap.contact}>Fale conosco</Link>
         </li>
       </HelpMenu>
     </HelpBallonWrapper>

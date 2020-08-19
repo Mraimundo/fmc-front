@@ -1,9 +1,10 @@
+import routeMap from 'routes/route-map';
 import Contact from 'pages/Contact';
 import { RouteModule } from './RouteModule';
 
 const routes: RouteModule[] = [
   {
-    path: '/fale-conosco',
+    path: routeMap.contact,
     component: Contact,
     accessPage: 'Página fale conosco',
   },

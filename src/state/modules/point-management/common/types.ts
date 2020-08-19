@@ -1,3 +1,5 @@
+import { EstablishmentTypes } from 'config/constants';
+
 export type PointsToDistribute = {
   general: number | null;
   generalPointId: number | null;
@@ -17,5 +19,5 @@ export type EstablishmentType = 'Revenda' | 'Cooperativa';
 export type Establishment = {
   value: string;
   title: string;
-  type: EstablishmentType;
+  type: EstablishmentTypes;
 };
