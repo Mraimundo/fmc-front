@@ -77,7 +77,7 @@ const FormSignIn: React.FC = () => {
         buttonRole="secondary"
         onClick={handleSingleSignOnClick}
       >
-        Single Sign On Fmc
+        Single Sign On FMC
       </SingleSignOnButton>
     </FormContext>
   );

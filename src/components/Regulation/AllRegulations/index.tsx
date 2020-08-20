@@ -14,7 +14,7 @@ import RegulationBox from './RegulationBox';
 import { Container, Content, Title, SubTitle, Accordion } from './styles';
 
 const TITLES = {
-  [REGULATIONS_TYPE.dataTerm]: 'Termos de Lei de Proteção de Dados',
+  [REGULATIONS_TYPE.dataTerm]: 'Termos de Proteção de Dados',
   [REGULATIONS_TYPE.regulationOfCampaign]: 'Regulamento do Programa Juntos',
   [REGULATIONS_TYPE.safraTerm]: 'Termos de Safras',
 };
@@ -37,11 +37,17 @@ const AllRegulations: React.FC = () => {
   useEffect(() => {
     getAllRegulations().then(regulations => {
       setDataRegulations(
-        regulations.filter(regulation => regulation.type === 'data_term'),
+        regulations.filter(
+          regulation =>
+            regulation.type === 'data_term' ||
+            regulation.name.toLowerCase().includes('proteção de dados'),
+        ),
       );
       setCampaingRegulations(
         regulations.filter(
-          regulation => regulation.type === 'regulation_of_campaign',
+          regulation =>
+            regulation.type === 'regulation_of_campaign' &&
+            !regulation.name.toLowerCase().includes('proteção de dados'),
         ),
       );
       setSafraRegulations(
@@ -135,12 +141,18 @@ const AllRegulations: React.FC = () => {
     <Container type="primary">
       <Content>
         <Title>Regulamentos e Termos</Title>
-        {dataRegulations.length > 0 &&
-          printRegulation(dataRegulations, 'data_term')}
         {campaignRegulations.length > 0 &&
           printRegulation(campaignRegulations, 'regulation_of_campaign')}
         {safraRegulations.length > 0 &&
           printRegulation(safraRegulations, 'safra_term')}
+        {dataRegulations.length > 0 &&
+          printRegulation(dataRegulations, 'data_term')}
+        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
+          Download do Termos de Uso
+        </a>
+        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870070.5f3d8ff69a8341.23430608.pdf">
+          Download da Política de Privacidade
+        </a>
       </Content>
     </Container>
   );

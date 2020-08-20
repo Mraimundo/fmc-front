@@ -129,6 +129,10 @@ export const BoxAccept = styled.div`
     font-size: 16px;
     margin-left: 8px;
     text-transform: uppercase;
+
+    a {
+      color: ${({ theme }) => theme.font.color.primary};
+    }
   }
 
   @media screen and (max-width: 500px) {

@@ -23,6 +23,18 @@ export const Content = styled.div`
   background-color: #fff;
   padding: 33px 46px;
   flex: 1;
+
+  > a {
+    color: ${({ theme }) => theme.font.color.primary};
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 16px;
+    display: block;
+    margin-top: 30px;
+
+    & + a {
+      margin-top: 10px;
+    }
+  }
 `;
 
 export const Title = styled.h1`
@@ -58,6 +70,10 @@ export const ContentRegulation = styled.div`
   margin-left: 109px;
   transform: translateY(-7px) translateX(1px);
   padding: 10px;
+
+  ul {
+    margin-left: 25px;
+  }
 
   @media screen and (max-width: 720px) {
     margin-left: 0;

@@ -95,10 +95,16 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
           }}
         />
         <span>
-          Ao clicar na caixa “Li e aceito os Termos de Uso e Política de
-          Privacidade”, tenho compreensão e estou de acordo com esses Termos,
-          bem como concordo e autorizo para a finalidade a que se destina, sem
-          reservas.
+          Ao clicar na caixa “Li e aceito os{' '}
+          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
+            Termos de Uso
+          </a>{' '}
+          e{' '}
+          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870070.5f3d8ff69a8341.23430608.pdf">
+            Política de Privacidade
+          </a>
+          ”, tenho compreensão e estou de acordo com esses Termos, bem como
+          concordo e autorizo para a finalidade a que se destina, sem reservas.
         </span>
       </BoxAccept>
 
