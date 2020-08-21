@@ -31,8 +31,8 @@ export const formatPointsExtract = (value: number) =>
 
 export const formatQuotedCoin = (value: number) =>
   value.toLocaleString('pt-br', {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4,
   });
 
 export const formatDollars = (value: number) =>

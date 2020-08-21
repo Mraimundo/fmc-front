@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 const GA_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 const env = process.env.NODE_ENV;
 let gaPageView = (segment: string) => {
-  console.log(segment);
+  console.log(`just homolog console ${segment}`);
 };
 /* console.log(process.env.GOOGLE_ANALYTICS_ID); */
 if (env === 'production' && GA_ID) {

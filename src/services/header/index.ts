@@ -23,11 +23,11 @@ export interface FetchCoinQuotationsService {
   };
 }
 export const fetchCoinQuotationsService = async (): Promise<Coin[] | null> => {
-  const { data } = await coinQuotation.get<FetchCoinQuotationsService>(
-    `/${COINS_TO_QUOTE}`,
-  );
+  const {
+    data: { USD, USDT },
+  } = await coinQuotation.get<FetchCoinQuotationsService>(``);
 
-  return transformCoinQuotationsRawData(data);
+  return transformCoinQuotationsRawData({ USD, USDT });
 };
 
 export interface FetchMenuService {
