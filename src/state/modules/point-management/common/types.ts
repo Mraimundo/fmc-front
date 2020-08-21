@@ -12,6 +12,7 @@ export type PointsToDistribute = {
     points: number;
     maxInvoicePercentage: number;
   } | null;
+  allowPartialDistribution?: boolean | null;
 };
 
 export type EstablishmentType = 'Revenda' | 'Cooperativa';

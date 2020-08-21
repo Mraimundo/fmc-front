@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import reducer, { initialState } from './reducer';
 import * as actions from './actions';
+import { FinishedDistributionPossibilities } from './constants';
 import {
   error,
   pointsToDistribute,
@@ -95,7 +96,7 @@ describe('src/state/modules/point-management/common/reducer', () => {
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      pointsToDistribute: pointsToDistribute,
+      pointsToDistribute,
       fetchPointsToDistribute: {
         isFetching: false,
       },
@@ -145,7 +146,10 @@ describe('src/state/modules/point-management/common/reducer', () => {
   });
 
   test('should can handle DISTRIBUTE_POINTS_ACTION', () => {
-    const result = reducer(undefined, actions.distributePoints());
+    const result = reducer(
+      undefined,
+      actions.distributePoints(FinishedDistributionPossibilities.Rc),
+    );
 
     expect(result).to.be.deep.equal({
       ...initialState,
@@ -156,7 +160,10 @@ describe('src/state/modules/point-management/common/reducer', () => {
   });
 
   test('should can handle DISTRIBUTE_POINTS_FINALLY_ACTION', () => {
-    const result = reducer(undefined, actions.distributePointsFinally());
+    const result = reducer(
+      undefined,
+      actions.distributePointsFinally(FinishedDistributionPossibilities.Ta),
+    );
 
     expect(result).to.be.deep.equal({
       ...initialState,
@@ -190,11 +197,14 @@ describe('src/state/modules/point-management/common/reducer', () => {
   });
 
   test('should can handle SET_FINISHED_DISTRIBUTION', () => {
-    const result = reducer(undefined, actions.setFinishedDistribution());
+    const result = reducer(
+      undefined,
+      actions.setFinishedDistribution(FinishedDistributionPossibilities.All),
+    );
 
     expect(result).to.be.deep.equal({
       ...initialState,
-      finishedDistribution: true,
+      finishedDistribution: FinishedDistributionPossibilities.All,
     });
   });
 });

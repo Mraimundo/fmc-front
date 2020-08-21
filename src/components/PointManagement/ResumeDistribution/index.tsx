@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatPoints } from 'util/points';
 import Button from 'components/shared/Button';
 import { Title, Checkbox } from 'components/PointManagement';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 import {
   setPointsToDistribute,
   toggleDistributeEqually,
@@ -11,7 +12,10 @@ import {
   removeAllScores,
 } from 'state/modules/point-management/team-awards/actions';
 import { distributePoints } from 'state/modules/point-management/common/actions';
-import { getFinishedDistribution } from 'state/modules/point-management/common/selectors';
+import {
+  getFinishedDistribution,
+  getPointsToDistribute as getPointsToDistributeCommon,
+} from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
   getAvailableScore,
@@ -38,6 +42,7 @@ const ResumeDistribution: React.FC = () => {
     isEnabledToAssignPoints,
     isEnabledToDistributePoints,
     finishedDistribution,
+    pointsToDistributeCommon,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -48,9 +53,14 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getIsEnabledToAssignPoints),
     useSelector(getIsEnabledToDistributePoints),
     useSelector(getFinishedDistribution),
+    useSelector(getPointsToDistributeCommon),
   ];
 
   const dispatch = useDispatch();
+
+  const partialDistribution = pointsToDistributeCommon.allowPartialDistribution
+    ? FinishedDistributionPossibilities.Rc
+    : FinishedDistributionPossibilities.All;
 
   const handleChangePointsToDistribute = useCallback(
     (points: number) => {
@@ -68,14 +78,17 @@ const ResumeDistribution: React.FC = () => {
   }, [dispatch]);
 
   const handleDistributePoints = useCallback(() => {
-    dispatch(distributePoints());
-  }, [dispatch]);
+    dispatch(distributePoints(partialDistribution));
+  }, [dispatch, partialDistribution]);
 
   const isDisabledDistributeEqually = useMemo(() => {
     if (distributeEqually) return false;
 
     return !pointsToDistribute || !selectedParticipantsWithoutScore;
   }, [distributeEqually, pointsToDistribute, selectedParticipantsWithoutScore]);
+
+  const { Ta, All } = FinishedDistributionPossibilities;
+  const isFinished = finishedDistribution === (Ta || All);
 
   return (
     <div>
@@ -118,7 +131,7 @@ const ResumeDistribution: React.FC = () => {
           <RemoveAllScores onClick={handleRemoveAllScores} />
         </>
       )}
-      {!finishedDistribution && (
+      {!isFinished && (
         <Button
           buttonRole="tertiary"
           type="button"

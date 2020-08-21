@@ -35,3 +35,9 @@ export const DISTRIBUTE_POINTS_SUCCESS =
 
 export const SET_FINISHED_DISTRIBUTION =
   '@fmc/point-management/common/SET_FINISHED_DISTRIBUTION';
+
+export enum FinishedDistributionPossibilities {
+  Rc = 'resale-cooperative-finished',
+  Ta = 'team-awards-finished',
+  All = 'all-finished',
+}

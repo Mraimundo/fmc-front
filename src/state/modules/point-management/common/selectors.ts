@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 import { FetchState } from '@types';
 import { StoreState } from 'state/root-reducer';
 import { PointsToDistribute, Establishment } from './types';
+import { FinishedDistributionPossibilities } from './constants';
 
 export const getFetchPointsToDistribute = (state: StoreState) =>
   state.pointManagement.common.fetchPointsToDistribute;
@@ -29,7 +30,9 @@ export const getSelectedEstablishment = (
 export const getDistributePoints = (state: StoreState): FetchState =>
   state.pointManagement.common.distributePoints;
 
-export const getFinishedDistribution = (state: StoreState): boolean =>
+export const getFinishedDistribution = (
+  state: StoreState,
+): FinishedDistributionPossibilities | null =>
   state.pointManagement.common.finishedDistribution;
 
 export const getIsResaleCooperativePointsOnly = createSelector(

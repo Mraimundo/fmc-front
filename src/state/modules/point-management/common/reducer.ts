@@ -19,6 +19,7 @@ import {
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
+  FinishedDistributionPossibilities,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -39,7 +40,7 @@ export type CommonState = {
   totalPointsResaleCooperative: number;
   establishments: Establishment[] | null;
   selectedEstablishment: Establishment | null;
-  finishedDistribution: boolean;
+  finishedDistribution: FinishedDistributionPossibilities | null;
 };
 
 export const initialState: CommonState = {
@@ -52,7 +53,7 @@ export const initialState: CommonState = {
   totalPointsResaleCooperative: 0,
   establishments: null,
   selectedEstablishment: null,
-  finishedDistribution: false,
+  finishedDistribution: null,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (

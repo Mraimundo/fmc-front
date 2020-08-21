@@ -27,6 +27,7 @@ export const constructPointsToDistribute = (
     pointId: params.resaleCooperativePointId || null,
     maxInvoicePercentage: params.resaleCooperativeMaxInvoicePercentage || 0,
   },
+  allowPartialDistribution: true,
 });
 
 export const sellerAward = (

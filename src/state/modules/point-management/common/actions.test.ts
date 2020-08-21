@@ -200,33 +200,39 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('distributePoints', () => {
+    const { Rc } = constants.FinishedDistributionPossibilities;
+
     test('should be a function', () => {
       expect(distributePoints).to.be.a('function');
     });
 
     test('should return a object', () => {
-      expect(distributePoints()).to.be.a('object');
+      expect(distributePoints(Rc)).to.be.a('object');
     });
 
     test('should return a valid object', () => {
-      expect(distributePoints()).to.be.deep.equal({
+      expect(distributePoints(Rc)).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_ACTION,
+        meta: { finishedDistributionPossibilities: Rc },
       });
     });
   });
 
   describe('distributePointsFinally', () => {
+    const { All } = constants.FinishedDistributionPossibilities;
+
     test('should be a function', () => {
       expect(distributePointsFinally).to.be.a('function');
     });
 
     test('should return a object', () => {
-      expect(distributePointsFinally()).to.be.a('object');
+      expect(distributePointsFinally(All)).to.be.a('object');
     });
 
     test('should return a valid object', () => {
-      expect(distributePointsFinally()).to.be.deep.equal({
+      expect(distributePointsFinally(All)).to.be.deep.equal({
         type: constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
+        meta: { finishedDistributionPossibilities: All },
       });
     });
   });
@@ -265,25 +271,35 @@ describe('src/state/modules/point-management/common/actions', () => {
   });
 
   describe('setFinishedDistribution', () => {
+    const { All } = constants.FinishedDistributionPossibilities;
+
     test('should be a function', () => {
       expect(setFinishedDistribution).to.be.a('function');
     });
 
     test('should return a object', () => {
-      expect(setFinishedDistribution()).to.be.a('object');
+      expect(setFinishedDistribution(All)).to.be.a('object');
     });
 
     test('should return a valid object with defualt param', () => {
-      expect(setFinishedDistribution()).to.be.deep.equal({
+      expect(setFinishedDistribution(All)).to.be.deep.equal({
         type: constants.SET_FINISHED_DISTRIBUTION,
-        payload: { finishedDistribution: true },
+        payload: {
+          finishedDistribution: All,
+        },
       });
     });
 
     test('should return a valid object with param', () => {
-      expect(setFinishedDistribution(false)).to.be.deep.equal({
+      expect(
+        setFinishedDistribution(
+          constants.FinishedDistributionPossibilities.All,
+        ),
+      ).to.be.deep.equal({
         type: constants.SET_FINISHED_DISTRIBUTION,
-        payload: { finishedDistribution: false },
+        payload: {
+          finishedDistribution: constants.FinishedDistributionPossibilities.All,
+        },
       });
     });
   });

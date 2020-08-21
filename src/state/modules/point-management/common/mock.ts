@@ -1,7 +1,7 @@
 import { EstablishmentTypes } from 'config/constants';
+import { Establishment as RawEstablishment } from 'services/auth/getEstablishments';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
-import { Establishment as RawEstablishment } from 'services/auth/getEstablishments';
 
 export const error = 'Generic Error';
 
@@ -18,7 +18,11 @@ export const pointsToDistribute: PointsToDistribute = {
 
 export const establishments: Establishment[] = [
   { value: '1', title: 'Estabelecimento 1', type: EstablishmentTypes.Resale },
-  { value: '2', title: 'Estabelecimento 2', type: EstablishmentTypes.Cooperative },
+  {
+    value: '2',
+    title: 'Estabelecimento 2',
+    type: EstablishmentTypes.Cooperative,
+  },
 ];
 
 export const rawEstablishments: RawEstablishment[] = [
@@ -65,7 +69,7 @@ const state: CommonState = {
   totalPointsTeamAwards: 5000,
   establishments,
   selectedEstablishment,
-  finishedDistribution: false,
+  finishedDistribution: null,
 };
 
 export default state;

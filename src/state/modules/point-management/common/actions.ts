@@ -19,6 +19,7 @@ import {
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
+  FinishedDistributionPossibilities,
 } from './constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
@@ -123,18 +124,20 @@ export const setSelectedEstablishment = (
     payload: { selectedEstablishment },
   };
 
-export const distributePoints = (): ActionCreator<
-  typeof DISTRIBUTE_POINTS_ACTION
-> =>
+export const distributePoints = (
+  finishedDistributionPossibilities: FinishedDistributionPossibilities,
+): ActionCreator<typeof DISTRIBUTE_POINTS_ACTION> =>
   <const>{
     type: DISTRIBUTE_POINTS_ACTION,
+    meta: { finishedDistributionPossibilities },
   };
 
-export const distributePointsFinally = (): ActionCreator<
-  typeof DISTRIBUTE_POINTS_FINALLY_ACTION
-> =>
+export const distributePointsFinally = (
+  finishedDistributionPossibilities: FinishedDistributionPossibilities,
+): ActionCreator<typeof DISTRIBUTE_POINTS_FINALLY_ACTION> =>
   <const>{
     type: DISTRIBUTE_POINTS_FINALLY_ACTION,
+    meta: { finishedDistributionPossibilities },
   };
 
 export const distributePointsFailure = (
@@ -155,7 +158,7 @@ export const distributePointsSuccess = (): ActionCreator<
   };
 
 export const setFinishedDistribution = (
-  finishedDistribution = true,
+  finishedDistribution: FinishedDistributionPossibilities,
 ): ActionCreatorPayload<
   typeof SET_FINISHED_DISTRIBUTION,
   Pick<CommonState, 'finishedDistribution'>

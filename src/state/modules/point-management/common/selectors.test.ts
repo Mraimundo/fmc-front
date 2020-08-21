@@ -66,7 +66,7 @@ describe('src/state/modules/point-management/common/selectors', () => {
     });
 
     test('check getFinishedDistribution', () => {
-      expect(getFinishedDistribution(state)).to.be.false;
+      expect(getFinishedDistribution(state)).to.be.null;
     });
   });
 

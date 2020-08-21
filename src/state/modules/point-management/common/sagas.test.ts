@@ -37,6 +37,8 @@ import mainSaga, {
   workerVerifyDistributePointsPossibility,
   workerDistributePoints,
   workerFinishedDistribution,
+  cleanResaleCooperative,
+  cleanTeamAwards,
 } from './sagas';
 import {
   establishments,
@@ -296,7 +298,12 @@ describe('src/state/modules/point-management/common/sagas', () => {
 
   describe('workerVerifyDistributePointsPossibility', () => {
     test('should call to distribute points with happy way', async () => {
-      await expectSaga(workerVerifyDistributePointsPossibility)
+      const { All } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerVerifyDistributePointsPossibility, {
+        type: constants.DISTRIBUTE_POINTS_ACTION,
+        meta: { finishedDistributionPossibilities: All },
+      })
         .withReducer(reducer)
         .withState(initialState)
         .provide([
@@ -317,7 +324,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .select(selectors.getTotalPointsTeamAwards)
         .select(selectors.getIsResaleCooperativePointsOnly)
         .call(workerDistributePoints)
-        .dispatch(actions.distributePoints())
+        .dispatch(actions.distributePoints(All))
         .hasFinalState(initialState)
         .run();
     });
@@ -450,16 +457,52 @@ describe('src/state/modules/point-management/common/sagas', () => {
   });
 
   describe('workerFinishedDistribution', () => {
-    test('should put any actions after finish distribution', async () => {
+    test('should call saga to clean resale cooperative values', async () => {
+      const { Rc } = constants.FinishedDistributionPossibilities;
+
       await expectSaga(workerFinishedDistribution)
         .withReducer(reducer)
         .withState(initialState)
-        .put(removeAllScores())
-        .put(actions.setTotalPointsTeamAwards(0))
-        .put(actions.setTotalPointsResaleCooperative(0))
-        .put(setInvoicePoints(0))
-        .put(setMarketplacePoints(0))
-        .dispatch(actions.setFinishedDistribution())
+        .provide([
+          [select(selectors.getFinishedDistribution), Rc],
+          [matchers.call.fn(cleanResaleCooperative), null],
+        ])
+        .call(cleanResaleCooperative)
+        .dispatch(actions.setFinishedDistribution(Rc))
+        .hasFinalState(initialState)
+        .run();
+    });
+
+    test('should call saga to clean team awards values', async () => {
+      const { Ta } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerFinishedDistribution)
+        .withReducer(reducer)
+        .withState(initialState)
+        .provide([
+          [select(selectors.getFinishedDistribution), Ta],
+          [matchers.call.fn(cleanTeamAwards), null],
+        ])
+        .call(cleanTeamAwards)
+        .dispatch(actions.setFinishedDistribution(Ta))
+        .hasFinalState(initialState)
+        .run();
+    });
+
+    test('should call saga to clean all values', async () => {
+      const { All } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerFinishedDistribution)
+        .withReducer(reducer)
+        .withState(initialState)
+        .provide([
+          [select(selectors.getFinishedDistribution), All],
+          [matchers.call.fn(cleanTeamAwards), null],
+          [matchers.call.fn(cleanResaleCooperative), null],
+        ])
+        .call(cleanTeamAwards)
+        .call(cleanResaleCooperative)
+        .dispatch(actions.setFinishedDistribution(All))
         .hasFinalState(initialState)
         .run();
     });
