@@ -1,6 +1,4 @@
-import { useCallback } from 'react';
 import { pluginApi } from 'services/api';
-import { Participant } from 'services/auth/interfaces/Participant';
 import { Product } from './interfaces';
 
 interface ProductApi {

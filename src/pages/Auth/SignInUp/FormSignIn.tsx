@@ -7,7 +7,6 @@ import { useToast } from 'context/ToastContext';
 import validateCpf from 'util/validations/cpf';
 
 import { Input, Button, PasswordInput } from 'components/shared';
-import { FaSignInAlt } from 'react-icons/fa';
 import RecoverPasswordButton from './RecoverPassword';
 import { SingleSignOnButton } from './styles';
 

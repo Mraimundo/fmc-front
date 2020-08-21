@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Button as DefaultButton } from 'components/shared';
 import DefaultModal from 'components/shared/Modal';
 import { lighten, shade } from 'polished';
-import background from 'assets/images/background.svg';
 import backgroundHeader from 'assets/images/background-header.svg';
 
 interface RegulationProps {

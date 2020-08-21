@@ -2,7 +2,6 @@ import React from 'react';
 
 import CircularProgress from 'components/Home/Performance/CircularProgress';
 import { Potentializer } from 'state/modules/goals/types';
-import { closestIndexTo } from 'date-fns/fp';
 import Box from '../Box';
 import {
   WrapperValues,
