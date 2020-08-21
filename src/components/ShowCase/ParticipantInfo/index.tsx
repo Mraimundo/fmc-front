@@ -8,7 +8,6 @@ import cameraIcon from 'assets/images/showcase/camera.svg';
 import transformer, {
   Response as Data,
 } from 'services/showcase/transformers/toParticipantTransformer';
-import { Link } from 'react-router-dom';
 
 import { Container, Content, Circle } from './styles';
 
@@ -74,7 +73,7 @@ const ParticipantInfo: React.FC<Props> = ({
           </Circle>
           <h3>{data.name}</h3>
           <h4>{data.points} pontos</h4>
-          <a href={data.urlAccess} target="_blank" rel="noreferrer">
+          <a href={data.urlAccess} target="_blank" rel="noopener noreferrer">
             {data.type === 'cnpj' ? 'Catálogo do canal' : 'Meu catálogo'}
           </a>
         </Content>

@@ -113,7 +113,7 @@ const Configuration: React.FC<Props> = ({ handleAction }) => {
         </ActionBox>
       </Container>
     ),
-    [campaign, audienceSelected, dispatch, loading, handleButtonClick],
+    [campaign, audienceSelected, dispatch, loading, handleButtonClick, errors],
   );
 };
 

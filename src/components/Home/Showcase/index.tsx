@@ -1,7 +1,6 @@
 import React from 'react';
 
 import routeMap from 'routes/route-map';
-import { showcase } from 'state/modules/home/mock';
 import { ShowcaseProduct } from 'state/modules/home/types';
 import ProductItem from './ProductItem';
 import SeeCompleteShowcase from './SeeCompleteShowcase';

@@ -24,7 +24,7 @@ const ProductsGrid: React.FC<Props> = ({ products }) => {
           <img src={item.imageUrl} alt={item.title} />
           <h4>{item.title}</h4>
           <h3>{item.points} pontos</h3>
-          <a href={item.urlAccess} rel="noreferrer" target="_blank">
+          <a href={item.urlAccess} target="_blank" rel="noopener noreferrer">
             Resgatar
           </a>
         </MiniBox>

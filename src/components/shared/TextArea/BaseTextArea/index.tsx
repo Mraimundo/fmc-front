@@ -4,8 +4,6 @@ import React, {
   useState,
   useCallback,
   useMemo,
-  useEffect,
-  ChangeEvent,
 } from 'react';
 
 import { IconBaseProps } from 'react-icons';
