@@ -144,23 +144,55 @@ export const Asnwers = styled.div`
 
       &::before {
         content: '';
-        width: 22px;
-        height: 22px;
+        width: calc(100% + 20px);
+        height: 100%;
         position: absolute;
         background: green;
-        top: 0px;
-        right: -25px;
-        border-radius: 50%;
+        top: 0;
+        left: -8px;
+        border-radius: 24px;
+        opacity: 0.4;
       }
 
       &::after {
-        content: 'L';
+        content: '';
         font-size: 22px;
         font-family: ${({ theme }) => theme.font.fontFamily.bold};
         position: absolute;
         color: #fff;
         transform: scaleX(-1) rotate(-35deg);
         top: -7px;
+        right: -21px;
+      }
+    }
+  }
+
+  ._wrongAnswer {
+    .MuiFormControlLabel-label {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: calc(100% + 20px);
+        height: 100%;
+        position: absolute;
+        background: red;
+        top: 0;
+        left: -8px;
+        border-radius: 24px;
+        opacity: 0.4;
+      }
+
+      &::after {
+        content: '';
+        font-size: 22px;
+        font-family: Helvetica-Neue-Bold;
+        position: absolute;
+        color: #fff;
+        -webkit-transform: scaleX(-1) rotate(-35deg);
+        -ms-transform: scaleX(-1) rotate(-35deg);
+        transform: scaleX(-1) rotate(0deg);
+        top: -4px;
         right: -21px;
       }
     }

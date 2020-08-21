@@ -134,9 +134,19 @@ const Quiz: React.FC = () => {
                 >
                   {question?.options.map(item => (
                     <div
-                      className={
-                        question.rightAnswerId === item.id ? '_rightAnswer' : ''
-                      }
+                      className={`
+                          ${
+                            question.rightAnswerId === item.id
+                              ? '_rightAnswer '
+                              : ' '
+                          }
+                          ${
+                            !!question.rightAnswerId &&
+                            question.rightAnswerId !== item.id
+                              ? '_wrongAnswer'
+                              : ''
+                          }
+                        `}
                     >
                       <FormControlLabel
                         key={`answer-${item.id}`}
