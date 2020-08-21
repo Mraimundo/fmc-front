@@ -7,6 +7,7 @@ import {
   ExtractSummary,
   Extract as IExtract,
 } from 'services/extract/interfaces';
+import { getParticipantsToAccessPI } from 'services/showcase';
 import getCampaigns from 'services/extract/getCampaigns';
 import getExtract from 'services/extract/getExtract';
 import getExtractEstablishment from 'services/extract/getExtractEstablishment';
@@ -23,11 +24,14 @@ import {
   StyledLink,
 } from './styles';
 
+const MYEXTRACT = '/myextract';
+
 const Extract: React.FC = () => {
   const location = useLocation();
   const [summary, setSummary] = useState<ExtractSummary>();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
+  const [piAccess, setPiAccess] = useState('');
   const [userType, setUserType] = useState<EstablishmentTypes>(
     EstablishmentTypes.Resale,
   );
@@ -39,7 +43,7 @@ const Extract: React.FC = () => {
   }, []);
 
   const getExtractFn = (typeName: string) => {
-    return typeName === '/myextract' ? getExtract : getExtractEstablishment;
+    return typeName === MYEXTRACT ? getExtract : getExtractEstablishment;
   };
 
   useEffect(() => {
@@ -55,6 +59,13 @@ const Extract: React.FC = () => {
           setExtractDetails(currentValues => [...currentValues, data]),
         ),
       );
+      getParticipantsToAccessPI().then(data => {
+        if (pathname === MYEXTRACT) {
+          setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
+          return;
+        }
+        setPiAccess(data.find(item => item.type === 'cnpj')?.urlPi || '');
+      });
     }
   }, [campaigns, participant, location]);
 
@@ -96,6 +107,7 @@ const Extract: React.FC = () => {
             summary={summary}
             userType={userType}
             pathKey={pathKey}
+            piAccess={piAccess}
           />
         )}
         <ExtractDetails details={extractDetails} />
