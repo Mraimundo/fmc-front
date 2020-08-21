@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { EstablishmentTypes } from 'config/constants';
 import { ExtractSummary } from 'services/extract/interfaces';
@@ -17,10 +17,27 @@ interface Props {
   summary: ExtractSummary;
   userType: EstablishmentTypes;
   pathKey: string;
+  piAccess: string;
 }
 
-const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
+const ExtractHeader: React.FC<Props> = ({
+  summary,
+  userType,
+  pathKey,
+  piAccess,
+}) => {
   const { points, balance, total } = summary;
+
+  const handlePiAccess = useCallback(() => {
+    if (!piAccess) return;
+
+    const linkClick = document.createElement('a');
+    linkClick.href = piAccess;
+    linkClick.target = '_blank';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [piAccess]);
 
   return (
     <Container userType={userType}>
@@ -52,8 +69,8 @@ const ExtractHeader: React.FC<Props> = ({ summary, userType, pathKey }) => {
           <Button
             type="button"
             buttonRole="primary"
-            onClick={() => console.log('test')}
-            disabled={balance.available === 0}
+            onClick={handlePiAccess}
+            disabled={piAccess === ''}
           >
             RESGATAR
           </Button>
