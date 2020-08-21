@@ -35,6 +35,7 @@ import {
   ResumeCol,
   ParticipantsCol,
 } from './styles';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 
 const PointManagement: React.FC = () => {
   const [
@@ -49,6 +50,7 @@ const PointManagement: React.FC = () => {
     totalPointsTeamAwards,
     isOpenModalMissingParticipants,
     missingParticipants,
+    pointsToDistribute,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
@@ -61,6 +63,7 @@ const PointManagement: React.FC = () => {
     useSelector(selectors.getTotalPointsTeamAwards),
     useSelector(getIsOpenModalMissingParticipants),
     useSelector(getMissingParticipants),
+    useSelector(selectors.getPointsToDistribute),
   ];
 
   const dispatch = useDispatch();
@@ -101,9 +104,13 @@ const PointManagement: React.FC = () => {
   }, [dispatch]);
 
   const handleDistributePoints = useCallback(() => {
-    dispatch(distributePointsFinally());
+    const { allowPartialDistribution } = pointsToDistribute;
+
+    const { Ta, All } = FinishedDistributionPossibilities;
+
+    dispatch(distributePointsFinally(allowPartialDistribution ? Ta : All));
     dispatch(toggleIsOpenModalMissingParticipants());
-  }, [dispatch]);
+  }, [dispatch, pointsToDistribute]);
 
   return (
     <Container style={{ paddingLeft: 0, paddingRight: 0 }}>

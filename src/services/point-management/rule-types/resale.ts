@@ -87,11 +87,16 @@ export const constructDataDistribution = ({
     participants,
   };
 
-  if (!resaleCooperativePointId && !!teamAwardsPointId)
-    return [teamAwardsPoints];
+  const hasParticipants = participants.length > 0;
+  const hasResaleCooperativePoints = marketplacePoints > 0 || invoicePoints > 0;
 
-  if (!!resaleCooperativePointId && !teamAwardsPointId)
+  if (hasParticipants && !hasResaleCooperativePoints) {
+    return [teamAwardsPoints];
+  }
+
+  if (!hasParticipants && hasResaleCooperativePoints) {
     return [resaleCooperativePoints];
+  }
 
   return [resaleCooperativePoints, teamAwardsPoints];
 };

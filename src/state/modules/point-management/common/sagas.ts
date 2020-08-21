@@ -43,6 +43,7 @@ import {
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   SET_FINISHED_DISTRIBUTION,
   SET_SELECTED_ESTABLISHMENT,
+  FinishedDistributionPossibilities,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -143,7 +144,15 @@ export function* workerSetIsReadyToDistribute() {
   }
 }
 
-export function* workerDistributePoints() {
+interface WorkerDistributePoints {
+  type: typeof DISTRIBUTE_POINTS_FINALLY_ACTION;
+  meta: {
+    finishedDistributionPossibilities: FinishedDistributionPossibilities;
+  };
+}
+export function* workerDistributePoints({
+  meta: { finishedDistributionPossibilities },
+}: WorkerDistributePoints) {
   try {
     const scoredParticipants: ScoredParticipant[] = yield select(
       getScoredParticipants,
@@ -168,15 +177,26 @@ export function* workerDistributePoints() {
     yield call<any>(distributePointsService, dataDistribution);
     yield all([
       put(actions.distributePointsSuccess()),
-      put(actions.setFinishedDistribution()),
+      put(actions.setFinishedDistribution(finishedDistributionPossibilities)),
     ]);
   } catch (error) {
     yield call(handlerErrors, error, actions.distributePointsFailure);
   }
 }
 
-export function* workerVerifyDistributePointsPossibility() {
+interface WorkerVerifyDistributePointsPossibility {
+  type: typeof DISTRIBUTE_POINTS_ACTION;
+  meta: {
+    finishedDistributionPossibilities: FinishedDistributionPossibilities;
+  };
+}
+export function* workerVerifyDistributePointsPossibility({
+  meta: { finishedDistributionPossibilities },
+}: WorkerVerifyDistributePointsPossibility) {
   try {
+    const pointsToDistribute: PointsToDistribute = yield select(
+      selectors.getPointsToDistribute,
+    );
     const totalPointsResaleCooperative: number = yield select(
       getTotalPointsResaleCooperative,
     );
@@ -185,7 +205,13 @@ export function* workerVerifyDistributePointsPossibility() {
       selectors.getSelectedEstablishment,
     );
 
-    if (!isEnabledToRescue && totalPointsResaleCooperative) {
+    const { allowPartialDistribution } = pointsToDistribute;
+
+    if (
+      !isEnabledToRescue &&
+      totalPointsResaleCooperative &&
+      !allowPartialDistribution
+    ) {
       throw new Error(
         `É necessário distribuir todos os pontos para ${selectedEstablishment.type} antes de finalizar`,
       );
@@ -204,7 +230,8 @@ export function* workerVerifyDistributePointsPossibility() {
     if (
       !isResaleCooperativePointsOnly &&
       !isEnabledToDistributePoints &&
-      totalPointsTeamAwards
+      totalPointsTeamAwards &&
+      !allowPartialDistribution
     ) {
       throw new Error(
         'É necessário distribuir todos os pontos para a equipe antes de finalizar',
@@ -217,18 +244,41 @@ export function* workerVerifyDistributePointsPossibility() {
       return;
     }
 
-    yield call(workerDistributePoints);
+    yield put(
+      actions.distributePointsFinally(finishedDistributionPossibilities),
+    );
   } catch (error) {
     yield call(handlerErrors, error, actions.distributePointsFailure);
   }
 }
 
-export function* workerFinishedDistribution() {
-  yield put(removeAllScores());
-  yield put(actions.setTotalPointsTeamAwards(0));
+export function* cleanResaleCooperative() {
   yield put(actions.setTotalPointsResaleCooperative(0));
   yield put(setInvoicePoints(0));
   yield put(setMarketplacePoints(0));
+}
+
+export function* cleanTeamAwards() {
+  yield put(actions.setTotalPointsResaleCooperative(0));
+  yield put(setInvoicePoints(0));
+  yield put(setMarketplacePoints(0));
+}
+
+export function* workerFinishedDistribution() {
+  const finishedDistribution = yield select(selectors.getFinishedDistribution);
+
+  if (finishedDistribution === FinishedDistributionPossibilities.Rc) {
+    yield call(cleanResaleCooperative);
+    return;
+  }
+
+  if (finishedDistribution === FinishedDistributionPossibilities.Ta) {
+    yield call(cleanTeamAwards);
+    return;
+  }
+
+  yield call(cleanResaleCooperative);
+  yield call(cleanTeamAwards);
 }
 
 export default function* commonSagas() {

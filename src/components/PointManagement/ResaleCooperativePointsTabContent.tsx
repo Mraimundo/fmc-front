@@ -5,7 +5,9 @@ import { EstablishmentTypes } from 'config/constants';
 import {
   getTotalPointsResaleCooperative,
   getFinishedDistribution,
+  getPointsToDistribute,
 } from 'state/modules/point-management/common/selectors';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 import { distributePoints } from 'state/modules/point-management/common/actions';
 import {
   getMarketplacePoints,
@@ -37,6 +39,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     maxInvoicePercentage,
     isEnabledToRescue,
     finishedDistribution,
+    pointsToDistribute,
   ] = [
     useSelector(getTotalPointsResaleCooperative),
     useSelector(getMarketplacePoints),
@@ -44,6 +47,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     useSelector(getMaxInvoicePercentage),
     useSelector(getIsEnabledToRescue),
     useSelector(getFinishedDistribution),
+    useSelector(getPointsToDistribute),
   ];
 
   const dispatch = useDispatch();
@@ -68,6 +72,13 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     return totalPointsResaleCooperative * (maxInvoicePercentage / 100);
   }, [maxInvoicePercentage, totalPointsResaleCooperative]);
 
+  const partialDistribution = pointsToDistribute.allowPartialDistribution
+    ? FinishedDistributionPossibilities.Rc
+    : FinishedDistributionPossibilities.All;
+
+  const { Rc, All } = FinishedDistributionPossibilities;
+  const isFinished = finishedDistribution === (Rc || All);
+
   return (
     <div>
       {!finishedDistribution && (
@@ -80,7 +91,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           hasInvoicePoints={!!maxInvoicePercentage}
         />
       )}
-      {finishedDistribution && (
+      {isFinished && (
         <Congrats
           totalPoints={totalPointsResaleCooperative}
           marketplacePoints={marketplacePoints || 0}
@@ -110,7 +121,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           buttonRole="tertiary"
           type="button"
           disabled={!isEnabledToRescue}
-          onClick={() => dispatch(distributePoints())}
+          onClick={() => dispatch(distributePoints(partialDistribution))}
         >
           RESGATAR PREMIAÇÃO
         </RescueResaleCooperativeButton>
