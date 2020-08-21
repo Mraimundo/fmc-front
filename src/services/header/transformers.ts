@@ -6,16 +6,15 @@ export const transformCoinQuotationsRawData = (
 ): Coin[] | null => {
   if (!data) return null;
 
-  return Object.values(data).reduce<Coin[]>(
-    (acc, { name, high }) => [
+  return Object.values(data).reduce<Coin[]>((acc, { name, bid }) => {
+    return [
       ...acc,
       {
         name,
-        value: Number.parseFloat(high),
+        value: Number.parseFloat(bid),
       },
-    ],
-    [] as Coin[],
-  );
+    ];
+  }, [] as Coin[]);
 };
 
 export const transformMenuRawData = (

@@ -77,7 +77,7 @@ describe('src/util/points', () => {
     });
 
     it(`formatQuotedCoin(3.1249) should return 3.125`, () => {
-      expect(formatQuotedCoin(3.1249)).to.be.equal('3.125');
+      expect(formatQuotedCoin(3.1249)).to.be.equal('3.1249');
     });
   });
 });
