@@ -60,6 +60,15 @@ export const ProgressTitle = styled.div`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   text-align: center;
   font-size: 0.8em;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  > span {
+    font-size: 11px;
+    transform: translateY(-1px);
+  }
 `;
 
 export const GoalText = styled.p`

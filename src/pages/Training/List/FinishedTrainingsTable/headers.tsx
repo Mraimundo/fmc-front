@@ -1,4 +1,5 @@
 import React from 'react';
+import routeMap from 'routes/route-map';
 import DefaultAction from './Actions/Default';
 import CertificateAction from './Actions/Certificate';
 
@@ -37,7 +38,10 @@ export default [
     dataValue: 'custom',
     fn: ({ id, approved }: CustomProps) =>
       approved ? (
-        <DefaultAction name="Gabarito" actionUrl={`/training/${id}`} />
+        <DefaultAction
+          name="Gabarito"
+          actionUrl={`${routeMap.training}/${id}`}
+        />
       ) : (
         <></>
       ),
@@ -50,7 +54,10 @@ export default [
       approved ? (
         <CertificateAction id={id} />
       ) : (
-        <DefaultAction name="Acessar" actionUrl={`/training/${id}`} />
+        <DefaultAction
+          name="Acessar"
+          actionUrl={`${routeMap.training}/${id}`}
+        />
       ),
     className: '_customWidth',
   },
