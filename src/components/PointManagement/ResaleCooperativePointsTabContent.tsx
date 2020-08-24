@@ -96,7 +96,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           onChange={handleSetMarketplacePoints}
           maxLength={totalPointsResaleCooperative - (invoicePoints || 0)}
         />
-        {!maxInvoicePercentage && (
+        {!!maxInvoicePercentage && (
           <InvoicePoints
             invoicePoints={invoicePoints || 0}
             onChange={handleSetInvoicePoints}
