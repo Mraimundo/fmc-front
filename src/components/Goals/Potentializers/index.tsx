@@ -24,7 +24,10 @@ const Potentializers: React.FC<PotentializersProps> = ({ potentializers }) => {
         <WrapperValues>
           {potentializers.map((potentializer, index) => (
             <Item key={potentializer.name}>
-              <ProgressTitle>{potentializer.name}</ProgressTitle>
+              <ProgressTitle>
+                {potentializer.name}
+                <span>®</span>
+              </ProgressTitle>
               <GoalText>Objetivo {potentializer.goal} L</GoalText>
               <CircularSectionItem>
                 <CircularProgress color={colors[index]} percent={0}>
