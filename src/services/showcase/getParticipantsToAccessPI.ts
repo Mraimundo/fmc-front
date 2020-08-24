@@ -15,6 +15,7 @@ interface ApiResponse {
     picture: string;
     points: number;
     url_pi: string;
+    client_group: string;
   };
 }
 
@@ -28,7 +29,7 @@ export default async (): Promise<Participant[]> => {
     result.push({
       id: establishment.id,
       imageUrl: establishment.picture,
-      name: establishment.name,
+      name: establishment.client_group,
       points: establishment.points,
       type: 'cnpj',
       urlPi: establishment.url_pi,

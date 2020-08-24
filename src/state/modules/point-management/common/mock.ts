@@ -1,7 +1,7 @@
 import { EstablishmentTypes } from 'config/constants';
+import { Establishment as RawEstablishment } from 'services/auth/getEstablishments';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
-import { Establishment as RawEstablishment } from 'services/auth/getEstablishments';
 
 export const error = 'Generic Error';
 
@@ -18,7 +18,11 @@ export const pointsToDistribute: PointsToDistribute = {
 
 export const establishments: Establishment[] = [
   { value: '1', title: 'Estabelecimento 1', type: EstablishmentTypes.Resale },
-  { value: '2', title: 'Estabelecimento 2', type: EstablishmentTypes.Cooperative },
+  {
+    value: '2',
+    title: 'Estabelecimento 2',
+    type: EstablishmentTypes.Cooperative,
+  },
 ];
 
 export const rawEstablishments: RawEstablishment[] = [
@@ -27,6 +31,7 @@ export const rawEstablishments: RawEstablishment[] = [
     name: 'Estabelecimento 1',
     status: 1,
     cnpj: '00000000000000',
+    client_group: 'test 1',
     type: {
       id: 1,
       name: EstablishmentTypes.Resale,
@@ -37,6 +42,7 @@ export const rawEstablishments: RawEstablishment[] = [
     name: 'Estabelecimento 2',
     status: 1,
     cnpj: '11111111111111',
+    client_group: 'test 2',
     type: {
       id: 2,
       name: EstablishmentTypes.Cooperative,
