@@ -3,6 +3,7 @@ import { News } from 'services/news/interfaces';
 import transformer, {
   Response as Data,
 } from 'services/news/transformers/toNewsList';
+import routeMap from 'routes/route-map';
 
 import { Container, MiniBox } from './styles';
 
@@ -21,7 +22,7 @@ const Grid: React.FC<Props> = ({ news, className }) => {
   return (
     <Container className={className}>
       {data.map(item => (
-        <MiniBox key={`key-news-${item.id}`} to={`/news/${item.id}`}>
+        <MiniBox key={`key-news-${item.id}`} to={`${routeMap.news}/${item.id}`}>
           <img src={item.pictureUrl} alt={item.title} />
           <span>{`${item.date} ${item.category}`} </span>
           <h3>{item.title}</h3>

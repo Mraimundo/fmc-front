@@ -8,6 +8,8 @@ import { News as INews } from 'services/news/interfaces';
 import News from 'components/News/View';
 import { Button } from 'components/shared';
 
+import routeMap from 'routes/route-map';
+
 import { Container, Content, Separator, Grid } from './styles';
 
 interface Params {
@@ -35,14 +37,14 @@ const View: React.FC = () => {
           title: 'Falha ao carregar a notícia solicitada',
           type: 'error',
         });
-        history.push('/news');
+        history.push(routeMap.news);
       }
     };
     load();
   }, [params, addToast]);
 
   const handleBack = useCallback(() => {
-    history.push('/news');
+    history.push(routeMap.news);
   }, []);
 
   return (

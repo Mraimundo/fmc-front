@@ -44,7 +44,7 @@ const routes: RouteModule[] = [
     accessPage: 'Página de edição de cadastro',
   },
   {
-    path: '/regulation',
+    path: routeMap.regulation,
     component: Regulation,
     accessPage: 'Página de regulamentos',
   },

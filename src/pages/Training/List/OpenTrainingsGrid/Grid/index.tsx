@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import startTraining from 'services/training/startTraining';
 import history from 'services/history';
+import routeMap from 'routes/route-map';
 
 import { Training, TRAINING_STATUS } from 'services/training/interfaces';
 import transformer, {
@@ -24,7 +25,7 @@ const Grid: React.FC<Props> = ({ data }) => {
 
   const handleStartTraining = useCallback((trainingId: number) => {
     startTraining(trainingId);
-    history.push(`/training/${trainingId}`);
+    history.push(`${routeMap.training}/${trainingId}`);
   }, []);
 
   return (
