@@ -119,7 +119,11 @@ export const fetchInfosService = async (): Promise<Infos | null> => {
 export interface FetchProductsService {
   id: number;
   name: string;
+  value: number;
+  volume: number;
+  position: string;
 }
+
 export const fetchTopPurchasingProductsService = async (): Promise<
   Product[] | null
 > => {

@@ -64,11 +64,12 @@ export const transformProducts = (
 ): Product[] | null => {
   if (!data) return null;
 
-  return data.map<Product>(product => ({
+  return data.map<Product>((product, index) => ({
     id: product.id,
     name: product.name,
-    billing: '',
-    volume: '',
+    billing: formatDollars(product.value),
+    volume: formatKgl(product.volume),
+    position: (index + 1).toString().padStart(2, '0'),
   }));
 };
 
