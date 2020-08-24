@@ -6,6 +6,7 @@ export interface Establishment {
   name: string;
   status: number;
   cnpj: string;
+  client_group: string;
   type: {
     id: number;
     name: EstablishmentTypes;

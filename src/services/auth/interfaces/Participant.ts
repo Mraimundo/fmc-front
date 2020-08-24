@@ -31,6 +31,7 @@ export interface Establishment {
   rtc_id: number | null;
   rtc_name: string | null;
   team_receives_points: boolean;
+  client_group: string;
 }
 
 interface Subsidiary {

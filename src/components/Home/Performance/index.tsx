@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
+import routeMap from 'routes/route-map';
 
 import openLinkIcon from 'assets/images/open-link-icon.svg';
 import CircularProgress from './CircularProgress';
@@ -49,7 +50,7 @@ const Performance: React.FC = () => {
         </ProgressWrapper>
       </PerformanceWrapper>
       <CompletePerformanceWrapper>
-        <Link to="/metas">
+        <Link to={routeMap.goal}>
           CONFIRA SEU DESEMPENHO COMPLETO
           <ReactSVG src={openLinkIcon} />
         </Link>

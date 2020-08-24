@@ -5,6 +5,11 @@ export const WrapperPoints = styled.div`
   display: flex;
   justify-content: center;
 
+  display: grid;
+  grid-column-gap: 3em;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  align-items: center;
+
   @media screen and (max-width: 992px) {
     flex-wrap: wrap;
   }

@@ -31,6 +31,7 @@ export const rawEstablishments: RawEstablishment[] = [
     name: 'Estabelecimento 1',
     status: 1,
     cnpj: '00000000000000',
+    client_group: 'test 1',
     type: {
       id: 1,
       name: EstablishmentTypes.Resale,
@@ -41,6 +42,7 @@ export const rawEstablishments: RawEstablishment[] = [
     name: 'Estabelecimento 2',
     status: 1,
     cnpj: '11111111111111',
+    client_group: 'test 2',
     type: {
       id: 2,
       name: EstablishmentTypes.Cooperative,

@@ -19,7 +19,7 @@ const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
     <DropdownList>
       {!!establishment && (
         <ProfileInfo>
-          <Establishment>{establishment.name}</Establishment>
+          <Establishment>{establishment.client_group}</Establishment>
           {establishment.rtc_name && <span>RTC: {establishment.rtc_name}</span>}
         </ProfileInfo>
       )}
