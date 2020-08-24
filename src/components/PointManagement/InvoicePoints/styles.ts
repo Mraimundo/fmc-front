@@ -5,13 +5,13 @@ import { FONTS } from 'styles/font/globals';
 export const Wrapper = styled.div`
   width: 100%;
   position: relative;
-  margin-left: 3em;
+  /*margin-left: 3em;*/
 
   &:before {
     content: '';
     width: 100%;
     height: 15px;
-    background-color ${({ theme }) => theme.font.color.primary};
+    background-color: ${({ theme }) => theme.font.color.primary};
     position: absolute;
     top: 0;
     left: 0;
