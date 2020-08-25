@@ -21,7 +21,7 @@ const ImportFile: React.FC = () => {
       forceDownload({
         filename: 'Indicação_participante_em_lote_modelo.xlsx',
         url:
-          'https://storage.vendavall.com.br/photos/1593794488.5eff5fb8bb63c8.54067056.xlsx',
+          'https://storage.vendavall.com.br/regulations/1598300182.5f44201660c321.64420944.xlsx',
       }),
     );
   }, []);
