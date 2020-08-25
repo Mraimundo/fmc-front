@@ -64,11 +64,11 @@ export const ProgressTitle = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  text-transform: uppercase;
 
   > span {
     font-size: 11px;
     transform: translateY(-1px);
-    text-transform: uppercase;
   }
 `;
 
