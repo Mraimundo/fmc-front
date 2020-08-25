@@ -68,6 +68,7 @@ export const ProgressTitle = styled.div`
   > span {
     font-size: 11px;
     transform: translateY(-1px);
+    text-transform: uppercase;
   }
 `;
 
