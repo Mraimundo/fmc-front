@@ -24,11 +24,11 @@ const PerformancePotentialTable: React.FC<PerformancePotentialTableProps> = ({
       </Item>
       {points.map((point: Point) => (
         <Item key={point.name}>
-          <span>{point.name}</span>
           <span>
-            {point.name === Points.Rebate ? 'R$ ': ''}
-            {point.value}
+            {point.name}
+            {point.name === Points.Rebate ? ' R$ ' : ''}
           </span>
+          <span>{point.value}</span>
         </Item>
       ))}
     </List>

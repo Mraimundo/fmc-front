@@ -100,7 +100,7 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
             Termos de Uso
           </a>{' '}
           e{' '}
-          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870070.5f3d8ff69a8341.23430608.pdf">
+          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
             Política de Privacidade
           </a>
           ”, tenho compreensão e estou de acordo com esses Termos, bem como
