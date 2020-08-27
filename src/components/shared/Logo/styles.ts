@@ -27,7 +27,7 @@ export const Content = styled.div`
   }
 
   > div svg {
-    margin-top: 1.5em;
+    /*margin-top: 1.5em;*/
   }
 
   @media screen and (max-width: 480px) {
