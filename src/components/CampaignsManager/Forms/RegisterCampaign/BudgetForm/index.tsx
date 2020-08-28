@@ -37,7 +37,7 @@ const BudgetForm: React.FC = () => {
         <h5>Precisa de verba complementar?</h5>
         <Box>
           <Checkbox color="default" />
-          <h6>Pontos Rebate</h6>
+          <h6>Pontos Marketing</h6>
           <InputValue
             onChange={value => {
               dispatch(
@@ -56,7 +56,7 @@ const BudgetForm: React.FC = () => {
         </Box>
         <Box>
           <Checkbox color="default" />
-          <h6>Budget Local</h6>
+          <h6>Pontos Diretoria</h6>
           <InputValue
             onChange={value => {
               dispatch(
@@ -75,7 +75,7 @@ const BudgetForm: React.FC = () => {
         </Box>
         <Box>
           <Checkbox color="default" />
-          <h6>Budget CRM</h6>
+          <h6>Pontos Ações aceleradoras</h6>
           <InputValue
             onChange={value => {
               dispatch(

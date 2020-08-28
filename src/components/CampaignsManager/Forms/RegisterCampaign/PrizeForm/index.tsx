@@ -44,9 +44,8 @@ const PrizeForm: React.FC = () => {
             inputRole="secondary"
           />
           <span>
-            Após a aprovação da sua campanha acesse o Personal Class no seu
-            Catálogo de Prêmios e inicie o processo de orçamento da premiação
-            escolhida.
+            O prêmio indicado aqui deverá ser resgatado no Personal Class do seu
+            Catálogo de Prêmios.
           </span>
         </Body>
       </Container>
