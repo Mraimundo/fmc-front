@@ -41,7 +41,7 @@ const CampaignsManagerReducer: Reducer<
   state = initialState,
   action: CampaignsManagerActions,
 ): CampaignsManagerState => {
-  if (action.type !== SET_CAMPAIGN && !state.canEdit) {
+  if (action.type !== SET_CAMPAIGN && action.type !== RESET && !state.canEdit) {
     return state;
   }
   switch (action.type) {
