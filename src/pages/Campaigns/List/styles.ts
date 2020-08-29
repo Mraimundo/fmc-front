@@ -38,6 +38,7 @@ export const CampaignBox = styled.div`
   background: #efefef;
   width: 100%;
   max-width: 557px;
+  margin-top: 20px;
 
   > img {
     width: 100%;

@@ -45,7 +45,9 @@ const RegulationModal: React.FC<Props> = ({
             Período da campanha de {campaign.startDate} até {campaign.endDate}
           </span>
           <span>Regulamento</span>
-          <RegulationBox>{parser(campaign.regulationText)}</RegulationBox>
+          {campaign.regulationText && (
+            <RegulationBox>{parser(campaign.regulationText)}</RegulationBox>
+          )}
           <button type="submit">
             <ReactSVG src={pdfIcon} />
             Download (PDF)
