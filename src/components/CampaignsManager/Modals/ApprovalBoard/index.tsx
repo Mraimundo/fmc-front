@@ -34,6 +34,7 @@ const ApprovalBoard: React.FC<Props> = ({
 }) => {
   const [comment, setComment] = useState('');
   const [canComment, setCanComment] = useState(false);
+  const [canDoAction, setCanDoAction] = useState(false);
   const [mode, setMode] = useState<Mode>('board');
   const [approverSelected, setApproverSelected] = useState<Approver | null>(
     null,
@@ -48,22 +49,27 @@ const ApprovalBoard: React.FC<Props> = ({
       setMode('board');
       setApprovers([..._approvers]);
       setApproverSelected(null);
+      setCanDoAction(
+        _approvers.find(item => item.profile === myProfile)?.status ===
+          'pending',
+      );
     }
-  }, [_approvers, isOpen]);
+  }, [_approvers, isOpen, myProfile]);
 
   const handleCommentClick = useCallback(
     (approver: Approver) => {
       setApproverSelected(approver);
       setComment(approver.comments[0] || '');
-      setCanComment(myProfile === approver.profile);
+      setCanComment(myProfile === approver.profile && canDoAction);
       setMode('comment');
     },
-    [myProfile],
+    [myProfile, canDoAction],
   );
 
   const handleApproveClick = useCallback(
     (approver: Approver) => {
       if (approver.profile !== myProfile) return;
+      if (!canDoAction) return;
       setApprovers(items => {
         return items.map(item => {
           if (approver.profile === item.profile) {
@@ -73,12 +79,13 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       });
     },
-    [myProfile],
+    [myProfile, canDoAction],
   );
 
   const handleDisapproveClick = useCallback(
     (approver: Approver) => {
       if (approver.profile !== myProfile) return;
+      if (!canDoAction) return;
       setApprovers(items => {
         return items.map(item => {
           if (approver.profile === item.profile) {
@@ -88,11 +95,15 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       });
     },
-    [myProfile],
+    [myProfile, canDoAction],
   );
 
   const approve = useCallback(
     async (data: Approver): Promise<void> => {
+      if (!canDoAction) {
+        onRequestClose();
+        return;
+      }
       try {
         await onApprove(data);
         onRequestClose();
@@ -105,11 +116,15 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       }
     },
-    [addToast, onRequestClose, onApprove],
+    [addToast, onRequestClose, onApprove, canDoAction],
   );
 
   const disapprove = useCallback(
     async (data: Approver): Promise<void> => {
+      if (!canDoAction) {
+        onRequestClose();
+        return;
+      }
       if (
         !data.comments ||
         data.comments.length === 0 ||
@@ -133,7 +148,7 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       }
     },
-    [addToast, onRequestClose, onDisapprove],
+    [addToast, onRequestClose, onDisapprove, canDoAction],
   );
 
   const handleButtonClick = useCallback(async () => {
@@ -205,7 +220,9 @@ const ApprovalBoard: React.FC<Props> = ({
           )}
         </Content>
         <Button type="button" buttonRole="primary" onClick={handleButtonClick}>
-          {mode === 'board' || myProfile !== approverSelected?.profile
+          {mode === 'board' ||
+          myProfile !== approverSelected?.profile ||
+          !canDoAction
             ? 'Ok'
             : 'Salvar'}
         </Button>
