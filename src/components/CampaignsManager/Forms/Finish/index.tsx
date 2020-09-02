@@ -6,7 +6,7 @@ import commentsTransformer, {
 import { useSelector } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
 import ApprovalBoard from 'components/CampaignsManager/ApprovalBoard';
-import { Container, Box, Content, MessageBox, Actions } from './styles';
+import { Container, Box, Content, MessageBox, Actions, Button } from './styles';
 
 type Fn = (campaign: Campaign) => Promise<void>;
 
@@ -25,14 +25,16 @@ const Finish: React.FC<Props> = ({
   // const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<IComment[]>([]);
+  const [actionSelected, setActionSelected] = useState('');
 
   useEffect(() => {
     setMessages(commentsTransformer(campaign.comments));
   }, [campaign.comments]);
 
   const handleButtonClick = useCallback(
-    async (fn: Fn) => {
+    async (fn: Fn, actionName: string) => {
       setLoading(true);
+      setActionSelected(actionName);
       await fn(campaign);
       setLoading(false);
     },
@@ -43,18 +45,30 @@ const Finish: React.FC<Props> = ({
     () => (
       <Container>
         <Actions>
-          <button type="button" onClick={() => handleButtonClick(handleSave)}>
-            Salvar
-          </button>
-          <button
+          <Button
             type="button"
-            onClick={() => handleButtonClick(handleApprovalRequest)}
+            onClick={() => handleButtonClick(handleSave, 'save')}
+            disabled={loading}
+            selected={loading && actionSelected === 'save'}
+          >
+            Salvar
+          </Button>
+          <Button
+            type="button"
+            onClick={() => handleButtonClick(handleApprovalRequest, 'approve')}
+            disabled={loading}
+            selected={loading && actionSelected === 'approve'}
           >
             Solicitar Aprovação
-          </button>
-          <button type="button" onClick={() => handleButtonClick(handleCancel)}>
+          </Button>
+          <Button
+            type="button"
+            onClick={() => handleButtonClick(handleCancel, 'cancel')}
+            disabled={loading}
+            selected={loading && actionSelected === 'cancel'}
+          >
             Cancelar Campanha
-          </button>
+          </Button>
         </Actions>
         <div className="extraPadding">
           <h4>Aprovação</h4>
@@ -82,6 +96,7 @@ const Finish: React.FC<Props> = ({
       handleCancel,
       handleApprovalRequest,
       handleButtonClick,
+      loading,
     ],
   );
 };

@@ -106,20 +106,45 @@ export const MessageBox = styled.div<MessageBoxProps>`
 export const Actions = styled.div`
   display: flex;
   margin-top: 35px;
-  > button {
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.font.color.primary};
-    font-family: ${({ theme }) => theme.font.fontFamily.medium};
-    font-size: 14px;
-    height: 49px;
-    border-radius: 7px;
-    min-width: 136px;
-    padding: 0 30px;
-    border: 1px dashed ${({ theme }) => opacify(0.5, theme.font.color.primary)};
+`;
 
-    background: transparent;
-    & + button {
-      margin-left: 8px;
-    }
+interface ButtonProps {
+  selected: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.medium};
+  font-size: 14px;
+  height: 49px;
+  border-radius: 7px;
+  min-width: 136px;
+  padding: 0 30px;
+  border: 1px dashed ${({ theme }) => opacify(0.5, theme.font.color.primary)};
+  position: relative;
+
+  background: transparent;
+  & + button {
+    margin-left: 8px;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+
+    ${({ selected }) =>
+      selected &&
+      css`
+        &:after {
+          content: 'Aguarde...';
+          position: absolute;
+          left: 50%;
+          top: 32px;
+          transform: translateX(-50%);
+          font-size: 11px;
+          opacity: 0.7;
+        }
+      `}
   }
 `;
