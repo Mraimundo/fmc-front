@@ -15,7 +15,7 @@ interface Response {
 }
 
 export interface FilterOptions {
-  directorId?: number;
+  directorId?: string;
   regionalId?: string;
   customerId?: number;
   status?: StatusText;

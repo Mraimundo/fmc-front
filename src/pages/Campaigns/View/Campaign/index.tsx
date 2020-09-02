@@ -1,5 +1,5 @@
 import React from 'react';
-import { Response as ICampaign } from 'services/campaignsManager/transformers/campaignToParticipantCampaignPage';
+import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
 
 import Header from './Header';
 import Prize from './Prize';
@@ -23,7 +23,7 @@ const Campaign: React.FC<Props> = ({ campaign }) => {
         <Product data={campaign.products} />
         {campaign.signed && (
           <>
-            <Regulation acceptedDate={campaign.accepted} />
+            <Regulation acceptedDate={campaign.acceptedDate} />
           </>
         )}
       </Content>

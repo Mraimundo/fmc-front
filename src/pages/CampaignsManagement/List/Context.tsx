@@ -36,7 +36,7 @@ export interface CampaignsListContextState {
   approve(approver: Approver): Promise<void>;
   togglePublishedStatus(campaignId: number): Promise<void>;
   addHighlight(campaignId: number): Promise<void>;
-  removeHighlight(campaignId: number): Promise<void>;
+  removeHighlight(highlightId: number): Promise<void>;
 }
 
 const CampaignsListContext = createContext<CampaignsListContextState>(
@@ -121,10 +121,10 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     await addHighlightToCampaign(campaignId);
   }, []);
 
-  const removeHighlight = useCallback(async (campaignId: number): Promise<
+  const removeHighlight = useCallback(async (highlightId: number): Promise<
     void
   > => {
-    await removeHighlightFromCampaign(campaignId);
+    await removeHighlightFromCampaign(highlightId);
   }, []);
 
   return (

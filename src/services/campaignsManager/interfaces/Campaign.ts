@@ -122,6 +122,11 @@ export interface Comment {
   date: Date;
 }
 
+export interface Highlight {
+  id: number | null;
+  status: boolean;
+}
+
 export interface Campaign {
   id: number | null;
   title: string;
@@ -143,4 +148,5 @@ export interface Campaign {
   createdAt: Date | null;
   approvers: Approver[];
   comments: Comment[];
+  highlight: Highlight;
 }

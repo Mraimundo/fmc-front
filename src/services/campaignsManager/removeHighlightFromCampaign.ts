@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
 
-export default async (campaignId: number): Promise<void> => {
-  await pluginApi.post(`highlights/remove`, { campaign_id: campaignId });
+export default async (highlightId: number): Promise<void> => {
+  await pluginApi.delete(`highlights/remove/${highlightId}`);
 };

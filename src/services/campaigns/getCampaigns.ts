@@ -1,3 +1,16 @@
+import { pluginApi } from 'services/api';
+import { addHours, format } from 'date-fns';
+
+interface CampaignApi {
+  id: number;
+  fmc_campaign_type: {
+    fourth_picture: string;
+  };
+  name: string;
+  start_date: Date;
+  end_date: Date;
+}
+
 export interface Campaign {
   id: number;
   imageUrl: string;
@@ -6,23 +19,25 @@ export interface Campaign {
   endDate: string;
 }
 
+interface ApiResponse {
+  data: CampaignApi[];
+}
+
+const transformer = (data: CampaignApi[]): Campaign[] => {
+  return data.map(item => ({
+    id: item.id,
+    imageUrl: item.fmc_campaign_type.fourth_picture,
+    title: item.name,
+    startDate: format(addHours(new Date(item.start_date), 3), 'dd/MM/yyyy'),
+    endDate: format(addHours(new Date(item.end_date), 3), 'dd/MM/yyyy'),
+  }));
+};
+
 export default async (): Promise<Campaign[]> => {
-  return [
-    {
-      id: 50,
-      imageUrl:
-        'https://storage.vendavall.com.br/tinymce/1595038632.5f125ba8a66501.23325933.png',
-      title: 'Título da campanha',
-      startDate: '02/02/2020',
-      endDate: '25/02/2020',
-    },
-    {
-      id: 51,
-      imageUrl:
-        'https://storage.vendavall.com.br/tinymce/1595038632.5f125ba8a66501.23325933.png',
-      title: 'Título da campanha',
-      startDate: '02/02/2020',
-      endDate: '25/02/2020',
-    },
-  ];
+  const {
+    data: { data },
+  } = await pluginApi.get<ApiResponse>(
+    'participants/campaigns?page=1&limit=100&order=desc',
+  );
+  return transformer(data);
 };

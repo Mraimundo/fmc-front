@@ -34,9 +34,7 @@ const Filters: React.FC<Props> = ({ profile }) => {
   const profilesToNotShowRegional: ApproverProfile[] = [RTC, KAM];
 
   const handleFilterClick = useCallback(() => {
-    const directorId = directorSelected?.value
-      ? parseInt(directorSelected.value, 0)
-      : undefined;
+    const directorId = directorSelected?.value || undefined;
     const regionalId = regionalSelected?.value || undefined;
     const customerId = customerSelected?.value
       ? parseInt(customerSelected.value, 0)

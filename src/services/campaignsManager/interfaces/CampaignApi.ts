@@ -33,6 +33,7 @@ interface MechanicApi {
 export interface ApproverApi {
   id: number;
   name: string;
+  nick_name: string;
   cpf: string;
   email: string;
   participant_id: number;
@@ -42,6 +43,12 @@ export interface ApproverApi {
   status: 0 | 1;
   created: Date;
   modified: Date;
+}
+
+export interface Highlight {
+  id: number;
+  title: string;
+  status: boolean;
 }
 
 export interface CampaignApi {
@@ -74,4 +81,5 @@ export interface CampaignApi {
   establishments: EstablishmentApi[];
   products: ProductApi[];
   fmc_campaign_type: MechanicApi;
+  highlights: Highlight[] | null;
 }

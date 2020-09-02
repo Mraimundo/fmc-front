@@ -16,15 +16,22 @@ const CampaignsManager: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('aqui');
     if (!params.id) {
+      console.log('aqui2');
       history.push('/');
       return;
     }
     getCampaign(parseInt(params.id, 0))
       .then(data => {
+        console.log('aqui3');
         dispatch(setCampaign(data));
+        console.log('aqui4');
       })
-      .catch(() => history.push('/'));
+      .catch(e => {
+        console.log('aqui5', e);
+        history.push('/');
+      });
   }, [params, dispatch]);
 
   return (

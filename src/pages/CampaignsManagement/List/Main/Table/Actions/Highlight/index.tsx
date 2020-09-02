@@ -8,12 +8,13 @@ import { Container } from './style';
 
 interface Props {
   id: number;
-  highlight: boolean;
+  status: boolean;
+  campaignId: number;
 }
 
-const HighLight: React.FC<Props> = ({ id, highlight: _highlight }) => {
+const HighLight: React.FC<Props> = ({ id, status, campaignId }) => {
   const { addHighlight, removeHighlight } = useCampaignsList();
-  const [highlight, setHighlight] = useState<boolean>(_highlight);
+  const [highlight, setHighlight] = useState<boolean>(status);
 
   const { addToast } = useToast();
 
@@ -21,7 +22,7 @@ const HighLight: React.FC<Props> = ({ id, highlight: _highlight }) => {
     async (newStatus: boolean) => {
       try {
         if (newStatus) {
-          await addHighlight(id);
+          await addHighlight(campaignId);
         } else {
           await removeHighlight(id);
         }

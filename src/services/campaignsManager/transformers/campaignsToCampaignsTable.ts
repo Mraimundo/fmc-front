@@ -26,7 +26,8 @@ export interface Response {
   };
   highlight: {
     id: number;
-    highlight: boolean;
+    status: boolean;
+    campaignId: number;
   };
   activated: {
     id: number;
@@ -54,8 +55,9 @@ export default (data: Campaign[]): Response[] => {
       status: item.status.statusText,
     },
     highlight: {
-      id: item.id || 0,
-      highlight: false, // A fazer
+      id: item.highlight.id || 0,
+      status: item.highlight.status,
+      campaignId: item.id || 0,
     },
     activated: {
       id: item.id || 0,

@@ -53,9 +53,15 @@ const highlightColumn = [
   {
     column: 'Destaque home',
     dataValue: 'highlight',
-    fn: ({ id, highlight }: { id: number; highlight: boolean }) => (
-      <HighlightAction highlight={highlight} id={id} />
-    ),
+    fn: ({
+      id,
+      status,
+      campaignId,
+    }: {
+      id: number;
+      campaignId: number;
+      status: boolean;
+    }) => <HighlightAction status={status} id={id} campaignId={campaignId} />,
   },
 ];
 

@@ -2,15 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useToast } from 'context/ToastContext';
 import { useParams } from 'react-router-dom';
 import history from 'services/history';
-import { getCampaign } from 'services/campaignsManager';
-import transformer, {
-  Response as ICampaign,
-} from 'services/campaignsManager/transformers/campaignToParticipantCampaignPage';
-import {
-  acceptRegulation,
-  getRegulationById,
-} from 'services/register/regulation';
+import getCampaign, {
+  Campaign as ICampaign,
+} from 'services/campaigns/getCampaign';
+import { format } from 'date-fns';
+
+import { getRegulationById } from 'services/register/regulation';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
+import participate from 'services/campaigns/participate';
 
 import { Button } from 'components/shared';
 import Campaign from './Campaign';
@@ -32,17 +31,26 @@ const List: React.FC = () => {
   useEffect(() => {
     getCampaign(parseInt(params.id, 0))
       .then(data => {
-        setCampaign(transformer(data));
+        setCampaign(data);
       })
       .catch(() => history.push('/'));
     getRegulationById(5).then(data => setRegulation(data));
   }, [params]);
 
   const handleAcceptRegulation = useCallback(
-    async (regulationId: number, version: number) => {
+    async (campaignId: number) => {
       try {
         setLoading(true);
-        await acceptRegulation(regulationId, version);
+        await participate(campaignId);
+        setCampaign(data =>
+          data
+            ? {
+                ...data,
+                signed: true,
+                acceptedDate: format(new Date(), 'dd/MM/yyyy'),
+              }
+            : null,
+        );
         setModalOpened(false);
       } catch (e) {
         addToast({
@@ -64,13 +72,15 @@ const List: React.FC = () => {
         {campaign && (
           <>
             <Campaign campaign={campaign} />
-            <Button
-              buttonRole="primary"
-              type="button"
-              onClick={() => setModalOpened(true)}
-            >
-              Participar
-            </Button>
+            {!campaign.signed && (
+              <Button
+                buttonRole="primary"
+                type="button"
+                onClick={() => setModalOpened(true)}
+              >
+                Participar
+              </Button>
+            )}
           </>
         )}
         {campaign && regulation && (
@@ -78,7 +88,7 @@ const List: React.FC = () => {
             isOpen={modalOpened}
             loading={loading}
             onAccept={async () => {
-              handleAcceptRegulation(regulation.id, regulation.version);
+              handleAcceptRegulation(campaign.id);
             }}
             onRequestClose={() => {
               setModalOpened(false);

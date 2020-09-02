@@ -1,50 +1,67 @@
+import { addHours } from 'date-fns';
 import {
   Campaign,
   Approver,
   ApproverProfile,
   ApprovalStatus,
   Comment,
+  Highlight,
 } from '../interfaces/Campaign';
-import { CampaignApi, ApproverApi } from '../interfaces/CampaignApi';
+import {
+  CampaignApi,
+  ApproverApi,
+  Highlight as HighlightApi,
+} from '../interfaces/CampaignApi';
 import getPtStatus from '../util/getPtStatusText';
 
 const extractApprovers = (data: ApproverApi[]): Approver[] => {
   const approvers: ApproverProfile[] = ['GRV', 'DN', 'CRM', 'MKT'];
 
   return approvers.map(item => {
-    const filteredData = data.filter(i => i.profile === item);
+    const filteredData = data.filter(i => i.profile === item && i.status === 1);
     let approvedStatus: ApprovalStatus = 'pending';
     if (filteredData.length > 0) {
-      approvedStatus = filteredData.find(
-        i => i.type === 'approve' && i.status === 1,
-      )
+      approvedStatus = filteredData.find(i => i.type === 'approve')
         ? 'approved'
         : 'disapproved';
     }
     return {
       profile: item,
       status: approvedStatus,
-      comments: filteredData.map(i => i.comment),
+      comments: data
+        .filter(i => i.profile === item && !!i.comment)
+        .map(i => i.comment),
     };
   });
 };
 
 const extractComments = (data: ApproverApi[]): Comment[] => {
-  return data.map(item => ({
-    name: item.name,
-    email: item.email,
-    cpf: item.cpf,
-    date: item.created,
-    message: item.comment,
-  }));
+  return data
+    .filter(item => !!item.comment)
+    .map(item => ({
+      name: item.nick_name,
+      email: item.email,
+      cpf: item.cpf,
+      date: item.created,
+      message: item.comment,
+    }));
+};
+
+const extractHighlight = (data: HighlightApi[] | null): Highlight => {
+  const found = data?.find(item => item.status) || null;
+
+  return {
+    id: found?.id || null,
+    status: found?.status || false,
+  };
 };
 
 export default (campaignApi: CampaignApi): Campaign => ({
   id: campaignApi.id,
   title: campaignApi.name,
   description: campaignApi.description,
-  startDate: campaignApi.start_date,
-  endDate: campaignApi.end_date,
+  startDate: addHours(new Date(campaignApi.start_date), 3),
+  endDate: addHours(new Date(campaignApi.end_date), 3),
   createdAt: campaignApi.created,
   affordPoints: campaignApi.points,
   complementaryAffordPoints: campaignApi.complementary_points,
@@ -89,4 +106,5 @@ export default (campaignApi: CampaignApi): Campaign => ({
   },
   approvers: extractApprovers(campaignApi.approvers),
   comments: extractComments(campaignApi.approvers),
+  highlight: extractHighlight(campaignApi.highlights),
 });

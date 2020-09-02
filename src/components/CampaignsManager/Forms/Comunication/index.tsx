@@ -22,7 +22,7 @@ const Comunication: React.FC<Props> = ({ handleAction }) => {
 
   return (
     <Container>
-      <h4>Comunicação: Bateu Levou</h4>
+      <h4>Comunicação: {campaign.mechanic?.name}</h4>
       <Content>
         <div>
           <div>

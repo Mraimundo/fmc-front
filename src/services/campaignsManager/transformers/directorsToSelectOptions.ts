@@ -2,8 +2,9 @@ import { Option } from 'components/shared/Select';
 import { Director } from '../interfaces/Campaign';
 
 export default (data: Director[]): Option[] => {
-  return data.map(item => ({
-    title: item.name,
-    value: item.id.toString(),
+  const arr = Array.from(new Set(data.map(i => i.directorship)));
+  return arr.map(item => ({
+    title: item,
+    value: item,
   }));
 };
