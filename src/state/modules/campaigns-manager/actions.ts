@@ -20,6 +20,7 @@ import {
   SET_CAMPAIGN,
   RESET,
   SET_ERRORS,
+  SET_SEND_MAIL,
 } from './constants';
 import { TextField, ValueField, Errors } from './types';
 
@@ -133,6 +134,14 @@ export const setErrors = (
     payload: data,
   };
 
+export const setSendMail = (
+  data: boolean,
+): ActionCreatorPayload<typeof SET_SEND_MAIL, boolean> =>
+  <const>{
+    type: SET_SEND_MAIL,
+    payload: data,
+  };
+
 export type CampaignsManagerActions = ReturnType<
   | typeof addGoal
   | typeof removeGoal
@@ -148,4 +157,5 @@ export type CampaignsManagerActions = ReturnType<
   | typeof setCampaign
   | typeof reset
   | typeof setErrors
+  | typeof setSendMail
 >;

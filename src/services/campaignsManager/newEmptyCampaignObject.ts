@@ -35,5 +35,6 @@ export default (): Campaign => {
     approvers: [],
     comments: [],
     highlight: { status: false, id: null },
+    sendEmail: false,
   };
 };

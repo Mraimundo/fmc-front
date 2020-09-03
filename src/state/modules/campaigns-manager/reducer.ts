@@ -20,6 +20,7 @@ import {
   SET_CAMPAIGN,
   RESET,
   SET_ERRORS,
+  SET_SEND_MAIL,
 } from './constants';
 
 export type CampaignsManagerState = {
@@ -120,6 +121,10 @@ const CampaignsManagerReducer: Reducer<
     case SET_MECHANIC:
       return produce(state, draft => {
         draft.campaign.mechanic = action.payload;
+      });
+    case SET_SEND_MAIL:
+      return produce(state, draft => {
+        draft.campaign.sendEmail = action.payload;
       });
     case SET_ERRORS:
       return produce(state, draft => {

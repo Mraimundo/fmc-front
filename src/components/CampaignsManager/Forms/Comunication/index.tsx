@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Button } from 'components/shared';
+import toggleSendMail from 'services/campaignsManager/toggleSendEmail';
+import { setSendMail } from 'state/modules/campaigns-manager/actions';
 
 import { Container, Content, Box } from './styles';
 
@@ -13,12 +15,24 @@ export interface Props {
 const Comunication: React.FC<Props> = ({ handleAction }) => {
   const campaign = useSelector(getCampaign);
   const [loading, setLoading] = useState(false);
+  const [sendEmail, setSendEmail] = useState(false);
+  const dispatch = useDispatch();
 
   const handleButtonClick = useCallback(async () => {
     setLoading(true);
     await handleAction(campaign);
     setLoading(false);
   }, [campaign, handleAction]);
+
+  useEffect(() => {
+    setSendEmail(campaign.sendEmail);
+  }, [campaign.sendEmail]);
+
+  const handleToggleSendMail = useCallback(async () => {
+    if (!campaign.id) return;
+    setSendEmail(item => !item);
+    toggleSendMail(campaign.id).then(data => dispatch(setSendMail(data)));
+  }, [campaign.id, dispatch]);
 
   return (
     <Container>
@@ -41,8 +55,12 @@ const Comunication: React.FC<Props> = ({ handleAction }) => {
                 alt="Imagem exemplo do E-mail"
               />
               <span>
-                <Checkbox color="default" /> Disparo automático do E-mail da
-                campanha
+                <Checkbox
+                  color="default"
+                  checked={sendEmail}
+                  onChange={() => handleToggleSendMail()}
+                />{' '}
+                Disparo automático do E-mail da campanha
               </span>
             </Box>
           </div>

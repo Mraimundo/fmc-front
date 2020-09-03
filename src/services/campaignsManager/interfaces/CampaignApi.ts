@@ -82,4 +82,5 @@ export interface CampaignApi {
   products: ProductApi[];
   fmc_campaign_type: MechanicApi;
   highlights: Highlight[] | null;
+  send_emails: boolean;
 }

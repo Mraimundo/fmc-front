@@ -12,3 +12,4 @@ export const SET_MECHANIC = '@fmc/campaigns/SET_MECHANIC';
 export const SET_CAMPAIGN = '@fmc/campaigns/SET_CAMPAIGN';
 export const RESET = '@fmc/campaigns/RESET';
 export const SET_ERRORS = '@fmc/campaigns/SET_ERRORS';
+export const SET_SEND_MAIL = '@fmc/campaigns/SET_SEND_MAIL';

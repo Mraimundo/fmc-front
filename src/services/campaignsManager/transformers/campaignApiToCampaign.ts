@@ -107,4 +107,5 @@ export default (campaignApi: CampaignApi): Campaign => ({
   approvers: extractApprovers(campaignApi.approvers),
   comments: extractComments(campaignApi.approvers),
   highlight: extractHighlight(campaignApi.highlights),
+  sendEmail: campaignApi.send_emails,
 });

@@ -149,4 +149,5 @@ export interface Campaign {
   approvers: Approver[];
   comments: Comment[];
   highlight: Highlight;
+  sendEmail: boolean;
 }
