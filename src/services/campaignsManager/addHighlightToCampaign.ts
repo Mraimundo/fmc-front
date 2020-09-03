@@ -1,5 +1,13 @@
 import { pluginApi } from 'services/api';
 
-export default async (campaignId: number): Promise<void> => {
-  await pluginApi.post(`highlights/add`, { campaign_id: campaignId });
+interface ApiResponse {
+  id: number;
+}
+
+export default async (campaignId: number): Promise<number> => {
+  const { data } = await pluginApi.post<ApiResponse>(`highlights/add`, {
+    campaign_id: campaignId,
+  });
+
+  return data.id;
 };

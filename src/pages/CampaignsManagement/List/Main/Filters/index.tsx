@@ -35,7 +35,7 @@ const Filters: React.FC<Props> = ({ profile }) => {
 
   const handleFilterClick = useCallback(() => {
     const directorId = directorSelected?.value || undefined;
-    const regionalId = regionalSelected?.value || undefined;
+    const regionalId = regionalSelected?.title || undefined;
     const customerId = customerSelected?.value
       ? parseInt(customerSelected.value, 0)
       : undefined;

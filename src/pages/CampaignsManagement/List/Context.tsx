@@ -21,6 +21,7 @@ import {
   Approver,
 } from 'services/campaignsManager/interfaces/Campaign';
 import { useAuth } from 'context/AuthContext';
+import produce from 'immer';
 
 export interface CampaignsListContextState {
   campaigns: Campaign[];
@@ -118,7 +119,21 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
   const addHighlight = useCallback(async (campaignId: number): Promise<
     void
   > => {
-    await addHighlightToCampaign(campaignId);
+    const id = await addHighlightToCampaign(campaignId);
+    setCampaigns(data =>
+      produce(data, draft => {
+        const index = draft.findIndex(item => item.id === campaignId);
+        if (index >= 0) {
+          draft[index] = {
+            ...draft[index],
+            highlight: {
+              id,
+              status: true,
+            },
+          };
+        }
+      }),
+    );
   }, []);
 
   const removeHighlight = useCallback(async (highlightId: number): Promise<

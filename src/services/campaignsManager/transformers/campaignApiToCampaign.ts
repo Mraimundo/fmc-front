@@ -28,7 +28,7 @@ const extractApprovers = (data: ApproverApi[]): Approver[] => {
     return {
       profile: item,
       status: approvedStatus,
-      comments: data
+      comments: filteredData
         .filter(i => i.profile === item && !!i.comment)
         .map(i => i.comment),
     };
