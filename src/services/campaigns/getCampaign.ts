@@ -27,6 +27,10 @@ interface CampaignApi {
   end_date: Date;
   reward_name: string;
   reward_description: string;
+  participation?: {
+    id: number;
+    created: Date;
+  };
   products: {
     id: number;
     name: string;
@@ -50,7 +54,9 @@ const transformer = (data: CampaignApi): Campaign => {
       title: name,
       value: formatPoints(volume),
     })),
-    acceptedDate: '',
+    acceptedDate: data.participation?.id
+      ? format(new Date(data.participation.created), 'dd/MM/yyyy')
+      : '',
     signed: data.participant_joined_campaign,
   };
 };

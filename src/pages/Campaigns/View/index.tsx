@@ -7,7 +7,7 @@ import getCampaign, {
 } from 'services/campaigns/getCampaign';
 import { format } from 'date-fns';
 
-import { getRegulationById } from 'services/register/regulation';
+import getRegulation from 'services/campaigns/getRegulation';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import participate from 'services/campaigns/participate';
 
@@ -32,9 +32,11 @@ const List: React.FC = () => {
     getCampaign(parseInt(params.id, 0))
       .then(data => {
         setCampaign(data);
+        getRegulation(data.id).then(reg => setRegulation(reg));
       })
-      .catch(() => history.push('/'));
-    getRegulationById(5).then(data => setRegulation(data));
+      .catch(e => {
+        history.push('/');
+      });
   }, [params]);
 
   const handleAcceptRegulation = useCallback(

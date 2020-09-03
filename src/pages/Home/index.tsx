@@ -24,6 +24,7 @@ import {
   Showcase,
 } from 'components/Home';
 import CoinQuotation from 'components/Header/CoinQuotation';
+import { Link } from 'react-router-dom';
 import {
   Wrapper,
   ShowCaseWrapper,
@@ -57,6 +58,7 @@ const Home: React.FC = () => {
 
   return (
     <HomeWrapper>
+      <Link to="/campanhas">Test</Link>
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>
