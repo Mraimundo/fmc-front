@@ -12,7 +12,9 @@ import Gallery from './modules/Gallery';
 import Home from './modules/Home';
 import News from './modules/News';
 import ParticipantsIndication from './modules/ParticipantsIndication';
+import ParticipantSimulation from './modules/ParticipantSimulation';
 import PointsManagement from './modules/PointsManagement';
+import Products from './modules/Products';
 import Showcase from './modules/Showcase';
 import Training from './modules/Training';
 import Goals from './modules/Goals';
@@ -31,7 +33,9 @@ const routesArray: RouteModule[][] = [
   Home,
   News,
   ParticipantsIndication,
+  ParticipantSimulation,
   PointsManagement,
+  Products,
   Showcase,
   Training,
   Goals,

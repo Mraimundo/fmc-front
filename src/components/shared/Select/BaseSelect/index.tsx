@@ -85,7 +85,11 @@ const BaseSelect: React.FC<SelectProps> = ({
   return useMemo(
     () => (
       <Container className={className}>
-        {!!label && <Label inputRole={inputRole}>{label}</Label>}
+        {!!label && (
+          <Label className="_label" inputRole={inputRole}>
+            {label}
+          </Label>
+        )}
         <InputContainer
           hasError={!!error}
           isFilled={isFilled}
