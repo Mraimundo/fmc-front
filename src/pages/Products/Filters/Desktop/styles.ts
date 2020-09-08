@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import filledIndicator from 'assets/images/products/filled-indicator.svg';
 import emptyIndicator from 'assets/images/products/empty-indicator.svg';
-import DefaultCategoriesSelect from './CategoriesSelect';
+import DefaultCategoriesSelect from '../CategoriesSelect';
 
 export const Container = styled.div`
   display: flex;

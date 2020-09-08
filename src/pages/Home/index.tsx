@@ -59,7 +59,12 @@ const Home: React.FC = () => {
   return (
     <HomeWrapper>
       <Link to="/campanhas">Ver campanha participante</Link>
-      <Link to="/solucoes">Soluções</Link>
+      <Link to="/solucoes" style={{ marginLeft: 20 }}>
+        Soluções
+      </Link>
+      <Link to="/visao-do-participante" style={{ marginLeft: 20 }}>
+        Simular
+      </Link>
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>

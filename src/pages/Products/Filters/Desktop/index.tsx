@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Option } from 'components/shared/Select';
 import { Type } from 'services/products/interfaces';
 import getProductTypes from 'services/products/getTypes';
+import { Filters } from '..';
 
 import {
   Container,
@@ -13,11 +14,6 @@ import {
   TypeTitle,
   CategoriesSelect,
 } from './styles';
-
-export interface Filters {
-  categoryId?: number;
-  typeId?: number;
-}
 
 interface Props {
   onFilter(filters: Filters): Promise<void>;
@@ -60,7 +56,10 @@ const FiltersScreen: React.FC<Props> = ({ onFilter }) => {
       </Header>
       <ProductTypes>
         {productTypes.map(item => (
-          <ProductType onClick={() => setTypeSelected(item)}>
+          <ProductType
+            onClick={() => setTypeSelected(item)}
+            key={`product-${item.id}`}
+          >
             <Indicator selected={typeSelected?.id === item.id} />
             <TypeTitle selected={typeSelected?.id === item.id}>
               {item.name}

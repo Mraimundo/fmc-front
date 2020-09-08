@@ -97,6 +97,7 @@ const Finish: React.FC<Props> = ({
       handleApprovalRequest,
       handleButtonClick,
       loading,
+      actionSelected,
     ],
   );
 };

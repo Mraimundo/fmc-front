@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import background from 'assets/images/products/background.svg';
+import mobileBackground from 'assets/images/products/mobile-background2.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -17,6 +18,10 @@ export const Content = styled.div`
   flex-direction: column;
   background: #f7f7f7;
   padding: 40px 60px;
+
+  @media screen and (max-width: 500px) {
+    padding: 40px 10px;
+  }
 `;
 
 export const Header = styled.div`
@@ -36,6 +41,21 @@ export const Header = styled.div`
       color: ${({ theme }) => theme.font.color.primary};
       margin-top: 6px;
     }
+
+    @media screen and (max-width: 500px) {
+      padding: 20px 10px;
+
+      > h3 {
+        font-size: 21px;
+        width: 100%;
+        text-align: center;
+      }
+
+      > span {
+        font-size: 14px;
+        padding: 0 20px;
+      }
+    }
   }
 
   display: flex;
@@ -43,4 +63,11 @@ export const Header = styled.div`
   height: 449px;
   background: url(${background}) no-repeat center center;
   justify-content: center;
+
+  @media screen and (max-width: 500px) {
+    background: url(${mobileBackground}) no-repeat center center;
+    background-size: 100%;
+    justify-content: center;
+    height: 498px;
+  }
 `;

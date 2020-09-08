@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import useDimensions from 'hooks/use-window-dimensions';
 import { Product } from 'services/products/interfaces';
 import getProducts from 'services/products/getProducts';
 
-import FiltersScreen, { Filters } from './Filters';
+import { Filters, DesktopFilter, MobileFilter } from './Filters';
 import ProductsList from './ProductsList';
 import { Container, Content, Header } from './styles';
 
@@ -14,6 +15,12 @@ const Products: React.FC = () => {
     setProducts(data);
   }, []);
 
+  const { width } = useDimensions();
+
+  useEffect(() => {
+    console.log(width);
+  }, [width]);
+
   return (
     <Container>
       <Header>
@@ -23,7 +30,11 @@ const Products: React.FC = () => {
             Um portfólio diversificado para o manejo e proteção de diferentes
             culturas.
           </span>
-          <FiltersScreen onFilter={onFilter} />
+          {width > 500 ? (
+            <DesktopFilter onFilter={onFilter} />
+          ) : (
+            <MobileFilter onFilter={onFilter} />
+          )}
         </Content>
       </Header>
       <Content>

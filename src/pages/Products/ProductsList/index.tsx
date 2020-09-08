@@ -26,7 +26,7 @@ const ProductsList: React.FC<Props> = ({ products }) => {
       <h3>Produtos</h3>
       <List>
         {products.map(item => (
-          <ProductContainer>
+          <ProductContainer key={`product-container-${item.id}`}>
             <Logo>
               <img src={item.pictureUrl} alt="" />
             </Logo>
