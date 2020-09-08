@@ -32,6 +32,7 @@ export const Logo = styled.div`
   width: 104px;
   height: 104px;
   box-shadow: 0px 0px 11px 1px rgba(0, 0, 0, 0.2);
+  align-self: center;
 
   > img {
     width: 100%;
@@ -46,15 +47,18 @@ export const Details = styled.div`
   margin-left: 22px;
   justify-content: space-between;
   padding: 2px 0;
+  flex: 1;
 `;
 
 export const BodyDetails = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
 `;
 
 export const Tags = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const Tag = styled.span`
@@ -68,10 +72,8 @@ export const Tag = styled.span`
   border-radius: 5px;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 12px;
-
-  & + span {
-    margin-left: 5px;
-  }
+  margin-right: 5px;
+  margin-bottom: 5px;
 `;
 
 export const ProductType = styled.span`
