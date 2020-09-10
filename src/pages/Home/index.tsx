@@ -62,9 +62,6 @@ const Home: React.FC = () => {
       <Link to="/solucoes" style={{ marginLeft: 20 }}>
         Soluções
       </Link>
-      <Link to="/visao-do-participante" style={{ marginLeft: 20 }}>
-        Simular
-      </Link>
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>

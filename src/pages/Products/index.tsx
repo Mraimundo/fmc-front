@@ -5,7 +5,7 @@ import getProducts from 'services/products/getProducts';
 
 import { Filters, DesktopFilter, MobileFilter } from './Filters';
 import ProductsList from './ProductsList';
-import { Container, Content, Header } from './styles';
+import { Container, Content, Header, NotFound } from './styles';
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -16,10 +16,6 @@ const Products: React.FC = () => {
   }, []);
 
   const { width } = useDimensions();
-
-  useEffect(() => {
-    console.log(width);
-  }, [width]);
 
   return (
     <Container>
@@ -38,7 +34,11 @@ const Products: React.FC = () => {
         </Content>
       </Header>
       <Content>
-        <ProductsList products={products} />
+        {products.length > 0 ? (
+          <ProductsList products={products} />
+        ) : (
+          <NotFound>Nenhum produto encontrado</NotFound>
+        )}
       </Content>
     </Container>
   );

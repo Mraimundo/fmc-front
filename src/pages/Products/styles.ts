@@ -71,3 +71,11 @@ export const Header = styled.div`
     height: 498px;
   }
 `;
+
+export const NotFound = styled.span`
+  width: 100%;
+  text-align: center;
+  margin: 25px 0;
+  color: ${({ theme }) => theme.font.color.quartenary};
+  font-size: 18px;
+`;
