@@ -19,4 +19,5 @@ export default {
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',
   training: '/treinamentos',
+  cockpit: '/cockpit',
 };
