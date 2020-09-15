@@ -30,7 +30,9 @@ const GeneralView: React.FC = () => {
   return (
     <Container>
       <h3>Visão geral</h3>
-      <Filters onFilter={onFilter} />
+      <CardContainer>
+        <Filters onFilter={onFilter} />
+      </CardContainer>
       <CardContainer>
         {mockCard.map(item => (
           <Card key={item.title} card={item} />

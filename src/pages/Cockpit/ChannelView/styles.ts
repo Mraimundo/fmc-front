@@ -3,10 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  > h3 {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 21px;
+    color: #717070;
+  }
 `;
 
 export const CardContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 25px;
@@ -16,13 +22,13 @@ export const CardContainer = styled.div`
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 18px 22px 30px 22px;
+  padding: 18px 2px 30px 16px;
   width: 100%;
   border-radius: 10px;
   background: #fff;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
 
-  > h5 {
+  > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 20px;
     color: #2c2b2b;

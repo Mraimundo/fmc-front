@@ -31,6 +31,6 @@ export const Content = styled.div`
 export const Separator = styled.div`
   width: 100%;
   height: 2px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  margin: 25px 0;
+  border-bottom: 1px solid #2c2b2b;
+  margin: 45px 0 35px 0;
 `;

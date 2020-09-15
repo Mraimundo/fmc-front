@@ -19,4 +19,5 @@ export const Title = styled.h3`
 export const Item = styled.span`
   font-size: 16px;
   margin-top: 20px;
+  color: #717070;
 `;

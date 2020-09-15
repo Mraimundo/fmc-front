@@ -4,7 +4,7 @@ import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
 import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
 
-import { Container } from './styles';
+import { Container, Fields } from './styles';
 
 export interface Filters {
   /* directorshipName?: string;
@@ -25,6 +25,7 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
   const [typeSelected, setTypeSelected] = useState<Option | null>(null);
   const [categorySelected, setCategorySelected] = useState<Option | null>(null);
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
     onFilter({ test: '' });
@@ -32,32 +33,36 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
 
   return (
     <Container>
-      <DirectorsSelect
-        setValue={value => setDirectorSelected(value)}
-        value={directorSelected}
-        placeholder="Diretoria"
-      />
-      <RegionalSelect
-        setValue={value => setRegionalSelected(value)}
-        value={regionalSelected}
-        placeholder="Regional"
-      />
-      <TypeSelect
-        setValue={value => setTypeSelected(value)}
-        value={typeSelected}
-        placeholder="Tipo"
-      />
-
-      <TypeSelect
-        setValue={value => setCategorySelected(value)}
-        value={categorySelected}
-        placeholder="Tipo"
-      />
-      <TypeSelect
-        setValue={value => setChannelSelected(value)}
-        value={channelSelected}
-        placeholder="Tipo"
-      />
+      <button type="button" onClick={() => setOpened(status => !status)}>
+        + Filtrar
+      </button>
+      <Fields opened={opened}>
+        <DirectorsSelect
+          setValue={value => setDirectorSelected(value)}
+          value={directorSelected}
+          placeholder="Diretoria"
+        />
+        <RegionalSelect
+          setValue={value => setRegionalSelected(value)}
+          value={regionalSelected}
+          placeholder="Regional"
+        />
+        <TypeSelect
+          setValue={value => setTypeSelected(value)}
+          value={typeSelected}
+          placeholder="Tipo"
+        />
+        <TypeSelect
+          setValue={value => setCategorySelected(value)}
+          value={categorySelected}
+          placeholder="Tipo"
+        />
+        <TypeSelect
+          setValue={value => setChannelSelected(value)}
+          value={channelSelected}
+          placeholder="Tipo"
+        />
+      </Fields>
     </Container>
   );
 };

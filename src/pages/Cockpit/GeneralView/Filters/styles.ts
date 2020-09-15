@@ -3,12 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 5px;
 `;
 
 export const SelectContainer = styled.div`
   display: grid;
   grid-template-columns: 110px 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 35px;
   align-items: center;
   margin-top: 10px;
 
@@ -19,8 +20,6 @@ export const SelectContainer = styled.div`
   }
 
   ._inputContainer {
-    max-width: 291px;
     height: 42px;
-    margin-left: 25px;
   }
 `;

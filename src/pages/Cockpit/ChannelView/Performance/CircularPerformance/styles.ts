@@ -5,7 +5,8 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px 0;
+  height: 100%;
+  padding: 0px 0 15px 0;
 `;
 
 export const CircularSectionItem = styled.div`
@@ -38,7 +39,8 @@ export const PercentCircularCenter = styled.div`
   span {
     display: block;
     text-align: center;
-    font-size: 0.8em;
-    font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    font-size: 28px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: #000;
   }
 `;
