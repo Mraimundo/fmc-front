@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
-import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
+import RegionalSelect from 'components/Cockpit/Selects/Regional';
 
 import { Container, SelectContainer } from './styles';
 
 export interface Filters {
-  directorshipName?: string;
+  directorName?: string;
   regionalName?: string;
 }
 
@@ -19,10 +19,9 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
 
   useEffect(() => {
-    if (!directorSelected || !regionalSelected) return;
     onFilter({
-      directorshipName: directorSelected.title,
-      regionalName: regionalSelected.title,
+      directorName: directorSelected?.title,
+      regionalName: regionalSelected?.title,
     });
   }, [directorSelected, regionalSelected, onFilter]);
 
@@ -42,6 +41,7 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
           setValue={value => setRegionalSelected(value)}
           value={regionalSelected}
           placeholder=""
+          directorName={directorSelected?.title}
         />
       </SelectContainer>
     </Container>

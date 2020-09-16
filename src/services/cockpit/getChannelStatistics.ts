@@ -8,6 +8,7 @@ export interface ApiResponse {
     type: string;
     status: string;
     campaign: string;
+    name: string;
   };
   participants: {
     active: number;
@@ -16,29 +17,6 @@ export interface ApiResponse {
   fmc_shared_actions: {
     balance: number;
   };
-}
-
-const mock = {
-  establishment: {
-    category: 'Água',
-    type: 'Cooperativa',
-    status: 'Ativo',
-    campaign: '20/21',
-  },
-  participants: {
-    active: 0,
-    precharge: 0,
-  },
-  fmc_shared_actions: {
-    balance: 0,
-  },
-};
-
-const fake = true;
-
-export interface Filters {
-  directorName?: string;
-  regionalName?: string;
 }
 
 const transformer = (data: ApiResponse): Statistics => {
@@ -52,17 +30,13 @@ const transformer = (data: ApiResponse): Statistics => {
       formatedPrecharge: data.participants.precharge.toString(),
     },
     fmcSharedActions: {
-      balance: data.fmc_shared_actions.balance,
-      formattedBalance: formatDollars(data.fmc_shared_actions.balance),
+      balance: data.fmc_shared_actions.balance || 0,
+      formattedBalance: formatDollars(data.fmc_shared_actions.balance || 0),
     },
   };
 };
 
 export default async (establishmentId: number): Promise<Statistics> => {
-  if (fake) {
-    return transformer(mock);
-  }
-
   const { data } = await pluginApi.get<ApiResponse>(
     `cockpit/channel-statistics?establishment_id=${establishmentId}`,
   );

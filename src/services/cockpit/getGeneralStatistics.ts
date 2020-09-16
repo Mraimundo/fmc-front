@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { formatDollars } from 'util/points';
+import { formatDollars, formatPercent } from 'util/points';
 import { Statistics } from './interfaces/general';
 
 export interface ApiResponse {
@@ -15,21 +15,6 @@ export interface ApiResponse {
   };
 }
 
-const mock = {
-  revenues: {
-    goal: 1840.67,
-    result: 1762.2,
-    percentage: 95.73,
-  },
-  pog: {
-    goal: 0,
-    result: 0,
-    percentage: 0,
-  },
-};
-
-const fake = true;
-
 export interface Filters {
   directorName?: string;
   regionalName?: string;
@@ -41,22 +26,18 @@ const transformer = (data: ApiResponse): Statistics => {
       ...data.revenues,
       formattedGoal: formatDollars(data.revenues.goal),
       formattedResult: formatDollars(data.revenues.result),
-      formattedPercentage: formatDollars(data.revenues.percentage),
+      formattedPercentage: formatPercent(data.revenues.percentage),
     },
     pog: {
       ...data.pog,
       formattedGoal: formatDollars(data.pog.goal),
       formattedResult: formatDollars(data.pog.result),
-      formattedPercentage: formatDollars(data.pog.percentage),
+      formattedPercentage: formatPercent(data.pog.percentage),
     },
   };
 };
 
 export default async (filters: Filters): Promise<Statistics> => {
-  if (fake) {
-    return transformer(mock);
-  }
-
   let extraSearch = '';
 
   if (filters.directorName) {

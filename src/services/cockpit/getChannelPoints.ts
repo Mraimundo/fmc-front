@@ -18,22 +18,22 @@ const mock = {
   fmc_shared_actions: 0,
 };
 
-const fake = true;
+const fake = false;
 
 const transformer = (data: ApiResponse): Points => {
   return {
-    marketplaceBalance: data.marketplace_balance,
-    sellerDistributedPoints: data.seller_distributed_points,
-    rebate: data.rebate,
-    channelPoints: data.channel_points,
-    fmcSharedActions: data.fmc_shared_actions,
-    formattedMarketplaceBalance: formatDollars(data.marketplace_balance),
+    marketplaceBalance: data.marketplace_balance || 0,
+    sellerDistributedPoints: data.seller_distributed_points || 0,
+    rebate: data.rebate || 0,
+    channelPoints: data.channel_points || 0,
+    fmcSharedActions: data.fmc_shared_actions || 0,
+    formattedMarketplaceBalance: formatDollars(data.marketplace_balance || 0),
     formattedSellerDistributedPoints: formatDollars(
-      data.seller_distributed_points,
+      data.seller_distributed_points || 0,
     ),
-    formattedRebate: formatDollars(data.rebate),
-    formattedChannelPoints: formatDollars(data.channel_points),
-    formattedFmcSharedActions: formatDollars(data.fmc_shared_actions),
+    formattedRebate: formatDollars(data.rebate || 0),
+    formattedChannelPoints: formatDollars(data.channel_points || 0),
+    formattedFmcSharedActions: formatDollars(data.fmc_shared_actions || 0),
   };
 };
 

@@ -1,5 +1,6 @@
 export interface Statistics {
   establishment: {
+    name: string;
     category: string;
     type: string;
     status: string;
@@ -43,6 +44,7 @@ export interface Performance {
     formattedGoal: string;
     formattedResult: string;
     formattedPercentage: string;
+    color: string;
   }[];
 }
 
@@ -57,4 +59,10 @@ export interface Points {
   formattedRebate: string;
   formattedChannelPoints: string;
   formattedFmcSharedActions: string;
+}
+
+export interface Channel {
+  id: number;
+  name: string;
+  cnpj: string;
 }

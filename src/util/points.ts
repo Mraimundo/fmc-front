@@ -43,3 +43,9 @@ export const formatDollars = (value: number) =>
 
 export const formatKgl = (value: number) =>
   new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(value);
+
+export const formatPercent = (value: number) =>
+  value.toLocaleString('pt-br', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  });

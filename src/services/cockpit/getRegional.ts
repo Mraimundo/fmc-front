@@ -1,6 +1,6 @@
 import { pluginApi } from 'services/api';
 
-interface Regional {
+export interface Regional {
   id: number;
   name: string;
 }
@@ -9,23 +9,18 @@ interface ApiResponse {
   data: Regional[];
 }
 
-const mock = [
-  {
-    id: 14,
-    name: 'Ponta Grossa',
-  },
-];
+export default async (directorName?: string): Promise<Regional[]> => {
+  let extraSearch = '';
 
-const fake = true;
-
-export default async (): Promise<Regional[]> => {
-  if (fake) {
-    return mock;
+  if (directorName) {
+    extraSearch = `&directorships[0]=${directorName}`;
   }
 
   const {
     data: { data },
-  } = await pluginApi.get<ApiResponse>('cockpit/regional?limit=100');
+  } = await pluginApi.get<ApiResponse>(
+    `cockpit/regional?limit=100${extraSearch}`,
+  );
   return data.map(({ id, name }) => ({
     id,
     name,

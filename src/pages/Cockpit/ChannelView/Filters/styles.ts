@@ -9,15 +9,10 @@ export const Container = styled.div`
     width: 111px;
     height: 40px;
     border-radius: 4px;
-    background: linear-gradient(
-      #757474 0%,
-      #6f6e6e 5.02%,
-      #4b4a4a 45.95%,
-      #343333 79.06%,
-      #2c2b2b 100%
-    );
+    background: #717070;
+    border: none;
     opacity: 0.6;
-    /*margin-bottom: 20px;*/
+    margin-bottom: 20px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 20px;
     color: #fff;
@@ -37,11 +32,13 @@ export const Fields = styled.div<FieldsProps>`
   padding: 0 18px;
   max-height: 0;
 
+  transition: max-height 0.4s ease;
+
   ${({ opened }) =>
     opened &&
     css`
       max-height: 250px;
-      margin-top: 20px;
+      margin-bottom: 20px;
     `}
 
   ._inputContainer {

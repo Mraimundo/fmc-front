@@ -1,31 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+
+import transformer, {
+  Card as ICard,
+} from 'services/cockpit/transformers/generalStatisticsToICard';
+import getData from 'services/cockpit/getGeneralStatistics';
 
 import Filters, { Filters as IFilters } from './Filters';
-import Card, { Card as ICard } from './Card';
+import Card from './Card';
 
 import { Container, CardContainer } from './styles';
 
 const GeneralView: React.FC = () => {
-  const onFilter = useCallback(async (filters: IFilters): Promise<void> => {
-    console.log('filter');
-  }, []);
+  const [cards, setCards] = useState<ICard[]>([]);
+  const [filters, setFilters] = useState<IFilters>({});
 
-  const mockCard: ICard[] = [
-    {
-      title: 'Faturamento (12,5%)',
-      items: [
-        'Objetivo total: US$ 30.000.000,00',
-        'Realizado total: US$ 12.349.432,21',
-      ],
-    },
-    {
-      title: 'POG (50%)',
-      items: [
-        'Objetivo total: US$ 30.000.000,00',
-        'Realizado total: US$ 12.349.432,21',
-      ],
-    },
-  ];
+  useEffect(() => {
+    getData(filters).then(data => setCards(transformer(data)));
+  }, [filters]);
+
+  const onFilter = useCallback(async (_filters: IFilters): Promise<void> => {
+    setFilters(_filters);
+  }, []);
 
   return (
     <Container>
@@ -34,7 +29,7 @@ const GeneralView: React.FC = () => {
         <Filters onFilter={onFilter} />
       </CardContainer>
       <CardContainer>
-        {mockCard.map(item => (
+        {cards.map(item => (
           <Card key={item.title} card={item} />
         ))}
       </CardContainer>

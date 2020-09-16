@@ -84,3 +84,17 @@ export enum EstablishmentTypes {
   Resale = 'Revenda',
   Cooperative = 'Cooperativa',
 }
+
+export enum EstablishmentCategory {
+  water = 'Água',
+  seed = 'Semente',
+  earth = 'Terra',
+  root = 'Raiz',
+}
+
+export const EstablishmentCategories = [
+  EstablishmentCategory.water,
+  EstablishmentCategory.seed,
+  EstablishmentCategory.earth,
+  EstablishmentCategory.root,
+];

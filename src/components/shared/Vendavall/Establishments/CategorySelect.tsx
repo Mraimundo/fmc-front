@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { EstablishmentTypes } from 'config/constants';
 import { Option } from 'components/shared/Select';
 import Select from 'components/shared/Select/BaseSelect';
+import { EstablishmentCategories } from 'config/constants';
 
 interface Props {
   className?: string;
@@ -13,7 +13,7 @@ interface Props {
   placeholder?: string;
 }
 
-const TypeSelect: React.FC<Props> = ({
+const CategorySelect: React.FC<Props> = ({
   className,
   inputRole = 'primary',
   disabled = false,
@@ -25,16 +25,12 @@ const TypeSelect: React.FC<Props> = ({
   const [data, setData] = useState<Option[]>([]);
 
   useEffect(() => {
-    setData([
-      {
-        title: EstablishmentTypes.Resale,
-        value: EstablishmentTypes.Resale,
-      },
-      {
-        title: EstablishmentTypes.Cooperative,
-        value: EstablishmentTypes.Cooperative,
-      },
-    ]);
+    setData(
+      EstablishmentCategories.map(item => ({
+        title: item,
+        value: item,
+      })),
+    );
   }, []);
 
   const loadItems = useCallback((): Option[] => {
@@ -55,4 +51,4 @@ const TypeSelect: React.FC<Props> = ({
   );
 };
 
-export default TypeSelect;
+export default CategorySelect;

@@ -22,46 +22,12 @@ export interface ApiResponse {
   }[];
 }
 
-const mock = {
-  revenues: {
-    goal: 0,
-    result: 0,
-    percentage: 0,
-  },
-  pog: {
-    goal: 0,
-    result: 0,
-    percentage: 0,
-  },
-  devolution_below_5_percent: false,
-  focus_product: [
-    {
-      name: '',
-      goal: 0,
-      result: 0,
-      percentage: 0,
-    },
-    {
-      name: '',
-      goal: 0,
-      result: 0,
-      percentage: 0,
-    },
-    {
-      name: '',
-      goal: 0,
-      result: 0,
-      percentage: 0,
-    },
-  ],
-};
-
-const fake = true;
-
 export interface Filters {
   directorName?: string;
   regionalName?: string;
 }
+
+const colors = ['#47C246', '#913944', '#838BC5'];
 
 const transformer = (data: ApiResponse): Performance => {
   return {
@@ -78,20 +44,17 @@ const transformer = (data: ApiResponse): Performance => {
       formattedPercentage: formatDollars(data.pog.percentage),
     },
     devolutionBelow5Percent: true,
-    focusProduct: data.focus_product.map(item => ({
+    focusProduct: data.focus_product.map((item, index) => ({
       ...item,
       formattedGoal: formatDollars(item.goal),
       formattedResult: formatDollars(item.result),
       formattedPercentage: formatDollars(item.percentage),
+      color: colors[index] || '',
     })),
   };
 };
 
 export default async (establishmentId: number): Promise<Performance> => {
-  if (fake) {
-    return transformer(mock);
-  }
-
   const { data } = await pluginApi.get<ApiResponse>(
     `cockpit/performance-statistics?establishment_id=${establishmentId}`,
   );

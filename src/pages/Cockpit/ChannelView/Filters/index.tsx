@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
-import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
+import RegionalSelect from 'components/Cockpit/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
+import CategorySelect from 'components/shared/Vendavall/Establishments/CategorySelect';
+import ChannelsSelect from 'components/Cockpit/Selects/Channels';
 
+import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { Container, Fields } from './styles';
 
-export interface Filters {
-  /* directorshipName?: string;
-  regionalName?: string;
-  type?: EstablishmentTypes;
-  categoryId: number;
-  channelId: number; */
-  test: string;
-}
-
 interface Props {
-  onFilter(filters: Filters): Promise<void>;
+  onFilter(establishmentId: number): Promise<void>;
+  clear(): void;
 }
 
-const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
+const FiltersComponent: React.FC<Props> = ({ onFilter, clear }) => {
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [typeSelected, setTypeSelected] = useState<Option | null>(null);
@@ -28,13 +23,17 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    onFilter({ test: '' });
-  }, [onFilter]);
+    if (!channelSelected) {
+      clear();
+      return;
+    }
+    onFilter(parseInt(channelSelected.value, 0));
+  }, [onFilter, clear, channelSelected]);
 
   return (
     <Container>
       <button type="button" onClick={() => setOpened(status => !status)}>
-        + Filtrar
+        {opened ? '-' : '+'} Filtrar
       </button>
       <Fields opened={opened}>
         <DirectorsSelect
@@ -43,24 +42,30 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
           placeholder="Diretoria"
         />
         <RegionalSelect
+          key={`regional-${directorSelected?.title || ''}`}
           setValue={value => setRegionalSelected(value)}
           value={regionalSelected}
           placeholder="Regional"
+          directorName={directorSelected?.title || ''}
         />
         <TypeSelect
           setValue={value => setTypeSelected(value)}
           value={typeSelected}
           placeholder="Tipo"
         />
-        <TypeSelect
+        <CategorySelect
           setValue={value => setCategorySelected(value)}
           value={categorySelected}
-          placeholder="Tipo"
+          placeholder="Categoria"
         />
-        <TypeSelect
+        <ChannelsSelect
           setValue={value => setChannelSelected(value)}
           value={channelSelected}
-          placeholder="Tipo"
+          placeholder="Canal"
+          directorName={directorSelected?.title}
+          categoryName={categorySelected?.title as EstablishmentCategory}
+          typeName={typeSelected?.title as EstablishmentTypes}
+          regionalName={regionalSelected?.title}
         />
       </Fields>
     </Container>

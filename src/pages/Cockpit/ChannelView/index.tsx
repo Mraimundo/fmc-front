@@ -1,53 +1,51 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import Filters, { Filters as IFilters } from './Filters';
+import {
+  Statistics as IStatistics,
+  Performance as IPerformance,
+  Points as IPoints,
+} from 'services/cockpit/interfaces/channel';
+import getChannelStatistics from 'services/cockpit/getChannelStatistics';
+import getChannelPerformance from 'services/cockpit/getChannelPerformance';
+import getChannelPoints from 'services/cockpit/getChannelPoints';
+import Filters from './Filters';
+
+import Statistics from './Statistics';
 import Performance from './Performance';
 import Points from './Points';
 
-import { Container, CardContainer, Card, CardBody } from './styles';
+import { Container } from './styles';
 
 const ChannelView: React.FC = () => {
-  const onFilter = useCallback(async (filters: IFilters): Promise<void> => {
-    console.log('filter');
+  const [statistics, setStatistics] = useState<IStatistics | null>(null);
+  const [performance, setPerformance] = useState<IPerformance | null>(null);
+  const [points, setPoints] = useState<IPoints | null>(null);
+
+  const onFilter = useCallback(async (establishmentId: number): Promise<
+    void
+  > => {
+    getChannelStatistics(establishmentId).then(data =>
+      setStatistics(data || null),
+    );
+    getChannelPerformance(establishmentId).then(data =>
+      setPerformance(data || null),
+    );
+    getChannelPoints(establishmentId).then(data => setPoints(data || null));
+  }, []);
+
+  const clear = useCallback((): void => {
+    setStatistics(null);
+    setPerformance(null);
+    setPoints(null);
   }, []);
 
   return (
     <Container>
       <h3>Visão por canal</h3>
-      <Filters onFilter={onFilter} />
-      <CardContainer>
-        <Card>
-          <h3>Nome do Canal</h3>
-          <CardBody>
-            <span>Categoria: Água</span>
-            <span>Tipo: Cooperativa</span>
-            <span>Status: Ativo</span>
-            <span>Safra: 20/21</span>
-          </CardBody>
-        </Card>
-        <Card>
-          <h3>Participantes</h3>
-          <CardBody>
-            <p>
-              Ativos: <strong>37</strong>
-            </p>
-            <p>
-              Pré-cadastro: <strong>18</strong>
-            </p>
-          </CardBody>
-        </Card>
-        <Card>
-          <h3>Ações Compartilhadas FMC</h3>
-          <CardBody>
-            <p>Saldo para o Canal</p>
-            <p>
-              <strong>200.000</strong>
-            </p>
-          </CardBody>
-        </Card>
-      </CardContainer>
-      <Performance />
-      <Points />
+      <Filters onFilter={onFilter} clear={clear} />
+      {statistics && <Statistics statistics={statistics} />}
+      {performance && <Performance performance={performance} />}
+      {points && <Points points={points} />}
     </Container>
   );
 };
