@@ -20,20 +20,6 @@ interface ApiResponse {
 }
 
 export default async (): Promise<Director[]> => {
-  /* return [
-    {
-      code: '374',
-      created: new Date(),
-      directorship: 'Cerrado Oeste',
-      id: 56,
-      name: 'Sinop',
-      upnDv: 'ferreiras',
-      upnDvParticipantId: 1,
-      upnGrv: 'trese',
-      upnGrvParticipantId: 1,
-      generatedAt: new Date(),
-    },
-  ];
   /* Api params ?page=1&limit=15&order=desc&establishments[0]=1&regional[0]=Arroz */
   const {
     data: { data },

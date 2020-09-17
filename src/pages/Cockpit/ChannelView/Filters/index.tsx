@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Option } from 'components/shared/Select';
-import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
+import DirectorsSelect from 'components/Cockpit/Selects/Directors';
 import RegionalSelect from 'components/Cockpit/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
 import CategorySelect from 'components/shared/Vendavall/Establishments/CategorySelect';
 import ChannelsSelect from 'components/Cockpit/Selects/Channels';
 import getRegionals from 'services/cockpit/getRegional';
-import getDirectors from 'services/campaignsManager/getDirectors';
+import getDirectors from 'services/cockpit/getDirectors';
 
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { Container, Fields } from './styles';
@@ -41,8 +41,8 @@ const FiltersComponent: React.FC<Props> = ({ onFilter, clear }) => {
       setShowDirectorSelect(data.length > 1);
       if (data.length === 1) {
         setDirectorSelected({
-          value: data[0].directorship,
-          title: data[0].directorship,
+          value: data[0].id,
+          title: data[0].name,
         });
       }
     });
