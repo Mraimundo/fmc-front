@@ -11,7 +11,7 @@ export const getHighlightLink = (
     {
       [HighlightTypes.Quiz]: `${routeMap.training}/${id}`,
       [HighlightTypes.Report]: `${routeMap.news}/${id}`,
-      [HighlightTypes.FmcCampaign]: `${routeMap.campaignManagement}/visualizar/${id}`,
+      [HighlightTypes.FmcCampaign]: `${routeMap.campaign}/${id}`,
     }[type] || '/'
   );
 };
