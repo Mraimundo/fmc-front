@@ -28,7 +28,7 @@ const GeneralView: React.FC = () => {
       <CardContainer>
         <Filters onFilter={onFilter} />
       </CardContainer>
-      <CardContainer>
+      <CardContainer className="_extra-margin">
         {cards.map(item => (
           <Card key={item.title} card={item} />
         ))}

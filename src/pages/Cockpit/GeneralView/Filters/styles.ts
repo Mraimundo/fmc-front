@@ -22,4 +22,12 @@ export const SelectContainer = styled.div`
   ._inputContainer {
     height: 42px;
   }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+    grid-column-gap: 0;
+    width: 100%;
+    margin-top: 10px;
+  }
 `;

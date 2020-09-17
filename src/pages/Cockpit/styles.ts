@@ -26,6 +26,15 @@ export const Content = styled.div`
     font-size: 24px;
     color: #2c2b2b;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 10px;
+
+    > h3 {
+      width: 100%;
+      text-align: center;
+    }
+  }
 `;
 
 export const Separator = styled.div`

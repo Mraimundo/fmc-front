@@ -10,6 +10,14 @@ export const Container = styled.div`
     font-size: 21px;
     color: #717070;
   }
+
+  @media screen and (max-width: 500px) {
+    margin-top: 16px;
+
+    ._extra-margin {
+      margin-top: 16px;
+    }
+  }
 `;
 
 export const CardContainer = styled.div`
@@ -18,4 +26,10 @@ export const CardContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 60px;
   width: 100%;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    margin-top: 6px;
+  }
 `;
