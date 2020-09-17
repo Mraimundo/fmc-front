@@ -23,7 +23,7 @@ const Logo: React.FC<Props> = ({
     <Container className={className}>
       <Content>
         <FmcLogoWrapper>
-          <Link to="/">
+          <Link to="/home">
             <ReactSVG src={logoFmc} />
           </Link>
         </FmcLogoWrapper>
