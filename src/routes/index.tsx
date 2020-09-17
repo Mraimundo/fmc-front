@@ -54,6 +54,7 @@ const Routes: React.FC = () => (
           component={component.component}
           isPrivate={!component.isPublic}
           special={!!component.special}
+          accessPage={component.accessPage}
         />
       )),
     )}
