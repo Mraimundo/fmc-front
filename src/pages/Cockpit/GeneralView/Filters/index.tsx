@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
 import RegionalSelect from 'components/Cockpit/Selects/Regional';
+import getRegionals from 'services/cockpit/getRegional';
+import getDirectors from 'services/campaignsManager/getDirectors';
 
 import { Container, SelectContainer } from './styles';
 
@@ -17,6 +19,30 @@ interface Props {
 const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
+  const [showRegionalSelect, setShowRegionalSelect] = useState(true);
+  const [showDirectorSelect, setShowDirectorSelect] = useState(true);
+
+  useEffect(() => {
+    getRegionals().then(data => {
+      setShowRegionalSelect(data.length > 1);
+      if (data.length === 1) {
+        setRegionalSelected({
+          value: data[0].id.toString(),
+          title: data[0].name,
+        });
+      }
+    });
+
+    getDirectors().then(data => {
+      setShowDirectorSelect(data.length > 1);
+      if (data.length === 1) {
+        setDirectorSelected({
+          value: data[0].directorship,
+          title: data[0].directorship,
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     onFilter({
@@ -29,20 +55,28 @@ const FiltersComponent: React.FC<Props> = ({ onFilter }) => {
     <Container>
       <SelectContainer>
         <span>Diretoria: </span>
-        <DirectorsSelect
-          setValue={value => setDirectorSelected(value)}
-          value={directorSelected}
-          placeholder=""
-        />
+        {showDirectorSelect ? (
+          <DirectorsSelect
+            setValue={value => setDirectorSelected(value)}
+            value={directorSelected}
+            placeholder=""
+          />
+        ) : (
+          <span>{directorSelected?.title}</span>
+        )}
       </SelectContainer>
       <SelectContainer>
         <span>Regional: </span>
-        <RegionalSelect
-          setValue={value => setRegionalSelected(value)}
-          value={regionalSelected}
-          placeholder=""
-          directorName={directorSelected?.title}
-        />
+        {showRegionalSelect ? (
+          <RegionalSelect
+            setValue={value => setRegionalSelected(value)}
+            value={regionalSelected}
+            placeholder=""
+            directorName={directorSelected?.title}
+          />
+        ) : (
+          <span>{regionalSelected?.title}</span>
+        )}
       </SelectContainer>
     </Container>
   );

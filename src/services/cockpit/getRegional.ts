@@ -10,6 +10,7 @@ interface ApiResponse {
 }
 
 export default async (directorName?: string): Promise<Regional[]> => {
+  /* return [{ id: 56, name: 'Sinop' }]; */
   let extraSearch = '';
 
   if (directorName) {

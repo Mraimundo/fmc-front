@@ -5,6 +5,8 @@ import RegionalSelect from 'components/Cockpit/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
 import CategorySelect from 'components/shared/Vendavall/Establishments/CategorySelect';
 import ChannelsSelect from 'components/Cockpit/Selects/Channels';
+import getRegionals from 'services/cockpit/getRegional';
+import getDirectors from 'services/campaignsManager/getDirectors';
 
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { Container, Fields } from './styles';
@@ -21,6 +23,30 @@ const FiltersComponent: React.FC<Props> = ({ onFilter, clear }) => {
   const [categorySelected, setCategorySelected] = useState<Option | null>(null);
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
   const [opened, setOpened] = useState(false);
+  const [showRegionalSelect, setShowRegionalSelect] = useState(true);
+  const [showDirectorSelect, setShowDirectorSelect] = useState(true);
+
+  useEffect(() => {
+    getRegionals().then(data => {
+      setShowRegionalSelect(data.length > 1);
+      if (data.length === 1) {
+        setRegionalSelected({
+          value: data[0].id.toString(),
+          title: data[0].name,
+        });
+      }
+    });
+
+    getDirectors().then(data => {
+      setShowDirectorSelect(data.length > 1);
+      if (data.length === 1) {
+        setDirectorSelected({
+          value: data[0].directorship,
+          title: data[0].directorship,
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (!channelSelected) {
@@ -36,18 +62,26 @@ const FiltersComponent: React.FC<Props> = ({ onFilter, clear }) => {
         {opened ? '-' : '+'} Filtrar
       </button>
       <Fields opened={opened}>
-        <DirectorsSelect
-          setValue={value => setDirectorSelected(value)}
-          value={directorSelected}
-          placeholder="Diretoria"
-        />
-        <RegionalSelect
-          key={`regional-${directorSelected?.title || ''}`}
-          setValue={value => setRegionalSelected(value)}
-          value={regionalSelected}
-          placeholder="Regional"
-          directorName={directorSelected?.title || ''}
-        />
+        {showDirectorSelect ? (
+          <DirectorsSelect
+            setValue={value => setDirectorSelected(value)}
+            value={directorSelected}
+            placeholder="Diretoria"
+          />
+        ) : (
+          <span>Diretoria: {directorSelected?.title}</span>
+        )}
+        {showRegionalSelect ? (
+          <RegionalSelect
+            key={`regional-${directorSelected?.title || ''}`}
+            setValue={value => setRegionalSelected(value)}
+            value={regionalSelected}
+            placeholder="Regional"
+            directorName={directorSelected?.title || ''}
+          />
+        ) : (
+          <span>Regional: {regionalSelected?.title}</span>
+        )}
         <TypeSelect
           setValue={value => setTypeSelected(value)}
           value={typeSelected}

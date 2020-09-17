@@ -34,6 +34,17 @@ export const Fields = styled.div<FieldsProps>`
 
   transition: max-height 0.4s ease;
 
+  > span {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 18px;
+    color: #2c2b2b;
+    margin-bottom: 7px;
+
+    & + span {
+      margin-bottom: 12px;
+    }
+  }
+
   ${({ opened }) =>
     opened &&
     css`

@@ -102,6 +102,7 @@ const BaseSelect: React.FC<SelectProps> = ({
             open={open}
             noOptionsText=""
             loadingText="Carregando"
+            getOptionDisabled={option => option.value === '-1'}
             onOpen={() => {
               setOpen(true);
             }}

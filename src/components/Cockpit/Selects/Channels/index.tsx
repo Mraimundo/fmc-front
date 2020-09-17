@@ -29,16 +29,27 @@ const RegionalSelect: React.FC<Props> = ({
   categoryName,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData({ directorName, regionalName, typeName, categoryName }).then(data =>
-      setOptions(transformer(data)),
-    );
+    setLoading(true);
+    getData({ directorName, regionalName, typeName, categoryName })
+      .then(data => setOptions(transformer(data)))
+      .catch(() => setOptions([]))
+      .finally(() => setLoading(false));
   }, [directorName, regionalName, typeName, categoryName]);
 
-  const loadItems = useCallback(() => {
-    return options;
-  }, [options]);
+  const loadItems = useCallback((): Option[] => {
+    if (loading) {
+      return [];
+    }
+
+    if (options.length > 0) {
+      return options;
+    }
+
+    return [{ value: '-1', title: 'Selecione uma Diretoria e uma Regional' }];
+  }, [options, loading]);
 
   return (
     <BaseSelect
