@@ -58,7 +58,6 @@ const Home: React.FC = () => {
 
   return (
     <HomeWrapper>
-      <Link to="/cockpit">Cockpit</Link>
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>
