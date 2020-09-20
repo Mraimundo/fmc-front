@@ -60,7 +60,7 @@ export const Header = styled.div`
 
   display: flex;
   width: 100%;
-  height: 449px;
+  height: 489px;
   background: url(${background}) no-repeat center center;
   justify-content: center;
 

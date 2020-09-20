@@ -8,6 +8,7 @@ import {
   Container,
   Header,
   TitleContainer,
+  LabelInfo,
   ProductTypes,
   ProductType,
   Indicator,
@@ -44,16 +45,17 @@ const FiltersScreen: React.FC<Props> = ({ onFilter }) => {
 
   return (
     <Container>
+      <TitleContainer>
+        <h3>Conheça a solução mais adequada para o seu cultivo.</h3>
+      </TitleContainer>
       <Header>
         <CategoriesSelect
           value={categorySelected}
           setValue={setCategorySelected}
-          label="Cultura"
+          label="1º Selecione a cultura"
         />
-        <TitleContainer>
-          <h3>Selecione o segmento para ver a solução mais adequada.</h3>
-        </TitleContainer>
       </Header>
+      <LabelInfo>2º Selecione o segmento</LabelInfo>
       <ProductTypes>
         {productTypes.map(item => (
           <ProductType

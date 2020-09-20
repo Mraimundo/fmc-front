@@ -12,7 +12,7 @@ export const Container = styled.div`
   max-width: 851px;
   position: absolute;
   bottom: 23px;
-  height: 205px;
+  height: 237px;
   background: rgba(126, 57, 29, 0.6);
 `;
 
@@ -49,9 +49,14 @@ export const TitleContainer = styled.div`
   }
 `;
 
+export const LabelInfo = styled.span`
+  font-size: 16px;
+  margin-top: 14px;
+`;
+
 export const ProductTypes = styled.div`
   display: flex;
-  margin-top: 31px;
+  margin-top: 7px;
 `;
 
 export const ProductType = styled.div`
