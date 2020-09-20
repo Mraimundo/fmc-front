@@ -70,6 +70,12 @@ export const Title = styled.h5`
   text-align: center;
   text-transform: uppercase;
   margin-top: 20px;
+
+  > span {
+    font-size: 12px;
+    transform: translateY(-3px);
+    display: inline-block;
+  }
 `;
 
 export const Details = styled.div`

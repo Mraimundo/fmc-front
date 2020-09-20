@@ -1,5 +1,6 @@
 import React from 'react';
 import checkIcon from 'assets/images/goals/goals-check-icon.svg';
+import uncheckIcon from 'assets/images/goals/goals-times-icon.svg';
 import { Performance as IPerformance } from 'services/cockpit/interfaces/channel';
 
 import CircularPerformance from './CircularPerformance';
@@ -45,12 +46,14 @@ const Performance: React.FC<Props> = ({ performance }) => {
             <Title>Devolução</Title>
             <CircularContent className="_special">
               <Details>
-                <span>
-                  {devolutionBelow5Percent ? 'Abaixo' : 'Acima'} dos 5%
-                </span>
+                <span>{devolutionBelow5Percent ? 'Até' : 'Acima de'} 5%</span>
               </Details>
               <CircularSectionItem>
-                <img src={checkIcon} alt="" title="" />
+                {devolutionBelow5Percent ? (
+                  <img src={checkIcon} alt="" title="" />
+                ) : (
+                  <img src={uncheckIcon} alt="" title="" />
+                )}
               </CircularSectionItem>
             </CircularContent>
           </Item>
@@ -58,14 +61,17 @@ const Performance: React.FC<Props> = ({ performance }) => {
         <Row>
           {focusProduct.map(item => (
             <Item key={`prod-${item.name}`}>
-              <Title>{item.name}</Title>
+              <Title>
+                {item.name}
+                <span>®</span>
+              </Title>
               <CircularPerformance
                 color={item.color}
                 percent={item.percentage}
               />
               <Details>
-                <span>Objetivo: US$ {item.formattedGoal}</span>
-                <span>Realizado: US$ {item.formattedResult}</span>
+                <span>Objetivo: {item.formattedGoal} L</span>
+                <span>Realizado: {item.formattedResult} L</span>
               </Details>
             </Item>
           ))}

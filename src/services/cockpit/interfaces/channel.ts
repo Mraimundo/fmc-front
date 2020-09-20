@@ -45,6 +45,7 @@ export interface Performance {
     formattedResult: string;
     formattedPercentage: string;
     color: string;
+    order: number;
   }[];
 }
 

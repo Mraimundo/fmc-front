@@ -14,18 +14,36 @@ import {
   CompletePerformanceWrapper,
 } from './styles';
 
-const Performance: React.FC = () => {
+export interface Props {
+  realized: {
+    bilingPercent: number;
+    pogPercent: number;
+    premioPercent: number;
+    heroPercent: number;
+    talismanPercent: number;
+  };
+}
+
+const Performance: React.FC<Props> = ({
+  realized: {
+    bilingPercent,
+    pogPercent,
+    premioPercent,
+    heroPercent,
+    talismanPercent,
+  },
+}) => {
   return (
     <Wrapper>
       <PerformanceWrapper>
         <ProgressWrapper borderRight>
           <IndividualProgressWrapper>
             <Label>FATURAMENTO</Label>
-            <CircularProgress color="#FF4C16" percent={0} />
+            <CircularProgress color="#FF4C16" percent={bilingPercent || 0} />
           </IndividualProgressWrapper>
           <IndividualProgressWrapper>
             <Label>POG</Label>
-            <CircularProgress color="#25CCE1" percent={0} />
+            <CircularProgress color="#25CCE1" percent={pogPercent || 0} />
           </IndividualProgressWrapper>
         </ProgressWrapper>
         <ProgressWrapper>
@@ -33,19 +51,19 @@ const Performance: React.FC = () => {
             <Label>
               PREMIO<span>®</span>
             </Label>
-            <CircularProgress color="#913944" percent={0} />
+            <CircularProgress color="#913944" percent={premioPercent || 0} />
           </IndividualProgressWrapper>
           <IndividualProgressWrapper>
             <Label>
               HERO<span>®</span>
             </Label>
-            <CircularProgress color="#47C246" percent={0} />
+            <CircularProgress color="#47C246" percent={heroPercent || 0} />
           </IndividualProgressWrapper>
           <IndividualProgressWrapper>
             <Label>
               TALISMAN<span>®</span>
             </Label>
-            <CircularProgress color="#838BC5" percent={0} />
+            <CircularProgress color="#838BC5" percent={talismanPercent || 0} />
           </IndividualProgressWrapper>
         </ProgressWrapper>
       </PerformanceWrapper>

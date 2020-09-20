@@ -54,7 +54,9 @@ const BillingPog: React.FC<BillingPogProps> = ({ billingPog }) => {
           </Item>
           <Item>
             <ProgressTitle>DEVOLUÇÃO %</ProgressTitle>
-            <GoalText>{billingPog.devolution.value}</GoalText>
+            <GoalText>
+              {billingPog.devolution.checked ? 'Até' : 'Acima de'} 5%
+            </GoalText>
             <CircularSectionItem>
               {billingPog.devolution.checked ? (
                 <img src={checkIcon} alt="" title="" />

@@ -28,6 +28,7 @@ export interface Filters {
 }
 
 const colors = ['#47C246', '#913944', '#838BC5'];
+const order = ['premio', 'hero', 'talisman'];
 
 const transformer = (data: ApiResponse): Performance => {
   return {
@@ -44,13 +45,16 @@ const transformer = (data: ApiResponse): Performance => {
       formattedPercentage: formatDollars(data.pog.percentage),
     },
     devolutionBelow5Percent: true,
-    focusProduct: data.focus_product.map((item, index) => ({
-      ...item,
-      formattedGoal: formatDollars(item.goal),
-      formattedResult: formatDollars(item.result),
-      formattedPercentage: formatDollars(item.percentage),
-      color: colors[index] || '',
-    })),
+    focusProduct: data.focus_product
+      .map((item, index) => ({
+        ...item,
+        formattedGoal: formatDollars(item.goal),
+        formattedResult: formatDollars(item.result),
+        formattedPercentage: formatDollars(item.percentage),
+        color: colors[index] || '',
+        order: order.indexOf(item.name.toLowerCase()),
+      }))
+      .sort((i, j) => (i.order > j.order ? 1 : -1)),
   };
 };
 

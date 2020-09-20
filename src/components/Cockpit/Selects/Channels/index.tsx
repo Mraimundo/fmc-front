@@ -48,8 +48,12 @@ const RegionalSelect: React.FC<Props> = ({
       return options;
     }
 
-    return [{ value: '-1', title: 'Selecione uma Diretoria e uma Regional' }];
-  }, [options, loading]);
+    if (!directorName || !regionalName) {
+      return [{ value: '-1', title: 'Selecione uma Diretoria e uma Regional' }];
+    }
+
+    return [{ value: '-1', title: 'Nenhum canal encontrado' }];
+  }, [options, loading, directorName, regionalName]);
 
   return (
     <BaseSelect
