@@ -4,6 +4,7 @@ import Accordion from './styled/modules/accordion';
 import Button from './styled/modules/button';
 import Contact from './styled/modules/contact';
 import Font from './styled/modules/font';
+import Footer from './styled/modules/footer';
 import Indication from './styled/modules/indication';
 import Input from './styled/modules/input';
 import Layout from './styled/modules/layout';
@@ -21,6 +22,7 @@ declare module 'styled-components' {
     button: Button;
     contact: Contact;
     font: Font;
+    footer: Footer;
     indication: Indication;
     input: Input;
     layout: Layout;

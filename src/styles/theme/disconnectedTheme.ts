@@ -1,4 +1,6 @@
+import { DefaultTheme } from 'styled-components';
 import accordion from './modules/accordion/default';
+import footer from './modules/footer/default';
 import indication from './modules/indication/default';
 import layout from './modules/layout/default';
 import regulation from './modules/regulation/default';
@@ -14,12 +16,13 @@ import menu from './modules/menu/disconnected';
 import modal from './modules/modal/disconnected';
 import tabMenu from './modules/tabMenu/disconnected';
 
-export default {
+const Theme: DefaultTheme = {
   accordion,
   button,
   indication,
   contact,
   font,
+  footer,
   input,
   layout,
   link,
@@ -30,3 +33,5 @@ export default {
   tabMenu,
   tooltip,
 };
+
+export default Theme;
