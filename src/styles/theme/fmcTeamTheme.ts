@@ -8,11 +8,11 @@ import layout from './modules/layout/default';
 import link from './modules/link/default';
 import modal from './modules/modal/default';
 import regulation from './modules/regulation/default';
-import table from './modules/table/default';
 import tabMenu from './modules/tabMenu/default';
 import tooltip from './modules/tooltip/default';
 
 import menu from './modules/menu/fmcTeam';
+import table from './modules/table/fmcTeam';
 
 export default {
   accordion,
