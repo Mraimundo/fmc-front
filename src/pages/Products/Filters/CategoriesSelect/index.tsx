@@ -22,10 +22,14 @@ const CategoriesProductsSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   const transformer = useCallback((data: Category[]): Option[] => {
-    return data.map(item => ({
-      value: item.id.toString(),
-      title: item.name,
-    }));
+    const newData = [{ value: 'todos', title: 'Todos' }];
+    newData.push(
+      ...data.map(item => ({
+        value: item.id.toString(),
+        title: item.name,
+      })),
+    );
+    return newData;
   }, []);
 
   useEffect(() => {
