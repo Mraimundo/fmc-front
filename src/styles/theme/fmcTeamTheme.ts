@@ -6,11 +6,13 @@ import font from './modules/font/fmcTeam';
 import input from './modules/input/default';
 import layout from './modules/layout/default';
 import link from './modules/link/default';
-import menu from './modules/menu/default';
 import modal from './modules/modal/default';
 import regulation from './modules/regulation/default';
 import table from './modules/table/default';
+import tabMenu from './modules/tabMenu/default';
 import tooltip from './modules/tooltip/default';
+
+import menu from './modules/menu/fmcTeam';
 
 export default {
   accordion,
@@ -25,5 +27,6 @@ export default {
   modal,
   regulation,
   table,
+  tabMenu,
   tooltip,
 };

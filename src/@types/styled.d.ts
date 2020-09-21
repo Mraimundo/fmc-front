@@ -12,6 +12,7 @@ import Menu from './styled/modules/menu';
 import Modal from './styled/modules/modal';
 import Regulation from './styled/modules/regulation';
 import Table from './styled/modules/table';
+import TabMenu from './styled/modules/tabMenu';
 import Tooltip from './styled/modules/tooltip';
 
 declare module 'styled-components' {
@@ -28,6 +29,7 @@ declare module 'styled-components' {
     modal: Modal;
     regulation: Regulation;
     table: Table;
+    tabMenu: TabMenu;
     tooltip: Tooltip;
   }
 }

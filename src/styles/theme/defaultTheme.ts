@@ -10,6 +10,7 @@ import menu from './modules/menu/default';
 import modal from './modules/modal/default';
 import regulation from './modules/regulation/default';
 import table from './modules/table/default';
+import tabMenu from './modules/tabMenu/default';
 import tooltip from './modules/tooltip/default';
 
 export default {
@@ -25,5 +26,6 @@ export default {
   modal,
   regulation,
   table,
+  tabMenu,
   tooltip,
 };

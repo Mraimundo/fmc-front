@@ -12,6 +12,7 @@ import input from './modules/input/disconnected';
 import link from './modules/link/disconnected';
 import menu from './modules/menu/disconnected';
 import modal from './modules/modal/disconnected';
+import tabMenu from './modules/tabMenu/disconnected';
 
 export default {
   accordion,
@@ -26,5 +27,6 @@ export default {
   modal,
   regulation,
   table,
+  tabMenu,
   tooltip,
 };

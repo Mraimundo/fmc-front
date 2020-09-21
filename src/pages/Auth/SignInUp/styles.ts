@@ -171,13 +171,13 @@ export const ItemList = styled.li<ItemListProps>`
     margin-left: 20px;
   }
 
-  background-color: ${({ theme }) => theme.menu.inactiveBackgroundColor};
+  background-color: ${({ theme }) => theme.tabMenu.inactiveBackgroundColor};
   transition: background-color 0.2s ease, color 0.2s ease;
   will-change: background-color, color;
   ${({ active }) =>
     active &&
     css`
-      background-color: ${({ theme }) => theme.menu.activeBackgroundColor};
+      background-color: ${({ theme }) => theme.tabMenu.activeBackgroundColor};
     `}
 
   ${({ active }) =>

@@ -6,7 +6,7 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.font.color.primary};
+  background: ${({ theme }) => theme.menu.background};
   height: ${HEADER_HEIGHT};
   width: 100%;
   padding: 0 1em;
