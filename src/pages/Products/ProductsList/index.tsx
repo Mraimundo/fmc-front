@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Product } from 'services/products/interfaces';
 
 import {
@@ -43,12 +43,20 @@ const ProductsList: React.FC<Props> = ({ products }) => {
               </BodyDetails>
               <Actions>
                 {item.externalLink && (
-                  <a href={item.externalLink} target="_blank" rel="noreferrer">
+                  <a
+                    href={item.externalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Veja mais
                   </a>
                 )}
                 {item.pdfFile && (
-                  <a href={item.pdfFile} target="_blank" rel="noreferrer">
+                  <a
+                    href={item.pdfFile}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Argumentário de vendas
                   </a>
                 )}

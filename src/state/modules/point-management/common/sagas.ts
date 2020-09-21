@@ -28,10 +28,7 @@ import {
   getIsEnabledToDistributePoints,
   getMissingParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
-import {
-  toggleIsOpenModalMissingParticipants,
-  removeAllScores,
-} from 'state/modules/point-management/team-awards/actions';
+import { toggleIsOpenModalMissingParticipants } from 'state/modules/point-management/team-awards/actions';
 import fetchEstablishmentsService, {
   Establishment as IEstablishment,
 } from 'services/auth/getEstablishments';

@@ -1,5 +1,3 @@
-import { rgba } from 'polished';
-
 export default {
-  background: '',
+  background: '#193b4e',
 };

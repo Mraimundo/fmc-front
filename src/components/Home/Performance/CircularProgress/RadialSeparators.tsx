@@ -1,6 +1,5 @@
 import React from 'react';
 import range from 'lodash.range';
-import { closestIndexTo } from 'date-fns/fp';
 
 interface SeparatorProps {
   turns: number;

@@ -33,7 +33,6 @@ import {
   getPotentializers,
 } from 'state/modules/goals/selectors';
 import CoinQuotation from 'components/Header/CoinQuotation';
-import { Link } from 'react-router-dom';
 import {
   Wrapper,
   ShowCaseWrapper,

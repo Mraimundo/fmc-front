@@ -1,6 +1,6 @@
 import { coinQuotation, vendavallApi } from 'services/api';
 
-import { COINS_TO_QUOTE, MenuTypes } from 'state/modules/header/constants';
+import { MenuTypes } from 'state/modules/header/constants';
 import { Coin, MenuItem } from 'state/modules/header/types';
 import {
   transformCoinQuotationsRawData,

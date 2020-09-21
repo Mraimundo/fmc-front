@@ -40,7 +40,7 @@ const HighLight: React.FC<Props> = ({ id, status, campaignId }) => {
         });
       }
     },
-    [addToast, id, addHighlight, removeHighlight],
+    [addToast, id, addHighlight, removeHighlight, campaignId],
   );
 
   return (

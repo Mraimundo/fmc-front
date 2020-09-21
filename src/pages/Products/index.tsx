@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import useDimensions from 'hooks/use-window-dimensions';
 import { Product } from 'services/products/interfaces';
 import getProducts from 'services/products/getProducts';
