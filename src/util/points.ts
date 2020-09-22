@@ -35,10 +35,14 @@ export const formatQuotedCoin = (value: number) =>
     maximumFractionDigits: 4,
   });
 
-export const formatDollars = (value: number) =>
+export const formatDollars = (
+  value: number,
+  minFractionDigits = 2,
+  maxFractionDigits = 2,
+) =>
   value.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: minFractionDigits,
+    maximumFractionDigits: maxFractionDigits,
   });
 
 export const formatKgl = (value: number) =>

@@ -24,14 +24,14 @@ const transformer = (data: ApiResponse): Statistics => {
   return {
     revenues: {
       ...data.revenues,
-      formattedGoal: formatDollars(data.revenues.goal),
-      formattedResult: formatDollars(data.revenues.result),
+      formattedGoal: formatDollars(data.revenues.goal, 0, 0),
+      formattedResult: formatDollars(data.revenues.result, 0, 0),
       formattedPercentage: formatPercent(data.revenues.percentage),
     },
     pog: {
       ...data.pog,
-      formattedGoal: formatDollars(data.pog.goal),
-      formattedResult: formatDollars(data.pog.result),
+      formattedGoal: formatDollars(data.pog.goal, 0, 0),
+      formattedResult: formatDollars(data.pog.result, 0, 0),
       formattedPercentage: formatPercent(data.pog.percentage),
     },
   };

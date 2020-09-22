@@ -38,18 +38,22 @@ export const transformBillingPog = (
 
   return {
     billing: {
-      goal: formatDollars(hasBilling ? data.faturamento.value : 0),
+      goal: formatDollars(hasBilling ? data.faturamento.value : 0, 0, 0),
       percentage: hasBilling
         ? Number((data.faturamento.progress.percentage * 100).toFixed())
         : 0,
-      realized: formatDollars(hasBilling ? data.faturamento.progress.value : 0),
+      realized: formatDollars(
+        hasBilling ? data.faturamento.progress.value : 0,
+        0,
+        0,
+      ),
     },
     pog: {
-      goal: formatDollars(hasPog ? data.pog.value : 0),
+      goal: formatDollars(hasPog ? data.pog.value : 0, 0, 0),
       percentage: hasPog
         ? Number((data.pog.progress.percentage * 100).toFixed())
         : 0,
-      realized: formatDollars(hasPog ? data.pog.progress.value : 0),
+      realized: formatDollars(hasPog ? data.pog.progress.value : 0, 0, 0),
     },
     devolution: {
       checked: hasDevolution ? data['devolução'].progress.checked : false,
@@ -96,7 +100,7 @@ export const transformInfos = (data: FetchInfosService): Infos | null => {
 
   return {
     points,
-    potential: formatDollars(data.potential.value),
+    potential: formatDollars(data.potential.value, 0, 0),
     lastUpdate: data.last_update,
     excel: data.full_performance_report,
   };
