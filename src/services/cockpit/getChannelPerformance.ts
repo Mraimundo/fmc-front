@@ -34,23 +34,32 @@ const transformer = (data: ApiResponse): Performance => {
   return {
     revenues: {
       ...data.revenues,
+      goal: (data.revenues.goal || 0) * 100,
+      result: (data.revenues.result || 0) * 100,
+      percentage: (data.revenues.percentage || 0) * 100,
       formattedGoal: formatDollars(data.revenues.goal),
       formattedResult: formatDollars(data.revenues.result),
-      formattedPercentage: formatDollars(data.revenues.percentage),
+      formattedPercentage: formatDollars((data.revenues.percentage || 0) * 100),
     },
     pog: {
       ...data.pog,
+      goal: (data.pog.goal || 0) * 100,
+      result: (data.pog.result || 0) * 100,
+      percentage: (data.pog.percentage || 0) * 100,
       formattedGoal: formatDollars(data.pog.goal),
       formattedResult: formatDollars(data.pog.result),
-      formattedPercentage: formatDollars(data.pog.percentage),
+      formattedPercentage: formatDollars((data.pog.percentage || 0) * 100),
     },
-    devolutionBelow5Percent: true,
+    devolutionBelow5Percent: data.devolution_below_5_percent,
     focusProduct: data.focus_product
       .map((item, index) => ({
         ...item,
+        goal: (item.goal || 0) * 100,
+        result: (item.result || 0) * 100,
+        percentage: (item.percentage || 0) * 100,
         formattedGoal: formatDollars(item.goal),
         formattedResult: formatDollars(item.result),
-        formattedPercentage: formatDollars(item.percentage),
+        formattedPercentage: formatDollars((item.percentage || 0) * 100),
         color: colors[index] || '',
         order: order.indexOf(item.name.toLowerCase()),
       }))
@@ -62,5 +71,8 @@ export default async (establishmentId: number): Promise<Performance> => {
   const { data } = await pluginApi.get<ApiResponse>(
     `cockpit/performance-statistics?establishment_id=${establishmentId}`,
   );
-  return transformer(data);
+  const teste = transformer(data);
+
+  console.log('teste', teste);
+  return teste;
 };

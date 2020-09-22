@@ -30,7 +30,10 @@ const Potentializers: React.FC<PotentializersProps> = ({ potentializers }) => {
               </ProgressTitle>
               <GoalText>Objetivo {potentializer.goal} L</GoalText>
               <CircularSectionItem>
-                <CircularProgress color={colors[index]} percent={0}>
+                <CircularProgress
+                  color={colors[index]}
+                  percent={potentializer.percentage}
+                >
                   <RealizedProgress
                     percent={potentializer.percentage}
                     realized={`${potentializer.realized} L`}
