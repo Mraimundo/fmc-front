@@ -46,8 +46,9 @@ const Regulation: React.FC<Props> = ({ handleAction }) => {
   }, [regulation]);
 
   useEffect(() => {
-    getRegulation().then(data => setRegulation(data));
-  }, []);
+    if (!campaign?.id) return;
+    getRegulation(campaign.id).then(data => setRegulation(data));
+  }, [campaign]);
 
   return (
     <Container>

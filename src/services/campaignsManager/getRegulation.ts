@@ -6,7 +6,11 @@ export interface Response {
   content: string;
 }
 
-export default async (): Promise<Response> => {
-  const { data } = await pluginApi.get<Response>('campaigns/regulation');
+export default async (campaignId?: number): Promise<Response> => {
+  const params = campaignId ? `?campaign_id=${campaignId}` : '';
+
+  const { data } = await pluginApi.get<Response>(
+    `campaigns/regulation${params}`,
+  );
   return data;
 };
