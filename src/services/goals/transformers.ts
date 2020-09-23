@@ -1,6 +1,6 @@
 import isEmpty from 'lodash.isempty';
 
-import { formatDollars, formatKgl, formatPoints } from 'util/points';
+import { fakeFormatDollars, formatKgl, formatPoints } from 'util/points';
 import {
   Product,
   BillingPog,
@@ -38,22 +38,22 @@ export const transformBillingPog = (
 
   return {
     billing: {
-      goal: formatDollars(hasBilling ? data.faturamento.value : 0, 0, 0),
+      goal: fakeFormatDollars(hasBilling ? data.faturamento.value : 0, 0, 0),
       percentage: hasBilling
         ? Number((data.faturamento.progress.percentage * 100).toFixed())
         : 0,
-      realized: formatDollars(
+      realized: fakeFormatDollars(
         hasBilling ? data.faturamento.progress.value : 0,
         0,
         0,
       ),
     },
     pog: {
-      goal: formatDollars(hasPog ? data.pog.value : 0, 0, 0),
+      goal: fakeFormatDollars(hasPog ? data.pog.value : 0, 0, 0),
       percentage: hasPog
         ? Number((data.pog.progress.percentage * 100).toFixed())
         : 0,
-      realized: formatDollars(hasPog ? data.pog.progress.value : 0, 0, 0),
+      realized: fakeFormatDollars(hasPog ? data.pog.progress.value : 0, 0, 0),
     },
     devolution: {
       checked: hasDevolution ? data['devolução'].progress.checked : false,
@@ -71,7 +71,7 @@ export const transformProducts = (
   return data.map<Product>((product, index) => ({
     id: product.id,
     name: product.name,
-    billing: formatDollars(product.value),
+    billing: fakeFormatDollars(product.value),
     volume: formatPoints(product.volume, 0, 0),
     position: (index + 1).toString().padStart(2, '0'),
   }));
@@ -100,7 +100,7 @@ export const transformInfos = (data: FetchInfosService): Infos | null => {
 
   return {
     points,
-    potential: formatDollars(data.potential.value, 0, 0),
+    potential: fakeFormatDollars(data.potential.value, 0, 0),
     lastUpdate: data.last_update,
     excel: data.full_performance_report,
   };

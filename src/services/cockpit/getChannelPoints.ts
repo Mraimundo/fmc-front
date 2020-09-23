@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { formatDollars } from 'util/points';
+import { fakeFormatDollars } from 'util/points';
 import { Points } from './interfaces/channel';
 
 export interface ApiResponse {
@@ -27,13 +27,13 @@ const transformer = (data: ApiResponse): Points => {
     rebate: data.rebate || 0,
     channelPoints: data.channel_points || 0,
     fmcSharedActions: data.fmc_shared_actions || 0,
-    formattedMarketplaceBalance: formatDollars(data.marketplace_balance || 0),
-    formattedSellerDistributedPoints: formatDollars(
+    formattedMarketplaceBalance: fakeFormatDollars(data.marketplace_balance || 0),
+    formattedSellerDistributedPoints: fakeFormatDollars(
       data.seller_distributed_points || 0,
     ),
-    formattedRebate: formatDollars(data.rebate || 0),
-    formattedChannelPoints: formatDollars(data.channel_points || 0),
-    formattedFmcSharedActions: formatDollars(data.fmc_shared_actions || 0),
+    formattedRebate: fakeFormatDollars(data.rebate || 0),
+    formattedChannelPoints: fakeFormatDollars(data.channel_points || 0),
+    formattedFmcSharedActions: fakeFormatDollars(data.fmc_shared_actions || 0),
   };
 };
 

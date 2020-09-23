@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { formatDollars, formatPercent } from 'util/points';
+import { fakeFormatDollars, formatPercent } from 'util/points';
 import { Statistics } from './interfaces/general';
 
 export interface ApiResponse {
@@ -24,14 +24,14 @@ const transformer = (data: ApiResponse): Statistics => {
   return {
     revenues: {
       ...data.revenues,
-      formattedGoal: formatDollars(data.revenues.goal, 0, 0),
-      formattedResult: formatDollars(data.revenues.result, 0, 0),
+      formattedGoal: fakeFormatDollars(data.revenues.goal, 0, 0),
+      formattedResult: fakeFormatDollars(data.revenues.result, 0, 0),
       formattedPercentage: formatPercent(data.revenues.percentage),
     },
     pog: {
       ...data.pog,
-      formattedGoal: formatDollars(data.pog.goal, 0, 0),
-      formattedResult: formatDollars(data.pog.result, 0, 0),
+      formattedGoal: fakeFormatDollars(data.pog.goal, 0, 0),
+      formattedResult: fakeFormatDollars(data.pog.result, 0, 0),
       formattedPercentage: formatPercent(data.pog.percentage),
     },
   };

@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { formatDollars } from 'util/points';
+import { fakeFormatDollars } from 'util/points';
 import { Performance } from './interfaces/channel';
 
 export interface ApiResponse {
@@ -37,18 +37,18 @@ const transformer = (data: ApiResponse): Performance => {
       goal: (data.revenues.goal || 0) * 100,
       result: (data.revenues.result || 0) * 100,
       percentage: (data.revenues.percentage || 0) * 100,
-      formattedGoal: formatDollars(data.revenues.goal, 0, 0),
-      formattedResult: formatDollars(data.revenues.result, 0, 0),
-      formattedPercentage: formatDollars((data.revenues.percentage || 0) * 100),
+      formattedGoal: fakeFormatDollars(data.revenues.goal, 0, 0),
+      formattedResult: fakeFormatDollars(data.revenues.result, 0, 0),
+      formattedPercentage: fakeFormatDollars((data.revenues.percentage || 0) * 100),
     },
     pog: {
       ...data.pog,
       goal: (data.pog.goal || 0) * 100,
       result: (data.pog.result || 0) * 100,
       percentage: (data.pog.percentage || 0) * 100,
-      formattedGoal: formatDollars(data.pog.goal, 0, 0),
-      formattedResult: formatDollars(data.pog.result, 0, 0),
-      formattedPercentage: formatDollars((data.pog.percentage || 0) * 100),
+      formattedGoal: fakeFormatDollars(data.pog.goal, 0, 0),
+      formattedResult: fakeFormatDollars(data.pog.result, 0, 0),
+      formattedPercentage: fakeFormatDollars((data.pog.percentage || 0) * 100),
     },
     devolutionBelow5Percent: data.devolution_below_5_percent,
     focusProduct: data.focus_product
@@ -57,9 +57,9 @@ const transformer = (data: ApiResponse): Performance => {
         goal: (item.goal || 0) * 100,
         result: (item.result || 0) * 100,
         percentage: (item.percentage || 0) * 100,
-        formattedGoal: formatDollars(item.goal, 0, 0),
-        formattedResult: formatDollars(item.result, 0, 0),
-        formattedPercentage: formatDollars((item.percentage || 0) * 100),
+        formattedGoal: fakeFormatDollars(item.goal, 0, 0),
+        formattedResult: fakeFormatDollars(item.result, 0, 0),
+        formattedPercentage: fakeFormatDollars((item.percentage || 0) * 100),
         color: colors[index] || '',
         order: order.indexOf(item.name.toLowerCase()),
       }))

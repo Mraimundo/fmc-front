@@ -1,5 +1,5 @@
 import { pluginApi } from 'services/api';
-import { formatDollars } from 'util/points';
+import { fakeFormatDollars } from 'util/points';
 import { Statistics } from './interfaces/channel';
 
 export interface ApiResponse {
@@ -31,7 +31,7 @@ const transformer = (data: ApiResponse): Statistics => {
     },
     fmcSharedActions: {
       balance: data.fmc_shared_actions.balance || 0,
-      formattedBalance: formatDollars(data.fmc_shared_actions.balance || 0),
+      formattedBalance: fakeFormatDollars(data.fmc_shared_actions.balance || 0),
     },
   };
 };
