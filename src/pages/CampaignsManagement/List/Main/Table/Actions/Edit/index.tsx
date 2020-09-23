@@ -18,7 +18,7 @@ interface Props {
 const Edit: React.FC<Props> = ({ id, status }) => {
   const { addToast } = useToast();
   const handleAction = useCallback(() => {
-    if (status === CAMPAIGN_STATUS_TEXT.CANCELED) {
+    if (status !== CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS) {
       addToast({
         title: 'Campanha não pode ser editada',
         type: 'error',

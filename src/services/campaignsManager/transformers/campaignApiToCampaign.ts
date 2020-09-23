@@ -1,4 +1,5 @@
 import { addHours } from 'date-fns';
+import { GRV, DN, CRM, MKT } from 'config/constants';
 import {
   Campaign,
   Approver,
@@ -33,6 +34,21 @@ const extractApprovers = (data: ApproverApi[]): Approver[] => {
         .map(i => i.comment),
     };
   });
+};
+
+const getProfileTurn = (data: ApproverApi[]): ApproverProfile => {
+  const filteredData = data.filter(i => i.status === 1);
+
+  switch (filteredData.length) {
+    case 0:
+      return GRV;
+    case 1:
+      return DN;
+    case 2:
+      return CRM;
+    default:
+      return MKT;
+  }
 };
 
 const extractComments = (data: ApproverApi[]): Comment[] => {
@@ -108,4 +124,5 @@ export default (campaignApi: CampaignApi): Campaign => ({
   comments: extractComments(campaignApi.approvers),
   highlight: extractHighlight(campaignApi.highlights),
   sendEmail: campaignApi.send_emails,
+  profileTurnToApprove: getProfileTurn(campaignApi.approvers),
 });

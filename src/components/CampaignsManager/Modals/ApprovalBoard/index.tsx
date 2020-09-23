@@ -20,15 +20,17 @@ interface Props {
   myProfile: ApproverProfile;
   onDisapprove(approver: Approver): Promise<void>;
   onApprove(approver: Approver): Promise<void>;
+  profileTurnToApprove?: ApproverProfile | null;
 }
 
 type Mode = 'board' | 'comment';
 
 const ApprovalBoard: React.FC<Props> = ({
   isOpen,
-  onRequestClose,
   approvers: _approvers,
   myProfile,
+  profileTurnToApprove,
+  onRequestClose,
   onDisapprove,
   onApprove,
 }) => {
@@ -50,11 +52,12 @@ const ApprovalBoard: React.FC<Props> = ({
       setApprovers([..._approvers]);
       setApproverSelected(null);
       setCanDoAction(
-        _approvers.find(item => item.profile === myProfile)?.status ===
-          'pending',
+        myProfile === profileTurnToApprove &&
+          _approvers.find(item => item.profile === myProfile)?.status ===
+            'pending',
       );
     }
-  }, [_approvers, isOpen, myProfile]);
+  }, [_approvers, isOpen, myProfile, profileTurnToApprove]);
 
   const handleCommentClick = useCallback(
     (approver: Approver) => {
@@ -66,10 +69,40 @@ const ApprovalBoard: React.FC<Props> = ({
     [myProfile, canDoAction],
   );
 
+  const checkBeforeAction = useCallback(
+    (approver: Approver): boolean => {
+      if (approver.profile !== myProfile) {
+        addToast({
+          title: 'Você não tem permissão para esta ação',
+          type: 'error',
+        });
+        return false;
+      }
+
+      if (myProfile !== profileTurnToApprove) {
+        addToast({
+          title: 'Esta ação não está disponível para você no momento',
+          type: 'error',
+        });
+        return false;
+      }
+
+      if (!canDoAction) {
+        addToast({
+          title: 'Você não tem permissão para esta ação',
+          type: 'error',
+        });
+        return false;
+      }
+
+      return true;
+    },
+    [myProfile, addToast, canDoAction, profileTurnToApprove],
+  );
+
   const handleApproveClick = useCallback(
     (approver: Approver) => {
-      if (approver.profile !== myProfile) return;
-      if (!canDoAction) return;
+      if (!checkBeforeAction(approver)) return;
       setApprovers(items => {
         return items.map(item => {
           if (approver.profile === item.profile) {
@@ -79,13 +112,12 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       });
     },
-    [myProfile, canDoAction],
+    [checkBeforeAction],
   );
 
   const handleDisapproveClick = useCallback(
     (approver: Approver) => {
-      if (approver.profile !== myProfile) return;
-      if (!canDoAction) return;
+      if (!checkBeforeAction(approver)) return;
       setApprovers(items => {
         return items.map(item => {
           if (approver.profile === item.profile) {
@@ -95,7 +127,7 @@ const ApprovalBoard: React.FC<Props> = ({
         });
       });
     },
-    [myProfile, canDoAction],
+    [checkBeforeAction],
   );
 
   const approve = useCallback(
@@ -213,9 +245,9 @@ const ApprovalBoard: React.FC<Props> = ({
           ) : (
             <textarea
               value={comment}
-              onChange={
-                canComment ? e => setComment(e.target.value) : undefined
-              }
+              onChange={e => {
+                if (canComment) setComment(e.target.value);
+              }}
             />
           )}
         </Content>

@@ -15,7 +15,7 @@ const Resume: React.FC = () => {
           <Box>
             <h6>Campanhas</h6>
             {resume.map(item => (
-              <div key={item.status.id}>
+              <div key={`${item.status.id}-${item.status.name}`}>
                 <h5>{item.status.name}</h5>
                 <span />
                 <h5>{item.count}</h5>

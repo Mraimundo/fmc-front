@@ -72,7 +72,7 @@ export const transformProducts = (
     id: product.id,
     name: product.name,
     billing: formatDollars(product.value),
-    volume: formatKgl(product.volume),
+    volume: formatPoints(product.volume, 0, 0),
     position: (index + 1).toString().padStart(2, '0'),
   }));
 };

@@ -1,7 +1,11 @@
-export const formatPoints = (value: number) =>
+export const formatPoints = (
+  value: number,
+  minFractionDigits = 2,
+  maxFractionDigits = 2,
+) =>
   value.toLocaleString('pt-br', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: minFractionDigits,
+    maximumFractionDigits: maxFractionDigits,
   });
 
 export const formatPointsInput = (value: string | number) => {
@@ -40,7 +44,7 @@ export const formatDollars = (
   minFractionDigits = 2,
   maxFractionDigits = 2,
 ) =>
-  value.toLocaleString('en-US', {
+  value.toLocaleString('pt-br', {
     minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: maxFractionDigits,
   });

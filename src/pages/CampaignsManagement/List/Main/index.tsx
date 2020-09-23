@@ -34,6 +34,7 @@ const Main: React.FC = () => {
             onRequestClose={closeApprovalModal}
             approvers={campaignSelected.approvers}
             myProfile={participant.profile_value}
+            profileTurnToApprove={campaignSelected.profileTurnToApprove}
             onApprove={approve}
             onDisapprove={disapprove}
           />
