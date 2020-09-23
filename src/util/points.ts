@@ -57,7 +57,7 @@ export const fakeFormatDollars = (
   });
 
 export const formatKgl = (value: number) =>
-  new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(value);
+  new Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(value);
 
 export const formatPercent = (value: number) =>
   value.toLocaleString('pt-br', {
