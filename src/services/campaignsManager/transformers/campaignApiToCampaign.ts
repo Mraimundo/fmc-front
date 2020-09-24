@@ -16,7 +16,7 @@ import {
 import getPtStatus from '../util/getPtStatusText';
 
 const extractApprovers = (data: ApproverApi[]): Approver[] => {
-  const approvers: ApproverProfile[] = ['GRV', 'DN', 'CRM', 'MKT'];
+  const approvers: ApproverProfile[] = ['GRV', 'CRM', 'DN', 'MKT'];
 
   return approvers.map(item => {
     const filteredData = data.filter(i => i.profile === item && i.status === 1);
@@ -43,9 +43,9 @@ const getProfileTurn = (data: ApproverApi[]): ApproverProfile => {
     case 0:
       return GRV;
     case 1:
-      return DN;
-    case 2:
       return CRM;
+    case 2:
+      return DN;
     default:
       return MKT;
   }

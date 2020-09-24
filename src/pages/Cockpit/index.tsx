@@ -1,16 +1,21 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
 
-import { Container, Content, Separator } from './styles';
+import { Container, Test, Content, Separator } from './styles';
 
 const Cockpit: React.FC = () => {
   return (
     <Container>
+      <Test>
+        <Content>
+          <h3>Cockpit</h3>
+          <GeneralView />
+        </Content>
+      </Test>
       <Content>
-        <h3>Cockpit</h3>
-        <GeneralView />
         <Separator />
         <ChannelView />
       </Content>

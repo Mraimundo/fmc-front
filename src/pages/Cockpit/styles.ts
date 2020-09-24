@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import background from 'assets/images/cockpit/new-background.jpg';
 
 export const Container = styled.div`
   display: flex;
@@ -6,6 +7,21 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background: #f7f7f7;
+`;
+
+export const Test = styled.div`
+  width: 100%;
+  background: red;
+  display: flex;
+  justify-content: center;
+
+  background: url(${background}) no-repeat center center;
+  justify-content: center;
+  background-size: 100%;
+
+  > div {
+    background: transparent;
+  }
 `;
 
 export const Content = styled.div`

@@ -55,7 +55,7 @@ const CampaignForm: React.FC = () => {
         <CategoriesProductsSelect
           setValue={value => setCategorySelected(value)}
           value={categorySelected}
-          placeholder="Categoria"
+          placeholder="Segmento"
         />
         <ProductsSelect
           setValue={value => setProductSelected(value)}

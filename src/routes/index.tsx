@@ -21,6 +21,8 @@ import Training from './modules/Training';
 import Goals from './modules/Goals';
 import HowParticipate from './modules/HowParticipate';
 
+import MailManager from './modules/MailManager';
+
 import Route from './Route';
 
 const routesArray: RouteModule[][] = [
@@ -42,6 +44,7 @@ const routesArray: RouteModule[][] = [
   Training,
   Goals,
   HowParticipate,
+  MailManager,
 ];
 
 const Routes: React.FC = () => (
