@@ -15,7 +15,7 @@ export const Test = styled.div`
   display: flex;
   justify-content: center;
 
-  background: url(${background}) no-repeat center center;
+  /*background: url(${background}) no-repeat center center;*/
   justify-content: center;
   background-size: 100%;
 
