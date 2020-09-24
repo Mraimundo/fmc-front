@@ -141,7 +141,5 @@ export const fetchTopSellingProductsService = async (): Promise<
     '/goals/top-ten-sellers',
   );
 
-  console.log('unformattedData', data);
-
   return transformProducts(data);
 };

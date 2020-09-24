@@ -71,7 +71,7 @@ export const transformProducts = (
   return data.map<Product>((product, index) => ({
     id: product.id,
     name: product.name,
-    billing: fakeFormatDollars(product.value),
+    billing: fakeFormatDollars(product.value, 0, 0),
     volume: formatPoints(product.volume, 0, 0),
     position: (index + 1).toString().padStart(2, '0'),
   }));
