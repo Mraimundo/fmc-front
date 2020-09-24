@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Test = styled.div`
   width: 100%;
-  background: red;
+  /*background: red;*/
   display: flex;
   justify-content: center;
 
