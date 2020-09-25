@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { vendavallApi } from 'services/api';
 
 export interface Response {
@@ -7,10 +8,17 @@ export interface Response {
   embedUrl: string;
 }
 
+interface PowerBiResponse {
+  token: string;
+}
+
 export default async (): Promise<Response> => {
   const { data } = await vendavallApi.get<Response>(`power_bi`);
+
   return {
-    ...data,
-    embedUrl: `https://api.powerbi.com/v1.0/myorg/groups/${data.workspaceId}/reports/${data.reportId}/GenerateToken`,
+    accessToken: data.accessToken,
+    reportId: data.reportId,
+    workspaceId: data.workspaceId,
+    embedUrl: `https://app.powerbi.com/reportEmbed?reportId=${data.reportId}`,
   };
 };
