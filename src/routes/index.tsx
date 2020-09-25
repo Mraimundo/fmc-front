@@ -22,6 +22,7 @@ import Goals from './modules/Goals';
 import HowParticipate from './modules/HowParticipate';
 
 import MailManager from './modules/MailManager';
+import PowerBi from './modules/PowerBi';
 
 import Route from './Route';
 
@@ -45,6 +46,7 @@ const routesArray: RouteModule[][] = [
   Goals,
   HowParticipate,
   MailManager,
+  PowerBi,
 ];
 
 const Routes: React.FC = () => (

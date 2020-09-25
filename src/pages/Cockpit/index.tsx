@@ -10,6 +10,7 @@ const Cockpit: React.FC = () => {
   return (
     <Container>
       <Test>
+        <Link to="/power-bi">Power Bi</Link>
         <Content>
           <h3>Cockpit</h3>
           <GeneralView />
