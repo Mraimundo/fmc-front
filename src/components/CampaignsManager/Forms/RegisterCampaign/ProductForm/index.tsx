@@ -21,6 +21,7 @@ import {
   ProductDetails,
   Input,
   ObservatioBox,
+  ContainerBox,
 } from './styles';
 
 const CampaignForm: React.FC = () => {
@@ -40,6 +41,8 @@ const CampaignForm: React.FC = () => {
             name: productSelected.title,
           },
           expectedVolume: 0,
+          expectedSellIn: 0,
+          expectedSellOut: 0,
         }),
       );
       setTimeout(() => {
@@ -73,15 +76,47 @@ const CampaignForm: React.FC = () => {
                 onClick={() => dispatch(removeGoal(item))}
               />
             </div>
-            <h5>Volume previsto</h5>
-            <InputValue
-              onChange={e => dispatch(addGoal({ ...item, expectedVolume: e }))}
-              value={item.expectedVolume}
-              component={Input}
-              formatValue={formatProductsInput}
-              inputRole="secondary"
-              error={errors[`goals[${index}].expectedVolume`]}
-            />
+            <ContainerBox>
+              <div>
+                <h5>Volume</h5>
+                <InputValue
+                  onChange={e =>
+                    dispatch(addGoal({ ...item, expectedVolume: e }))
+                  }
+                  value={item.expectedVolume}
+                  component={Input}
+                  formatValue={formatProductsInput}
+                  inputRole="secondary"
+                  error={errors[`goals[${index}].expectedVolume`]}
+                />
+              </div>
+              <div>
+                <h5>Sell-in</h5>
+                <InputValue
+                  placeholder="0,00 US$"
+                  onChange={e =>
+                    dispatch(addGoal({ ...item, expectedSellIn: e }))
+                  }
+                  value={item.expectedSellIn}
+                  component={Input}
+                  formatValue={e => formatProductsInput(e, 'US$')}
+                  inputRole="secondary"
+                />
+              </div>
+              <div>
+                <h5>Sell-out</h5>
+                <InputValue
+                  placeholder="0,00 US$"
+                  onChange={e =>
+                    dispatch(addGoal({ ...item, expectedSellOut: e }))
+                  }
+                  value={item.expectedSellOut}
+                  component={Input}
+                  formatValue={e => formatProductsInput(e, 'US$')}
+                  inputRole="secondary"
+                />
+              </div>
+            </ContainerBox>
           </ProductDetails>
         ))}
         <ObservatioBox>

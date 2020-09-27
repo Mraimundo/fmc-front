@@ -26,6 +26,8 @@ export default (data: Campaign): CreateNewCampaignDTO => {
     products: data.goals.map(item => ({
       id: item.product.id,
       volume: item.expectedVolume,
+      sellin: item.expectedSellIn,
+      sellout: item.expectedSellOut,
     })),
   };
 };

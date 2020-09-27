@@ -25,3 +25,8 @@ export const Separator = styled.div`
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   margin-top: 3px;
 `;
+
+export const RegulationLink = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+`;

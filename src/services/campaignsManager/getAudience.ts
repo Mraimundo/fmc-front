@@ -47,7 +47,7 @@ export default async (): Promise<Audience[]> => {
   /* Api params ?page=1&limit=15&order=desc */
   const {
     data: { data },
-  } = await pluginApi.get<ApiResponse>('campaigns/establishments?limit=100');
+  } = await pluginApi.get<ApiResponse>('campaigns/establishments?limit=200');
   return data.map(item => ({
     customer: {
       id: item.id,

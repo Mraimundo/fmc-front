@@ -1,4 +1,7 @@
-export const formatProductsInput = (value: string | number) => {
+export const formatProductsInput = (
+  value: string | number,
+  suffix = 'Kg/L',
+) => {
   if (!Number(value)) return '';
 
   const amount = new Intl.NumberFormat('pt-BR', {
@@ -6,5 +9,5 @@ export const formatProductsInput = (value: string | number) => {
     minimumFractionDigits: 2,
   }).format(Number(value) / 100);
 
-  return `${amount} Kg/L`;
+  return `${amount} ${suffix}`;
 };

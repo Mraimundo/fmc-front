@@ -6,6 +6,7 @@ import getCampaign, {
   Campaign as ICampaign,
 } from 'services/campaigns/getCampaign';
 import { format } from 'date-fns';
+import useModalStatus from 'hooks/use-modal-status';
 
 import getRegulation from 'services/campaigns/getRegulation';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
@@ -24,9 +25,12 @@ const List: React.FC = () => {
   const params = useParams<Params>();
   const [campaign, setCampaign] = useState<ICampaign | null>(null);
   const [regulation, setRegulation] = useState<Regulation | null>(null);
-  const [modalOpened, setModalOpened] = useState(false);
+  /* const [modalOpened, setModalOpened] = useState(false); */
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
+
+  const modalStatus = useModalStatus();
+  const { opened, closeModal, openModal } = modalStatus;
 
   useEffect(() => {
     getCampaign(parseInt(params.id, 0))
@@ -34,7 +38,7 @@ const List: React.FC = () => {
         setCampaign(data);
         getRegulation(data.id).then(reg => setRegulation(reg));
       })
-      .catch(e => {
+      .catch(() => {
         history.push('/');
       });
   }, [params]);
@@ -53,7 +57,7 @@ const List: React.FC = () => {
               }
             : null,
         );
-        setModalOpened(false);
+        closeModal();
       } catch (e) {
         addToast({
           title:
@@ -65,7 +69,7 @@ const List: React.FC = () => {
         setLoading(false);
       }
     },
-    [addToast],
+    [addToast, closeModal],
   );
 
   return (
@@ -73,13 +77,9 @@ const List: React.FC = () => {
       <Content>
         {campaign && (
           <>
-            <Campaign campaign={campaign} />
+            <Campaign campaign={campaign} regulationModal={modalStatus} />
             {!campaign.signed && (
-              <Button
-                buttonRole="primary"
-                type="button"
-                onClick={() => setModalOpened(true)}
-              >
+              <Button buttonRole="primary" type="button" onClick={openModal}>
                 Participar
               </Button>
             )}
@@ -87,14 +87,13 @@ const List: React.FC = () => {
         )}
         {campaign && regulation && (
           <RegulationModal
-            isOpen={modalOpened}
+            isOpen={opened}
             loading={loading}
+            canAccept={!campaign.signed}
             onAccept={async () => {
               handleAcceptRegulation(campaign.id);
             }}
-            onRequestClose={() => {
-              setModalOpened(false);
-            }}
+            onRequestClose={closeModal}
             campaign={{ ...campaign, regulationText: regulation.content }}
           />
         )}

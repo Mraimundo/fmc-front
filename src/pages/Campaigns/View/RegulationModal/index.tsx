@@ -18,6 +18,7 @@ interface Props {
     endDate: string;
     regulationText: string;
   };
+  canAccept: boolean;
 }
 
 const RegulationModal: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const RegulationModal: React.FC<Props> = ({
   onAccept,
   campaign,
   loading,
+  canAccept,
 }) => {
   const handleAccept = useCallback(async () => {
     await onAccept();
@@ -56,10 +58,10 @@ const RegulationModal: React.FC<Props> = ({
         <Button
           type="button"
           buttonRole="primary"
-          onClick={handleAccept}
+          onClick={canAccept ? handleAccept : onRequestClose}
           loading={loading}
         >
-          Aceitar
+          {canAccept ? 'Aceitar' : 'Ok'}
         </Button>
       </Container>
     </Modal>

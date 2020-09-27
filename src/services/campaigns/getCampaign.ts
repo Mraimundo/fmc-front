@@ -1,6 +1,14 @@
 import { pluginApi } from 'services/api';
 import { addHours, format } from 'date-fns';
-import { formatPoints } from 'util/points';
+import { fakeFormatDollars } from 'util/points';
+
+export interface Product {
+  id: number;
+  title: string;
+  volume: string;
+  sellIn: string;
+  sellOut: string;
+}
 
 export interface Campaign {
   id: number;
@@ -11,7 +19,7 @@ export interface Campaign {
   description: string;
   prizeTitle: string;
   prizeDescription: string;
-  products: { id: number; title: string; value: string }[];
+  products: Product[];
   acceptedDate: string;
   signed: boolean;
 }
@@ -23,6 +31,7 @@ interface CampaignApi {
     secondary_picture: string;
     description: string;
   };
+  description: string;
   start_date: Date;
   end_date: Date;
   reward_name: string;
@@ -35,6 +44,8 @@ interface CampaignApi {
     id: number;
     name: string;
     volume: number;
+    sellin: number;
+    sellout: number;
   }[];
   participant_joined_campaign: boolean;
 }
@@ -46,13 +57,15 @@ const transformer = (data: CampaignApi): Campaign => {
     title: data.name,
     startDate: format(addHours(new Date(data.start_date), 3), 'dd/MM/yyyy'),
     endDate: format(addHours(new Date(data.end_date), 3), 'dd/MM/yyyy'),
-    description: data.fmc_campaign_type.description,
+    description: data.description,
     prizeTitle: data.reward_name,
     prizeDescription: data.reward_description,
-    products: data.products.map(({ id, name, volume }) => ({
+    products: data.products.map(({ id, name, volume, sellin, sellout }) => ({
       id,
       title: name,
-      value: formatPoints(volume),
+      volume: `${fakeFormatDollars(volume, 0, 0)} Kg/L`,
+      sellIn: `US$ ${fakeFormatDollars(sellin)}`,
+      sellOut: `US$ ${fakeFormatDollars(sellout)}`,
     })),
     acceptedDate: data.participation?.id
       ? format(new Date(data.participation.created), 'dd/MM/yyyy')

@@ -103,6 +103,8 @@ export interface Prize {
 export interface Goal {
   product: Product;
   expectedVolume: number;
+  expectedSellIn: number;
+  expectedSellOut: number;
 }
 
 export type ApproverProfile = IApproverProfile;

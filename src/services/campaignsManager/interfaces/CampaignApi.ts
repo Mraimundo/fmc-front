@@ -16,6 +16,8 @@ interface ProductApi {
   modified: Date;
   segment: string;
   volume: number;
+  sellin: number;
+  sellout: number;
 }
 
 interface MechanicApi {

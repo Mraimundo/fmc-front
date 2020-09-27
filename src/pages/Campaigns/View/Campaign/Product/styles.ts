@@ -38,11 +38,21 @@ export const Row = styled.div`
     color: #707070;
     font-family: ${({ theme }) => theme.font.fontFamily.medium};
     font-size: 21px;
+    position: relative;
+    padding-top: 6px;
+
+    > span {
+      position: absolute;
+      top: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+    }
   }
 `;
 
 export const Box = styled.h5`
-  width: 136px;
+  width: 150px;
   height: 49px;
   border: 1px solid ${({ theme }) => theme.font.color.quartenary};
   display: flex;

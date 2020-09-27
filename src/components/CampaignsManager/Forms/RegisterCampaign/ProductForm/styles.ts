@@ -32,35 +32,19 @@ export const ProductsSelect = styled(DefaultProductsSelect)`
     height: 44px;
   }
   margin-top: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 7px;
 `;
 
 export const ProductDetails = styled.div`
   display: flex;
-  align-items: center;
-  margin-top: 14px;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
   width: 100%;
   max-width: 900px;
 
   svg {
     cursor: pointer;
-  }
-
-  > h5 {
-    font-size: 16px;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: ${({ theme }) => theme.font.color.primary};
-    padding-right: 18px;
-    flex: 1;
-    text-align: right;
-  }
-
-  > input {
-    width: 100%;
-    max-width: 280px;
-    height: 44px;
-    border: 1px solid ${({ theme }) => theme.font.color.quartenary};
-    text-align: right;
   }
 
   > ._productName {
@@ -81,8 +65,40 @@ export const ProductDetails = styled.div`
   }
 `;
 
+export const ContainerBox = styled.div`
+  width: 100%;
+  max-width: 710px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+
+  > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+
+    > h5 {
+      font-size: 16px;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      color: ${({ theme }) => theme.font.color.primary};
+      padding-right: 18px;
+      flex: 1;
+      text-align: right;
+    }
+
+    > input {
+      width: 100%;
+      max-width: 280px;
+      height: 44px;
+      border: 1px solid ${({ theme }) => theme.font.color.quartenary};
+      text-align: right;
+    }
+  }
+`;
+
 export const Input = styled(DefaultInput)`
-  max-width: 280px;
+  max-width: 144px;
   ._inputContainer {
     width: 100%;
     max-width: 280px;

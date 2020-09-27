@@ -97,6 +97,8 @@ export default (campaignApi: CampaignApi): Campaign => ({
       name: product.name,
     },
     expectedVolume: product.volume,
+    expectedSellIn: product.sellin,
+    expectedSellOut: product.sellout,
   })),
   mechanic: {
     id: campaignApi.fmc_campaign_type.id,

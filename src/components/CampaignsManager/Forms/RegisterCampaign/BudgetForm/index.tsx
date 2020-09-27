@@ -21,7 +21,7 @@ const BudgetForm: React.FC = () => {
       <Container>
         <h4>Indicar origem da verba:</h4>
         <Box>
-          <Checkbox color="default" />
+          <div />
           <h6>Pontos Rebate</h6>
           <InputValue
             onChange={value => {
@@ -36,8 +36,8 @@ const BudgetForm: React.FC = () => {
         </Box>
         <h5>Precisa de verba complementar?</h5>
         <Box>
-          <Checkbox color="default" />
-          <h6>Pontos Marketing</h6>
+          <div />
+          <h6>Budget Marketing</h6>
           <InputValue
             onChange={value => {
               dispatch(
@@ -55,8 +55,8 @@ const BudgetForm: React.FC = () => {
           />
         </Box>
         <Box>
-          <Checkbox color="default" />
-          <h6>Pontos Diretoria</h6>
+          <div />
+          <h6>Budget Diretoria</h6>
           <InputValue
             onChange={value => {
               dispatch(
@@ -74,8 +74,8 @@ const BudgetForm: React.FC = () => {
           />
         </Box>
         <Box>
-          <Checkbox color="default" />
-          <h6>Pontos Ações aceleradoras</h6>
+          <div />
+          <h6>Budget Ações aceleradoras</h6>
           <InputValue
             onChange={value => {
               dispatch(
