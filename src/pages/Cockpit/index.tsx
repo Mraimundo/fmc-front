@@ -4,18 +4,17 @@ import { Link } from 'react-router-dom';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
 
-import { Container, Test, Content, Separator } from './styles';
+import { Container, GeneralContent, Content, Separator } from './styles';
 
 const Cockpit: React.FC = () => {
   return (
     <Container>
-      <Test>
-        <Link to="/power-bi">Power Bi</Link>
+      <GeneralContent>
         <Content>
           <h3>Cockpit</h3>
           <GeneralView />
         </Content>
-      </Test>
+      </GeneralContent>
       <Content>
         <Separator />
         <ChannelView />

@@ -9,7 +9,7 @@ export const Container = styled.div`
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
-    color: #717070;
+    color: #052346;
   }
 `;
 
@@ -18,7 +18,6 @@ export const Content = styled.div`
   flex-direction: column;
   margin-top: 16px;
   width: 100%;
-  border-radius: 10px;
   background: #fff;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
   padding: 0 10px 20px 0;
@@ -65,7 +64,7 @@ export const Item = styled.div`
 export const Title = styled.h5`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 16px;
-  color: #2c2b2b;
+  color: #052346;
   width: 100%;
   text-align: center;
   text-transform: uppercase;
@@ -86,6 +85,6 @@ export const Details = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 14px;
     text-align: center;
-    color: #2c2b2b;
+    color: #052346;
   }
 `;

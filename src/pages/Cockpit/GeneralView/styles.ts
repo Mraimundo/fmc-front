@@ -3,12 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 35px;
+  margin-top: 47px;
 
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
-    color: #717070;
+    color: #34ffff;
+  }
+
+  ._extra-margin {
+    margin-top: 39px;
   }
 
   @media screen and (max-width: 500px) {
@@ -21,9 +25,9 @@ export const Container = styled.div`
 `;
 
 export const CardContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 34px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: 320px 320px;
   grid-gap: 60px;
   width: 100%;
 

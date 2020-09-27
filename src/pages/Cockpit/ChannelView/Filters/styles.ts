@@ -9,13 +9,13 @@ export const Container = styled.div`
     width: 111px;
     height: 40px;
     border-radius: 4px;
-    background: #717070;
+    background: #34ffff;
     border: none;
     opacity: 0.6;
     margin-bottom: 20px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 20px;
-    color: #fff;
+    color: #052346;
   }
 `;
 
@@ -29,7 +29,7 @@ export const Fields = styled.div<FieldsProps>`
   /*margin: 18px 0;*/
   overflow: hidden;
   width: 100%;
-  padding: 0 18px;
+  padding: 0;
   max-height: 0;
 
   transition: max-height 0.4s ease;
@@ -37,7 +37,7 @@ export const Fields = styled.div<FieldsProps>`
   > span {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 18px;
-    color: #2c2b2b;
+    color: #052346;
     margin-bottom: 7px;
 
     & + span {
@@ -56,10 +56,10 @@ export const Fields = styled.div<FieldsProps>`
     width: 291px;
     height: 42px;
     background: #fff;
-    border: 1px solid #717070; /*MAYCONN retirar depois do book de estilos*/
+    border: 1px solid #34ffff;
 
     input {
-      color: #717070;
+      color: #052346;
     }
   }
 

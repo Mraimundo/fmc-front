@@ -13,14 +13,14 @@ export const Card = styled.div`
   flex-direction: column;
   padding: 18px 2px 30px 16px;
   width: 100%;
-  border-radius: 10px;
   background: #fff;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+  border: 1px solid #34ffff;
 
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 20px;
-    color: #2c2b2b;
+    color: #052346;
   }
 `;
 
@@ -33,17 +33,17 @@ export const CardBody = styled.div`
 
   > span {
     font-size: 16px;
-    color: #717070;
+    color: #052346;
   }
 
   > p {
     font-size: 20px;
-    color: #717070;
+    color: #052346;
 
     > strong {
       font-family: ${({ theme }) => theme.font.fontFamily.bold};
       font-size: 22px;
-      color: #717070;
+      color: #052346;
     }
   }
 `;

@@ -8,7 +8,7 @@ export const Container = styled.div`
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
-    color: #717070;
+    color: #34ffff;
   }
 `;
 
@@ -19,7 +19,7 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  background: #fff;
+  background: #34ffff;
   width: 100%;
   padding: 4px 10px;
   display: flex;
@@ -32,11 +32,11 @@ export const Item = styled.li`
 
 export const Title = styled.span`
   font-size: 18px;
-  color: #484848;
+  color: #052346;
 `;
 
 export const Value = styled.span`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 18px;
-  color: #484848;
+  color: #052346;
 `;

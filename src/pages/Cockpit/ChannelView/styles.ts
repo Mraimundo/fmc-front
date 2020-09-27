@@ -7,6 +7,6 @@ export const Container = styled.div`
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 21px;
-    color: #717070;
+    color: #34ffff;
   }
 `;
