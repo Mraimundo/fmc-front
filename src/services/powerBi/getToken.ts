@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { vendavallApi } from 'services/api';
 
 export interface Response {

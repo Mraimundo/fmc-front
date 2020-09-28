@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 const PowerBi: React.FC = () => {
   const [config, setConfig] = useState<IConfig | null>();
-  const [report, setReport] = useState<Report>();
+  const [, setReport] = useState<Report>();
 
   useEffect(() => {
     getConfig().then(data => setConfig(data));

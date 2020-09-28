@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
 

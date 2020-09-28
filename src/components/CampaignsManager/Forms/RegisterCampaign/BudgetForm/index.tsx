@@ -5,7 +5,6 @@ import {
   getErrors,
 } from 'state/modules/campaigns-manager/selectors';
 import { setPointsValue } from 'state/modules/campaigns-manager/actions';
-import Checkbox from '@material-ui/core/Checkbox';
 import InputValue from 'components/CampaignsManager/Inputs/NumberMaskInput';
 import { formatPointsInput, formatRebatePointsInput } from 'util/points';
 

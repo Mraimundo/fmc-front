@@ -6,6 +6,7 @@ import { CreateTicketDTO } from 'services/contact/connected/dtos/index';
 import uploadFileToStorage from 'services/storage/sendFile';
 
 import { TextArea, Button } from 'components/shared';
+import history from 'services/history';
 import schema from './schemaValidation';
 
 import { Container, SubjectSelect, CategorySelect } from './styles';
@@ -64,6 +65,10 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
   const { handleSubmit, watch, setValue, reset } = methods;
   const onSubmit = handleSubmit(async data => {
     try {
+      if (data.message === 'mail-manager') {
+        history.push('/mail-manager');
+        return;
+      }
       setLoading(true);
       const { message } = await openTicket({
         categoryId: parseInt(data.category?.value || '0', 0),
