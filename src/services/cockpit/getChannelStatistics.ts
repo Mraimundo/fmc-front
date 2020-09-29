@@ -9,6 +9,7 @@ export interface ApiResponse {
     status: string;
     campaign: string;
     name: string;
+    client_group: string;
   };
   participants: {
     active: number;
@@ -22,7 +23,11 @@ export interface ApiResponse {
 const transformer = (data: ApiResponse): Statistics => {
   return {
     establishment: {
-      ...data.establishment,
+      category: data.establishment.category,
+      type: data.establishment.type,
+      status: data.establishment.status,
+      campaign: data.establishment.campaign,
+      name: data.establishment.client_group,
     },
     participants: {
       ...data.participants,
