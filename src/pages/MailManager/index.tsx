@@ -68,7 +68,37 @@ const MailManager: React.FC = () => {
           Salvar HTML
         </button>
       </Actions>
-      <EmailEditor ref={emailEditorRef} projectId={6231} />
+      <EmailEditor
+        ref={emailEditorRef}
+        options={{
+          mergeTags: [
+            {
+              name: 'Products',
+              rules: [
+                {
+                  name: 'Repeat for Each Product',
+                  before: '{{#products}}',
+                  after: '{{/products}}',
+                },
+              ],
+              mergeTags: [
+                {
+                  name: 'Product Name',
+                  value: '{{name}}',
+                },
+                {
+                  name: 'Product Image',
+                  value: '{{image}}',
+                },
+              ],
+            },
+            {
+              name: 'customer_name',
+              value: 'name',
+            },
+          ],
+        }}
+      />
     </div>
   );
 };

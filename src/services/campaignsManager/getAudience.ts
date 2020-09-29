@@ -53,6 +53,7 @@ export default async (): Promise<Audience[]> => {
       id: item.id,
       name: item.name,
       cnpj: item.cnpj,
+      type: item.type.name,
     },
     balance: item.balance,
   }));

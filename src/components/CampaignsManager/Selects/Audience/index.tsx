@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
 import getData from 'services/campaignsManager/getAudience';
@@ -14,16 +20,18 @@ interface Props {
   error?: string;
 }
 
-const AudienceSelect: React.FC<Props> = ({
-  className,
-  value,
-  setValue,
-  label,
-  placeholder,
-  error,
-}) => {
+export interface AudienceHandles {
+  options: Audience[];
+}
+
+const AudienceSelect: React.ForwardRefRenderFunction<AudienceHandles, Props> = (
+  { className, value, setValue, label, placeholder, error },
+  ref,
+) => {
   const [options, setOptions] = useState<Audience[]>([]);
   const [internalValue, setInternalValue] = useState<Option | null>(null);
+
+  useImperativeHandle(ref, () => ({ options }));
 
   useEffect(() => {
     getData().then(data => setOptions(data));
@@ -72,4 +80,4 @@ const AudienceSelect: React.FC<Props> = ({
   );
 };
 
-export default AudienceSelect;
+export default forwardRef(AudienceSelect);

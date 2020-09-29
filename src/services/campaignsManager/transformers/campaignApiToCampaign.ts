@@ -115,6 +115,7 @@ export default (campaignApi: CampaignApi): Campaign => ({
       id: customer.id,
       name: customer.name,
       cnpj: customer.cnpj,
+      type: customer.type_name,
     },
     balance: customer.balance,
   })),

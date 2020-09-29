@@ -1,4 +1,7 @@
-import { ApproverProfile as IApproverProfile } from 'config/constants';
+import {
+  ApproverProfile as IApproverProfile,
+  EstablishmentTypes,
+} from 'config/constants';
 
 export const CAMPAIGN_STATUS = {
   WAITING_APPROVAL: 3,
@@ -75,6 +78,7 @@ export interface Customer {
   id: number;
   name: string;
   cnpj: string;
+  type: EstablishmentTypes;
 }
 
 export interface Audience {

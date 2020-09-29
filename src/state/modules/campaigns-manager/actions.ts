@@ -73,16 +73,16 @@ export const setPointsValue = (
   };
 
 export const addAudience = (
-  data: Audience,
-): ActionCreatorPayload<typeof ADD_AUDIENCE, Audience> =>
+  data: Audience | Audience[],
+): ActionCreatorPayload<typeof ADD_AUDIENCE, Audience | Audience[]> =>
   <const>{
     type: ADD_AUDIENCE,
     payload: data,
   };
 
 export const removeAudience = (
-  data: Audience,
-): ActionCreatorPayload<typeof REMOVE_AUDIENCE, Audience> =>
+  data: Audience | Audience[],
+): ActionCreatorPayload<typeof REMOVE_AUDIENCE, Audience | Audience[]> =>
   <const>{
     type: REMOVE_AUDIENCE,
     payload: data,

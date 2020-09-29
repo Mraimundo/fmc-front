@@ -1,3 +1,4 @@
+import { EstablishmentTypes } from 'config/constants';
 import { Status, StatusText, ApproverProfile } from './Campaign';
 
 interface EstablishmentApi {
@@ -6,6 +7,7 @@ interface EstablishmentApi {
   cnpj: string;
   client_code: string;
   balance: number;
+  type_name: EstablishmentTypes;
 }
 
 interface ProductApi {

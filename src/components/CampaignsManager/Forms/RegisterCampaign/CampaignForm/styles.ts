@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { opacify } from 'polished';
 import DefaultMechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
 import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
 
@@ -61,6 +62,14 @@ export const Box = styled.div`
   }
 `;
 
+export const CostumersContainer = styled.div`
+  max-height: 250px;
+  overflow: auto;
+  max-width: 620px;
+  padding-top: 0px;
+  margin-top: 12px;
+`;
+
 export const CostumerDetails = styled.div`
   width: 100%;
   max-width: 586px;
@@ -69,7 +78,6 @@ export const CostumerDetails = styled.div`
   display: flex;
   align-items: center;
   padding: 0 16px;
-  margin-top: 10px;
 
   svg {
     cursor: pointer;
@@ -88,5 +96,56 @@ export const CostumerDetails = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.primary};
     padding-right: 30px;
+  }
+
+  & + div {
+    margin-top: 10px;
+  }
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  margin-top: 4px;
+  margin-bottom: 4px;
+`;
+
+interface ButtonProps {
+  loading: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.medium};
+  font-size: 11px;
+  height: 32px;
+  border-radius: 7px;
+  min-width: 136px;
+  padding: 0 18px;
+  border: 1px dashed ${({ theme }) => opacify(0.5, theme.font.color.primary)};
+  position: relative;
+
+  background: transparent;
+  & + button {
+    margin-left: 8px;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+
+    ${({ loading }) =>
+      loading &&
+      css`
+        &:after {
+          content: 'Aguarde...';
+          position: absolute;
+          left: 50%;
+          top: 32px;
+          transform: translateX(-50%);
+          font-size: 11px;
+          opacity: 0.7;
+        }
+      `}
   }
 `;

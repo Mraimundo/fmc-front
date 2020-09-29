@@ -1,7 +1,11 @@
 import { Reducer } from 'redux';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import {
+  Campaign,
+  Audience,
+} from 'services/campaignsManager/interfaces/Campaign';
 import { newEmptyCampaignObject } from 'services/campaignsManager';
 import produce from 'immer';
+import { object } from 'yup';
 import { Errors } from './types';
 
 import { CampaignsManagerActions } from './actions';
@@ -95,10 +99,20 @@ const CampaignsManagerReducer: Reducer<
       };
     case ADD_AUDIENCE:
       return produce(state, draft => {
-        const newData = draft.campaign.audience.filter(
-          item => item.customer.id !== action.payload.customer.id,
-        );
-        newData.push(action.payload);
+        let newData: Audience[];
+        if (action.payload instanceof Array) {
+          const ids = action.payload.map(item => item.customer.id);
+          newData = draft.campaign.audience.filter(
+            item => ids.indexOf(item.customer.id) === -1,
+          );
+          newData.push(...action.payload);
+        } else {
+          const customerId = action.payload.customer.id;
+          newData = draft.campaign.audience.filter(
+            item => item.customer.id !== customerId,
+          );
+          newData.push(action.payload);
+        }
 
         draft.campaign.audience = newData.sort((item1, item2) =>
           item1.customer.id > item2.customer.id ? 1 : -1,
@@ -106,8 +120,15 @@ const CampaignsManagerReducer: Reducer<
       });
     case REMOVE_AUDIENCE:
       return produce(state, draft => {
+        let ids: number[];
+        if (action.payload instanceof Array) {
+          ids = action.payload.map(item => item.customer.id);
+        } else {
+          ids = [action.payload.customer.id];
+        }
+
         draft.campaign.audience = draft.campaign.audience.filter(
-          item => item.customer.id !== action.payload.customer.id,
+          item => ids.indexOf(item.customer.id) === -1,
         );
       });
     case SET_START_DATE:
