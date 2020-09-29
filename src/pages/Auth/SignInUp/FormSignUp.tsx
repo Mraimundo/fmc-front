@@ -86,7 +86,7 @@ const FormSignUp: React.FC = () => {
             pattern="XXX.XXX.XXX-XX"
           />
         ) : (
-          <Input name="param_first_access" placeholder="UPN" />
+          <Input name="param_first_access" placeholder="Nome de Usuário FMC" />
         )}
         <Button type="submit" buttonRole="primary" loading={loading}>
           Cadastrar
