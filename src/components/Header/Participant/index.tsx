@@ -10,7 +10,7 @@ import { Wrapper, WelcomeText, Hello } from './styles';
 interface ParticipantProps {
   picture: string | null;
   name: string;
-  establishment: Establishment;
+  establishment: Establishment | null;
   points?: number;
   signOut(): void;
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   HEADER_HEIGHT,
@@ -26,13 +26,24 @@ export const ProfileInfo = styled.div`
   font-size: 0.9em;
 `;
 
-export const ParticipantMenuList = styled.ul`
+interface MenuListProps {
+  notshowseparator: boolean;
+}
+
+export const ParticipantMenuList = styled.ul<MenuListProps>`
   list-style-type: none;
   font-size: 0.9em;
   border-top: 1px solid;
   padding-top: 0.5em;
   margin-top: 1em;
   margin-bottom: 0.5em;
+
+  ${({ notshowseparator }) =>
+    notshowseparator &&
+    css`
+      border-top: none;
+      margin-top: 0;
+    `}
 
   li {
     height: 25px;

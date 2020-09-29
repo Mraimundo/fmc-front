@@ -11,7 +11,7 @@ import {
 } from './Dropdown.styles';
 
 interface DropdownProps {
-  establishment: IEstablishment;
+  establishment: IEstablishment | null;
   signOut(): void;
 }
 const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
@@ -23,7 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
           {establishment.rtc_name && <span>RTC: {establishment.rtc_name}</span>}
         </ProfileInfo>
       )}
-      <ParticipantMenuList>
+      <ParticipantMenuList notshowseparator={!establishment}>
         <li>
           <Link to={routeMap.profile}>Meu perfil</Link>
         </li>
