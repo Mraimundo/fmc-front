@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+  }
 `;
 
 export const SelectContainer = styled.div`
@@ -21,7 +25,7 @@ export const SelectContainer = styled.div`
     border-color: #34ffff;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 720px) {
     grid-template-columns: 1fr;
     padding: 0 10px;
     grid-column-gap: 0;

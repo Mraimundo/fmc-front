@@ -8,6 +8,11 @@ export const Container = styled.div`
   background: #fff;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
   border: 1px solid #34ffff;
+
+  @media screen and (max-width: 720px) {
+    width: auto;
+    margin: 10px;
+  }
 `;
 
 export const Title = styled.h3`

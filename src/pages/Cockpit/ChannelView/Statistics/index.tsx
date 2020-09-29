@@ -1,7 +1,14 @@
 import React from 'react';
 import { Statistics as IStatistics } from 'services/cockpit/interfaces/channel';
 
-import { Container, Card, CardBody } from './styles';
+import {
+  Container,
+  Card,
+  CardBody,
+  ChannelCard,
+  ParticipantsCard,
+  ActionsCard,
+} from './styles';
 
 interface Props {
   statistics: IStatistics;
@@ -12,7 +19,7 @@ const Statistics: React.FC<Props> = ({
 }) => {
   return (
     <Container>
-      <Card>
+      <ChannelCard>
         <h3>{establishment.name}</h3>
         <CardBody>
           <span>Categoria: {establishment.category}</span>
@@ -20,19 +27,21 @@ const Statistics: React.FC<Props> = ({
           <span>Status: {establishment.status}</span>
           <span>Safra: {establishment.campaign}</span>
         </CardBody>
-      </Card>
-      <Card>
-        <h3>Participantes</h3>
-        <CardBody>
-          <p>
-            Ativos: <strong>{participants.formatedActive}</strong>
-          </p>
-          <p>
-            Pré-cadastro: <strong>{participants.formatedPrecharge}</strong>
-          </p>
-        </CardBody>
-      </Card>
-      <Card>
+      </ChannelCard>
+      <ParticipantsCard>
+        <div>
+          <h3>Participantes</h3>
+          <CardBody>
+            <p>
+              Ativos: <strong>{participants.formatedActive}</strong>
+            </p>
+            <p>
+              Pré-cadastro: <strong>{participants.formatedPrecharge}</strong>
+            </p>
+          </CardBody>
+        </div>
+      </ParticipantsCard>
+      <ActionsCard>
         <h3>Ações Compartilhadas FMC</h3>
         <CardBody>
           <p>Saldo para o Canal</p>
@@ -40,7 +49,7 @@ const Statistics: React.FC<Props> = ({
             <strong>{fmcSharedActions.formattedBalance}</strong>
           </p>
         </CardBody>
-      </Card>
+      </ActionsCard>
     </Container>
   );
 };

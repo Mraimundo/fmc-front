@@ -50,7 +50,7 @@ export const Item = styled.div`
     margin-left: 8%;
     padding-bottom: 10%;
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 720px) {
       border-bottom: 1px solid #eee;
       border-left: none;
     }

@@ -67,7 +67,7 @@ export const Fields = styled.div<FieldsProps>`
     margin-top: 10px;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 720px) {
     padding: 0 10px;
 
     ._inputContainer {

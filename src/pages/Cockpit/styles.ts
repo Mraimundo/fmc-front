@@ -34,7 +34,7 @@ export const Content = styled.div`
   background: transparent;
   padding: 30px 0;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 720px) {
     padding: 40px 10px;
   }
 
@@ -44,7 +44,7 @@ export const Content = styled.div`
     color: #34ffff;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 720px) {
     padding: 10px;
 
     > h3 {
