@@ -4,7 +4,14 @@ import { Product } from 'state/modules/goals/types';
 import Table from 'components/shared/Table';
 import { TitleSection } from './styles';
 
-const headers = [
+const sellingHeaders = [
+  { column: 'POSIÇÃO', dataValue: 'position' },
+  { column: 'PRODUTO', dataValue: 'name' },
+  { column: 'POG (US$)', dataValue: 'billing' },
+  { column: 'VOLUME (KG/L)', dataValue: 'volume' },
+];
+
+const purchasingHeaders = [
   { column: 'POSIÇÃO', dataValue: 'position' },
   { column: 'PRODUTO', dataValue: 'name' },
   { column: 'FATURAMENTO (US$)', dataValue: 'billing' },
@@ -22,9 +29,9 @@ const Top10ProductsTabContent: React.FC<Top10ProductsTabContentProps> = ({
   return (
     <>
       <TitleSection>Produtos mais comprados</TitleSection>
-      <Table headers={headers} data={purchasingProducts || []} />
+      <Table headers={purchasingHeaders} data={purchasingProducts || []} />
       <TitleSection>Produtos mais vendidos</TitleSection>
-      <Table headers={headers} data={sellingProducts || []} />
+      <Table headers={sellingHeaders} data={sellingProducts || []} />
     </>
   );
 };
