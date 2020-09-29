@@ -1,5 +1,7 @@
 import { pluginApi } from 'services/api';
 import { fakeFormatDollars, formatPercent } from 'util/points';
+import getDirectors from './getDirectors';
+import getRegional from './getRegional';
 import { Statistics } from './interfaces/general';
 
 export interface ApiResponse {
@@ -48,6 +50,19 @@ export default async (filters: Filters): Promise<Statistics> => {
     extraSearch += `${extraSearch !== '' ? '&' : '?'}regional[0]=${
       filters.regionalName
     }`;
+  }
+
+  /* Temporário até o Robson ajustar a chamada do EndPoint no Back */
+  if (extraSearch === '') {
+    const directors = await getDirectors();
+    const regionals = await getRegional();
+    extraSearch = '?';
+    extraSearch += directors
+      .map((item, key) => `directorships[${key}]=${item.name}`)
+      .join('&');
+    extraSearch += regionals
+      .map((item, key) => `regional[${key}]=${item.name}`)
+      .join('&');
   }
 
   const { data } = await pluginApi.get<ApiResponse>(
