@@ -27,7 +27,7 @@ const Performance: React.FC<Props> = ({ performance }) => {
             <Title>Faturamento</Title>
             <CircularPerformance
               color="#FF4C16"
-              percent={revenues.percentage}
+              percent={parseInt(revenues.formattedPercentage, 0)}
             />
             <Details>
               <span>Objetivo: US$ {revenues.formattedGoal}</span>
@@ -36,7 +36,10 @@ const Performance: React.FC<Props> = ({ performance }) => {
           </Item>
           <Item>
             <Title>POG</Title>
-            <CircularPerformance color="#25CCE1" percent={pog.percentage} />
+            <CircularPerformance
+              color="#25CCE1"
+              percent={parseInt(pog.formattedPercentage, 0)}
+            />
             <Details>
               <span>Objetivo: US$ {pog.formattedGoal}</span>
               <span>Realizado: US$ {pog.formattedResult}</span>
@@ -67,7 +70,7 @@ const Performance: React.FC<Props> = ({ performance }) => {
               </Title>
               <CircularPerformance
                 color={item.color}
-                percent={item.percentage}
+                percent={parseInt(item.formattedPercentage, 0)}
               />
               <Details>
                 <span>Objetivo: {item.formattedGoal} L</span>

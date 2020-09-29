@@ -39,7 +39,11 @@ const transformer = (data: ApiResponse): Performance => {
       percentage: (data.revenues.percentage || 0) * 100,
       formattedGoal: fakeFormatDollars(data.revenues.goal, 0, 0),
       formattedResult: fakeFormatDollars(data.revenues.result, 0, 0),
-      formattedPercentage: fakeFormatDollars((data.revenues.percentage || 0) * 100),
+      formattedPercentage: fakeFormatDollars(
+        (data.revenues.percentage || 0) * 100,
+        0,
+        0,
+      ),
     },
     pog: {
       ...data.pog,
@@ -48,7 +52,11 @@ const transformer = (data: ApiResponse): Performance => {
       percentage: (data.pog.percentage || 0) * 100,
       formattedGoal: fakeFormatDollars(data.pog.goal, 0, 0),
       formattedResult: fakeFormatDollars(data.pog.result, 0, 0),
-      formattedPercentage: fakeFormatDollars((data.pog.percentage || 0) * 100),
+      formattedPercentage: fakeFormatDollars(
+        (data.pog.percentage || 0) * 100,
+        0,
+        0,
+      ),
     },
     devolutionBelow5Percent: data.devolution_below_5_percent,
     focusProduct: data.focus_product
@@ -59,7 +67,11 @@ const transformer = (data: ApiResponse): Performance => {
         percentage: (item.percentage || 0) * 100,
         formattedGoal: fakeFormatDollars(item.goal, 0, 0),
         formattedResult: fakeFormatDollars(item.result, 0, 0),
-        formattedPercentage: fakeFormatDollars((item.percentage || 0) * 100),
+        formattedPercentage: fakeFormatDollars(
+          (item.percentage || 0) * 100,
+          0,
+          0,
+        ),
         color: colors[index] || '',
         order: order.indexOf(item.name.toLowerCase()),
       }))
