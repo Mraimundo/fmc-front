@@ -14,6 +14,8 @@ export const transformBannersRawData = (
       picture: item.picture,
       mobilePicture: item.mobile_picture,
       title: item.title,
+      linkType: item.type,
+      url: item.url,
     }),
   );
 };

@@ -3,8 +3,20 @@ import { HighlightTypes } from './constants';
 import { Banner, Highlight, ShowcaseProduct } from './types';
 
 export const banners: Banner[] = [
-  { title: 'Banner 1', picture: 'https://photo1.com.br', mobilePicture: '' },
-  { title: 'Banner 2', picture: 'https://photo2.com.br', mobilePicture: '' },
+  {
+    title: 'Banner 1',
+    picture: 'https://photo1.com.br',
+    mobilePicture: '',
+    linkType: 'internal',
+    url: 'como-participar',
+  },
+  {
+    title: 'Banner 2',
+    picture: 'https://photo2.com.br',
+    mobilePicture: '',
+    linkType: 'external',
+    url: 'https://google.com',
+  },
 ];
 
 export const highlights: Highlight[] = [

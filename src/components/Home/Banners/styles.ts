@@ -55,3 +55,7 @@ export const Slider = styled(Slick)`
     }
   }
 `;
+
+export const Item = styled.div`
+  cursor: pointer;
+`;

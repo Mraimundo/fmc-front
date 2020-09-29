@@ -10,11 +10,12 @@ import {
 } from './transformers';
 
 export interface FetchBannersService {
-  type: string;
+  type: 'internal' | 'external';
   title: string;
   open_new_page: string;
   picture: string;
   mobile_picture: string;
+  url: string;
 }
 export const fetchBannersService = async (): Promise<Banner[] | null> => {
   const { data: response } = await vendavallApi.get<

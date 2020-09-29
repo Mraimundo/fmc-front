@@ -4,6 +4,8 @@ export interface Banner {
   title: string;
   picture: string;
   mobilePicture: string;
+  linkType: 'internal' | 'external';
+  url: string;
 }
 
 export interface Highlight {
