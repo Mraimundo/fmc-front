@@ -11,8 +11,8 @@ export default (data: Statistics): Card[] => {
     title: `Faturamento`,
     items: [
       `Objetivo total: US$ ${data.revenues.formattedGoal}`,
-      `Realizado total: US$ ${data.revenues.formattedResult}`,
-      `Realizado Parcial: ${data.revenues.formattedPercentage}%`,
+      `Realizado parcial: US$ ${data.revenues.formattedResult}`,
+      `Realizado parcial (%): ${data.revenues.formattedPercentage}%`,
     ],
   });
 
@@ -20,8 +20,8 @@ export default (data: Statistics): Card[] => {
     title: `POG`,
     items: [
       `Objetivo total: US$ ${data.pog.formattedGoal}`,
-      `Realizado total: US$ ${data.pog.formattedResult}`,
-      `Realizado Parcial: ${data.pog.formattedPercentage}%`,
+      `Realizado parcial: US$ ${data.pog.formattedResult}`,
+      `Realizado parcial (%): ${data.pog.formattedPercentage}%`,
     ],
   });
 
