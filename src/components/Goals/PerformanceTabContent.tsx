@@ -23,8 +23,6 @@ const PerformanceTabContent: React.FC<PerformanceTabContentProps> = ({
 }) => {
   const hasPotentializers = !!potentializers && potentializers.length > 0;
 
-  const doNotShowExcelNow = false;
-
   return (
     <>
       <BillingPog billingPog={billingPog} />
@@ -35,7 +33,7 @@ const PerformanceTabContent: React.FC<PerformanceTabContentProps> = ({
             potential={infos.potential}
             points={infos.points}
           />
-          {!!infos.excel && doNotShowExcelNow && infos.excel !== '#' && (
+          {!!infos.excel && infos.excel !== '#' && (
             <ExcelDownload url={infos.excel} />
           )}
           {!!infos.lastUpdate && (
