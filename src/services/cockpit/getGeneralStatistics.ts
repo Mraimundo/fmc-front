@@ -60,9 +60,9 @@ export default async (filters: Filters): Promise<Statistics> => {
     extraSearch += directors
       .map((item, key) => `directorships[${key}]=${item.name}`)
       .join('&');
-    extraSearch += regionals
+    extraSearch += `&${regionals
       .map((item, key) => `regional[${key}]=${item.name}`)
-      .join('&');
+      .join('&')}`;
   }
 
   const { data } = await pluginApi.get<ApiResponse>(
