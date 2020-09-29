@@ -31,7 +31,7 @@ const ComponentsByProfile: React.FC<Props> = ({ participant, inputRole }) => {
         <>
           <Info>
             <span>Empresa</span>
-            <p>{participant.establishment.name}</p>
+            <p>{participant.establishment.client_group}</p>
           </Info>
           <Input
             name="role.name"
@@ -47,7 +47,7 @@ const ComponentsByProfile: React.FC<Props> = ({ participant, inputRole }) => {
         <>
           <Info>
             <span>Empresa</span>
-            <p>{participant.establishment.name}</p>
+            <p>{participant.establishment.client_group}</p>
           </Info>
           <Info>
             <span>Filial</span>
