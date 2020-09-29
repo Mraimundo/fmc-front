@@ -18,6 +18,10 @@ export const Title = styled.h3`
 
 export const Item = styled.span`
   font-size: 16px;
-  margin-top: 20px;
+  margin-top: 10px;
   color: #052346;
+
+  & + span {
+    margin-top: 7px;
+  }
 `;

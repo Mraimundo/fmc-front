@@ -8,18 +8,20 @@ export interface Card {
 export default (data: Statistics): Card[] => {
   const cards = new Array<Card>();
   cards.push({
-    title: `Faturamento (${data.revenues.formattedPercentage}%)`,
+    title: `Faturamento`,
     items: [
       `Objetivo total: US$ ${data.revenues.formattedGoal}`,
       `Realizado total: US$ ${data.revenues.formattedResult}`,
+      `Realizado Parcial: ${data.revenues.formattedPercentage}%`,
     ],
   });
 
   cards.push({
-    title: `POG (${data.pog.formattedPercentage}%)`,
+    title: `POG`,
     items: [
       `Objetivo total: US$ ${data.pog.formattedGoal}`,
       `Realizado total: US$ ${data.pog.formattedResult}`,
+      `Realizado Parcial: ${data.pog.formattedPercentage}%`,
     ],
   });
 

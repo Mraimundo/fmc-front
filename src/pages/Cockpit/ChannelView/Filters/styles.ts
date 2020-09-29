@@ -37,7 +37,7 @@ export const Fields = styled.div<FieldsProps>`
   > span {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 18px;
-    color: #052346;
+    color: #34ffff;
     margin-bottom: 7px;
 
     & + span {
