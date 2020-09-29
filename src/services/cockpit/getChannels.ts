@@ -2,8 +2,12 @@ import { pluginApi } from 'services/api';
 import { EstablishmentTypes, EstablishmentCategory } from 'config/constants';
 import { Channel } from './interfaces/channel';
 
+interface ChannelApi extends Channel {
+  client_group: string;
+}
+
 interface ApiResponse {
-  data: Channel[];
+  data: ChannelApi[];
 }
 
 export interface Filters {
@@ -39,9 +43,9 @@ export default async (filters: Filters): Promise<Channel[]> => {
     `cockpit/establishments?page=1&limit=250${extraSearch}`,
   );
 
-  return data.map(({ id, name, cnpj }) => ({
+  return data.map(({ id, client_group, cnpj }) => ({
     id,
-    name,
+    name: client_group,
     cnpj,
   }));
 };
