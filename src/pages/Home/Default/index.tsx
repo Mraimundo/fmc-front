@@ -55,6 +55,8 @@ const DefaultHome: React.FC = () => {
     useSelector(getPotentializers),
   ];
 
+  useEffect(() => console.log('banner', banners), [banners]);
+
   useEffect(() => {
     if (!participant.id) return;
 
@@ -97,9 +99,7 @@ const DefaultHome: React.FC = () => {
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>
-      <Hidden xs sm>
-        {!!banners && <Banners items={banners} />}
-      </Hidden>
+      <Hidden>{!!banners && <Banners items={banners} />}</Hidden>
       <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
