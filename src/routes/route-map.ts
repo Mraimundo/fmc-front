@@ -20,4 +20,5 @@ export default {
   showcase: '/catalogo-de-premios',
   training: '/treinamentos',
   cockpit: '/cockpit',
+  report: '/relatorios',
 };
