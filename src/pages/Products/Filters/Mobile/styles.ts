@@ -9,8 +9,8 @@ export const Container = styled.div`
   width: 100%;
   max-width: 851px;
   position: absolute;
-  bottom: 23px;
-  height: 282px;
+  bottom: 13px;
+  height: 292px;
   background: rgba(126, 57, 29, 0.6);
   width: calc(100% - 20px);
 `;
@@ -24,6 +24,7 @@ export const Header = styled.div`
 
 export const SelectContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
@@ -31,11 +32,11 @@ export const SelectContainer = styled.div`
 
 export const Label = styled.div`
   font-size: 16px;
-  padding-left: 20px;
+  margin-top: 16px;
 `;
 
 export const CategoriesSelect = styled(DefaultCategoriesSelect)`
-  width: 190px;
+  width: 100%;
 
   ._label {
     font-size: 16px;
@@ -45,7 +46,7 @@ export const CategoriesSelect = styled(DefaultCategoriesSelect)`
 
   ._inputContainer {
     height: 38px;
-    width: 172px;
+    width: 100%;
   }
 `;
 
@@ -53,7 +54,6 @@ export const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   flex: 1;
-  transform: translateY(12px);
 
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -65,7 +65,7 @@ export const TitleContainer = styled.div`
 export const IndicatorContainer = styled.div`
   width: 100%;
   display: flex;
-  margin-top: 35px;
+  margin-top: 10px;
 
   .curve-span {
     bottom: -23px;
