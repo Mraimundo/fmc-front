@@ -15,7 +15,10 @@ const Report: React.FC = () => {
     getCampaignPerformanceLink().then(url =>
       setReports(oldReports => [
         ...oldReports,
-        { title: 'Performance completa', url },
+        {
+          title: 'Performance dos meus Canais Indiretos no Programa Juntos FMC',
+          url,
+        },
       ]),
     );
   }, []);
