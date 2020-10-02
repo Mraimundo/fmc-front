@@ -63,11 +63,15 @@ export const List = styled.ul`
   }
 `;
 
-export const Link = styled.button`
+export const Link = styled.a`
   width: 122px;
   height: 40px;
   border-radius: 8px;
-  border: none;
+  border: 1px solid ${({ theme }) => theme.font.color.quartenary};
   color: ${({ theme }) => theme.font.color.quartenary};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 `;
