@@ -38,7 +38,7 @@ const List: React.FC = () => {
         setCampaign(data);
         getRegulation(data.id).then(reg => setRegulation(reg));
       })
-      .catch(() => {
+      .catch(e => {
         history.push('/');
       });
   }, [params]);

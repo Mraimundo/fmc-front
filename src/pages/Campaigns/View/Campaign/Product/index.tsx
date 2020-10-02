@@ -13,20 +13,26 @@ const Product: React.FC<Props> = ({ data }) => {
       <h3>Produtos Participantes</h3>
       <Separator />
       {data.map(item => (
-        <Row>
+        <Row key={`item-${item.id}`}>
           <Box>{item.title}</Box>
-          <span>
-            <span>Volume</span>
-            {item.volume}
-          </span>
-          <span>
-            <span>Faturamento</span>
-            {item.sellIn}
-          </span>
-          <span>
-            <span>POG</span>
-            {item.sellOut}
-          </span>
+          {item.volume && (
+            <span>
+              <span>Volume</span>
+              {item.volume}
+            </span>
+          )}
+          {item.sellIn && (
+            <span>
+              <span>Faturamento</span>
+              {item.sellIn}
+            </span>
+          )}
+          {item.sellOut && (
+            <span>
+              <span>POG</span>
+              {item.sellOut}
+            </span>
+          )}
         </Row>
       ))}
     </Container>

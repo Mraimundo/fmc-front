@@ -8,7 +8,7 @@ interface PowerBiResponse {
   token: string;
 }
 
-const getCampaignPerformanceLink = async (): Promise<string> => {
+const getChannelCampaignPerformanceLink = async (): Promise<string> => {
   const { data } = await pluginApi.get<Response>(
     'reports/campaign-performance',
   );
@@ -16,4 +16,12 @@ const getCampaignPerformanceLink = async (): Promise<string> => {
   return data.download_url || '';
 };
 
-export { getCampaignPerformanceLink };
+const getProductsPerformanceLink = async (): Promise<string> => {
+  const { data } = await pluginApi.get<Response>(
+    'reports/products-performance',
+  );
+
+  return data.download_url || '';
+};
+
+export { getChannelCampaignPerformanceLink, getProductsPerformanceLink };

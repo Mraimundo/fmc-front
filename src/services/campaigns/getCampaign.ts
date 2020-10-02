@@ -63,9 +63,9 @@ const transformer = (data: CampaignApi): Campaign => {
     products: data.products.map(({ id, name, volume, sellin, sellout }) => ({
       id,
       title: name,
-      volume: `${fakeFormatDollars(volume, 0, 0)} Kg/L`,
-      sellIn: `US$ ${fakeFormatDollars(sellin)}`,
-      sellOut: `US$ ${fakeFormatDollars(sellout)}`,
+      volume: volume ? `${fakeFormatDollars(volume, 0, 0)} Kg/L` : '',
+      sellIn: sellin ? `US$ ${fakeFormatDollars(sellin || 0)}` : '',
+      sellOut: sellout ? `US$ ${fakeFormatDollars(sellout || 0)}` : '',
     })),
     acceptedDate: data.participation?.id
       ? format(new Date(data.participation.created), 'dd/MM/yyyy')

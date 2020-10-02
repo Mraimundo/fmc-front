@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getCampaignPerformanceLink } from 'services/reports';
+import {
+  getChannelCampaignPerformanceLink,
+  getProductsPerformanceLink,
+} from 'services/reports';
 
 import { Container, Content, List, Link } from './styles';
 
@@ -12,15 +15,28 @@ const Report: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);
 
   useEffect(() => {
-    getCampaignPerformanceLink().then(url =>
-      setReports(oldReports => [
-        ...oldReports,
+    const loadLinks = async () => {
+      const [
+        channelCampaignPerformance,
+        productPerformanceLink,
+      ] = await Promise.all([
+        getChannelCampaignPerformanceLink(),
+        getProductsPerformanceLink(),
+      ]);
+
+      setReports([
         {
           title: 'Performance dos meus Canais Indiretos no Programa Juntos FMC',
-          url,
+          url: channelCampaignPerformance,
         },
-      ]),
-    );
+        {
+          title: 'Performance completa',
+          url: productPerformanceLink,
+        },
+      ]);
+    };
+
+    loadLinks();
   }, []);
 
   return (
@@ -31,7 +47,9 @@ const Report: React.FC = () => {
           {reports.map(item => (
             <li>
               <span>{item.title}</span>
-              <Link href={item.url}>Download</Link>
+              <Link href={item.url} target="_blank">
+                Download
+              </Link>
             </li>
           ))}
         </List>
