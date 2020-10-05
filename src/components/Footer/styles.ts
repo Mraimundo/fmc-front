@@ -19,6 +19,7 @@ export const FmcLogo = styled.div`
   position: absolute;
   left: 1.5em;
   width: 150px;
+  opacity: 0;
 
   svg {
     width: 100%;
