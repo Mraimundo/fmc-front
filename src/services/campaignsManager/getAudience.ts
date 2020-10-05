@@ -55,6 +55,6 @@ export default async (): Promise<Audience[]> => {
       cnpj: item.cnpj,
       type: item.type.name,
     },
-    balance: item.balance,
+    balance: item.balance || 0,
   }));
 };
