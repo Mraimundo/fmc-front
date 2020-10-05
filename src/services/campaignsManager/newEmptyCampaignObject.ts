@@ -36,5 +36,6 @@ export default (): Campaign => {
     comments: [],
     highlight: { status: false, id: null },
     sendEmail: false,
+    profileTurnToApprove: [],
   };
 };

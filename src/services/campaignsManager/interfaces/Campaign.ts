@@ -156,5 +156,5 @@ export interface Campaign {
   comments: Comment[];
   highlight: Highlight;
   sendEmail: boolean;
-  profileTurnToApprove?: ApproverProfile | null;
+  profileTurnToApprove?: ApproverProfile[] | null;
 }

@@ -10,6 +10,7 @@ import {
   Approver,
   ApproverProfile,
 } from 'services/campaignsManager/interfaces/Campaign';
+import { profile } from 'console';
 import BoardBox from './BoardBox';
 import { Modal, Container, Content, Close } from './styles';
 
@@ -20,7 +21,7 @@ interface Props {
   myProfile: ApproverProfile;
   onDisapprove(approver: Approver): Promise<void>;
   onApprove(approver: Approver): Promise<void>;
-  profileTurnToApprove?: ApproverProfile | null;
+  profileTurnToApprove?: ApproverProfile[] | null;
 }
 
 type Mode = 'board' | 'comment';
@@ -52,7 +53,7 @@ const ApprovalBoard: React.FC<Props> = ({
       setApprovers([..._approvers]);
       setApproverSelected(null);
       setCanDoAction(
-        myProfile === profileTurnToApprove &&
+        !!profileTurnToApprove?.includes(myProfile) &&
           _approvers.find(item => item.profile === myProfile)?.status ===
             'pending',
       );
@@ -79,7 +80,7 @@ const ApprovalBoard: React.FC<Props> = ({
         return false;
       }
 
-      if (myProfile !== profileTurnToApprove) {
+      if (!profileTurnToApprove?.includes(myProfile)) {
         addToast({
           title: 'Esta ação não está disponível para você no momento',
           type: 'error',
