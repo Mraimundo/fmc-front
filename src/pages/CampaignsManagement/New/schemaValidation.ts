@@ -39,9 +39,6 @@ export default Yup.object().shape({
             .shape({ id: Yup.number().required(mandatoryMessage) })
             .required(mandatoryMessage)
             .typeError(mandatoryMessage),
-          expectedVolume: Yup.number()
-            .required(mandatoryMessage)
-            .min(1, mandatoryMessage),
         })
         .typeError(mandatoryMessage)
         .required(mandatoryMessage),

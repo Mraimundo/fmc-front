@@ -22,7 +22,7 @@ const List: React.FC = () => {
       <Content>
         <h3>Campanhas</h3>
         {campaigns.map(item => (
-          <CampaignBox>
+          <CampaignBox key={`campaign-${item.id}`}>
             <img src={item.imageUrl} alt={item.title} />
             <div>
               <div>
