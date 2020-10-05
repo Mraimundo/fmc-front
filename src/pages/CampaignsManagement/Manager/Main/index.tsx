@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import history from 'services/history';
 import { useDispatch } from 'react-redux';
+import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { campaignToUpdateCampaignDTO } from 'services/campaignsManager/transformers';
@@ -39,6 +40,9 @@ const Main: React.FC = () => {
   const { addToast } = useToast();
   const { isValid, getErrors } = useSchema<Campaign>(schema);
   const dispatch = useDispatch();
+  const {
+    participant: { profile_value: profile },
+  } = useAuth();
 
   const handleNextTab = async (): Promise<void> => {
     nextTab();
@@ -126,6 +130,7 @@ const Main: React.FC = () => {
           <RegisterCampaignForm
             handleAction={handleNextTab}
             actionButtonName="Próximo"
+            myProfile={profile}
           />
         )}
         {tabSelected === CONFIGURATION_TAB && (

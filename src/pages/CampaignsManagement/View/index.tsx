@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAuth } from 'context/AuthContext';
 import { setCampaign } from 'state/modules/campaigns-manager/actions';
 import { useParams } from 'react-router-dom';
 import { getCampaign } from 'services/campaignsManager';
@@ -15,6 +16,10 @@ interface Params {
 const CampaignsManager: React.FC = () => {
   const params = useParams<Params>();
   const dispatch = useDispatch();
+
+  const {
+    participant: { profile_value: profile },
+  } = useAuth();
 
   useEffect(() => {
     if (!params.id) {
@@ -38,6 +43,7 @@ const CampaignsManager: React.FC = () => {
         <RegisterCampaignForm
           handleAction={handleAction}
           actionButtonName="Ok"
+          myProfile={profile}
         />
       </Content>
     </Container>

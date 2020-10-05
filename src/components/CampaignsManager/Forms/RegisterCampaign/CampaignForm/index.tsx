@@ -24,7 +24,7 @@ import {
   setStartDate,
   setMechanic,
 } from 'state/modules/campaigns-manager/actions';
-import { EstablishmentTypes } from 'config/constants';
+import { EstablishmentTypes, ApproverProfile, CRM } from 'config/constants';
 import {
   Container,
   CustomersSelect,
@@ -42,7 +42,11 @@ enum ButtonSelectText {
   RemoveAll,
 }
 
-const CampaignForm: React.FC = () => {
+interface Props {
+  profile: ApproverProfile;
+}
+
+const CampaignForm: React.FC<Props> = ({ profile }) => {
   const audienceRef = useRef<AudienceHandles>(null);
   const [loading, setLoading] = useState(false);
   const [actionSelected, setActionSelected] = useState<ButtonSelectText | null>(
@@ -131,38 +135,40 @@ const CampaignForm: React.FC = () => {
           placeholder="Selecionar Clientes"
           ref={audienceRef}
         />
-        <Actions>
-          <Button
-            type="button"
-            onClick={() =>
-              handleButtonClick(addAllResales, ButtonSelectText.ResaleAdd)
-            }
-            disabled={loading}
-            loading={loading && actionSelected === ButtonSelectText.ResaleAdd}
-          >
-            Todas as Revendas
-          </Button>
-          <Button
-            type="button"
-            onClick={() =>
-              handleButtonClick(addAllCooperative, ButtonSelectText.CoopAdd)
-            }
-            disabled={loading}
-            loading={loading && actionSelected === ButtonSelectText.CoopAdd}
-          >
-            Todas as Cooperativas
-          </Button>
-          <Button
-            type="button"
-            onClick={() =>
-              handleButtonClick(removeAll, ButtonSelectText.RemoveAll)
-            }
-            disabled={loading}
-            loading={loading && actionSelected === ButtonSelectText.RemoveAll}
-          >
-            Remover Todos
-          </Button>
-        </Actions>
+        {profile === CRM && (
+          <Actions>
+            <Button
+              type="button"
+              onClick={() =>
+                handleButtonClick(addAllResales, ButtonSelectText.ResaleAdd)
+              }
+              disabled={loading}
+              loading={loading && actionSelected === ButtonSelectText.ResaleAdd}
+            >
+              Todas as Revendas
+            </Button>
+            <Button
+              type="button"
+              onClick={() =>
+                handleButtonClick(addAllCooperative, ButtonSelectText.CoopAdd)
+              }
+              disabled={loading}
+              loading={loading && actionSelected === ButtonSelectText.CoopAdd}
+            >
+              Todas as Cooperativas
+            </Button>
+            <Button
+              type="button"
+              onClick={() =>
+                handleButtonClick(removeAll, ButtonSelectText.RemoveAll)
+              }
+              disabled={loading}
+              loading={loading && actionSelected === ButtonSelectText.RemoveAll}
+            >
+              Remover Todos
+            </Button>
+          </Actions>
+        )}
         <CostumersContainer>
           {campaign.audience.map(item => (
             <CostumerDetails key={`audience${item.customer.id}`}>
