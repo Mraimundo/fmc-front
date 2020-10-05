@@ -40,6 +40,7 @@ const Register: React.FC<Props> = ({
         type="button"
         buttonRole="primary"
         onClick={handleButtonClick}
+        disabled={loading}
         loading={loading}
       >
         {actionButtonName}
