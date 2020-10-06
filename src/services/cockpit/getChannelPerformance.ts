@@ -83,8 +83,5 @@ export default async (establishmentId: number): Promise<Performance> => {
   const { data } = await pluginApi.get<ApiResponse>(
     `cockpit/performance-statistics?establishment_id=${establishmentId}`,
   );
-  const teste = transformer(data);
-
-  console.log('teste', teste);
-  return teste;
+  return transformer(data);
 };

@@ -55,8 +55,6 @@ const DefaultHome: React.FC = () => {
     useSelector(getPotentializers),
   ];
 
-  useEffect(() => console.log('banner', banners), [banners]);
-
   useEffect(() => {
     if (!participant.id) return;
 

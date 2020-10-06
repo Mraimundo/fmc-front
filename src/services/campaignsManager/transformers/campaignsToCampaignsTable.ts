@@ -32,6 +32,7 @@ export interface Response {
   activated: {
     id: number;
     activated: boolean;
+    highlightId: number;
   };
 }
 
@@ -62,6 +63,7 @@ export default (data: Campaign[]): Response[] => {
     activated: {
       id: item.id || 0,
       activated: item.status.statusText === CAMPAIGN_STATUS_TEXT.PUBLISHED,
+      highlightId: item.highlight.id || 0,
     },
   }));
 };

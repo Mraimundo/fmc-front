@@ -4,8 +4,6 @@ import { Button } from 'components/shared';
 
 import { ACTIVE, INACTIVE, PRECHARGE } from 'config/constants/vendavallStatus';
 
-import { FaEdit, FaTrashAlt, FaShareSquare, FaCheck } from 'react-icons/fa';
-
 import { Container, Content, ActionsBox } from './style';
 
 interface Props {

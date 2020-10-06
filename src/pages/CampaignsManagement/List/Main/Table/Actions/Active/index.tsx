@@ -10,10 +10,15 @@ import { Container } from './style';
 interface Props {
   id: number;
   activated: boolean;
+  highlightId: number;
 }
 
-const Active: React.FC<Props> = ({ id, activated: _activated }) => {
-  const { togglePublishedStatus } = useCampaignsList();
+const Active: React.FC<Props> = ({
+  id,
+  activated: _activated,
+  highlightId,
+}) => {
+  const { togglePublishedStatus, removeHighlight } = useCampaignsList();
   const [activated, setActivated] = useState<boolean>(_activated);
 
   const { addToast } = useToast();
@@ -25,7 +30,12 @@ const Active: React.FC<Props> = ({ id, activated: _activated }) => {
         title: 'Status alterado com sucesso',
         type: 'success',
       });
-      setActivated(e => !e);
+      setActivated(e => {
+        if (e) {
+          removeHighlight(highlightId);
+        }
+        return !e;
+      });
     } catch (e) {
       addToast({
         title:
@@ -34,7 +44,7 @@ const Active: React.FC<Props> = ({ id, activated: _activated }) => {
         type: 'error',
       });
     }
-  }, [addToast, togglePublishedStatus, id]);
+  }, [addToast, togglePublishedStatus, id, highlightId, removeHighlight]);
 
   return (
     <Container>

@@ -140,6 +140,14 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     void
   > => {
     await removeHighlightFromCampaign(highlightId);
+    setCampaigns(data =>
+      data.map(item => {
+        if (item.highlight.id === highlightId) {
+          return { ...item, highlight: { id: null, status: false } };
+        }
+        return item;
+      }),
+    );
   }, []);
 
   return (

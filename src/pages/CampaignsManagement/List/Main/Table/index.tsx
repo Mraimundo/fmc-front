@@ -24,16 +24,13 @@ const Table: React.FC<Props> = ({ profile }) => {
     setTableData(transformer(campaigns));
   }, [campaigns]);
 
-  return useMemo(
-    () => (
-      <Container
-        headers={headers(profile)}
-        data={tableData}
-        noResultText="Nenhuma Pesquisa encontrada"
-        isFetching={isFetching}
-      />
-    ),
-    [tableData, isFetching, profile],
+  return (
+    <Container
+      headers={headers(profile)}
+      data={tableData}
+      noResultText="Nenhuma Pesquisa encontrada"
+      isFetching={isFetching}
+    />
   );
 };
 
