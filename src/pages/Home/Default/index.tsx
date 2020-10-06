@@ -26,6 +26,7 @@ import {
   Performance,
   MyPoints,
   Showcase,
+  AddNF,
 } from 'components/Home';
 import { Props as IPerformance } from 'components/Home/Performance';
 import {
@@ -100,6 +101,9 @@ const DefaultHome: React.FC = () => {
       <Hidden xs sm>
         {!!banners && <Banners items={banners} />}
       </Hidden>
+      <Wrapper>
+        <AddNF />
+      </Wrapper>
       <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}

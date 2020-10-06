@@ -9,7 +9,12 @@ import Header from 'components/Header';
 import MobileHeader from 'components/Header/MobileHeader';
 import Footer from 'components/Footer';
 import Logo from 'components/shared/Logo';
-import { defaultTheme, cooperativaTheme, fmcTeamTheme } from 'styles/theme';
+import {
+  defaultTheme,
+  cooperativaTheme,
+  fmcTeamTheme,
+  fmcProdutorTheme,
+} from 'styles/theme';
 import Popups from './Popups';
 
 import { Container } from './styles';
@@ -22,12 +27,14 @@ const Dashboard: React.FC = ({ children }) => {
     if (!participant || !participant.id) return;
 
     if (participant.profile === 'FMC') {
-      setTheme(fmcTeamTheme);
+      // setTheme(fmcTeamTheme);
+      setTheme(fmcProdutorTheme);
       return;
     }
 
     if (participant.establishment.type_name === EstablishmentTypes.Resale) {
-      setTheme(defaultTheme);
+      // setTheme(defaultTheme);
+      setTheme(fmcProdutorTheme);
       return;
     }
 
