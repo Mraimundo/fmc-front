@@ -4,6 +4,7 @@ import { Button } from 'components/shared';
 import { ReactSVG } from 'react-svg';
 import closeIcon from 'assets/images/training/close-icon.svg';
 import pdfIcon from 'assets/images/pdf.svg';
+import getDownload from 'services/campaigns/getUrlRegulationToDownload';
 
 import { Modal, Container, Content, Close, RegulationBox } from './styles';
 
@@ -17,6 +18,7 @@ interface Props {
     startDate: string;
     endDate: string;
     regulationText: string;
+    id: number;
   };
   canAccept: boolean;
 }
@@ -32,6 +34,16 @@ const RegulationModal: React.FC<Props> = ({
   const handleAccept = useCallback(async () => {
     await onAccept();
   }, [onAccept]);
+
+  const handlePdfDownload = useCallback(async () => {
+    const url = await getDownload(campaign.id);
+
+    const linkClick = document.createElement('a');
+    linkClick.href = url;
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [campaign.id]);
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} type="primary">
@@ -50,7 +62,7 @@ const RegulationModal: React.FC<Props> = ({
           {campaign.regulationText && (
             <RegulationBox>{parser(campaign.regulationText)}</RegulationBox>
           )}
-          <button type="submit">
+          <button type="button" onClick={handlePdfDownload}>
             <ReactSVG src={pdfIcon} />
             Download (PDF)
           </button>
