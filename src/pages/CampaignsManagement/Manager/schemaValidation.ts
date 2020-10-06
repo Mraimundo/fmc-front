@@ -28,7 +28,7 @@ export default Yup.object().shape({
     .typeError(mandatoryMessage),
   expectedSellIn: Yup.number()
     .required(mandatoryMessage)
-    .min(1, mandatoryMessage),
+    .min(0, mandatoryMessage),
   expectedSellOut: Yup.number()
     .required(mandatoryMessage)
     .min(1, mandatoryMessage),
