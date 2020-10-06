@@ -14,7 +14,7 @@ import {
 interface ParticipantProps {
   picture: string | null;
   name: string;
-  establishment: Establishment;
+  establishment: Establishment | null;
   points: number;
 }
 const Participant: React.FC<ParticipantProps> = ({
