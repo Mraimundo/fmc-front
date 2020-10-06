@@ -30,7 +30,7 @@ export default Yup.object().shape({
     .min(0, mandatoryMessage),
   expectedSellOut: Yup.number()
     .required(mandatoryMessage)
-    .min(1, mandatoryMessage),
+    .min(0, mandatoryMessage),
   goals: Yup.array()
     .of(
       Yup.object()
