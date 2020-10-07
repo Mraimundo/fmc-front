@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
+import Manutencao from 'assets/images/manutencao.jpg';
+
 import { DefaultTheme, ThemeContext } from 'styled-components';
 import { Visible } from 'react-grid-system';
 
@@ -37,6 +40,27 @@ const Dashboard: React.FC = ({ children }) => {
       setTheme(cooperativaTheme);
     }
   }, [participant]);
+
+  const manutencao = true;
+
+  if (manutencao) {
+    return (
+      <Container>
+        <Logo logoType="fmcTeam" />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '80vh',
+          }}
+        >
+          <img src={Manutencao} alt="Site em Manutenção" />
+        </div>
+      </Container>
+    );
+  }
 
   return theme ? (
     <>
