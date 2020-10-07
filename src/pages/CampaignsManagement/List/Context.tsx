@@ -27,7 +27,7 @@ export interface CampaignsListContextState {
   campaigns: Campaign[];
   isFetching: boolean;
   resume: IDetails[];
-  applyFilters(filters?: FilterOptions): Promise<void>;
+  applyFilters(filters?: FilterOptions): void;
   approvalModalOpened: boolean;
   openApprovalModal(): void;
   closeApprovalModal(): void;
@@ -53,14 +53,10 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
   const [resume, setResume] = useState<IDetails[]>([]);
   const [approvalModalOpened, setApprovalModalOpened] = useState(false);
 
-  const { participant } = useAuth();
+  const [filters, setFilters] = useState<FilterOptions | undefined>(undefined);
+  const [refresh, setRefresh] = useState(0);
 
-  useEffect(() => {
-    setIsFetching(true);
-    getCampaigns()
-      .then(({ data }) => setCampaigns(data))
-      .finally(() => setIsFetching(false));
-  }, []);
+  const { participant } = useAuth();
 
   useEffect(() => {
     if (!participant.id) return;
@@ -69,12 +65,20 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     });
   }, [participant.id]);
 
-  const applyFilters = useCallback(async (filters?: FilterOptions) => {
-    setIsFetching(true);
-    const { data } = await getCampaigns(filters);
-    setCampaigns(data);
-    setIsFetching(false);
+  const applyFilters = useCallback((_filters?: FilterOptions) => {
+    setFilters(_filters);
   }, []);
+
+  useEffect(() => {
+    setIsFetching(true);
+    getCampaigns(filters)
+      .then(({ data }) => {
+        setCampaigns(data);
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, [filters, refresh]);
 
   const openApprovalModal = useCallback(() => {
     setApprovalModalOpened(true);
@@ -98,6 +102,7 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     async ({ comments }: Approver) => {
       if (!campaignSelected || !campaignSelected.id) return;
       await approveCampaign(campaignSelected.id, comments[0]);
+      setRefresh(e => e + 1);
     },
     [campaignSelected],
   );
@@ -106,6 +111,7 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     async ({ comments }: Approver) => {
       if (!campaignSelected || !campaignSelected.id) return;
       await disapproveCampaign(campaignSelected.id, comments[0]);
+      setRefresh(e => e + 1);
     },
     [campaignSelected],
   );
