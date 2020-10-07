@@ -41,7 +41,7 @@ const Dashboard: React.FC = ({ children }) => {
     }
   }, [participant]);
 
-  const manutencao = true;
+  const manutencao = false;
 
   if (manutencao) {
     return (

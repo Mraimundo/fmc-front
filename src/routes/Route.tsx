@@ -46,9 +46,7 @@ const Route: React.FC<RouteProps> = ({
                 <Component />
               </Layout>
             ) : (
-              <Layout>
-                <Component />
-              </Layout>
+              <Component />
             )}
           </>
         ) : (
