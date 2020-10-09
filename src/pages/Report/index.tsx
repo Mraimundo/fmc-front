@@ -26,11 +26,11 @@ const Report: React.FC = () => {
 
       setReports([
         {
-          title: 'Performance dos meus Canais Indiretos no Programa Juntos FMC',
+          title: 'Performance Programa',
           url: channelCampaignPerformance,
         },
         {
-          title: 'Performance completa',
+          title: 'Performance Produtos',
           url: productPerformanceLink,
         },
       ]);
