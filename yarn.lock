@@ -9959,6 +9959,13 @@ react-ga@^3.1.2:
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-3.1.2.tgz#e13f211c51a2e5c401ea69cf094b9501fe3c51ce"
   integrity sha512-OJrMqaHEHbodm+XsnjA6ISBEHTwvpFrxco65mctzl/v3CASMSLSyUkFqz9yYrPDKGBUfNQzKCjuMJwctjlWBbw==
 
+react-google-charts@^3.0.15:
+  version "3.0.15"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-3.0.15.tgz#30759a470f48336e744fd383d054122b039a1ff2"
+  integrity sha512-78s5xOQOJvL+jIewrWQZEHtlVk+5Yh4zZy+ODA1on1o1FaRjKWXxoo4n4JQl1XuqkF/A9NWque3KqM6pMggjzQ==
+  dependencies:
+    react-load-script "^0.0.6"
+
 react-grid-system@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-7.0.3.tgz#ef8928e2a07641cae9fa2735637903aa94751a44"
