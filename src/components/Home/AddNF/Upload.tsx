@@ -7,16 +7,14 @@ import { StyledUpload } from './styles';
 
 const Upload: React.FC = () => {
   return (
-    <>
-      <StyledUpload>
-        <h4> Faça o upload aqui! </h4>
-        <div className="button">
-          <input type="file" id="fileId" accept="image/x-png, image/jpg,.pdf" />
-          <ReactSVG src={uploadIcon} className="icon" />
-          Carregar arquivo
-        </div>
-      </StyledUpload>
-    </>
+    <StyledUpload>
+      <h4> Faça o upload aqui! </h4>
+      <div className="button">
+        <input type="file" id="fileId" accept="image/x-png, image/jpg,.pdf" />
+        <ReactSVG src={uploadIcon} className="icon" />
+        Carregar arquivo
+      </div>
+    </StyledUpload>
   );
 };
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import background from 'assets/images/fmcProdutor/addNF-bg.png';
+import backgroundMobile from 'assets/images/fmcProdutor/addNF-bg--mobile.png';
 
 export const AddNFContainer = styled.div`
   position: relative;
@@ -16,23 +17,34 @@ export const AddNFContainer = styled.div`
   color: ${({ theme }) => theme.font.color.primary};
 
   .AddNFContainer__inner {
-    margin-top: 8px;
     position: relative;
-    z-index: 2;
-    padding-left: 25%;
-    background: url(${background});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% auto;
+
     @media (max-width: 767px) {
       > * {
-        position: relative;
-        z-index: 3;
         margin-top: 20px;
+      }
+      &::before {
+        content: '';
+        width: 100%;
+        height: 145px;
+        display: block;
+        margin: 0 auto 16px auto;
+        background-image: url(${backgroundMobile});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
       }
     }
     @media (min-width: 768px) {
+      background: url(${background});
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 97% auto;
+      padding-left: 33%;
+    }
+    @media (min-width: 1024px) {
       display: flex;
+      padding-left: 25%;
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
@@ -40,11 +52,17 @@ export const AddNFContainer = styled.div`
   }
   .AddNFContainer__right {
     margin-top: 16px;
+    > div {
+      margin-top: 20px;
+    }
     @media (min-width: 768px) {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
+    }
+    @media (min-width: 1024px) {
+      flex-flow: row nowrap;
     }
   }
   > div {
@@ -64,7 +82,7 @@ export const AddNFContainer = styled.div`
     font-size: 36px;
     line-height: 1.2;
     font-family: ${({ theme }) => theme.font.fontFamily.condensed};
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       margin: auto 20px;
     }
   }
@@ -86,12 +104,11 @@ export const StyledStatusTable = styled.div`
     align-items: center;
     margin: 8px auto;
   }
-  .StatusTable__label,
-  .StatusTable__value {
+  p {
     flex-shrink: 0;
   }
 
-  .StatusTable__dots {
+  span {
     height: 1px;
     flex: 1 1 100%;
     border-bottom: 1px dotted;
@@ -117,17 +134,20 @@ export const StyledUpload = styled.div`
     max-width: 100%;
     padding: 10px 12px;
     text-transform: uppercase;
-    font-size: 22px;
+    font-size: 18px;
     margin-top: 8px;
     line-height: 1;
     font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    @media (min-width: 1024px) {
+      font-size: 22px;
+    }
     input {
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      z-index: 10;
+      z-index: 2;
       opacity: 0;
       cursor: pointer;
     }
