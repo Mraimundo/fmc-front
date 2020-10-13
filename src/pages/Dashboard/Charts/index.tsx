@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useDimensions from 'hooks/use-window-dimensions';
 import { getChartsData, Data as IData } from 'services/dashboard/charts';
@@ -49,7 +49,11 @@ const Charts: React.FC = () => {
     setAlready(false);
     const test: Test = {} as Record<ChartName, () => JSX.Element>;
     if (!charts) return test;
-    const labels = clients.map(item => item.name);
+
+    const labels =
+      filteredClients.length > 0
+        ? filteredClients.map(item => item.name)
+        : clients.map(item => item.name);
 
     Object.keys(charts).forEach(item => {
       const { firstDataBar, secondDataBar, title, thirdDataBar } = charts[
@@ -71,11 +75,15 @@ const Charts: React.FC = () => {
     return test;
   }, [charts, clients]);
 
+  const onFilter = useCallback((data: IClient[]): void => {
+    setFilteredClients(data);
+  }, []);
+
   return (
     <Container>
       {already && (
         <>
-          <Filters clients={clients} />
+          <Filters clients={clients} onFilter={onFilter} />
           <Box>
             <div>{drawChart.billingRealized()}</div>
           </Box>
