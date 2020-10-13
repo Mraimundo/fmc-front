@@ -1,73 +1,102 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { Bar, HorizontalBar } from 'react-chartjs-2';
-import Chart from 'react-google-charts';
-import { ChartData } from 'chart.js';
-import { FONTS } from 'styles/font/globals';
-import { Container } from './styles';
+import useDimensions from 'hooks/use-window-dimensions';
+import { getChartsData, Data as IData } from 'services/dashboard/charts';
+import {
+  getCharts,
+  getClients,
+  Charts as ICharts,
+  Client as IClient,
+  ChartName,
+} from 'services/dashboard/charts/transformers';
+
+import getChart from './getChart';
+import Filters from './Filters';
+import { Container, Box } from './styles';
+
+type Test = Record<ChartName, () => JSX.Element>;
 
 const Charts: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [already, setAlready] = useState(false);
+  const [chartsData, setChartsData] = useState<IData[]>([]);
+  const [clients, setClients] = useState<IClient[]>([]);
+  const [filteredClients, setFilteredClients] = useState<IClient[]>([]);
+  const [charts, setCharts] = useState<ICharts | null>(null);
+  const { width } = useDimensions();
 
-  const data = [
-    ['Year', 'View', { role: 'annotation' }, 'View2', { role: 'annotation' }],
-    ['2010', 10, 'teste', 15, 'teste2'],
-    ['2011', 12, 'teste', 15, 'teste2'],
-    ['2012', 7, 'teste', -4, 'teste2'],
-  ];
+  useEffect(() => {
+    setLoading(true);
+    getChartsData()
+      .then(data => setChartsData(data))
+      .finally(() => setLoading(false));
+  }, []);
 
-  /* const Test: ChartData = {
-    datasets,
-  };
-*/
-  const data2: ChartData = {
-    labels: [
-      'AGROAMAZONIA',
-      'LEMEFERTIL',
-      'TERRA FORTE',
-      'DOMENE & SILVESTRE',
-      'UNICERES CATANDUVA',
-    ],
-    datasets: [
-      {
-        label: 'Meta',
-        backgroundColor: 'rgba(4, 48, 103, 0.2)',
-        borderColor: 'rgba(4, 48, 103, 1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(4, 48, 103, 0.4)',
-        hoverBorderColor: 'rgba(4, 48, 103, 1)',
-        data: [50, 40, 35, 50, 40],
-      },
-      {
-        label: 'Realizado ',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: [65, 59, 80, 81, 56],
-        fill: true,
-      },
-    ],
-  };
+  useEffect(() => {
+    if (chartsData.length === 0) return;
+
+    setLoading(true);
+
+    const filter = filteredClients.length > 0 ? filteredClients : undefined;
+
+    setClients(getClients(chartsData));
+    setCharts(getCharts(chartsData, filter));
+
+    setLoading(false);
+  }, [chartsData, filteredClients]);
+
+  const drawChart = useMemo(() => {
+    setAlready(false);
+    const test: Test = {} as Record<ChartName, () => JSX.Element>;
+    if (!charts) return test;
+    const labels = clients.map(item => item.name);
+
+    Object.keys(charts).forEach(item => {
+      const { firstDataBar, secondDataBar, title, thirdDataBar } = charts[
+        item as ChartName
+      ];
+
+      test[item as ChartName] = () =>
+        getChart({
+          title,
+          labels,
+          firstDataBar,
+          secondDataBar,
+          thirdDataBar,
+          showLabel: true, //! !secondDataBar,
+          formatType: secondDataBar ? 'uss' : '%',
+        });
+    });
+    setAlready(true);
+    return test;
+  }, [charts, clients]);
+
   return (
     <Container>
-      <h2>Charts</h2>
-      <Chart
-        chartType="BarChart"
-        width="100%"
-        height="400px"
-        data={data}
-        options={{ colors: ['green', 'blue'] }}
-      />
-      <HorizontalBar
-        data={data2}
-        options={{
-          maintainAspectRatio: true,
-          scales: {
-            yAxes: [{ ticks: { fontSize: 8, fontFamily: FONTS.bold } }],
-          },
-        }}
-      />
+      {already && (
+        <>
+          <Filters clients={clients} />
+          <Box>
+            <div>{drawChart.billingRealized()}</div>
+          </Box>
+
+          <Box>
+            <div>{drawChart.pogRealized()}</div>
+          </Box>
+
+          <Box>
+            <div>{drawChart.premioRealized()}</div>
+          </Box>
+
+          <Box>
+            <div>{drawChart.heroRealized()}</div>
+          </Box>
+
+          <Box>
+            <div>{drawChart.talismaRealized()}</div>
+          </Box>
+        </>
+      )}
     </Container>
   );
 };

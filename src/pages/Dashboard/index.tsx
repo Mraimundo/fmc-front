@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   getChannelCampaignPerformanceLink,
   getProductsPerformanceLink,
-} from 'services/reports';
+} from 'services/dashboard/reports';
 
 import Reports, { Report as IReport } from './Reports';
 import Charts from './Charts';
@@ -14,7 +14,7 @@ type Tab = 'reports' | 'charts';
 const Report: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [reports, setReports] = useState<IReport[]>([]);
-  const [tabSelected, setTabSelected] = useState<Tab>('reports');
+  const [tabSelected, setTabSelected] = useState<Tab>('charts');
 
   useEffect(() => {
     const loadLinks = async () => {
