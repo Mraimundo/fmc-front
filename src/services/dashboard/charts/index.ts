@@ -1,7 +1,7 @@
 import { pluginApi } from 'services/api';
 
 export interface Data {
-  client_code: string;
+  client_group: string;
   billing_goal: number;
   billing_result: number;
   billing_percentage: number;
@@ -26,7 +26,7 @@ interface ApiResponse {
 const mock: ApiResponse = {
   data: [
     {
-      client_code: 'GERAIS AGRO',
+      client_group: 'GERAIS AGRO',
       billing_goal: 523575.63,
       billing_result: 289393.85,
       billing_percentage: 55,
@@ -44,7 +44,7 @@ const mock: ApiResponse = {
       talisman_percentage: -1.0,
     },
     {
-      client_code: 'SYNAGRO',
+      client_group: 'SYNAGRO',
       billing_goal: 1947205.56,
       billing_result: 281189.85,
       billing_percentage: 14.0,

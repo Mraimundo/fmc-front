@@ -49,7 +49,7 @@ const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
     return filter.map(item => item.name);
   }
 
-  return data.map(item => item.client_code);
+  return data.map(item => item.client_group);
 };
 
 const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
@@ -57,13 +57,13 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 };
 
 const getClients = (data: Data[]): Client[] => {
-  return data.map(item => ({ name: item.client_code }));
+  return data.map(item => ({ name: item.client_group }));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
   const labels = getDataLabels(data, filter);
   const filteredData = data.filter(
-    item => labels.indexOf(item.client_code) >= 0,
+    item => labels.indexOf(item.client_group) >= 0,
   );
 
   return {
