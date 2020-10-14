@@ -6,6 +6,7 @@ export interface HowParticipate {
   description: string;
   pictureUrl: string;
   mobilePictureUrl: string;
+
   links: {
     id: number;
     type: 'internal' | 'external' | 'file';

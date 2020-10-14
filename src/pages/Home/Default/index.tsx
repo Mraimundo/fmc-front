@@ -102,9 +102,6 @@ const DefaultHome: React.FC = () => {
         {!!banners && <Banners items={banners} />}
       </Hidden>
       <Wrapper>
-        <AddNF />
-      </Wrapper>
-      <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
         <PerformanceMyPointsWrapper>

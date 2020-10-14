@@ -79,11 +79,14 @@ export const AddNFContainer = styled.div`
   }
   .AddNFContainer__title {
     text-transform: uppercase;
-    font-size: 36px;
+    font-size: 18px;
     line-height: 1.2;
     font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     @media (min-width: 1024px) {
       margin: auto 20px;
+    }
+    @media (min-width: 768px) {
+      font-size: 36px;
     }
   }
 `;

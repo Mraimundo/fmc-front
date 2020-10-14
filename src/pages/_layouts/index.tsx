@@ -27,14 +27,14 @@ const Dashboard: React.FC = ({ children }) => {
     if (!participant || !participant.id) return;
 
     if (participant.profile === 'FMC') {
-      // setTheme(fmcTeamTheme);
-      setTheme(fmcProdutorTheme);
+      setTheme(fmcTeamTheme);
+      //setTheme(fmcProdutorTheme);
       return;
     }
 
     if (participant.establishment.type_name === EstablishmentTypes.Resale) {
-      // setTheme(defaultTheme);
-      setTheme(fmcProdutorTheme);
+      setTheme(defaultTheme);
+      //setTheme(fmcProdutorTheme);
       return;
     }
 
