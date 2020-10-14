@@ -48,6 +48,11 @@ export const TabWrapper = styled.div`
   border-radius: 7px;
   padding: 1em 2em;
   margin-top: 25px;
+
+  @media screen and (max-width: 720px) {
+    padding: 1em 0.5em;
+    border: none;
+  }
 `;
 
 export const TabsList = styled.ul`
