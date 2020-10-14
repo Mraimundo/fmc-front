@@ -7,7 +7,7 @@ import {
 import Reports, { Report as IReport } from './Reports';
 import Charts from './Charts';
 
-import { Container, Content } from './styles';
+import { Container, Content, TabWrapper, TabsList, Tab } from './styles';
 
 type Tab = 'reports' | 'charts';
 
@@ -47,13 +47,27 @@ const Report: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3 onClick={() => setTabSelected('reports')}>Relatórios</h3>
-        <h3 onClick={() => setTabSelected('charts')}>Gráficos</h3>
-        {tabSelected === 'reports' ? (
-          <Reports data={reports} loading={loading} />
-        ) : (
-          <Charts />
-        )}
+        <TabWrapper>
+          <TabsList>
+            <Tab
+              onClick={() => setTabSelected('charts')}
+              active={tabSelected === 'charts'}
+            >
+              <span>Gráficos</span>
+            </Tab>
+            <Tab
+              onClick={() => setTabSelected('reports')}
+              active={tabSelected === 'reports'}
+            >
+              <span>Relatórios</span>
+            </Tab>
+          </TabsList>
+          {tabSelected === 'reports' ? (
+            <Reports data={reports} loading={loading} />
+          ) : (
+            <Charts />
+          )}
+        </TabWrapper>
       </Content>
     </Container>
   );
