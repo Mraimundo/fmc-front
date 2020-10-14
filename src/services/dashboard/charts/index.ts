@@ -65,7 +65,10 @@ const mock: ApiResponse = {
 };
 
 const getChartsData = async (): Promise<Data[]> => {
-  const { data } = mock;
+  let {
+    data: { data },
+  } = await pluginApi.get<ApiResponse>('dashboards/performance');
+  data = mock.data;
 
   return data;
 };
