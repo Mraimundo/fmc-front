@@ -103,7 +103,14 @@ export default ({
           yAxes: [
             {
               display: showLabel,
-              ticks: { fontSize: 10, fontFamily: FONTS.bold },
+              ticks: {
+                fontSize: 10,
+                fontFamily: FONTS.bold,
+                callback: text => {
+                  const splitText = text.toString().split(' ');
+                  return `${splitText[0]}${splitText.length > 1 ? ' ...' : ''}`;
+                },
+              },
             },
           ],
         },
