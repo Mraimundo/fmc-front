@@ -26,7 +26,6 @@ import {
   Performance,
   MyPoints,
   Showcase,
-  AddNF,
 } from 'components/Home';
 import { Props as IPerformance } from 'components/Home/Performance';
 import {

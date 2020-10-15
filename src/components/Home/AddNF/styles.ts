@@ -130,7 +130,6 @@ export const StyledUpload = styled.div`
     border-radius: 10px;
     background: #e63027;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
-    -webkit-appearance: none;
     appearance: none;
     border: 0;
     width: 100%;

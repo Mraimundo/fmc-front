@@ -4,7 +4,7 @@ export default {
   color: {
     primary: '#3B302A',
     secondary: '#B4ACA9',
-    tertiary: '#F3F1F1',
+    tertiary: '#65554D',
     quartenary: '#808285',
   },
   fontFamily: { ...FONTS },

@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ShowCaseWrapper = styled.div`
-background-color: background: linear-gradient(to right, #8f817b 0.35%,#7e6f68 14.4%,#685952 36.38%,#61514a 50.32%,#4f413b 71.07%,#312722 100%);
+background: linear-gradient(to right, #8f817b 0.35%,#7e6f68 14.4%,#685952 36.38%,#61514a 50.32%,#4f413b 71.07%,#312722 100%);
 
 @media screen and (max-width: 480px) {
   background: linear-gradient(

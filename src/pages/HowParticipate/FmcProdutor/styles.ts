@@ -134,6 +134,23 @@ export const Banner = styled.img`
     }
 `;
 
+
+export const LinkRegulamento = styled.div`
+    display: block;
+    margin: 60px auto;
+    text-align:center;
+`;
+
+export const Button = styled.div`
+    width: 265px;
+    color: #fff;
+    display: inline-block;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    background-color: ${({ theme }) => theme.font.color.tertiary};
+    padding: 12px 8px;
+    font-size:16px;
+`;
+
 export const StepsListItem = styled.li`
     text-align: center;
     margin-bottom: 8px;
