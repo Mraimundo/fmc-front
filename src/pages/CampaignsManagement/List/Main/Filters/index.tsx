@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Filters: React.FC<Props> = ({ profile }) => {
-  const { applyFilters, campaigns } = useCampaignsList();
+  const { applyFilters, campaigns, pagination } = useCampaignsList();
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [customerSelected, setCustomerSelected] = useState<Option | null>(null);
@@ -54,7 +54,7 @@ const Filters: React.FC<Props> = ({ profile }) => {
   return useMemo(
     () => (
       <Container>
-        <h4>Campanhas solicitadas ({campaigns.length})</h4>
+        <h4>Campanhas solicitadas ({pagination?.total || 0})</h4>
         <Separator />
         {profilesToNotShowDirectors.indexOf(profile) === -1 && (
           <DirectorsSelect

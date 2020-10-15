@@ -1,10 +1,15 @@
 import React from 'react';
 
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
+
 import { useAuth } from 'context/AuthContext';
 import ApprovalModal from 'components/CampaignsManager/Modals/ApprovalBoard';
+import ReactPaginate from 'react-paginate';
 import Resume from './Resume';
 import Filters from './Filters';
 import Table from './Table';
+
 import { useCampaignsList } from '../Context';
 
 import { Separator } from './Filters/styles';
@@ -19,6 +24,8 @@ const Main: React.FC = () => {
     campaignSelected,
     approve,
     disapprove,
+    pagination,
+    setPage,
   } = useCampaignsList();
 
   return (
@@ -28,6 +35,19 @@ const Main: React.FC = () => {
         <Filters profile={participant.profile_value} />
         <Separator />
         <Table profile={participant.profile_value} />
+        {pagination && (
+          <ReactPaginate
+            previousLabel={<ChevronLeftRoundedIcon />}
+            nextLabel={<ChevronRightRoundedIcon />}
+            breakLabel="..."
+            breakClassName="break-me"
+            pageCount={pagination.last_page}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={({ selected }) => setPage(selected + 1)}
+            containerClassName="campaigns-pagination"
+          />
+        )}
         {campaignSelected && (
           <ApprovalModal
             isOpen={approvalModalOpened}
