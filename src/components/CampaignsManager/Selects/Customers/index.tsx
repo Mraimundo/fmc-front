@@ -22,6 +22,7 @@ const CustomersSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
+    console.log('oi');
     getData().then(data => setOptions(transformer(data)));
   }, []);
 
