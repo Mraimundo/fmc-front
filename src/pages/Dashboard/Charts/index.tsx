@@ -23,7 +23,6 @@ const Charts: React.FC = () => {
   const [clients, setClients] = useState<IClient[]>([]);
   const [filteredClients, setFilteredClients] = useState<IClient[]>([]);
   const [charts, setCharts] = useState<ICharts | null>(null);
-  const { width } = useDimensions();
 
   useEffect(() => {
     setLoading(true);
@@ -73,7 +72,7 @@ const Charts: React.FC = () => {
     });
     setAlready(true);
     return test;
-  }, [charts, clients]);
+  }, [charts, clients, filteredClients]);
 
   const onFilter = useCallback((data: IClient[]): void => {
     setFilteredClients(data);

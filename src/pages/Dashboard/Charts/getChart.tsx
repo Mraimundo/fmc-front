@@ -33,7 +33,7 @@ export default ({
         label: 'Meta',
         backgroundColor: 'rgba(4, 48, 103, 0.2)',
         borderColor: 'rgba(4, 48, 103, 1)',
-        borderWidth: 1,
+        borderWidth: 0,
         hoverBackgroundColor: 'rgba(4, 48, 103, 0.4)',
         hoverBorderColor: 'rgba(4, 48, 103, 1)',
         data: firstDataBar,
@@ -42,7 +42,7 @@ export default ({
         label: 'Realizado',
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
+        borderWidth: 0,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data: secondDataBar,
@@ -70,18 +70,22 @@ export default ({
         plugins: {
           ...ChartDataLabels,
           datalabels: {
-            formatter: (value: number, context) => {
+            align: 'end',
+            textAlign: 'end',
+            formatter: (value: string, context) => {
               if (!context.chart.data.datasets) return '';
-              return context.chart.data.datasets[context.datasetIndex].label ===
+              if (
+                context.chart.data.datasets[context.datasetIndex].label ===
                 'Realizado'
-                ? `${fakeFormatDollars(value, 0, 0)} (${fakeFormatDollars(
-                    (context.chart.data.datasets[2].data as number[])[
-                      context.dataIndex
-                    ],
-                    0,
-                    0,
-                  )}%)`
-                : `${fakeFormatDollars(value, 0, 0)}`;
+              ) {
+                const uss = fakeFormatDollars(parseFloat(value), 0, 0);
+                const tmp = (context.chart.data.datasets[2].data as string[])[
+                  context.dataIndex
+                ];
+                const percent = `${fakeFormatDollars(parseFloat(tmp), 0, 0)}%`;
+                return `${uss} (${percent})`;
+              }
+              return `${fakeFormatDollars(parseFloat(value), 0, 0)}`;
             },
           },
         },
@@ -95,6 +99,7 @@ export default ({
         scales: {
           xAxes: [
             {
+              display: false,
               ticks: {
                 beginAtZero: true,
               },
@@ -103,6 +108,10 @@ export default ({
           yAxes: [
             {
               display: showLabel,
+              gridLines: {
+                display: true,
+                color: ['#bfbfbf'],
+              },
               ticks: {
                 fontSize: 10,
                 fontFamily: FONTS.bold,
