@@ -24,4 +24,14 @@ const getProductsPerformanceLink = async (): Promise<string> => {
   return data.download_url || '';
 };
 
-export { getChannelCampaignPerformanceLink, getProductsPerformanceLink };
+const getAccessLogLink = async (): Promise<string> => {
+  const { data } = await pluginApi.get<Response>('/reports/access');
+
+  return data.download_url || '';
+};
+
+export {
+  getChannelCampaignPerformanceLink,
+  getProductsPerformanceLink,
+  getAccessLogLink,
+};
