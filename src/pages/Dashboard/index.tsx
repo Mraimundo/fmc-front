@@ -3,6 +3,7 @@ import {
   getChannelCampaignPerformanceLink,
   getProductsPerformanceLink,
   getAccessLogLink,
+  getParticipantsLogLink,
 } from 'services/dashboard/reports';
 
 import Reports, { Report as IReport } from './Reports';
@@ -24,10 +25,12 @@ const Report: React.FC = () => {
         channelCampaignPerformance,
         productPerformanceLink,
         accessLogLink,
+        participantsLink,
       ] = await Promise.all([
         getChannelCampaignPerformanceLink(),
         getProductsPerformanceLink(),
         getAccessLogLink(),
+        getParticipantsLogLink(),
       ]);
 
       setReports([
@@ -42,6 +45,10 @@ const Report: React.FC = () => {
         {
           title: 'Relatório de Acessos',
           url: accessLogLink,
+        },
+        {
+          title: 'Relatório de Participantes',
+          url: participantsLink,
         },
       ]);
 

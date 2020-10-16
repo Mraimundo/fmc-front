@@ -30,8 +30,15 @@ const getAccessLogLink = async (): Promise<string> => {
   return data.download_url || '';
 };
 
+const getParticipantsLogLink = async (): Promise<string> => {
+  const { data } = await pluginApi.get<Response>('/reports/team');
+
+  return data.download_url || '';
+};
+
 export {
   getChannelCampaignPerformanceLink,
   getProductsPerformanceLink,
   getAccessLogLink,
+  getParticipantsLogLink,
 };
