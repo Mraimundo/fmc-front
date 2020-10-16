@@ -2,19 +2,18 @@ import React from 'react';
 
 import { ReactSVG } from 'react-svg';
 import uploadIcon from 'assets/images/fmcProdutor/upload-icon.svg';
-import uploadFileToStorage from 'services/storage/sendFile';
-import { StyledUpload } from './styles';
+import { Container, Button } from './styles';
 
 const Upload: React.FC = () => {
   return (
-    <StyledUpload>
+    <Container>
       <h4> Faça o upload aqui! </h4>
-      <div className="button">
+      <Button>
         <input type="file" id="fileId" accept="image/x-png, image/jpg,.pdf" />
         <ReactSVG src={uploadIcon} className="icon" />
         Carregar arquivo
-      </div>
-    </StyledUpload>
+      </Button>
+    </Container>
   );
 };
 

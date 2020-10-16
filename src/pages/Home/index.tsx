@@ -17,8 +17,6 @@ const Home: React.FC = () => {
     default:
       return <DefaultHome />;
   }
-
-  //return participant.profile === 'FMC' ? <FmcTeamHome /> : <DefaultHome />;
 };
 
 export default Home;

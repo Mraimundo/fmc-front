@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { CustomArrowProps, Settings } from 'react-slick';
 import { ReactSVG } from 'react-svg';
 
@@ -52,7 +52,7 @@ const SliderHowParticipate: React.FC<SliderProps> = ({ items }) => {
       <Slider {...settings}>
         {items.map(item => (
           <Item key={item.picture}>
-            <img src={item.picture} />
+            <img src={item.picture} alt="Imagem rotativa" />
           </Item>
         ))}
       </Slider>

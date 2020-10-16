@@ -11,7 +11,6 @@ const arrowStyle = css`
   transform: translateY(-20px);
   cursor: pointer;
   z-index: 1;
-
 `;
 
 export const Prev = styled.div`
@@ -34,7 +33,7 @@ export const Dot = styled.div`
     background-color: transparent;
     border-radius: 50%;
     display: block;
-    border: 1px solid #B1A9A5;
+    border: 1px solid #b1a9a5;
     cursor: pointer;
   }
 `;
@@ -51,7 +50,7 @@ export const Slider = styled(Slick)`
     .slick-active {
       ${Dot} {
         &:before {
-          background-color: #B1A9A5;
+          background-color: #b1a9a5;
         }
       }
     }

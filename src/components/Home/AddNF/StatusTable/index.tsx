@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { StyledStatusTable } from './styles';
+import { Container } from './styles';
 
 const StatusTable: React.FC = () => {
   return (
-    <StyledStatusTable>
+    <Container>
       <ul>
         <li>
           <p>Em análise</p>
@@ -22,7 +22,7 @@ const StatusTable: React.FC = () => {
           <p>1</p>
         </li>
       </ul>
-    </StyledStatusTable>
+    </Container>
   );
 };
 

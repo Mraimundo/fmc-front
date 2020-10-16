@@ -8,32 +8,22 @@ export const Wrapper = styled.div`
 `;
 
 export const ShowCaseWrapper = styled.div`
-background: linear-gradient(to right, #8f817b 0.35%,#7e6f68 14.4%,#685952 36.38%,#61514a 50.32%,#4f413b 71.07%,#312722 100%);
-
-@media screen and (max-width: 480px) {
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.font.color.primary} 70%,
-    ${({ theme }) => darken(0.05, theme.font.color.primary)}
+    #8f817b 0.35%,
+    #7e6f68 14.4%,
+    #685952 36.38%,
+    #61514a 50.32%,
+    #4f413b 71.07%,
+    #312722 100%
   );
-}
-`;
 
-
-export const PerformanceWrapper = styled.div`
-  width: 75%;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-export const MyPointsWrapper = styled.div`
-  width: 25%;
-  margin-left: 1em;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
+  @media screen and (max-width: 480px) {
+    background: linear-gradient(
+      to right,
+      ${({ theme }) => theme.font.color.primary} 70%,
+      ${({ theme }) => darken(0.05, theme.font.color.primary)}
+    );
   }
 `;
 
