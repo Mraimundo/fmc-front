@@ -33,6 +33,8 @@ const Route: React.FC<RouteProps> = ({
     return <DefaultRoute {...rest} render={() => <Component />} />;
   }
 
+  /* MAYCONN Layout Temporario para nao private */
+
   return (
     <DefaultRoute
       {...rest}

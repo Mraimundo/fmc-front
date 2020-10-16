@@ -20,7 +20,7 @@ export interface FetchBannersService {
 export const fetchBannersService = async (): Promise<Banner[] | null> => {
   const { data: response } = await vendavallApi.get<
     FetchBannersService[] | null
-  >('banners');
+  >('banners?limit=100');
 
   return transformBannersRawData(response);
 };

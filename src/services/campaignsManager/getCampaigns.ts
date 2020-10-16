@@ -20,19 +20,22 @@ export interface FilterOptions {
   customerId?: number;
   status?: StatusText;
   mechanicId?: number;
+  page?: number;
 }
 
 export default async (filters?: FilterOptions): Promise<Response> => {
   /* ?page=1&limit=15&order=desc&status[0]=published&establishments[0]=1&types[0]=1&regional[0]=Arroz&directorships[0]=Sul&participants[0]=1 */
 
-  let extraSearch = '?limit=100';
+  const page = filters?.page || 1;
+
+  let extraSearch = `?limit=10&page=${page}`;
   if (filters) {
     const { status, customerId, directorId, mechanicId, regionalId } = filters;
     if (mechanicId) {
       extraSearch += `&types[0]=${mechanicId}`;
     }
     if (customerId) {
-      extraSearch += `&participants[0]=${customerId}`;
+      extraSearch += `&establishments[0]=${customerId}`;
     }
     if (directorId) {
       extraSearch += `&directorships[0]=${directorId}`;
