@@ -31,19 +31,19 @@ export default ({
     datasets: [
       {
         label: 'Meta',
-        backgroundColor: 'rgba(4, 48, 103, 0.2)',
+        backgroundColor: '#CDD6E1',
         borderColor: 'rgba(4, 48, 103, 1)',
         borderWidth: 0,
-        hoverBackgroundColor: 'rgba(4, 48, 103, 0.4)',
+        hoverBackgroundColor: '#CDD6E1',
         hoverBorderColor: 'rgba(4, 48, 103, 1)',
         data: firstDataBar,
       },
       {
         label: 'Realizado',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        backgroundColor: '#FF6565',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 0,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBackgroundColor: '#FF6565',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data: secondDataBar,
       },
