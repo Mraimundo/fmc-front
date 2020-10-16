@@ -52,12 +52,8 @@ const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
   return data.map(item => item.client_group);
 };
 
-const getDataNumbers = (
-  data: Data[],
-  columnName: DataColumnName,
-  times = 1,
-): number[] => {
-  return data.map(item => item[columnName] * times);
+const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
+  return data.map(item => item[columnName]);
 };
 
 const getClients = (data: Data[]): Client[] => {
@@ -84,7 +80,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'pog_goal'),
       secondDataBar: getDataNumbers(filteredData, 'pog_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'pog_percentage', 100),
+      thirdDataBar: getDataNumbers(filteredData, 'pog_percentage'),
       title: 'POG (US$) Realizado',
     },
     premioRealized: {
