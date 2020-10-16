@@ -93,7 +93,7 @@ export const AddNFContainer = styled.div`
 export const StyledStatusTable = styled.div`
   padding: 12px 22px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.font.color.tertiary};
+  background: ${({ theme }) => theme.font.color.quartenary};
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
   margin-top: 10px;
   @media (min-width: 768px) {

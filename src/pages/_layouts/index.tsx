@@ -27,14 +27,12 @@ const Dashboard: React.FC = ({ children }) => {
     if (!participant || !participant.id) return;
 
     if (participant.profile === 'FMC') {
-      //setTheme(fmcTeamTheme);
-      setTheme(fmcProdutorTheme);
+      setTheme(fmcTeamTheme);
       return;
     }
 
     if (participant.establishment.type_name === EstablishmentTypes.Resale) {
-      //setTheme(defaultTheme);
-      setTheme(fmcProdutorTheme);
+      setTheme(defaultTheme);
       return;
     }
 
@@ -42,6 +40,12 @@ const Dashboard: React.FC = ({ children }) => {
       participant.establishment.type_name === EstablishmentTypes.Cooperative
     ) {
       setTheme(cooperativaTheme);
+      return;
+    }
+
+    if (participant.profile === 'PRODUTOR') {
+      setTheme(fmcProdutorTheme);
+      return;
     }
   }, [participant]);
 

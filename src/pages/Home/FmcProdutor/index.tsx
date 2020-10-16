@@ -23,7 +23,6 @@ import {
   Banners,
   Title,
   Highlights,
-  Performance,
   MyPoints,
   Showcase,
   AddNF,
@@ -37,7 +36,6 @@ import CoinQuotation from 'components/Header/CoinQuotation';
 import {
   Wrapper,
   ShowCaseWrapper,
-  PerformanceMyPointsWrapper,
   PerformanceWrapper,
   MyPointsWrapper,
   HomeWrapper,
@@ -107,29 +105,14 @@ const FmcProdutorHome: React.FC = () => {
       <Wrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
-        <PerformanceMyPointsWrapper>
-          {!isParticipant && (
-            <>
-              <PerformanceWrapper>
-                <Title>Performance</Title>
-                <Performance realized={realized.realized} />
-              </PerformanceWrapper>
-              <MyPointsWrapper>
-                <Title>Meus pontos</Title>
-                <MyPoints isParticipant={isParticipant} />
-              </MyPointsWrapper>
-            </>
-          )}
-        </PerformanceMyPointsWrapper>
       </Wrapper>
-      {isParticipant && showCatalog && (
-        <ShowCaseWrapper>
-          <Wrapper>
-            <Title reverse>Vitrine de Prêmios</Title>
-            <Showcase products={products} />
-          </Wrapper>
-        </ShowCaseWrapper>
-      )}
+
+      <ShowCaseWrapper>
+        <Wrapper>
+          <Title reverse>Vitrine de Prêmios</Title>
+          <Showcase products={products} />
+        </Wrapper>
+      </ShowCaseWrapper>
     </HomeWrapper>
   );
 };

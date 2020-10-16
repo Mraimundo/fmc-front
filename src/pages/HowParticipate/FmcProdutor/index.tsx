@@ -3,13 +3,8 @@ import useDimensions from 'hooks/use-window-dimensions';
 import getData, {
   HowParticipate as IHowParticipate,
 } from 'services/participants/howParticipate';
-import { Link } from 'react-router-dom';
-import routesMap from 'routes/route-map';
 
-import bannerDesktop from 'assets/images/fmcProdutor/howParticipate__banner--desktop.jpg';
-import bannerMobile from 'assets/images/fmcProdutor/howParticipate__banner--mobile.jpg';
-
-import Steps from './steps';
+import { SliderHowParticipate } from 'components/HowParticipate';
 
 import {
   Container,
@@ -18,37 +13,49 @@ import {
   Title,
   LinkRegulamento,
   Button,
+  StepsContainer,
+  StepsContent,
+  StepsTitle,
 } from './styles';
 
 const FmcProdutorHowParticipate: React.FC = () => {
   const [data, setData] = useState<IHowParticipate | null>(null);
   const { width } = useDimensions();
-
   useEffect(() => {
     getData().then(_data => {
       setData(_data);
     });
   }, []);
 
+  let slideItemsArr: { picture: string }[] = [];
+  data?.slider.split(',').forEach((prop, index) => {
+    slideItemsArr.push({ picture: prop });
+  });
+
   return (
     <Container>
       <Content>
-        <Title> Como Participar </Title>
-        <Banner src={width > 500 ? bannerDesktop : bannerMobile} />
-        <Title>O Programa - Apresentação</Title>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-          aperiam incidunt officiis labore laborum, blanditiis qui asperiores
-          iste culpa, natus perferendis odio? Perspiciatis a cum vel dicta dolor
-          reprehenderit provident.
-        </p>
+        <img
+          src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl}
+          alt={data?.description}
+        />
 
-        <Steps></Steps>
+        <StepsContainer>
+          <StepsContent>
+            <StepsTitle>Veja como é fácil participar</StepsTitle>
+            <SliderHowParticipate items={slideItemsArr} />
+          </StepsContent>
+        </StepsContainer>
 
         <LinkRegulamento>
-          <Link to={routesMap.regulation}>
-            <Button> Regulamento </Button>
-          </Link>
+          {data?.links.map(item => (
+            <div key={item.target}>
+              <a href={item.target}>
+                {' '}
+                <Button> {item.label} </Button>{' '}
+              </a>
+            </div>
+          ))}
         </LinkRegulamento>
       </Content>
     </Container>

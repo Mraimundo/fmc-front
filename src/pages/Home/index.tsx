@@ -9,7 +9,16 @@ import FmcProdutorHome from './FmcProdutor';
 const Home: React.FC = () => {
   const { participant } = useAuth();
 
-  return participant.profile === 'FMC' ? <FmcTeamHome /> : <DefaultHome />;
+  switch (participant.profile) {
+    case 'FMC':
+      return <FmcTeamHome />;
+    case 'PRODUTOR':
+      return <FmcProdutorHome />;
+    default:
+      return <DefaultHome />;
+  }
+
+  //return participant.profile === 'FMC' ? <FmcTeamHome /> : <DefaultHome />;
 };
 
 export default Home;

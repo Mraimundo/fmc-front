@@ -112,7 +112,7 @@ export const StepsContent = styled.div`
     border-radius: 10px;
     padding: 18px 24px;
     @media (min-width: 768px) {
-      padding: 20px 24px;
+      padding: 30px 24px;
     }
 `;
 
