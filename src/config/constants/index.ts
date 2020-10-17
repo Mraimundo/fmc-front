@@ -20,7 +20,7 @@ export const RTC = 'RTC';
 export const KAM = 'KAM';
 export const GRM = 'GRM';
 
-export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE';
+export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE' | 'PRODUTOR';
 export type ApproverProfile =
   | typeof GRV
   | typeof DN
