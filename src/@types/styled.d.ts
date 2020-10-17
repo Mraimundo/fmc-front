@@ -5,6 +5,7 @@ import Button from './styled/modules/button';
 import Contact from './styled/modules/contact';
 import Font from './styled/modules/font';
 import Footer from './styled/modules/footer';
+import HowParticipate from './styled/modules/howParticipate';
 import Indication from './styled/modules/indication';
 import Input from './styled/modules/input';
 import Layout from './styled/modules/layout';
@@ -23,6 +24,7 @@ declare module 'styled-components' {
     contact: Contact;
     font: Font;
     footer: Footer;
+    howParticipate: HowParticipate;
     indication: Indication;
     input: Input;
     layout: Layout;

@@ -9,12 +9,13 @@ import layout from './modules/layout/default';
 import link from './modules/link/default';
 import modal from './modules/modal/default';
 import regulation from './modules/regulation/default';
+import table from './modules/table/default';
 import tabMenu from './modules/tabMenu/default';
 import tooltip from './modules/tooltip/default';
 
 import footer from './modules/footer/fmcProdutor';
 import menu from './modules/menu/fmcProdutor';
-import table from './modules/table/fmcTeam';
+import howParticipate from './modules/howParticipate/produtor';
 
 const Theme: DefaultTheme = {
   accordion,
@@ -23,6 +24,7 @@ const Theme: DefaultTheme = {
   contact,
   font,
   footer,
+  howParticipate,
   input,
   layout,
   link,

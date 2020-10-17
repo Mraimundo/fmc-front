@@ -24,15 +24,18 @@ const Dashboard: React.FC = ({ children }) => {
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
 
   useEffect(() => {
-    if (!participant || !participant.id) return;
+    if (!participant || !participant.id) {
+      setTheme(null);
+      return;
+    }
 
     if (participant.profile === 'FMC') {
       setTheme(fmcTeamTheme);
       return;
     }
 
-    if (participant.establishment.type_name === EstablishmentTypes.Resale) {
-      setTheme(defaultTheme);
+    if (participant.profile === 'PRODUTOR') {
+      setTheme(fmcProdutorTheme);
       return;
     }
 
@@ -43,39 +46,34 @@ const Dashboard: React.FC = ({ children }) => {
       return;
     }
 
-    if (participant.profile === 'PRODUTOR') {
-      setTheme(fmcProdutorTheme);
-      return;
-    }
+    setTheme(defaultTheme);
   }, [participant]);
 
   return theme ? (
-    <>
-      <ThemeContext.Provider value={theme}>
-        {shouldShowRegulationsModal ? (
-          <ModalRegulations opened={shouldShowRegulationsModal} />
-        ) : (
-          <Container>
-            <Logo
-              logoType={
-                participant.profile === 'FMC'
-                  ? 'fmcTeam'
-                  : participant.establishment.type_name
-              }
-            />
-            <Visible xl xxl>
-              <Header />
-            </Visible>
-            <Visible xs sm md lg>
-              <MobileHeader />
-            </Visible>
-            {children}
-            {!shouldShowRegulationsModal && <Popups />}
-            <Footer />
-          </Container>
-        )}
-      </ThemeContext.Provider>
-    </>
+    <ThemeContext.Provider value={theme}>
+      {shouldShowRegulationsModal ? (
+        <ModalRegulations opened={shouldShowRegulationsModal} />
+      ) : (
+        <Container>
+          <Logo
+            logoType={
+              participant.profile === 'FMC'
+                ? 'fmcTeam'
+                : participant.establishment.type_name
+            }
+          />
+          <Visible xl xxl>
+            <Header />
+          </Visible>
+          <Visible xs sm md lg>
+            <MobileHeader />
+          </Visible>
+          {children}
+          {!shouldShowRegulationsModal && <Popups />}
+          <Footer />
+        </Container>
+      )}
+    </ThemeContext.Provider>
   ) : (
     <></>
   );

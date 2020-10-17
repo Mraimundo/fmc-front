@@ -4,6 +4,7 @@ import button from './modules/button/fmcTeam';
 import contact from './modules/contact/default';
 import indication from './modules/indication/default';
 import font from './modules/font/fmcTeam';
+import howParticipate from './modules/howParticipate/default';
 import input from './modules/input/default';
 import layout from './modules/layout/default';
 import link from './modules/link/default';
@@ -23,6 +24,7 @@ const Theme: DefaultTheme = {
   contact,
   font,
   footer,
+  howParticipate,
   input,
   layout,
   link,
