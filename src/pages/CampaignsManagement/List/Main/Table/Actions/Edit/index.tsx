@@ -5,6 +5,7 @@ import {
 } from 'services/campaignsManager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import EditIcon from 'assets/images/campaigns/edit-icon.svg';
+import viewIcon from 'assets/images/campaigns/view-icon.svg';
 import history from 'services/history';
 
 import { useToast } from 'context/ToastContext';
@@ -17,7 +18,8 @@ interface Props {
 
 const Edit: React.FC<Props> = ({ id, status }) => {
   const { addToast } = useToast();
-  const handleAction = useCallback(() => {
+
+  const handleEdit = useCallback(() => {
     if (status !== CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS) {
       addToast({
         title: 'Campanha não pode ser editada',
@@ -25,11 +27,21 @@ const Edit: React.FC<Props> = ({ id, status }) => {
       });
       return;
     }
+
     history.push(`/gerenciamento-de-campanhas/editar/${id}`);
   }, [id, status, addToast]);
+
+  const handleView = useCallback(() => {
+    history.push(`/gerenciamento-de-campanhas/visualizar/${id}`);
+  }, [id]);
+
   return (
     <Container>
-      <ReactSVG src={EditIcon} onClick={handleAction} />
+      {status === CAMPAIGN_STATUS_TEXT.UNDER_ANALYSIS ? (
+        <ReactSVG src={EditIcon} onClick={handleEdit} />
+      ) : (
+        <ReactSVG src={viewIcon} onClick={handleView} />
+      )}
     </Container>
   );
 };

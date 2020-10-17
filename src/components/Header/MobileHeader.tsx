@@ -53,8 +53,10 @@ const Header: React.FC = () => {
         <ParticipantMobile
           name={participant.nick_name}
           picture={participant.picture}
-          establishment={participant.establishment}
           points={0}
+          establishment={
+            participant.profile === 'FMC' ? null : participant.establishment
+          }
         />
         {!!menu && <MobileMenu items={menu} signOut={signOut} />}
       </MobileNav>

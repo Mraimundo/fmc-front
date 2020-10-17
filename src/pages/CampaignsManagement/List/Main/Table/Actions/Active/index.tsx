@@ -5,7 +5,7 @@ import offIcon from 'assets/images/campaigns/off-icon.svg';
 import { useToast } from 'context/ToastContext';
 import { useCampaignsList } from '../../../../Context';
 
-import { Container } from './style';
+import { Container, StyledLoader } from './style';
 
 interface Props {
   id: number;
@@ -21,10 +21,13 @@ const Active: React.FC<Props> = ({
   const { togglePublishedStatus, removeHighlight } = useCampaignsList();
   const [activated, setActivated] = useState<boolean>(_activated);
 
+  const [loading, setLoading] = useState(false);
+
   const { addToast } = useToast();
 
   const handleClick = useCallback(async () => {
     try {
+      setLoading(true);
       await togglePublishedStatus(id);
       addToast({
         title: 'Status alterado com sucesso',
@@ -44,11 +47,16 @@ const Active: React.FC<Props> = ({
         type: 'error',
       });
     }
+    setLoading(false);
   }, [addToast, togglePublishedStatus, id, highlightId, removeHighlight]);
 
   return (
     <Container>
-      <ReactSVG src={activated ? onIcon : offIcon} onClick={handleClick} />
+      {loading ? (
+        <StyledLoader type="ThreeDots" height={25} width={25} />
+      ) : (
+        <ReactSVG src={activated ? onIcon : offIcon} onClick={handleClick} />
+      )}
     </Container>
   );
 };
