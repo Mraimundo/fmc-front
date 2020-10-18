@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useRef } from 'react';
+
 import { FONTS } from 'styles/font/globals';
 import { ChartData } from 'chart.js';
-import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, HorizontalBar } from 'react-chartjs-2';
-import { fakeFormatDollars, formatPercent } from 'util/points';
+import { fakeFormatDollars } from 'util/points';
 
 interface Props {
   labels: string[];
@@ -11,7 +12,6 @@ interface Props {
   secondDataBar: number[];
   thirdDataBar: number[];
   showLabel?: boolean;
-  formatType?: 'uss' | '%';
   title?: string;
 }
 
@@ -21,7 +21,6 @@ export default ({
   secondDataBar,
   thirdDataBar,
   showLabel = true,
-  formatType = 'uss',
   title,
 }: Props): JSX.Element => {
   const Component: typeof HorizontalBar | typeof Bar = HorizontalBar;
@@ -37,6 +36,7 @@ export default ({
         hoverBackgroundColor: '#CDD6E1',
         hoverBorderColor: 'rgba(4, 48, 103, 1)',
         data: firstDataBar,
+        barThickness: 20,
       },
       {
         label: 'Realizado',
@@ -46,6 +46,7 @@ export default ({
         hoverBackgroundColor: '#FF6565',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data: secondDataBar,
+        barThickness: 20,
       },
       {
         label: '',
@@ -61,17 +62,20 @@ export default ({
   };
 
   return (
-    <Component
+    <HorizontalBar
+      key={`MyKey-${labels.length}-${title}`}
       data={result}
       height={60 * labels.length + 100}
       redraw
       options={{
+        responsive: true,
         title: { display: !!title, text: title },
         plugins: {
           ...ChartDataLabels,
           datalabels: {
             align: 'end',
             textAlign: 'end',
+            color: 'rgba(0,0,0,0.55)',
             formatter: (value: string, context) => {
               if (!context.chart.data.datasets) return '';
               if (
@@ -96,6 +100,7 @@ export default ({
           labels: { filter: item => !!item.text },
         },
         maintainAspectRatio: false,
+        /* maintainAspectRatio: true, */
         scales: {
           xAxes: [
             {
