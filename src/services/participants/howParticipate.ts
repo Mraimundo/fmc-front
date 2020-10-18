@@ -6,6 +6,7 @@ export interface HowParticipate {
   description: string;
   pictureUrl: string;
   mobilePictureUrl: string;
+  slider: string,
   links: {
     id: number;
     type: 'internal' | 'external' | 'file';
@@ -52,6 +53,7 @@ const transform = (data: ApiResponse): HowParticipate => {
     description: data.description,
     pictureUrl: data.picture,
     mobilePictureUrl: data.mobile_picture ? data.mobile_picture : data.picture,
+    slider: data.slider,
     links: data.how_participate_buttons.map(item => ({
       id: item.id,
       type: item.type === 'url' ? 'external' : item.type,
