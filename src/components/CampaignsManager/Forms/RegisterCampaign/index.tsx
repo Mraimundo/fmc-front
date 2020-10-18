@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { ApproverProfile } from 'config/constants';
 import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { useSelector } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
@@ -13,10 +14,12 @@ import { Container } from './styles';
 interface Props {
   handleAction(campaign: Campaign): Promise<void>;
   actionButtonName?: string;
+  myProfile: ApproverProfile;
 }
 const Register: React.FC<Props> = ({
   handleAction,
   actionButtonName = 'Enviar',
+  myProfile,
 }) => {
   const [loading, setLoading] = useState(false);
   const campaign = useSelector(getCampaign);
@@ -29,7 +32,7 @@ const Register: React.FC<Props> = ({
 
   return (
     <Container>
-      <CampaingForm />
+      <CampaingForm profile={myProfile} />
       <PrizeForm />
       <BudgetForm />
       <ProductForm />
@@ -37,6 +40,7 @@ const Register: React.FC<Props> = ({
         type="button"
         buttonRole="primary"
         onClick={handleButtonClick}
+        disabled={loading}
         loading={loading}
       >
         {actionButtonName}

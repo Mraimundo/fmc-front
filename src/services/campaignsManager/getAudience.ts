@@ -51,10 +51,10 @@ export default async (): Promise<Audience[]> => {
   return data.map(item => ({
     customer: {
       id: item.id,
-      name: item.name,
+      name: item.client_group,
       cnpj: item.cnpj,
       type: item.type.name,
     },
-    balance: item.balance,
+    balance: item.balance || 0,
   }));
 };

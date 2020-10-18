@@ -7,15 +7,20 @@ import getData from 'services/cockpit/getGeneralStatistics';
 
 import Filters, { Filters as IFilters } from './Filters';
 import Card from './Card';
+import LoadingCard from './Card/Loading';
 
 import { Container, CardContainer } from './styles';
 
 const GeneralView: React.FC = () => {
   const [cards, setCards] = useState<ICard[]>([]);
   const [filters, setFilters] = useState<IFilters>({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData(filters).then(data => setCards(transformer(data)));
+    setLoading(true);
+    getData(filters)
+      .then(data => setCards(transformer(data)))
+      .finally(() => setLoading(false));
   }, [filters]);
 
   const onFilter = useCallback(async (_filters: IFilters): Promise<void> => {
@@ -29,9 +34,9 @@ const GeneralView: React.FC = () => {
         <Filters onFilter={onFilter} />
       </CardContainer>
       <CardContainer className="_extra-margin">
-        {cards.map(item => (
-          <Card key={item.title} card={item} />
-        ))}
+        {loading
+          ? [1, 2].map(item => <LoadingCard key={`loading-${item}`} />)
+          : cards.map(item => <Card key={item.title} card={item} />)}
       </CardContainer>
     </Container>
   );

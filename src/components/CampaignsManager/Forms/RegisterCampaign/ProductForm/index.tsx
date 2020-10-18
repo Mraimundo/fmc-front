@@ -91,7 +91,7 @@ const CampaignForm: React.FC = () => {
                 />
               </div>
               <div>
-                <h5>Sell-in</h5>
+                <h5>Faturamento</h5>
                 <InputValue
                   placeholder="0,00 US$"
                   onChange={e =>
@@ -104,7 +104,7 @@ const CampaignForm: React.FC = () => {
                 />
               </div>
               <div>
-                <h5>Sell-out</h5>
+                <h5>POG</h5>
                 <InputValue
                   placeholder="0,00 US$"
                   onChange={e =>

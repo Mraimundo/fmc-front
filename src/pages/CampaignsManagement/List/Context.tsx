@@ -5,6 +5,8 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
+
+import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import {
   getCampaigns,
   getCampaignsDetails,
@@ -27,7 +29,7 @@ export interface CampaignsListContextState {
   campaigns: Campaign[];
   isFetching: boolean;
   resume: IDetails[];
-  applyFilters(filters?: FilterOptions): Promise<void>;
+  applyFilters(filters?: FilterOptions): void;
   approvalModalOpened: boolean;
   openApprovalModal(): void;
   closeApprovalModal(): void;
@@ -38,6 +40,8 @@ export interface CampaignsListContextState {
   togglePublishedStatus(campaignId: number): Promise<void>;
   addHighlight(campaignId: number): Promise<void>;
   removeHighlight(highlightId: number): Promise<void>;
+  setPage(page: number): void;
+  pagination: Pagination | null;
 }
 
 const CampaignsListContext = createContext<CampaignsListContextState>(
@@ -46,6 +50,7 @@ const CampaignsListContext = createContext<CampaignsListContextState>(
 
 export const CampaignsListProvider: React.FC = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [campaignSelected, setCampaignSelected] = useState<Campaign | null>(
     null,
@@ -53,14 +58,9 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
   const [resume, setResume] = useState<IDetails[]>([]);
   const [approvalModalOpened, setApprovalModalOpened] = useState(false);
 
-  const { participant } = useAuth();
+  const [filters, setFilters] = useState<FilterOptions | undefined>(undefined);
 
-  useEffect(() => {
-    setIsFetching(true);
-    getCampaigns()
-      .then(({ data }) => setCampaigns(data))
-      .finally(() => setIsFetching(false));
-  }, []);
+  const { participant } = useAuth();
 
   useEffect(() => {
     if (!participant.id) return;
@@ -69,12 +69,25 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     });
   }, [participant.id]);
 
-  const applyFilters = useCallback(async (filters?: FilterOptions) => {
-    setIsFetching(true);
-    const { data } = await getCampaigns(filters);
-    setCampaigns(data);
-    setIsFetching(false);
+  const applyFilters = useCallback((_filters?: FilterOptions) => {
+    setFilters({ ..._filters, page: 1 });
   }, []);
+
+  const setPage = useCallback((page: number): void => {
+    setFilters(oldFilters => ({ ...oldFilters, page }));
+  }, []);
+
+  useEffect(() => {
+    setIsFetching(true);
+    getCampaigns(filters)
+      .then(({ data, pagination: apiPagination }) => {
+        setCampaigns(data);
+        setPagination(apiPagination);
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, [filters]);
 
   const openApprovalModal = useCallback(() => {
     setApprovalModalOpened(true);
@@ -95,17 +108,57 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
   );
 
   const approve = useCallback(
-    async ({ comments }: Approver) => {
+    async ({ comments, profile }: Approver) => {
       if (!campaignSelected || !campaignSelected.id) return;
       await approveCampaign(campaignSelected.id, comments[0]);
+      setCampaigns(data =>
+        produce(data, draft => {
+          const index = draft.findIndex(
+            item => item.id === campaignSelected.id,
+          );
+          if (index >= 0) {
+            draft[index] = {
+              ...draft[index],
+              approvers: [
+                ...draft[index].approvers.map(item => {
+                  if (item.profile === profile) {
+                    item.status = 'approved';
+                  }
+                  return item;
+                }),
+              ],
+            };
+          }
+        }),
+      );
     },
     [campaignSelected],
   );
 
   const disapprove = useCallback(
-    async ({ comments }: Approver) => {
+    async ({ comments, profile }: Approver) => {
       if (!campaignSelected || !campaignSelected.id) return;
       await disapproveCampaign(campaignSelected.id, comments[0]);
+      setCampaigns(data =>
+        produce(data, draft => {
+          const index = draft.findIndex(
+            item => item.id === campaignSelected.id,
+          );
+          if (index >= 0) {
+            draft[index] = {
+              ...draft[index],
+              approvers: [
+                ...draft[index].approvers.map(item => {
+                  if (item.profile === profile) {
+                    item.status = 'disapproved';
+                  }
+                  return item;
+                }),
+              ],
+            };
+          }
+        }),
+      );
     },
     [campaignSelected],
   );
@@ -140,6 +193,14 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
     void
   > => {
     await removeHighlightFromCampaign(highlightId);
+    setCampaigns(data =>
+      data.map(item => {
+        if (item.highlight.id === highlightId) {
+          return { ...item, highlight: { id: null, status: false } };
+        }
+        return item;
+      }),
+    );
   }, []);
 
   return (
@@ -159,6 +220,8 @@ export const CampaignsListProvider: React.FC = ({ children }) => {
         togglePublishedStatus,
         addHighlight,
         removeHighlight,
+        setPage,
+        pagination,
       }}
     >
       {children}

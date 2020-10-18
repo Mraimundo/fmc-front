@@ -61,17 +61,18 @@ const FiltersScreen: React.FC<Props> = ({ onFilter }) => {
   return (
     <Container>
       <Header>
+        <TitleContainer>
+          <h3>Conheça a solução mais adequada para o seu cultivo.</h3>
+        </TitleContainer>
         <SelectContainer>
-          <Label>Cultura</Label>
+          <Label>1º Selecione a cultura</Label>
           <CategoriesSelect
             value={categorySelected}
             setValue={setCategorySelected}
           />
         </SelectContainer>
-        <TitleContainer>
-          <h3>Selecione o segmento para ver a solução mais adequada.</h3>
-        </TitleContainer>
       </Header>
+      <Label>2º Selecione o segmento</Label>
       <IndicatorContainer>
         {productTypes[0] && (
           <Indicator

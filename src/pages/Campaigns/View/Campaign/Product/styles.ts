@@ -52,6 +52,7 @@ export const Row = styled.div`
 `;
 
 export const Box = styled.h5`
+  text-align: center;
   width: 150px;
   height: 49px;
   border: 1px solid ${({ theme }) => theme.font.color.quartenary};

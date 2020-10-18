@@ -11,8 +11,9 @@ import useModalStatus from 'hooks/use-modal-status';
 import getRegulation from 'services/campaigns/getRegulation';
 import { Regulation } from 'services/register/regulation/interfaces/IRegulation';
 import participate from 'services/campaigns/participate';
-
 import { Button } from 'components/shared';
+import LoadingPage from './Loading';
+
 import Campaign from './Campaign';
 import RegulationModal from './RegulationModal';
 import { Container, Content } from './styles';
@@ -26,6 +27,7 @@ const List: React.FC = () => {
   const [campaign, setCampaign] = useState<ICampaign | null>(null);
   const [regulation, setRegulation] = useState<Regulation | null>(null);
   /* const [modalOpened, setModalOpened] = useState(false); */
+  const [loadingAccept, setLoadingAccept] = useState(false);
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
 
@@ -33,6 +35,7 @@ const List: React.FC = () => {
   const { opened, closeModal, openModal } = modalStatus;
 
   useEffect(() => {
+    setLoading(true);
     getCampaign(parseInt(params.id, 0))
       .then(data => {
         setCampaign(data);
@@ -40,13 +43,14 @@ const List: React.FC = () => {
       })
       .catch(() => {
         history.push('/');
-      });
+      })
+      .finally(() => setLoading(false));
   }, [params]);
 
   const handleAcceptRegulation = useCallback(
     async (campaignId: number) => {
       try {
-        setLoading(true);
+        setLoadingAccept(true);
         await participate(campaignId);
         setCampaign(data =>
           data
@@ -66,13 +70,13 @@ const List: React.FC = () => {
           type: 'error',
         });
       } finally {
-        setLoading(false);
+        setLoadingAccept(false);
       }
     },
     [addToast, closeModal],
   );
 
-  return (
+  return !loading ? (
     <Container>
       <Content>
         {campaign && (
@@ -88,7 +92,7 @@ const List: React.FC = () => {
         {campaign && regulation && (
           <RegulationModal
             isOpen={opened}
-            loading={loading}
+            loading={loadingAccept}
             canAccept={!campaign.signed}
             onAccept={async () => {
               handleAcceptRegulation(campaign.id);
@@ -99,6 +103,8 @@ const List: React.FC = () => {
         )}
       </Content>
     </Container>
+  ) : (
+    <LoadingPage />
   );
 };
 

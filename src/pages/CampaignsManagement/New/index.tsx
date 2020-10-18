@@ -6,6 +6,7 @@ import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
 import { createNewCampaign } from 'services/campaignsManager';
 import { CreateNewCampaignDTO } from 'services/campaignsManager/dtos';
 import { campaignToCreateNewCampaignDTO } from 'services/campaignsManager/transformers';
+import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 import history from 'services/history';
 import { RegisterCampaignForm } from 'components/CampaignsManager';
@@ -19,6 +20,9 @@ const New: React.FC = () => {
   const { addToast } = useToast();
   const dispatch = useDispatch();
   const { isValid, getErrors } = useSchema<Campaign>(schema);
+  const {
+    participant: { profile_value: profile },
+  } = useAuth();
 
   useEffect(() => {
     dispatch(reset());
@@ -54,7 +58,7 @@ const New: React.FC = () => {
   return (
     <Container>
       <Content>
-        <RegisterCampaignForm handleAction={handleSave} />
+        <RegisterCampaignForm handleAction={handleSave} myProfile={profile} />
       </Content>
     </Container>
   );

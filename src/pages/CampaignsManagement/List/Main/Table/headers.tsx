@@ -69,8 +69,20 @@ const publish = [
   {
     column: '',
     dataValue: 'activated',
-    fn: ({ id, activated }: { id: number; activated: boolean }) => (
-      <ActivatedAction activated={activated} id={id} />
+    fn: ({
+      id,
+      activated,
+      highlightId,
+    }: {
+      id: number;
+      activated: boolean;
+      highlightId: number;
+    }) => (
+      <ActivatedAction
+        activated={activated}
+        id={id}
+        highlightId={highlightId}
+      />
     ),
   },
 ];

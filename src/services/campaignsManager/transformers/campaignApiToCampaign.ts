@@ -36,18 +36,18 @@ const extractApprovers = (data: ApproverApi[]): Approver[] => {
   });
 };
 
-const getProfileTurn = (data: ApproverApi[]): ApproverProfile => {
+const getProfileTurn = (data: ApproverApi[]): ApproverProfile[] => {
   const filteredData = data.filter(i => i.status === 1);
 
   switch (filteredData.length) {
     case 0:
-      return GRV;
+      return [GRV, CRM];
     case 1:
-      return CRM;
+      return [CRM];
     case 2:
-      return DN;
+      return [DN, CRM];
     default:
-      return MKT;
+      return [MKT, CRM];
   }
 };
 

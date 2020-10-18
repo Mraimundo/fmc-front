@@ -37,12 +37,12 @@ export const CampaignBox = styled.div`
   padding-bottom: 0;
   background: #efefef;
   width: 100%;
-  max-width: 557px;
+  /*max-width: 557px;*/
   margin-top: 20px;
 
   > img {
     width: 100%;
-    max-width: 520px;
+    /*max-width: 520px;*/
     object-fit: cover;
   }
 

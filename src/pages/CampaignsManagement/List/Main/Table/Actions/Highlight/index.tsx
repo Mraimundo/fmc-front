@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ReactSVG } from 'react-svg';
 import StarIcon from 'assets/images/campaigns/star-icon.svg';
 import { useToast } from 'context/ToastContext';
@@ -18,6 +18,10 @@ const HighLight: React.FC<Props> = ({ id, status, campaignId }) => {
 
   const { addToast } = useToast();
 
+  useEffect(() => {
+    setHighlight(status);
+  }, [status]);
+
   const handleClick = useCallback(
     async (newStatus: boolean) => {
       try {
@@ -30,7 +34,6 @@ const HighLight: React.FC<Props> = ({ id, status, campaignId }) => {
           title: 'Destaque alterado com sucesso',
           type: 'success',
         });
-        setHighlight(e => !e);
       } catch (e) {
         addToast({
           title:

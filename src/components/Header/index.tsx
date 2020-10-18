@@ -31,13 +31,14 @@ const Header: React.FC = () => {
       {!!menu && <Menu items={menu} selectedMenu={selectedMenu} />}
       <ParticipantWrapper>
         <HelpBalloon />
-        {!!participant?.establishment?.category && (
-          <ParticipantBadge
-            badge={getParticipantBadgeByPortugueseTerm(
-              participant.establishment.category,
-            )}
-          />
-        )}
+        {participant.profile !== 'FMC' &&
+          !!participant?.establishment?.category && (
+            <ParticipantBadge
+              badge={getParticipantBadgeByPortugueseTerm(
+                participant.establishment.category,
+              )}
+            />
+          )}
         <Participant
           name={participant.nick_name}
           picture={participant.picture}

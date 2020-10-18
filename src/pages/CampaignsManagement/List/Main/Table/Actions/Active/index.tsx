@@ -5,27 +5,40 @@ import offIcon from 'assets/images/campaigns/off-icon.svg';
 import { useToast } from 'context/ToastContext';
 import { useCampaignsList } from '../../../../Context';
 
-import { Container } from './style';
+import { Container, StyledLoader } from './style';
 
 interface Props {
   id: number;
   activated: boolean;
+  highlightId: number;
 }
 
-const Active: React.FC<Props> = ({ id, activated: _activated }) => {
-  const { togglePublishedStatus } = useCampaignsList();
+const Active: React.FC<Props> = ({
+  id,
+  activated: _activated,
+  highlightId,
+}) => {
+  const { togglePublishedStatus, removeHighlight } = useCampaignsList();
   const [activated, setActivated] = useState<boolean>(_activated);
+
+  const [loading, setLoading] = useState(false);
 
   const { addToast } = useToast();
 
   const handleClick = useCallback(async () => {
     try {
+      setLoading(true);
       await togglePublishedStatus(id);
       addToast({
         title: 'Status alterado com sucesso',
         type: 'success',
       });
-      setActivated(e => !e);
+      setActivated(e => {
+        if (e) {
+          removeHighlight(highlightId);
+        }
+        return !e;
+      });
     } catch (e) {
       addToast({
         title:
@@ -34,11 +47,16 @@ const Active: React.FC<Props> = ({ id, activated: _activated }) => {
         type: 'error',
       });
     }
-  }, [addToast, togglePublishedStatus, id]);
+    setLoading(false);
+  }, [addToast, togglePublishedStatus, id, highlightId, removeHighlight]);
 
   return (
     <Container>
-      <ReactSVG src={activated ? onIcon : offIcon} onClick={handleClick} />
+      {loading ? (
+        <StyledLoader type="ThreeDots" height={25} width={25} />
+      ) : (
+        <ReactSVG src={activated ? onIcon : offIcon} onClick={handleClick} />
+      )}
     </Container>
   );
 };

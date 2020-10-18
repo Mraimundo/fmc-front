@@ -53,13 +53,15 @@ export default async (filters: Filters): Promise<Statistics> => {
   }
 
   /* Temporário até o Robson ajustar a chamada do EndPoint no Back */
-  if (extraSearch === '') {
+  if (!filters.directorName) {
     const directors = await getDirectors();
-    const regionals = await getRegional();
-    extraSearch = '?';
+    extraSearch += extraSearch === '' ? '?' : '&';
     extraSearch += directors
       .map((item, key) => `directorships[${key}]=${item.name}`)
       .join('&');
+  }
+  if (!filters.regionalName) {
+    const regionals = await getRegional();
     extraSearch += `&${regionals
       .map((item, key) => `regional[${key}]=${item.name}`)
       .join('&')}`;
