@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import useDimensions from 'hooks/use-window-dimensions';
 import { getChartsData, Data as IData } from 'services/dashboard/charts';
 import {
   getCharts,
@@ -67,7 +66,6 @@ const Charts: React.FC = () => {
           secondDataBar,
           thirdDataBar,
           showLabel: true, //! !secondDataBar,
-          formatType: secondDataBar ? 'uss' : '%',
         });
     });
     setAlready(true);
@@ -80,9 +78,9 @@ const Charts: React.FC = () => {
 
   return (
     <Container>
+      <Filters clients={clients} onFilter={onFilter} />
       {already && (
         <>
-          <Filters clients={clients} onFilter={onFilter} />
           <Box>
             <div>{drawChart.billingRealized()}</div>
           </Box>
