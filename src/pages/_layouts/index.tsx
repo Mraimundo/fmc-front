@@ -11,7 +11,7 @@ import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
 import MobileHeader from 'components/Header/MobileHeader';
 import Footer from 'components/Footer';
-import Logo from 'components/shared/Logo';
+import Logo, { LogoType } from 'components/shared/Logo';
 import {
   defaultTheme,
   cooperativaTheme,
@@ -25,7 +25,7 @@ import { Container } from './styles';
 const Dashboard: React.FC = ({ children }) => {
   const { shouldShowRegulationsModal, participant } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
-  const [logoType, setLogoType] = useState('');
+  const [logoType, setLogoType] = useState<LogoType | undefined>(undefined);
 
   useEffect(() => {
     if (!participant || !participant.id) {
@@ -49,10 +49,11 @@ const Dashboard: React.FC = ({ children }) => {
       participant.establishment.type_name === EstablishmentTypes.Cooperative
     ) {
       setTheme(cooperativaTheme);
-      setLogoType('fmcProdutor');
+      setLogoType(EstablishmentTypes.Cooperative);
       return;
     }
 
+    setLogoType(EstablishmentTypes.Resale);
     setTheme(defaultTheme);
   }, [participant]);
 

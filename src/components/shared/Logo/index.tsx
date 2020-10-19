@@ -13,7 +13,7 @@ import logoProdutor from 'assets/images/logo-produtor.svg';
 
 import { Container, Content, FmcLogoWrapper } from './styles';
 
-type LogoType = EstablishmentTypes | 'fmcTeam' | 'fmcProdutor';
+export type LogoType = EstablishmentTypes | 'fmcTeam' | 'fmcProdutor';
 
 interface Props {
   className?: string;
