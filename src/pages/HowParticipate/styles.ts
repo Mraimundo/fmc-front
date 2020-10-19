@@ -78,6 +78,7 @@ export const StepsContainer = styled.div`
   background-size: 100% auto;
   background-position: center;
   margin: 45px auto;
+  width: 100%;
   background: linear-gradient(
     rgba(101, 85, 77, 0.17) 0%,
     rgba(255, 255, 255, 0.18) 47.78%,

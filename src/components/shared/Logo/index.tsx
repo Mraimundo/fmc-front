@@ -9,10 +9,11 @@ import logoFmc from 'assets/images/indication/logo-fmc.svg';
 import logoRevenda from 'assets/images/logo-revenda.svg';
 import logoCooperativa from 'assets/images/logo-cooperativa.svg';
 import logoEquipe from 'assets/images/logo-equipe.svg';
+import logoProdutor from 'assets/images/logo-produtor.svg';
 
 import { Container, Content, FmcLogoWrapper } from './styles';
 
-type LogoType = EstablishmentTypes | 'fmcTeam';
+type LogoType = EstablishmentTypes | 'fmcTeam' | 'fmcProdutor';
 
 interface Props {
   className?: string;
@@ -27,6 +28,7 @@ const Logo: React.FC<Props> = ({
       [EstablishmentTypes.Resale]: <ReactSVG src={logoRevenda} />,
       [EstablishmentTypes.Cooperative]: <ReactSVG src={logoCooperativa} />,
       fmcTeam: <ReactSVG src={logoEquipe} />,
+      fmcProdutor: <ReactSVG src={logoProdutor} />,
     }),
     [],
   );

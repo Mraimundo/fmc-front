@@ -25,6 +25,7 @@ import { Container } from './styles';
 const Dashboard: React.FC = ({ children }) => {
   const { shouldShowRegulationsModal, participant } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
+  const [logoType, setLogoType] = useState('');
 
   useEffect(() => {
     if (!participant || !participant.id) {
@@ -34,11 +35,13 @@ const Dashboard: React.FC = ({ children }) => {
 
     if (participant.profile === 'FMC') {
       setTheme(fmcTeamTheme);
+      setLogoType('fmcTeam');
       return;
     }
 
     if (participant.profile === 'PRODUTOR') {
       setTheme(fmcProdutorTheme);
+      setLogoType('fmcProdutor');
       return;
     }
 
@@ -46,6 +49,7 @@ const Dashboard: React.FC = ({ children }) => {
       participant.establishment.type_name === EstablishmentTypes.Cooperative
     ) {
       setTheme(cooperativaTheme);
+      setLogoType('fmcProdutor');
       return;
     }
 
@@ -79,13 +83,7 @@ const Dashboard: React.FC = ({ children }) => {
         <ModalRegulations opened={shouldShowRegulationsModal} />
       ) : (
         <Container>
-          <Logo
-            logoType={
-              participant.profile === 'FMC'
-                ? 'fmcTeam'
-                : participant.establishment.type_name
-            }
-          />
+          <Logo logoType={logoType} />
           <Visible xl xxl>
             <Header />
           </Visible>

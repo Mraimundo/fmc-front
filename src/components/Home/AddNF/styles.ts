@@ -15,23 +15,21 @@ export const Container = styled.div`
     rgba(101, 85, 77, 0.09) 100%
   );
   color: ${({ theme }) => theme.font.color.primary};
+`;
 
-  > div {
-    border: 1px dashed ${({ theme }) => theme.font.color.secondary};
-    border-radius: 10px;
-    padding: 24px;
-    @media (min-width: 768px) {
-      padding: 50px 24px;
-    }
+export const Content = styled.div`
+  position: relative;
+
+  border: 1px dashed ${({ theme }) => theme.font.color.secondary};
+  border-radius: 10px;
+  padding: 24px;
+  @media (min-width: 768px) {
+    padding: 50px 24px;
   }
   a {
     text-decoration: none;
     color: #181818;
   }
-`;
-
-export const Content = styled.div`
-  position: relative;
 
   @media (max-width: 767px) {
     > * {
@@ -66,6 +64,13 @@ export const Content = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+`;
+export const StyledStatusTable = styled.div`
+  padding: 12px 22px;
+  border-radius: 10px;
+  background: #f4f4f3;
+  border: 1px dashed ${({ theme }) => theme.font.color.secondary};
+  margin-top: 10px;
 `;
 
 export const Title = styled.h3`
