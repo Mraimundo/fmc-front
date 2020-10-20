@@ -57,17 +57,20 @@ const Charts: React.FC = () => {
         : clients.map(item => item.name);
 
     arr = Object.keys(charts).map(item => {
-      const { firstDataBar, secondDataBar, title, thirdDataBar } = charts[
-        item as ChartName
-      ];
+      const { dataset, title } = charts[item as ChartName];
 
       return () =>
         getChart({
           title,
           labels,
-          firstDataBar,
-          secondDataBar,
-          thirdDataBar,
+          datasets: dataset.map(_item => ({
+            data: _item.data,
+            backgroundColor: _item.backgroundColor,
+            borderColor: _item.borderColor,
+            borderWidth: _item.borderWidth,
+            label: _item.label,
+            visible: _item.visible,
+          })),
           showLabel: true,
         });
     });
