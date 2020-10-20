@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from 'context/AuthContext';
-import { KAM, RTC } from 'config/constants';
+import { KAM, RTC, GRV, GRM } from 'config/constants';
 import {
   getChannelCampaignPerformanceLink,
   getProductsPerformanceLink,
@@ -15,7 +15,7 @@ import { Container, Content, TabWrapper, TabsList, Tab } from './styles';
 
 type Tab = 'reports' | 'charts';
 
-const RolesToShowTabs = [KAM, RTC];
+const RolesToShowTabs = [KAM, RTC, GRV, GRM];
 
 const Report: React.FC = () => {
   const [loading, setLoading] = useState(false);

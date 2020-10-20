@@ -49,7 +49,7 @@ const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
     return filter.map(item => item.name);
   }
 
-  return data.map(item => item.client_group);
+  return data.map(item => item.name);
 };
 
 const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
@@ -58,15 +58,13 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 
 const getClients = (data: Data[]): Client[] => {
   return data
-    .map(item => ({ name: item.client_group }))
+    .map(item => ({ name: item.name }))
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
   const labels = getDataLabels(data, filter);
-  const filteredData = data.filter(
-    item => labels.indexOf(item.client_group) >= 0,
-  );
+  const filteredData = data.filter(item => labels.indexOf(item.name) >= 0);
 
   return {
     billingRealized: {
