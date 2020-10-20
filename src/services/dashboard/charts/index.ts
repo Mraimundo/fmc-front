@@ -40,7 +40,9 @@ const getChartsData = async (profile: ApproverProfile): Promise<Data[]> => {
 
   const {
     data: { data },
-  } = await pluginApi.get<{ data: CustomResponse[] }>('dashboards/performance');
+  } = await pluginApi.get<{ data: CustomResponse[] }>(
+    'dashboards/team-performance',
+  );
   return data.map(item => ({ ...item, name: item.rtc_name }));
 };
 
