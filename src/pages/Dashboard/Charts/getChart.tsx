@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { FONTS } from 'styles/font/globals';
 import { ChartData, ChartColor } from 'chart.js';
@@ -8,9 +8,6 @@ import { fakeFormatDollars } from 'util/points';
 
 interface Props {
   labels: string[];
-  /* firstDataBar: number[];
-  secondDataBar: number[];
-  thirdDataBar: number[]; */
   showLabel?: boolean;
   title?: string;
   datasets: {
@@ -25,9 +22,6 @@ interface Props {
 
 export default ({
   labels,
-  /* firstDataBar,
-  secondDataBar,
-  thirdDataBar, */
   datasets,
   showLabel = true,
   title,
@@ -40,41 +34,11 @@ export default ({
       ...item,
       barThickness: 20,
       datalabels: { display: item.visible },
-      hidden: item.visible,
+      hidden: item.visible === false,
       hoverBackgroundColor: item.backgroundColor,
       hoverBorderColor: item.borderColor,
-    })) /* [
-      {
-        label: 'Meta',
-        backgroundColor: '#CDD6E1',
-        borderColor: '#2464A3',
-        borderWidth: 1,
-        hoverBackgroundColor: '#CDD6E1',
-        hoverBorderColor: '#2464A3',
-        data: firstDataBar,
-        barThickness: 20,
-      },
-      {
-        label: 'Realizado',
-        backgroundColor: '#FF6565',
-        borderColor: '#A32B2B',
-        borderWidth: 1,
-        hoverBackgroundColor: '#FF6565',
-        hoverBorderColor: '#A32B2B',
-        data: secondDataBar,
-        barThickness: 20,
-      },
-      {
-        label: '',
-        data: thirdDataBar,
-        hidden: true,
-        hideInLegendAndTooltip: true,
-        showLine: false,
-        fill: false,
-        datalabels: { display: false },
-        /* backgroundColor: 'transparent', * /
-      },
-    ] */,
+      hideInLegendAndTooltip: item.visible === false,
+    })),
   };
 
   return (
