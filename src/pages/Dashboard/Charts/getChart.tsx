@@ -81,7 +81,7 @@ export default ({
     <Component
       key={`MyKey-${labels.length}-${title}`}
       data={result}
-      /* height={60 * labels.length + 100} */
+      height={70 * labels.length + 120}
       redraw
       options={{
         responsive: true,

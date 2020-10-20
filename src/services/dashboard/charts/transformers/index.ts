@@ -57,9 +57,7 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 };
 
 const getClients = (data: Data[]): Client[] => {
-  return data
-    .map(item => ({ name: item.name }))
-    .sort((a, b) => (a.name > b.name ? 1 : -1));
+  return data.map(item => ({ name: item.name }));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
