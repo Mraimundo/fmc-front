@@ -4,11 +4,33 @@ export interface Client {
   name: string;
 }
 
+type DataColumnName =
+  | 'billing_goal'
+  | 'billing_result'
+  | 'billing_percentage'
+  | 'pog_goal'
+  | 'pog_result'
+  | 'pog_percentage'
+  | 'premio_goal'
+  | 'premio_result'
+  | 'premio_percentage'
+  | 'hero_goal'
+  | 'hero_result'
+  | 'hero_percentage'
+  | 'talisman_goal'
+  | 'talisman_result'
+  | 'talisman_percentage';
+
 interface ChartData {
   labels: string[];
-  firstDataBar: number[];
-  secondDataBar: number[];
-  thirdDataBar: number[];
+  dataset: {
+    data: number[];
+    backgroundColor?: string;
+    borderColor?: string;
+    borderWidth?: number;
+    label?: string;
+    visible?: boolean;
+  }[];
   title: string;
 }
 
@@ -27,23 +49,6 @@ export interface Charts {
   talismaRealized: ChartData;
 }
 
-type DataColumnName =
-  | 'billing_goal'
-  | 'billing_result'
-  | 'billing_percentage'
-  | 'pog_goal'
-  | 'pog_result'
-  | 'pog_percentage'
-  | 'premio_goal'
-  | 'premio_result'
-  | 'premio_percentage'
-  | 'hero_goal'
-  | 'hero_result'
-  | 'hero_percentage'
-  | 'talisman_goal'
-  | 'talisman_result'
-  | 'talisman_percentage';
-
 const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
   if (filter) {
     return filter.map(item => item.name);
@@ -57,9 +62,7 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 };
 
 const getClients = (data: Data[]): Client[] => {
-  return data
-    .map(item => ({ name: item.name }))
-    .sort((a, b) => (a.name > b.name ? 1 : -1));
+  return data.map(item => ({ name: item.name }));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
@@ -69,37 +72,122 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
   return {
     billingRealized: {
       labels,
-      firstDataBar: getDataNumbers(filteredData, 'billing_goal'),
-      secondDataBar: getDataNumbers(filteredData, 'billing_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'billing_percentage'),
-      title: 'Faturamento (US$)',
+      dataset: [
+        {
+          data: getDataNumbers(filteredData, 'billing_goal'),
+          backgroundColor: '#CDD6E1',
+          borderColor: '#2464A3',
+          borderWidth: 1,
+          label: 'Meta',
+        },
+        {
+          data: getDataNumbers(filteredData, 'billing_result'),
+          backgroundColor: '#FF6565',
+          borderColor: '#A32B2B',
+          borderWidth: 1,
+          label: 'Realizado',
+        },
+        {
+          data: getDataNumbers(filteredData, 'billing_percentage'),
+          visible: false,
+        },
+      ],
+      title: 'Faturamento (MM US$)',
     },
     pogRealized: {
       labels,
-      firstDataBar: getDataNumbers(filteredData, 'pog_goal'),
-      secondDataBar: getDataNumbers(filteredData, 'pog_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'pog_percentage'),
-      title: 'POG (US$)',
+      dataset: [
+        {
+          data: getDataNumbers(filteredData, 'pog_goal'),
+          backgroundColor: '#CDD6E1',
+          borderColor: '#2464A3',
+          borderWidth: 1,
+          label: 'Meta',
+        },
+        {
+          data: getDataNumbers(filteredData, 'pog_result'),
+          backgroundColor: '#FF6565',
+          borderColor: '#A32B2B',
+          borderWidth: 1,
+          label: 'Realizado',
+        },
+        {
+          data: getDataNumbers(filteredData, 'pog_percentage'),
+          visible: false,
+        },
+      ],
+      title: 'POG (MM US$)',
     },
     premioRealized: {
       labels,
-      firstDataBar: getDataNumbers(filteredData, 'premio_goal'),
-      secondDataBar: getDataNumbers(filteredData, 'premio_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'premio_percentage'),
+      dataset: [
+        {
+          data: getDataNumbers(filteredData, 'premio_goal'),
+          backgroundColor: 'green',
+          borderColor: 'red',
+          borderWidth: 1,
+          label: 'Meta',
+        },
+        {
+          data: getDataNumbers(filteredData, 'premio_result'),
+          backgroundColor: 'yellow',
+          borderColor: 'blue',
+          borderWidth: 1,
+          label: 'Realizado',
+        },
+        {
+          data: getDataNumbers(filteredData, 'premio_percentage'),
+          visible: false,
+        },
+      ],
       title: 'PREMIO (L)',
     },
     heroRealized: {
       labels,
-      firstDataBar: getDataNumbers(filteredData, 'hero_goal'),
-      secondDataBar: getDataNumbers(filteredData, 'hero_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'hero_percentage'),
+      dataset: [
+        {
+          data: getDataNumbers(filteredData, 'hero_goal'),
+          backgroundColor: '#CDD6E1',
+          borderColor: '#2464A3',
+          borderWidth: 1,
+          label: 'Meta',
+        },
+        {
+          data: getDataNumbers(filteredData, 'hero_result'),
+          backgroundColor: '#FF6565',
+          borderColor: '#A32B2B',
+          borderWidth: 1,
+          label: 'Realizado',
+        },
+        {
+          data: getDataNumbers(filteredData, 'hero_percentage'),
+          visible: false,
+        },
+      ],
       title: 'HERO (L)',
     },
     talismaRealized: {
       labels,
-      firstDataBar: getDataNumbers(filteredData, 'talisman_goal'),
-      secondDataBar: getDataNumbers(filteredData, 'talisman_result'),
-      thirdDataBar: getDataNumbers(filteredData, 'talisman_percentage'),
+      dataset: [
+        {
+          data: getDataNumbers(filteredData, 'talisman_goal'),
+          backgroundColor: '#CDD6E1',
+          borderColor: '#2464A3',
+          borderWidth: 1,
+          label: 'Meta',
+        },
+        {
+          data: getDataNumbers(filteredData, 'talisman_result'),
+          backgroundColor: '#FF6565',
+          borderColor: '#A32B2B',
+          borderWidth: 1,
+          label: 'Realizado',
+        },
+        {
+          data: getDataNumbers(filteredData, 'talisman_percentage'),
+          visible: false,
+        },
+      ],
       title: 'TALISMAN (L)',
     },
   };
