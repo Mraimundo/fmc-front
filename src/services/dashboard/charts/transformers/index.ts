@@ -72,14 +72,14 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       firstDataBar: getDataNumbers(filteredData, 'billing_goal'),
       secondDataBar: getDataNumbers(filteredData, 'billing_result'),
       thirdDataBar: getDataNumbers(filteredData, 'billing_percentage'),
-      title: 'Faturamento (US$)',
+      title: 'Faturamento (MM US$)',
     },
     pogRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'pog_goal'),
       secondDataBar: getDataNumbers(filteredData, 'pog_result'),
       thirdDataBar: getDataNumbers(filteredData, 'pog_percentage'),
-      title: 'POG (US$)',
+      title: 'POG (MM US$)',
     },
     premioRealized: {
       labels,
