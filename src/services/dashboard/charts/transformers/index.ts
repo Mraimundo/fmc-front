@@ -57,9 +57,7 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 };
 
 const getClients = (data: Data[]): Client[] => {
-  return data
-    .map(item => ({ name: item.name }))
-    .sort((a, b) => (a.name > b.name ? 1 : -1));
+  return data.map(item => ({ name: item.name }));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
@@ -72,14 +70,14 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       firstDataBar: getDataNumbers(filteredData, 'billing_goal'),
       secondDataBar: getDataNumbers(filteredData, 'billing_result'),
       thirdDataBar: getDataNumbers(filteredData, 'billing_percentage'),
-      title: 'Faturamento (US$)',
+      title: 'Faturamento (MM US$)',
     },
     pogRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'pog_goal'),
       secondDataBar: getDataNumbers(filteredData, 'pog_result'),
       thirdDataBar: getDataNumbers(filteredData, 'pog_percentage'),
-      title: 'POG (US$)',
+      title: 'POG (MM US$)',
     },
     premioRealized: {
       labels,
