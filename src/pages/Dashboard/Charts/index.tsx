@@ -65,9 +65,26 @@ const Charts: React.FC = () => {
         getChart({
           title,
           labels,
-          firstDataBar,
-          secondDataBar,
-          thirdDataBar,
+          datasets: [
+            {
+              data: firstDataBar,
+              label: 'Meta',
+              backgroundColor: '#CDD6E1',
+              borderColor: '#2464A3',
+              borderWidth: 1,
+            },
+            {
+              data: secondDataBar,
+              label: 'Realizado',
+              backgroundColor: '#FF6565',
+              borderColor: '#A32B2B',
+              borderWidth: 1,
+            },
+            {
+              data: thirdDataBar,
+              visible: false,
+            },
+          ],
           showLabel: true,
         });
     });

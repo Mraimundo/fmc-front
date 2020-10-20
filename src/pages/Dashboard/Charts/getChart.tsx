@@ -1,25 +1,34 @@
 import React, { useRef } from 'react';
 
 import { FONTS } from 'styles/font/globals';
-import { ChartData } from 'chart.js';
+import { ChartData, ChartColor } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, HorizontalBar } from 'react-chartjs-2';
 import { fakeFormatDollars } from 'util/points';
 
 interface Props {
   labels: string[];
-  firstDataBar: number[];
+  /* firstDataBar: number[];
   secondDataBar: number[];
-  thirdDataBar: number[];
+  thirdDataBar: number[]; */
   showLabel?: boolean;
   title?: string;
+  datasets: {
+    data: number[];
+    label?: string;
+    visible?: boolean;
+    backgroundColor?: ChartColor;
+    borderColor?: ChartColor;
+    borderWidth?: number;
+  }[];
 }
 
 export default ({
   labels,
-  firstDataBar,
+  /* firstDataBar,
   secondDataBar,
-  thirdDataBar,
+  thirdDataBar, */
+  datasets,
   showLabel = true,
   title,
 }: Props): JSX.Element => {
@@ -27,7 +36,14 @@ export default ({
 
   const result: ChartData = {
     labels,
-    datasets: [
+    datasets: datasets.map(item => ({
+      ...item,
+      barThickness: 20,
+      datalabels: { display: item.visible },
+      hidden: item.visible,
+      hoverBackgroundColor: item.backgroundColor,
+      hoverBorderColor: item.borderColor,
+    })) /* [
       {
         label: 'Meta',
         backgroundColor: '#CDD6E1',
@@ -56,16 +72,16 @@ export default ({
         showLine: false,
         fill: false,
         datalabels: { display: false },
-        /* backgroundColor: 'transparent', */
+        /* backgroundColor: 'transparent', * /
       },
-    ],
+    ] */,
   };
 
   return (
     <Component
       key={`MyKey-${labels.length}-${title}`}
       data={result}
-      height={60 * labels.length + 100}
+      /* height={60 * labels.length + 100} */
       redraw
       options={{
         responsive: true,
