@@ -41,6 +41,7 @@
       "no-unused-expressions": "off",
       "no-param-reassign": ["error", { "props": false }],
       "@typescript-eslint/camelcase": ["error", { "properties": "never", "ignoreDestructuring": true } ],
+      "react/require-default-props": [0],
       "no-empty": [
         "error",
         { "allowEmptyCatch": true }

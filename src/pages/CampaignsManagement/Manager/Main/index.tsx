@@ -52,6 +52,15 @@ const Main: React.FC = () => {
     async (data: Campaign) => {
       try {
         if (!data.id) return;
+        if (!(await isValid(data))) {
+          const errors = await getErrors(data);
+          dispatch(setErrors(errors));
+          throw new Error(
+            'Por favor confira o preenchimento do formulário nas abas anteriores',
+          );
+        }
+        const dto = campaignToUpdateCampaignDTO(data);
+        await updateCampaign(dto);
         await requestForApprovalCampaign(data.id);
         addToast({
           title: 'Solicitação de aprovação feita com sucesso',
@@ -67,7 +76,7 @@ const Main: React.FC = () => {
         });
       }
     },
-    [addToast],
+    [addToast, isValid, dispatch, getErrors],
   );
 
   const handleCancel = useCallback(
