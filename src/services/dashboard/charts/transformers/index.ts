@@ -130,8 +130,8 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
         },
         {
           data: getDataNumbers(filteredData, 'premio_result'),
-          backgroundColor: '#FFE5D0',
-          borderColor: '#FDCA84',
+          backgroundColor: '#EC959F',
+          borderColor: '#913944',
           borderWidth: 1,
           label: 'Realizado',
         },
@@ -154,8 +154,8 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
         },
         {
           data: getDataNumbers(filteredData, 'hero_result'),
-          backgroundColor: '#FFE5D0',
-          borderColor: '#FDCA84',
+          backgroundColor: '#C1F7D2',
+          borderColor: '#47C246',
           borderWidth: 1,
           label: 'Realizado',
         },
@@ -178,8 +178,8 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
         },
         {
           data: getDataNumbers(filteredData, 'talisman_result'),
-          backgroundColor: '#FFE5D0',
-          borderColor: '#FDCA84',
+          backgroundColor: '#B5BDF3',
+          borderColor: '#838BC5',
           borderWidth: 1,
           label: 'Realizado',
         },
