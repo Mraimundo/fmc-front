@@ -12,6 +12,8 @@ import {
   getParticipantByCpf,
   getParticipantByUpn,
 } from 'services/register/getParticipantData';
+import FirstAccessMessage from './FirstAccessMessage';
+
 import { MenuList, ItemList } from './styles';
 
 interface SignUpFormData {
@@ -22,6 +24,7 @@ type TypeSelect = 'fmc' | 'participant';
 
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
 
@@ -46,6 +49,7 @@ const FormSignUp: React.FC = () => {
       history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
+      setShowModal(true);
       addToast({
         title: e.response?.data?.message || 'Falha ao checar CPF',
         type: 'error',
@@ -60,9 +64,13 @@ const FormSignUp: React.FC = () => {
     },
     [setValue],
   );
+  const onRequestClose = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   return (
     <FormContext {...methods}>
+      <FirstAccessMessage isOpen={showModal} onRequestClose={onRequestClose} />
       <form onSubmit={onSubmit}>
         <MenuList>
           <ItemList
