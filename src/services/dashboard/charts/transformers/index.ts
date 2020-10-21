@@ -32,6 +32,7 @@ interface ChartData {
     visible?: boolean;
   }[];
   title: string;
+  divideValueBy?: number;
 }
 
 export type ChartName =
@@ -51,7 +52,9 @@ export interface Charts {
 
 const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
   if (filter) {
-    return filter.map(item => item.name);
+    return data
+      .filter(item => !!filter.find(i => i.name === item.name))
+      .map(item => item.name);
   }
 
   return data.map(item => item.name);
@@ -93,6 +96,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
         },
       ],
       title: 'Faturamento (MM US$)',
+      divideValueBy: 1000,
     },
     pogRealized: {
       labels,
@@ -117,6 +121,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
         },
       ],
       title: 'POG (MM US$)',
+      divideValueBy: 1000,
     },
     premioRealized: {
       labels,
@@ -140,7 +145,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
           visible: false,
         },
       ],
-      title: 'PREMIO (L)',
+      title: 'PREMIO<span>®</span> (L)',
     },
     heroRealized: {
       labels,
@@ -164,7 +169,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
           visible: false,
         },
       ],
-      title: 'HERO (L)',
+      title: 'HERO<span>®</span> (L)',
     },
     talismaRealized: {
       labels,
@@ -188,7 +193,7 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
           visible: false,
         },
       ],
-      title: 'TALISMAN (L)',
+      title: 'TALISMAN<span>®</span> (L)',
     },
   };
 };
