@@ -123,15 +123,15 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       dataset: [
         {
           data: getDataNumbers(filteredData, 'premio_goal'),
-          backgroundColor: 'green',
-          borderColor: 'red',
+          backgroundColor: '#EAEAEA',
+          borderColor: '#B4B4B4',
           borderWidth: 1,
           label: 'Meta',
         },
         {
           data: getDataNumbers(filteredData, 'premio_result'),
-          backgroundColor: 'yellow',
-          borderColor: 'blue',
+          backgroundColor: '#FFE5D0',
+          borderColor: '#FDCA84',
           borderWidth: 1,
           label: 'Realizado',
         },
@@ -147,15 +147,15 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       dataset: [
         {
           data: getDataNumbers(filteredData, 'hero_goal'),
-          backgroundColor: '#CDD6E1',
-          borderColor: '#2464A3',
+          backgroundColor: '#EAEAEA',
+          borderColor: '#B4B4B4',
           borderWidth: 1,
           label: 'Meta',
         },
         {
           data: getDataNumbers(filteredData, 'hero_result'),
-          backgroundColor: '#FF6565',
-          borderColor: '#A32B2B',
+          backgroundColor: '#FFE5D0',
+          borderColor: '#FDCA84',
           borderWidth: 1,
           label: 'Realizado',
         },
@@ -171,15 +171,15 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       dataset: [
         {
           data: getDataNumbers(filteredData, 'talisman_goal'),
-          backgroundColor: '#CDD6E1',
-          borderColor: '#2464A3',
+          backgroundColor: '#EAEAEA',
+          borderColor: '#B4B4B4',
           borderWidth: 1,
           label: 'Meta',
         },
         {
           data: getDataNumbers(filteredData, 'talisman_result'),
-          backgroundColor: '#FF6565',
-          borderColor: '#A32B2B',
+          backgroundColor: '#FFE5D0',
+          borderColor: '#FDCA84',
           borderWidth: 1,
           label: 'Realizado',
         },
