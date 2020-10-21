@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import parser from 'html-react-parser';
 import { getChartsData, Data as IData } from 'services/dashboard/charts';
 import {
   getCharts,
@@ -14,7 +15,7 @@ import getChart from './getChart';
 import Filters from './Filters';
 import { Container, Box } from './styles';
 
-type Arr = () => JSX.Element;
+type Arr = [string, () => JSX.Element];
 
 const Charts: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ const Charts: React.FC = () => {
   }, [participant]);
 
   useEffect(() => {
+    console.log('oi');
     if (chartsData.length === 0) return;
 
     setLoading(true);
@@ -53,26 +55,32 @@ const Charts: React.FC = () => {
 
     const labels =
       filteredClients.length > 0
-        ? filteredClients.map(item => item.name)
+        ? clients
+            .filter(item => !!filteredClients.find(i => i.name === item.name))
+            .map(item => item.name)
         : clients.map(item => item.name);
 
     arr = Object.keys(charts).map(item => {
-      const { dataset, title } = charts[item as ChartName];
+      const { dataset, title, divideValueBy } = charts[item as ChartName];
 
-      return () =>
-        getChart({
-          title,
-          labels,
-          datasets: dataset.map(_item => ({
-            data: _item.data,
-            backgroundColor: _item.backgroundColor,
-            borderColor: _item.borderColor,
-            borderWidth: _item.borderWidth,
-            label: _item.label,
-            visible: _item.visible,
-          })),
-          showLabel: true,
-        });
+      return [
+        title,
+        () =>
+          getChart({
+            /* title, */
+            labels,
+            datasets: dataset.map(_item => ({
+              data: _item.data,
+              backgroundColor: _item.backgroundColor,
+              borderColor: _item.borderColor,
+              borderWidth: _item.borderWidth,
+              label: _item.label,
+              visible: _item.visible,
+            })),
+            showLabel: true,
+            divideValueBy,
+          }),
+      ];
     });
 
     setAlready(true);
@@ -89,8 +97,11 @@ const Charts: React.FC = () => {
       <Filters clients={clients} onFilter={onFilter} />
       {!loading && already && (
         <>
-          {drawChart.map(item => (
-            <Box>{item()}</Box>
+          {drawChart.map(([title, item]) => (
+            <Box key={title}>
+              <h3>{parser(title || '')}</h3>
+              {item()}
+            </Box>
           ))}
         </>
       )}

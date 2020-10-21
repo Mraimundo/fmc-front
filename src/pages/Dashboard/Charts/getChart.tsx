@@ -10,6 +10,7 @@ interface Props {
   labels: string[];
   showLabel?: boolean;
   title?: string;
+  divideValueBy?: number;
   datasets: {
     data: number[];
     label?: string;
@@ -25,6 +26,7 @@ export default ({
   datasets,
   showLabel = true,
   title,
+  divideValueBy = 1,
 }: Props): JSX.Element => {
   const Component: typeof HorizontalBar | typeof Bar = HorizontalBar;
 
@@ -69,14 +71,22 @@ export default ({
                 context.chart.data.datasets[context.datasetIndex].label ===
                 'Realizado'
               ) {
-                const uss = fakeFormatDollars(parseFloat(value) / 1000, 0, 0);
+                const uss = fakeFormatDollars(
+                  parseFloat(value) / divideValueBy,
+                  0,
+                  0,
+                );
                 const tmp = (context.chart.data.datasets[2].data as string[])[
                   context.dataIndex
                 ];
                 const percent = `${fakeFormatDollars(parseFloat(tmp), 0, 0)}%`;
                 return `${uss} (${percent})`;
               }
-              return `${fakeFormatDollars(parseFloat(value) / 1000, 0, 0)}`;
+              return `${fakeFormatDollars(
+                parseFloat(value) / divideValueBy,
+                0,
+                0,
+              )}`;
             },
           },
         },
