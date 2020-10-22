@@ -12,9 +12,9 @@ export interface Contact {
   municipio?: string;
   agree: boolean;
   canal: { title: string; value: string };
-  estado: string;
-  produtorAgricola: string;
-  ficouSabendo: string;
+  estado: { title: string; value: string };
+  produtorAgricola: { title: string; value: string };
+  ficouSabendo: { title: string; value: string };
   fields_aditional: [];
 }
 
