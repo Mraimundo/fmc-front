@@ -41,7 +41,7 @@ const Resume: React.FC = () => {
         </Content>
       </Container>
     ),
-    [resume],
+    [resume, participant.profile_value],
   );
 };
 
