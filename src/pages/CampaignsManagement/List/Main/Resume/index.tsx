@@ -1,11 +1,16 @@
 import React, { useMemo } from 'react';
+import { useAuth } from 'context/AuthContext';
+import { CRM, GRM, GRV, RTC, KAM } from 'config/constants';
 import history from 'services/history';
 import { useCampaignsList } from '../../Context';
 
 import { Container, Content, Box, Action, AddButton } from './styles';
 
+const allowRolesToAddCampaigns = [CRM, GRM, GRV, RTC, KAM];
+
 const Resume: React.FC = () => {
   const { resume } = useCampaignsList();
+  const { participant } = useAuth();
 
   return useMemo(
     () => (
@@ -22,19 +27,21 @@ const Resume: React.FC = () => {
               </div>
             ))}
           </Box>
-          <Action>
-            <span>Nova campanha</span>
-            <AddButton
-              type="button"
-              onClick={() =>
-                history.push('/gerenciamento-de-campanhas/registrar')
-              }
-            />
-          </Action>
+          {allowRolesToAddCampaigns.includes(participant.profile_value) && (
+            <Action>
+              <span>Nova campanha</span>
+              <AddButton
+                type="button"
+                onClick={() =>
+                  history.push('/gerenciamento-de-campanhas/registrar')
+                }
+              />
+            </Action>
+          )}
         </Content>
       </Container>
     ),
-    [resume],
+    [resume, participant.profile_value],
   );
 };
 
