@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import DefaultModal from 'components/shared/Modal';
 
 export const Container = styled.div`
@@ -7,7 +7,11 @@ export const Container = styled.div`
   flex-grow: 1;
 `;
 
-export const Button = styled.div`
+interface ButtonProps {
+  disabled: boolean;
+}
+
+export const Button = styled.div<ButtonProps>`
   cursor: pointer;
   position: relative;
   color: #fff;
@@ -24,10 +28,6 @@ export const Button = styled.div`
   margin-top: 8px;
   line-height: 1;
   font-family: ${({ theme }) => theme.font.fontFamily.condensed};
-
-  &[disabled] {
-    cursor: default;
-  }
 
   input {
     position: absolute;
@@ -54,6 +54,12 @@ export const Button = styled.div`
   @media (min-width: 1024px) {
     font-size: 22px;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default;
+    `}
 `;
 
 export const Modal = styled(DefaultModal)`
