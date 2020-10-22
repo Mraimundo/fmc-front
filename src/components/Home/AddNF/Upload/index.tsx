@@ -19,7 +19,6 @@ interface AddNota {
 }
 
 const Upload: React.FC = () => {
-  // const [attachingFile, setAttachingFile] = useState(false);
   const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -37,33 +36,40 @@ const Upload: React.FC = () => {
     },
     [],
   );
-  const handleHideModal = () => {};
+  const onRequestClose = () => {
+    setShowModal(false);
+    console.log('TESTE onRequestClose');
+  };
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>
-      <Button>
-        <input
-          type="file"
-          id="fileId"
-          accept="image/x-png, image/jpg,.pdf"
-          onChange={handleAttachFile}
-        />
-
+      <Button disabled={fileUrl !== ''}>
         {fileUrl !== '' ? (
           <span>Nota fiscal enviada Com sucesso!</span>
         ) : (
           <div>
+            <input
+              type="file"
+              id="fileId"
+              accept="image/x-png, image/jpg,.pdf"
+              onChange={handleAttachFile}
+            />
+
             <ReactSVG src={uploadIcon} className="icon" />
             <span>Carregar arquivo</span>
           </div>
         )}
       </Button>
 
-      <Modal isOpen={showModal} type="secondary">
+      <Modal
+        isOpen={showModal}
+        type="secondary"
+        onRequestClose={onRequestClose}
+      >
         <ContainerModal>
-          <CloseModal onClick={() => setShowModal(false)} />
+          <CloseModal onClick={onRequestClose} />
           <h3>Nota fiscal enviada com sucesso!</h3>
-          <ButtonModal onClick={() => setShowModal(false)}>ok</ButtonModal>
+          <ButtonModal onClick={onRequestClose}>ok</ButtonModal>
         </ContainerModal>
       </Modal>
     </Container>

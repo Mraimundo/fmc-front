@@ -13,7 +13,7 @@ import DataRegulation from 'components/Regulation/DataRegulation';
 import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
 
 import logoImg from 'assets/images/logo.png';
-import Form from 'components/Auth/Register/Form';
+import Form from 'components/Auth/Register/FormProdutor';
 
 import {
   Container,
@@ -95,7 +95,7 @@ const FirstAccess: React.FC = () => {
 
   return (
     <>
-      {!hasAcceptedDataRegulation ? (
+      {hasAcceptedDataRegulation ? (
         <RegulationContainer>
           <Header>
             <img src={logoImg} alt="Logo" />

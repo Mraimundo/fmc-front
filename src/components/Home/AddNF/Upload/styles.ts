@@ -25,6 +25,10 @@ export const Button = styled.div`
   line-height: 1;
   font-family: ${({ theme }) => theme.font.fontFamily.condensed};
 
+  &[disabled] {
+    cursor: default;
+  }
+
   input {
     position: absolute;
     width: 100%;
@@ -110,7 +114,7 @@ export const CloseModal = styled.button`
   right: 5px;
   width: 14px;
   height: 14px;
-  apperance: none;
+  appearance: none;
   border: 0;
   background-color: transparent;
   background-repeat: no-repeat;
