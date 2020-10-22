@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 12px 22px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.font.color.quartenary};
+  background: #f4f4f3;
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
   margin-top: 10px;
 
