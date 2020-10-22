@@ -22,11 +22,29 @@ interface Customer {
   type: EstablishmentTypes;
 }
 
-export default async (): Promise<Customer[]> => {
+export interface Filters {
+  directorName?: string;
+  regionalName?: string;
+}
+
+export default async (filters: Filters): Promise<Customer[]> => {
   /* Api params ?page=1&limit=15&order=desc */
+  const { directorName, regionalName } = filters;
+
+  let extraSearch = '';
+  if (directorName) {
+    extraSearch += `&directorships[0]=${directorName}`;
+  }
+
+  if (regionalName) {
+    extraSearch += `&regional[0]=${regionalName}`;
+  }
+
   const {
     data: { data },
-  } = await pluginApi.get<ApiResponse>('campaigns/establishments?limit=200');
+  } = await pluginApi.get<ApiResponse>(
+    `campaigns/establishments?limit=200${extraSearch}`,
+  );
   return data.map(item => ({
     id: item.id,
     name: item.client_group,
