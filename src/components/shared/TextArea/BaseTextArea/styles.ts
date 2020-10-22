@@ -72,6 +72,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     padding-bottom: 10px;
     padding-right: 12px;
     overflow-y: scroll;
+    font: inherit;
 
     &::placeholder {
       color: ${({ theme, inputRole }) =>

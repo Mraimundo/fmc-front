@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
-import accordion from './modules/accordion/default';
-import button from './modules/button/fmcTeam';
+import accordion from './modules/accordion/fmcProdutor';
+import button from './modules/button/fmcProdutor';
 import contact from './modules/contact/default';
 import indication from './modules/indication/default';
 import font from './modules/font/fmcProdutor';
