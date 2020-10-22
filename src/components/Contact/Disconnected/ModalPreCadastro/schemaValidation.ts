@@ -23,4 +23,28 @@ export default Yup.object().shape({
     .max(350, 'Limite de 350 caracteres'),
   fileUrl: Yup.string(),
   municipio: Yup.string().required('Muncípio é obrigatório'),
+  estado: Yup.object()
+    .shape({
+      value: Yup.string().required('Estado é obrigatório'),
+    })
+    .required('Estado é obrigatório')
+    .typeError('Estado é obrigatório'),
+  produtorAgricola: Yup.object()
+    .shape({
+      value: Yup.string().required('Informe se é Produtor Agrícola'),
+    })
+    .required('Informe se é Produtor Agrícola')
+    .typeError('Informe se é Produtor Agrícola'),
+  canal: Yup.object()
+    .shape({
+      value: Yup.string().required('Informe o Canal de compra'),
+    })
+    .required('Informe o Canal de compra')
+    .typeError('Informe o Canal de compra'),
+  ficouSabendo: Yup.object()
+    .shape({
+      value: Yup.string().required('Informe como ficou sabendo'),
+    })
+    .required('Informe como ficou sabendo')
+    .typeError('Informe como ficou sabendo'),
 });

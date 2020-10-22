@@ -12,9 +12,11 @@ import {
   getParticipantByCpf,
   getParticipantByUpn,
 } from 'services/register/getParticipantData';
+import DefaultModal from 'components/shared/Modal';
 import FirstAccessMessage from './FirstAccessMessage';
+import ModalPreCadastro from '../../../components/Contact/Disconnected/ModalPreCadastro';
 
-import { MenuList, ItemList } from './styles';
+import { MenuList, ItemList, ContainerModal, InlineLink } from './styles';
 
 interface SignUpFormData {
   param_first_access: string;
@@ -25,6 +27,7 @@ type TypeSelect = 'fmc' | 'participant';
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
 
@@ -57,6 +60,11 @@ const FormSignUp: React.FC = () => {
     }
   });
 
+  const handleOpenPreCadastro = () => {
+    setShowModal(false);
+    setShowFormModal(true);
+  };
+
   const handleSelectType = useCallback(
     (type: TypeSelect) => {
       setTypeSelected(type);
@@ -70,7 +78,35 @@ const FormSignUp: React.FC = () => {
 
   return (
     <FormContext {...methods}>
-      <FirstAccessMessage isOpen={showModal} onRequestClose={onRequestClose} />
+      {/* <FirstAccessMessage isOpen={showModal} onRequestClose={onRequestClose} /> */}
+
+      <DefaultModal
+        isOpen={showModal}
+        onRequestClose={onRequestClose}
+        type="secondary"
+      >
+        <ContainerModal>
+          <h3> Bem-vindo(a)! </h3>
+          <p>
+            Se você é um produtor(a) que compra produtos FMC por meio das
+            revendas ou cooperativas pertencentes ao programa JUNTOS FMC,{' '}
+            <InlineLink onClick={handleOpenPreCadastro}>clique aqui</InlineLink>{' '}
+            para se cadastrar.
+          </p>
+          <p>
+            Se for colaborador(a) de um canal JUNTOS FMC, por favor, solicite
+            sua indicação de acesso diretamente ao seu estabelecimento.
+          </p>
+          <Button
+            type="submit"
+            buttonRole="quaternary"
+            onClick={onRequestClose}
+          >
+            OK
+          </Button>
+        </ContainerModal>
+      </DefaultModal>
+
       <form onSubmit={onSubmit}>
         <MenuList>
           <ItemList
@@ -100,6 +136,11 @@ const FormSignUp: React.FC = () => {
           Cadastrar
         </Button>
       </form>
+
+      <ModalPreCadastro
+        isOpen={showFormModal}
+        onRequestClose={() => setShowFormModal(false)}
+      />
     </FormContext>
   );
 };

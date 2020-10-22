@@ -27,6 +27,9 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    > * {
+      margin-bottom: 16px;
+    }
   }
 `;
 
@@ -91,5 +94,34 @@ export const TextArea = styled(DefaultTextArea)`
 export const DefaultModal = styled(Modal)`
   ._modalContainer {
     padding: 0;
+  }
+`;
+
+export const BoxAccept = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin: 32px 0 !important;
+  width: 100%;
+  text-align: left;
+  color: #e63027;
+
+  > input {
+    cursor: pointer;
+  }
+
+  > span {
+    color: #e63027;
+    font-size: 16px;
+    margin-left: 8px;
+
+    a {
+      color: ${({ theme }) => theme.font.color.primary};
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    > span {
+      font-size: 12px;
+    }
   }
 `;

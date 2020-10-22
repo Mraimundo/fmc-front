@@ -9,10 +9,13 @@ export interface Contact {
   subjectId: number;
   message: string;
   fileUrl?: string;
-  municipio: string;
+  municipio?: string;
   agree: boolean;
-  canal: string;
+  canal: { title: string; value: string };
   estado: string;
+  produtorAgricola: string;
+  ficouSabendo: string;
+  fields_aditional: [];
 }
 
 interface ContactResponse {
@@ -28,26 +31,29 @@ export default async (contact: Contact): Promise<ContactResponse> => {
       contact_phone: `${contact.dddMobile}${contact.mobile}`,
       name: contact.name,
       contact_subject_id: contact.subjectId,
-      municipio: contact.municipio,
-      agree: contact.agree,
-      canal_produtos: contact.canal,
-      estado: contact.estado,
       contact_records: [
         {
           type: 'p',
           text: contact.message,
+          fields_aditional: [
+            {
+              municipio: contact.municipio,
+              canal_produtos: contact.canal.value,
+              estado: contact.estado.value,
+              ficou_sabendo: contact.ficouSabendo.value,
+              produtor_agricola: contact.produtorAgricola.value,
+            },
+          ],
         },
       ],
       file: contact.fileUrl || '',
     };
-    console.log('request');
-    console.log(request);
+
     const { data } = await vendavallApi.post<ContactResponse>(
       'contacts/unlogged',
       request,
     );
-    console.log('request2');
-    console.log(request);
+
     return {
       message: data.message,
       type: data.type === 'success' ? 'success' : 'error',

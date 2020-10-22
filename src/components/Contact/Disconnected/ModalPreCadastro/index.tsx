@@ -9,6 +9,11 @@ import openTicket from 'services/contact/disconnected/openTicket';
 
 import schemaValidation from './schemaValidation';
 
+import UfSelect from '../../../Auth/Register/Form/UfsSelect';
+
+import ProdutorAgricolaSelect from './ProdutorAgricolaSelect';
+import ComoFicouConhecendoSelect from './ComoFicouConhecendoSelect';
+import CanalSelect from './CanalSelect';
 import {
   Container,
   Title,
@@ -19,6 +24,7 @@ import {
   Button,
   AttachFile,
   DefaultModal,
+  BoxAccept,
 } from './styles';
 
 interface ModalProps {
@@ -36,15 +42,18 @@ interface ContactFormData {
   message: string;
   fileUrl: string;
   municipio: string;
+  estado: Option | null;
+  produtorAgricola: Option | null;
+  canal: Option | null;
+  ficouSabendo: Option | null;
   agree: boolean;
-  canal: string;
-  estado: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
+const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const [loading, setLoading] = useState(false);
   const [fileAttached, setFileAttached] = useState(false);
   const [attaching, setAttaching] = useState(false);
+  const [hasAgreed, setHasAgreed] = useState(false);
   const { addToast } = useToast();
 
   const methods = useForm<ContactFormData>({
@@ -53,28 +62,33 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     mode: 'onSubmit',
     defaultValues: {
       subject: null,
+      estado: null,
+      produtorAgricola: null,
+      canal: null,
+      ficouSabendo: null,
     },
   });
 
   const { handleSubmit, register, setValue } = methods;
   const onSubmit = handleSubmit(async data => {
-    setLoading(true);
-    try {
-      const { message } = await openTicket({
-        ...data,
-        subjectId: parseInt(data.subject?.value || '0', 0),
-      });
-      addToast({ title: message });
-      onRequestClose();
-    } catch (e) {
-      addToast({
-        title:
-          e.response?.data?.message ||
-          'Falha ao abir chamado. Por favor tente novamente',
-        type: 'error',
-      });
+    if (hasAgreed) {
+      try {
+        const { message } = await openTicket({
+          ...data,
+          subjectId: parseInt(data.subject?.value || '0', 0),
+        });
+        addToast({ title: message });
+        onRequestClose();
+      } catch (e) {
+        addToast({
+          title:
+            e.response?.data?.message ||
+            'Falha ao abir chamado. Por favor tente novamente',
+          type: 'error',
+        });
+      }
+      setLoading(false);
     }
-    setLoading(false);
   });
 
   const inputRole = 'secondary';
@@ -99,7 +113,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       type="primary"
     >
       <Container>
-        <Title>Fale conosco pre</Title>
+        <Title>Fale conosco</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
             <Input name="name" label="Nome" inputRole={inputRole} />
@@ -127,7 +141,25 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               />
             </BoxPhone>
             <SubjectSelect name="subject" inputRole={inputRole} />
+
+            {/* <Input name="subjectFacade" disabled value="Pré-cadastro" label="Assunto" inputRole={inputRole} />
+            <input type="hidden" name="subject" value="13"/> */}
+
             <Input name="municipio" label="Município" inputRole={inputRole} />
+
+            <UfSelect name="estado" label="Estado" inputRole={inputRole} />
+
+            <ProdutorAgricolaSelect
+              name="produtorAgricola"
+              inputRole={inputRole}
+            />
+
+            <CanalSelect name="canal" inputRole={inputRole} />
+            <ComoFicouConhecendoSelect
+              name="ficouSabendo"
+              inputRole={inputRole}
+            />
+
             <TextArea
               name="message"
               label="Mensagem"
@@ -157,6 +189,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               </>
             )}
 
+            <BoxAccept>
+              <input
+                type="checkbox"
+                name="agree"
+                checked={hasAgreed}
+                onChange={() => {
+                  setHasAgreed(e => !e);
+                }}
+              />
+              <span>
+                Concordo em compartilhar meus dados para o pré-cadastro no
+                Programa Juntos FMC - Produtor.*
+                {!hasAgreed && <strong>Obrigatório</strong>}
+              </span>
+            </BoxAccept>
+
             <Button type="submit" buttonRole="primary" loading={loading}>
               Enviar
             </Button>
@@ -167,4 +215,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   );
 };
 
-export default Modal;
+export default ModalPreCadastro;
