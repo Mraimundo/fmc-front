@@ -74,6 +74,8 @@ const Filters: React.FC<Props> = ({ profile }) => {
           setValue={value => setCustomerSelected(value)}
           value={customerSelected}
           placeholder="Grupo de cliente"
+          directorName={directorSelected?.title}
+          regionalName={regionalSelected?.title}
         />
         <CampaignStatusSelect
           setValue={value => setStatusSelected(value)}
@@ -97,10 +99,10 @@ const Filters: React.FC<Props> = ({ profile }) => {
       customerSelected,
       statusSelected,
       mechanicSelected,
-      campaigns,
       profilesToNotShowRegional,
       profilesToNotShowDirectors,
       profile,
+      pagination,
     ],
   );
 };
