@@ -10,6 +10,8 @@ interface Props {
   setValue(value: Option | null): void;
   value: Option | null;
   placeholder?: string;
+  directorName?: string;
+  regionalName?: string;
 }
 
 const CustomersSelect: React.FC<Props> = ({
@@ -18,16 +20,35 @@ const CustomersSelect: React.FC<Props> = ({
   setValue,
   label,
   placeholder,
+  directorName,
+  regionalName,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData().then(data => setOptions(transformer(data)));
-  }, []);
+    setLoading(true);
+    getData({ directorName, regionalName })
+      .then(data => setOptions(transformer(data)))
+      .catch(() => setOptions([]))
+      .finally(() => setLoading(false));
+  }, [directorName, regionalName]);
 
   const loadItems = useCallback(() => {
-    return options;
-  }, [options]);
+    if (loading) {
+      return [{ value: '-1', title: 'Carregando' }];
+    }
+
+    if (options.length > 0) {
+      return options;
+    }
+
+    if (!directorName || !regionalName) {
+      return [{ value: '-1', title: 'Selecione uma Diretoria e uma Regional' }];
+    }
+
+    return [{ value: '-1', title: 'Nenhum cliente encontrado' }];
+  }, [options, loading, directorName, regionalName]);
 
   return (
     <BaseSelect

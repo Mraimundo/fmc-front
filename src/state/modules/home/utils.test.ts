@@ -28,7 +28,7 @@ describe('src/state/modules/home/utils', () => {
 
     test('should return fmc campaign url with id 1 param', () => {
       expect(getHighlightLink(HighlightTypes.FmcCampaign, 1)).to.be.equal(
-        `${routeMap.campaignManagement}/visualizar/1`,
+        `${routeMap.campaign}/1`,
       );
     });
   });
