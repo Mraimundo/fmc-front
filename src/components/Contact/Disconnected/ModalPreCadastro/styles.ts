@@ -33,6 +33,7 @@ export const Container = styled.div`
     ._inputContainer {
       height: 44px;
     }
+
   }
 `;
 
@@ -90,7 +91,7 @@ export const SubjectSelect = styled(Select)`
 
 export const TextArea = styled(DefaultTextArea)`
   ._inputContainer {
-    height: 90px;
+    height: 90px !important;
   }
 `;
 

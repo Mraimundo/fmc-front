@@ -38,15 +38,14 @@ interface ContactFormData {
   email: string;
   dddMobile: string;
   mobile: string;
-  subject: Option | null;
+  subject: string;
   message: string;
   fileUrl: string;
-  municipio: string;
-  estado: Option | null;
-  produtorAgricola: Option | null;
-  canal: Option | null;
-  ficouSabendo: Option | null;
-  agree: boolean;
+  municipio?: string | undefined;
+  estado?: Option | undefined;
+  produtorAgricola?: Option | undefined;
+  canal?: Option | undefined;
+  ficouSabendo?: Option | undefined;
 }
 
 const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
@@ -61,11 +60,11 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
     defaultValues: {
-      subject: null,
-      estado: null,
-      produtorAgricola: null,
-      canal: null,
-      ficouSabendo: null,
+      subject: 'Solicitação Pré-cadastro',
+      estado: undefined,
+      produtorAgricola: undefined,
+      canal: undefined,
+      ficouSabendo: undefined,
     },
   });
 
@@ -75,7 +74,7 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       try {
         const { message } = await openTicket({
           ...data,
-          subjectId: parseInt(data.subject?.value || '0', 0),
+          subjectId: 20,
         });
         addToast({ title: message });
         onRequestClose();
@@ -140,10 +139,12 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                 inputRole={inputRole}
               />
             </BoxPhone>
-            <SubjectSelect name="subject" inputRole={inputRole} />
-
-            {/* <Input name="subjectFacade" disabled value="Pré-cadastro" label="Assunto" inputRole={inputRole} />
-            <input type="hidden" name="subject" value="13"/> */}
+            <Input
+              name="subject"
+              disabled
+              inputRole={inputRole}
+              value="Solicitação Pré-cadastro"
+            />
 
             <Input name="municipio" label="Município" inputRole={inputRole} />
 
@@ -192,7 +193,6 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             <BoxAccept>
               <input
                 type="checkbox"
-                name="agree"
                 checked={hasAgreed}
                 onChange={() => {
                   setHasAgreed(e => !e);
