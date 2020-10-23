@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSpring } from 'react-spring';
 import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';

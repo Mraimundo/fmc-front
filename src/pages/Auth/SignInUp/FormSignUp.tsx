@@ -13,7 +13,6 @@ import {
   getParticipantByUpn,
 } from 'services/register/getParticipantData';
 import DefaultModal from 'components/shared/Modal';
-import FirstAccessMessage from './FirstAccessMessage';
 import ModalPreCadastro from '../../../components/Contact/Disconnected/ModalPreCadastro';
 
 import { MenuList, ItemList, ContainerModal, InlineLink } from './styles';
@@ -78,8 +77,6 @@ const FormSignUp: React.FC = () => {
 
   return (
     <FormContext {...methods}>
-      {/* <FirstAccessMessage isOpen={showModal} onRequestClose={onRequestClose} /> */}
-
       <DefaultModal
         isOpen={showModal}
         onRequestClose={onRequestClose}
