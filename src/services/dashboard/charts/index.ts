@@ -28,6 +28,10 @@ export interface Data extends Omit<DefaultResponse, 'client_group'> {
   name: string;
 }
 
+const orderByName = (data: Data[]): Data[] => {
+  return data.sort((a, b) => (a.name > b.name ? 1 : -1));
+};
+
 const getChartsData = async (profile: ApproverProfile): Promise<Data[]> => {
   if (profile === RTC || profile === KAM) {
     const {
@@ -35,7 +39,9 @@ const getChartsData = async (profile: ApproverProfile): Promise<Data[]> => {
     } = await pluginApi.get<{ data: DefaultResponse[] }>(
       'dashboards/performance',
     );
-    return data.map(item => ({ ...item, name: item.client_group }));
+    return orderByName(
+      data.map(item => ({ ...item, name: item.client_group })),
+    );
   }
 
   const {
@@ -43,7 +49,7 @@ const getChartsData = async (profile: ApproverProfile): Promise<Data[]> => {
   } = await pluginApi.get<{ data: CustomResponse[] }>(
     'dashboards/team-performance',
   );
-  return data.map(item => ({ ...item, name: item.rtc_name }));
+  return orderByName(data.map(item => ({ ...item, name: item.rtc_name })));
 };
 
 export { getChartsData };

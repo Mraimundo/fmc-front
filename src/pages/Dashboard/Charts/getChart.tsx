@@ -1,95 +1,92 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { FONTS } from 'styles/font/globals';
-import { ChartData } from 'chart.js';
+import { ChartData, ChartColor } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, HorizontalBar } from 'react-chartjs-2';
 import { fakeFormatDollars } from 'util/points';
 
 interface Props {
   labels: string[];
-  firstDataBar: number[];
-  secondDataBar: number[];
-  thirdDataBar: number[];
   showLabel?: boolean;
   title?: string;
+  divideValueBy?: number;
+  datasets: {
+    data: number[];
+    label?: string;
+    visible?: boolean;
+    backgroundColor?: ChartColor;
+    borderColor?: ChartColor;
+    borderWidth?: number;
+  }[];
 }
 
 export default ({
   labels,
-  firstDataBar,
-  secondDataBar,
-  thirdDataBar,
+  datasets,
   showLabel = true,
   title,
+  divideValueBy = 1,
 }: Props): JSX.Element => {
   const Component: typeof HorizontalBar | typeof Bar = HorizontalBar;
 
   const result: ChartData = {
     labels,
-    datasets: [
-      {
-        label: 'Meta',
-        backgroundColor: '#CDD6E1',
-        borderColor: 'rgba(4, 48, 103, 1)',
-        borderWidth: 0,
-        hoverBackgroundColor: '#CDD6E1',
-        hoverBorderColor: 'rgba(4, 48, 103, 1)',
-        data: firstDataBar,
-        barThickness: 20,
-      },
-      {
-        label: 'Realizado',
-        backgroundColor: '#FF6565',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 0,
-        hoverBackgroundColor: '#FF6565',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: secondDataBar,
-        barThickness: 20,
-      },
-      {
-        label: '',
-        data: thirdDataBar,
-        hidden: true,
-        hideInLegendAndTooltip: true,
-        showLine: false,
-        fill: false,
-        datalabels: { display: false },
-        /* backgroundColor: 'transparent', */
-      },
-    ],
+    datasets: datasets.map(item => ({
+      ...item,
+      barThickness: 20,
+      datalabels: { display: item.visible },
+      hidden: item.visible === false,
+      hoverBackgroundColor: item.backgroundColor,
+      hoverBorderColor: item.borderColor,
+      hideInLegendAndTooltip: item.visible === false,
+    })),
   };
 
   return (
-    <HorizontalBar
+    <Component
       key={`MyKey-${labels.length}-${title}`}
       data={result}
-      height={60 * labels.length + 100}
+      height={70 * labels.length + 120}
       redraw
       options={{
         responsive: true,
-        title: { display: !!title, text: title },
+        title: {
+          display: !!title,
+          text: title,
+          fontFamily: FONTS.bold,
+          fontSize: 20,
+          padding: 20,
+        },
         plugins: {
           ...ChartDataLabels,
           datalabels: {
             align: 'end',
-            textAlign: 'end',
+            anchor: 'end',
             color: 'rgba(0,0,0,0.55)',
+            font: { family: FONTS.bold },
             formatter: (value: string, context) => {
               if (!context.chart.data.datasets) return '';
               if (
                 context.chart.data.datasets[context.datasetIndex].label ===
                 'Realizado'
               ) {
-                const uss = fakeFormatDollars(parseFloat(value), 0, 0);
+                const uss = fakeFormatDollars(
+                  parseFloat(value) / divideValueBy,
+                  0,
+                  0,
+                );
                 const tmp = (context.chart.data.datasets[2].data as string[])[
                   context.dataIndex
                 ];
                 const percent = `${fakeFormatDollars(parseFloat(tmp), 0, 0)}%`;
                 return `${uss} (${percent})`;
               }
-              return `${fakeFormatDollars(parseFloat(value), 0, 0)}`;
+              return `${fakeFormatDollars(
+                parseFloat(value) / divideValueBy,
+                0,
+                0,
+              )}`;
             },
           },
         },
@@ -104,9 +101,11 @@ export default ({
         scales: {
           xAxes: [
             {
-              display: false,
+              display: true,
               ticks: {
                 beginAtZero: true,
+                callback: value =>
+                  fakeFormatDollars(parseFloat(value.toString()) / 1000, 0, 0),
               },
             },
           ],
