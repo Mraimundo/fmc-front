@@ -7,7 +7,11 @@ import { handlerErrors } from 'util/handler-errors';
 import * as constants from './constants';
 import * as actions from './actions';
 import reducer, { initialState } from './reducer';
-import mainSaga, { workerFetchBanners, workerFetchHighlights } from './sagas';
+import mainSaga, {
+  workerFetchBanners,
+  workerFetchHighlights,
+  workerFetchShowcaseProducts,
+} from './sagas';
 import { banners, highlights } from './mock';
 
 describe('src/state/modules/home/sagas', () => {
@@ -93,6 +97,10 @@ describe('src/state/modules/home/sagas', () => {
       .all([
         takeEvery(constants.FETCH_BANNERS_ACTION, workerFetchBanners),
         takeEvery(constants.FETCH_HIGHLIGHTS_ACTION, workerFetchHighlights),
+        takeEvery(
+          constants.FETCH_SHOWCASEPRODUCTS_ACTION,
+          workerFetchShowcaseProducts,
+        ),
       ])
       .finish()
       .isDone();

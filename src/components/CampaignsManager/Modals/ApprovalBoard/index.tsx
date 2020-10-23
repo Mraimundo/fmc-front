@@ -10,7 +10,6 @@ import {
   Approver,
   ApproverProfile,
 } from 'services/campaignsManager/interfaces/Campaign';
-import { profile } from 'console';
 import BoardBox from './BoardBox';
 import { Modal, Container, Content, Close } from './styles';
 

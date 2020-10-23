@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Filters: React.FC<Props> = ({ profile }) => {
-  const { applyFilters, campaigns, pagination } = useCampaignsList();
+  const { applyFilters, pagination } = useCampaignsList();
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [customerSelected, setCustomerSelected] = useState<Option | null>(null);
@@ -74,6 +74,8 @@ const Filters: React.FC<Props> = ({ profile }) => {
           setValue={value => setCustomerSelected(value)}
           value={customerSelected}
           placeholder="Grupo de cliente"
+          directorName={directorSelected?.title}
+          regionalName={regionalSelected?.title}
         />
         <CampaignStatusSelect
           setValue={value => setStatusSelected(value)}
@@ -97,10 +99,10 @@ const Filters: React.FC<Props> = ({ profile }) => {
       customerSelected,
       statusSelected,
       mechanicSelected,
-      campaigns,
       profilesToNotShowRegional,
       profilesToNotShowDirectors,
       profile,
+      pagination,
     ],
   );
 };
