@@ -314,7 +314,10 @@ describe('src/state/modules/point-management/common/sagas', () => {
           [select(getMissingParticipants), 0],
           [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
-          [matchers.call.fn(workerDistributePoints), null],
+          [
+            select(selectors.getPointsToDistribute),
+            { allowPartialDistribution: false },
+          ],
         ])
         .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
@@ -323,29 +326,41 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .select(getMissingParticipants)
         .select(selectors.getTotalPointsTeamAwards)
         .select(selectors.getIsResaleCooperativePointsOnly)
-        .call(workerDistributePoints)
+        .put(actions.distributePointsFinally(All))
         .dispatch(actions.distributePoints(All))
-        .hasFinalState(initialState)
+        .hasFinalState({
+          ...initialState,
+          distributePoints: { isFetching: true },
+        })
         .run();
     });
 
     test('should throw an error when try distribute without permission to rescue resale/cooperative', async () => {
       const error = `É necessário distribuir todos os pontos para ${establishments[0].type} antes de finalizar`;
 
-      await expectSaga(workerVerifyDistributePointsPossibility)
+      const { All } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerVerifyDistributePointsPossibility, {
+        type: constants.DISTRIBUTE_POINTS_ACTION,
+        meta: { finishedDistributionPossibilities: All },
+      })
         .withReducer(reducer)
         .withState(initialState)
         .provide([
           [select(selectors.getTotalPointsResaleCooperative), 100],
           [select(getIsEnabledToRescue), false],
           [select(selectors.getSelectedEstablishment), establishments[0]],
+          [
+            select(selectors.getPointsToDistribute),
+            { allowPartialDistribution: false },
+          ],
         ])
         .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
         .select(selectors.getSelectedEstablishment)
         .call(handlerErrors, new Error(error), actions.distributePointsFailure)
         .not.call.fn(workerDistributePoints)
-        .dispatch(actions.distributePoints())
+        .dispatch(actions.distributePoints(All))
         .hasFinalState({
           ...initialState,
           distributePoints: {
@@ -359,7 +374,12 @@ describe('src/state/modules/point-management/common/sagas', () => {
     test('should throw an error when try distribute without scored participants', async () => {
       const error = `É necessário distribuir todos os pontos para a equipe antes de finalizar`;
 
-      await expectSaga(workerVerifyDistributePointsPossibility)
+      const { Ta } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerVerifyDistributePointsPossibility, {
+        type: constants.DISTRIBUTE_POINTS_ACTION,
+        meta: { finishedDistributionPossibilities: Ta },
+      })
         .withReducer(reducer)
         .withState(initialState)
         .provide([
@@ -369,6 +389,10 @@ describe('src/state/modules/point-management/common/sagas', () => {
           [select(selectors.getSelectedEstablishment), establishments[0]],
           [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
+          [
+            select(selectors.getPointsToDistribute),
+            { allowPartialDistribution: false },
+          ],
         ])
         .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
@@ -378,7 +402,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .select(selectors.getIsResaleCooperativePointsOnly)
         .call(handlerErrors, new Error(error), actions.distributePointsFailure)
         .not.call.fn(workerDistributePoints)
-        .dispatch(actions.distributePoints())
+        .dispatch(actions.distributePoints(Ta))
         .hasFinalState({
           ...initialState,
           distributePoints: {
@@ -390,7 +414,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
     });
 
     test('should open modal missing participants', async () => {
-      await expectSaga(workerVerifyDistributePointsPossibility)
+      const { Rc } = constants.FinishedDistributionPossibilities;
+      await expectSaga(workerVerifyDistributePointsPossibility, {
+        type: constants.DISTRIBUTE_POINTS_ACTION,
+        meta: { finishedDistributionPossibilities: Rc },
+      })
         .withReducer(reducer)
         .withState(initialState)
         .provide([
@@ -401,6 +429,10 @@ describe('src/state/modules/point-management/common/sagas', () => {
           [select(getMissingParticipants), 1],
           [select(selectors.getTotalPointsTeamAwards), 100],
           [select(selectors.getIsResaleCooperativePointsOnly), false],
+          [
+            select(selectors.getPointsToDistribute),
+            { allowPartialDistribution: false },
+          ],
         ])
         .select(selectors.getTotalPointsResaleCooperative)
         .select(getIsEnabledToRescue)
@@ -412,7 +444,7 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .put(toggleIsOpenModalMissingParticipants())
         .returns(undefined)
         .not.call.fn(workerDistributePoints)
-        .dispatch(actions.distributePoints())
+        .dispatch(actions.distributePoints(Rc))
         .hasFinalState(initialState)
         .run();
     });
@@ -428,7 +460,12 @@ describe('src/state/modules/point-management/common/sagas', () => {
         pointsToDistribute,
       });
 
-      await expectSaga(workerDistributePoints)
+      const { All } = constants.FinishedDistributionPossibilities;
+
+      await expectSaga(workerDistributePoints, {
+        type: constants.DISTRIBUTE_POINTS_FINALLY_ACTION,
+        meta: { finishedDistributionPossibilities: All },
+      })
         .withReducer(reducer)
         .withState(initialState)
         .provide([
@@ -446,11 +483,11 @@ describe('src/state/modules/point-management/common/sagas', () => {
         .select(selectors.getPointsToDistribute)
         .call(distributePointsService, dataDistribution)
         .put(actions.distributePointsSuccess())
-        .put(actions.setFinishedDistribution())
-        .dispatch(actions.distributePointsFinally())
+        .put(actions.setFinishedDistribution(All))
+        .dispatch(actions.distributePointsFinally(All))
         .hasFinalState({
           ...initialState,
-          finishedDistribution: true,
+          finishedDistribution: 'all-finished',
         })
         .run();
     });

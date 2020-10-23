@@ -5,6 +5,7 @@ import { ThemeContext } from 'styled-components';
 import { defaultTheme } from 'styles/theme';
 import { Coin } from 'state/modules/header/types';
 import { coinQuotations } from 'state/modules/header/mock';
+import { fakeFormatDollars } from 'util/points';
 import CoinQuotation from '.';
 
 describe('<CoinQuotation />', () => {
@@ -25,7 +26,9 @@ describe('<CoinQuotation />', () => {
     );
 
     coinQuotations.map((coin: Coin) =>
-      expect(getByText(`R$ ${coin.value}`)).toBeInTheDocument(),
+      expect(
+        getByText(`R$ ${fakeFormatDollars(coin.value, 2, 3)}`),
+      ).toBeInTheDocument(),
     );
   });
 });
