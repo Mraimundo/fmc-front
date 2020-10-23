@@ -18,7 +18,7 @@ interface AddNota {
   urlnota: string;
 }
 
-const Upload: React.FC = () => {
+const Upload = props => {
   const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -27,10 +27,10 @@ const Upload: React.FC = () => {
       if (e && e.target && e.target.files && e.target.files.length > 0) {
         const { url } = await uploadFileToStorage(e.target.files[0], 'notas');
         setFileUrl(url);
-
         pluginApi.post<AddNota>('participants/UploadNota/add', {
           urlnota: url,
         });
+        props.onUpdate();
         setShowModal(true);
       }
     },
@@ -38,23 +38,21 @@ const Upload: React.FC = () => {
   );
   const onRequestClose = () => {
     setShowModal(false);
-    console.log('TESTE onRequestClose');
   };
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>
       <Button disabled={fileUrl !== ''}>
+        <input
+          type="file"
+          id="fileId"
+          accept="image/x-png, image/jpg,.pdf"
+          onChange={handleAttachFile}
+        />
         {fileUrl !== '' ? (
           <span>Nota fiscal enviada Com sucesso!</span>
         ) : (
           <div>
-            <input
-              type="file"
-              id="fileId"
-              accept="image/x-png, image/jpg,.pdf"
-              onChange={handleAttachFile}
-            />
-
             <ReactSVG src={uploadIcon} className="icon" />
             <span>Carregar arquivo</span>
           </div>
