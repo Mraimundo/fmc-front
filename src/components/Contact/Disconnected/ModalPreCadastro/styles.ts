@@ -30,6 +30,9 @@ export const Container = styled.div`
     > * {
       margin-bottom: 16px;
     }
+    ._inputContainer {
+      height: 44px;
+    }
   }
 `;
 
