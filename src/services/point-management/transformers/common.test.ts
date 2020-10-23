@@ -48,6 +48,7 @@ describe('src/services/point-management/transformers/common', () => {
       };
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
+        allowPartialDistribution: true,
         general: 0,
         generalPointId: null,
         teamAwards: null,
@@ -84,6 +85,7 @@ describe('src/services/point-management/transformers/common', () => {
       };
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
+        allowPartialDistribution: true,
         general: 5000,
         generalPointId: 1,
         teamAwards: null,
@@ -138,6 +140,7 @@ describe('src/services/point-management/transformers/common', () => {
       };
 
       expect(transformTotalPointsToDistributeRawData(mock)).to.be.deep.equal({
+        allowPartialDistribution: true,
         general: 0,
         generalPointId: null,
         teamAwards: {

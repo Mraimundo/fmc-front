@@ -14,6 +14,7 @@ import {
 
 export const GRV = 'GRV';
 export const DN = 'DN';
+export const DM = 'DM';
 export const CRM = 'CRM';
 export const MKT = 'MKT';
 export const RTC = 'RTC';
@@ -24,6 +25,7 @@ export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE' | 'PRODUTOR';
 export type ApproverProfile =
   | typeof GRV
   | typeof DN
+  | typeof DM
   | typeof CRM
   | typeof MKT
   | typeof RTC

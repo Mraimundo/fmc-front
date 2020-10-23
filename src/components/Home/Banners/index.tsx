@@ -31,15 +31,6 @@ const settings: Settings = {
   nextArrow: <NextSlide />,
   prevArrow: <PrevSlide />,
   customPaging: () => <Dot />,
-  responsive: [
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
 };
 
 interface BannersProps {
