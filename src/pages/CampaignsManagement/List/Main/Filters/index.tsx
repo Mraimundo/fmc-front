@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Filters: React.FC<Props> = ({ profile }) => {
-  const { applyFilters, campaigns, pagination } = useCampaignsList();
+  const { applyFilters, pagination } = useCampaignsList();
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [customerSelected, setCustomerSelected] = useState<Option | null>(null);

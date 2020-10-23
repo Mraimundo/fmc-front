@@ -215,6 +215,7 @@ const CampaignForm: React.FC<Props> = ({ profile }) => {
       handleButtonClick,
       loading,
       removeAll,
+      profile,
     ],
   );
 };
