@@ -88,7 +88,9 @@ export const constructDataDistribution = ({
   };
 
   const hasParticipants = participants.length > 0;
-  const hasResaleCooperativePoints = marketplacePoints > 0 || invoicePoints > 0;
+  const hasResaleCooperativePoints =
+    (marketplacePoints > 0 || invoicePoints > 0) &&
+    resaleCooperativePointId > 0;
 
   if (hasParticipants && !hasResaleCooperativePoints) {
     return [teamAwardsPoints];
