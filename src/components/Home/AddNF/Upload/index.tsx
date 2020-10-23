@@ -18,7 +18,11 @@ interface AddNota {
   urlnota: string;
 }
 
-const Upload = props => {
+interface Props {
+  onUpdate: () => void;
+}
+
+const Upload: React.FC<Props> = Props => {
   const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -30,11 +34,11 @@ const Upload = props => {
         pluginApi.post<AddNota>('participants/UploadNota/add', {
           urlnota: url,
         });
-        props.onUpdate();
+        Props.onUpdate();
         setShowModal(true);
       }
     },
-    [],
+    [Props],
   );
   const onRequestClose = () => {
     setShowModal(false);

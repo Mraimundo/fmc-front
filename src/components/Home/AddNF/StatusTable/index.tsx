@@ -1,16 +1,18 @@
 import React from 'react';
-import { Nf as INf } from 'services/nf/interfaces';
 
 import { Container } from './styles';
+interface Props {
+  nfListLength: number;
+}
 
-const StatusTable = props => {
+const StatusTable: React.FC<Props> = Props => {
   return (
     <Container>
       <ul>
         <li>
           <p>Em análise</p>
           <span />
-          <p>{props.nfListLength}</p>
+          <p>{Props.nfListLength}</p>
         </li>
         <li>
           <p>Liberadas</p>

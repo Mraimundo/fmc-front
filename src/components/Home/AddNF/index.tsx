@@ -10,7 +10,7 @@ const AddNF: React.FC = () => {
 
   const getNfData = () => {
     getNfList().then(data => {
-      setNfListLength(data.notas.length);
+      setNfListLength(data.length);
     });
   };
 

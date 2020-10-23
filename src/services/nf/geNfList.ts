@@ -1,10 +1,9 @@
 import { pluginApi } from 'services/api';
-import { Nf } from './interfaces';
 
-export default async (): Promise<Nf[]> => {
+export default async () => {
   try {
-    const { data } = await pluginApi.get<Nf[]>('/participants/uploadNota');
-    return data;
+    const { data } = await pluginApi.get('/participants/uploadNota?status=0');
+    return data.notas;
   } catch {
     return [];
   }
