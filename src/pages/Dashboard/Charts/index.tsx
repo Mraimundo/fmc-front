@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import useDimensions from 'hooks/use-window-dimensions';
 import { getChartsData, Data as IData } from 'services/dashboard/charts';
 import {
   getCharts,
@@ -10,11 +9,12 @@ import {
   ChartName,
 } from 'services/dashboard/charts/transformers';
 
+import { useAuth } from 'context/AuthContext';
 import getChart from './getChart';
 import Filters from './Filters';
 import { Container, Box } from './styles';
 
-type Test = Record<ChartName, () => JSX.Element>;
+type Arr = () => JSX.Element;
 
 const Charts: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -23,13 +23,15 @@ const Charts: React.FC = () => {
   const [clients, setClients] = useState<IClient[]>([]);
   const [filteredClients, setFilteredClients] = useState<IClient[]>([]);
   const [charts, setCharts] = useState<ICharts | null>(null);
+  const { participant } = useAuth();
 
   useEffect(() => {
+    if (!participant) return;
     setLoading(true);
-    getChartsData()
+    getChartsData(participant.profile_value)
       .then(data => setChartsData(data))
       .finally(() => setLoading(false));
-  }, []);
+  }, [participant]);
 
   useEffect(() => {
     if (chartsData.length === 0) return;
@@ -46,32 +48,33 @@ const Charts: React.FC = () => {
 
   const drawChart = useMemo(() => {
     setAlready(false);
-    const test: Test = {} as Record<ChartName, () => JSX.Element>;
-    if (!charts) return test;
+    let arr: Arr[] = [];
+    if (!charts) return arr;
 
     const labels =
       filteredClients.length > 0
         ? filteredClients.map(item => item.name)
         : clients.map(item => item.name);
 
-    Object.keys(charts).forEach(item => {
+    arr = Object.keys(charts).map(item => {
       const { firstDataBar, secondDataBar, title, thirdDataBar } = charts[
         item as ChartName
       ];
 
-      test[item as ChartName] = () =>
+      return () =>
         getChart({
           title,
           labels,
           firstDataBar,
           secondDataBar,
           thirdDataBar,
-          showLabel: true, //! !secondDataBar,
-          formatType: secondDataBar ? 'uss' : '%',
+          showLabel: true,
         });
     });
+
     setAlready(true);
-    return test;
+
+    return arr;
   }, [charts, clients, filteredClients]);
 
   const onFilter = useCallback((data: IClient[]): void => {
@@ -80,28 +83,12 @@ const Charts: React.FC = () => {
 
   return (
     <Container>
-      {already && (
+      <Filters clients={clients} onFilter={onFilter} />
+      {!loading && already && (
         <>
-          <Filters clients={clients} onFilter={onFilter} />
-          <Box>
-            <div>{drawChart.billingRealized()}</div>
-          </Box>
-
-          <Box>
-            <div>{drawChart.pogRealized()}</div>
-          </Box>
-
-          <Box>
-            <div>{drawChart.premioRealized()}</div>
-          </Box>
-
-          <Box>
-            <div>{drawChart.heroRealized()}</div>
-          </Box>
-
-          <Box>
-            <div>{drawChart.talismaRealized()}</div>
-          </Box>
+          {drawChart.map(item => (
+            <Box>{item()}</Box>
+          ))}
         </>
       )}
     </Container>

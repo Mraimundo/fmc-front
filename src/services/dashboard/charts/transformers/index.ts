@@ -49,7 +49,7 @@ const getDataLabels = (data: Data[], filter?: Client[]): string[] => {
     return filter.map(item => item.name);
   }
 
-  return data.map(item => item.client_group);
+  return data.map(item => item.name);
 };
 
 const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
@@ -58,15 +58,13 @@ const getDataNumbers = (data: Data[], columnName: DataColumnName): number[] => {
 
 const getClients = (data: Data[]): Client[] => {
   return data
-    .map(item => ({ name: item.client_group }))
+    .map(item => ({ name: item.name }))
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 };
 
 const getCharts = (data: Data[], filter?: Client[]): Charts => {
   const labels = getDataLabels(data, filter);
-  const filteredData = data.filter(
-    item => labels.indexOf(item.client_group) >= 0,
-  );
+  const filteredData = data.filter(item => labels.indexOf(item.name) >= 0);
 
   return {
     billingRealized: {
@@ -74,35 +72,35 @@ const getCharts = (data: Data[], filter?: Client[]): Charts => {
       firstDataBar: getDataNumbers(filteredData, 'billing_goal'),
       secondDataBar: getDataNumbers(filteredData, 'billing_result'),
       thirdDataBar: getDataNumbers(filteredData, 'billing_percentage'),
-      title: 'Faturamento (US$) Realizado',
+      title: 'Faturamento (US$)',
     },
     pogRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'pog_goal'),
       secondDataBar: getDataNumbers(filteredData, 'pog_result'),
       thirdDataBar: getDataNumbers(filteredData, 'pog_percentage'),
-      title: 'POG (US$) Realizado',
+      title: 'POG (US$)',
     },
     premioRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'premio_goal'),
       secondDataBar: getDataNumbers(filteredData, 'premio_result'),
       thirdDataBar: getDataNumbers(filteredData, 'premio_percentage'),
-      title: 'PREMIO (L) Realizado',
+      title: 'PREMIO (L)',
     },
     heroRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'hero_goal'),
       secondDataBar: getDataNumbers(filteredData, 'hero_result'),
       thirdDataBar: getDataNumbers(filteredData, 'hero_percentage'),
-      title: 'HERO (L) Realizado',
+      title: 'HERO (L)',
     },
     talismaRealized: {
       labels,
       firstDataBar: getDataNumbers(filteredData, 'talisman_goal'),
       secondDataBar: getDataNumbers(filteredData, 'talisman_result'),
       thirdDataBar: getDataNumbers(filteredData, 'talisman_percentage'),
-      title: 'TALISMAN (L) Realizado',
+      title: 'TALISMAN (L)',
     },
   };
 };
