@@ -5,7 +5,6 @@ import {
 } from 'services/campaignsManager/interfaces/Campaign';
 import { newEmptyCampaignObject } from 'services/campaignsManager';
 import produce from 'immer';
-import { object } from 'yup';
 import { Errors } from './types';
 
 import { CampaignsManagerActions } from './actions';

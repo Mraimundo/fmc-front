@@ -47,7 +47,7 @@ export default ({
     <Component
       key={`MyKey-${labels.length}-${title}`}
       data={result}
-      height={70 * labels.length + 120}
+      height={20 * labels.length + 60}
       redraw
       options={{
         responsive: true,
@@ -96,8 +96,8 @@ export default ({
           align: 'center',
           labels: { filter: item => !!item.text },
         },
-        maintainAspectRatio: false,
-        /* maintainAspectRatio: true, */
+        /* maintainAspectRatio: false, */
+        maintainAspectRatio: true,
         scales: {
           xAxes: [
             {
