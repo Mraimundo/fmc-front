@@ -3,7 +3,7 @@ export const formatPoints = (
   minFractionDigits = 2,
   maxFractionDigits = 2,
 ) =>
-  value.toLocaleString('pt-br', {
+  value.toLocaleString('pt-BR', {
     minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: maxFractionDigits,
   });
