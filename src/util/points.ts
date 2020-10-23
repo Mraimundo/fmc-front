@@ -50,11 +50,12 @@ export const fakeFormatDollars = (
   value: number,
   minFractionDigits = 2,
   maxFractionDigits = 2,
-) =>
-  value.toLocaleString('pt-br', {
+) => {
+  return value.toLocaleString('pt-br', {
     minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: maxFractionDigits,
   });
+};
 
 export const formatKgl = (value: number) =>
   new Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(value);
