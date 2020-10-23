@@ -35,6 +35,9 @@ export default async (ticket: CreateTicketDTO): Promise<ContactResponse> => {
     ],
   };
 
+  console.log('request');
+  console.log(request);
+
   const { data } = await vendavallApi.post<ContactResponse>(
     'contacts/add',
     request,
