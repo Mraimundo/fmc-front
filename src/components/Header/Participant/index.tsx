@@ -5,7 +5,7 @@ import { Establishment } from 'services/auth/interfaces/Participant';
 import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
 import Dropdown from './Dropdown';
-import { Wrapper, WelcomeText, Hello } from './styles';
+import { Wrapper, WelcomeText, Hello, StatusIcon } from './styles';
 
 interface ParticipantProps {
   picture: string | null;
@@ -23,6 +23,7 @@ const Participant: React.FC<ParticipantProps> = ({
 }) => {
   return (
     <Wrapper>
+      <StatusIcon />
       <Avatar name={name} picture={picture} circleDimension={40} />
       <WelcomeText>
         <Hello>Olá {getFirstName(name)}!</Hello>
