@@ -1,0 +1,209 @@
+<svg id="luzes-roleta-01" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="303.6" height="303.6" viewBox="0 0 303.6 303.6">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.205" y1="0.093" x2="0.795" y2="0.907" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#424242"/>
+      <stop offset="0.13" stop-color="#505050"/>
+      <stop offset="0.39" stop-color="#757575"/>
+      <stop offset="0.59" stop-color="#979797"/>
+      <stop offset="0.92" stop-color="#dadada"/>
+      <stop offset="1" stop-color="#ececec"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.205" y1="0.093" x2="0.795" y2="0.907" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f0f0f0"/>
+      <stop offset="0.1" stop-color="#dadada"/>
+      <stop offset="0.41" stop-color="#979797"/>
+      <stop offset="0.54" stop-color="#858585"/>
+      <stop offset="0.84" stop-color="#606060"/>
+      <stop offset="1" stop-color="#525252"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.205" y1="0.093" x2="0.795" y2="0.907" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#cecece"/>
+      <stop offset="0.01" stop-color="#cbcbcb"/>
+      <stop offset="0.02" stop-color="#c2c2c2"/>
+      <stop offset="0.03" stop-color="#b2b2b2"/>
+      <stop offset="0.03" stop-color="#9c9c9c"/>
+      <stop offset="0.04" stop-color="#848484"/>
+      <stop offset="0.08" stop-color="#868686"/>
+      <stop offset="0.09" stop-color="#8d8d8d"/>
+      <stop offset="0.1" stop-color="#999"/>
+      <stop offset="0.11" stop-color="#ababab"/>
+      <stop offset="0.12" stop-color="#c1c1c1"/>
+      <stop offset="0.12" stop-color="#c2c2c2"/>
+      <stop offset="0.14" stop-color="silver"/>
+      <stop offset="0.15" stop-color="#b9b9b9"/>
+      <stop offset="0.15" stop-color="#aeaeae"/>
+      <stop offset="0.15" stop-color="#a6a6a6"/>
+      <stop offset="0.16" stop-color="#868686"/>
+      <stop offset="0.17" stop-color="#717171"/>
+      <stop offset="0.17" stop-color="#696969"/>
+      <stop offset="0.26" stop-color="#6b6b6b"/>
+      <stop offset="0.27" stop-color="#7d7d7d"/>
+      <stop offset="0.27" stop-color="#939393"/>
+      <stop offset="0.27" stop-color="#a4a4a4"/>
+      <stop offset="0.28" stop-color="#afafaf"/>
+      <stop offset="0.29" stop-color="#b6b6b6"/>
+      <stop offset="0.31" stop-color="#b8b8b8"/>
+      <stop offset="0.45" stop-color="#b6b6b6"/>
+      <stop offset="0.5" stop-color="#afafaf"/>
+      <stop offset="0.53" stop-color="#a4a4a4"/>
+      <stop offset="0.56" stop-color="#939393"/>
+      <stop offset="0.58" stop-color="#868686"/>
+      <stop offset="0.63" stop-color="#6b6b6b"/>
+      <stop offset="0.67" stop-color="#6d6d6d"/>
+      <stop offset="0.69" stop-color="#747474"/>
+      <stop offset="0.7" stop-color="#7f7f7f"/>
+      <stop offset="0.71" stop-color="#909090"/>
+      <stop offset="0.71" stop-color="#959595"/>
+      <stop offset="0.83" stop-color="#3e3e3e"/>
+      <stop offset="0.83" stop-color="#4f4f4f"/>
+      <stop offset="0.83" stop-color="#5c5c5c"/>
+      <stop offset="0.84" stop-color="#636363"/>
+      <stop offset="0.85" stop-color="#656565"/>
+      <stop offset="0.9" stop-color="#676767"/>
+      <stop offset="0.91" stop-color="#6e6e6e"/>
+      <stop offset="0.91" stop-color="#6f6f6f"/>
+      <stop offset="0.92" stop-color="#838383"/>
+      <stop offset="0.93" stop-color="#999"/>
+      <stop offset="0.93" stop-color="#aaa"/>
+      <stop offset="0.94" stop-color="#b5b5b5"/>
+      <stop offset="0.96" stop-color="#bcbcbc"/>
+      <stop offset="1" stop-color="#bebebe"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <path id="Caminho_4665" data-name="Caminho 4665" d="M187.18,319.94c-83.21,0-150.9-67.69-150.9-150.89S104,18.16,187.18,18.16,338.07,85.85,338.07,169.05,270.38,319.94,187.18,319.94Zm0-286.78c-74.93,0-135.9,61-135.9,135.89s61,135.89,135.9,135.89,135.89-61,135.89-135.89S262.11,33.16,187.18,33.16Z" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <circle id="Elipse_75" data-name="Elipse 75" cx="151.8" cy="151.8" r="151.8" transform="translate(-27.617 169.107) rotate(-45)" fill="none"/>
+    </clipPath>
+    <radialGradient id="radial-gradient" cx="0.498" cy="0.5" r="0.5" gradientTransform="translate(0)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e0e0e0"/>
+      <stop offset="0.21" stop-color="#c4c4c4"/>
+      <stop offset="0.34" stop-color="#9c9c9c"/>
+      <stop offset="0.57" stop-color="#5a5a5a"/>
+      <stop offset="0.77" stop-color="#292929"/>
+      <stop offset="0.92" stop-color="#0b0b0b"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-2" cx="0.505" cy="0.499" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-3" cx="0.501" cy="0.501" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-4" cx="0.499" cy="0.499" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-5" cx="0.497" cy="0.501" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-6" cx="0.5" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-7" cx="0.495" r="0.5" gradientTransform="translate(0.005) scale(0.99 1)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-8" cx="0.501" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-9" cx="0.498" cy="0.5" r="0.5" gradientTransform="translate(-0.001)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e0e0e0"/>
+      <stop offset="0.04" stop-color="#d9d9d9"/>
+      <stop offset="0.09" stop-color="#c6c6c6"/>
+      <stop offset="0.15" stop-color="#a8a8a8"/>
+      <stop offset="0.21" stop-color="#838383"/>
+      <stop offset="0.41" stop-color="#595959"/>
+      <stop offset="0.68" stop-color="#292929"/>
+      <stop offset="0.88" stop-color="#0b0b0b"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-10" cx="0.5" cy="0.498" r="0.5" gradientTransform="translate(-0.001)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d1d1d1"/>
+      <stop offset="0.21" stop-color="#7e7e7e"/>
+      <stop offset="0.4" stop-color="#595959"/>
+      <stop offset="0.67" stop-color="#292929"/>
+      <stop offset="0.88" stop-color="#0b0b0b"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-11" cx="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-12" cx="0.5" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-13" cx="0.492" r="0.5" gradientTransform="translate(-0.008) scale(1.016 1)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-14" cx="0.5" r="0.5" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-15" cx="0.501" cy="0.501" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-16" cx="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-17" cx="0.502" cy="0.502" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-18" cx="0.5" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-19" cx="0.5" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-20" cx="0.5" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-21" cx="0.499" cy="0.499" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-22" cx="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-23" cx="0.502" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-24" cx="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-25" cx="0.502" cy="0.502" r="0.498" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-26" cx="0.5" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-27" cx="0.501" cy="0.502" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-28" cx="0.5" r="0.499" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-29" cx="0.503" cy="0.502" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-30" cx="0.501" cy="0.501" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-31" cx="0.501" cy="0.499" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-32" cx="0.494" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-33" cx="0.502" cy="0.499" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-34" cx="0.499" r="0.499" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-35" cx="0.502" cy="0.496" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-36" cx="0.5" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-37" cx="0.499" cy="0.501" r="0.499" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-38" cx="0.5" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-39" cx="0.499" cy="0.498" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-40" cx="0.5" cy="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-41" cx="0.5" r="0.501" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-42" cx="0.5" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-43" cx="0.501" cy="0.501" r="0.499" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-44" cx="0.499" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-45" cx="0.498" cy="0.501" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-46" cx="0.499" r="0.5" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-47" cx="0.498" cy="0.504" r="0.501" xlink:href="#radial-gradient"/>
+    <radialGradient id="radial-gradient-48" cx="0.5" r="0.501" xlink:href="#radial-gradient"/>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1" transform="translate(-35.26 -17.31)">
+    <path id="Caminho_4614" data-name="Caminho 4614" d="M187.06,21.1a148,148,0,1,0,148,148,148,148,0,0,0-148-148Zm0,283.25A135.24,135.24,0,1,1,322.3,169.11,135.24,135.24,0,0,1,187.06,304.35Z" fill="url(#linear-gradient)"/>
+    <path id="Caminho_4615" data-name="Caminho 4615" d="M187.06,17.31a151.8,151.8,0,1,0,151.8,151.8,151.8,151.8,0,0,0-151.8-151.8Zm0,290.51a138.7,138.7,0,1,1,.01,0Z" fill="url(#linear-gradient-2)"/>
+    <path id="Caminho_4616" data-name="Caminho 4616" d="M187.06,19.59A149.52,149.52,0,1,0,336.57,169.107,149.522,149.522,0,0,0,187.06,19.59Zm0,286.14A136.62,136.62,0,1,1,323.68,169.11,136.62,136.62,0,0,1,187.06,305.73Z" fill="url(#linear-gradient-3)"/>
+    <g id="Grupo_3050" data-name="Grupo 3050" clip-path="url(#clip-path)">
+      <g id="Grupo_3049" data-name="Grupo 3049" clip-path="url(#clip-path-2)">
+        <path id="Caminho_4617" data-name="Caminho 4617" d="M187,36.76a10.11,10.11,0,1,1,10.11-10.11A10.11,10.11,0,0,1,187,36.76Z" fill="url(#radial-gradient)"/>
+        <path id="Caminho_4618" data-name="Caminho 4618" d="M192,26.65a5.1,5.1,0,1,1-5-5.09A5.1,5.1,0,0,1,192,26.65Z" fill="url(#radial-gradient-2)"/>
+        <path id="Caminho_4619" data-name="Caminho 4619" d="M149.89,41.72a10.13,10.13,0,1,1,2.62-.35A10.13,10.13,0,0,1,149.89,41.72Z" fill="url(#radial-gradient-3)"/>
+        <path id="Caminho_4620" data-name="Caminho 4620" d="M115.38,54.08A8.09,8.09,0,1,1,119.43,53,8.09,8.09,0,0,1,115.38,54.08Z" fill="url(#radial-gradient-4)"/>
+        <path id="Caminho_4621" data-name="Caminho 4621" d="M85.76,76.15A7.36,7.36,0,1,1,91,74a7.36,7.36,0,0,1-5.24,2.15Z" fill="url(#radial-gradient-5)"/>
+        <path id="Caminho_4622" data-name="Caminho 4622" d="M63.06,108.61a10.116,10.116,0,1,0-.01,0Z" fill="url(#radial-gradient-6)"/>
+        <path id="Caminho_4623" data-name="Caminho 4623" d="M48.83,140.09a7,7,0,1,1,7.1-6.088,7,7,0,0,1-7.1,6.088Z" fill="url(#radial-gradient-7)"/>
+        <path id="Caminho_4624" data-name="Caminho 4624" d="M44,180.26a10.12,10.12,0,1,1,10.11-10.12A10.12,10.12,0,0,1,44,180.26Z" fill="url(#radial-gradient-8)"/>
+        <path id="Caminho_4625" data-name="Caminho 4625" d="M49,214.68a7.48,7.48,0,1,1,6.47-3.74,7.4,7.4,0,0,1-4.54,3.48,7.55,7.55,0,0,1-1.93.26Z" fill="url(#radial-gradient-9)"/>
+        <path id="Caminho_4626" data-name="Caminho 4626" d="M63.35,249A7.241,7.241,0,1,1,67,248,7.24,7.24,0,0,1,63.35,249Z" fill="url(#radial-gradient-10)"/>
+        <path id="Caminho_4627" data-name="Caminho 4627" d="M86.16,279.68a8.36,8.36,0,1,1,5.92-2.44A8.36,8.36,0,0,1,86.16,279.68Z" fill="url(#radial-gradient-11)"/>
+        <path id="Caminho_4628" data-name="Caminho 4628" d="M115.86,304.14a10.11,10.11,0,1,1,8.77-5.06,10.11,10.11,0,0,1-8.77,5.06Z" fill="url(#radial-gradient-12)"/>
+        <path id="Caminho_4629" data-name="Caminho 4629" d="M150.44,318.38a10.12,10.12,0,0,1,0-20.23,10.459,10.459,0,0,1,2.62.34,10.12,10.12,0,0,1-2.61,19.89Z" fill="url(#radial-gradient-13)"/>
+        <path id="Caminho_4630" data-name="Caminho 4630" d="M187.51,323.18a10.11,10.11,0,1,1,10.11-10.11,10.11,10.11,0,0,1-10.11,10.11Z" fill="url(#radial-gradient-14)"/>
+        <path id="Caminho_4631" data-name="Caminho 4631" d="M224.56,318.23a10.12,10.12,0,1,1,2.63-.35A10.12,10.12,0,0,1,224.56,318.23Z" fill="url(#radial-gradient-15)"/>
+        <path id="Caminho_4632" data-name="Caminho 4632" d="M259.08,303.85a10.1,10.1,0,1,1,5.06-1.35,10.1,10.1,0,0,1-5.06,1.35Z" fill="url(#radial-gradient-16)"/>
+        <path id="Caminho_4633" data-name="Caminho 4633" d="M288.69,281a10.12,10.12,0,1,1,7.15-3,10.12,10.12,0,0,1-7.15,3Z" fill="url(#radial-gradient-17)"/>
+        <path id="Caminho_4634" data-name="Caminho 4634" d="M311.39,251.33a10.11,10.11,0,1,1,9.778-7.492,10.11,10.11,0,0,1-9.778,7.492Z" fill="url(#radial-gradient-18)"/>
+        <path id="Caminho_4635" data-name="Caminho 4635" d="M325.63,216.77a10.12,10.12,0,1,1,9.77-7.5,10.12,10.12,0,0,1-9.77,7.5Z" fill="url(#radial-gradient-19)"/>
+        <path id="Caminho_4636" data-name="Caminho 4636" d="M330.44,179.69a10.12,10.12,0,1,1,10.11-10.11,10.12,10.12,0,0,1-10.11,10.11Z" fill="url(#radial-gradient-20)"/>
+        <path id="Caminho_4637" data-name="Caminho 4637" d="M325.48,142.63a10.08,10.08,0,1,1,2.62-.34A10.08,10.08,0,0,1,325.48,142.63Z" fill="url(#radial-gradient-21)"/>
+        <path id="Caminho_4638" data-name="Caminho 4638" d="M311.11,108.12a10.11,10.11,0,1,1,5.06-1.35A10.11,10.11,0,0,1,311.11,108.12Z" fill="url(#radial-gradient-22)"/>
+        <path id="Caminho_4639" data-name="Caminho 4639" d="M288.29,78.51a10.11,10.11,0,1,1,7.15-3,10,10,0,0,1-7.15,3Z" fill="url(#radial-gradient-23)"/>
+        <path id="Caminho_4640" data-name="Caminho 4640" d="M258.58,55.81a10.11,10.11,0,1,1,8.77-5.06A10.11,10.11,0,0,1,258.58,55.81Z" fill="url(#radial-gradient-24)"/>
+        <path id="Caminho_4641" data-name="Caminho 4641" d="M224,41.57a10.58,10.58,0,0,1-2.62-.34,10.14,10.14,0,1,1,2.62.34Z" fill="url(#radial-gradient-25)"/>
+        <path id="Caminho_4642" data-name="Caminho 4642" d="M154.81,30.29a5.09,5.09,0,1,1-2.371-3.1,5.09,5.09,0,0,1,2.371,3.1Z" fill="url(#radial-gradient-26)"/>
+        <path id="Caminho_4643" data-name="Caminho 4643" d="M119.79,43.43a5.1,5.1,0,1,1-3.112-2.388A5.09,5.09,0,0,1,119.79,43.43Z" fill="url(#radial-gradient-27)"/>
+        <path id="Caminho_4644" data-name="Caminho 4644" d="M89.37,65.19a5.1,5.1,0,1,1-7.21,0A5.1,5.1,0,0,1,89.37,65.19Z" fill="url(#radial-gradient-28)"/>
+        <path id="Caminho_4645" data-name="Caminho 4645" d="M65.61,94.09a5.1,5.1,0,1,1-3.888-.528A5.09,5.09,0,0,1,65.61,94.09Z" fill="url(#radial-gradient-29)"/>
+        <path id="Caminho_4646" data-name="Caminho 4646" d="M49.77,129.54a3.65,3.65,0,1,1-4.47,2.58A3.65,3.65,0,0,1,49.77,129.54Z" fill="url(#radial-gradient-30)"/>
+        <path id="Caminho_4647" data-name="Caminho 4647" d="M44,165.05a5.1,5.1,0,1,1-5.09,5.09A5.1,5.1,0,0,1,44,165.05Z" fill="url(#radial-gradient-31)"/>
+        <path id="Caminho_4648" data-name="Caminho 4648" d="M48,203.4a3.93,3.93,0,1,1-2.39,1.833A3.93,3.93,0,0,1,48,203.4Z" fill="url(#radial-gradient-32)"/>
+        <path id="Caminho_4649" data-name="Caminho 4649" d="M60.8,237.3a5.1,5.1,0,1,1-2.388,3.112A5.09,5.09,0,0,1,60.8,237.3Z" fill="url(#radial-gradient-33)"/>
+        <path id="Caminho_4650" data-name="Caminho 4650" d="M82.56,267.72a5.1,5.1,0,1,1,0,7.21A5.1,5.1,0,0,1,82.56,267.72Z" fill="url(#radial-gradient-34)"/>
+        <path id="Caminho_4651" data-name="Caminho 4651" d="M111.46,291.48a5.1,5.1,0,1,1-.528,3.888,5.09,5.09,0,0,1,.528-3.888Z" fill="url(#radial-gradient-35)"/>
+        <path id="Caminho_4652" data-name="Caminho 4652" d="M145.52,306.94a5.09,5.09,0,1,1,.506,3.866A5.09,5.09,0,0,1,145.52,306.94Z" fill="url(#radial-gradient-36)"/>
+        <path id="Caminho_4653" data-name="Caminho 4653" d="M182.42,313.07a5.1,5.1,0,1,1,5.09,5.09,5.1,5.1,0,0,1-5.09-5.09Z" fill="url(#radial-gradient-37)"/>
+        <path id="Caminho_4654" data-name="Caminho 4654" d="M219.65,309.43a5.08,5.08,0,1,1,2.369,3.1,5.09,5.09,0,0,1-2.369-3.1Z" fill="url(#radial-gradient-38)"/>
+        <path id="Caminho_4655" data-name="Caminho 4655" d="M254.67,296.29a5.09,5.09,0,1,1,3.111,2.392,5.09,5.09,0,0,1-3.111-2.392Z" fill="url(#radial-gradient-39)"/>
+        <path id="Caminho_4656" data-name="Caminho 4656" d="M285.09,274.53a5.09,5.09,0,1,1,7.2,0A5.09,5.09,0,0,1,285.09,274.53Z" fill="url(#radial-gradient-40)"/>
+        <path id="Caminho_4657" data-name="Caminho 4657" d="M308.85,245.63a5.09,5.09,0,1,1,6.95-1.86,5.09,5.09,0,0,1-6.95,1.86Z" fill="url(#radial-gradient-41)"/>
+        <path id="Caminho_4658" data-name="Caminho 4658" d="M324.31,211.57a5.09,5.09,0,1,1,3.866-.506A5.09,5.09,0,0,1,324.31,211.57Z" fill="url(#radial-gradient-42)"/>
+        <path id="Caminho_4659" data-name="Caminho 4659" d="M330.44,174.67a5.1,5.1,0,1,1,5.09-5.09A5.1,5.1,0,0,1,330.44,174.67Z" fill="url(#radial-gradient-43)"/>
+        <path id="Caminho_4660" data-name="Caminho 4660" d="M326.8,137.44a5.09,5.09,0,1,1,3.1-2.371,5.09,5.09,0,0,1-3.1,2.371Z" fill="url(#radial-gradient-44)"/>
+        <path id="Caminho_4661" data-name="Caminho 4661" d="M313.66,102.42a5.09,5.09,0,1,1,2.392-3.111,5.09,5.09,0,0,1-2.392,3.111Z" fill="url(#radial-gradient-45)"/>
+        <path id="Caminho_4662" data-name="Caminho 4662" d="M291.89,72a5.09,5.09,0,1,1,1.5-3.605A5.09,5.09,0,0,1,291.89,72Z" fill="url(#radial-gradient-46)"/>
+        <path id="Caminho_4663" data-name="Caminho 4663" d="M263,48.24a5.1,5.1,0,1,1,.524-3.89A5.09,5.09,0,0,1,263,48.24Z" fill="url(#radial-gradient-47)"/>
+        <path id="Caminho_4664" data-name="Caminho 4664" d="M228.94,32.78a5.09,5.09,0,1,1-3.6-6.24A5.09,5.09,0,0,1,228.94,32.78Z" fill="url(#radial-gradient-48)"/>
+      </g>
+    </g>
+  </g>
+</svg>
