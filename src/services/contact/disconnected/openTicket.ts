@@ -8,7 +8,7 @@ export interface Contact {
   dddMobile: string;
   mobile: string;
   subjectId: number;
-  message: string;
+  message?: string;
   fileUrl?: string;
   municipio?: string;
   canal?: string;
@@ -28,7 +28,7 @@ export default async (contact: Contact): Promise<ContactResponse> => {
     let request = {};
 
 
-    if (contact.municipio && contact.estado && contact.estado && contact.produtorAgricola) {
+    if (contact.municipio && contact.estado && contact.produtorAgricola?.value) {
       request = {
         cpf_not_registered: contact.cpf,
         email_not_registered: contact.email,
@@ -42,7 +42,7 @@ export default async (contact: Contact): Promise<ContactResponse> => {
             fields_aditional: [
               {
                 municipio: contact.municipio,
-                canal_produtos: contact.canal,
+                canal_produtos: contact.canal || '',
                 estado: contact.estado?.value || '',
                 ficou_sabendo: contact.ficouSabendo?.value || '',
                 produtor_agricola: contact.produtorAgricola?.value || '',
