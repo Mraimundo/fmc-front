@@ -13,7 +13,6 @@ import UfSelect from '../../../Auth/Register/Form/UfsSelect';
 
 import ProdutorAgricolaSelect from './ProdutorAgricolaSelect';
 import ComoFicouConhecendoSelect from './ComoFicouConhecendoSelect';
-import CanalSelect from './CanalSelect';
 import {
   Container,
   Title,
@@ -43,7 +42,7 @@ interface ContactFormData {
   municipio?: string | undefined;
   estado?: Option | undefined;
   produtorAgricola?: Option | undefined;
-  canal?: Option | undefined;
+  canal?: string | undefined;
   ficouSabendo?: Option | undefined;
 }
 
@@ -154,7 +153,12 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               inputRole={inputRole}
             />
 
-            <CanalSelect name="canal" inputRole={inputRole} />
+            <Input
+              name="canal"
+              label="Em qual Canal você compra os produtos FMC?"
+              inputRole={inputRole}
+            />
+
             <ComoFicouConhecendoSelect
               name="ficouSabendo"
               inputRole={inputRole}

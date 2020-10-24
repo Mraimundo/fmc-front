@@ -30,12 +30,8 @@ export default Yup.object().shape({
     })
     .required('Informe se é Produtor Agrícola')
     .typeError('Informe se é Produtor Agrícola'),
-  canal: Yup.object()
-    .shape({
-      value: Yup.string().required('Informe o Canal de compra'),
-    })
-    .required('Informe o Canal de compra')
-    .typeError('Informe o Canal de compra'),
+  canal: Yup.string()
+  .required('Informe o canal de compra'),
   ficouSabendo: Yup.object()
     .shape({
       value: Yup.string().required('Informe como ficou sabendo'),
