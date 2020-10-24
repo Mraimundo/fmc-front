@@ -28,7 +28,7 @@ export default async (filters?: FilterOptions): Promise<Response> => {
 
   const page = filters?.page || 1;
 
-  let extraSearch = `?limit=10&page=${page}`;
+  let extraSearch = `?limit=20&page=${page}`;
   if (filters) {
     const { status, customerId, directorId, mechanicId, regionalId } = filters;
     if (mechanicId) {

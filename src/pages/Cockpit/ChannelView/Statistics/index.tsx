@@ -3,7 +3,6 @@ import { Statistics as IStatistics } from 'services/cockpit/interfaces/channel';
 
 import {
   Container,
-  Card,
   CardBody,
   ChannelCard,
   ParticipantsCard,

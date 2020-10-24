@@ -1,25 +1,28 @@
 import React from 'react';
 
 import { Container } from './styles';
+interface Props {
+  nfListLength: number;
+}
 
-const StatusTable: React.FC = () => {
+const StatusTable: React.FC<Props> = Props => {
   return (
     <Container>
       <ul>
         <li>
           <p>Em análise</p>
           <span />
-          <p>1</p>
+          <p>{Props.nfListLength}</p>
         </li>
         <li>
           <p>Liberadas</p>
           <span />
-          <p>1</p>
+          <p>0</p>
         </li>
         <li>
           <p>Descredenciadas</p>
           <span />
-          <p>1</p>
+          <p>0</p>
         </li>
       </ul>
     </Container>

@@ -3,7 +3,7 @@ export const formatPoints = (
   minFractionDigits = 2,
   maxFractionDigits = 2,
 ) =>
-  value.toLocaleString('pt-br', {
+  value.toLocaleString('pt-BR', {
     minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: maxFractionDigits,
   });
@@ -51,17 +51,10 @@ export const fakeFormatDollars = (
   minFractionDigits = 2,
   maxFractionDigits = 2,
 ) => {
-  console.log('value', value);
-
-  console.log('type', typeof value);
-
-  const test = value.toLocaleString('pt-br', {
+  return value.toLocaleString('pt-br', {
     minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: maxFractionDigits,
   });
-
-  console.log('test', test);
-  return test;
 };
 
 export const formatKgl = (value: number) =>
