@@ -17,7 +17,7 @@ const mockValues = [
 
 const Cockpit: React.FC = () => {
   const spin = useCallback(async (): Promise<string> => {
-    return 'Surpresa';
+    return '100 pontos';
   }, []);
   return <Roleta values={mockValues} spin={spin} />;
   return (

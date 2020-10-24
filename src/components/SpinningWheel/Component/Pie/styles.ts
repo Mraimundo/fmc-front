@@ -28,8 +28,10 @@ export const PieSlice = styled.div<PieProps>`
     height: 270px;
     border-radius: 100%;
     clip: rect(0px, 135px, 270px, 0px);
-    background-color: ${({ index }) =>
-      index % 2 === 0 ? '#BEC0C2' : '#FA0014'};
+    background: ${({ index }) =>
+      index % 2 === 0 ?
+        'linear-gradient(to right, rgb(108, 108, 110) 0%, rgb(173, 174, 176) 100%)' :
+        'linear-gradient(to right, rgb(163, 1, 16) 0%, rgb(232, 1, 19) 100%)'};
     transform: rotate(${({ size }) => `${size}deg`});
 
     &::before {
