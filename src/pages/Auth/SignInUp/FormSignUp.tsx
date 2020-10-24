@@ -52,10 +52,10 @@ const FormSignUp: React.FC = () => {
     } catch (e) {
       setLoading(false);
       setShowModal(true);
-      addToast({
+      /*  addToast({
         title: e.response?.data?.message || 'Falha ao checar CPF',
         type: 'error',
-      });
+      }); */
     }
   });
 

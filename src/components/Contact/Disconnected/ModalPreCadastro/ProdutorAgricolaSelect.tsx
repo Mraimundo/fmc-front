@@ -26,7 +26,7 @@ const ProdutorAgricolaSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Você é um Produtor Agrícola?"
+      label="Você é um Produtor Agrícola?*"
       loadItems={loadItems}
       className={className}
       disabled={disabled}

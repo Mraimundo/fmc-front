@@ -245,6 +245,7 @@ export const SingleSignOnButton = styled(Button)`
 `;
 
 export const Modal = styled(DefaultModal)`
+  padding-left:0;
   @media screen and (max-width: 720px) {
     ._modalContainer {
       width: 98%;
@@ -263,8 +264,12 @@ export const ContainerModal = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  max-width: 743px;
-  padding: 60px 55px;
+  max-width: 90%;
+  padding: 60px 35px;
+  margin: auto;
+  @media (min-width: 768px) {
+    width: 743px;
+  }
 
   h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -276,6 +281,9 @@ export const ContainerModal = styled.div`
     margin-bottom: 20px;
     font-size: 18px;
     text-align: center;
+    @media (min-width:1024px) {
+      font-size: 24px;
+    }
   }
 
   button {

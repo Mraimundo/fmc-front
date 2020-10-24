@@ -13,9 +13,7 @@ export default Yup.object().shape({
     .required('Número é obrigatório')
     .test('valid-mobile', 'Número inválido', validMobilePhone),
   subject: Yup.string().required('Assunto é obrigatório'),
-  message: Yup.string()
-    .required('Mensagem é obrigatória')
-    .max(350, 'Limite de 350 caracteres'),
+  message: Yup.string().max(350, 'Limite de 350 caracteres'),
   fileUrl: Yup.string(),
   municipio: Yup.string().required('Muncípio é obrigatório'),
   estado: Yup.object()
@@ -30,12 +28,9 @@ export default Yup.object().shape({
     })
     .required('Informe se é Produtor Agrícola')
     .typeError('Informe se é Produtor Agrícola'),
-  canal: Yup.string()
-  .required('Informe o canal de compra'),
+  canal: Yup.string(),
   ficouSabendo: Yup.object()
     .shape({
-      value: Yup.string().required('Informe como ficou sabendo'),
+      value: Yup.string(),
     })
-    .required('Informe como ficou sabendo')
-    .typeError('Informe como ficou sabendo'),
 });

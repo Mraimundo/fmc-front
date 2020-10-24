@@ -28,7 +28,7 @@ export default async (contact: Contact): Promise<ContactResponse> => {
     let request = {};
 
 
-    if (contact.municipio && contact.estado && contact.estado  && contact.produtorAgricola && contact.canal && contact.ficouSabendo) {
+    if (contact.municipio && contact.estado && contact.estado && contact.produtorAgricola) {
       request = {
         cpf_not_registered: contact.cpf,
         email_not_registered: contact.email,
@@ -49,7 +49,8 @@ export default async (contact: Contact): Promise<ContactResponse> => {
               },
             ],
           }
-        ]
+        ],
+        file: contact.fileUrl || '',
       }
     } else {
       request = {
