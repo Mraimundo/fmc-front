@@ -11,7 +11,7 @@ export interface Contact {
   message: string;
   fileUrl?: string;
   municipio?: string;
-  canal?: Option;
+  canal?: string;
   estado?: Option;
   produtorAgricola?: Option;
   ficouSabendo?: Option;
@@ -26,7 +26,9 @@ interface ContactResponse {
 export default async (contact: Contact): Promise<ContactResponse> => {
   try {
     let request = {};
-    if (contact.municipio && contact.canal?.value ) {
+
+
+    if (contact.municipio && contact.estado && contact.estado && contact.produtorAgricola) {
       request = {
         cpf_not_registered: contact.cpf,
         email_not_registered: contact.email,
@@ -40,14 +42,15 @@ export default async (contact: Contact): Promise<ContactResponse> => {
             fields_aditional: [
               {
                 municipio: contact.municipio,
-                canal_produtos: contact.canal?.value || '',
+                canal_produtos: contact.canal,
                 estado: contact.estado?.value || '',
                 ficou_sabendo: contact.ficouSabendo?.value || '',
                 produtor_agricola: contact.produtorAgricola?.value || '',
               },
             ],
           }
-        ]
+        ],
+        file: contact.fileUrl || '',
       }
     } else {
       request = {
@@ -66,10 +69,15 @@ export default async (contact: Contact): Promise<ContactResponse> => {
       };
     }
 
+    console.log(request);
+
     const { data } = await vendavallApi.post<ContactResponse>(
       'contacts/unlogged',
       request,
     );
+
+    console.log(request);
+
     return {
       message: data.message,
       type: data.type === 'success' ? 'success' : 'error',

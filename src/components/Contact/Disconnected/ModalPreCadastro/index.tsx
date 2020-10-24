@@ -13,7 +13,6 @@ import UfSelect from '../../../Auth/Register/Form/UfsSelect';
 
 import ProdutorAgricolaSelect from './ProdutorAgricolaSelect';
 import ComoFicouConhecendoSelect from './ComoFicouConhecendoSelect';
-import CanalSelect from './CanalSelect';
 import {
   Container,
   Title,
@@ -43,7 +42,7 @@ interface ContactFormData {
   municipio?: string | undefined;
   estado?: Option | undefined;
   produtorAgricola?: Option | undefined;
-  canal?: Option | undefined;
+  canal?: string | undefined;
   ficouSabendo?: Option | undefined;
 }
 
@@ -114,19 +113,19 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         <Title>Fale conosco</Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
-            <Input name="name" label="Nome" inputRole={inputRole} />
+            <Input name="name" label="Nome completo*" inputRole={inputRole} />
             <Input
               name="cpf"
-              label="CPF"
+              label="CPF*"
               numbersOnly
               pattern="XXX.XXX.XXX-XX"
               inputRole={inputRole}
             />
-            <Input name="email" label="E-mail" inputRole={inputRole} />
+            <Input name="email" label="E-mail*" inputRole={inputRole} />
             <BoxPhone>
               <Input
                 name="dddMobile"
-                label="Celular"
+                label="Celular*"
                 numbersOnly
                 pattern="(XX)"
                 inputRole={inputRole}
@@ -140,21 +139,27 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             </BoxPhone>
             <Input
               name="subject"
+              label="Assunto*"
               disabled
               inputRole={inputRole}
               value="Solicitação Pré-cadastro"
             />
 
-            <Input name="municipio" label="Município" inputRole={inputRole} />
+            <Input name="municipio" label="Município*" inputRole={inputRole} />
 
-            <UfSelect name="estado" label="Estado" inputRole={inputRole} />
+            <UfSelect name="estado" label="Estado*" inputRole={inputRole} />
 
             <ProdutorAgricolaSelect
               name="produtorAgricola"
               inputRole={inputRole}
             />
 
-            <CanalSelect name="canal" inputRole={inputRole} />
+            <Input
+              name="canal"
+              label="Em qual Canal você compra os produtos FMC?"
+              inputRole={inputRole}
+            />
+
             <ComoFicouConhecendoSelect
               name="ficouSabendo"
               inputRole={inputRole}
