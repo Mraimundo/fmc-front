@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
 import { Establishment as IEstablishment } from 'services/auth/interfaces/Participant';
+import { IProfile } from 'config/constants';
 import {
   DropdownList,
   ParticipantMenuList,
@@ -11,7 +12,7 @@ import {
 
 interface DropdownProps {
   establishment: IEstablishment | null;
-  profile: string | null;
+  profile: IProfile | null;
   signOut(): void;
 }
 const Dropdown: React.FC<DropdownProps> = ({
