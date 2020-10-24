@@ -10,6 +10,7 @@ interface PieProps {
   size: number;
   index: number;
   length: number;
+  value: string;
 }
 
 export const PieSlice = styled.div<PieProps>`
@@ -32,7 +33,7 @@ export const PieSlice = styled.div<PieProps>`
     transform: rotate(${({ size }) => `${size}deg`});
 
     &::before {
-      content: 'test-${({ index }) => `${index}`}';
+      content: '${({ value }) => `${value}`}';
       position: absolute;
       color: blue;
       font-size: 16px;

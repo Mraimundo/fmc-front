@@ -2,8 +2,11 @@ import React from 'react';
 
 import { Container, PieSlice } from './styles';
 
-const Pie: React.FC = () => {
-  const values = ['1', '2', '3', '4', '5', '6'];
+interface Props {
+  values: string[];
+}
+
+const Pie: React.FC<Props> = ({ values }) => {
   const size = 360 / values.length;
 
   return (
@@ -15,6 +18,7 @@ const Pie: React.FC = () => {
           rotate={size * index}
           size={size}
           length={values.length}
+          value={item}
         >
           <div />
         </PieSlice>
