@@ -96,6 +96,7 @@ export const TextArea = styled(DefaultTextArea)`
 `;
 
 export const DefaultModal = styled(Modal)`
+  overflow-x: hidden;
   ._modalContainer {
     padding: 0;
   }
