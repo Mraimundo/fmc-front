@@ -5,10 +5,11 @@ import { Establishment } from 'services/auth/interfaces/Participant';
 import { useAuth } from 'context/AuthContext';
 import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
+import { Status } from 'state/modules/header/constants';
 import Dropdown from './Dropdown';
 import { Wrapper, WelcomeText, Hello } from './styles';
-import { Status } from 'state/modules/header/constants';
 import ParticipantStatus from '../ParticipantStatus';
+
 interface ParticipantProps {
   picture: string | null;
   name: string;
@@ -35,7 +36,11 @@ const Participant: React.FC<ParticipantProps> = ({
         {typeof points === 'number' && <span>Meus pontos: {points}</span>}
       </WelcomeText>
       <AiFillCaretDown />
-      <Dropdown establishment={establishment} signOut={signOut} />
+      <Dropdown
+        establishment={establishment}
+        profile={participant.profile}
+        signOut={signOut}
+      />
     </Wrapper>
   );
 };

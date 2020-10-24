@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from 'context/AuthContext';
 import routeMap from 'routes/route-map';
 import { Establishment as IEstablishment } from 'services/auth/interfaces/Participant';
 import {
@@ -12,11 +11,15 @@ import {
 
 interface DropdownProps {
   establishment: IEstablishment | null;
+  profile: string | null;
   signOut(): void;
 }
-const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
-  const { participant } = useAuth();
-  const isProdutor = participant.profile === 'PRODUTOR';
+const Dropdown: React.FC<DropdownProps> = ({
+  establishment,
+  profile,
+  signOut,
+}) => {
+  const isProdutor = profile === 'PRODUTOR';
   return (
     <DropdownList>
       {!!establishment && !isProdutor && (
