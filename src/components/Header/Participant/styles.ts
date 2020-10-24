@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import { DropdownList } from './Dropdown.styles';
 
-
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -23,7 +22,6 @@ export const Hello = styled.span`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
 `;
 
-
 export const WelcomeText = styled.div`
   font-size: 0.8em;
   margin-left: 0.5em;
@@ -33,6 +31,3 @@ export const WelcomeText = styled.div`
     display: block;
   }
 `;
-
-
-

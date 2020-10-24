@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import getNfList from 'services/nf/geNfList';
 import StatusTable from './StatusTable';
 import Upload from './Upload';
@@ -8,15 +8,15 @@ import { Container, Content, Title, RightSideBox } from './styles';
 const AddNF: React.FC = () => {
   const [nfListLength, setNfListLength] = useState(0);
 
-  const getNfData = () => {
+  const getNfData = useCallback(() => {
     getNfList().then(data => {
       setNfListLength(data.length);
     });
-  };
+  }, []);
 
   useEffect(() => {
     getNfData();
-  }, []);
+  }, [getNfData]);
 
   return (
     <Container>

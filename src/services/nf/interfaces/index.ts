@@ -3,5 +3,6 @@ export interface Nf {
     id: number;
     participant_id: number;
     urlnota: string;
+    status: number;
   };
 }

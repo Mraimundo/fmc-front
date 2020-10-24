@@ -2,10 +2,10 @@ import React from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 
 import { Establishment } from 'services/auth/interfaces/Participant';
-import { useAuth } from 'context/AuthContext';
 import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
 import { Status } from 'state/modules/header/constants';
+import { IProfile } from 'config/constants';
 import Dropdown from './Dropdown';
 import { Wrapper, WelcomeText, Hello } from './styles';
 import ParticipantStatus from '../ParticipantStatus';
@@ -16,6 +16,7 @@ interface ParticipantProps {
   establishment: Establishment | null;
   points?: number;
   signOut(): void;
+  profile: IProfile;
 }
 const Participant: React.FC<ParticipantProps> = ({
   picture,
@@ -23,13 +24,11 @@ const Participant: React.FC<ParticipantProps> = ({
   establishment,
   points,
   signOut,
+  profile,
 }) => {
-  const { participant } = useAuth();
   return (
     <Wrapper>
-      {participant.profile === 'PRODUTOR' && (
-        <ParticipantStatus status={Status.Parceiro} />
-      )}
+      {profile === 'PRODUTOR' && <ParticipantStatus status={Status.Parceiro} />}
       <Avatar name={name} picture={picture} circleDimension={40} />
       <WelcomeText>
         <Hello>Olá {getFirstName(name)}!</Hello>
@@ -38,7 +37,7 @@ const Participant: React.FC<ParticipantProps> = ({
       <AiFillCaretDown />
       <Dropdown
         establishment={establishment}
-        profile={participant.profile}
+        profile={profile}
         signOut={signOut}
       />
     </Wrapper>

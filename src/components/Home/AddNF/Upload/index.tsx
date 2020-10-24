@@ -40,9 +40,11 @@ const Upload: React.FC<Props> = Props => {
     },
     [Props],
   );
-  const onRequestClose = () => {
+
+  const onRequestClose = useCallback(() => {
     setShowModal(false);
-  };
+  }, []);
+
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>

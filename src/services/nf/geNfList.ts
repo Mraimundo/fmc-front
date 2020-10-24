@@ -1,8 +1,15 @@
 import { pluginApi } from 'services/api';
+import { Nf } from './interfaces';
 
-export default async () => {
+interface ApiResponse {
+  notas: Nf[];
+}
+
+export default async (): Promise<Nf[]> => {
   try {
-    const { data } = await pluginApi.get('/participants/uploadNota?status=0');
+    const { data } = await pluginApi.get<ApiResponse>(
+      '/participants/uploadNota?status=0',
+    );
     return data.notas;
   } catch {
     return [];
