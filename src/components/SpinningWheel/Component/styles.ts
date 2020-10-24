@@ -94,7 +94,10 @@ export const Base = styled(ReactSVG)`
   bottom: 0;
 `;
 
-export const Pizza = styled.div`
+interface PizzaProps {
+  degsToRotate: number;
+}
+export const Pizza = styled.div<PizzaProps>`
   /*background: blue;*/
   position: absolute;
   width: 270px;
@@ -103,4 +106,49 @@ export const Pizza = styled.div`
   top: 18px;
   left: 16px;
   z-index: 2;
+
+  transition: all 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  // transform: rotateZ(0deg);
+  transform: rotateZ(${({ degsToRotate }) => `${degsToRotate}deg`});
+
+  /*animation: spin 8s linear forwards;*/
+  /*@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    5% {
+      transform: rotate(360deg);
+    }
+    10% {
+      transform: rotate(720deg);
+    }
+    20% {
+      transform: rotate(1080deg);
+    }
+    30% {
+      transform: rotate(1440deg);
+    }
+    40% {
+      transform: rotate(1800deg);
+    }
+    50% {
+      transform: rotate(2000deg);
+    }
+    60% {
+      transform: rotate(2200deg);
+    }
+    70% {
+      transform: rotate(2300deg);
+    }
+    80% {
+      transform: rotate(2380deg);
+    }
+    90% {
+      transform: rotate(2440deg);
+    }
+    100% {
+      transform: rotate(2480deg);
+    }
+  }*/
 `;

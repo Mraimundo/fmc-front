@@ -32,7 +32,7 @@ export const PieSlice = styled.div<PieProps>`
     transform: rotate(${({ size }) => `${size}deg`});
 
     &::before {
-      content: 'test';
+      content: 'test-${({ index }) => `${index}`}';
       position: absolute;
       color: blue;
       font-size: 16px;
