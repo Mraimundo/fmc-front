@@ -35,6 +35,7 @@ const settings: Settings = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
+        infinite: true,
       },
     },
   ],
@@ -52,7 +53,6 @@ const SliderHowParticipate: React.FC<SliderProps> = ({ items }) => {
       <Slider {...settings}>
         {items.map(item => (
           <Item key={item.picture}>
-            {console.log('test', item)}
             <img src={item.picture} alt="Imagem rotativa" />
           </Item>
         ))}

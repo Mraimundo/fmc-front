@@ -110,7 +110,7 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       type="primary"
     >
       <Container>
-        <Title>Fale conosco</Title>
+        <Title> Solicitação de Pré-cadastro </Title>
         <FormContext {...methods}>
           <form onSubmit={onSubmit}>
             <Input name="name" label="Nome completo*" inputRole={inputRole} />
