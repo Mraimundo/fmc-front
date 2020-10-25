@@ -4,7 +4,9 @@ import baseImg from 'assets/images/spinning-wheel/base.svg';
 import borderLightsImg from 'assets/images/spinning-wheel/border-lights.png';
 import spinButtonImg from 'assets/images/spinning-wheel/spin-button.png';
 import stopArrowImg from 'assets/images/spinning-wheel/stop-arrow.png';
+import closeButtonImg from 'assets/images/spinning-wheel/close.svg';
 
+import { Prize } from 'services/spinningWheel/interfaces';
 import { useToast } from 'context/ToastContext';
 import Pie from './Pie';
 
@@ -16,18 +18,24 @@ import {
   SpinButton,
   Base,
   Pizza,
+  Instructions,
+  InstructionContent,
+  CloseButton,
 } from './styles';
 
 interface Props {
-  values: string[];
-  spin(): Promise<string>;
+  values: Prize[];
+  spin(): Promise<Prize>;
+  close(): void;
+  className?: string;
 }
 
 const fixedSpins = 360 * 7;
 
-const Component: React.FC<Props> = ({ values, spin }) => {
+const Component: React.FC<Props> = ({ values, spin, className, close }) => {
   const [alreadyTried, setAlreadyTried] = useState(false);
   const [degsToRotate, setDegsToRotate] = useState(0);
+  const [winner, setWinner] = useState<Prize | null>(null);
   const { addToast } = useToast();
 
   const handleSpinClick = useCallback(async (): Promise<void> => {
@@ -40,7 +48,7 @@ const Component: React.FC<Props> = ({ values, spin }) => {
       const prize = await spin();
 
       const reverseArrayPositionToStop =
-        [...values].reverse().indexOf(prize) + 1;
+        [...values].reverse().findIndex(item => item.id === prize.id) + 1;
 
       if (!prize || reverseArrayPositionToStop === 0) {
         throw new Error();
@@ -52,6 +60,7 @@ const Component: React.FC<Props> = ({ values, spin }) => {
         (360 / numberOfSlices) * reverseArrayPositionToStop - middleOfTheSlice;
 
       setDegsToRotate(fixedSpins + stopValue);
+      setWinner(prize);
       setAlreadyTried(true);
     } catch {
       addToast({
@@ -64,14 +73,24 @@ const Component: React.FC<Props> = ({ values, spin }) => {
   }, [addToast, spin, values, alreadyTried]);
 
   return (
-    <Container>
+    <Container className={className}>
       <SpinContainer>
         <StopArrow src={stopArrowImg} />
         <BorderLights src={borderLightsImg} />
         <SpinButton src={spinButtonImg} onClick={handleSpinClick} />
         <Pizza degsToRotate={degsToRotate}>
-          <Pie values={values} />
+          <Pie values={values} winner={winner} />
         </Pizza>
+        <Instructions>
+          <CloseButton src={closeButtonImg} onClick={close} />
+          <InstructionContent>
+            <h3>Roleta Premiada</h3>
+            <p>
+              Você se engajou e demonstrou conhecimentos. Chegou a hora de
+              tentar a sorte na Roleta Premiada
+            </p>
+          </InstructionContent>
+        </Instructions>
       </SpinContainer>
       <Base src={baseImg} />
     </Container>

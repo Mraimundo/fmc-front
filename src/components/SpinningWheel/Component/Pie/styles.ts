@@ -11,6 +11,7 @@ interface PieProps {
   index: number;
   length: number;
   value: string;
+  winner: boolean;
 }
 
 export const PieSlice = styled.div<PieProps>`
@@ -33,6 +34,17 @@ export const PieSlice = styled.div<PieProps>`
         ? 'linear-gradient(to right, rgb(108, 108, 110) 0%, rgb(173, 174, 176) 100%)'
         : 'linear-gradient(to right, rgb(163, 1, 16) 0%, rgb(232, 1, 19) 100%)'};
     transform: rotate(${({ size }) => `${size}deg`});
+
+    transition: background 1s 5s;
+    &::after {
+      transition: background 1s 5s;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: ${({ winner }) =>
+        winner ? 'rgba(255, 255, 100, 0.3)' : 'transparent'};
+    }
 
     &::before {
       content: '${({ value }) => `${value}`}';

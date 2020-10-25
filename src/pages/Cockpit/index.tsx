@@ -1,25 +1,34 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Roleta from 'components/SpinningWheel/Component';
+import Modal from 'components/SpinningWheel/Modal';
+import { getAvailablePrizes, spin } from 'services/spinningWheel';
+import { Prize } from 'services/spinningWheel/interfaces';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
 
 import { Container, GeneralContent, Content, Separator } from './styles';
 
-const mockValues = [
-  '100 pontos',
-  'Tente novamente',
-  '250 pontos',
-  'Tenho outra vez',
-  '300 pontos',
-  'Surpresa',
-];
-
 const Cockpit: React.FC = () => {
-  const spin = useCallback(async (): Promise<string> => {
-    return '100 pontos';
+  const [isOpen, setIsOpen] = useState(false);
+  const [prizes, setPrizes] = useState<Prize[]>([]);
+
+  useEffect(() => {
+    getAvailablePrizes().then(data => setPrizes(data));
   }, []);
-  return <Roleta values={mockValues} spin={spin} />;
+
+  return (
+    <>
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Test
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={() => setIsOpen(false)}
+        values={prizes}
+        spin={spin}
+      />
+    </>
+  );
   return (
     <Container>
       <GeneralContent>
