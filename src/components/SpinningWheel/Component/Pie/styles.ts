@@ -37,11 +37,12 @@ export const PieSlice = styled.div<PieProps>`
     &::before {
       content: '${({ value }) => `${value}`}';
       position: absolute;
-      font-size: 16px;
+      font-size: 14px;
       transform: rotate(${({ size }) => `-${size / 2}deg`});
       font-family: ${({ theme }) => theme.font.fontFamily.bold};
       color: ${({ index }) =>
         index % 2 === 0 ? 'rgb(163, 1, 16)' : 'rgb(173, 174, 176)'};
+      line-height: 1;
 
       left: -22px;
       top: 72px;

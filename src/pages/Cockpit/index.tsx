@@ -8,7 +8,7 @@ import { Container, GeneralContent, Content, Separator } from './styles';
 
 const mockValues = [
   '100 pontos',
-  'Não foi dessa vez',
+  'Tente novamente',
   '250 pontos',
   'Tenho outra vez',
   '300 pontos',
