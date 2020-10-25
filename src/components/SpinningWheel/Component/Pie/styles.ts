@@ -29,17 +29,19 @@ export const PieSlice = styled.div<PieProps>`
     border-radius: 100%;
     clip: rect(0px, 135px, 270px, 0px);
     background: ${({ index }) =>
-      index % 2 === 0 ?
-        'linear-gradient(to right, rgb(108, 108, 110) 0%, rgb(173, 174, 176) 100%)' :
-        'linear-gradient(to right, rgb(163, 1, 16) 0%, rgb(232, 1, 19) 100%)'};
+      index % 2 === 0
+        ? 'linear-gradient(to right, rgb(108, 108, 110) 0%, rgb(173, 174, 176) 100%)'
+        : 'linear-gradient(to right, rgb(163, 1, 16) 0%, rgb(232, 1, 19) 100%)'};
     transform: rotate(${({ size }) => `${size}deg`});
 
     &::before {
       content: '${({ value }) => `${value}`}';
       position: absolute;
-      color: blue;
       font-size: 16px;
       transform: rotate(${({ size }) => `-${size / 2}deg`});
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      color: ${({ index }) =>
+        index % 2 === 0 ? 'rgb(163, 1, 16)' : 'rgb(173, 174, 176)'};
 
       left: -22px;
       top: 72px;
