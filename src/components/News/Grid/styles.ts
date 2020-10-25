@@ -39,7 +39,6 @@ export const MiniBox = styled(Link)`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin: 8px 0;
-    text-align: justify;
   }
 
   p {
