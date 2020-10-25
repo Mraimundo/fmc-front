@@ -18,7 +18,6 @@ export const Container = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 5px;
-    margin-left: 25px;
   }
 
   > span {
