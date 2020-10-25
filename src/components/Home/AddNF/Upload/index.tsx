@@ -9,9 +9,9 @@ import {
   Container,
   Button,
   ButtonModal,
+  Modal,
   ContainerModal,
   CloseModal,
-  Modal,
 } from './styles';
 
 interface AddNota {
