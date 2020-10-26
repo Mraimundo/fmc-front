@@ -1,24 +1,24 @@
 import React from 'react';
-import { Prize } from 'services/spinningWheel/interfaces';
+import { Spin } from 'services/spinningWheel/interfaces';
 
-import { DefaultModal, Spin } from './styles';
+import { DefaultModal, Spin as StyledSpin } from './styles';
 
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
-  values: Prize[];
-  spin(): Promise<Prize>;
+  spinData: Spin;
+  spin(spinId: number): Promise<{ prizeId: number }>;
 }
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
-  values,
+  spinData,
   spin,
 }) => {
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <Spin values={values} spin={spin} close={onRequestClose} />
+      <StyledSpin spinData={spinData} spin={spin} close={onRequestClose} />
     </DefaultModal>
   );
 };

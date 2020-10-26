@@ -5,7 +5,7 @@ import { Container, PieSlice } from './styles';
 
 interface Props {
   values: Prize[];
-  winner: Prize | null;
+  winner: { prizeId: number } | null;
 }
 
 const Pie: React.FC<Props> = ({ values, winner }) => {
@@ -21,7 +21,7 @@ const Pie: React.FC<Props> = ({ values, winner }) => {
           size={size}
           length={values.length}
           value={item.value}
-          winner={winner?.id === item.id}
+          winner={winner?.prizeId === item.id}
         >
           <div />
         </PieSlice>

@@ -6,7 +6,7 @@ import spinButtonImg from 'assets/images/spinning-wheel/spin-button.png';
 import stopArrowImg from 'assets/images/spinning-wheel/stop-arrow.png';
 import closeButtonImg from 'assets/images/spinning-wheel/close.svg';
 
-import { Prize } from 'services/spinningWheel/interfaces';
+import { Spin } from 'services/spinningWheel/interfaces';
 import { useToast } from 'context/ToastContext';
 import Pie from './Pie';
 
@@ -24,18 +24,18 @@ import {
 } from './styles';
 
 interface Props {
-  values: Prize[];
-  spin(): Promise<Prize>;
+  spinData: Spin;
+  spin(spinId: number): Promise<{ prizeId: number }>;
   close(): void;
   className?: string;
 }
 
 const fixedSpins = 360 * 7;
 
-const Component: React.FC<Props> = ({ values, spin, className, close }) => {
+const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
   const [alreadyTried, setAlreadyTried] = useState(false);
   const [degsToRotate, setDegsToRotate] = useState(0);
-  const [winner, setWinner] = useState<Prize | null>(null);
+  const [winner, setWinner] = useState<{ prizeId: number } | null>(null);
   const { addToast } = useToast();
 
   const handleSpinClick = useCallback(async (): Promise<void> => {
@@ -43,12 +43,14 @@ const Component: React.FC<Props> = ({ values, spin, className, close }) => {
     setDegsToRotate(fixedSpins);
 
     try {
-      const numberOfSlices = values.length;
+      const numberOfSlices = spinData.prizes.length;
 
-      const prize = await spin();
+      const prize = await spin(spinData.id);
 
       const reverseArrayPositionToStop =
-        [...values].reverse().findIndex(item => item.id === prize.id) + 1;
+        [...spinData.prizes]
+          .reverse()
+          .findIndex(item => item.id === prize.prizeId) + 1;
 
       if (!prize || reverseArrayPositionToStop === 0) {
         throw new Error();
@@ -70,7 +72,7 @@ const Component: React.FC<Props> = ({ values, spin, className, close }) => {
       });
       setDegsToRotate(0);
     }
-  }, [addToast, spin, values, alreadyTried]);
+  }, [addToast, spin, spinData, alreadyTried]);
 
   return (
     <Container className={className}>
@@ -79,7 +81,7 @@ const Component: React.FC<Props> = ({ values, spin, className, close }) => {
         <BorderLights src={borderLightsImg} />
         <SpinButton src={spinButtonImg} onClick={handleSpinClick} />
         <Pizza degsToRotate={degsToRotate}>
-          <Pie values={values} winner={winner} />
+          <Pie values={spinData.prizes} winner={winner} />
         </Pizza>
         <Instructions>
           <CloseButton src={closeButtonImg} onClick={close} />

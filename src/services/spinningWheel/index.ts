@@ -1,4 +1,4 @@
 import spin from './spin';
-import getAvailablePrizes from './getAvailablePrizes';
+import getAvailableSpins from './getAvailableSpins';
 
-export { getAvailablePrizes, spin };
+export { getAvailableSpins, spin };
