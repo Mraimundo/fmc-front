@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
+import backgroundDescription from 'assets/images/spinning-wheel/background-description.png';
 
 export const Container = styled.div`
   display: flex;
@@ -120,7 +121,9 @@ export const Pizza = styled.div<PizzaProps>`
 
 export const Instructions = styled.div`
   position: absolute;
-  background: linear-gradient(37deg, rgb(246, 0, 19) 0%, rgb(176, 5, 20) 100%);
+  /*background: linear-gradient(37deg, rgb(246, 0, 19) 0%, rgb(176, 5, 20) 100%);*/
+  background: url(${backgroundDescription});
+
   top: 11px;
   left: -251px;
   height: 260px;
@@ -133,6 +136,7 @@ export const Instructions = styled.div`
     left: -49px;
     height: 290px;
     top: -140px;
+    background-size: cover;
   }
 `;
 
@@ -170,4 +174,5 @@ export const CloseButton = styled(ReactSVG)`
   position: absolute;
   top: 21px;
   left: 23px;
+  cursor: pointer;
 `;

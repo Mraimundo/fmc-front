@@ -11,7 +11,7 @@ interface PieProps {
   index: number;
   length: number;
   value: string;
-  winner: boolean;
+  winner?: boolean;
 }
 
 export const PieSlice = styled.div<PieProps>`
@@ -43,7 +43,8 @@ export const PieSlice = styled.div<PieProps>`
       width: 100%;
       height: 100%;
       background: ${({ winner }) =>
-        winner ? 'rgba(255, 255, 100, 0.3)' : 'transparent'};
+        winner === false ? 'rgba(0,0,0,0.5)' : 'transparent'};
+      transform: rotate(45deg);
     }
 
     &::before {

@@ -21,7 +21,7 @@ const Pie: React.FC<Props> = ({ values, winner }) => {
           size={size}
           length={values.length}
           value={item.value}
-          winner={winner?.prizeId === item.id}
+          winner={winner !== null ? winner.prizeId === item.id : undefined}
         >
           <div />
         </PieSlice>
