@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
+import { getAvailableSpins, spin } from 'services/spinningWheel';
+import { Spin } from 'services/spinningWheel/interfaces';
 import {
   answerTraining,
   canAnswerTraininig,
@@ -42,9 +44,13 @@ interface TrainingContextState {
   quizAlreadyAnswered: boolean;
   successModalOpened: boolean;
   closeSuccessModal(): void;
+  spinModalOpened: boolean;
+  closeSpinModal(): void;
   approved: boolean;
   canAnswer: { canAnswer: boolean; reason: string };
   certificate: ICertificate;
+  spinData: Spin | undefined;
+  spin(spinId: number): Promise<{ prizeId: number }>;
 }
 
 const TrainingContext = createContext<TrainingContextState>(
@@ -65,9 +71,20 @@ export const TrainingProvider: React.FC = ({ children }) => {
     message: '',
     hasCertificate: false,
   });
+  const [spinData, setSpinData] = useState<Spin | undefined>(undefined);
   const { addToast } = useToast();
+  const [spinModalOpened, setSpinModalOpened] = useState(false);
 
-  const closeSuccessModal = useCallback(() => setSuccessModalOpened(false), []);
+  const closeSuccessModal = useCallback(() => {
+    setSuccessModalOpened(false);
+    if (spinData?.id) {
+      setSpinModalOpened(true);
+    }
+  }, [spinData]);
+
+  const closeSpinModal = useCallback(() => {
+    setSpinModalOpened(false);
+  }, []);
 
   const loadTraining = useCallback(
     async (trainingId: number): Promise<void> => {
@@ -158,6 +175,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
         setCertificate(certificateResponse);
         setApproved(approvedApi);
         setSuccessModalOpened(true);
+        getAvailableSpins(training.id).then(data =>
+          setSpinData(data || undefined),
+        );
         loadTraining(training.id);
       } else {
         addToast({
@@ -219,9 +239,13 @@ export const TrainingProvider: React.FC = ({ children }) => {
         quizAlreadyAnswered,
         successModalOpened,
         closeSuccessModal,
+        spinModalOpened,
+        closeSpinModal,
         approved,
         canAnswer,
         certificate,
+        spinData,
+        spin,
       }}
     >
       {children}
