@@ -74,6 +74,23 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
     }
   }, [addToast, spin, spinData, alreadyTried]);
 
+  const getSpinDescription = useCallback(
+    (_winner: { prizeId: number } | null): string => {
+      if (_winner === null) {
+        return 'Você se engajou e demonstrou conhecimentos. Chegou a hora de tentar a sorte na Roleta Premiada';
+      }
+
+      const prize = spinData.prizes.find(item => item.id === _winner.prizeId);
+
+      if (!prize?.winner) {
+        return 'Não foi dessa vez. Continue participando dos treinamentos para garantir novas chances!';
+      }
+
+      return 'Você ganhou pontos extras com a Roleta Premiada! Em breve, seu extrato exibirá a pontuação.';
+    },
+    [spinData.prizes],
+  );
+
   return (
     <Container className={className}>
       <SpinContainer>
@@ -87,10 +104,7 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
           <CloseButton src={closeButtonImg} onClick={close} />
           <InstructionContent>
             <h3>Roleta Premiada</h3>
-            <p>
-              Você se engajou e demonstrou conhecimentos. Chegou a hora de
-              tentar a sorte na Roleta Premiada
-            </p>
+            <p>{getSpinDescription(winner)}</p>
           </InstructionContent>
         </Instructions>
       </SpinContainer>
