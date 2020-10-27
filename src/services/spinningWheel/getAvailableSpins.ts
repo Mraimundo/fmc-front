@@ -36,6 +36,7 @@ export default async (quizId: number): Promise<Spin | null> => {
       prizes: awards.map(award => ({
         id: award.Awards.id,
         value: award.Awards.title,
+        winner: parseInt(award.Awards.value, 0) > 0,
       })),
     };
   }
