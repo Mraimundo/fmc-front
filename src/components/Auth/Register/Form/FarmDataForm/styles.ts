@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Input as DefaultInput } from 'components/shared';
+import DefaultInput from 'components/shared/Input/BaseInput';
+import { Button as DefaultButton } from 'components/shared';
 
 export const Input = styled(DefaultInput)`
   margin-top: 15px;
@@ -10,10 +11,86 @@ export const Input = styled(DefaultInput)`
   }
 `;
 
-export const Subtitle = styled.h4`
-  color: #e63027;
-  margin: 10px 0;
+export const Obs = styled.p`
   font-size: 18px;
+  color: #e63027;
   max-width: 590px;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
+`;
+
+export const MemberActionContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 648px;
+  margin: 48px 0;
+`;
+
+export const AddMemberButton = styled.button`
+  background: #193b4e;
+  color: #fff;
+  font-size: 21px;
+  max-width: 390px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  border: 0;
+`;
+
+export const Button = styled(DefaultButton)`
+  margin-top: 15px;
+  max-width: 300px;
+  align-self: center;
+  height: 44px;
+  margin-top: 30px;
+`;
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 25px 0;
+`;
+
+export const Title = styled.h3`
+  margin-bottom: 10px;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  color: ${({ theme }) => theme.font.color.primary};
+  font-size: 18px;
+
+  strong {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+`;
+
+export const ListContainer = styled.div`
+  margin: 32px auto;
+  color: #808285;
+  width: 100%;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    padding: 3px 8px;
+    font-weight: normal;
+    text-align: left;
+  }
+  td {
+    padding: 20px 8px;
+  }
+  tr:nth-child(odd) {
+    td {
+      background: #efefef;
+    }
+  }
+`;
+
+export const DeleteLink = styled.span`
+  font-size: 14px;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  text-decoration: underline;
+  cursor: pointer;
 `;

@@ -45,6 +45,25 @@ export interface Regulation {
   version: string;
 }
 
+export enum MemberType {
+  farm = 'fazenda',
+  family = 'família',
+  partner = 'socios',
+  principal = 'matriz',
+  branch = 'filial',
+  agriculture = 'agropecuária',
+}
+
+export interface MemberGroup {
+  id?: number;
+  type: MemberType;
+  cpf_cnpj: string;
+  name: string;
+  ie: string;
+  city: string;
+  uf: string;
+}
+
 export interface Participant {
   id: number;
   cpf: string;
@@ -81,4 +100,5 @@ export interface Participant {
   // MAYCONN Campos adicionar
   producer_cpf: string;
   producer_group_name: string;
+  members_group: MemberGroup[];
 }
