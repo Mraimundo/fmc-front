@@ -7,6 +7,7 @@ import getschemaValidations from './Validators/getSchemaValidations';
 import ProducerHeader, { Tab } from './Producer/Header';
 import PersonalDataForm from './PersonalDataForm';
 import FarmDataForm from './FarmDataForm';
+import HarvestDataForm from './HarvestDataForm';
 
 import { Title } from './styles';
 
@@ -194,6 +195,7 @@ const Form: React.FC<Props> = ({
             removeMemberGroup={removeMemberGroup}
           />
         )}
+        {activeTab === 'HARVEST_DATA' && <HarvestDataForm />}
       </form>
     </FormContext>
   );

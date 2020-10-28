@@ -64,6 +64,28 @@ export interface MemberGroup {
   uf: string;
 }
 
+export interface Harvest {
+  algodao: number;
+  arroz_irrigado: number;
+  batata: number;
+  cafe: number;
+  cana: number;
+  cenoura: number;
+  cevada: number;
+  citrus: number;
+  feijao: number;
+  mandioca: number;
+  melao: number;
+  milho: number;
+  outras: number;
+  outras_quais: number;
+  soja: number;
+  tabaco: number;
+  tomate: number;
+  trigo: number;
+  uva: number;
+}
+
 export interface Participant {
   id: number;
   cpf: string;
@@ -101,4 +123,5 @@ export interface Participant {
   producer_cpf: string;
   producer_group_name: string;
   members_group: MemberGroup[];
+  harvest: Harvest;
 }
