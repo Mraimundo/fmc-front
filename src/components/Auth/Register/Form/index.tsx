@@ -4,9 +4,11 @@ import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import PasswordHelp from 'components/shared/PasswordHelp';
-import ComponentsByProfile from './ComponentsByProfile';
-import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
+import ComponentsByProfile from './Commom/ComponentsByProfile';
+import ExtraFieldsForParticipant from './Commom/ExtraFieldsForParticipant';
 import getschemaValidations from './Validators/getSchemaValidations';
+
+import ProducerHeader from './Producer/Header';
 
 import {
   Title,
@@ -149,14 +151,23 @@ const Form: React.FC<Props> = ({
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <Title>
-          {editing ? 'Editar cadastro' : 'Ativar cadastro'} -{' '}
-          <strong>
-            {participant.profile === 'FMC' && 'Equipe FMC'}
-            {participant.profile === 'FOCALPOINT' && 'Focal Point'}
-            {participant.profile === 'PARTICIPANTE' && 'Participante'}
-          </strong>
-        </Title>
+        {participant.profile === PROFILES.producer ? (
+          <>
+            <Title>
+              {editing ? 'Editar cadastro' : 'Bem-vindo Produtor(a)'}
+            </Title>
+            <ProducerHeader />
+          </>
+        ) : (
+          <Title>
+            {editing ? 'Editar cadastro' : 'Ativar cadastro'} -{' '}
+            <strong>
+              {participant.profile === 'FMC' && 'Equipe FMC'}
+              {participant.profile === 'FOCALPOINT' && 'Focal Point'}
+              {participant.profile === 'PARTICIPANTE' && 'Participante'}
+            </strong>
+          </Title>
+        )}
         <Avatar name="picture" inputRole={inputRole} />
         <ComponentsByProfile participant={participant} inputRole={inputRole} />
         <Input
