@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div``;
 
@@ -25,7 +25,12 @@ export const Navigation = styled.ul`
     justify-content: space-between;
   }
 `;
-export const NavigationItem = styled.li`
+
+interface NavigationItemProps {
+  haserrors: number;
+}
+
+export const NavigationItem = styled.li<NavigationItemProps>`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -43,6 +48,28 @@ export const NavigationItem = styled.li`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+
+  ${({ haserrors }) =>
+    !!haserrors &&
+    css`
+      &:after {
+        content: '!';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background: red;
+        top: 5px;
+        right: 8px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      }
+    `}
+
   &.isCurrent {
     color: #193b4e;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -117,8 +144,5 @@ export const NavigationItem = styled.li`
         background-image: url("data:image/svg+xml,%3Csvg id='Group_3158' data-name='Group 3158' xmlns='http://www.w3.org/2000/svg' width='194.777' height='101.204' viewBox='0 0 194.777 101.204'%3E%3Cpath id='Path_4745' data-name='Path 4745' d='M3695.741,394.509,3682.3,414.225a.625.625,0,0,0,.516.976h13.438a.625.625,0,0,0,.625-.625V394.861a.625.625,0,0,0-1.141-.352Zm-.109,19.443H3684l11.631-17.066Z' transform='translate(-3669.958 -349.411)' fill='%23193b4e'/%3E%3Cpath id='Path_4746' data-name='Path 4746' d='M3789.277,143.073H3664.266A19.148,19.148,0,0,0,3645.14,162.2h1.25a17.9,17.9,0,0,1,17.876-17.876h125.011a17.9,17.9,0,0,1,17.876,17.876v62.953a17.9,17.9,0,0,1-17.876,17.876H3672.508v-.007a41.682,41.682,0,0,1-27.125-12.988l-.005,0a.6.6,0,0,0-.065-.056.349.349,0,0,0-.029-.024.632.632,0,0,0-.077-.043c-.01,0-.019-.011-.028-.015a.605.605,0,0,0-.083-.027l-.032-.01a.648.648,0,0,0-.074-.009l-.024,0-.024,0h-4.392V218.385a.625.625,0,0,0-.625-.625h-25.05v-9.543l25.18-37.438h10.2v37.248a.624.624,0,0,0,.624.625h4.615V217.9h-4.615a.625.625,0,0,0,0,1.249h5.239a.625.625,0,0,0,.625-.625c0-.024,0-.047,0-.07s0-.047,0-.07V208.027a.625.625,0,0,0-.625-.625h-4.614V170.155a.625.625,0,0,0-.625-.625h-11.161a.625.625,0,0,0-.518.276l-25.472,37.872a.624.624,0,0,0-.106.349v10.358a.625.625,0,0,0,.625.625h25.05v11.453a.625.625,0,0,0,.625.625h4.741a43.193,43.193,0,0,0,27.464,13.154v.036h117.147a19.147,19.147,0,0,0,19.125-19.126V162.2A19.147,19.147,0,0,0,3789.277,143.073Z' transform='translate(-3613.625 -143.073)' fill='%23193b4e'/%3E%3C/svg%3E%0A");
       }
     }
-  }
-
-
   }
 `;

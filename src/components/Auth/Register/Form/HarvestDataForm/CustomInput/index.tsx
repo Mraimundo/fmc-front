@@ -13,8 +13,7 @@ const CustomInput: React.FC<Props> = ({ name, title }) => {
   const [value, setValue] = useState('');
 
   const handleChangeValue = useCallback((v: string) => {
-    const numbers = parseFloat(numbersOnly(v)) / 1000;
-    setValue(`${formatPoints(numbers, 3, 3)}`);
+    setValue(`${formatPoints(parseInt(numbersOnly(v) || '0', 0), 0, 0)}`);
   }, []);
 
   return (
@@ -26,7 +25,7 @@ const CustomInput: React.FC<Props> = ({ name, title }) => {
           label=""
           value={value}
           onChange={e => handleChangeValue(e.target.value)}
-          placeholder="0.000,000"
+          placeholder="0.000"
         />
         <span>hectares</span>
       </Box>

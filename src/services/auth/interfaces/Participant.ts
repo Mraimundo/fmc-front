@@ -78,7 +78,7 @@ export interface Harvest {
   melao: number;
   milho: number;
   outras: number;
-  outras_quais: number;
+  outras_quais: string;
   soja: number;
   tabaco: number;
   tomate: number;
