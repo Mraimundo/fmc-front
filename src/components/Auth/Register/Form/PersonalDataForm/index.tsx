@@ -15,6 +15,8 @@ import {
   Button,
   BoxPhone,
   BoxAutoIndication,
+  NextButtonContainer,
+  NextButton,
 } from './styles';
 
 interface Props {
@@ -150,13 +152,15 @@ const PersonalDataForm: React.FC<Props> = ({
           </Button>
         </>
       ) : (
-        <Button
-          type="button"
-          buttonRole="primary"
-          onClick={handleActionPageButton}
-        >
-          Próximo
-        </Button>
+        <NextButtonContainer>
+          <NextButton
+            type="button"
+            buttonRole="primary"
+            onClick={handleActionPageButton}
+          >
+            Próximo
+          </NextButton>
+        </NextButtonContainer>
       )}
     </div>
   );

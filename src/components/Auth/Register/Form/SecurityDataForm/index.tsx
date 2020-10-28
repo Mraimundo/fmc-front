@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { Title, PasswordInput, Button } from './styles';
+import { Title, PasswordInput, ButtonContainer, Button } from './styles';
 
 interface Props {
   inputRole: 'primary' | 'secondary';
@@ -24,9 +24,11 @@ const SecurityDataForm: React.FC<Props> = ({ inputRole, loading, actived }) => {
         label="Confirmar Senha"
         inputRole={inputRole}
       />
-      <Button type="submit" buttonRole="primary" loading={loading}>
-        Salvar
-      </Button>
+      <ButtonContainer>
+        <Button type="submit" buttonRole="primary" loading={loading}>
+          Salvar
+        </Button>
+      </ButtonContainer>
     </div>
   );
 };

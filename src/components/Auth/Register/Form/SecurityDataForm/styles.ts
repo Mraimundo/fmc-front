@@ -15,8 +15,8 @@ export const PasswordInput = styled(DefaultPasswordInput)`
 
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.quartenary};
-  margin-bottom: 10px;
-  font-size: 18px;
+  margin: 60px 0 40px 0;
+  font-size: 24px;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   strong {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -24,9 +24,14 @@ export const Title = styled.h3`
 `;
 
 export const Button = styled(DefaultButton)`
-  margin-top: 15px;
-  max-width: 300px;
-  align-self: center;
-  height: 44px;
-  margin-top: 30px;
+  width: 100%;
+  max-width: 425px;
+  height: 48px;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 `;

@@ -6,6 +6,8 @@ export const Container = styled.div`
   max-width: 498px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
 `;
 
 export const Label = styled.label`
@@ -16,6 +18,9 @@ export const Label = styled.label`
 `;
 
 export const Box = styled.div`
+  display: flex;
+  align-items: center;
+
   > span {
     margin-left: 6px;
     font-size: 16px;
@@ -24,10 +29,14 @@ export const Box = styled.div`
 `;
 
 export const Input = styled(DefaultInput)`
-  margin-top: 15px;
   max-width: 178px;
 
   ._inputContainer {
     height: 40px;
   }
+`;
+
+export const ExtraInput = styled(Input)`
+  max-width: 120px;
+  margin-left: 10px;
 `;

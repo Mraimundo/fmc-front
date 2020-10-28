@@ -68,6 +68,19 @@ export const Button = styled(DefaultButton)`
   margin-top: 30px;
 `;
 
+export const NextButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
+export const NextButton = styled(Button)`
+  width: 100%;
+  max-width: 425px;
+  height: 48px;
+`;
+
 export const BoxPhone = styled.div`
   display: flex;
   max-width: 499px;

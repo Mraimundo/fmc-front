@@ -2,14 +2,15 @@ import React, { useCallback, useState } from 'react';
 import numbersOnly from 'util/numbersOnly';
 import { formatPoints } from 'util/points';
 
-import { Container, Box, Label, Input } from './styles';
+import { Container, Box, Label, Input, ExtraInput } from './styles';
 
 interface Props {
   name: string;
   title: string;
+  extraInfo?: string;
 }
 
-const CustomInput: React.FC<Props> = ({ name, title }) => {
+const CustomInput: React.FC<Props> = ({ name, title, extraInfo }) => {
   const [value, setValue] = useState('');
 
   const handleChangeValue = useCallback((v: string) => {
@@ -18,7 +19,12 @@ const CustomInput: React.FC<Props> = ({ name, title }) => {
 
   return (
     <Container>
-      <Label>{title}</Label>
+      <Box>
+        <Label>{title}</Label>
+        {!!extraInfo && (
+          <ExtraInput name={extraInfo} label="" placeholder="Nome" />
+        )}
+      </Box>
       <Box>
         <Input
           name={name}

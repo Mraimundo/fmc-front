@@ -7,9 +7,9 @@ import {
   MemberType,
 } from 'services/auth/interfaces/Participant';
 import { Option } from 'components/shared/Select';
-import MemberTypeSelect from '../Selects/MemberTypeSelect';
-import UfSelect from '../Selects/UfsBaseSelect';
 import {
+  UfSelect,
+  MemberTypeSelect,
   BaseInput,
   Input,
   Obs,
@@ -20,6 +20,8 @@ import {
   Title,
   Separator,
   DeleteLink,
+  ButtonContainer,
+  NextButton,
 } from './styles';
 
 interface Props {
@@ -78,6 +80,10 @@ const FarmDataForm: React.FC<Props> = ({
     )
       return false;
 
+    if (cpfCnpjInput.length !== 11 && cpfCnpjInput.length !== 14) {
+      throw new Error('Cpf ou Cnpj inválido');
+    }
+
     // MAYCONN
     // Validar CPF e CNPJ
 
@@ -92,8 +98,13 @@ const FarmDataForm: React.FC<Props> = ({
   ]);
 
   const handleAddMember = useCallback((): void => {
-    if (!isMemberFormValid) {
-      addToast({ type: 'error', title: 'Verifique os dados do formulário!' });
+    try {
+      if (!isMemberFormValid()) {
+        addToast({ type: 'error', title: 'Verifique os dados do formulário!' });
+        return;
+      }
+    } catch (e) {
+      addToast({ type: 'error', title: e.message });
       return;
     }
 
@@ -141,7 +152,10 @@ const FarmDataForm: React.FC<Props> = ({
       />
 
       <MemberActionContainer>
-        <AddMemberButton onClick={() => setMemberFormIsVisible(true)}>
+        <AddMemberButton
+          onClick={() => setMemberFormIsVisible(true)}
+          type="button"
+        >
           - Adicionar CNPJ e/ou CPF cadastrados do grupo
         </AddMemberButton>
       </MemberActionContainer>
@@ -152,6 +166,7 @@ const FarmDataForm: React.FC<Props> = ({
             inputRole={inputRole}
             value={memberTypeSelected}
             setValue={value => setMemberTypeSelected(value)}
+            label="Tipo"
           />
           <BaseInput
             label="CPF ou CNPJ"
@@ -183,9 +198,15 @@ const FarmDataForm: React.FC<Props> = ({
             value={ufSelected}
             setValue={value => setUfSelected(value)}
           />
-          <Button type="button" buttonRole="primary" onClick={handleAddMember}>
-            Salvar
-          </Button>
+          <ButtonContainer>
+            <Button
+              type="button"
+              buttonRole="primary"
+              onClick={handleAddMember}
+            >
+              Salvar
+            </Button>
+          </ButtonContainer>
         </>
       )}
       {participant.members_group?.length > 0 && (
@@ -224,13 +245,15 @@ const FarmDataForm: React.FC<Props> = ({
           </ListContainer>
         </>
       )}
-      <Button
-        type="button"
-        buttonRole="primary"
-        onClick={handleActionPageButton}
-      >
-        Próximo
-      </Button>
+      <ButtonContainer>
+        <NextButton
+          type="button"
+          buttonRole="primary"
+          onClick={handleActionPageButton}
+        >
+          Próximo
+        </NextButton>
+      </ButtonContainer>
     </div>
   );
 };

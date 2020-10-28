@@ -4,6 +4,8 @@ import {
   Button as DefaultButton,
   Input as DefaultInput,
 } from 'components/shared';
+import DefaultUfSelect from '../Selects/UfsBaseSelect';
+import DefaultMemberTypeSelect from '../Selects/MemberTypeSelect';
 
 export const BaseInput = styled(DefaultBaseInput)`
   margin-top: 15px;
@@ -26,8 +28,7 @@ export const Input = styled(DefaultInput)`
 export const Obs = styled.p`
   font-size: 18px;
   color: #e63027;
-  max-width: 590px;
-  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  margin: 30px 0;
 `;
 
 export const MemberActionContainer = styled.div`
@@ -52,10 +53,22 @@ export const AddMemberButton = styled.button`
 
 export const Button = styled(DefaultButton)`
   margin-top: 15px;
-  max-width: 300px;
-  align-self: center;
+  max-width: 179px;
   height: 44px;
-  margin-top: 30px;
+  margin: 40px 0;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
+export const NextButton = styled(Button)`
+  width: 100%;
+  max-width: 425px;
+  height: 48px;
 `;
 
 export const Separator = styled.div`
@@ -105,4 +118,19 @@ export const DeleteLink = styled.span`
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   text-decoration: underline;
   cursor: pointer;
+`;
+
+export const MemberTypeSelect = styled(DefaultMemberTypeSelect)`
+  ._inputContainer {
+    max-width: 221px;
+    height: 40px;
+  }
+`;
+
+export const UfSelect = styled(DefaultUfSelect)`
+  margin-top: 16px;
+  ._inputContainer {
+    max-width: 100px;
+    height: 40px;
+  }
 `;

@@ -116,9 +116,9 @@ export const BoxAutoIndication = styled.div`
   }
 
   > span {
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-family: #e63027;
     color: ${({ theme }) => theme.font.color.primary};
-    font-size: 14px;
+    font-size: 16px;
     margin-left: 8px;
   }
 `;

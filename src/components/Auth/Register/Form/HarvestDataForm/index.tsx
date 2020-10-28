@@ -1,5 +1,5 @@
 import React from 'react';
-import { Obs, Button } from './styles';
+import { Obs, ButtonContainer, Button } from './styles';
 import CustomInput from './CustomInput';
 
 const harvestItems = [
@@ -40,13 +40,20 @@ const HarvestDataForm: React.FC<Props> = ({
       {harvestItems.map(item => (
         <CustomInput key={item.key} name={item.key} title={item.title} />
       ))}
-      <Button
-        type="button"
-        buttonRole="primary"
-        onClick={handleActionPageButton}
-      >
-        Próximo
-      </Button>
+      <CustomInput
+        name="harvest.outras"
+        title="Outras"
+        extraInfo="outras_quais"
+      />
+      <ButtonContainer>
+        <Button
+          type="button"
+          buttonRole="primary"
+          onClick={handleActionPageButton}
+        >
+          Próximo
+        </Button>
+      </ButtonContainer>
     </div>
   );
 };
