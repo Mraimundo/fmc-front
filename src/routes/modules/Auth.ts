@@ -21,6 +21,12 @@ const routes: RouteModule[] = [
     special: true,
   },
   {
+    path: '/auto-login',
+    component: Autologin,
+    accessPage: 'Página de login automático',
+    special: true,
+  },
+  {
     path: '/sso',
     component: Sso,
     accessPage: 'Página de login automático via SSO',
