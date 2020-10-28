@@ -141,26 +141,7 @@ const Form: React.FC<Props> = ({
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
 
-    console.log('Aqui Estou');
-
-    console.log('test', {
-      ...data,
-      members_group: [...(participant.members_group || [])],
-      marital_status: data?.marital_status_select?.value || '',
-      education_level: data?.education_level_select?.value || '',
-      gender: data?.gender_select?.value || '',
-      address: {
-        ...data.address,
-        public_place: data?.public_place_select?.value || '',
-        state_code: data?.state_code_select?.value || '',
-      },
-      birth_date: data.formatted_birth_date,
-      rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
-      access_premio_ideall:
-        _participant.profile !== PROFILES.focalPoint || autoindicate,
-    });
-
-    /* await saveParticipant({
+    await saveParticipant({
       ...data,
       members_group: [...participant.members_group],
       marital_status: data?.marital_status_select?.value || '',
@@ -175,7 +156,7 @@ const Form: React.FC<Props> = ({
       rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
       access_premio_ideall:
         _participant.profile !== PROFILES.focalPoint || autoindicate,
-    }); */
+    });
     setLoading(false);
   });
 
@@ -224,7 +205,6 @@ const Form: React.FC<Props> = ({
           inputRole={inputRole}
           loading={loading}
           actived={activeTab === 'SECURITY_DATA'}
-        />
         />
       </form>
     </FormContext>
