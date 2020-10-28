@@ -80,4 +80,5 @@ export interface Participant {
 
   // MAYCONN Campos adicionar
   producer_cpf: string;
+  producer_group_name: string;
 }
