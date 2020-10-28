@@ -8,6 +8,7 @@ import ProducerHeader, { Tab } from './Producer/Header';
 import PersonalDataForm from './PersonalDataForm';
 import FarmDataForm from './FarmDataForm';
 import HarvestDataForm from './HarvestDataForm';
+import SecurityDataForm from './SecurityDataForm';
 
 import { Title } from './styles';
 
@@ -140,8 +141,11 @@ const Form: React.FC<Props> = ({
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
 
-    await saveParticipant({
+    console.log('Aqui Estou');
+
+    console.log('test', {
       ...data,
+      members_group: [...(participant.members_group || [])],
       marital_status: data?.marital_status_select?.value || '',
       education_level: data?.education_level_select?.value || '',
       gender: data?.gender_select?.value || '',
@@ -155,6 +159,23 @@ const Form: React.FC<Props> = ({
       access_premio_ideall:
         _participant.profile !== PROFILES.focalPoint || autoindicate,
     });
+
+    /* await saveParticipant({
+      ...data,
+      members_group: [...participant.members_group],
+      marital_status: data?.marital_status_select?.value || '',
+      education_level: data?.education_level_select?.value || '',
+      gender: data?.gender_select?.value || '',
+      address: {
+        ...data.address,
+        public_place: data?.public_place_select?.value || '',
+        state_code: data?.state_code_select?.value || '',
+      },
+      birth_date: data.formatted_birth_date,
+      rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
+      access_premio_ideall:
+        _participant.profile !== PROFILES.focalPoint || autoindicate,
+    }); */
     setLoading(false);
   });
 
@@ -178,24 +199,33 @@ const Form: React.FC<Props> = ({
             </strong>
           </Title>
         )}
-        {activeTab === 'PERSONAL_DATA' && (
-          <PersonalDataForm
-            participant={participant}
-            editing={editing}
-            inputRole={inputRole}
-            autoIndicate={autoindicate}
-            setAutoIndicate={setAutoindicate}
-            loading={loading}
-          />
-        )}
-        {activeTab === 'FARM_DATA' && (
-          <FarmDataForm
-            participant={participant}
-            addMemberGroup={addMemberGroup}
-            removeMemberGroup={removeMemberGroup}
-          />
-        )}
-        {activeTab === 'HARVEST_DATA' && <HarvestDataForm />}
+        <PersonalDataForm
+          participant={participant}
+          editing={editing}
+          inputRole={inputRole}
+          autoIndicate={autoindicate}
+          setAutoIndicate={setAutoindicate}
+          loading={loading}
+          handleActionPageButton={() => setActiveTab('FARM_DATA')}
+          actived={activeTab === 'PERSONAL_DATA'}
+        />
+        <FarmDataForm
+          participant={participant}
+          addMemberGroup={addMemberGroup}
+          removeMemberGroup={removeMemberGroup}
+          handleActionPageButton={() => setActiveTab('HARVEST_DATA')}
+          actived={activeTab === 'FARM_DATA'}
+        />
+        <HarvestDataForm
+          handleActionPageButton={() => setActiveTab('SECURITY_DATA')}
+          actived={activeTab === 'HARVEST_DATA'}
+        />
+        <SecurityDataForm
+          inputRole={inputRole}
+          loading={loading}
+          actived={activeTab === 'SECURITY_DATA'}
+        />
+        />
       </form>
     </FormContext>
   );

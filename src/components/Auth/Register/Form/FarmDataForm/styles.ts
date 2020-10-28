@@ -1,6 +1,18 @@
 import styled from 'styled-components';
-import DefaultInput from 'components/shared/Input/BaseInput';
-import { Button as DefaultButton } from 'components/shared';
+import DefaultBaseInput from 'components/shared/Input/BaseInput';
+import {
+  Button as DefaultButton,
+  Input as DefaultInput,
+} from 'components/shared';
+
+export const BaseInput = styled(DefaultBaseInput)`
+  margin-top: 15px;
+  max-width: 499px;
+
+  ._inputContainer {
+    height: 40px;
+  }
+`;
 
 export const Input = styled(DefaultInput)`
   margin-top: 15px;

@@ -119,7 +119,7 @@ export interface Participant {
   regulations_accepted: Regulation[];
   profile_value: ApproverProfile;
 
-  // MAYCONN Campos adicionar
+  // Producers
   producer_cpf: string;
   producer_group_name: string;
   members_group: MemberGroup[];

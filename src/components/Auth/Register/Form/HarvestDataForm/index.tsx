@@ -1,5 +1,5 @@
 import React from 'react';
-import { Obs } from './styles';
+import { Obs, Button } from './styles';
 import CustomInput from './CustomInput';
 
 const harvestItems = [
@@ -22,9 +22,17 @@ const harvestItems = [
   { key: 'harvest.uva', title: 'Uva' },
 ];
 
-const HarvestDataForm: React.FC = () => {
+interface Props {
+  handleActionPageButton(): void;
+  actived: boolean;
+}
+
+const HarvestDataForm: React.FC<Props> = ({
+  handleActionPageButton,
+  actived,
+}) => {
   return (
-    <>
+    <div style={{ display: actived ? 'block' : 'none' }}>
       <Obs>
         Por favor, preencha os dados das áreas dos seus principais cultivos,
         considerando os dados da área total do grupo:
@@ -32,7 +40,14 @@ const HarvestDataForm: React.FC = () => {
       {harvestItems.map(item => (
         <CustomInput key={item.key} name={item.key} title={item.title} />
       ))}
-    </>
+      <Button
+        type="button"
+        buttonRole="primary"
+        onClick={handleActionPageButton}
+      >
+        Próximo
+      </Button>
+    </div>
   );
 };
 

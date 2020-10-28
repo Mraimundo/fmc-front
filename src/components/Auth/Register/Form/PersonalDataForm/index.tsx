@@ -24,6 +24,8 @@ interface Props {
   autoIndicate: boolean;
   setAutoIndicate(checked: boolean): void;
   inputRole: 'primary' | 'secondary';
+  handleActionPageButton(): void;
+  actived: boolean;
 }
 
 const PersonalDataForm: React.FC<Props> = ({
@@ -33,9 +35,11 @@ const PersonalDataForm: React.FC<Props> = ({
   autoIndicate,
   setAutoIndicate,
   loading,
+  handleActionPageButton,
+  actived,
 }) => {
   return (
-    <>
+    <div style={{ display: actived ? 'block' : 'none' }}>
       <Avatar name="picture" inputRole={inputRole} />
       <ComponentsByProfile participant={participant} inputRole={inputRole} />
       <Input
@@ -146,11 +150,15 @@ const PersonalDataForm: React.FC<Props> = ({
           </Button>
         </>
       ) : (
-        <Button type="button" buttonRole="primary" loading={loading}>
+        <Button
+          type="button"
+          buttonRole="primary"
+          onClick={handleActionPageButton}
+        >
           Próximo
         </Button>
       )}
-    </>
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import { Option } from 'components/shared/Select';
 import MemberTypeSelect from '../Selects/MemberTypeSelect';
 import UfSelect from '../Selects/UfsBaseSelect';
 import {
+  BaseInput,
   Input,
   Obs,
   MemberActionContainer,
@@ -25,12 +26,16 @@ interface Props {
   participant: Participant;
   addMemberGroup(member: MemberGroup): void;
   removeMemberGroup(member: MemberGroup): void;
+  handleActionPageButton(): void;
+  actived: boolean;
 }
 
 const FarmDataForm: React.FC<Props> = ({
   participant,
   addMemberGroup,
   removeMemberGroup,
+  handleActionPageButton,
+  actived,
 }) => {
   const { addToast } = useToast();
 
@@ -123,7 +128,7 @@ const FarmDataForm: React.FC<Props> = ({
   );
 
   return (
-    <>
+    <div style={{ display: actived ? 'block' : 'none' }}>
       <Obs>
         *Somente para produtores que realizam compras usando mais de um
         CPF/CNPJ.
@@ -148,25 +153,25 @@ const FarmDataForm: React.FC<Props> = ({
             value={memberTypeSelected}
             setValue={value => setMemberTypeSelected(value)}
           />
-          <Input
+          <BaseInput
             label="CPF ou CNPJ"
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
-          <Input
+          <BaseInput
             label="Nome ou Razão Social"
             value={nameInput}
             onChange={e => setNameInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
-          <Input
+          <BaseInput
             label="Inscrição Estadual"
             value={ieInput}
             onChange={e => setIeInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
-          <Input
+          <BaseInput
             label="Município"
             value={cityInput}
             onChange={e => setCityInput(e.currentTarget.value)}
@@ -219,7 +224,14 @@ const FarmDataForm: React.FC<Props> = ({
           </ListContainer>
         </>
       )}
-    </>
+      <Button
+        type="button"
+        buttonRole="primary"
+        onClick={handleActionPageButton}
+      >
+        Próximo
+      </Button>
+    </div>
   );
 };
 
