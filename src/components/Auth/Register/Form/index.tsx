@@ -3,23 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
-import PasswordHelp from 'components/shared/PasswordHelp';
-import ComponentsByProfile from './Commom/ComponentsByProfile';
-import ExtraFieldsForParticipant from './Commom/ExtraFieldsForParticipant';
 import getschemaValidations from './Validators/getSchemaValidations';
+import ProducerHeader, { Tab } from './Producer/Header';
+import PersonalDataForm from './PersonalDataForm';
 
-import ProducerHeader from './Producer/Header';
-
-import {
-  Title,
-  Separator,
-  Avatar,
-  Input,
-  PasswordInput,
-  Button,
-  BoxPhone,
-  BoxAutoIndication,
-} from './styles';
+import { Title } from './styles';
 
 interface Props {
   participant: Participant;
@@ -44,6 +32,7 @@ const Form: React.FC<Props> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [autoindicate, setAutoindicate] = useState(false);
+  const [activeTab, setActiveTab] = React.useState<Tab>('PERSONAL_DATA');
   const inputRole = 'secondary';
 
   const schema = getschemaValidations(
@@ -156,7 +145,7 @@ const Form: React.FC<Props> = ({
             <Title>
               {editing ? 'Editar cadastro' : 'Bem-vindo Produtor(a)'}
             </Title>
-            <ProducerHeader />
+            <ProducerHeader activeTab={activeTab} setActiveTab={setActiveTab} />
           </>
         ) : (
           <Title>
@@ -168,121 +157,15 @@ const Form: React.FC<Props> = ({
             </strong>
           </Title>
         )}
-        <Avatar name="picture" inputRole={inputRole} />
-        <ComponentsByProfile participant={participant} inputRole={inputRole} />
-        <Input
-          name="nick_name"
-          label="Como gostaria de ser chamado*"
-          inputRole={inputRole}
-        />
-        <Input
-          name="name"
-          label="Nome completo*"
-          inputRole={inputRole}
-          disabled={
-            participant.profile === 'FMC' ||
-            participant.profile === 'FOCALPOINT'
-          }
-        />
-        <Input
-          name="email"
-          label="E-mail*"
-          inputRole={inputRole}
-          disabled={
-            participant.profile === 'FMC' ||
-            participant.profile === 'FOCALPOINT'
-          }
-        />
-        <Input
-          name="cpf"
-          label="CPF*"
-          numbersOnly
-          pattern="XXX.XXX.XXX-XX"
-          inputRole={inputRole}
-          disabled={participant.cpf !== ''}
-        />
-        <BoxPhone>
-          <Input
-            name="area_code"
-            numbersOnly
-            pattern="(XX)"
-            label="DDD*"
-            inputRole={inputRole}
-          />
-          <Input
-            name="cell_phone"
-            numbersOnly
-            label="Celular*"
-            pattern="X XXXX-XXXX"
-            inputRole={inputRole}
-          />
-        </BoxPhone>
-        {participant.profile === PROFILES.producer && (
-          <>
-            <Input
-              name="producer_cpf"
-              label="CPF do produtor (código do produtor agrícola)*"
-              numbersOnly
-              pattern="XXX.XXX.XXX-XX"
-              inputRole={inputRole}
-            />
-            <Input
-              name="formatted_birth_date"
-              label="Data de nascimento"
-              inputRole={inputRole}
-              pattern="XX/XX/XXXX"
-            />
-          </>
-        )}
-        {editing &&
-          participant.profile === PROFILES.focalPoint &&
-          participant.establishment.team_receives_points &&
-          !participant.access_premio_ideall && (
-            <BoxAutoIndication>
-              <input
-                type="checkbox"
-                name="test"
-                checked={autoindicate}
-                onChange={() => setAutoindicate(e => !e)}
-              />
-              <span>Participar do Catálogo de Prêmios</span>
-            </BoxAutoIndication>
-          )}
-        {(participant.profile === PROFILES.participant ||
-          (editing &&
-            autoindicate &&
-            participant.profile === PROFILES.focalPoint) ||
-          participant.access_premio_ideall) && (
-          <ExtraFieldsForParticipant
-            inputRole={inputRole}
+        {activeTab === 'PERSONAL_DATA' && (
+          <PersonalDataForm
             participant={participant}
+            editing={editing}
+            inputRole={inputRole}
             autoIndicate={autoindicate}
             setAutoIndicate={setAutoindicate}
+            loading={loading}
           />
-        )}
-        {participant.profile !== PROFILES.producer ? (
-          <>
-            <Separator />
-            <Title>Segurança</Title>
-            <PasswordInput
-              name="password"
-              label="Senha"
-              inputRole={inputRole}
-              help={PasswordHelp}
-            />
-            <PasswordInput
-              name="password_confirmation"
-              label="Confirmar Senha"
-              inputRole={inputRole}
-            />
-            <Button type="submit" buttonRole="primary" loading={loading}>
-              Confirmar
-            </Button>
-          </>
-        ) : (
-          <Button type="button" buttonRole="primary" loading={loading}>
-            Próximo
-          </Button>
         )}
       </form>
     </FormContext>
