@@ -5,11 +5,11 @@ import {
   PasswordInput as DefaultPasswordInput,
   Button as DefaultButton,
 } from 'components/shared';
-import DefaultGraduationLevelSelect from './GraduationLevelSelect';
-import DefaultMaritalSelect from './MaritalStatusSelect';
-import DefaultGenderSelect from './GenderSelect';
-import DefaultPublicPlaceSelect from './PublicPlaceSelect';
-import DefaultUfSelect from './UfsSelect';
+import DefaultGraduationLevelSelect from './Selects/GraduationLevelSelect';
+import DefaultMaritalSelect from './Selects/MaritalStatusSelect';
+import DefaultGenderSelect from './Selects/GenderSelect';
+import DefaultPublicPlaceSelect from './Selects/PublicPlaceSelect';
+import DefaultUfSelect from './Selects/UfsSelect';
 
 export const UfSelect = styled(DefaultUfSelect)`
   margin-top: 15px;

@@ -6,7 +6,7 @@ import { Participant } from 'services/auth/interfaces/Participant';
 import PasswordHelp from 'components/shared/PasswordHelp';
 import ComponentsByProfile from './ComponentsByProfile';
 import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
-import getschemaValidations from './getSchemaValidations';
+import getschemaValidations from './Validators/getSchemaValidations';
 
 import {
   Title,
@@ -206,7 +206,23 @@ const Form: React.FC<Props> = ({
             inputRole={inputRole}
           />
         </BoxPhone>
-
+        {participant.profile === PROFILES.producer && (
+          <>
+            <Input
+              name="producer_cpf"
+              label="CPF do produtor (código do produtor agrícola)*"
+              numbersOnly
+              pattern="XXX.XXX.XXX-XX"
+              inputRole={inputRole}
+            />
+            <Input
+              name="formatted_birth_date"
+              label="Data de nascimento"
+              inputRole={inputRole}
+              pattern="XX/XX/XXXX"
+            />
+          </>
+        )}
         {editing &&
           participant.profile === PROFILES.focalPoint &&
           participant.establishment.team_receives_points &&
@@ -221,30 +237,42 @@ const Form: React.FC<Props> = ({
               <span>Participar do Catálogo de Prêmios</span>
             </BoxAutoIndication>
           )}
-
         {(participant.profile === PROFILES.participant ||
           (editing &&
             autoindicate &&
             participant.profile === PROFILES.focalPoint) ||
           participant.access_premio_ideall) && (
-          <ExtraFieldsForParticipant inputRole={inputRole} />
+          <ExtraFieldsForParticipant
+            inputRole={inputRole}
+            participant={participant}
+            autoIndicate={autoindicate}
+            setAutoIndicate={setAutoindicate}
+          />
         )}
-        <Separator />
-        <Title>Segurança</Title>
-        <PasswordInput
-          name="password"
-          label="Senha"
-          inputRole={inputRole}
-          help={PasswordHelp}
-        />
-        <PasswordInput
-          name="password_confirmation"
-          label="Confirmar Senha"
-          inputRole={inputRole}
-        />
-        <Button type="submit" buttonRole="primary" loading={loading}>
-          Confirmar
-        </Button>
+        {participant.profile !== PROFILES.producer ? (
+          <>
+            <Separator />
+            <Title>Segurança</Title>
+            <PasswordInput
+              name="password"
+              label="Senha"
+              inputRole={inputRole}
+              help={PasswordHelp}
+            />
+            <PasswordInput
+              name="password_confirmation"
+              label="Confirmar Senha"
+              inputRole={inputRole}
+            />
+            <Button type="submit" buttonRole="primary" loading={loading}>
+              Confirmar
+            </Button>
+          </>
+        ) : (
+          <Button type="button" buttonRole="primary" loading={loading}>
+            Próximo
+          </Button>
+        )}
       </form>
     </FormContext>
   );

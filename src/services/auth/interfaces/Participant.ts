@@ -77,4 +77,7 @@ export interface Participant {
   education_level: string;
   regulations_accepted: Regulation[];
   profile_value: ApproverProfile;
+
+  // MAYCONN Campos adicionar
+  producer_cpf: string;
 }
