@@ -40,7 +40,11 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
 
   const handleSpinClick = useCallback(async (): Promise<void> => {
     if (alreadyTried) return;
-    setDegsToRotate(fixedSpins);
+    setAlreadyTried(true);
+
+    setDegsToRotate(oldValue => oldValue + fixedSpins);
+
+    setWinner(null);
 
     try {
       const numberOfSlices = spinData.prizes.length;
@@ -62,14 +66,22 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
         (360 / numberOfSlices) * reverseArrayPositionToStop - middleOfTheSlice;
 
       setDegsToRotate(fixedSpins + stopValue);
-      setWinner(prize);
-      setAlreadyTried(true);
+      setTimeout(() => {
+        setWinner(prize);
+        const foundPrize = spinData.prizes.find(
+          item => item.id === prize.prizeId,
+        );
+        if (foundPrize?.value?.toLowerCase() === 'tente novamente') {
+          setAlreadyTried(false);
+        }
+      }, 4800);
     } catch {
       addToast({
         title:
           'Falha ao obter Prêmio, por favor tente novamente ou contate o suporte!',
         type: 'error',
       });
+      setAlreadyTried(false);
       setDegsToRotate(0);
     }
   }, [addToast, spin, spinData, alreadyTried]);
