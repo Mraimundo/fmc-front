@@ -34,6 +34,7 @@ const fixedSpins = 360 * 7;
 
 const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
   const [alreadyTried, setAlreadyTried] = useState(false);
+  const [spinTries, setSpinTries] = useState(1);
   const [degsToRotate, setDegsToRotate] = useState(0);
   const [winner, setWinner] = useState<{ prizeId: number } | null>(null);
   const { addToast } = useToast();
@@ -42,7 +43,8 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
     if (alreadyTried) return;
     setAlreadyTried(true);
 
-    setDegsToRotate(oldValue => oldValue + fixedSpins);
+    setDegsToRotate(fixedSpins * spinTries);
+    setSpinTries(spinTries + 1);
 
     setWinner(null);
 
@@ -65,7 +67,7 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
       const stopValue =
         (360 / numberOfSlices) * reverseArrayPositionToStop - middleOfTheSlice;
 
-      setDegsToRotate(fixedSpins + stopValue);
+      setDegsToRotate(oldValue => oldValue + stopValue);
       setTimeout(() => {
         setWinner(prize);
         const foundPrize = spinData.prizes.find(
@@ -84,7 +86,7 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
       setAlreadyTried(false);
       setDegsToRotate(0);
     }
-  }, [addToast, spin, spinData, alreadyTried]);
+  }, [addToast, spin, spinData, alreadyTried, spinTries]);
 
   const getSpinDescription = useCallback(
     (_winner: { prizeId: number } | null): string => {
@@ -93,6 +95,10 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
       }
 
       const prize = spinData.prizes.find(item => item.id === _winner.prizeId);
+
+      if (prize?.value?.toLowerCase() === 'tente novamente') {
+        return 'Quase. Mas vamos lá, mais uma chance de girar e ganhar!';
+      }
 
       if (!prize?.winner) {
         return 'Não foi dessa vez. Continue participando dos treinamentos para garantir novas chances!';
