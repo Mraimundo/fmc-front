@@ -63,6 +63,7 @@ const ComponentsByProfile: React.FC<Props> = ({ participant, inputRole }) => {
           />
         </>
       ),
+      [PROFILES.producer]: () => <></>,
     }),
     [inputRole, participant],
   );

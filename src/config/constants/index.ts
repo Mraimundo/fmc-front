@@ -21,7 +21,6 @@ export const RTC = 'RTC';
 export const KAM = 'KAM';
 export const GRM = 'GRM';
 
-export type IProfile = 'FOCALPOINT' | 'FMC' | 'PARTICIPANTE' | 'PRODUTOR';
 export type ApproverProfile =
   | typeof GRV
   | typeof DN
@@ -36,7 +35,14 @@ export const PROFILES = {
   focalPoint: 'FOCALPOINT',
   fmc: 'FMC',
   participant: 'PARTICIPANTE',
+  producer: 'PRODUTOR',
 };
+
+export type IProfile =
+  | typeof PROFILES.fmc
+  | typeof PROFILES.fmc
+  | typeof PROFILES.participant
+  | typeof PROFILES.producer;
 
 export const REGULATIONS_TYPE = {
   dataTerm: 'data_term',
