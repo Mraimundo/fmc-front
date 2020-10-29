@@ -34,13 +34,19 @@ const fixedSpins = 360 * 7;
 
 const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
   const [alreadyTried, setAlreadyTried] = useState(false);
+  const [spinTries, setSpinTries] = useState(1);
   const [degsToRotate, setDegsToRotate] = useState(0);
   const [winner, setWinner] = useState<{ prizeId: number } | null>(null);
   const { addToast } = useToast();
 
   const handleSpinClick = useCallback(async (): Promise<void> => {
     if (alreadyTried) return;
-    setDegsToRotate(fixedSpins);
+    setAlreadyTried(true);
+
+    setDegsToRotate(fixedSpins * spinTries);
+    setSpinTries(spinTries + 1);
+
+    setWinner(null);
 
     try {
       const numberOfSlices = spinData.prizes.length;
@@ -61,18 +67,26 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
       const stopValue =
         (360 / numberOfSlices) * reverseArrayPositionToStop - middleOfTheSlice;
 
-      setDegsToRotate(fixedSpins + stopValue);
-      setWinner(prize);
-      setAlreadyTried(true);
+      setDegsToRotate(oldValue => oldValue + stopValue);
+      setTimeout(() => {
+        setWinner(prize);
+        const foundPrize = spinData.prizes.find(
+          item => item.id === prize.prizeId,
+        );
+        if (foundPrize?.value?.toLowerCase() === 'tente novamente') {
+          setAlreadyTried(false);
+        }
+      }, 4800);
     } catch {
       addToast({
         title:
           'Falha ao obter Prêmio, por favor tente novamente ou contate o suporte!',
         type: 'error',
       });
+      setAlreadyTried(false);
       setDegsToRotate(0);
     }
-  }, [addToast, spin, spinData, alreadyTried]);
+  }, [addToast, spin, spinData, alreadyTried, spinTries]);
 
   const getSpinDescription = useCallback(
     (_winner: { prizeId: number } | null): string => {
@@ -81,6 +95,10 @@ const Component: React.FC<Props> = ({ spinData, spin, className, close }) => {
       }
 
       const prize = spinData.prizes.find(item => item.id === _winner.prizeId);
+
+      if (prize?.value?.toLowerCase() === 'tente novamente') {
+        return 'Quase. Mas vamos lá, mais uma chance de girar e ganhar!';
+      }
 
       if (!prize?.winner) {
         return 'Não foi dessa vez. Continue participando dos treinamentos para garantir novas chances!';
