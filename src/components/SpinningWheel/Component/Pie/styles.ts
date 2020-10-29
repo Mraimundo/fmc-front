@@ -35,9 +35,10 @@ export const PieSlice = styled.div<PieProps>`
         : 'linear-gradient(to right, rgb(163, 1, 16) 0%, rgb(232, 1, 19) 100%)'};
     transform: rotate(${({ size }) => `${size}deg`});
 
-    transition: background 1s 5s;
+    transition: background 300ms;
     &::after {
-      transition: background 1s 5s;
+      /*transition: background 1s 5s;*/
+      transition: background 300ms;
       content: '';
       position: absolute;
       width: 100%;

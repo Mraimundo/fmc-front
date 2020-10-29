@@ -102,6 +102,14 @@ export const TrainingProvider: React.FC = ({ children }) => {
               IAnswerResponse[]
             >([getMyAnswers(trainingId), getRightAnswers(trainingId)]);
 
+            /* If someday the Client changes his mind and asks that participants that for some reason
+               didn't spin before to play the roulette, these three lines below will do that.
+               To open the spin as soon as the participant gets the training page. */
+            /* getAvailableSpins(trainingId).then(_data =>
+              setSpinData(_data || undefined),
+            );
+            setSpinModalOpened(true); */
+
             setQuestions(
               data.map(item => ({
                 ...item,
