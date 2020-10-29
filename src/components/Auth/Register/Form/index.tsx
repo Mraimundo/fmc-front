@@ -143,7 +143,7 @@ const Form: React.FC<Props> = ({
 
     await saveParticipant({
       ...data,
-      members_group: [...participant.members_group],
+      members_group: [...(participant.members_group || [])],
       marital_status: data?.marital_status_select?.value || '',
       education_level: data?.education_level_select?.value || '',
       gender: data?.gender_select?.value || '',
