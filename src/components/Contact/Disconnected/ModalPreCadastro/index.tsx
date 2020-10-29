@@ -9,7 +9,7 @@ import openTicket from 'services/contact/disconnected/openTicket';
 
 import schemaValidation from './schemaValidation';
 
-import UfSelect from '../../../Auth/Register/Form/UfsSelect';
+import UfSelect from '../../../Auth/Register/Form/Selects/UfsSelect';
 
 import ProdutorAgricolaSelect from './ProdutorAgricolaSelect';
 import ComoFicouConhecendoSelect from './ComoFicouConhecendoSelect';
