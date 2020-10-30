@@ -47,11 +47,11 @@ export interface Regulation {
 
 export enum MemberType {
   farm = 'fazenda',
-  family = 'família',
+  family = 'familia',
   partner = 'socios',
   principal = 'matriz',
   branch = 'filial',
-  agriculture = 'agropecuária',
+  agriculture = 'agropecuaria',
 }
 
 export interface MemberGroup {
