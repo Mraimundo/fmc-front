@@ -121,6 +121,7 @@ const PersonalDataForm: React.FC<Props> = ({
           </BoxAutoIndication>
         )}
       {(participant.profile === PROFILES.participant ||
+        participant.profile === PROFILES.producer ||
         (editing &&
           autoIndicate &&
           participant.profile === PROFILES.focalPoint) ||
