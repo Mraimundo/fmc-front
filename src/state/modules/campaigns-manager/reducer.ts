@@ -2,8 +2,8 @@ import { Reducer } from 'redux';
 import {
   Campaign,
   Audience,
-} from 'services/campaignsManager/interfaces/Campaign';
-import { newEmptyCampaignObject } from 'services/campaignsManager';
+} from 'services/campaigns-manager/interfaces/Campaign';
+import { newEmptyCampaignObject } from 'services/campaigns-manager';
 import produce from 'immer';
 import { Errors } from './types';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import {
   Campaign,
   Audience,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getCampaign,

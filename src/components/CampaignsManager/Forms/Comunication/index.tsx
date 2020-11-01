@@ -1,10 +1,10 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Button } from 'components/shared';
-import toggleSendMail from 'services/campaignsManager/toggleSendEmail';
+import toggleSendMail from 'services/campaigns-manager/toggleSendEmail';
 import { setSendMail } from 'state/modules/campaigns-manager/actions';
 
 import { Container, Content, Box } from './styles';

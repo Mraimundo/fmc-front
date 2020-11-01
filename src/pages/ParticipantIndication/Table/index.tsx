@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
+import { ParticipantIndication } from 'services/participant-indication/interfaces/ParticipantIndication';
 import transformer, {
   ParticipantIndicationTableData,
-} from 'services/participantIndication/transformers/participantIndicationsToTableList';
+} from 'services/participant-indication/transformers/participantIndicationsToTableList';
 import headers from './headers';
 import { Container } from './styles';
 
