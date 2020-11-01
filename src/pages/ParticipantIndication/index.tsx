@@ -2,23 +2,23 @@ import React, { useEffect, useState, useCallback } from 'react';
 import produce from 'immer';
 
 import { INACTIVE, ACTIVE } from 'config/constants/vendavallStatus';
-import getTableListData from 'services/participantIndication/getParticipantsList';
-import { ParticipantIndication as IParticipantIndication } from 'services/participantIndication/interfaces/ParticipantIndication';
-import ICreateParticipantIndicateDTO from 'services/participantIndication/dtos/ICreateParticipantIndicateDTO';
-import getIndicationTeamDetails from 'services/participantIndication/getIndicationTeamDetails';
+import getTableListData from 'services/participant-indication/getParticipantsList';
+import { ParticipantIndication as IParticipantIndication } from 'services/participant-indication/interfaces/ParticipantIndication';
+import ICreateParticipantIndicateDTO from 'services/participant-indication/dtos/ICreateParticipantIndicateDTO';
+import getIndicationTeamDetails from 'services/participant-indication/getIndicationTeamDetails';
 import {
   create as indicate,
   edit as editIndication,
-} from 'services/participantIndication/indicateParticipant';
-import resendIndicationEmail from 'services/participantIndication/resendIndicationEmail';
-import inactiveParticipantFromIndication from 'services/participantIndication/inactiveParticipantFromIndication';
-import activeParticipantFromIndication from 'services/participantIndication/activeParticipantFromIndication';
+} from 'services/participant-indication/indicateParticipant';
+import resendIndicationEmail from 'services/participant-indication/resendIndicationEmail';
+import inactiveParticipantFromIndication from 'services/participant-indication/inactiveParticipantFromIndication';
+import activeParticipantFromIndication from 'services/participant-indication/activeParticipantFromIndication';
 import { useToast } from 'context/ToastContext';
 
 import getEstablishments, {
   Establishment,
 } from 'services/auth/getEstablishments';
-import IEditParticipantIndicateDTO from 'services/participantIndication/dtos/IEditParticipantIndicateDTO';
+import IEditParticipantIndicateDTO from 'services/participant-indication/dtos/IEditParticipantIndicateDTO';
 import { useAuth } from 'context/AuthContext';
 import StatusBox from './StatusBox';
 import Filters from './Filters';

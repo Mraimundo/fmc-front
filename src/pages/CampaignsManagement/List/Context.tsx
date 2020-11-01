@@ -15,13 +15,13 @@ import {
   toggleCampaignPublishedStatus,
   addHighlightToCampaign,
   removeHighlightFromCampaign,
-} from 'services/campaignsManager';
-import { FilterOptions } from 'services/campaignsManager/getCampaigns';
-import { Response as IDetails } from 'services/campaignsManager/getCampaignsDetails';
+} from 'services/campaigns-manager';
+import { FilterOptions } from 'services/campaigns-manager/getCampaigns';
+import { Response as IDetails } from 'services/campaigns-manager/getCampaignsDetails';
 import {
   Campaign,
   Approver,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import { useAuth } from 'context/AuthContext';
 import produce from 'immer';
 

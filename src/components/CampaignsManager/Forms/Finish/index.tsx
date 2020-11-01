@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
 import commentsTransformer, {
   Response as IComment,
-} from 'services/campaignsManager/transformers/commentsToCommentsGrid';
+} from 'services/campaigns-manager/transformers/commentsToCommentsGrid';
 import { useSelector } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
 import ApprovalBoard from 'components/CampaignsManager/ApprovalBoard';

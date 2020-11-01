@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useAuth } from 'context/AuthContext';
 import { setCampaign } from 'state/modules/campaigns-manager/actions';
 import { useParams } from 'react-router-dom';
-import { getCampaign } from 'services/campaignsManager';
+import { getCampaign } from 'services/campaigns-manager';
 import history from 'services/history';
 import { RegisterCampaignForm } from 'components/CampaignsManager';
 

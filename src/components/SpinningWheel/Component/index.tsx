@@ -6,7 +6,7 @@ import spinButtonImg from 'assets/images/spinning-wheel/spin-button.png';
 import stopArrowImg from 'assets/images/spinning-wheel/stop-arrow.png';
 import closeButtonImg from 'assets/images/spinning-wheel/close.svg';
 
-import { Spin } from 'services/spinningWheel/interfaces';
+import { Spin } from 'services/spinning-wheel/interfaces';
 import { useToast } from 'context/ToastContext';
 import Pie from './Pie';
 

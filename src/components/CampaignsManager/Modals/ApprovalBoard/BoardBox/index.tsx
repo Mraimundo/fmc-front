@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Approver,
   ApproverProfile,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import thumbUpIcon from 'assets/images/campaigns/thumb-up-icon.svg';
 import thumbDownIcon from 'assets/images/campaigns/thumb-down-icon.svg';

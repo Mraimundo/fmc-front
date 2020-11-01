@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ApprovalStatus } from 'services/campaignsManager/interfaces/Campaign';
+import { ApprovalStatus } from 'services/campaigns-manager/interfaces/Campaign';
 
 export const Container = styled.div`
   display: flex;

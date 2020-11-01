@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
-import { getAvailableSpins, spin } from 'services/spinningWheel';
-import { Spin } from 'services/spinningWheel/interfaces';
+import { getAvailableSpins, spin } from 'services/spinning-wheel';
+import { Spin } from 'services/spinning-wheel/interfaces';
 import {
   answerTraining,
   canAnswerTraininig,

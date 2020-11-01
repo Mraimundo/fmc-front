@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import transformer, {
   Response as ITableItemData,
-} from 'services/campaignsManager/transformers/campaignsToCampaignsTable';
-import { ApproverProfile } from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/transformers/campaignsToCampaignsTable';
+import { ApproverProfile } from 'services/campaigns-manager/interfaces/Campaign';
 import headers from './headers';
 import { useCampaignsList } from '../../Context';
 import { Container } from './styles';
