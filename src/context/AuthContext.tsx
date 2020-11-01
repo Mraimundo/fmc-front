@@ -19,20 +19,23 @@ interface Credentials {
   password: string;
 }
 
+interface CredentialsToken {
+  token: string;
+  isSSOToken?: boolean;
+}
+
 interface AuthContextState {
   participant: Participant;
+  refreshParticipant(): void;
   signed: boolean;
   shouldShowRegulationsModal: boolean;
-  signIn(credentials: Credentials | string): Promise<void>;
+  signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
-  updateParticipantData(): void;
-  setToken(token: string): void;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  // const [tries, setTries] = useState(0);
   const [apiToken, setApiToken] = useState<string>('');
   const [participant, setParticipant] = useState<Participant>(
     {} as Participant,
@@ -41,7 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     false,
   );
 
-  const updateParticipantData = useCallback(async () => {
+  const refreshParticipant = useCallback(async () => {
     const [data, isThereRegulationsToAccept] = await Promise.all([
       getLoggedParticipant(),
       isThereAnyRegulationToAccept(),
@@ -60,16 +63,60 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!apiToken) return;
-    updateParticipantData();
-  }, [apiToken, updateParticipantData]);
+    refreshParticipant();
+  }, [apiToken, refreshParticipant]);
 
-  const signIn = useCallback(async (data: Credentials | string) => {
-    const { token } = await signInService(data);
+  const signInWithCredentials = useCallback(
+    async (credentials: Credentials): Promise<string> => {
+      const { token } = await signInService(credentials);
+      return token;
+    },
+    [],
+  );
 
-    localStorage.setItem('@Vendavall:token', token);
-    setToken(token);
-    setApiToken(token);
-  }, []);
+  const signInWithCredentialsToken = useCallback(
+    async (credentials: CredentialsToken): Promise<string> => {
+      if (credentials.isSSOToken) return credentials.token;
+      const { token } = await signInService(credentials.token);
+      return token;
+    },
+    [],
+  );
+
+  const isCredentialsOrCredentialsToken = useCallback(
+    (
+      data: Credentials | CredentialsToken,
+    ): 'credentials' | 'credentialsToken' => {
+      if ((data as Credentials).cpf) return 'credentials';
+      return 'credentialsToken';
+    },
+    [],
+  );
+
+  const signIn = useCallback(
+    async (data: Credentials | CredentialsToken) => {
+      let token = '';
+
+      const credentialsType = isCredentialsOrCredentialsToken(data);
+
+      if (credentialsType === 'credentials') {
+        token = await signInWithCredentials(data as Credentials);
+      }
+
+      if (credentialsType === 'credentialsToken') {
+        token = await signInWithCredentialsToken(data as CredentialsToken);
+      }
+
+      localStorage.setItem('@Vendavall:token', token);
+      setToken(token);
+      setApiToken(token);
+    },
+    [
+      isCredentialsOrCredentialsToken,
+      signInWithCredentials,
+      signInWithCredentialsToken,
+    ],
+  );
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Vendavall:token');
@@ -96,35 +143,15 @@ export const AuthProvider: React.FC = ({ children }) => {
     }, 800);
   }, [addToast, signOut, apiToken]);
 
-  const setTokenFn = useCallback(
-    (tokenParam: string) => {
-      setToken(tokenParam);
-      isTokenValid().then(isValid => {
-        if (!isValid) {
-          signOut();
-          addToast({
-            title: 'Token inválido',
-            type: 'error',
-          });
-          return;
-        }
-        localStorage.setItem('@Vendavall:token', tokenParam);
-        setApiToken(tokenParam);
-      });
-    },
-    [addToast, signOut],
-  );
-
   return (
     <AuthContext.Provider
       value={{
         participant,
+        refreshParticipant,
         signed: !!apiToken,
         signIn,
         signOut,
         shouldShowRegulationsModal,
-        updateParticipantData,
-        setToken: setTokenFn,
       }}
     >
       {children}
