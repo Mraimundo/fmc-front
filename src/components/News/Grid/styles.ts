@@ -46,7 +46,6 @@ export const MiniBox = styled(Link)`
     color: ${({ theme }) => theme.font.color.secondary};
     font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 6px;
-    text-align: justify;
   }
 
   @media screen and (max-width: 720px) {
