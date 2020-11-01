@@ -13,6 +13,7 @@ interface ParticipantProps {
   establishment: Establishment | null;
   points?: number;
   signOut(): void;
+  simulating: boolean;
 }
 const Participant: React.FC<ParticipantProps> = ({
   picture,
@@ -20,6 +21,7 @@ const Participant: React.FC<ParticipantProps> = ({
   establishment,
   points,
   signOut,
+  simulating,
 }) => {
   return (
     <Wrapper>
@@ -29,7 +31,11 @@ const Participant: React.FC<ParticipantProps> = ({
         {typeof points === 'number' && <span>Meus pontos: {points}</span>}
       </WelcomeText>
       <AiFillCaretDown />
-      <Dropdown establishment={establishment} signOut={signOut} />
+      <Dropdown
+        establishment={establishment}
+        signOut={signOut}
+        simulating={simulating}
+      />
     </Wrapper>
   );
 };

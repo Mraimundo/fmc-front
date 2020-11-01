@@ -9,7 +9,7 @@ import { Container, GeneralContent, Content, Separator } from './styles';
 const Cockpit: React.FC = () => {
   return (
     <Container>
-      <Link to="visao-do-participantes" style={{ color: '#000' }}>
+      <Link to="visao-do-participante" style={{ color: '#000' }}>
         Acessar
       </Link>
       <GeneralContent>

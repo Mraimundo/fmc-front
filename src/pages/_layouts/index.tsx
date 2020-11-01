@@ -15,10 +15,10 @@ import Logo from 'components/shared/Logo';
 import { defaultTheme, cooperativaTheme, fmcTeamTheme } from 'styles/theme';
 import Popups from './Popups';
 
-import { Container } from './styles';
+import { Container, SimulateIndicator } from './styles';
 
 const Dashboard: React.FC = ({ children }) => {
-  const { shouldShowRegulationsModal, participant } = useAuth();
+  const { shouldShowRegulationsModal, participant, simulating } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Dashboard: React.FC = ({ children }) => {
 
   if (manutencao) {
     return (
-      <Container>
+      <Container simulating={false}>
         <Logo logoType="fmcTeam" />
         <div
           style={{
@@ -65,27 +65,30 @@ const Dashboard: React.FC = ({ children }) => {
   return theme ? (
     <>
       <ThemeContext.Provider value={theme}>
-        {shouldShowRegulationsModal ? (
+        {!simulating && shouldShowRegulationsModal ? (
           <ModalRegulations opened={shouldShowRegulationsModal} />
         ) : (
-          <Container>
-            <Logo
-              logoType={
-                participant.profile === 'FMC'
-                  ? 'fmcTeam'
-                  : participant.establishment.type_name
-              }
-            />
-            <Visible xl xxl>
-              <Header />
-            </Visible>
-            <Visible xs sm md lg>
-              <MobileHeader />
-            </Visible>
-            {children}
-            {!shouldShowRegulationsModal && <Popups />}
-            <Footer />
-          </Container>
+          <>
+            {simulating && <SimulateIndicator>Simulando</SimulateIndicator>}
+            <Container simulating={simulating}>
+              <Logo
+                logoType={
+                  participant.profile === 'FMC'
+                    ? 'fmcTeam'
+                    : participant.establishment.type_name
+                }
+              />
+              <Visible xl xxl>
+                <Header />
+              </Visible>
+              <Visible xs sm md lg>
+                <MobileHeader />
+              </Visible>
+              {children}
+              {!shouldShowRegulationsModal && <Popups />}
+              <Footer />
+            </Container>
+          </>
         )}
       </ThemeContext.Provider>
     </>

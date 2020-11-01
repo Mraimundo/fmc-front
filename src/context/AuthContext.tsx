@@ -31,11 +31,13 @@ interface AuthContextState {
   shouldShowRegulationsModal: boolean;
   signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
+  simulating: boolean;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const [simulating, setSimulating] = useState(false);
   const [apiToken, setApiToken] = useState<string>('');
   const [participant, setParticipant] = useState<Participant>(
     {} as Participant,
@@ -152,6 +154,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         shouldShowRegulationsModal,
+        simulating,
       }}
     >
       {children}
