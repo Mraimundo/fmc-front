@@ -95,7 +95,7 @@ const FirstAccess: React.FC = () => {
 
   return (
     <>
-      {hasAcceptedDataRegulation ? (
+      {!hasAcceptedDataRegulation ? (
         <RegulationContainer>
           <Header>
             <img src={logoImg} alt="Logo" />
