@@ -17,6 +17,7 @@ interface ParticipantProps {
   points?: number;
   signOut(): void;
   profile: IProfile;
+  simulating: boolean;
 }
 const Participant: React.FC<ParticipantProps> = ({
   picture,
@@ -25,6 +26,7 @@ const Participant: React.FC<ParticipantProps> = ({
   points,
   signOut,
   profile,
+  simulating,
 }) => {
   return (
     <Wrapper>
@@ -37,8 +39,9 @@ const Participant: React.FC<ParticipantProps> = ({
       <AiFillCaretDown />
       <Dropdown
         establishment={establishment}
-        profile={profile}
         signOut={signOut}
+        profile={profile}
+        simulating={simulating}
       />
     </Wrapper>
   );

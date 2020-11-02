@@ -21,7 +21,7 @@ import { Wrapper, ShowCaseWrapper, HomeWrapper } from './styles';
 const FmcProdutorHome: React.FC = () => {
   const dispatch = useDispatch();
   const coinQuotations = useSelector(getCoinQuotations);
-  const { participant } = useAuth();
+  const { participant, simulating } = useAuth();
 
   const [banners, highlights, products] = [
     useSelector(getBanners),
@@ -55,7 +55,7 @@ const FmcProdutorHome: React.FC = () => {
       <ShowCaseWrapper>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios</Title>
-          <Showcase products={products} />
+          <Showcase products={products} isSimulating={simulating} />
         </Wrapper>
       </ShowCaseWrapper>
     </HomeWrapper>

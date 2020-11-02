@@ -12,7 +12,7 @@ interface Props {
 
 const Box: React.FC<Props> = ({ participant: data }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const { participant } = useAuth();
+  const { participant, simulating } = useAuth();
 
   useEffect(() => {
     if (!participant) return;
@@ -30,11 +30,12 @@ const Box: React.FC<Props> = ({ participant: data }) => {
       <ParticipantInfo
         participant={data}
         showChangePicture={data.type === 'cnpj'}
+        isSimulating={simulating}
       />
       {products.length > 0 && (
         <ContentBox>
           <h3>Produtos em destaque</h3>
-          <ProductsGrid products={products} />
+          <ProductsGrid products={products} isSimulating={simulating} />
         </ContentBox>
       )}
     </Container>

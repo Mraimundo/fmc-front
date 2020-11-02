@@ -32,7 +32,8 @@ export const Content = styled.div`
     margin-top: 8px;
   }
 
-  > a {
+  > a,
+  > span {
     margin-top: 30px;
     width: 158px;
     height: 36px;
@@ -45,6 +46,10 @@ export const Content = styled.div`
     text-decoration: none;
     font-size: 14px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+
+  > span {
+    cursor: not-allowed;
   }
 `;
 

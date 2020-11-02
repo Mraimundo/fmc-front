@@ -106,3 +106,15 @@ export const EstablishmentCategories = [
   EstablishmentCategory.earth,
   EstablishmentCategory.root,
 ];
+
+interface TApiError {
+  data: { message: string };
+}
+
+export class ApiError {
+  response: TApiError;
+
+  constructor(message: string) {
+    this.response = { data: { message } };
+  }
+}

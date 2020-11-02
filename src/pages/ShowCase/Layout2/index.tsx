@@ -13,6 +13,8 @@ const Layout2: React.FC = () => {
   const [categorySelected, setCategorySelected] = useState<Option | null>(null);
   const [typeSelected, setTypeSelected] = useState<Option | null>(null);
 
+  /* Quando vir terminar essa tela lembra de controlar caso esteja sendo simulado um acesso */
+
   return (
     <Container>
       <Content>

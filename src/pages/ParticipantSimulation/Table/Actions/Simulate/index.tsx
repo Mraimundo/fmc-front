@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useAuth } from 'context/AuthContext';
 
 import { Container } from './style';
 
@@ -8,12 +9,13 @@ interface Props {
 
 const Simulate: React.FC<Props> = ({ id }) => {
   const [loading, setLoading] = useState(false);
+  const { simulate } = useAuth();
 
   const handleClick = useCallback(async () => {
     setLoading(true);
-    console.log('Click', id);
+    await simulate();
     setLoading(false);
-  }, [id]);
+  }, [simulate]);
 
   return (
     <Container onClick={handleClick} disabled={loading}>

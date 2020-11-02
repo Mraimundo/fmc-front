@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
 
+import { FilterOptions } from 'services/participant-simulation/get-participants-list-to-simulate';
 import { Button } from 'components/shared';
 import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
@@ -7,16 +8,8 @@ import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
 
 import { Container } from './styles';
 
-export interface FilterOptions {
-  directorId?: string;
-  regionalId?: string;
-  typeId?: number;
-  channelId?: number;
-  search?: string;
-}
-
 interface Props {
-  onFilter(filters?: FilterOptions): Promise<void>;
+  onFilter(filters?: FilterOptions): void;
 }
 
 const Filters: React.FC<Props> = ({ onFilter }) => {
@@ -27,8 +20,23 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
   const [searchInput, setSearchInput] = useState('');
 
   const handleFilterClick = useCallback(() => {
-    console.log('filter');
-  }, []);
+    onFilter({
+      directorId: directorSelected?.value,
+      regionalId: regionalSelected?.value,
+      typeId: typeSelected ? parseInt(typeSelected.value, 0) : undefined,
+      channelId: channelSelected
+        ? parseInt(channelSelected.value, 0)
+        : undefined,
+      search: searchInput,
+    });
+  }, [
+    onFilter,
+    directorSelected,
+    regionalSelected,
+    typeSelected,
+    channelSelected,
+    searchInput,
+  ]);
 
   return useMemo(
     () => (

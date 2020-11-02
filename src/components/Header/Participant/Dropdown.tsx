@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
 import { Establishment as IEstablishment } from 'services/auth/interfaces/Participant';
@@ -14,24 +14,31 @@ interface DropdownProps {
   establishment: IEstablishment | null;
   profile: IProfile | null;
   signOut(): void;
+  simulating: boolean;
 }
 const Dropdown: React.FC<DropdownProps> = ({
   establishment,
   profile,
   signOut,
+  simulating,
 }) => {
-  const isProdutor = profile === 'PRODUTOR';
+  const [isProducer] = useState(() => profile === 'PRODUTOR');
+
   return (
     <DropdownList>
-      {!!establishment && !isProdutor && (
+      {!!establishment && !isProducer && (
         <ProfileInfo>
           <Establishment>{establishment.client_group}</Establishment>
           {establishment.rtc_name && <span>RTC: {establishment.rtc_name}</span>}
         </ProfileInfo>
       )}
-      <ParticipantMenuList notshowseparator={!establishment || isProdutor}>
+      <ParticipantMenuList notshowseparator={!establishment || isProducer}>
         <li>
-          <Link to={routeMap.profile}>Meu perfil</Link>
+          {simulating ? (
+            <span>Meu perfil</span>
+          ) : (
+            <Link to={routeMap.profile}>Meu perfil</Link>
+          )}
         </li>
         <li>
           <a href="#sair" onClick={signOut}>
