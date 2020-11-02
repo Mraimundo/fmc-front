@@ -17,7 +17,7 @@ const useMenu = () => {
 
     return () => {
       setSelectedMenu(null);
-    }
+    };
   }, [url, menu]);
 
   return { selectedMenu, menu };

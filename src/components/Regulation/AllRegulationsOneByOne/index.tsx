@@ -30,7 +30,7 @@ interface Props {
 
 const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
   const { addToast } = useToast();
-  const { updateParticipantData, signOut } = useAuth();
+  const { refreshParticipant, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [accepting, setAccepting] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
@@ -115,7 +115,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
       setSelectedRegulationIndex(i => {
         if (i >= regulations.length - 1) {
           setShowModal(false);
-          updateParticipantData();
+          refreshParticipant();
           return i;
         }
         return i + 1;
@@ -128,7 +128,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
       });
     }
     setAccepting(false);
-  }, [regulation, addToast, regulations, updateParticipantData]);
+  }, [regulation, addToast, regulations, refreshParticipant]);
 
   /* const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
     if (

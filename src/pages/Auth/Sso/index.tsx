@@ -6,7 +6,7 @@ import { useToast } from 'context/ToastContext';
 
 const Sso: React.FC = () => {
   const { search } = useLocation();
-  const { setToken } = useAuth();
+  const { signIn } = useAuth();
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -31,9 +31,10 @@ const Sso: React.FC = () => {
       return;
     }
 
-    setToken(token);
+    signIn({ token, isSSOToken: true });
     history.push('/');
-  }, [search, addToast, setToken]);
+  }, [search, addToast, signIn]);
+
   return <h1>aguarde...</h1>;
 };
 

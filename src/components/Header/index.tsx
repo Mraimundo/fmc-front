@@ -15,7 +15,7 @@ import { Nav, ParticipantWrapper } from './styles';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const { participant, signOut } = useAuth();
+  const { participant, signOut, simulating } = useAuth();
   const { selectedMenu, menu } = useMenu();
 
   const coinQuotations = useSelector(getCoinQuotations);
@@ -50,6 +50,7 @@ const Header: React.FC = () => {
             participant.establishment.team_receives_points ? 0 : undefined
           }
           signOut={signOut}
+          simulating={simulating}
         />
       </ParticipantWrapper>
     </Nav>

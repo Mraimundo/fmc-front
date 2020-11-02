@@ -16,7 +16,7 @@ import { Container, Content, contentAnimation } from './styles';
 const RegisterEdit: React.FC = () => {
   const props = useSpring(contentAnimation);
   const { addToast } = useToast();
-  const { updateParticipantData } = useAuth();
+  const { refreshParticipant } = useAuth();
   const [participant, setParticipant] = useState<Participant | null>(null);
   const [modalOpened, setModalOpened] = useState(false);
 
@@ -46,7 +46,7 @@ const RegisterEdit: React.FC = () => {
         } as Participant;
 
         await save(request);
-        updateParticipantData();
+        refreshParticipant();
         setModalOpened(true);
       } catch (e) {
         addToast({
@@ -57,7 +57,7 @@ const RegisterEdit: React.FC = () => {
         });
       }
     },
-    [participant, addToast, updateParticipantData],
+    [participant, addToast, refreshParticipant],
   );
 
   const handleCloseModal = useCallback(() => {

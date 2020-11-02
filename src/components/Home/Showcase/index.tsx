@@ -8,14 +8,19 @@ import { ProductList, MobileSeeCompleteShowcase } from './styles';
 
 interface Props {
   products: ShowcaseProduct[] | null;
+  isSimulating: boolean;
 }
 
-const Showcase: React.FC<Props> = ({ products }) => {
+const Showcase: React.FC<Props> = ({ products, isSimulating }) => {
   return (
     <>
       <ProductList>
         {products?.map(item => (
-          <ProductItem product={item} key={`prod-${item.id}`} />
+          <ProductItem
+            product={item}
+            key={`prod-${item.id}`}
+            isSimulating={isSimulating}
+          />
         ))}
         <SeeCompleteShowcase
           link={routeMap.showcase}

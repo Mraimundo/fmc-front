@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { ShowcaseProduct } from 'state/modules/home/types';
 import { formatPoints } from 'util/points';
 import {
   ProductItemStyled,
+  StyledLink,
   ImageWrapper,
   NameWrapper,
   Name,
@@ -12,13 +13,28 @@ import {
 
 interface ProductItemProps {
   product: ShowcaseProduct;
+  isSimulating: boolean;
 }
-const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+const ProductItem: React.FC<ProductItemProps> = ({ product, isSimulating }) => {
   const { link, picture, name, price } = product;
+
+  const handleLinkClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      if (isSimulating) {
+        e.preventDefault();
+      }
+    },
+    [isSimulating],
+  );
 
   return (
     <ProductItemStyled>
-      <a href={link} target="_blank" rel="noopener noreferrer">
+      <StyledLink
+        onClick={e => handleLinkClick(e)}
+        href={isSimulating ? '' : link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <ImageWrapper>
           <img src={picture} alt="" title="" />
         </ImageWrapper>
@@ -28,7 +44,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             {formatPoints(price)} <span>pontos</span>
           </Price>
         </NameWrapper>
-      </a>
+      </StyledLink>
     </ProductItemStyled>
   );
 };

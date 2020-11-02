@@ -17,7 +17,7 @@ const Autologin: React.FC = () => {
     }
     const login = async () => {
       try {
-        await signIn(token);
+        await signIn({ token });
       } catch {
         addToast({
           title: 'Token inválido',
