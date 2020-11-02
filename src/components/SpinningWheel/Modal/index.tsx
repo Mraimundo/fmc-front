@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spin } from 'services/spinningWheel/interfaces';
+import { Spin } from 'services/spinning-wheel/interfaces';
 
 import { DefaultModal, Spin as StyledSpin } from './styles';
 

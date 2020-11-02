@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
+import { StatusText } from 'services/campaigns-manager/interfaces/Campaign';
 import { ApproverProfile, CRM, DN, GRM, GRV, MKT } from 'config/constants';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';

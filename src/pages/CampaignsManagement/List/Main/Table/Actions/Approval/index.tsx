@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { StatusText } from 'services/campaignsManager/interfaces/Campaign';
+import { StatusText } from 'services/campaigns-manager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import ApprovalIcon from 'assets/images/campaigns/approval-icon.svg';
 import { useCampaignsList } from '../../../../Context';

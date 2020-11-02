@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Prize } from 'services/spinningWheel/interfaces';
+import { Prize } from 'services/spinning-wheel/interfaces';
 import { Container, PieSlice } from './styles';
 
 interface Props {

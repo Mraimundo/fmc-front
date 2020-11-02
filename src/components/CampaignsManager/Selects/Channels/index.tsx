@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/campaignsManager/getChannels';
-import transformer from 'services/campaignsManager/transformers/channelsToSelectOptions';
+import getData from 'services/campaigns-manager/getChannels';
+import transformer from 'services/campaigns-manager/transformers/channelsToSelectOptions';
 
 interface Props {
   className?: string;
