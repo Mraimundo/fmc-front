@@ -48,7 +48,8 @@ export const ParticipantMenuList = styled.ul<MenuListProps>`
   li {
     height: 25px;
 
-    a {
+    a,
+    span {
       text-decoration: none;
       color: ${({ theme }) => theme.font.color.primary};
       display: flex;
@@ -60,6 +61,10 @@ export const ParticipantMenuList = styled.ul<MenuListProps>`
       &:hover {
         transform: translateX(3px);
       }
+    }
+
+    span {
+      cursor: not-allowed;
     }
   }
 `;

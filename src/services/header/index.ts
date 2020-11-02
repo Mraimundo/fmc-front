@@ -1,4 +1,4 @@
-import { coinQuotation, vendavallApi } from 'services/api';
+import { coinQuotationApi, vendavallApi } from 'services/api';
 
 import { MenuTypes } from 'state/modules/header/constants';
 import { Coin, MenuItem } from 'state/modules/header/types';
@@ -25,7 +25,7 @@ export interface FetchCoinQuotationsService {
 export const fetchCoinQuotationsService = async (): Promise<Coin[] | null> => {
   const {
     data: { USD, USDT },
-  } = await coinQuotation.get<FetchCoinQuotationsService>(``);
+  } = await coinQuotationApi.get<FetchCoinQuotationsService>(``);
 
   return transformCoinQuotationsRawData({ USD, USDT });
 };

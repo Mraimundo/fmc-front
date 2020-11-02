@@ -13,8 +13,13 @@ import {
 interface DropdownProps {
   establishment: IEstablishment | null;
   signOut(): void;
+  simulating: boolean;
 }
-const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  establishment,
+  signOut,
+  simulating,
+}) => {
   return (
     <DropdownList>
       {!!establishment && (
@@ -25,7 +30,11 @@ const Dropdown: React.FC<DropdownProps> = ({ establishment, signOut }) => {
       )}
       <ParticipantMenuList notshowseparator={!establishment}>
         <li>
-          <Link to={routeMap.profile}>Meu perfil</Link>
+          {simulating ? (
+            <span>Meu perfil</span>
+          ) : (
+            <Link to={routeMap.profile}>Meu perfil</Link>
+          )}
         </li>
         <li>
           <a href="#sair" onClick={signOut}>

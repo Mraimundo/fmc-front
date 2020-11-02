@@ -20,7 +20,7 @@ const TITLES = {
 };
 
 const AllRegulations: React.FC = () => {
-  const { updateParticipantData } = useAuth();
+  const { refreshParticipant } = useAuth();
   const { addToast } = useToast();
 
   const [dataRegulations, setDataRegulations] = useState<
@@ -80,7 +80,7 @@ const AllRegulations: React.FC = () => {
             title: 'Você aceitou todos os regulamentos',
             type: 'success',
           });
-          updateParticipantData();
+          refreshParticipant();
           return;
         }
         setAcceptedIds([...acceptedIds, id]);
@@ -97,7 +97,7 @@ const AllRegulations: React.FC = () => {
       safraRegulations,
       campaignRegulations,
       dataRegulations,
-      updateParticipantData,
+      refreshParticipant,
     ],
   );
 

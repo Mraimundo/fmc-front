@@ -1,12 +1,22 @@
-import axios from 'axios';
+import axios, { Method } from 'axios';
+import { ApiError } from 'config/constants';
 
 import env from 'config/env';
 
 const baseURL = process.env.REACT_APP_API_HOST;
 const plugin = process.env.REACT_APP_API_PLUGIN;
 const storageUrl = process.env.REACT_APP_STORAGE_HOST;
-const pdfURL = process.env.REACT_APP_PDF_HOST;
 const headers = { Accept: 'application/json' };
+const notAllowedReadOnlyMethods: (Method | undefined)[] = [
+  'post',
+  'POST',
+  'put',
+  'PUT',
+  'delete',
+  'DELETE',
+  'PATCH',
+  'patch',
+];
 
 const pluginApi = axios.create({
   baseURL: `${baseURL}/${plugin}/api/v1`,
@@ -26,11 +36,8 @@ const storageApi = axios.create({
   },
 });
 
-const pdfApi = axios.create({
-  baseURL: pdfURL,
-  headers: {
-    Accept: 'application/json,application/pdf',
-  },
+const coinQuotationApi = axios.create({
+  baseURL: env.coinQuotationUrl,
 });
 
 const setToken = (token: string): void => {
@@ -38,8 +45,39 @@ const setToken = (token: string): void => {
   pluginApi.defaults.headers.authorization = token;
 };
 
-export const coinQuotation = axios.create({
-  baseURL: env.coinQuotationUrl,
-});
+const setReadOnly = (): void => {
+  pluginApi.interceptors.request.use(
+    req => {
+      if (notAllowedReadOnlyMethods.includes(req.method)) {
+        throw new ApiError('Operação não permitida');
+      }
 
-export { pluginApi, vendavallApi, storageApi, pdfApi, setToken };
+      return req;
+    },
+    error => {
+      return Promise.reject(error);
+    },
+  );
+
+  vendavallApi.interceptors.request.use(
+    req => {
+      if (notAllowedReadOnlyMethods.includes(req.method)) {
+        throw new ApiError('Operação não permitida');
+      }
+
+      return req;
+    },
+    error => {
+      return Promise.reject(error);
+    },
+  );
+};
+
+export {
+  pluginApi,
+  vendavallApi,
+  storageApi,
+  coinQuotationApi,
+  setToken,
+  setReadOnly,
+};

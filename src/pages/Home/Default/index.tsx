@@ -45,7 +45,7 @@ import {
 const DefaultHome: React.FC = () => {
   const dispatch = useDispatch();
   const coinQuotations = useSelector(getCoinQuotations);
-  const { participant } = useAuth();
+  const { participant, simulating } = useAuth();
 
   const [banners, highlights, products, billingPog, potentializers] = [
     useSelector(getBanners),
@@ -122,7 +122,7 @@ const DefaultHome: React.FC = () => {
         <ShowCaseWrapper>
           <Wrapper>
             <Title reverse>Vitrine de Prêmios</Title>
-            <Showcase products={products} />
+            <Showcase products={products} isSimulating={simulating} />
           </Wrapper>
         </ShowCaseWrapper>
       )}
