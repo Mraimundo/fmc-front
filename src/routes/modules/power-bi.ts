@@ -1,5 +1,5 @@
 import PowerBi from 'pages/PowerBi';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

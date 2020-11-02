@@ -1,31 +1,30 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { RouteModule } from './modules/RouteModule';
+import { RouteModule } from './modules/route-module';
 
-import Auth from './modules/Auth';
-import Campaigns from './modules/Campaigns';
-import CampaignsManager from './modules/CampaignsManager';
-import Cockpit from './modules/Cockpit';
-import Contact from './modules/Contact';
-import Extract from './modules/Extract';
-import Faq from './modules/Faq';
-import Gallery from './modules/Gallery';
-import Home from './modules/Home';
-import News from './modules/News';
-import ParticipantsIndication from './modules/ParticipantsIndication';
-import ParticipantSimulation from './modules/ParticipantSimulation';
-import PointsManagement from './modules/PointsManagement';
-import Products from './modules/Products';
-import Showcase from './modules/Showcase';
-import Training from './modules/Training';
-import Goals from './modules/Goals';
-import HowParticipate from './modules/HowParticipate';
+import Auth from './modules/auth';
+import Campaigns from './modules/campaigns';
+import CampaignsManager from './modules/campaigns-manager';
+import Cockpit from './modules/cockpit';
+import Contact from './modules/contact';
+import Extract from './modules/extract';
+import Faq from './modules/faq';
+import Gallery from './modules/gallery';
+import Home from './modules/home';
+import MailManager from './modules/mail-manager';
+import News from './modules/news';
+import ParticipantsIndication from './modules/participants-indication';
+import ParticipantSimulation from './modules/participant-simulation';
+import PointsManagement from './modules/points-management';
+import PowerBi from './modules/power-bi';
+import Products from './modules/products';
+import Report from './modules/report';
+import Showcase from './modules/showcase';
+import Training from './modules/training';
+import Goals from './modules/goals';
+import HowParticipate from './modules/how-participate';
 
-import MailManager from './modules/MailManager';
-import PowerBi from './modules/PowerBi';
-import Report from './modules/Report';
-
-import Route from './Route';
+import Route from './route';
 
 const routesArray: RouteModule[][] = [
   Auth,
