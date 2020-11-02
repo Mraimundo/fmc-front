@@ -5,7 +5,7 @@ import Sso from 'pages/Auth/Sso';
 import FirstAccess from 'pages/Auth/FirstAccess';
 import RegisterEdit from 'pages/Auth/RegisterEdit';
 import Regulation from 'pages/Auth/Regulation';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

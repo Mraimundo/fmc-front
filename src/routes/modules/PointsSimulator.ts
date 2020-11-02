@@ -1,7 +1,7 @@
 import routeMap from 'routes/route-map';
 import CampaignsList from 'pages/Campaigns/List';
 import CampaignsView from 'pages/Campaigns/View';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

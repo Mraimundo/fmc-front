@@ -3,7 +3,7 @@ import CampaignManager from 'pages/CampaignsManagement/Manager';
 import NewCampaign from 'pages/CampaignsManagement/New';
 import ViewCampaign from 'pages/CampaignsManagement/View';
 import CampaignsList from 'pages/CampaignsManagement/List';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

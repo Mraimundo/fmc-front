@@ -1,6 +1,6 @@
 import Gallery from 'pages/Gallery/List';
 import routeMap from 'routes/route-map';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

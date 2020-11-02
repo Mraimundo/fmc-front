@@ -1,6 +1,6 @@
 import routeMap from 'routes/route-map';
 import Goals from 'pages/Goals';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {
