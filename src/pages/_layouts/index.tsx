@@ -18,7 +18,12 @@ import Popups from './Popups';
 import { Container, SimulateIndicator } from './styles';
 
 const Dashboard: React.FC = ({ children }) => {
-  const { shouldShowRegulationsModal, participant, simulating } = useAuth();
+  const {
+    shouldShowRegulationsModal,
+    participant,
+    simulating,
+    signOut,
+  } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
 
   useEffect(() => {
@@ -69,7 +74,14 @@ const Dashboard: React.FC = ({ children }) => {
           <ModalRegulations opened={shouldShowRegulationsModal} />
         ) : (
           <>
-            {simulating && <SimulateIndicator>Simulando</SimulateIndicator>}
+            {simulating && (
+              <SimulateIndicator>
+                <span>Simulando</span>
+                <button onClick={signOut} type="button">
+                  Sair
+                </button>
+              </SimulateIndicator>
+            )}
             <Container simulating={simulating}>
               <Logo
                 logoType={

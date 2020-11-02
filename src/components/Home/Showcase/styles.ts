@@ -20,6 +20,8 @@ export const ProductItemStyled = styled.li`
   }
 `;
 
+export const StyledLink = styled.a``;
+
 export const NameWrapper = styled.div`
   padding: 1em;
   font-family: ${({ theme }) => theme.font.fontFamily.regular};

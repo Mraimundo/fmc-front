@@ -40,13 +40,18 @@ export const MiniBox = styled.div`
     margin: 8px 0;
   }
 
-  a {
+  a,
+  span {
     font-size: 13px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     text-transform: uppercase;
     margin: 6px 0 12px 0;
     align-self: center;
+  }
+
+  span {
+    cursor: not-allowed;
   }
 
   @media screen and (max-width: 720px) {

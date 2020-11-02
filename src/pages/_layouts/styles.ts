@@ -28,4 +28,16 @@ export const SimulateIndicator = styled.div`
   align-items: center;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 22px;
+
+  > button {
+    position: absolute;
+    right: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+    background: none;
+    text-decoration: underline;
+    color: #fff;
+    font-size: 18px;
+  }
 `;

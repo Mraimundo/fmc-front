@@ -15,12 +15,14 @@ interface Props {
   participant: Participant;
   className?: string;
   showChangePicture: boolean;
+  isSimulating: boolean;
 }
 
 const ParticipantInfo: React.FC<Props> = ({
   participant,
   className,
   showChangePicture,
+  isSimulating,
 }) => {
   const [data, setData] = useState<Data | null>(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -73,9 +75,16 @@ const ParticipantInfo: React.FC<Props> = ({
           </Circle>
           <h3>{data.name}</h3>
           <h4>{data.points} pontos</h4>
-          <a href={data.urlAccess} target="_blank" rel="noopener noreferrer">
-            {data.type === 'cnpj' ? 'Catálogo do canal' : 'Meu catálogo'}
-          </a>
+
+          {isSimulating ? (
+            <span>
+              {data.type === 'cnpj' ? 'Catálogo do canal' : 'Meu catálogo'}
+            </span>
+          ) : (
+            <a href={data.urlAccess} target="_blank" rel="noopener noreferrer">
+              {data.type === 'cnpj' ? 'Catálogo do canal' : 'Meu catálogo'}
+            </a>
+          )}
         </Content>
       )}
     </Container>
