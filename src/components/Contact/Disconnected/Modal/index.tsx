@@ -66,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       addToast({
         title:
           e.response?.data?.message ||
-          'Falha ao abir chamado. Por favor tente novamente',
+          'Falha ao abrir chamado. Por favor tente novamente',
         type: 'error',
       });
     }

@@ -5,13 +5,18 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
+import { useDispatch } from 'react-redux';
 import signInService from 'services/auth/signIn';
 import isTokenValid from 'services/auth/isTokenValid';
 import isThereAnyRegulationToAccept from 'services/register/regulation/isThereAnyRegulationToAccept';
+import { getTokenSimulate } from 'services/participant-simulation';
+import { fetchMenu } from 'state/modules/header/actions';
 
 import getLoggedParticipant from 'services/auth/getLoggedParticipant';
 import { Participant } from 'services/auth/interfaces/Participant';
-import { setToken } from 'services/api';
+import { setToken, setReadOnly } from 'services/api';
+import history from 'services/history';
+import routeMap from 'routes/route-map';
 import { useToast } from './ToastContext';
 
 interface Credentials {
@@ -32,11 +37,13 @@ interface AuthContextState {
   signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
   simulating: boolean;
+  simulate(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const dispatch = useDispatch();
   const [simulating, setSimulating] = useState(false);
   const [apiToken, setApiToken] = useState<string>('');
   const [participant, setParticipant] = useState<Participant>(
@@ -56,17 +63,13 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('@Vendavall:token');
-    if (token) {
-      setToken(token);
-      setApiToken(token);
+    if (!simulating) {
+      const token = localStorage.getItem('@Vendavall:token');
+      if (token) {
+        setApiToken(token);
+      }
     }
-  }, []);
-
-  useEffect(() => {
-    if (!apiToken) return;
-    refreshParticipant();
-  }, [apiToken, refreshParticipant]);
+  }, [simulating]);
 
   const signInWithCredentials = useCallback(
     async (credentials: Credentials): Promise<string> => {
@@ -121,10 +124,25 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 
   const signOut = useCallback(() => {
+    if (simulating) {
+      setSimulating(false);
+      history.push(routeMap.participantSimulation);
+      return;
+    }
     localStorage.removeItem('@Vendavall:token');
 
     setToken('');
     setApiToken('');
+  }, [simulating]);
+
+  const simulate = useCallback(async (): Promise<void> => {
+    const token = await getTokenSimulate();
+    setSimulating(true);
+    setReadOnly();
+    setApiToken(token);
+    setTimeout(() => {
+      history.push('/home');
+    }, 900);
   }, []);
 
   const { addToast } = useToast();
@@ -140,10 +158,13 @@ export const AuthProvider: React.FC = ({ children }) => {
             title: 'Sua Sessão expirou, por favor refaça seu login',
             type: 'error',
           });
+          return;
         }
+        refreshParticipant();
+        dispatch(fetchMenu());
       });
     }, 800);
-  }, [addToast, signOut, apiToken]);
+  }, [addToast, signOut, apiToken, refreshParticipant, dispatch]);
 
   return (
     <AuthContext.Provider
@@ -155,6 +176,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signOut,
         shouldShowRegulationsModal,
         simulating,
+        simulate,
       }}
     >
       {children}
