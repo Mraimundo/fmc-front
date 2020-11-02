@@ -1,7 +1,7 @@
 import routeMap from 'routes/route-map';
 import News from 'pages/News/List';
 import View from 'pages/News/View';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

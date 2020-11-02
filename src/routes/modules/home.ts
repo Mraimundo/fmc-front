@@ -1,5 +1,5 @@
 import Home from 'pages/Home';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {
