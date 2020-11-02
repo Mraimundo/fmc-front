@@ -8,7 +8,7 @@ import React, {
 import DatePicker from 'components/shared/DatePicker';
 import { ReactSVG } from 'react-svg';
 import deleteIcon from 'assets/images/campaigns/delete-icon.svg';
-import { Audience } from 'services/campaignsManager/interfaces/Campaign';
+import { Audience } from 'services/campaigns-manager/interfaces/Campaign';
 import { AudienceHandles } from 'components/CampaignsManager/Selects/Audience';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from 'components/shared/Input/BaseInput';

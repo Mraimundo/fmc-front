@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import {
   StatusText,
   CAMPAIGN_STATUS_TEXT,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import { ReactSVG } from 'react-svg';
 import EditIcon from 'assets/images/campaigns/edit-icon.svg';
 import viewIcon from 'assets/images/campaigns/view-icon.svg';

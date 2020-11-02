@@ -7,9 +7,9 @@ import React, {
 } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/campaignsManager/getAudience';
-import transformer from 'services/campaignsManager/transformers/audienceToSelectOptions';
-import { Audience } from 'services/campaignsManager/interfaces/Campaign';
+import getData from 'services/campaigns-manager/getAudience';
+import transformer from 'services/campaigns-manager/transformers/audienceToSelectOptions';
+import { Audience } from 'services/campaigns-manager/interfaces/Campaign';
 
 interface Props {
   className?: string;

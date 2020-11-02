@@ -2,10 +2,10 @@ import React, { useCallback, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { reset, setErrors } from 'state/modules/campaigns-manager/actions';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
-import { createNewCampaign } from 'services/campaignsManager';
-import { CreateNewCampaignDTO } from 'services/campaignsManager/dtos';
-import { campaignToCreateNewCampaignDTO } from 'services/campaignsManager/transformers';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
+import { createNewCampaign } from 'services/campaigns-manager';
+import { CreateNewCampaignDTO } from 'services/campaigns-manager/dtos';
+import { campaignToCreateNewCampaignDTO } from 'services/campaigns-manager/transformers';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 import history from 'services/history';

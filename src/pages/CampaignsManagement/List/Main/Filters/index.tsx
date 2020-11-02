@@ -10,7 +10,7 @@ import MechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
 import {
   Mechanic,
   ApproverProfile,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import { GRM, RTC, KAM } from 'config/constants';
 import { useCampaignsList } from '../../Context';
 

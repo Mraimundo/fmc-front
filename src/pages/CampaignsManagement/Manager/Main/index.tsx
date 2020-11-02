@@ -3,13 +3,13 @@ import history from 'services/history';
 import { useDispatch } from 'react-redux';
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
-import { campaignToUpdateCampaignDTO } from 'services/campaignsManager/transformers';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
+import { campaignToUpdateCampaignDTO } from 'services/campaigns-manager/transformers';
 import {
   updateCampaign,
   cancelCampaign,
   requestForApprovalCampaign,
-} from 'services/campaignsManager';
+} from 'services/campaigns-manager';
 import { setErrors } from 'state/modules/campaigns-manager/actions';
 
 import {

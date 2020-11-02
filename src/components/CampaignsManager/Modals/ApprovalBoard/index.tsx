@@ -9,7 +9,7 @@ import { useToast } from 'context/ToastContext';
 import {
   Approver,
   ApproverProfile,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import BoardBox from './BoardBox';
 import { Modal, Container, Content, Close } from './styles';
 

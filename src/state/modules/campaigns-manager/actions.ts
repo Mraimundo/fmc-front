@@ -4,7 +4,7 @@ import {
   Goal,
   Audience,
   Mechanic,
-} from 'services/campaignsManager/interfaces/Campaign';
+} from 'services/campaigns-manager/interfaces/Campaign';
 import {
   ADD_GOAL,
   REMOVE_GOAL,

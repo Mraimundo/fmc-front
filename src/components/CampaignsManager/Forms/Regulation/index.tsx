@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
 import { useSelector } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
 import getUrlRegulationToDownload from 'services/register/regulation/getUrlRegulationToDownload';
 import getRegulation, {
   Response as IRegulation,
-} from 'services/campaignsManager/getRegulation';
+} from 'services/campaigns-manager/getRegulation';
 import { Button } from 'components/shared';
 import { ReactSVG } from 'react-svg';
 import parser from 'html-react-parser';

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { ApproverProfile } from 'config/constants';
-import { Campaign } from 'services/campaignsManager/interfaces/Campaign';
+import { Campaign } from 'services/campaigns-manager/interfaces/Campaign';
 import { useSelector } from 'react-redux';
 import { getCampaign } from 'state/modules/campaigns-manager/selectors';
 import { Button } from 'components/shared';

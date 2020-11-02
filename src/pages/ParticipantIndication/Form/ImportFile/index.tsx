@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import uploadFileToStorage from 'services/storage/sendFile';
-import sendFile from 'services/participantIndication/importFile';
+import sendFile from 'services/participant-indication/importFile';
 import forceDownload from 'services/storage/getUrlToForceDownload';
 import FinishModal from 'components/ParticipantIndication/Modals/FinishImport';
 
