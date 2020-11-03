@@ -11,7 +11,6 @@ import {
   MaritalStatusSelect,
   GenderSelect,
   UfSelectRG,
-  BoxAutoIndication,
 } from './styles';
 
 interface Props {
