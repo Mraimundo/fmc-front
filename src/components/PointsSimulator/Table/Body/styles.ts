@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.tbody`
-  input {
-    width: 86px;
-    height: 33px;
+  tr {
+    height: 65px;
+    background: #dad8d9;
+    margin-bottom: 8px;
   }
 `;

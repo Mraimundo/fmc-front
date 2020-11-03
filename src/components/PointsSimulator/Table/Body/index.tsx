@@ -1,41 +1,16 @@
 import React from 'react';
 
+import Tr from './Tr';
 import { Container } from './styles';
 
 const Header: React.FC = () => {
+  const products = ['1', '2', '3', '4', '5', '6'];
+
   return (
     <Container>
-      <tr>
-        <td>1</td>
-        <td>
-          <span>Inseticidas</span>
-          <span>Produto</span>
-        </td>
-        <td>
-          <span>Objetivo: ---</span>
-          <span>Realizado: ---</span>
-        </td>
-        <td>
-          <span>Objetivo: ---</span>
-          <span>Realizado: ---</span>
-        </td>
-        <td>
-          <span>--- KG/L</span>
-          <span>--- US$</span>
-        </td>
-        <td>
-          <input type="text" />
-        </td>
-        <td>
-          <input type="text" />
-        </td>
-        <td>
-          <input type="text" />
-        </td>
-        <td>
-          <input type="text" />
-        </td>
-      </tr>
+      {products.map(item => (
+        <Tr key={item} />
+      ))}
     </Container>
   );
 };
