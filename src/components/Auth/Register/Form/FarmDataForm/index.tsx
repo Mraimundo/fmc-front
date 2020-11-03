@@ -74,7 +74,6 @@ const FarmDataForm: React.FC<Props> = ({
         !!ufSelected &&
         !!cpfCnpjInput &&
         !!nameInput &&
-        !!ieInput &&
         !!cityInput
       )
     )

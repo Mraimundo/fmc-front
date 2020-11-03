@@ -23,6 +23,9 @@ export const Content = styled(animated.div)`
   @media screen and (max-width: 720px) {
     width: 100%;
   }
+  @media (min-width: 1024px) {
+    padding: 64px 75px;
+  }
 
   form {
     display: flex;

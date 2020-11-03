@@ -32,17 +32,6 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({
       {participant.profile === PROFILES.producer ? (
         <>
           <AddressFields inputRole={inputRole} />
-          <BoxAutoIndication>
-            <input
-              type="checkbox"
-              name="autoindicate"
-              checked={autoIndicate}
-              onChange={() => setAutoIndicate(!autoIndicate)}
-            />
-            <span>
-              Complete os dados para poder realizar resgates em cartão.
-            </span>
-          </BoxAutoIndication>
         </>
       ) : (
         <>

@@ -14,6 +14,7 @@ export const WelcomeMessageContainer = styled.div`
 /* Refatorar depois daqui para baixo, esses svgs direto dessa forma aí nao fica legível */
 
 export const Navigation = styled.ul`
+  margin: 50px auto 30px auto;
   @media (min-width: 768px) {
     display: flex;
     flex-flow: row wrap;

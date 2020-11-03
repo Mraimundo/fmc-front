@@ -28,7 +28,7 @@ export const Separator = styled.div`
 
 export const Avatar = styled(DefaultAvatar)`
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 32px;
   button {
     height: 36px;
     margin-top: 0;
