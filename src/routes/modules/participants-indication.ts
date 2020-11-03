@@ -1,6 +1,6 @@
 import ParticipantIndication from 'pages/ParticipantIndication';
 import routeMap from 'routes/route-map';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

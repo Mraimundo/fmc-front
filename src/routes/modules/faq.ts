@@ -1,6 +1,6 @@
 import routeMap from 'routes/route-map';
 import Faq from 'pages/Faq';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

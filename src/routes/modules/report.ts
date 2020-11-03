@@ -1,6 +1,6 @@
 import routeMap from 'routes/route-map';
 import Report from 'pages/Dashboard';
-import { RouteModule } from './RouteModule';
+import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {

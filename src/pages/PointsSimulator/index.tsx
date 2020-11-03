@@ -1,11 +1,17 @@
 import React from 'react';
 
-import { Container } from './styles';
+import Header from 'components/PointsSimulator/Header';
+import Table from 'components/PointsSimulator/Table';
+
+import { Container, Content } from './styles';
 
 const PointsSimulator: React.FC = () => {
   return (
     <Container>
-      <h1>Simulador</h1>
+      <Content>
+        <Header />
+        <Table />
+      </Content>
     </Container>
   );
 };

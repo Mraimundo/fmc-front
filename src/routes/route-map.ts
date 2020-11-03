@@ -21,4 +21,5 @@ export default {
   training: '/treinamentos',
   cockpit: '/cockpit',
   report: '/relatorios',
+  pointsSimulator: '/simulador',
 };
