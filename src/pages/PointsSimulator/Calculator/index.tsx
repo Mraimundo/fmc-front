@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from 'components/PointsSimulator/Header';
-import Table from 'components/PointsSimulator/Table';
-import Footer from 'components/PointsSimulator/Footer';
+import Header from 'components/PointsSimulator/Calculator/Header';
+import Table from 'components/PointsSimulator/Calculator/Table';
+import Footer from 'components/PointsSimulator/Calculator/Footer';
 
 import { Container, Content, CustomTableBox, Box } from './styles';
 

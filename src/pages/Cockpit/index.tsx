@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Simulador from 'pages/PointsSimulator';
+import Simulador from 'pages/PointsSimulator/Result';
+import { Link } from 'react-router-dom';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
 
