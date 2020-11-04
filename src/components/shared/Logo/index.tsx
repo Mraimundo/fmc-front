@@ -34,9 +34,9 @@ const Logo: React.FC<Props> = ({
   );
   const logoToShowMobile = useMemo(
     () => ({
-      [EstablishmentTypes.Resale]: <ReactSVG src={logoRevenda} />,
-      [EstablishmentTypes.Cooperative]: <ReactSVG src={logoCooperativa} />,
-      fmcTeam: <ReactSVG src={logoEquipe} />,
+      [EstablishmentTypes.Resale]: <ReactSVG src={juntosLogoMobile} />,
+      [EstablishmentTypes.Cooperative]: <ReactSVG src={juntosLogoMobile} />,
+      fmcTeam: <ReactSVG src={juntosLogoMobile} />,
       fmcProdutor: <ReactSVG src={logoProdutor} />,
     }),
     [],

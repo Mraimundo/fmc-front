@@ -158,16 +158,16 @@ const FarmDataForm: React.FC<Props> = ({
             inputRole={inputRole}
             value={memberTypeSelected}
             setValue={value => setMemberTypeSelected(value)}
-            label="Tipo"
+            label="Tipo*"
           />
           <BaseInput
-            label="CPF ou CNPJ"
+            label="CPF ou CNPJ*"
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
           <BaseInput
-            label="Nome ou Razão Social"
+            label="Nome ou Razão Social*"
             value={nameInput}
             onChange={e => setNameInput(e.currentTarget.value)}
             inputRole={inputRole}
@@ -179,13 +179,13 @@ const FarmDataForm: React.FC<Props> = ({
             inputRole={inputRole}
           />
           <BaseInput
-            label="Município"
+            label="Município*"
             value={cityInput}
             onChange={e => setCityInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
           <UfSelect
-            label="Estado"
+            label="Estado*"
             inputRole={inputRole}
             value={ufSelected}
             setValue={value => setUfSelected(value)}
