@@ -11,6 +11,7 @@ import {
   MaritalStatusSelect,
   GenderSelect,
   UfSelectRG,
+  BoxAutoIndication,
 } from './styles';
 
 interface Props {
@@ -31,6 +32,17 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({
       {participant.profile === PROFILES.producer ? (
         <>
           <AddressFields inputRole={inputRole} />
+          <BoxAutoIndication style={{ display: 'none' }}>
+            <input
+              type="checkbox"
+              name="autoindicate"
+              checked={autoIndicate}
+              onChange={() => setAutoIndicate(!autoIndicate)}
+            />
+            <span>
+              Complete os dados para poder realizar resgates em cartão.
+            </span>
+          </BoxAutoIndication>
         </>
       ) : (
         <>
