@@ -102,8 +102,12 @@ export default ({
           xAxes: [
             {
               display: true,
+              gridLines: {
+                display: false,
+              },
               ticks: {
                 beginAtZero: true,
+                min: 0,
                 callback: value =>
                   fakeFormatDollars(parseFloat(value.toString()) / 1000, 0, 0),
               },
