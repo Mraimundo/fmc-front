@@ -5,7 +5,7 @@ import getData, {
 } from 'services/participants/howParticipate';
 
 import { SliderHowParticipate } from 'components/HowParticipate';
-
+import { Link } from 'react-router-dom';
 import {
   Container,
   Content,
@@ -53,8 +53,12 @@ const DefaultHowParticipate: React.FC = () => {
         )}
         <Actions>
           {data?.links.map(item => (
-            <div key={`link-${item.id}`}>
-              <a href={item.target}>{item.label}</a>
+            <div key={item.id}>
+              {item.type === 'internal' ? (
+                <Link to={item.target}>{item.label}</Link>
+              ) : (
+                <a href={item.target}>{item.label}</a>
+              )}
             </div>
           ))}
         </Actions>
