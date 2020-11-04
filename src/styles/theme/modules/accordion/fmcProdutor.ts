@@ -2,9 +2,9 @@ export default {
   primary: {
     fontColor: '#312e38',
     closeIconColor: '#d7d8da',
-    openIconColor: '#193f4e',
+    openIconColor: '#2c2420',
     backgroundOpenIconColor: '#d7d8da',
-    backgroundCloseIconColor: '#193f4e',
+    backgroundCloseIconColor: '#2c2420',
     borderColor: '#312e38',
   },
   secondary: {
