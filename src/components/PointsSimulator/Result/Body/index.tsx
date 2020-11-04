@@ -51,6 +51,7 @@ const Body: React.FC = () => {
               { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
             ]}
             percentageCompleted={100}
+            percentageSimulated={100}
           />
           <Card
             title="POG"
@@ -59,7 +60,8 @@ const Body: React.FC = () => {
               { title: 'Meta 20/21', value: 'US$ 1.333.444' },
               { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
             ]}
-            percentageCompleted={100}
+            percentageCompleted={80}
+            percentageSimulated={90}
           />
           <Card
             title={<span>Hero</span>}
@@ -68,7 +70,8 @@ const Body: React.FC = () => {
               { title: 'Meta 20/21', value: 'US$ 1.333.444' },
               { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
             ]}
-            percentageCompleted={100}
+            percentageCompleted={80}
+            percentageSimulated={100}
           />
           <Card
             title={<span>Prêmio</span>}
@@ -77,7 +80,8 @@ const Body: React.FC = () => {
               { title: 'Meta 20/21', value: 'US$ 1.333.444' },
               { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
             ]}
-            percentageCompleted={100}
+            percentageCompleted={50}
+            percentageSimulated={100}
           />
           <Card
             title={<span>Talisman</span>}
@@ -86,7 +90,8 @@ const Body: React.FC = () => {
               { title: 'Meta 20/21', value: 'US$ 1.333.444' },
               { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
             ]}
-            percentageCompleted={100}
+            percentageCompleted={50}
+            percentageSimulated={50}
           />
         </Cards>
       </CustomIndicatorContainer>

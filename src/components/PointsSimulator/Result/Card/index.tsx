@@ -12,6 +12,7 @@ interface Props {
   description: string;
   tableData: Item[];
   percentageCompleted: number;
+  percentageSimulated: number;
 }
 
 const Card: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const Card: React.FC<Props> = ({
   description,
   tableData,
   percentageCompleted,
+  percentageSimulated,
 }) => {
   return (
     <Container>
@@ -32,7 +34,12 @@ const Card: React.FC<Props> = ({
           </li>
         ))}
       </ul>
-      <StyledPercentageBar completed={percentageCompleted} />
+      <StyledPercentageBar
+        percentageCompleted={percentageCompleted}
+        percentageSimulated={percentageSimulated}
+      >
+        <span>{percentageSimulated}%</span>
+      </StyledPercentageBar>
     </Container>
   );
 };
