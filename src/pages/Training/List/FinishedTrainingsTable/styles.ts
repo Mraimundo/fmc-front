@@ -12,7 +12,7 @@ export const Container = styled(Table)`
 
   > tbody > tr {
     color: ${({ theme }) => theme.font.color.quartenary};
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 14px;
   }
 
