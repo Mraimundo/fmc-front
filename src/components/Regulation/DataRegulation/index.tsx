@@ -19,9 +19,10 @@ import {
 interface Props {
   onAccept(): Promise<void> | void;
   regulation: Regulation | null;
+  profile: string | undefined;
 }
 
-const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
+const DataRegulation: React.FC<Props> = ({ onAccept, regulation, profile }) => {
   const [loading, setLoading] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
   const buttonRole = 'primary';
@@ -95,16 +96,36 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation }) => {
           }}
         />
         <span>
-          Ao clicar na caixa “Li e aceito os{' '}
-          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
-            Termos de Uso
-          </a>{' '}
-          e{' '}
-          <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
-            Política de Privacidade
-          </a>
-          ”, tenho compreensão e estou de acordo com esses Termos, bem como
-          concordo e autorizo para a finalidade a que se destina, sem reservas.
+          {profile === 'PRODUTOR' && (
+            <div>
+              Ao clicar na caixa “Li e aceito os{' '}
+              <a href="https://s3.amazonaws.com/vendavall/photos/1604524991.5fa31bbf4f9c19.74793365.pdf">
+                Termos de Uso
+              </a>{' '}
+              e{' '}
+              <a href="https://s3.amazonaws.com/vendavall/photos/1604524903.5fa31b6744f8d3.91813222.pdf">
+                Política de Privacidade
+              </a>
+              ”, tenho compreensão e estou de acordo com esses Termos, bem como
+              concordo e autorizo para a finalidade a que se destina, sem
+              reservas.
+            </div>
+          )}
+          {profile !== 'PRODUTOR' && (
+            <div>
+              Ao clicar na caixa “Li e aceito os{' '}
+              <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
+                Termos de Uso
+              </a>{' '}
+              e{' '}
+              <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
+                Política de Privacidade
+              </a>
+              ”, tenho compreensão e estou de acordo com esses Termos, bem como
+              concordo e autorizo para a finalidade a que se destina, sem
+              reservas.
+            </div>
+          )}
         </span>
       </BoxAccept>
 

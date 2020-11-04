@@ -104,6 +104,7 @@ const FirstAccess: React.FC = () => {
             <DataRegulation
               onAccept={onAcceptRegulation}
               regulation={dataRegulation}
+              profile={participant?.profile}
             />
           </RegulationContent>
         </RegulationContainer>
