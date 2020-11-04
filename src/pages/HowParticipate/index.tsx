@@ -4,6 +4,7 @@ import getData, {
   HowParticipate as IHowParticipate,
 } from 'services/participants/howParticipate';
 
+import { Link } from 'react-router-dom';
 import { Container, Content, Actions } from './styles';
 
 const HowParticipate: React.FC = () => {
@@ -25,8 +26,12 @@ const HowParticipate: React.FC = () => {
         />
         <Actions>
           {data?.links.map(item => (
-            <div>
-              <a href={item.target}>{item.label}</a>
+            <div key={item.id}>
+              {item.type === 'internal' ? (
+                <Link to={item.target}>{item.label}</Link>
+              ) : (
+                <a href={item.target}>{item.label}</a>
+              )}
             </div>
           ))}
         </Actions>
