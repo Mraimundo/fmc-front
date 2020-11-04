@@ -8,6 +8,10 @@ export const Container = styled.div`
   align-items: center;
   min-height: calc(100vh - 95px);
   background: #fff;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export const Content = styled.div`

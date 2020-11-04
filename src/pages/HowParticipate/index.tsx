@@ -4,18 +4,37 @@ import getData, {
   HowParticipate as IHowParticipate,
 } from 'services/participants/howParticipate';
 
+import { SliderHowParticipate } from 'components/HowParticipate';
 import { Link } from 'react-router-dom';
-import { Container, Content, Actions } from './styles';
+import {
+  Container,
+  Content,
+  Actions,
+  StepsContainer,
+  StepsContent,
+  StepsTitle,
+} from './styles';
 
-const HowParticipate: React.FC = () => {
+interface SlideItem {
+  picture: string;
+}
+
+const DefaultHowParticipate: React.FC = () => {
   const [data, setData] = useState<IHowParticipate | null>(null);
   const { width } = useDimensions();
+  const [slideItems, setSlideItems] = useState<SlideItem[]>([]);
 
   useEffect(() => {
     getData().then(_data => {
       setData(_data);
     });
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+
+    setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+  }, [data]);
 
   return (
     <Container>
@@ -24,6 +43,14 @@ const HowParticipate: React.FC = () => {
           src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl}
           alt={data?.description}
         />
+        {slideItems.length > 0 && (
+          <StepsContainer>
+            <StepsContent>
+              <StepsTitle>Veja como é fácil participar</StepsTitle>
+              <SliderHowParticipate items={slideItems} />
+            </StepsContent>
+          </StepsContainer>
+        )}
         <Actions>
           {data?.links.map(item => (
             <div key={item.id}>
@@ -40,4 +67,4 @@ const HowParticipate: React.FC = () => {
   );
 };
 
-export default HowParticipate;
+export default DefaultHowParticipate;

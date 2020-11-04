@@ -2,6 +2,7 @@ import { DefaultTheme } from 'styled-components';
 import accordion from './modules/accordion/default';
 import button from './modules/button/default';
 import contact from './modules/contact/default';
+import howParticipate from './modules/howParticipate/default';
 import indication from './modules/indication/default';
 import font from './modules/font/default';
 import footer from './modules/footer/default';
@@ -22,6 +23,7 @@ const Theme: DefaultTheme = {
   contact,
   font,
   footer,
+  howParticipate,
   input,
   layout,
   link,

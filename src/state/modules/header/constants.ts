@@ -23,3 +23,10 @@ export enum Badge {
   Seed = 'seed',
   Water = 'water',
 }
+
+export enum Status {
+  Especialista = 'especialista',
+  Conselheiro = 'conselheiro',
+  Parceiro = 'parceiro',
+  Lider = 'líder',
+}

@@ -1,5 +1,10 @@
 import numbersOnly from 'util/numbersOnly';
-import { Participant, Regulation } from 'services/auth/interfaces/Participant';
+import {
+  Participant,
+  Regulation,
+  MemberGroup,
+  Harvest,
+} from 'services/auth/interfaces/Participant';
 import { formatDate } from 'util/datetime';
 
 interface SaveRequest {
@@ -36,6 +41,12 @@ interface SaveRequest {
   role_id: number;
   regulations_accepted: Regulation[];
   access_premio_ideall: boolean;
+
+  // Producers
+  producer_cpf: string;
+  producer_group_name: string;
+  members_group: MemberGroup[];
+  harvest: Harvest;
 }
 
 export default (participant: Participant): SaveRequest => {
@@ -75,5 +86,10 @@ export default (participant: Participant): SaveRequest => {
       participant.profile === 'FOCALPOINT'
         ? participant.access_premio_ideall
         : true,
+
+    producer_cpf: participant.producer_cpf || '',
+    producer_group_name: participant.producer_group_name || '',
+    members_group: participant.members_group || [],
+    harvest: participant.harvest || ({} as Harvest),
   };
 };

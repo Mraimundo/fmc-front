@@ -44,7 +44,7 @@ export const Actions = styled.div`
   }
 
   > div {
-    border: 1px solid #e63027;
+    border: 1px solid ${({ theme }) => theme.howParticipate.button.borderColor};
     padding: 4px;
     border-radius: 6px;
   }
@@ -56,7 +56,8 @@ export const Actions = styled.div`
     width: 282px;
     height: 58px;
     border-radius: 6px;
-    background-color: #e63027;
+    background-color: ${({ theme }) =>
+      theme.howParticipate.button.backgroundColor};
     text-decoration: none;
     text-transform: uppercase;
 
@@ -67,5 +68,44 @@ export const Actions = styled.div`
     & + a {
       margin-left: 20px;
     }
+  }
+`;
+
+export const StepsContainer = styled.div`
+  position: relative;
+  padding: 12px;
+  border-radius: 10px;
+  background-size: 100% auto;
+  background-position: center;
+  margin: 45px auto;
+  width: 100%;
+  background: linear-gradient(
+    rgba(101, 85, 77, 0.17) 0%,
+    rgba(255, 255, 255, 0.18) 47.78%,
+    rgba(101, 85, 77, 0.09) 100%
+  );
+  color: ${({ theme }) => theme.font.color.primary};
+`;
+
+export const StepsContent = styled.div`
+  border: 1px dashed ${({ theme }) => theme.font.color.secondary};
+  border-radius: 10px;
+  padding: 18px 24px;
+  @media (min-width: 768px) {
+    padding: 30px 24px;
+  }
+`;
+
+export const StepsTitle = styled.h1`
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: center;
+  font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
+  @media (min-width: 1024px) {
+    margin: auto 20px;
   }
 `;
