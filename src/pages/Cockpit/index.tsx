@@ -8,6 +8,7 @@ import ChannelView from './ChannelView';
 import { Container, GeneralContent, Content, Separator } from './styles';
 
 const Cockpit: React.FC = () => {
+  return <Simulador />;
   return (
     <Container>
       <Link to="/visao-do-participante">Acessar</Link>
