@@ -93,9 +93,7 @@ const PersonalDataForm: React.FC<Props> = ({
         <>
           <Input
             name="producer_cpf"
-            label="CPF do produtor (código do produtor agrícola)*"
-            numbersOnly
-            pattern="XXX.XXX.XXX-XX"
+            label="CPF do produtor (código do produtor agrícola)"
             inputRole={inputRole}
           />
           <Input

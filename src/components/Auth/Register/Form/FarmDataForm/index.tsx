@@ -74,7 +74,6 @@ const FarmDataForm: React.FC<Props> = ({
         !!ufSelected &&
         !!cpfCnpjInput &&
         !!nameInput &&
-        !!ieInput &&
         !!cityInput
       )
     )
@@ -88,14 +87,7 @@ const FarmDataForm: React.FC<Props> = ({
     // Validar CPF e CNPJ
 
     return true;
-  }, [
-    memberTypeSelected,
-    ufSelected,
-    cpfCnpjInput,
-    nameInput,
-    ieInput,
-    cityInput,
-  ]);
+  }, [memberTypeSelected, ufSelected, cpfCnpjInput, nameInput, cityInput]);
 
   const handleAddMember = useCallback((): void => {
     try {
@@ -123,8 +115,8 @@ const FarmDataForm: React.FC<Props> = ({
     addToast,
     isMemberFormValid,
     cityInput,
-    cpfCnpjInput,
     ieInput,
+    cpfCnpjInput,
     nameInput,
     memberTypeSelected,
     ufSelected,

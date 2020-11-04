@@ -3,6 +3,8 @@ import { Obs, ButtonContainer, Button } from './styles';
 import CustomInput from './CustomInput';
 
 const harvestItems = [
+  { key: 'harvest.soja', title: 'Soja' },
+  { key: 'harvest.milho', title: 'Milho' },
   { key: 'harvest.algodao', title: 'Algodão' },
   { key: 'harvest.arroz_irrigado', title: 'Arroz Irrigado' },
   { key: 'harvest.batata', title: 'Batata' },
@@ -14,8 +16,6 @@ const harvestItems = [
   { key: 'harvest.feijao', title: 'Feijão' },
   { key: 'harvest.mandioca', title: 'Mandioca' },
   { key: 'harvest.melao', title: 'Melão' },
-  { key: 'harvest.milho', title: 'Milho' },
-  { key: 'harvest.soja', title: 'Soja' },
   { key: 'harvest.tabaco', title: 'Tabaco' },
   { key: 'harvest.tomate', title: 'Tomate' },
   { key: 'harvest.trigo', title: 'Trigo' },

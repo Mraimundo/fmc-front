@@ -48,9 +48,6 @@ const cepFields = {
 };
 
 const extraProducerFields = {
-  producer_cpf: Yup.string()
-    .required(mandatoryMessage)
-    .test('valid-cpf', 'CPF inválido', validateCpf),
   producer_group_name: Yup.string().required(mandatoryMessage),
   members_group: Yup.array().of(
     Yup.object()

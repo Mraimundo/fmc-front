@@ -32,7 +32,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({
       {participant.profile === PROFILES.producer ? (
         <>
           <AddressFields inputRole={inputRole} />
-          <BoxAutoIndication>
+          <BoxAutoIndication style={{ display: 'none' }}>
             <input
               type="checkbox"
               name="autoindicate"
