@@ -49,3 +49,11 @@ export const FmcLogoWrapper = styled.div`
     }
   }
 `;
+export const LogoMobile = styled.div`
+  @media screen and (max-width: 1023px) {
+    svg {
+      width: auto;
+      height: 20px;
+    }
+  }
+`;
