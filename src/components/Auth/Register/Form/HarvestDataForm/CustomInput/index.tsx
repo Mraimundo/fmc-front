@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import numbersOnly from 'util/numbersOnly';
 import { formatPoints } from 'util/points';
