@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
+import { useToast } from 'context/ToastContext';
 
 import { Input, Button } from 'components/shared';
 
@@ -27,6 +28,7 @@ const FormSignUp: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
+  const { addToast } = useToast();
 
   const schema = Yup.object().shape({
     param_first_access: Yup.string().required('Campo obrigatório'),
@@ -49,11 +51,14 @@ const FormSignUp: React.FC = () => {
       history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
-      setShowModal(true);
-      /*  addToast({
-        title: e.response?.data?.message || 'Falha ao checar CPF',
-        type: 'error',
-      }); */
+      if (e.response?.data?.message === 'CPF não encontrado') {
+        setShowModal(true);
+      } else {
+        addToast({
+          title: e.response?.data?.message || 'Falha ao checar CPF',
+          type: 'error',
+        });
+      }
     }
   });
 
