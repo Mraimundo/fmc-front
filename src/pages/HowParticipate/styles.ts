@@ -73,7 +73,7 @@ export const Actions = styled.div`
 
 export const StepsContainer = styled.div`
   position: relative;
-  margin: 45px auto;
+  margin: 0 auto 110px auto;
   width: 100%;
 `;
 
@@ -97,5 +97,18 @@ export const StepsTitle = styled.h1`
   }
   @media (min-width: 1024px) {
     margin: auto 20px;
+  }
+`;
+
+export const Text = styled.div`
+  width: 100%;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-size: 16px;
+  margin: 20px auto;
+  strong {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+  p {
+    margin-bottom: 12px;
   }
 `;
