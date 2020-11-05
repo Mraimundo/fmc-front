@@ -33,7 +33,10 @@ const DefaultHowParticipate: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl} />
+        <img
+          src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl}
+          alt="Como Participar"
+        />
         <Text>{parser(data?.description || '')}</Text>
         {slideItems.length > 0 && (
           <StepsContainer>
