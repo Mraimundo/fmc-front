@@ -11,7 +11,7 @@ import logoCooperativa from 'assets/images/logo-cooperativa.svg';
 import logoEquipe from 'assets/images/logo-equipe.svg';
 import logoProdutor from 'assets/images/logo-produtor.svg';
 
-import { Container, Content, FmcLogoWrapper, LogoMobile } from './styles';
+import { Container, Content, FmcLogoWrapper } from './styles';
 
 export type LogoType = EstablishmentTypes | 'fmcTeam' | 'fmcProdutor';
 
@@ -32,15 +32,6 @@ const Logo: React.FC<Props> = ({
     }),
     [],
   );
-  const logoToShowMobile = useMemo(
-    () => ({
-      [EstablishmentTypes.Resale]: <ReactSVG src={juntosLogoMobile} />,
-      [EstablishmentTypes.Cooperative]: <ReactSVG src={juntosLogoMobile} />,
-      fmcTeam: <ReactSVG src={juntosLogoMobile} />,
-      fmcProdutor: <ReactSVG src={logoProdutor} />,
-    }),
-    [],
-  );
 
   return (
     <Container className={className}>
@@ -51,7 +42,7 @@ const Logo: React.FC<Props> = ({
           </Link>
         </FmcLogoWrapper>
         <Visible xs sm md lg>
-          <LogoMobile>{logoToShowMobile[logoType]}</LogoMobile>
+          <img src={juntosLogoMobile} alt="" title="" />
         </Visible>
         <Visible xl xxl>
           {logoToShow[logoType]}

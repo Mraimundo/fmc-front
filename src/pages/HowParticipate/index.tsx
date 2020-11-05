@@ -6,14 +6,7 @@ import getData, {
 
 import { SliderHowParticipate } from 'components/HowParticipate';
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Content,
-  Actions,
-  StepsContainer,
-  StepsContent,
-  StepsTitle,
-} from './styles';
+import { Container, Content, Actions, StepsContainer } from './styles';
 
 interface SlideItem {
   picture: string;
@@ -45,10 +38,7 @@ const DefaultHowParticipate: React.FC = () => {
         />
         {slideItems.length > 0 && (
           <StepsContainer>
-            <StepsContent>
-              <StepsTitle>Veja como é fácil participar</StepsTitle>
-              <SliderHowParticipate items={slideItems} />
-            </StepsContent>
+            <SliderHowParticipate items={slideItems} />
           </StepsContainer>
         )}
         <Actions>
