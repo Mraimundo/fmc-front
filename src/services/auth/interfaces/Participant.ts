@@ -65,25 +65,25 @@ export interface MemberGroup {
 }
 
 export interface Harvest {
-  algodao: number;
-  arroz_irrigado: number;
-  batata: number;
-  cafe: number;
-  cana: number;
-  cenoura: number;
-  cevada: number;
-  citrus: number;
-  feijao: number;
-  mandioca: number;
-  melao: number;
-  milho: number;
-  outras: number;
+  algodao: string;
+  arroz_irrigado: string;
+  batata: string;
+  cafe: string;
+  cana: string;
+  cenoura: string;
+  cevada: string;
+  citrus: string;
+  feijao: string;
+  mandioca: string;
+  melao: string;
+  milho: string;
+  outras: string;
   outras_quais: string;
-  soja: number;
-  tabaco: number;
-  tomate: number;
-  trigo: number;
-  uva: number;
+  soja: string;
+  tabaco: string;
+  tomate: string;
+  trigo: string;
+  uva: string;
 }
 
 export interface Participant {
