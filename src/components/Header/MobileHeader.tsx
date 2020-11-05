@@ -43,7 +43,9 @@ const Header: React.FC = () => {
       <HeaderToggleMenu>
         <img src={menuIcon} alt="" title="" onClick={toggleMenu} />
         <EstablishmentType>
-          {participant.establishment.type_name}
+          {participant.profile === 'PRODUTOR'
+            ? 'PRODUTOR'
+            : participant.establishment.type_name}
         </EstablishmentType>
       </HeaderToggleMenu>
       <MobileNav open={menuIsOpen}>

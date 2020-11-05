@@ -6,14 +6,7 @@ import getData, {
 
 import { SliderHowParticipate } from 'components/HowParticipate';
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Content,
-  Actions,
-  StepsContainer,
-  StepsContent,
-  StepsTitle,
-} from './styles';
+import { Container, Content, Actions, StepsContainer } from './styles';
 
 interface SlideItem {
   picture: string;
