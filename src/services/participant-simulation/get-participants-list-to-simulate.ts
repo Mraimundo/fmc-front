@@ -1,3 +1,5 @@
+import { pluginApi } from 'services/api';
+
 export interface Participant {
   id: number;
   clientCode: number;
@@ -13,8 +15,16 @@ export interface FilterOptions {
   search?: string;
 }
 
+interface ApiResponse {
+  data: [];
+}
+
 export default async (filters: FilterOptions): Promise<Participant[]> => {
   console.log(filters);
+  const data = await pluginApi.get(`participants/simulation`);
+
+  console.log('data', data);
+
   const mock = [
     {
       id: 1,
