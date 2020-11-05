@@ -170,7 +170,7 @@ export const BoxAccept = styled.div`
 
   > span {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: ${({ theme }) => theme.font.color.quartenary};
+    color: #808285;
     font-size: 16px;
     margin-left: 8px;
     text-transform: uppercase;
