@@ -18,7 +18,7 @@ import { Container, Content, Separator } from './styles';
 const ParticipantSimulations: React.FC = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
-  const [filters, setFilters] = useState<FilterOptions>({ page: 1 });
+  const [filters, setFilters] = useState<FilterOptions>({});
   const [fetching, setFetching] = useState(false);
 
   const onFilter = useCallback(
@@ -41,7 +41,9 @@ const ParticipantSimulations: React.FC = () => {
       })
       .finally(() => {
         setFetching(false);
-        scroll.scrollTo(300);
+        if (filters.page) {
+          scroll.scrollTo(450);
+        }
       });
   }, [filters]);
 

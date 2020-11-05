@@ -16,7 +16,7 @@ export default [
   },
   {
     column: '',
-    dataValue: 'activated',
+    dataValue: 'id',
     fn: (id: string) => <SimulateAction id={id} />,
   },
 ];

@@ -14,7 +14,7 @@ export interface FilterOptions {
   typeId?: number;
   channelId?: number;
   search?: string;
-  page: number;
+  page?: number;
 }
 
 interface ApiResponse {
@@ -38,7 +38,7 @@ export default async (filters: FilterOptions): Promise<Response> => {
   const {
     data: { data, pagination },
   } = await pluginApi.get<ApiResponse>(
-    `participants/simulation?page=${filters.page}`,
+    `participants/simulation?page=${filters.page || 1}`,
   );
 
   return {

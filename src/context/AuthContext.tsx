@@ -37,7 +37,7 @@ interface AuthContextState {
   signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
   simulating: boolean;
-  simulate(): Promise<void>;
+  simulate(participantId: number): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
@@ -135,8 +135,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     setApiToken('');
   }, [simulating]);
 
-  const simulate = useCallback(async (): Promise<void> => {
-    const token = await getTokenSimulate();
+  const simulate = useCallback(async (participantId: number): Promise<void> => {
+    const token = await getTokenSimulate(participantId);
     setSimulating(true);
     setReadOnly();
     setApiToken(token);
