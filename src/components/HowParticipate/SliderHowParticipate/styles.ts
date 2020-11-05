@@ -39,7 +39,6 @@ export const Dot = styled.div`
 `;
 
 export const Slider = styled(Slick)`
-  margin-top: 24px;
   img {
     width: 100%;
   }

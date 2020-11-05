@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import useDimensions from 'hooks/use-window-dimensions';
+import parser from 'html-react-parser';
 import getData, {
   HowParticipate as IHowParticipate,
 } from 'services/participants/howParticipate';
 
 import { SliderHowParticipate } from 'components/HowParticipate';
 import { Link } from 'react-router-dom';
-import { Container, Content, Actions, StepsContainer } from './styles';
+import { Container, Content, Actions, StepsContainer, Text } from './styles';
 
 interface SlideItem {
   picture: string;
@@ -32,10 +33,8 @@ const DefaultHowParticipate: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img
-          src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl}
-          alt={data?.description}
-        />
+        <img src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl} />
+        <Text>{parser(data?.description || '')}</Text>
         {slideItems.length > 0 && (
           <StepsContainer>
             <SliderHowParticipate items={slideItems} />
