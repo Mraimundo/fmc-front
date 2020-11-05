@@ -48,7 +48,7 @@ const cepFields = {
 };
 
 const extraProducerFields = {
-  producer_group_name: Yup.string().required(mandatoryMessage),
+  producer_group_name: Yup.string(),
   members_group: Yup.array().of(
     Yup.object()
       .shape({
