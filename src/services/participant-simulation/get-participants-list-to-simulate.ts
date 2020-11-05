@@ -11,7 +11,7 @@ export interface Participant {
 export interface FilterOptions {
   directorId?: string;
   regionalId?: string;
-  typeId?: number;
+  typeId?: string;
   channelId?: number;
   search?: string;
   page?: number;
@@ -34,12 +34,33 @@ interface Response {
 }
 
 export default async (filters: FilterOptions): Promise<Response> => {
-  console.log(filters);
+  const page = filters?.page || 1;
+
+  console.log('filters', filters);
+
+  let extraSearch = `?limit=20&page=${page}`;
+  if (filters) {
+    const { directorId, regionalId, typeId, search, channelId } = filters;
+    if (typeId) {
+      extraSearch += `&types[0]=${typeId}`;
+    }
+    if (directorId) {
+      extraSearch += `&directorships[0]=${directorId}`;
+    }
+    if (channelId) {
+      extraSearch += `&channel[0]=${channelId}`;
+    }
+    if (regionalId) {
+      extraSearch += `&regional[0]=${regionalId}`;
+    }
+    if (search) {
+      extraSearch += `&search=${search}`;
+    }
+  }
+
   const {
     data: { data, pagination },
-  } = await pluginApi.get<ApiResponse>(
-    `participants/simulation?page=${filters.page || 1}`,
-  );
+  } = await pluginApi.get<ApiResponse>(`participants/simulation${extraSearch}`);
 
   return {
     participants: data.map(item => ({

@@ -145,6 +145,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     }, 900);
   }, []);
 
+  const cancelSimulation = useCallback(() => {
+    setSimulating(false);
+  }, []);
+
   const { addToast } = useToast();
 
   useEffect(() => {

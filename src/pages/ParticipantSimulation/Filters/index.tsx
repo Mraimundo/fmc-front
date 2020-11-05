@@ -5,7 +5,10 @@ import { Button } from 'components/shared';
 import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
 import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
+import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
+import ChannelsSelect from 'components/Cockpit/Selects/Channels';
 
+import { EstablishmentTypes } from 'config/constants';
 import { Container } from './styles';
 
 interface Props {
@@ -23,7 +26,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
     onFilter({
       directorId: directorSelected?.value,
       regionalId: regionalSelected?.value,
-      typeId: typeSelected ? parseInt(typeSelected.value, 0) : undefined,
+      typeId: typeSelected?.value?.toLowerCase(),
       channelId: channelSelected
         ? parseInt(channelSelected.value, 0)
         : undefined,
@@ -53,26 +56,29 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
           placeholder="Regional"
         />
 
-        <RegionalSelect
+        <TypeSelect
           setValue={value => setTypeSelected(value)}
           value={typeSelected}
           placeholder="Tipo"
         />
 
-        <RegionalSelect
+        <ChannelsSelect
+          directorName={directorSelected?.title}
+          typeName={typeSelected?.title as EstablishmentTypes}
+          regionalName={regionalSelected?.title}
           setValue={value => setChannelSelected(value)}
           value={channelSelected}
           placeholder="Canal"
         />
-
         <input
           type="text"
           value={searchInput}
           onChange={e => setSearchInput(e.target.value)}
+          placeholder="Digite o Nome, e-mail, Grupo de cliente ou Código de cliente"
         />
 
         <Button type="button" buttonRole="primary" onClick={handleFilterClick}>
-          Filtrar
+          Pesquisar
         </Button>
       </Container>
     ),
