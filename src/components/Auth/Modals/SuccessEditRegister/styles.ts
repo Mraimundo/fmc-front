@@ -32,12 +32,12 @@ export const Content = styled.div`
   > h3 {
     font-size: 32px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: ${({ theme }) => theme.font.color.tertiary};
+    color: #fff;
   }
 
   > h4 {
     font-size: 24px;
-    color: ${({ theme }) => theme.font.color.tertiary};
+    color: #fff;
     text-align: center;
   }
 
@@ -59,7 +59,7 @@ export const Close = styled.div`
     border: none;
     background: transparent;
     svg path {
-      fill: ${({ theme }) => theme.font.color.tertiary};
+      fill: #fff;
     }
   }
 `;
