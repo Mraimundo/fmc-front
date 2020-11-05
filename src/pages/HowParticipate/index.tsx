@@ -45,10 +45,7 @@ const DefaultHowParticipate: React.FC = () => {
         />
         {slideItems.length > 0 && (
           <StepsContainer>
-            <StepsContent>
-              <StepsTitle>Veja como é fácil participar</StepsTitle>
-              <SliderHowParticipate items={slideItems} />
-            </StepsContent>
+            <SliderHowParticipate items={slideItems} />
           </StepsContainer>
         )}
         <Actions>
