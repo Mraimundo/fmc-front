@@ -21,11 +21,11 @@ const NextSlide = ({ onClick }: CustomArrowProps) => (
 
 const settings: Settings = {
   dots: true,
-  infinite: false,
+  infinite: true,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: true,
+  autoplay: false,
   nextArrow: <NextSlide />,
   prevArrow: <PrevSlide />,
   customPaging: () => <Dot />,
