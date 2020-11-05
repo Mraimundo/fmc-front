@@ -8,7 +8,7 @@ interface Props {
   inputRole?: 'primary' | 'secondary';
 }
 
-const values = ['opt1', 'opt2'];
+const values = ['Redes Sociais', 'Canais de redistribuição'];
 
 const ComoFicouConhecendoSelect: React.FC<Props> = ({
   name,
