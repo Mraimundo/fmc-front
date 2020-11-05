@@ -99,11 +99,11 @@ const DataRegulation: React.FC<Props> = ({ onAccept, regulation, profile }) => {
           {profile === 'PRODUTOR' && (
             <div>
               Ao clicar na caixa “Li e aceito os{' '}
-              <a href="https://s3.amazonaws.com/vendavall/photos/1604524991.5fa31bbf4f9c19.74793365.pdf">
+              <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://s3.amazonaws.com/vendavall/photos/1604524991.5fa31bbf4f9c19.74793365.pdf">
                 Termos de Uso
               </a>{' '}
               e{' '}
-              <a href="https://s3.amazonaws.com/vendavall/photos/1604524903.5fa31b6744f8d3.91813222.pdf">
+              <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://s3.amazonaws.com/vendavall/photos/1604524903.5fa31b6744f8d3.91813222.pdf">
                 Política de Privacidade
               </a>
               ”, tenho compreensão e estou de acordo com esses Termos, bem como
