@@ -9,7 +9,7 @@ import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
 import { Container } from './styles';
 
 interface Props {
-  onFilter(filters?: FilterOptions): void;
+  onFilter(filters?: Omit<FilterOptions, 'page'>): void;
 }
 
 const Filters: React.FC<Props> = ({ onFilter }) => {
