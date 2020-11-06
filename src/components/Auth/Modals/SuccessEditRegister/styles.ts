@@ -59,7 +59,7 @@ export const Close = styled.div`
     border: none;
     background: transparent;
     svg path {
-      fill: #fff;
+      fill: ${({ theme }) => theme.font.color.tertiary};
     }
   }
 `;
