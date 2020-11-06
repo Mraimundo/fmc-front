@@ -43,7 +43,7 @@ const HarvestDataForm: React.FC<Props> = ({
       <CustomInput
         name="harvest.outras"
         title="Outras"
-        extraInfo="outras_quais"
+        extraInfo="harvest.outras_quais"
       />
       <ButtonContainer>
         <Button
