@@ -32,12 +32,12 @@ export const Content = styled.div`
   > h3 {
     font-size: 32px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: #fff;
+    color: ${({ theme }) => theme.font.color.tertiary};
   }
 
   > h4 {
     font-size: 24px;
-    color: #fff;
+    color: ${({ theme }) => theme.font.color.tertiary};
     text-align: center;
   }
 
