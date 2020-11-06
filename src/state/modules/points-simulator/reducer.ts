@@ -1,45 +1,22 @@
 import { Reducer } from 'redux';
 import produce from 'immer';
+import { FetchState } from '@types';
+import { emptyFetchState, fetchErrorState, fetchingState } from 'state/utils';
+import { Product, Channel } from './interfaces';
 import { PointsSimulatorActions } from './actions';
-import {
-  SET_REVENUES_IN_KILOS_PER_LITER,
-  SET_UNIT_VALUE_IN_DOLLAR,
-} from './constants';
-
-interface Product {
-  id: number;
-  name: string;
-  isEnhancer: boolean;
-  isParticipatingProduct: boolean;
-  type: {
-    id: number;
-    name: string;
-  };
-  revenues: {
-    goalInDollar: number;
-    realizedInDollar: number;
-  };
-  pog: {
-    goalInDollar: number;
-    realizedInDollar: number;
-  };
-  stock: {
-    inKilosPerLiter: number;
-    inDollar: number;
-  };
-  simulationData: {
-    unitValueInDollar: number;
-    revenuesInKilosPerLiter: number;
-    revenuesInDollar: number;
-    pogInKilosPerLiter: number;
-  };
-}
+import * as constants from './constants';
 
 export type PointsSimulatorState = {
+  fetchChannel: FetchState;
+  channel: Channel | null;
+  fetchProducts: FetchState;
   products: Product[];
 };
 
 export const initialState: PointsSimulatorState = {
+  fetchChannel: emptyFetchState,
+  channel: null,
+  fetchProducts: emptyFetchState,
   products: [],
 };
 
@@ -51,25 +28,62 @@ const CampaignsManagerReducer: Reducer<
   action: PointsSimulatorActions,
 ): PointsSimulatorState => {
   switch (action.type) {
-    case SET_REVENUES_IN_KILOS_PER_LITER:
+    case constants.SET_REVENUES_IN_KILOS_PER_LITER:
       return produce(state, draft => {
-        const { productId, value } = action.payload;
+        const { productId, value: revenuesInKilosPerLiter } = action.payload;
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
-            product.simulationData.revenuesInKilosPerLiter = value;
+            product.simulationData.revenuesInKilosPerLiter = revenuesInKilosPerLiter;
+
+            product.simulationData.revenuesInDollar =
+              revenuesInKilosPerLiter *
+              product.simulationData.unitValueInDollar;
+
+            product.simulationData.pogInKilosPerLiter =
+              (product.stock.inDollar +
+                product.simulationData.revenuesInDollar) /
+              (product.stock.inKilosPerLiter + revenuesInKilosPerLiter);
           }
           return product;
         });
       });
-    case SET_UNIT_VALUE_IN_DOLLAR:
+    case constants.SET_UNIT_VALUE_IN_DOLLAR:
       return produce(state, draft => {
-        const { productId, value } = action.payload;
+        const { productId, value: unitValueInDollar } = action.payload;
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
-            product.simulationData.unitValueInDollar = value;
+            product.simulationData.unitValueInDollar = unitValueInDollar;
+
+            product.simulationData.revenuesInDollar =
+              product.simulationData.revenuesInKilosPerLiter *
+              unitValueInDollar;
+
+            product.simulationData.pogInKilosPerLiter =
+              (product.stock.inDollar +
+                product.simulationData.revenuesInDollar) /
+              (product.stock.inKilosPerLiter +
+                product.simulationData.revenuesInKilosPerLiter);
           }
           return product;
         });
+      });
+    case constants.FETCH_CHANNEL_ACTION:
+      return { ...state, fetchChannel: fetchingState };
+    case constants.FETCH_CHANNEL_FAILURE:
+      return { ...state, fetchChannel: fetchErrorState(action) };
+    case constants.FETCH_CHANNEL_SUCCESS:
+      return {
+        ...state,
+        fetchChannel: emptyFetchState,
+        channel: action.payload,
+      };
+    case constants.FETCH_PRODUCTS_ACTION:
+      return { ...state, fetchProducts: fetchingState };
+    case constants.FETCH_PRODUCTS_FAILURE:
+      return { ...state, fetchProducts: fetchErrorState(action) };
+    case constants.FETCH_PRODUCTS_SUCCESS:
+      return produce(state, draft => {
+        draft.products = action.payload;
       });
     default:
       return state;

@@ -9,6 +9,9 @@ import campaignsManager, {
   CampaignsManagerState,
 } from './modules/campaigns-manager/reducer';
 import goals, { GoalsState } from './modules/goals/reducer';
+import pointsSimulator, {
+  PointsSimulatorState,
+} from './modules/points-simulator/reducer';
 
 export type StoreState = {
   pointManagement: PointManagementState;
@@ -16,6 +19,7 @@ export type StoreState = {
   header: HeaderState;
   home: HomeState;
   goals: GoalsState;
+  pointsSimulator: PointsSimulatorState;
 };
 
 export default combineReducers<StoreState>({
@@ -24,4 +28,5 @@ export default combineReducers<StoreState>({
   header,
   home,
   goals,
+  pointsSimulator,
 });

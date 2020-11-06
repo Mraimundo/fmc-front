@@ -1,6 +1,18 @@
+import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
+import { emptyFetchState } from 'state/utils';
 import { PointsSimulatorState } from './reducer';
 
 const mock: PointsSimulatorState = {
+  fetchChannel: emptyFetchState,
+  channel: {
+    id: 1,
+    name: 'Estabelecimento Teste 1',
+    groupName: 'Teste',
+    code: 'Teste',
+    type: EstablishmentTypes.Resale,
+    category: EstablishmentCategory.earth,
+  },
+  fetchProducts: emptyFetchState,
   products: [
     {
       id: 1,

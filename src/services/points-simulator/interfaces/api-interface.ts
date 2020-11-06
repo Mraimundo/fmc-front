@@ -1,14 +1,10 @@
 import { EstablishmentTypes, EstablishmentCategory } from 'config/constants';
 
-export interface ProductType {
-  id: number;
-  name: string;
-}
-
 export interface Product {
   id: number;
   name: string;
-  type: ProductType;
+  type_id: number;
+  type_name: string;
   is_enhancer: boolean;
   is_a_participating_product: boolean;
   revenues_goal: number;
@@ -20,12 +16,12 @@ export interface Product {
 }
 
 export interface Channel {
+  id: number;
   name: string;
   group_name: string;
   code: string;
   type: EstablishmentTypes;
   category: EstablishmentCategory;
-  products: Product[];
 }
 
 export interface ApiResponse {
