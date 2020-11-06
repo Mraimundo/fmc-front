@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
