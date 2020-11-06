@@ -14,7 +14,7 @@ import { fetchMenu } from 'state/modules/header/actions';
 
 import getLoggedParticipant from 'services/auth/getLoggedParticipant';
 import { Participant } from 'services/auth/interfaces/Participant';
-import { setToken, setReadOnly } from 'services/api';
+import { setToken, setApiMode } from 'services/api';
 import history from 'services/history';
 import routeMap from 'routes/route-map';
 import { useToast } from './ToastContext';
@@ -37,7 +37,7 @@ interface AuthContextState {
   signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
   simulating: boolean;
-  simulate(): Promise<void>;
+  simulate(participantId: number): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
@@ -63,13 +63,11 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!simulating) {
-      const token = localStorage.getItem('@Vendavall:token');
-      if (token) {
-        setApiToken(token);
-      }
+    const token = localStorage.getItem('@Vendavall:token');
+    if (token) {
+      setApiToken(token);
     }
-  }, [simulating]);
+  }, []);
 
   const signInWithCredentials = useCallback(
     async (credentials: Credentials): Promise<string> => {
@@ -125,8 +123,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(() => {
     if (simulating) {
-      setSimulating(false);
-      history.push(routeMap.participantSimulation);
+      setApiMode('write');
+      const token = localStorage.getItem('@Vendavall:token');
+      if (token) {
+        setApiToken(token);
+        setTimeout(() => {
+          setSimulating(false);
+          history.push(routeMap.participantSimulation);
+        }, 600);
+      }
       return;
     }
     localStorage.removeItem('@Vendavall:token');
@@ -135,14 +140,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     setApiToken('');
   }, [simulating]);
 
-  const simulate = useCallback(async (): Promise<void> => {
-    const token = await getTokenSimulate();
+  const simulate = useCallback(async (participantId: number): Promise<void> => {
+    const token = await getTokenSimulate(participantId);
     setSimulating(true);
-    setReadOnly();
+    setApiMode('readonly');
     setApiToken(token);
     setTimeout(() => {
       history.push('/home');
-    }, 900);
+    }, 700);
   }, []);
 
   const { addToast } = useToast();
@@ -163,7 +168,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         refreshParticipant();
         dispatch(fetchMenu());
       });
-    }, 800);
+    }, 300);
   }, [addToast, signOut, apiToken, refreshParticipant, dispatch]);
 
   return (

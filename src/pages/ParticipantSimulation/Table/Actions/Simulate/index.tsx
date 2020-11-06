@@ -13,9 +13,9 @@ const Simulate: React.FC<Props> = ({ id }) => {
 
   const handleClick = useCallback(async () => {
     setLoading(true);
-    await simulate();
+    await simulate(parseInt(id, 0));
     setLoading(false);
-  }, [simulate]);
+  }, [simulate, id]);
 
   return (
     <Container onClick={handleClick} disabled={loading}>
