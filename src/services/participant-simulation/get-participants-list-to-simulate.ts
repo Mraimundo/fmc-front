@@ -36,8 +36,6 @@ interface Response {
 export default async (filters: FilterOptions): Promise<Response> => {
   const page = filters?.page || 1;
 
-  console.log('filters', filters);
-
   let extraSearch = `?limit=20&page=${page}`;
   if (filters) {
     const { directorId, regionalId, typeId, search, channelId } = filters;
@@ -48,7 +46,7 @@ export default async (filters: FilterOptions): Promise<Response> => {
       extraSearch += `&directorships[0]=${directorId}`;
     }
     if (channelId) {
-      extraSearch += `&channel[0]=${channelId}`;
+      extraSearch += `&channels[0]=${channelId}`;
     }
     if (regionalId) {
       extraSearch += `&regional[0]=${regionalId}`;
