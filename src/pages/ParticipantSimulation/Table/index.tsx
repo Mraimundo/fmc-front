@@ -4,7 +4,7 @@ import headers from './headers';
 import { Container } from './styles';
 
 interface TableData {
-  clientCode: number;
+  clientCode: string;
   name: string;
   email: string;
   id: number;
