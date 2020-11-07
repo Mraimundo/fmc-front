@@ -22,10 +22,12 @@ export const CustomTableBox = styled.div`
   align-items: center;
   position: relative;
   flex: 1;
+  min-height: 350px;
 `;
 
 export const Box = styled.div`
   max-height: calc(100vh - 557px);
+  min-height: 350px;
   width: 100%;
   overflow: auto;
   padding-bottom: 63px;

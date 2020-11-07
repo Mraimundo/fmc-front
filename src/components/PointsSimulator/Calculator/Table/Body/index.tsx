@@ -1,15 +1,30 @@
 import React from 'react';
 
+import { Product } from 'state/modules/points-simulator/interfaces';
+import { DataValueDTO } from 'state/modules/points-simulator/types';
 import Tr from './Tr';
 import { Container } from './styles';
 
-const Header: React.FC = () => {
-  const products = ['1', '2', '3', '4', '5', '6'];
+interface HeaderProps {
+  products: Product[];
+  setUnitValueInDollar(data: DataValueDTO): void;
+  setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+}
 
+const Header: React.FC<HeaderProps> = ({
+  products,
+  setUnitValueInDollar,
+  setRevenuesInKilosPerLiter,
+}) => {
   return (
     <Container>
-      {products.map(item => (
-        <Tr key={item} />
+      {products.map(product => (
+        <Tr
+          key={product.id}
+          product={product}
+          setUnitValueInDollar={setUnitValueInDollar}
+          setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
+        />
       ))}
     </Container>
   );

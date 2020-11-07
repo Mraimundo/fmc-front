@@ -1,7 +1,6 @@
 import React from 'react';
 
-import SimuladorCalc from 'pages/PointsSimulator/Calculator';
-import SimuladorResult from 'pages/PointsSimulator/Result';
+import PointsSimulator from 'pages/PointsSimulator';
 import { Link } from 'react-router-dom';
 import GeneralView from './GeneralView';
 import ChannelView from './ChannelView';
@@ -9,12 +8,7 @@ import ChannelView from './ChannelView';
 import { Container, GeneralContent, Content, Separator } from './styles';
 
 const Cockpit: React.FC = () => {
-  return (
-    <>
-      <SimuladorCalc />
-      <SimuladorResult />
-    </>
-  );
+  return <PointsSimulator />;
   return (
     <Container>
       <Link to="/visao-do-participante">Acessar</Link>

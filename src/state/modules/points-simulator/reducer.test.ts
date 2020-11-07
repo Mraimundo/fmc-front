@@ -5,6 +5,7 @@ import reducer, { initialState, PointsSimulatorState } from './reducer';
 import * as constants from './constants';
 import * as actions from './actions';
 import mockedState from './mock';
+import { Mode } from './types';
 
 describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.SET_REVENUES_IN_KILOS_PER_LITER} working togheter`, () => {
   it('should set the dollar unit and the kilos per liter revenues values, after that recalculate revenues in dollar and pog in kilos by liter', () => {
@@ -144,6 +145,33 @@ describe(`test reducer - ${constants.FETCH_PRODUCTS_ACTION}`, () => {
         isFetching: false,
       },
       products: mockedState.products,
+    });
+  });
+});
+
+describe(`test reducer - ${constants.SET_DOLLAR_BASE_VALUE}`, () => {
+  it('should set dollar base', () => {
+    const dollarBaseValue = 5.555;
+    const result = reducer(
+      initialState,
+      actions.setDollarBaseValue(dollarBaseValue),
+    );
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      dollarBaseValue,
+    });
+  });
+});
+
+describe(`test reducer - ${constants.SET_MODE}`, () => {
+  it('should set screen mode', () => {
+    const mode = Mode.result;
+    const result = reducer(initialState, actions.setMode(mode));
+
+    expect(result).to.be.deep.equal({
+      ...initialState,
+      mode,
     });
   });
 });

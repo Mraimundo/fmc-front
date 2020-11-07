@@ -1,6 +1,21 @@
 import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
 
-export const Container = styled.tr``;
+interface ContainerProps {
+  participate: boolean;
+}
+
+export const Container = styled.tr<ContainerProps>`
+  height: 65px;
+  background: #dad8d9;
+  margin-bottom: 8px;
+
+  ${({ participate }) =>
+    !participate &&
+    css`
+      background: ${lighten(0.1, '#dad8d9')};
+    `}
+`;
 
 export const ProductBox = styled.div`
   display: flex;
@@ -49,6 +64,8 @@ export const CustomInputBox = styled.div<CustomInputBoxProps>`
     height: 33px;
     border: none;
     border-radius: 5px;
+    padding: 0 5px;
+    font-size: 14px;
   }
 
   ${({ blocked }) =>

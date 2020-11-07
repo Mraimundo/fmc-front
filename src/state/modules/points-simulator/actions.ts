@@ -3,16 +3,21 @@ import {
   ActionCreatorPayload,
   ActionCreatorFailure,
 } from '@types';
-import { SetValueData } from './types';
+import { DataValueDTO, Mode } from './types';
 import { Product, Channel } from './interfaces';
 
 import * as constants from './constants';
 
+export const setDollarBaseValue = (
+  value: number,
+): ActionCreatorPayload<typeof constants.SET_DOLLAR_BASE_VALUE, number> =>
+  <const>{ type: constants.SET_DOLLAR_BASE_VALUE, payload: value };
+
 export const setUnitValueInDollar = (
-  data: SetValueData,
+  data: DataValueDTO,
 ): ActionCreatorPayload<
   typeof constants.SET_UNIT_VALUE_IN_DOLLAR,
-  SetValueData
+  DataValueDTO
 > =>
   <const>{
     type: constants.SET_UNIT_VALUE_IN_DOLLAR,
@@ -20,21 +25,22 @@ export const setUnitValueInDollar = (
   };
 
 export const setRevenuesValueInKilosPerLiter = (
-  data: SetValueData,
+  data: DataValueDTO,
 ): ActionCreatorPayload<
   typeof constants.SET_REVENUES_IN_KILOS_PER_LITER,
-  SetValueData
+  DataValueDTO
 > =>
   <const>{
     type: constants.SET_REVENUES_IN_KILOS_PER_LITER,
     payload: data,
   };
 
-export const fetchChannel = (): ActionCreator<
-  typeof constants.FETCH_CHANNEL_ACTION
-> =>
+export const fetchChannel = (
+  channelId: number,
+): ActionCreatorPayload<typeof constants.FETCH_CHANNEL_ACTION, number> =>
   <const>{
     type: constants.FETCH_CHANNEL_ACTION,
+    payload: channelId,
   };
 
 export const fetchChannelFailure = (
@@ -81,6 +87,13 @@ export const fetchProductsSuccess = (
     payload: data,
   };
 
+export const setMode = (
+  data: Mode,
+): ActionCreatorPayload<typeof constants.SET_MODE, Mode> =>
+  <const>{
+    type: constants.SET_MODE,
+    payload: data,
+  };
 export type PointsSimulatorActions = ReturnType<
   | typeof setUnitValueInDollar
   | typeof setRevenuesValueInKilosPerLiter
@@ -90,4 +103,6 @@ export type PointsSimulatorActions = ReturnType<
   | typeof fetchProducts
   | typeof fetchProductsFailure
   | typeof fetchProductsSuccess
+  | typeof setDollarBaseValue
+  | typeof setMode
 >;

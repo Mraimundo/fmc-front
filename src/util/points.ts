@@ -57,8 +57,13 @@ export const fakeFormatDollars = (
   });
 };
 
-export const formatKgl = (value: number) =>
-  new Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(value);
+export const formatKgl = (value: number | string) => {
+  if (!Number(value)) return '';
+  const valueToFormat = typeof value === 'string' ? parseFloat(value) : value;
+  return new Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(
+    valueToFormat,
+  );
+};
 
 export const formatPercent = (value: number) =>
   value.toLocaleString('pt-br', {

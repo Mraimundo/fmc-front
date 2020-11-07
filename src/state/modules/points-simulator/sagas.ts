@@ -1,4 +1,5 @@
 import { all, takeEvery, call, put } from 'redux-saga/effects';
+import { ActionCreatorPayload } from '@types';
 
 import { handlerErrors } from 'util/handler-errors';
 import { getChannel, getProducts } from 'services/points-simulator';
@@ -11,9 +12,11 @@ import { channelApiToChannel, productsApiToProducts } from './transformers';
 import * as actions from './actions';
 import * as constants from './constants';
 
-export function* fetchChannel() {
+export function* fetchChannel({
+  payload,
+}: ActionCreatorPayload<typeof constants.FETCH_CHANNEL_ACTION, number>) {
   try {
-    const result: ChannelApi = yield call(getChannel);
+    const result: ChannelApi = yield call(getChannel, payload);
 
     if (!result?.id) throw new Error('Falha ao buscar canal');
 

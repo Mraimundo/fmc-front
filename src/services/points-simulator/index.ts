@@ -1,5 +1,6 @@
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { Channel, Product } from './interfaces/api-interface';
+import mockedProducts from './mock/products';
 
 const getChannels = async (): Promise<Channel[]> => {
   return [
@@ -14,7 +15,7 @@ const getChannels = async (): Promise<Channel[]> => {
   ];
 };
 
-const getChannel = async (): Promise<Channel | null> => {
+const getChannel = async (channelId: number): Promise<Channel | null> => {
   return {
     id: 1,
     name: 'Estabelecimento Teste 1',
@@ -26,36 +27,7 @@ const getChannel = async (): Promise<Channel | null> => {
 };
 
 const getProducts = async (): Promise<Product[]> => {
-  return [
-    {
-      id: 1,
-      name: 'Produto 1',
-      type_id: 1,
-      type_name: 'Inseticida',
-      is_enhancer: false,
-      is_a_participating_product: true,
-      revenues_goal: 1333000,
-      revenues_realized: 666000,
-      pog_goal: 1333000,
-      pog_realized: 666000,
-      stock_in_kg_per_liter: 1333000,
-      stock_in_dolar: 666000,
-    },
-    {
-      id: 2,
-      name: 'Produto 2',
-      type_id: 1,
-      type_name: 'Inseticida',
-      is_enhancer: true,
-      is_a_participating_product: true,
-      revenues_goal: 1333000,
-      revenues_realized: 666000,
-      pog_goal: 1333000,
-      pog_realized: 666000,
-      stock_in_kg_per_liter: 1333000,
-      stock_in_dolar: 666000,
-    },
-  ];
+  return mockedProducts;
 };
 
 export { getChannels, getChannel, getProducts };

@@ -1,57 +1,97 @@
 import React from 'react';
 
+import { Product } from 'state/modules/points-simulator/interfaces';
+import { DataValueDTO } from 'state/modules/points-simulator/types';
 import Checkbox from '@material-ui/core/Checkbox';
+import Input from 'components/PointsSimulator/Calculator/CustomInput';
 
 import { Container, ProductBox, CustomDataBox, CustomInputBox } from './styles';
 
-const Tr: React.FC = () => {
+interface TrProps {
+  product: Product;
+  setUnitValueInDollar(data: DataValueDTO): void;
+  setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+}
+
+const Tr: React.FC<TrProps> = ({
+  product,
+  setUnitValueInDollar,
+  setRevenuesInKilosPerLiter,
+}) => {
   return (
-    <Container>
+    <Container participate={product.isParticipatingProduct}>
       <td>
         <Checkbox color="default" />
       </td>
       <td>
         <ProductBox>
-          <span>Inseticidas</span>
-          <span>Produto</span>
+          <span>{product.type.name}</span>
+          <span>{product.name}</span>
         </ProductBox>
       </td>
       <td>
         <CustomDataBox>
-          <span>Objetivo: ---</span>
-          <span>Realizado: ---</span>
+          <span>Objetivo: {product.revenues.goalInDollar || '---'}</span>
+          <span>Realizado: {product.revenues.realizedInDollar || '---'}</span>
         </CustomDataBox>
       </td>
       <td>
         <CustomDataBox>
-          <span>Objetivo: ---</span>
-          <span>Realizado: ---</span>
+          <span>Objetivo: {product.pog.goalInDollar || '---'}</span>
+          <span>Realizado: {product.pog.realizedInDollar || '---'}</span>
         </CustomDataBox>
       </td>
       <td>
         <CustomDataBox>
-          <span>--- KG/L</span>
-          <span>--- US$</span>
+          <span>{product.stock.inKilosPerLiter || '---'} KG/L</span>
+          <span>{product.stock.inDollar || '---'} US$</span>
         </CustomDataBox>
       </td>
       <td>
         <CustomInputBox blocked={false}>
-          <input type="text" />
+          <Input
+            type="money"
+            defaultValue={product.simulationData.unitValueInDollar}
+            onChange={value =>
+              setUnitValueInDollar({
+                productId: product.id,
+                value,
+              })
+            }
+          />
         </CustomInputBox>
       </td>
       <td>
         <CustomInputBox blocked={false}>
-          <input type="text" />
+          <Input
+            placeholder="0"
+            type="kilograma"
+            defaultValue={product.simulationData.revenuesInKilosPerLiter}
+            onChange={value =>
+              setRevenuesInKilosPerLiter({
+                productId: product.id,
+                value,
+              })
+            }
+          />
         </CustomInputBox>
       </td>
       <td>
         <CustomInputBox blocked>
-          <input type="text" disabled />
+          <Input
+            type="money"
+            value={product.simulationData.revenuesInDollar}
+            disabled
+          />
         </CustomInputBox>
       </td>
       <td>
         <CustomInputBox blocked>
-          <input type="text" disabled />
+          <Input
+            type="money"
+            value={product.simulationData.pogInKilosPerLiter}
+            disabled
+          />
         </CustomInputBox>
       </td>
     </Container>

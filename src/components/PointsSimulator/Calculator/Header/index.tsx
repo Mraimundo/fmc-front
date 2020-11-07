@@ -15,11 +15,18 @@ import {
   CustomText,
 } from './styles';
 
-type Tab = 'tab1' | 'tab2';
+export enum Tab {
+  enhancerProductsTab = 'Produtos potencializadores',
+  participateProductsTab = 'Produtos',
+}
 
-const Header: React.FC = () => {
+interface Header {
+  tabSelected: Tab;
+  setTabSelected(tab: Tab): void;
+}
+
+const Header: React.FC<Header> = ({ tabSelected, setTabSelected }) => {
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
-  const [tabSelected, setTabSelected] = useState<Tab>('tab1');
 
   return (
     <Container>
@@ -38,14 +45,14 @@ const Header: React.FC = () => {
       <SecondBox>
         <Tabs>
           <Item
-            onClick={() => setTabSelected('tab1')}
-            selected={tabSelected === 'tab1'}
+            onClick={() => setTabSelected(Tab.enhancerProductsTab)}
+            selected={tabSelected === Tab.enhancerProductsTab}
           >
             <span>Produtos potencializadores</span>
           </Item>
           <Item
-            onClick={() => setTabSelected('tab2')}
-            selected={tabSelected === 'tab2'}
+            onClick={() => setTabSelected(Tab.participateProductsTab)}
+            selected={tabSelected === Tab.participateProductsTab}
           >
             <span>Produtos</span>
           </Item>

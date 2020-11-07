@@ -2,22 +2,27 @@ import { Reducer } from 'redux';
 import produce from 'immer';
 import { FetchState } from '@types';
 import { emptyFetchState, fetchErrorState, fetchingState } from 'state/utils';
+import { Mode } from './types';
 import { Product, Channel } from './interfaces';
 import { PointsSimulatorActions } from './actions';
 import * as constants from './constants';
 
 export type PointsSimulatorState = {
+  mode: Mode;
   fetchChannel: FetchState;
   channel: Channel | null;
   fetchProducts: FetchState;
   products: Product[];
+  dollarBaseValue: number;
 };
 
 export const initialState: PointsSimulatorState = {
+  mode: Mode.calculator,
   fetchChannel: emptyFetchState,
   channel: null,
   fetchProducts: emptyFetchState,
   products: [],
+  dollarBaseValue: 0,
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -85,6 +90,10 @@ const CampaignsManagerReducer: Reducer<
       return produce(state, draft => {
         draft.products = action.payload;
       });
+    case constants.SET_DOLLAR_BASE_VALUE:
+      return { ...state, dollarBaseValue: action.payload };
+    case constants.SET_MODE:
+      return { ...state, mode: action.payload };
     default:
       return state;
   }

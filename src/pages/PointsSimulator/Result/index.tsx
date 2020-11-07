@@ -8,7 +8,7 @@ import { Container, Content } from './styles';
 
 const Result: React.FC = () => {
   return (
-    <Container>
+    <Container id="result">
       <Content>
         <Header />
         <Body />

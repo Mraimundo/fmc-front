@@ -1,9 +1,12 @@
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { emptyFetchState } from 'state/utils';
+import { Mode } from './types';
 import { PointsSimulatorState } from './reducer';
 
 const mock: PointsSimulatorState = {
   fetchChannel: emptyFetchState,
+  mode: Mode.calculator,
+  dollarBaseValue: 5.38,
   channel: {
     id: 1,
     name: 'Estabelecimento Teste 1',

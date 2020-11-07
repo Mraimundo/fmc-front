@@ -1,14 +1,30 @@
 import React from 'react';
 
+import { Product } from 'state/modules/points-simulator/interfaces';
+import { DataValueDTO } from 'state/modules/points-simulator/types';
 import Header from './Header';
 import Body from './Body';
 import { Container } from './styles';
 
-const Table: React.FC = () => {
+interface TableProps {
+  products: Product[];
+  setUnitValueInDollar(data: DataValueDTO): void;
+  setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+}
+
+const Table: React.FC<TableProps> = ({
+  products,
+  setUnitValueInDollar,
+  setRevenuesInKilosPerLiter,
+}) => {
   return (
     <Container>
       <Header />
-      <Body />
+      <Body
+        products={products}
+        setUnitValueInDollar={setUnitValueInDollar}
+        setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
+      />
     </Container>
   );
 };
