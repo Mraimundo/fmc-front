@@ -15,6 +15,7 @@ import ExtractHeader from 'components/Extract/ExtractHeader';
 import ExtractDetails from 'components/Extract/ExtractDetails';
 import { useAuth } from 'context/AuthContext';
 
+import routeMap from 'routes/route-map';
 import {
   Container,
   Content,
@@ -112,7 +113,7 @@ const Extract: React.FC = () => {
         )}
         <ExtractDetails details={extractDetails} />
       </Content>
-      {pathKey === '/extract' && (
+      {pathKey === routeMap.extract.channel && (
         <ExtractLegend>
           *Ações Compartilhadas: é a verba reservada para você e seu RTC
           definirem juntos quais as melhores ações e práticas para ajudar a
