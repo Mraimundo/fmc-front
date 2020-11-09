@@ -26,8 +26,9 @@ const DefaultHowParticipate: React.FC = () => {
 
   useEffect(() => {
     if (!data) return;
-
-    setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+    if (data.slider.length > 0) {
+      setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+    }
   }, [data]);
 
   return (
