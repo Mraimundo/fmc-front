@@ -3,8 +3,8 @@ import {
   ActionCreatorPayload,
   ActionCreatorFailure,
 } from '@types';
-import { DataValueDTO, Mode } from './types';
-import { Product, Channel } from './interfaces';
+import { DataValueDTO, Mode, CalcutationDTO } from './types';
+import { Product, Channel, Indicator } from './interfaces';
 
 import * as constants from './constants';
 
@@ -61,12 +61,11 @@ export const fetchChannelSuccess = (
     payload: data,
   };
 
-export const fetchProducts = (
-  channelId: number,
-): ActionCreatorPayload<typeof constants.FETCH_PRODUCTS_ACTION, number> =>
+export const fetchProducts = (): ActionCreator<
+  typeof constants.FETCH_PRODUCTS_ACTION
+> =>
   <const>{
     type: constants.FETCH_PRODUCTS_ACTION,
-    payload: channelId,
   };
 
 export const fetchProductsFailure = (
@@ -87,6 +86,34 @@ export const fetchProductsSuccess = (
     payload: data,
   };
 
+export const fetchIndicators = (): ActionCreator<
+  typeof constants.FETCH_INDICATORS_ACTION
+> =>
+  <const>{
+    type: constants.FETCH_INDICATORS_ACTION,
+  };
+
+export const fetchIndicatorsFailure = (
+  error: string,
+): ActionCreatorFailure<typeof constants.FETCH_INDICATORS_FAILURE> =>
+  <const>{
+    type: constants.FETCH_INDICATORS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchIndicatorsSuccess = (
+  data: Indicator[],
+): ActionCreatorPayload<
+  typeof constants.FETCH_INDICATORS_SUCCESS,
+  Indicator[]
+> =>
+  <const>{
+    type: constants.FETCH_INDICATORS_SUCCESS,
+    payload: data,
+  };
+
 export const setMode = (
   data: Mode,
 ): ActionCreatorPayload<typeof constants.SET_MODE, Mode> =>
@@ -94,6 +121,25 @@ export const setMode = (
     type: constants.SET_MODE,
     payload: data,
   };
+
+export const fetchCalculate = (): ActionCreator<
+  typeof constants.CALCULATE_SIMULATION_ACTION
+> =>
+  <const>{
+    type: constants.CALCULATE_SIMULATION_ACTION,
+  };
+
+export const fetchCalculateSuccess = (
+  data: CalcutationDTO,
+): ActionCreatorPayload<
+  typeof constants.CALCULATE_SIMULATION_SUCCESS,
+  CalcutationDTO
+> =>
+  <const>{
+    type: constants.CALCULATE_SIMULATION_SUCCESS,
+    payload: data,
+  };
+
 export type PointsSimulatorActions = ReturnType<
   | typeof setUnitValueInDollar
   | typeof setRevenuesValueInKilosPerLiter
@@ -103,6 +149,11 @@ export type PointsSimulatorActions = ReturnType<
   | typeof fetchProducts
   | typeof fetchProductsFailure
   | typeof fetchProductsSuccess
+  | typeof fetchIndicators
+  | typeof fetchIndicatorsFailure
+  | typeof fetchIndicatorsSuccess
   | typeof setDollarBaseValue
   | typeof setMode
+  | typeof fetchCalculate
+  | typeof fetchCalculateSuccess
 >;

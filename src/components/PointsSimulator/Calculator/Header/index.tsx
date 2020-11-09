@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ReactSVG } from 'react-svg';
 import listImage from 'assets/images/points-simulator/list.svg';
@@ -23,10 +23,23 @@ export enum Tab {
 interface Header {
   tabSelected: Tab;
   setTabSelected(tab: Tab): void;
+  setProductTypeIdSelected(productTypeId: number | undefined): void;
 }
 
-const Header: React.FC<Header> = ({ tabSelected, setTabSelected }) => {
+const Header: React.FC<Header> = props => {
+  const { tabSelected, setTabSelected, setProductTypeIdSelected } = props;
+
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
+  const [productTypeSelected, setProductTypeSelected] = useState<Option | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const productTypeId = productTypeSelected
+      ? parseInt(productTypeSelected.value, 0)
+      : undefined;
+    setProductTypeIdSelected(productTypeId);
+  }, [productTypeSelected, setProductTypeIdSelected]);
 
   return (
     <Container>
@@ -58,8 +71,9 @@ const Header: React.FC<Header> = ({ tabSelected, setTabSelected }) => {
           </Item>
         </Tabs>
         <ProductTypeSelect
-          value={channelSelected}
-          setValue={setChannelSelected}
+          value={productTypeSelected}
+          setValue={setProductTypeSelected}
+          placeholder="Tipo de produto"
         />
       </SecondBox>
     </Container>

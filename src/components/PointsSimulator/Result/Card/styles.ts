@@ -90,7 +90,7 @@ export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
     height: 19px;
     ${({ percentageCompleted, theme }) => css`
       border-radius: ${percentageCompleted < 100 ? '9.5px 0 0 9.5px' : '9.5px'};
-      width: ${percentageCompleted}%;
+      width: ${percentageCompleted < 100 ? percentageCompleted : 100}%;
       background: ${theme.font.color.primary};
     `}
   }
@@ -105,7 +105,7 @@ export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
     background: #ed342d;
     ${({ percentageSimulated }) => css`
       border-radius: ${percentageSimulated < 100 ? '9.5px 0 0 9.5px' : '9.5px'};
-      width: ${percentageSimulated}%;
+      width: ${percentageSimulated < 100 ? percentageSimulated : 100}%;
     `}
   }
 `;

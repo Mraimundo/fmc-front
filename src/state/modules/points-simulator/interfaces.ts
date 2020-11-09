@@ -41,3 +41,31 @@ export interface Channel {
   type: EstablishmentTypes;
   category: EstablishmentCategory;
 }
+
+export enum IndicatorType {
+  revenues = 'Faturamento',
+  premio = 'Premio',
+  hero = 'Hero',
+  talisman = 'Talisman',
+}
+
+export enum UnitType {
+  dollar = 'Dolar',
+  liter = 'Litro',
+  kilo = 'Kilo',
+}
+
+export interface Indicator {
+  title: string;
+  type: IndicatorType;
+  unitType: UnitType;
+  isRegisteredProduct: boolean;
+  lastRealized: number;
+  currentGoal: number;
+  currentRealized: number;
+  percentageRealized: number;
+  simulationData: {
+    totalRealized: number;
+    totalPercentageRealized: number;
+  };
+}

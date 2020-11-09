@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/campaigns-manager/getChannels';
-import transformer from 'services/campaigns-manager/transformers/channelsToSelectOptions';
+import { getProductTypes } from 'services/points-simulator/index';
 
 interface Props {
   className?: string;
@@ -22,7 +21,11 @@ const ChannelsSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    getData().then(data => setOptions(transformer(data)));
+    getProductTypes().then(data =>
+      setOptions(
+        data.map(({ id, name }) => ({ value: id.toString(), title: name })),
+      ),
+    );
   }, []);
 
   const loadItems = useCallback(() => {

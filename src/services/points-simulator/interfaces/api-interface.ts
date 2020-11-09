@@ -1,5 +1,10 @@
 import { EstablishmentTypes, EstablishmentCategory } from 'config/constants';
 
+export interface ProductType {
+  id: number;
+  name: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -26,4 +31,19 @@ export interface Channel {
 
 export interface ApiResponse {
   channels: Channel[];
+}
+
+export interface Indicators {
+  revenues_last_realized_in_dollar: number;
+  revenues_current_goal_in_dollar: number;
+  revenues_current_realized_in_dollar: number;
+  hero_last_realized_in_Liter: number;
+  hero_current_goal_in_Liter: number;
+  hero_current_realized_in_Liter: number;
+  premio_last_realized_in_Liter: number;
+  premio_current_goal_in_Liter: number;
+  premio_current_realized_in_Liter: number;
+  talisman_last_realized_in_Liter: number;
+  talisman_current_goal_in_Liter: number;
+  talisman_current_realized_in_Liter: number;
 }

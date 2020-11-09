@@ -17,6 +17,11 @@ import Footer from 'components/PointsSimulator/Calculator/Footer';
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
 import { Container, Content, CustomTableBox, Box } from './styles';
 
+interface Filter {
+  productTypeId?: number;
+  isEnhancer: boolean;
+}
+
 const PointsSimulator: React.FC = () => {
   const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
@@ -24,6 +29,7 @@ const PointsSimulator: React.FC = () => {
   const mode = useSelector(getMode);
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
   const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
+  const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,14 +46,22 @@ const PointsSimulator: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!products) return;
-    if (tabSelected === Tab.enhancerProductsTab) {
-      setProductsTableData(products.filter(item => !!item.isEnhancer));
-      return;
-    }
+    setFilter(oldFilter => ({
+      ...oldFilter,
+      isEnhancer: tabSelected === Tab.enhancerProductsTab,
+    }));
+  }, [tabSelected]);
 
-    setProductsTableData(products.filter(item => !item.isEnhancer));
-  }, [tabSelected, products]);
+  useEffect(() => {
+    if (!products) return;
+    setProductsTableData(
+      products.filter(
+        item =>
+          item.isEnhancer === filter.isEnhancer &&
+          (!filter.productTypeId || item.type.id === filter.productTypeId),
+      ),
+    );
+  }, [filter, products]);
 
   const handleRevenuesValueChange = useCallback(
     (data: DataValueDTO): void => {
@@ -64,6 +78,7 @@ const PointsSimulator: React.FC = () => {
   );
 
   const handleCalculate = useCallback(() => {
+    dispatch(actions.fetchCalculate());
     dispatch(actions.setMode(Mode.result));
   }, [dispatch]);
 
@@ -71,12 +86,21 @@ const PointsSimulator: React.FC = () => {
     dispatch(actions.setMode(Mode.calculator));
   }, [dispatch]);
 
-  console.log('a');
+  const handleProductTypeSelect = useCallback(
+    (productTypeId: number | undefined): void => {
+      setFilter(oldFilter => ({ ...oldFilter, productTypeId }));
+    },
+    [],
+  );
 
   return (
     <Container id="calculator">
       <Content>
-        <Header tabSelected={tabSelected} setTabSelected={setTabSelected} />
+        <Header
+          tabSelected={tabSelected}
+          setTabSelected={setTabSelected}
+          setProductTypeIdSelected={handleProductTypeSelect}
+        />
         <CustomTableBox>
           <Box>
             <Table
@@ -89,6 +113,9 @@ const PointsSimulator: React.FC = () => {
             dollarBaseValue={dollarBaseValue}
             handleButtonAction={
               mode === Mode.calculator ? handleCalculate : handleReCalculate
+            }
+            buttonActionText={
+              mode === Mode.calculator ? 'Calcular' : 'Recalcular'
             }
           />
         </CustomTableBox>

@@ -1,5 +1,5 @@
 import { StoreState } from 'state/root-reducer';
-import { Product, Channel } from './interfaces';
+import { Product, Channel, Indicator } from './interfaces';
 import { Mode } from './types';
 
 export const getProducts = (state: StoreState): Product[] | null =>
@@ -12,3 +12,6 @@ export const getDollarBaseValue = (state: StoreState): number =>
   state.pointsSimulator.dollarBaseValue;
 
 export const getMode = (state: StoreState): Mode => state.pointsSimulator.mode;
+
+export const getIndicators = (state: StoreState): Indicator[] =>
+  state.pointsSimulator.indicators;

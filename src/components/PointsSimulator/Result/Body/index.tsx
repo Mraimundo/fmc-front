@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MiniBox from '../MiniBox';
-import Card from '../Card';
+import CardComponent from '../Card';
 import {
   Container,
   CustomSimulateContent,
@@ -13,7 +13,23 @@ import {
   Cards,
 } from './styles';
 
-const Body: React.FC = () => {
+export interface Card {
+  title: string;
+  isRegisteredProduct?: boolean;
+  description: string;
+  tableData: {
+    title: string;
+    value: string;
+  }[];
+  percentageCompleted: number;
+  percentageSimulated: number;
+}
+
+interface Props {
+  cards: Card[];
+}
+
+const Body: React.FC<Props> = ({ cards }) => {
   return (
     <Container>
       <CustomSimulateContent>
@@ -43,17 +59,17 @@ const Body: React.FC = () => {
       <CustomIndicatorContainer>
         <h3>Indicadores</h3>
         <Cards>
-          <Card
-            title="Faturamento"
-            description="Realizado 19/20 - US$ 1.333.444"
-            tableData={[
-              { title: 'Meta 20/21', value: 'US$ 1.333.444' },
-              { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
-            ]}
-            percentageCompleted={100}
-            percentageSimulated={100}
-          />
-          <Card
+          {cards.map(item => (
+            <CardComponent
+              key={item.title}
+              title={item.title}
+              description={item.description}
+              tableData={item.tableData}
+              percentageCompleted={item.percentageCompleted}
+              percentageSimulated={item.percentageSimulated}
+            />
+          ))}
+          <CardComponent
             title="POG"
             description="Realizado 19/20 - US$ 1.333.444"
             tableData={[
@@ -62,36 +78,6 @@ const Body: React.FC = () => {
             ]}
             percentageCompleted={80}
             percentageSimulated={90}
-          />
-          <Card
-            title={<span>Hero</span>}
-            description="Realizado 19/20 - US$ 1.333.444"
-            tableData={[
-              { title: 'Meta 20/21', value: 'US$ 1.333.444' },
-              { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
-            ]}
-            percentageCompleted={80}
-            percentageSimulated={100}
-          />
-          <Card
-            title={<span>Prêmio</span>}
-            description="Realizado 19/20 - US$ 1.333.444"
-            tableData={[
-              { title: 'Meta 20/21', value: 'US$ 1.333.444' },
-              { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
-            ]}
-            percentageCompleted={50}
-            percentageSimulated={100}
-          />
-          <Card
-            title={<span>Talisman</span>}
-            description="Realizado 19/20 - US$ 1.333.444"
-            tableData={[
-              { title: 'Meta 20/21', value: 'US$ 1.333.444' },
-              { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
-            ]}
-            percentageCompleted={50}
-            percentageSimulated={50}
           />
         </Cards>
       </CustomIndicatorContainer>

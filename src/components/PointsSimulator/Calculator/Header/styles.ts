@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import DefaultChannelSelect from './Selects/Channels';
+import DefaultChannelSelect from '../CustomSelects/Channels';
+import DefaultProductTypeSelect from '../CustomSelects/ProductTypes';
 
 export const Container = styled.div`
   margin-top: 40px;
@@ -55,7 +56,7 @@ export const ChannelSelect = styled(DefaultChannelSelect)`
   }
 `;
 
-export const ProductTypeSelect = styled(DefaultChannelSelect)`
+export const ProductTypeSelect = styled(DefaultProductTypeSelect)`
   max-width: 202px;
   margin-left: 93px;
   height: 40px;

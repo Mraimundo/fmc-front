@@ -21,3 +21,17 @@ export const FETCH_CHANNEL_FAILURE =
   '@fmc/points-simulator/FETCH_CHANNEL_FAILURE';
 export const FETCH_CHANNEL_SUCCESS =
   '@fmc/points-simulator/FETCH_CHANNEL_SUCCESS';
+
+export const FETCH_INDICATORS_ACTION =
+  '@fmc/points-simulator/FETCH_INDICATORS_ACTION';
+export const FETCH_INDICATORS_FAILURE =
+  '@fmc/points-simulator/FETCH_INDICATORS_FAILURE';
+export const FETCH_INDICATORS_SUCCESS =
+  '@fmc/points-simulator/FETCH_INDICATORS_SUCCESS';
+
+export const CALCULATE_SIMULATION_ACTION =
+  '@fmc/points-simulator/CALCULATE_SIMULATION_ACTION';
+export const CALCULATE_SIMULATION_FAILURE =
+  '@fmc/points-simulator/CALCULATE_SIMULATION_FAILURE';
+export const CALCULATE_SIMULATION_SUCCESS =
+  '@fmc/points-simulator/CALCULATE_SIMULATION_SUCCESS';

@@ -2,6 +2,7 @@ import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { emptyFetchState } from 'state/utils';
 import { Mode } from './types';
 import { PointsSimulatorState } from './reducer';
+import { IndicatorType, UnitType } from './interfaces';
 
 const mock: PointsSimulatorState = {
   fetchChannel: emptyFetchState,
@@ -43,6 +44,24 @@ const mock: PointsSimulatorState = {
         revenuesInKilosPerLiter: 0,
         revenuesInDollar: 0,
         pogInKilosPerLiter: 0,
+      },
+    },
+  ],
+  fetchCalculate: emptyFetchState,
+  fetchIndicators: emptyFetchState,
+  indicators: [
+    {
+      title: 'Faturamento',
+      type: IndicatorType.revenues,
+      isRegisteredProduct: false,
+      unitType: UnitType.dollar,
+      currentGoal: 1333000,
+      currentRealized: 666000,
+      lastRealized: 1333000,
+      percentageRealized: 50,
+      simulationData: {
+        totalPercentageRealized: 50,
+        totalRealized: 666000,
       },
     },
   ],

@@ -3,7 +3,7 @@ import produce from 'immer';
 import { FetchState } from '@types';
 import { emptyFetchState, fetchErrorState, fetchingState } from 'state/utils';
 import { Mode } from './types';
-import { Product, Channel } from './interfaces';
+import { Product, Channel, Indicator } from './interfaces';
 import { PointsSimulatorActions } from './actions';
 import * as constants from './constants';
 
@@ -14,6 +14,9 @@ export type PointsSimulatorState = {
   fetchProducts: FetchState;
   products: Product[];
   dollarBaseValue: number;
+  fetchCalculate: FetchState;
+  fetchIndicators: FetchState;
+  indicators: Indicator[];
 };
 
 export const initialState: PointsSimulatorState = {
@@ -23,6 +26,9 @@ export const initialState: PointsSimulatorState = {
   fetchProducts: emptyFetchState,
   products: [],
   dollarBaseValue: 0,
+  fetchCalculate: emptyFetchState,
+  fetchIndicators: emptyFetchState,
+  indicators: [],
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -87,13 +93,21 @@ const CampaignsManagerReducer: Reducer<
     case constants.FETCH_PRODUCTS_FAILURE:
       return { ...state, fetchProducts: fetchErrorState(action) };
     case constants.FETCH_PRODUCTS_SUCCESS:
-      return produce(state, draft => {
-        draft.products = action.payload;
-      });
+      return { ...state, products: action.payload };
+    case constants.FETCH_INDICATORS_ACTION:
+      return { ...state, fetchIndicators: fetchingState };
+    case constants.FETCH_INDICATORS_FAILURE:
+      return { ...state, fetchIndicators: fetchErrorState(action) };
+    case constants.FETCH_INDICATORS_SUCCESS:
+      return { ...state, indicators: action.payload };
     case constants.SET_DOLLAR_BASE_VALUE:
       return { ...state, dollarBaseValue: action.payload };
     case constants.SET_MODE:
       return { ...state, mode: action.payload };
+    case constants.CALCULATE_SIMULATION_ACTION:
+      return { ...state, fetchCalculate: fetchingState };
+    case constants.CALCULATE_SIMULATION_SUCCESS:
+      return { ...state, indicators: action.payload.indicators };
     default:
       return state;
   }

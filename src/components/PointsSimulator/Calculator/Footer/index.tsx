@@ -5,10 +5,13 @@ import { Container, Button } from './styles';
 
 interface Props {
   dollarBaseValue: number;
+  buttonActionText: string;
   handleButtonAction(): void;
 }
 
-const Footer: React.FC<Props> = ({ dollarBaseValue, handleButtonAction }) => {
+const Footer: React.FC<Props> = props => {
+  const { dollarBaseValue, handleButtonAction, buttonActionText } = props;
+
   return (
     <Container>
       <div>
@@ -23,7 +26,7 @@ const Footer: React.FC<Props> = ({ dollarBaseValue, handleButtonAction }) => {
           type="button"
           onClick={handleButtonAction}
         >
-          Calcular
+          {buttonActionText}
         </Button>
       </div>
     </Container>
