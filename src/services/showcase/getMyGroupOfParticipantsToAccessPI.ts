@@ -1,23 +1,31 @@
-// import { pluginApi } from 'services/api';
+import { pluginApi } from 'services/api';
 import { ParticipantGroup } from './interfaces';
 
-const mock: ParticipantGroup[] = [
-  {
-    id: 1,
-    name: 'Estabelecimento X',
-    points: 1000,
-    urlPi: '#',
-    category: 'Água',
-  },
-  {
-    id: 2,
-    category: 'Terra',
-    name: 'Participante X',
-    points: 1500,
-    urlPi: '#',
-  },
-];
+interface ApiResponse {
+  data: ParticipantGroup[];
+}
 
-export default async (): Promise<ParticipantGroup[]> => {
-  return mock;
+interface Filters {
+  typeName?: string;
+  categoryName?: string;
+}
+
+export default async (filters: Filters): Promise<ParticipantGroup[]> => {
+  let extraSearch = '?limit=100';
+
+  if (filters.categoryName) {
+    extraSearch += `&category_name=${filters.categoryName}`;
+  }
+
+  if (filters.typeName) {
+    extraSearch += `&type_name=${filters.typeName}`;
+  }
+
+  const {
+    data: { data },
+  } = await pluginApi.get<ApiResponse>(
+    `premio-ideall/establishments${extraSearch}`,
+  );
+
+  return data;
 };

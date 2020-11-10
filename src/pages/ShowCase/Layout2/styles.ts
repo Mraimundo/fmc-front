@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import DefaultTypesSelect from 'components/ShowCase/TypesSelect';
-import DefaultCategoriesSelect from 'components/ShowCase/CategoriesSelect';
+import DefaultTypesSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
+import DefaultCategoriesSelect from 'components/shared/Vendavall/Establishments/CategorySelect';
 
 export const Container = styled.div`
   display: flex;
