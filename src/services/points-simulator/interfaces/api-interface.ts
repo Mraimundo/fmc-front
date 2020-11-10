@@ -12,10 +12,14 @@ export interface Product {
   type_name: string;
   is_enhancer: boolean;
   is_a_participating_product: boolean;
-  revenues_goal: number;
-  revenues_realized: number;
-  pog_goal: number;
-  pog_realized: number;
+  revenues_goal_in_dollar: number;
+  revenues_realized_in_dollar: number;
+  revenues_goal_in_kilos_by_liter: number;
+  revenues_realized_in_kilos_by_liter: number;
+  pog_goal_in_dollar: number;
+  pog_realized_in_dollar: number;
+  pog_goal_in_kilos_by_liter: number;
+  pog_realized_in_kilos_by_liter: number;
   stock_in_kg_per_liter: number;
   stock_in_dolar: number;
 }
@@ -46,4 +50,8 @@ export interface Indicators {
   talisman_last_realized_in_Liter: number;
   talisman_current_goal_in_Liter: number;
   talisman_current_realized_in_Liter: number;
+}
+
+export interface Configuration {
+  partial_date: Date;
 }

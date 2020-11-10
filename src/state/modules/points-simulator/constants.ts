@@ -35,3 +35,10 @@ export const CALCULATE_SIMULATION_FAILURE =
   '@fmc/points-simulator/CALCULATE_SIMULATION_FAILURE';
 export const CALCULATE_SIMULATION_SUCCESS =
   '@fmc/points-simulator/CALCULATE_SIMULATION_SUCCESS';
+
+export const FETCH_CONFIGURATION_ACTION =
+  '@fmc/points-simulator/FETCH_CONFIGURATION_ACTION';
+export const FETCH_CONFIGURATION_FAILURE =
+  '@fmc/points-simulator/FETCH_CONFIGURATION_FAILURE';
+export const FETCH_CONFIGURATION_SUCCESS =
+  '@fmc/points-simulator/FETCH_CONFIGURATION_SUCCESS';

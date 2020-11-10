@@ -72,7 +72,10 @@ describe(`test reducer - ${constants.FETCH_PRODUCTS_SUCCESS}`, () => {
 
 describe(`test reducer - ${constants.FETCH_CHANNEL_ACTION}`, () => {
   it('should call and complete fetch channel', () => {
-    const actionResult = reducer(initialState, actions.fetchChannel());
+    const actionResult = reducer(
+      initialState,
+      actions.fetchChannel(mockedState.channel?.id || 1),
+    );
     expect(actionResult).to.be.deep.equal({
       ...initialState,
       fetchChannel: {
@@ -110,10 +113,7 @@ describe(`test reducer - ${constants.FETCH_CHANNEL_ACTION}`, () => {
 
 describe(`test reducer - ${constants.FETCH_PRODUCTS_ACTION}`, () => {
   it('should call and complete fetch products', () => {
-    const actionResult = reducer(
-      initialState,
-      actions.fetchProducts(mockedState.channel?.id as number),
-    );
+    const actionResult = reducer(initialState, actions.fetchProducts());
     expect(actionResult).to.be.deep.equal({
       ...initialState,
       fetchProducts: {

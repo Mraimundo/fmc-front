@@ -24,10 +24,14 @@ export interface Product {
   revenues: {
     goalInDollar: number;
     realizedInDollar: number;
+    goalInKilosByLiter: number;
+    realizedInKilosByLiter: number;
   };
   pog: {
     goalInDollar: number;
     realizedInDollar: number;
+    goalInKilosByLiter: number;
+    realizedInKilosByLiter: number;
   };
   stock: Stock;
   simulationData: SimulationData;
@@ -68,4 +72,8 @@ export interface Indicator {
     totalRealized: number;
     totalPercentageRealized: number;
   };
+}
+
+export interface Configuration {
+  partialDate?: Date;
 }

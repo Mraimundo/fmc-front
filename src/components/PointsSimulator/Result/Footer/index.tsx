@@ -4,7 +4,11 @@ import { ReactSVG } from 'react-svg';
 import shareImg from 'assets/images/points-simulator/share.svg';
 import { Container, Button } from './styles';
 
-const Footer: React.FC = () => {
+interface Props {
+  handleSaveSimulationClick(): void;
+}
+
+const Footer: React.FC<Props> = ({ handleSaveSimulationClick }) => {
   return (
     <Container>
       <span>
@@ -13,7 +17,11 @@ const Footer: React.FC = () => {
       </span>
       <div>
         <ReactSVG src={shareImg} />
-        <Button buttonRole="primary" type="button">
+        <Button
+          buttonRole="primary"
+          type="button"
+          onClick={handleSaveSimulationClick}
+        >
           Salvar Simulação
         </Button>
       </div>

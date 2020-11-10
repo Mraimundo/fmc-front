@@ -1,8 +1,8 @@
-import Result from 'pages/PointsSimulator/Result';
 import {
   Channel as ChannelApi,
   Product as ProductApi,
   Indicators as IndicatorsApi,
+  Configuration as ConfigurationApi,
 } from 'services/points-simulator/interfaces/api-interface';
 import getPercentage from './services/get-goal-realized-percentage';
 import {
@@ -11,6 +11,7 @@ import {
   Indicator,
   IndicatorType,
   UnitType,
+  Configuration,
 } from './interfaces';
 
 const channelApiToChannel = (channel: ChannelApi): Channel => ({
@@ -33,12 +34,16 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       name: product.type_name,
     },
     revenues: {
-      goalInDollar: product.revenues_goal,
-      realizedInDollar: product.revenues_realized,
+      goalInDollar: product.revenues_goal_in_dollar,
+      realizedInDollar: product.revenues_realized_in_dollar,
+      goalInKilosByLiter: product.revenues_goal_in_kilos_by_liter,
+      realizedInKilosByLiter: product.revenues_realized_in_kilos_by_liter,
     },
     pog: {
-      goalInDollar: product.pog_goal,
-      realizedInDollar: product.pog_realized,
+      goalInDollar: product.pog_goal_in_dollar,
+      realizedInDollar: product.pog_realized_in_dollar,
+      goalInKilosByLiter: product.pog_goal_in_kilos_by_liter,
+      realizedInKilosByLiter: product.pog_realized_in_kilos_by_liter,
     },
     stock: {
       inKilosPerLiter: product.stock_in_kg_per_liter,
@@ -141,8 +146,17 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
   return result;
 };
 
+const configurationApiToConfiguration = (
+  configuration: ConfigurationApi,
+): Configuration => {
+  return {
+    partialDate: configuration.partial_date,
+  };
+};
+
 export {
   channelApiToChannel,
   productsApiToProducts,
   indicatorsApiToIndicators,
+  configurationApiToConfiguration,
 };

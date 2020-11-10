@@ -20,15 +20,19 @@ export enum Tab {
   participateProductsTab = 'Produtos',
 }
 
-interface Header {
+interface Props {
   tabSelected: Tab;
   setTabSelected(tab: Tab): void;
   setProductTypeIdSelected(productTypeId: number | undefined): void;
+  setChannelIdSelected(channelId: number): void;
 }
 
-const Header: React.FC<Header> = props => {
-  const { tabSelected, setTabSelected, setProductTypeIdSelected } = props;
-
+const Header: React.FC<Props> = ({
+  tabSelected,
+  setTabSelected,
+  setProductTypeIdSelected,
+  setChannelIdSelected,
+}) => {
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
   const [productTypeSelected, setProductTypeSelected] = useState<Option | null>(
     null,
@@ -40,6 +44,12 @@ const Header: React.FC<Header> = props => {
       : undefined;
     setProductTypeIdSelected(productTypeId);
   }, [productTypeSelected, setProductTypeIdSelected]);
+
+  useEffect(() => {
+    if (!channelSelected) return;
+    const channelSelectedId = parseInt(channelSelected.value, 0);
+    setChannelIdSelected(channelSelectedId);
+  }, [channelSelected, setChannelIdSelected]);
 
   return (
     <Container>

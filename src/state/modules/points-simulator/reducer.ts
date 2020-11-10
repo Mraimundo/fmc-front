@@ -3,7 +3,7 @@ import produce from 'immer';
 import { FetchState } from '@types';
 import { emptyFetchState, fetchErrorState, fetchingState } from 'state/utils';
 import { Mode } from './types';
-import { Product, Channel, Indicator } from './interfaces';
+import { Product, Channel, Indicator, Configuration } from './interfaces';
 import { PointsSimulatorActions } from './actions';
 import * as constants from './constants';
 
@@ -17,6 +17,8 @@ export type PointsSimulatorState = {
   fetchCalculate: FetchState;
   fetchIndicators: FetchState;
   indicators: Indicator[];
+  fetchConfiguration: FetchState;
+  configuration: Configuration;
 };
 
 export const initialState: PointsSimulatorState = {
@@ -29,6 +31,8 @@ export const initialState: PointsSimulatorState = {
   fetchCalculate: emptyFetchState,
   fetchIndicators: emptyFetchState,
   indicators: [],
+  fetchConfiguration: emptyFetchState,
+  configuration: {},
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -87,19 +91,39 @@ const CampaignsManagerReducer: Reducer<
         ...state,
         fetchChannel: emptyFetchState,
         channel: action.payload,
+        products: [],
+        indicators: [],
       };
     case constants.FETCH_PRODUCTS_ACTION:
       return { ...state, fetchProducts: fetchingState };
     case constants.FETCH_PRODUCTS_FAILURE:
       return { ...state, fetchProducts: fetchErrorState(action) };
     case constants.FETCH_PRODUCTS_SUCCESS:
-      return { ...state, products: action.payload };
+      return {
+        ...state,
+        fetchProducts: emptyFetchState,
+        products: action.payload,
+      };
     case constants.FETCH_INDICATORS_ACTION:
       return { ...state, fetchIndicators: fetchingState };
     case constants.FETCH_INDICATORS_FAILURE:
       return { ...state, fetchIndicators: fetchErrorState(action) };
     case constants.FETCH_INDICATORS_SUCCESS:
-      return { ...state, indicators: action.payload };
+      return {
+        ...state,
+        fetchIndicators: emptyFetchState,
+        indicators: action.payload,
+      };
+    case constants.FETCH_CONFIGURATION_ACTION:
+      return { ...state, fetchConfiguration: fetchingState };
+    case constants.FETCH_CONFIGURATION_FAILURE:
+      return { ...state, fetchConfiguration: fetchErrorState(action) };
+    case constants.FETCH_CONFIGURATION_SUCCESS:
+      return {
+        ...state,
+        fetchConfiguration: emptyFetchState,
+        configuration: action.payload,
+      };
     case constants.SET_DOLLAR_BASE_VALUE:
       return { ...state, dollarBaseValue: action.payload };
     case constants.SET_MODE:
@@ -107,7 +131,11 @@ const CampaignsManagerReducer: Reducer<
     case constants.CALCULATE_SIMULATION_ACTION:
       return { ...state, fetchCalculate: fetchingState };
     case constants.CALCULATE_SIMULATION_SUCCESS:
-      return { ...state, indicators: action.payload.indicators };
+      return {
+        ...state,
+        fetchCalculate: emptyFetchState,
+        indicators: action.payload.indicators,
+      };
     default:
       return state;
   }

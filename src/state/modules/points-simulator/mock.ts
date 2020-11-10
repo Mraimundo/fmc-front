@@ -8,6 +8,10 @@ const mock: PointsSimulatorState = {
   fetchChannel: emptyFetchState,
   mode: Mode.calculator,
   dollarBaseValue: 5.38,
+  fetchConfiguration: emptyFetchState,
+  configuration: {
+    partialDate: new Date(),
+  },
   channel: {
     id: 1,
     name: 'Estabelecimento Teste 1',
@@ -30,10 +34,14 @@ const mock: PointsSimulatorState = {
       revenues: {
         goalInDollar: 1333000,
         realizedInDollar: 666000,
+        goalInKilosByLiter: 1333000,
+        realizedInKilosByLiter: 666000,
       },
       pog: {
         goalInDollar: 1333000,
         realizedInDollar: 666000,
+        goalInKilosByLiter: 1333000,
+        realizedInKilosByLiter: 666000,
       },
       stock: {
         inKilosPerLiter: 90000,

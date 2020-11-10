@@ -4,7 +4,7 @@ import {
   ActionCreatorFailure,
 } from '@types';
 import { DataValueDTO, Mode, CalcutationDTO } from './types';
-import { Product, Channel, Indicator } from './interfaces';
+import { Product, Channel, Indicator, Configuration } from './interfaces';
 
 import * as constants from './constants';
 
@@ -140,6 +140,34 @@ export const fetchCalculateSuccess = (
     payload: data,
   };
 
+export const fetchConfiguration = (): ActionCreator<
+  typeof constants.FETCH_CONFIGURATION_ACTION
+> =>
+  <const>{
+    type: constants.FETCH_CONFIGURATION_ACTION,
+  };
+
+export const fetchConfigurationFailure = (
+  error: string,
+): ActionCreatorFailure<typeof constants.FETCH_CONFIGURATION_FAILURE> =>
+  <const>{
+    type: constants.FETCH_CONFIGURATION_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchConfigurationSuccess = (
+  data: Configuration,
+): ActionCreatorPayload<
+  typeof constants.FETCH_CONFIGURATION_SUCCESS,
+  Configuration
+> =>
+  <const>{
+    type: constants.FETCH_CONFIGURATION_SUCCESS,
+    payload: data,
+  };
+
 export type PointsSimulatorActions = ReturnType<
   | typeof setUnitValueInDollar
   | typeof setRevenuesValueInKilosPerLiter
@@ -149,6 +177,9 @@ export type PointsSimulatorActions = ReturnType<
   | typeof fetchProducts
   | typeof fetchProductsFailure
   | typeof fetchProductsSuccess
+  | typeof fetchConfiguration
+  | typeof fetchConfigurationFailure
+  | typeof fetchConfigurationSuccess
   | typeof fetchIndicators
   | typeof fetchIndicatorsFailure
   | typeof fetchIndicatorsSuccess

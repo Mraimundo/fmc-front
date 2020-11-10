@@ -6,6 +6,7 @@ import {
   getProducts,
   getDollarBaseValue,
   getMode,
+  getChannel,
 } from 'state/modules/points-simulator/selectors';
 import * as actions from 'state/modules/points-simulator/actions';
 import { getCoinQuotations } from 'state/modules/header/selectors';
@@ -25,6 +26,7 @@ interface Filter {
 const PointsSimulator: React.FC = () => {
   const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
+  const channel = useSelector(getChannel);
   const dollarBaseValue = useSelector(getDollarBaseValue);
   const mode = useSelector(getMode);
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
@@ -40,10 +42,6 @@ const PointsSimulator: React.FC = () => {
       ),
     );
   }, [dispatch, coinsQuotation]);
-
-  useEffect(() => {
-    dispatch(actions.fetchChannel(1));
-  }, [dispatch]);
 
   useEffect(() => {
     setFilter(oldFilter => ({
@@ -93,6 +91,13 @@ const PointsSimulator: React.FC = () => {
     [],
   );
 
+  const handleChannelSelect = useCallback(
+    (channelSelectId: number): void => {
+      dispatch(actions.fetchChannel(channelSelectId));
+    },
+    [dispatch],
+  );
+
   return (
     <Container id="calculator">
       <Content>
@@ -100,25 +105,29 @@ const PointsSimulator: React.FC = () => {
           tabSelected={tabSelected}
           setTabSelected={setTabSelected}
           setProductTypeIdSelected={handleProductTypeSelect}
+          setChannelIdSelected={handleChannelSelect}
         />
-        <CustomTableBox>
-          <Box>
-            <Table
-              products={productsTableData}
-              setRevenuesInKilosPerLiter={handleRevenuesValueChange}
-              setUnitValueInDollar={handleUnitValueChange}
+        {channel && (
+          <CustomTableBox>
+            <Box>
+              <Table
+                products={productsTableData}
+                setRevenuesInKilosPerLiter={handleRevenuesValueChange}
+                setUnitValueInDollar={handleUnitValueChange}
+                tabSelected={tabSelected}
+              />
+            </Box>
+            <Footer
+              dollarBaseValue={dollarBaseValue}
+              handleButtonAction={
+                mode === Mode.calculator ? handleCalculate : handleReCalculate
+              }
+              buttonActionText={
+                mode === Mode.calculator ? 'Calcular' : 'Recalcular'
+              }
             />
-          </Box>
-          <Footer
-            dollarBaseValue={dollarBaseValue}
-            handleButtonAction={
-              mode === Mode.calculator ? handleCalculate : handleReCalculate
-            }
-            buttonActionText={
-              mode === Mode.calculator ? 'Calcular' : 'Recalcular'
-            }
-          />
-        </CustomTableBox>
+          </CustomTableBox>
+        )}
       </Content>
     </Container>
   );

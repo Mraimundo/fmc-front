@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/campaigns-manager/getChannels';
-import transformer from 'services/campaigns-manager/transformers/channelsToSelectOptions';
+import { getChannels } from 'services/points-simulator/index';
 
 interface Props {
   className?: string;
@@ -22,8 +21,18 @@ const ChannelsSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    getData().then(data => setOptions(transformer(data)));
+    getChannels().then(data =>
+      setOptions(
+        data.map(item => ({ title: item.name, value: item.id.toString() })),
+      ),
+    );
   }, []);
+
+  useEffect(() => {
+    if (options.length > 0) {
+      setValue(options[0]);
+    }
+  }, [setValue, options]);
 
   const loadItems = useCallback(() => {
     return options;
@@ -38,6 +47,7 @@ const ChannelsSelect: React.FC<Props> = ({
       setValue={setValue}
       placeholder={placeholder}
       inputRole="secondary"
+      disableClearable
     />
   );
 };
