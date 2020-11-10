@@ -36,5 +36,4 @@ export interface ParticipantGroup {
   name: string;
   points: number;
   category: string;
-  urlPi: string;
 }
