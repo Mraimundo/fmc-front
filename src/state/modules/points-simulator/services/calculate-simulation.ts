@@ -31,6 +31,25 @@ const calculateSimulatedRevenues = ({
   return { totalRealized, totalPercentageRealized };
 };
 
+const calculateSimulatedPog = ({
+  products,
+  indicator,
+}: IndicatorDTO): SimulationData => {
+  const simulatedProductsValue = products.reduce(
+    (accumulator, product) => accumulator + product.simulationData.pogInDollar,
+    0,
+  );
+
+  const totalRealized = indicator.currentRealized + simulatedProductsValue;
+
+  const totalPercentageRealized = getPercentage(
+    indicator.currentGoal,
+    totalRealized,
+  );
+
+  return { totalRealized, totalPercentageRealized };
+};
+
 const calculateSimulatedProduct = ({
   products,
   indicator,
@@ -51,4 +70,8 @@ const calculateSimulatedProduct = ({
   return { totalRealized, totalPercentageRealized };
 };
 
-export { calculateSimulatedRevenues, calculateSimulatedProduct };
+export {
+  calculateSimulatedRevenues,
+  calculateSimulatedProduct,
+  calculateSimulatedPog,
+};

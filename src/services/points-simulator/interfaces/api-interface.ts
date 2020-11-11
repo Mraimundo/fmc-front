@@ -41,6 +41,9 @@ export interface Indicators {
   revenues_last_realized_in_dollar: number;
   revenues_current_goal_in_dollar: number;
   revenues_current_realized_in_dollar: number;
+  pog_last_realized_in_dollar: number;
+  pog_current_goal_in_dollar: number;
+  pog_current_realized_in_dollar: number;
   hero_last_realized_in_Liter: number;
   hero_current_goal_in_Liter: number;
   hero_current_realized_in_Liter: number;

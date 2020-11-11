@@ -69,16 +69,6 @@ const Body: React.FC<Props> = ({ cards }) => {
               percentageSimulated={item.percentageSimulated}
             />
           ))}
-          <CardComponent
-            title="POG"
-            description="Realizado 19/20 - US$ 1.333.444"
-            tableData={[
-              { title: 'Meta 20/21', value: 'US$ 1.333.444' },
-              { title: 'Realizado 20/21', value: 'US$ 1.333.444' },
-            ]}
-            percentageCompleted={80}
-            percentageSimulated={90}
-          />
         </Cards>
       </CustomIndicatorContainer>
     </Container>

@@ -54,10 +54,26 @@ const CampaignsManagerReducer: Reducer<
               revenuesInKilosPerLiter *
               product.simulationData.unitValueInDollar;
 
-            product.simulationData.pogInKilosPerLiter =
+            product.simulationData.pogUnitValueInDollar =
               (product.stock.inDollar +
                 product.simulationData.revenuesInDollar) /
               (product.stock.inKilosPerLiter + revenuesInKilosPerLiter);
+
+            product.simulationData.pogInDollar =
+              product.simulationData.pogInKilosPerLiter *
+              product.simulationData.pogUnitValueInDollar;
+          }
+          return product;
+        });
+      });
+    case constants.SET_POG_IN_KILOS_PER_LITER:
+      return produce(state, draft => {
+        const { productId, value: pogInKilosPerLiter } = action.payload;
+        draft.products = draft.products.map(product => {
+          if (product.id === productId) {
+            product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
+            product.simulationData.pogInDollar =
+              pogInKilosPerLiter * product.simulationData.pogUnitValueInDollar;
           }
           return product;
         });
@@ -73,11 +89,15 @@ const CampaignsManagerReducer: Reducer<
               product.simulationData.revenuesInKilosPerLiter *
               unitValueInDollar;
 
-            product.simulationData.pogInKilosPerLiter =
+            product.simulationData.pogUnitValueInDollar =
               (product.stock.inDollar +
                 product.simulationData.revenuesInDollar) /
               (product.stock.inKilosPerLiter +
                 product.simulationData.revenuesInKilosPerLiter);
+
+            product.simulationData.pogInDollar =
+              product.simulationData.pogInKilosPerLiter *
+              product.simulationData.pogUnitValueInDollar;
           }
           return product;
         });

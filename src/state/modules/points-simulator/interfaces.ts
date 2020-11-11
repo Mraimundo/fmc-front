@@ -4,7 +4,9 @@ export interface SimulationData {
   unitValueInDollar: number;
   revenuesInKilosPerLiter: number;
   revenuesInDollar: number;
-  pogInKilosPerLiter: number;
+  pogUnitValueInDollar: number;
+  pogInKilosPerLiter: number; // Agora será o dado digitado pelo usuario
+  pogInDollar: number; // unitario * valor de entrada do usuário
 }
 
 export interface Stock {
@@ -48,6 +50,7 @@ export interface Channel {
 
 export enum IndicatorType {
   revenues = 'Faturamento',
+  pog = 'Pog',
   premio = 'Premio',
   hero = 'Hero',
   talisman = 'Talisman',

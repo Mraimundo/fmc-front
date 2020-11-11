@@ -12,6 +12,7 @@ interface TrProps {
   product: Product;
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+  setPogInKilosPerLiter(data: DataValueDTO): void;
 }
 
 interface ValuesData {
@@ -27,6 +28,7 @@ const Tr: React.FC<TrProps> = ({
   product,
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
+  setPogInKilosPerLiter,
 }) => {
   const [valuesData, setValuesData] = useState<ValuesData | null>(null);
 
@@ -144,11 +146,14 @@ const Tr: React.FC<TrProps> = ({
         </CustomInputBox>
       </td>
       <td>
-        <CustomInputBox blocked>
+        <CustomInputBox blocked={false}>
           <Input
-            type="money"
-            value={product.simulationData.pogInKilosPerLiter}
-            disabled
+            placeholder="0"
+            type="kilograma"
+            defaultValue={product.simulationData.pogInKilosPerLiter}
+            onChange={value =>
+              setPogInKilosPerLiter({ productId: product.id, value })
+            }
           />
         </CustomInputBox>
       </td>

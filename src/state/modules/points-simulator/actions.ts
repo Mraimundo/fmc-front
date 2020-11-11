@@ -35,6 +35,17 @@ export const setRevenuesValueInKilosPerLiter = (
     payload: data,
   };
 
+export const setPogValueInKilosPerLiter = (
+  data: DataValueDTO,
+): ActionCreatorPayload<
+  typeof constants.SET_POG_IN_KILOS_PER_LITER,
+  DataValueDTO
+> =>
+  <const>{
+    type: constants.SET_POG_IN_KILOS_PER_LITER,
+    payload: data,
+  };
+
 export const fetchChannel = (
   channelId: number,
 ): ActionCreatorPayload<typeof constants.FETCH_CHANNEL_ACTION, number> =>
@@ -171,6 +182,7 @@ export const fetchConfigurationSuccess = (
 export type PointsSimulatorActions = ReturnType<
   | typeof setUnitValueInDollar
   | typeof setRevenuesValueInKilosPerLiter
+  | typeof setPogValueInKilosPerLiter
   | typeof fetchChannel
   | typeof fetchChannelFailure
   | typeof fetchChannelSuccess

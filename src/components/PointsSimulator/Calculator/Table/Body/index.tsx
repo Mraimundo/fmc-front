@@ -9,12 +9,14 @@ interface HeaderProps {
   products: Product[];
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+  setPogInKilosPerLiter(data: DataValueDTO): void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   products,
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
+  setPogInKilosPerLiter,
 }) => {
   return (
     <Container>
@@ -24,6 +26,7 @@ const Header: React.FC<HeaderProps> = ({
           product={product}
           setUnitValueInDollar={setUnitValueInDollar}
           setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
+          setPogInKilosPerLiter={setPogInKilosPerLiter}
         />
       ))}
     </Container>

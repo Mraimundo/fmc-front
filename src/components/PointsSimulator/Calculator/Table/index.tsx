@@ -11,6 +11,7 @@ interface TableProps {
   products: Product[];
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
+  setPogInKilosPerLiter(data: DataValueDTO): void;
   tabSelected: Tab;
 }
 
@@ -18,6 +19,7 @@ const Table: React.FC<TableProps> = ({
   products,
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
+  setPogInKilosPerLiter,
   tabSelected,
 }) => {
   return (
@@ -27,6 +29,7 @@ const Table: React.FC<TableProps> = ({
         products={products}
         setUnitValueInDollar={setUnitValueInDollar}
         setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
+        setPogInKilosPerLiter={setPogInKilosPerLiter}
       />
     </Container>
   );

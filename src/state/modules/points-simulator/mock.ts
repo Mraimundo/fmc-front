@@ -52,6 +52,8 @@ const mock: PointsSimulatorState = {
         revenuesInKilosPerLiter: 0,
         revenuesInDollar: 0,
         pogInKilosPerLiter: 0,
+        pogInDollar: 0,
+        pogUnitValueInDollar: 0,
       },
     },
   ],

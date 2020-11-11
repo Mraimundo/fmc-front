@@ -54,6 +54,8 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       revenuesInKilosPerLiter: 0,
       revenuesInDollar: 0,
       pogInKilosPerLiter: 0,
+      pogInDollar: 0,
+      pogUnitValueInDollar: 0,
     },
   }));
 
@@ -78,6 +80,27 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.revenues_current_realized_in_dollar,
       ),
       totalRealized: indicators.revenues_current_realized_in_dollar,
+    },
+  });
+
+  result.push({
+    title: 'POG',
+    type: IndicatorType.pog,
+    unitType: UnitType.dollar,
+    lastRealized: indicators.pog_last_realized_in_dollar,
+    currentRealized: indicators.pog_current_realized_in_dollar,
+    isRegisteredProduct: false,
+    currentGoal: indicators.pog_current_goal_in_dollar,
+    percentageRealized: getPercentage(
+      indicators.pog_current_goal_in_dollar,
+      indicators.pog_current_realized_in_dollar,
+    ),
+    simulationData: {
+      totalPercentageRealized: getPercentage(
+        indicators.pog_current_goal_in_dollar,
+        indicators.pog_current_realized_in_dollar,
+      ),
+      totalRealized: indicators.pog_current_realized_in_dollar,
     },
   });
 
@@ -143,6 +166,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
       totalRealized: indicators.talisman_current_realized_in_Liter,
     },
   });
+
   return result;
 };
 

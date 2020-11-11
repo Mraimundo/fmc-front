@@ -75,6 +75,13 @@ const PointsSimulator: React.FC = () => {
     [dispatch],
   );
 
+  const handlePogKilosByLiterValueChange = useCallback(
+    (data: DataValueDTO): void => {
+      dispatch(actions.setPogValueInKilosPerLiter(data));
+    },
+    [dispatch],
+  );
+
   const handleCalculate = useCallback(() => {
     dispatch(actions.fetchCalculate());
     dispatch(actions.setMode(Mode.result));
@@ -114,6 +121,7 @@ const PointsSimulator: React.FC = () => {
                 products={productsTableData}
                 setRevenuesInKilosPerLiter={handleRevenuesValueChange}
                 setUnitValueInDollar={handleUnitValueChange}
+                setPogInKilosPerLiter={handlePogKilosByLiterValueChange}
                 tabSelected={tabSelected}
               />
             </Box>

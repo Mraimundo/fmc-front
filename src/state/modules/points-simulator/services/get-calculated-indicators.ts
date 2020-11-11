@@ -2,6 +2,7 @@ import { Product, Indicator, IndicatorType } from '../interfaces';
 import {
   calculateSimulatedRevenues,
   calculateSimulatedProduct,
+  calculateSimulatedPog,
 } from './calculate-simulation';
 
 const enhancerProductsIndicatorTypes = [
@@ -20,6 +21,14 @@ export default (products: Product[], indicators: Indicator[]): Indicator[] => {
           indicator,
         });
         indicator.simulationData = revenuesSimulationData;
+      }
+
+      if (indicator.type === IndicatorType.pog) {
+        const pogSimulationData = calculateSimulatedPog({
+          products,
+          indicator,
+        });
+        indicator.simulationData = pogSimulationData;
       }
 
       if (enhancerProductsIndicatorTypes.includes(indicator.type)) {

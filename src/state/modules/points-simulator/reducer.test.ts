@@ -12,8 +12,10 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
     const productIndex = 0;
     const unitValueInDollarToSet = 12.5;
     const revenuesValueInKilosPerLiterToSet = 80000;
+    const pogValueInKilosPerLiterToSet = 800;
     const expectedRevenuesInDollar = 1000000;
-    const expectedPogInKilosPerLiter = 11.764705882352942;
+    const expectedPogUnitValue = 11.764705882352942;
+    const expectPogInDollar = 9411.764705882353;
 
     const productId = mockedState.products[productIndex].id;
     const product = { ...mockedState.products[productIndex] };
@@ -22,7 +24,7 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
       products: [product],
     };
 
-    const valueInDolarReducer = reducer(
+    const firstReducerTransformation = reducer(
       mockedStateWithJustTheFirstProduct,
       actions.setUnitValueInDollar({
         productId,
@@ -30,15 +32,23 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
       }),
     );
 
-    const result = reducer(
-      valueInDolarReducer,
+    const secondReducerTransformation = reducer(
+      firstReducerTransformation,
       actions.setRevenuesValueInKilosPerLiter({
         productId,
         value: revenuesValueInKilosPerLiterToSet,
       }),
     );
 
-    expect(result).to.be.deep.equal({
+    const finalReducerTranformation = reducer(
+      secondReducerTransformation,
+      actions.setPogValueInKilosPerLiter({
+        productId,
+        value: pogValueInKilosPerLiterToSet,
+      }),
+    );
+
+    expect(finalReducerTranformation).to.be.deep.equal({
       ...mockedStateWithJustTheFirstProduct,
       products: [
         {
@@ -47,8 +57,10 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
             ...product.simulationData,
             unitValueInDollar: unitValueInDollarToSet,
             revenuesInKilosPerLiter: revenuesValueInKilosPerLiterToSet,
+            pogInKilosPerLiter: pogValueInKilosPerLiterToSet,
             revenuesInDollar: expectedRevenuesInDollar,
-            pogInKilosPerLiter: expectedPogInKilosPerLiter,
+            pogUnitValueInDollar: expectedPogUnitValue,
+            pogInDollar: expectPogInDollar,
           },
         },
       ],
