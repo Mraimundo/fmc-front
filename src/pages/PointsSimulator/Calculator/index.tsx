@@ -11,6 +11,7 @@ import {
 import * as actions from 'state/modules/points-simulator/actions';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 
+import LoadSimulationModal from 'components/PointsSimulator/Commom/Modals/LoadSimulation';
 import Header, { Tab } from 'components/PointsSimulator/Calculator/Header';
 import Table from 'components/PointsSimulator/Calculator/Table';
 import Footer from 'components/PointsSimulator/Calculator/Footer';
@@ -24,6 +25,9 @@ interface Filter {
 }
 
 const PointsSimulator: React.FC = () => {
+  const [isLoadSimulatioModalOpened, setIsLoadSimulatioModalOpened] = useState(
+    false,
+  );
   const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
   const channel = useSelector(getChannel);
@@ -113,6 +117,7 @@ const PointsSimulator: React.FC = () => {
           setTabSelected={setTabSelected}
           setProductTypeIdSelected={handleProductTypeSelect}
           setChannelIdSelected={handleChannelSelect}
+          handleLoadSimulationClick={() => setIsLoadSimulatioModalOpened(true)}
         />
         {channel && (
           <CustomTableBox>
@@ -137,6 +142,10 @@ const PointsSimulator: React.FC = () => {
           </CustomTableBox>
         )}
       </Content>
+      <LoadSimulationModal
+        isOpen={isLoadSimulatioModalOpened}
+        onRequestClose={() => setIsLoadSimulatioModalOpened(false)}
+      />
     </Container>
   );
 };

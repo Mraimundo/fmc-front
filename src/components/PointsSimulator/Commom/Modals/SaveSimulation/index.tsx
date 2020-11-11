@@ -35,7 +35,11 @@ const Modal: React.FC<ModalProps> = ({
       return;
     }
 
-    await onSave({ channelId: channel.id, simulationName });
+    await onSave({
+      channelId: channel.id,
+      simulationName,
+      jsonDataInString: '',
+    });
     addToast({
       type: 'success',
       title: 'Simulação salva com sucesso!',

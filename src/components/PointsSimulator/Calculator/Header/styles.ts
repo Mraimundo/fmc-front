@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ReactSVG as DefaultReactSVG } from 'react-svg';
 import DefaultChannelSelect from '../CustomSelects/Channels';
 import DefaultProductTypeSelect from '../CustomSelects/ProductTypes';
 
@@ -33,6 +34,10 @@ export const FirstBox = styled.div`
       color: ${({ theme }) => theme.font.color.primary};
     }
   }
+`;
+
+export const ReactSVG = styled(DefaultReactSVG)`
+  cursor: pointer;
 `;
 
 export const SecondBox = styled.div`

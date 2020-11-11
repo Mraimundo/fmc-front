@@ -1,4 +1,5 @@
 import { EstablishmentTypes, EstablishmentCategory } from 'config/constants';
+import { string } from 'yup';
 
 export interface ProductType {
   id: number;
@@ -57,4 +58,12 @@ export interface Indicators {
 
 export interface Configuration {
   partial_date: Date;
+}
+
+export interface SimulationData {
+  id: number;
+  simulation_date: Date;
+  client_group: string;
+  simulation_name: string;
+  data_json_in_string: string;
 }

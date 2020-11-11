@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { ReactSVG } from 'react-svg';
 import listImage from 'assets/images/points-simulator/list.svg';
 import { Option } from 'components/shared/Select';
 
@@ -13,6 +12,7 @@ import {
   ChannelSelect,
   ProductTypeSelect,
   CustomText,
+  ReactSVG,
 } from './styles';
 
 export enum Tab {
@@ -25,6 +25,7 @@ interface Props {
   setTabSelected(tab: Tab): void;
   setProductTypeIdSelected(productTypeId: number | undefined): void;
   setChannelIdSelected(channelId: number): void;
+  handleLoadSimulationClick(): void;
 }
 
 const Header: React.FC<Props> = ({
@@ -32,6 +33,7 @@ const Header: React.FC<Props> = ({
   setTabSelected,
   setProductTypeIdSelected,
   setChannelIdSelected,
+  handleLoadSimulationClick,
 }) => {
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
   const [productTypeSelected, setProductTypeSelected] = useState<Option | null>(
@@ -62,7 +64,7 @@ const Header: React.FC<Props> = ({
             setValue={setChannelSelected}
           />
           <CustomText>Minhas simulações</CustomText>
-          <ReactSVG src={listImage} />
+          <ReactSVG src={listImage} onClick={handleLoadSimulationClick} />
         </div>
       </FirstBox>
       <SecondBox>
