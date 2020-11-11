@@ -10,6 +10,8 @@ import getParticipants, {
   FilterOptions,
 } from 'services/participant-simulation/get-participants-list-to-simulate';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
+import { useAuth } from 'context/AuthContext';
+import history from 'services/history';
 import Filters from './Filters';
 import Table from './Table';
 
@@ -20,6 +22,13 @@ const ParticipantSimulations: React.FC = () => {
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [filters, setFilters] = useState<FilterOptions>({});
   const [fetching, setFetching] = useState(false);
+  const { simulating } = useAuth();
+
+  useEffect(() => {
+    if (simulating) {
+      history.push('/');
+    }
+  }, [simulating]);
 
   const onFilter = useCallback(
     async (_filters: Omit<FilterOptions, 'page'>): Promise<void> => {

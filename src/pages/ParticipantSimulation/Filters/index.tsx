@@ -3,8 +3,8 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { FilterOptions } from 'services/participant-simulation/get-participants-list-to-simulate';
 import { Button } from 'components/shared';
 import { Option } from 'components/shared/Select';
-import DirectorsSelect from 'components/CampaignsManager/Selects/Directors';
-import RegionalSelect from 'components/CampaignsManager/Selects/Regional';
+import DirectorsSelect from 'components/Cockpit/Selects/Directors';
+import RegionalSelect from 'components/Cockpit/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
 import ChannelsSelect from 'components/Cockpit/Selects/Channels';
 import getRegionals from 'services/cockpit/getRegional';
@@ -81,6 +81,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
         {showRegionalSelect && (
           <RegionalSelect
             setValue={value => setRegionalSelected(value)}
+            directorName={directorSelected?.title}
             value={regionalSelected}
             placeholder="Regional"
           />
