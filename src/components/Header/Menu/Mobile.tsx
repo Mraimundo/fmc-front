@@ -11,11 +11,13 @@ interface MenuProps {
   items: TMenuItem[];
   subMenu?: boolean;
   signOut?: () => void;
+  simulating: boolean;
 }
 const MobileMenu: React.FC<MenuProps> = ({
   items,
   subMenu = false,
   signOut = () => null,
+  simulating,
 }) => {
   return (
     <MobileMenuList subMenu={subMenu}>
@@ -26,7 +28,11 @@ const MobileMenu: React.FC<MenuProps> = ({
             subMenu={subMenu && !isEmpty(item.children)}
           />
           {!isEmpty(item.children) && (
-            <MobileMenu items={item.children || []} subMenu />
+            <MobileMenu
+              items={item.children || []}
+              subMenu
+              simulating={simulating}
+            />
           )}
         </MobileMenuItem>
       ))}
@@ -39,7 +45,9 @@ const MobileMenu: React.FC<MenuProps> = ({
             <Link to={routesMap.contact}>FALE CONOSCO</Link>
           </MobileMenuItem>
           <MobileMenuItem>
-            <Link to={routesMap.profile}>MEU PERFIL</Link>
+            <Link to={simulating ? '/home' : routesMap.profile}>
+              MEU PERFIL
+            </Link>
           </MobileMenuItem>
           <MobileMenuItem>
             <a href="/" onClick={signOut}>

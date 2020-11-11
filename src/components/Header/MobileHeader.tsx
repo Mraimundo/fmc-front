@@ -20,7 +20,7 @@ import {
 const Header: React.FC = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const { participant, signOut } = useAuth();
+  const { participant, signOut, simulating } = useAuth();
   const { menu } = useMenu();
 
   const toggleMenu = useCallback(() => {
@@ -58,7 +58,9 @@ const Header: React.FC = () => {
             participant.profile === 'FMC' ? null : participant.establishment
           }
         />
-        {!!menu && <MobileMenu items={menu} signOut={signOut} />}
+        {!!menu && (
+          <MobileMenu items={menu} signOut={signOut} simulating={simulating} />
+        )}
       </MobileNav>
     </>
   );
