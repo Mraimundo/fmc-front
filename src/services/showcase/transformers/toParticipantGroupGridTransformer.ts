@@ -15,7 +15,6 @@ export interface Response {
   id: number;
   name: string;
   points: string;
-  urlAccess: string;
   category: string;
 }
 
@@ -24,7 +23,6 @@ export default (data: ParticipantGroup[]): Response[] => {
     id: participant.id,
     name: participant.name,
     points: format(participant.points),
-    urlAccess: participant.urlPi,
     category: participant.category,
   }));
 };

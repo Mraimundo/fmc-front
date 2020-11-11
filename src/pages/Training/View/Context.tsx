@@ -51,6 +51,7 @@ interface TrainingContextState {
   certificate: ICertificate;
   spinData: Spin | undefined;
   spin(spinId: number): Promise<{ prizeId: number }>;
+  canShowAnsers: boolean;
 }
 
 const TrainingContext = createContext<TrainingContextState>(
@@ -65,6 +66,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [successModalOpened, setSuccessModalOpened] = useState(false);
   const [approved, setApproved] = useState(false);
+  const [canShowAnsers, setCanShowAnsers] = useState(false);
   const [canAnswer, setCanAnswer] = useState({ canAnswer: false, reason: '' });
   const [certificate, setCertificate] = useState<ICertificate>({
     url: '',
@@ -101,6 +103,8 @@ export const TrainingProvider: React.FC = ({ children }) => {
               IAnswer[],
               IAnswerResponse[]
             >([getMyAnswers(trainingId), getRightAnswers(trainingId)]);
+
+            setCanShowAnsers(rightAnswers.length > 0);
 
             /* If someday the Client changes his mind and asks that participants that for some reason
                didn't spin before to play the roulette, these three lines below will do that.
@@ -254,6 +258,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
         certificate,
         spinData,
         spin,
+        canShowAnsers,
       }}
     >
       {children}
