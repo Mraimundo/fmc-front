@@ -53,6 +53,10 @@ const loadSimulations = async (): Promise<SimulationData[]> => {
   }));
 };
 
+const deleteSimulation = async (simulationId: number): Promise<void> => {
+  console.log('deleted');
+};
+
 export {
   getChannels,
   getChannel,
@@ -62,4 +66,5 @@ export {
   getConfiguration,
   saveSimulation,
   loadSimulations,
+  deleteSimulation,
 };

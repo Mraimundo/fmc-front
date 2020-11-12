@@ -10,7 +10,10 @@ import {
 } from 'state/modules/points-simulator/selectors';
 import * as actions from 'state/modules/points-simulator/actions';
 import { getCoinQuotations } from 'state/modules/header/selectors';
-import { loadSimulations } from 'services/points-simulator/index';
+import {
+  loadSimulations,
+  deleteSimulation,
+} from 'services/points-simulator/index';
 
 import LoadSimulationModal, {
   TableData,
@@ -136,6 +139,10 @@ const PointsSimulator: React.FC = () => {
     [dispatch],
   );
 
+  const onDeleteSimulation = useCallback(async (simulationId: number) => {
+    await deleteSimulation(simulationId);
+  }, []);
+
   console.log('a');
 
   return (
@@ -176,6 +183,7 @@ const PointsSimulator: React.FC = () => {
         onRequestClose={() => setIsLoadSimulatioModalOpened(false)}
         tableData={savedSimulations}
         onLoadState={onLoadState}
+        onDeleteSimulation={onDeleteSimulation}
       />
     </Container>
   );

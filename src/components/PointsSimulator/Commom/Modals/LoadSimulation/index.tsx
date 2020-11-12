@@ -4,6 +4,7 @@ import { ReactSVG } from 'react-svg';
 import deleteImg from 'assets/images/points-simulator/delete.svg';
 import editImg from 'assets/images/points-simulator/edit.svg';
 
+import { useToast } from 'context/ToastContext';
 import { DefaultModal, Header, Table, Content, ActionsContent } from './styles';
 
 export interface TableData {
@@ -18,6 +19,7 @@ interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
   onLoadState(jsonStateInString: string): void;
+  onDeleteSimulation(simulationId: number): void | Promise<void>;
   tableData: TableData[];
 }
 
@@ -26,13 +28,26 @@ const Modal: React.FC<ModalProps> = ({
   onRequestClose,
   tableData,
   onLoadState,
+  onDeleteSimulation,
 }) => {
+  const { addToast } = useToast();
+
   const handleEditClick = useCallback(
     (jsonStateInString: string) => {
       onLoadState(jsonStateInString);
       onRequestClose();
     },
     [onLoadState, onRequestClose],
+  );
+  const [deletedIds, setDeletedIds] = useState<number[]>([]);
+
+  const handleDelectClick = useCallback(
+    async (simulationId: number) => {
+      await onDeleteSimulation(simulationId);
+      setDeletedIds(oldData => [...oldData, simulationId]);
+      addToast({ type: 'success', title: 'Simulação excluída!' });
+    },
+    [onDeleteSimulation, addToast],
   );
 
   const [inputSearchValue, setInputSearchValue] = useState('');
@@ -43,9 +58,10 @@ const Modal: React.FC<ModalProps> = ({
       setFilteredData(
         tableData.filter(
           item =>
-            inputSearchValue === '' ||
-            item.clientGroup.toLowerCase().includes(inputSearchValue) ||
-            item.simulationName.toLowerCase().includes(inputSearchValue),
+            !deletedIds.includes(item.id) &&
+            (inputSearchValue === '' ||
+              item.clientGroup.toLowerCase().includes(inputSearchValue) ||
+              item.simulationName.toLowerCase().includes(inputSearchValue)),
         ),
       );
     }, 700);
@@ -53,7 +69,7 @@ const Modal: React.FC<ModalProps> = ({
     return () => {
       clearTimeout(handler);
     };
-  }, [inputSearchValue, tableData]);
+  }, [inputSearchValue, tableData, deletedIds]);
 
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
@@ -92,7 +108,10 @@ const Modal: React.FC<ModalProps> = ({
                       />
                     </button>
                     <button type="button">
-                      <ReactSVG src={deleteImg} />
+                      <ReactSVG
+                        src={deleteImg}
+                        onClick={() => handleDelectClick(item.id)}
+                      />
                     </button>
                   </ActionsContent>
                 </td>
