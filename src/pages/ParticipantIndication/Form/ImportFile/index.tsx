@@ -4,6 +4,8 @@ import sendFile from 'services/participant-indication/importFile';
 import forceDownload from 'services/storage/getUrlToForceDownload';
 import FinishModal from 'components/ParticipantIndication/Modals/FinishImport';
 
+import { useAuth } from 'context/AuthContext';
+import { useToast } from 'context/ToastContext';
 import { Container, SaveButton } from './styles';
 
 const ImportFile: React.FC = () => {
@@ -15,6 +17,8 @@ const ImportFile: React.FC = () => {
   const [modalOpened, setModalOpened] = useState(false);
   const [importedLines, setImportedLines] = useState(0);
   const [errors, setErrors] = useState<string[]>([]);
+  const { simulating } = useAuth();
+  const { addToast } = useToast();
 
   useEffect(() => {
     setDownloadLink(
@@ -39,6 +43,10 @@ const ImportFile: React.FC = () => {
   );
 
   const handleImport = useCallback(async () => {
+    if (simulating) {
+      addToast({ type: 'error', title: 'Operação não permitida' });
+      return;
+    }
     setLoading(true);
     const result = await sendFile(fileUrl);
     setImportedLines(result.success_count);
@@ -46,7 +54,7 @@ const ImportFile: React.FC = () => {
     setFileUrl('');
     setLoading(false);
     setModalOpened(true);
-  }, [fileUrl]);
+  }, [fileUrl, addToast, simulating]);
 
   return (
     <Container>
