@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Product } from 'state/modules/points-simulator/interfaces';
@@ -143,7 +143,16 @@ const PointsSimulator: React.FC = () => {
     await deleteSimulation(simulationId);
   }, []);
 
-  console.log('a');
+  const quantityItemsAdded = useMemo(
+    () =>
+      products?.filter(
+        item =>
+          item.simulationData.unitValueInDollar > 0 &&
+          item.simulationData.revenuesInKilosPerLiter > 0 &&
+          item.simulationData.pogInKilosPerLiter > 0,
+      ).length || 0,
+    [products],
+  );
 
   return (
     <Container id="calculator">
@@ -174,6 +183,7 @@ const PointsSimulator: React.FC = () => {
               buttonActionText={
                 mode === Mode.calculator ? 'Calcular' : 'Recalcular'
               }
+              quantityItemsAdded={quantityItemsAdded}
             />
           </CustomTableBox>
         )}

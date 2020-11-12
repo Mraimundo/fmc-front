@@ -38,7 +38,8 @@ const CampaignsManagerReducer: Reducer<
         const { productId, value: revenuesInKilosPerLiter } = action.payload;
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
-            product.simulationData.revenuesInKilosPerLiter = revenuesInKilosPerLiter;
+            product.simulationData.revenuesInKilosPerLiter =
+              revenuesInKilosPerLiter || 0;
             product.simulationData = calculateSimulationDataProductValues(
               product.simulationData,
               product,

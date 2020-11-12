@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Product } from 'state/modules/points-simulator/interfaces';
 import { DataValueDTO } from 'state/modules/points-simulator/types';
@@ -31,6 +31,14 @@ const Tr: React.FC<TrProps> = ({
   setPogInKilosPerLiter,
 }) => {
   const [valuesData, setValuesData] = useState<ValuesData | null>(null);
+
+  const checked = useMemo(
+    () =>
+      product.simulationData.unitValueInDollar > 0 &&
+      product.simulationData.revenuesInKilosPerLiter > 0 &&
+      product.simulationData.pogInKilosPerLiter > 0,
+    [product.simulationData],
+  );
 
   useEffect(() => {
     if (product.isEnhancer) {
@@ -81,7 +89,7 @@ const Tr: React.FC<TrProps> = ({
   return (
     <Container participate={product.isParticipatingProduct}>
       <td>
-        <Checkbox color="default" />
+        <Checkbox color="default" checked={checked} />
       </td>
       <td>
         <ProductBox>

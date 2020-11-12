@@ -7,11 +7,15 @@ interface Props {
   dollarBaseValue: number;
   buttonActionText: string;
   handleButtonAction(): void;
+  quantityItemsAdded: number;
 }
 
-const Footer: React.FC<Props> = props => {
-  const { dollarBaseValue, handleButtonAction, buttonActionText } = props;
-
+const Footer: React.FC<Props> = ({
+  dollarBaseValue,
+  handleButtonAction,
+  buttonActionText,
+  quantityItemsAdded,
+}) => {
   return (
     <Container>
       <div>
@@ -20,7 +24,7 @@ const Footer: React.FC<Props> = props => {
         <strong>{formatPoints(dollarBaseValue)}</strong>
       </div>
       <div>
-        <span>Itens adicionados (00)</span>
+        <span>Itens adicionados ({quantityItemsAdded})</span>
         <Button
           buttonRole="tertiary"
           type="button"

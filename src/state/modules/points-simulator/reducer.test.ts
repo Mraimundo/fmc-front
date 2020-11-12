@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { Channel } from './interfaces';
-import reducer, { initialState, PointsSimulatorState } from './reducer';
+import { Channel, PointsSimulatorState } from './interfaces';
+import reducer, { initialState } from './reducer';
 import * as constants from './constants';
 import * as actions from './actions';
 import mockedState from './mock';

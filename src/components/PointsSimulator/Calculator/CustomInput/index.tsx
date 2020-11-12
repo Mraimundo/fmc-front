@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import NumberFormat, { NumberFormatValues } from 'react-number-format';
 
-import { formatPointsInput, formatKgl } from 'util/points';
+import { formatPointsInput, formatKglInput } from 'util/points';
 
 type Type = 'money' | 'kilograma';
 
@@ -29,9 +29,7 @@ const CustomInput: React.FC<Props> = ({
     ({ floatValue }: NumberFormatValues) => {
       const handler = setTimeout(() => {
         if (typeof onChange === 'undefined') return;
-        if (typeof floatValue === 'number') {
-          onChange(floatValue / (type === 'money' ? 100 : 1));
-        }
+        onChange((floatValue || 0) / (type === 'money' ? 100 : 1));
       }, 700);
 
       return () => {
@@ -41,13 +39,17 @@ const CustomInput: React.FC<Props> = ({
     [onChange, type],
   );
 
-  const format = type === 'money' ? formatPointsInput : formatKgl;
+  const format = type === 'money' ? formatPointsInput : formatKglInput;
 
   return (
     <NumberFormat
       thousandSeparator
       type="tel"
-      value={value ? (value || 0) * (type === 'money' ? 100 : 1) : undefined}
+      value={
+        typeof value === 'number'
+          ? (value || 0) * (type === 'money' ? 100 : 1)
+          : undefined
+      }
       defaultValue={(defaultValue || 0) * (type === 'money' ? 100 : 1)}
       format={format}
       allowNegative={false}
