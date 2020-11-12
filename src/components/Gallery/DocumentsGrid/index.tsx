@@ -10,9 +10,10 @@ import { Container, MiniBox } from './styles';
 
 interface Props {
   gallery: Media[];
+  simulating: boolean;
 }
 
-const DocumentsGrid: React.FC<Props> = ({ gallery }) => {
+const DocumentsGrid: React.FC<Props> = ({ gallery, simulating }) => {
   const [data, setData] = useState<Data[]>([]);
 
   useEffect(() => {
@@ -32,9 +33,15 @@ const DocumentsGrid: React.FC<Props> = ({ gallery }) => {
             <span>{`${item.date}`} </span>
             <p>{item.description}</p>
           </div>
-          <a href={item.download_url} download>
-            <ReactSVG src={DownloadIcon} />
-          </a>
+          {simulating ? (
+            <span className="link">
+              <ReactSVG src={DownloadIcon} />
+            </span>
+          ) : (
+            <a href={item.download_url} download>
+              <ReactSVG src={DownloadIcon} />
+            </a>
+          )}
         </MiniBox>
       ))}
     </Container>

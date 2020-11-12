@@ -27,7 +27,8 @@ export const MiniBox = styled.div`
     object-fit: cover;
   }
 
-  > a {
+  > a,
+  .link {
     align-self: center;
     margin-right: 20px;
     svg {
@@ -36,6 +37,10 @@ export const MiniBox = styled.div`
         fill: ${({ theme }) => theme.font.color.primary};
       }
     }
+  }
+
+  .link {
+    cursor: not-allowed;
   }
 
   > div {
@@ -94,7 +99,8 @@ export const MiniBox = styled.div`
       width: 100%;
     }
 
-    > a {
+    > a,
+    link {
       align-self: flex-end;
       margin-top: 10px;
       margin-right: 0;
