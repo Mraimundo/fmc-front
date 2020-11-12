@@ -58,6 +58,7 @@ export interface Indicators {
 
 export interface Configuration {
   partial_date: Date;
+  pog_realized_net_percentage: number;
 }
 
 export interface SimulationData {

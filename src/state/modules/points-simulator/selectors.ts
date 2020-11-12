@@ -1,6 +1,16 @@
 import { StoreState } from 'state/root-reducer';
-import { Product, Channel, Indicator, Configuration } from './interfaces';
+import {
+  Product,
+  Channel,
+  Indicator,
+  Configuration,
+  PointsSimulatorState,
+} from './interfaces';
 import { Mode } from './types';
+
+export const getPointsSimulatorFullState = (
+  state: StoreState,
+): PointsSimulatorState => state.pointsSimulator;
 
 export const getProducts = (state: StoreState): Product[] | null =>
   state.pointsSimulator.products;

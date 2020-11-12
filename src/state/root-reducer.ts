@@ -9,9 +9,8 @@ import campaignsManager, {
   CampaignsManagerState,
 } from './modules/campaigns-manager/reducer';
 import goals, { GoalsState } from './modules/goals/reducer';
-import pointsSimulator, {
-  PointsSimulatorState,
-} from './modules/points-simulator/reducer';
+import pointsSimulator from './modules/points-simulator/reducer';
+import { PointsSimulatorState } from './modules/points-simulator/interfaces';
 
 export type StoreState = {
   pointManagement: PointManagementState;

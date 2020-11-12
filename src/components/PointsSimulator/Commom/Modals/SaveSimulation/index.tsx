@@ -11,7 +11,7 @@ interface ModalProps {
   onRequestClose(): void;
   simulationDate: Date;
   channel: Channel;
-  onSave(data: SaveSimulationDTO): Promise<void>;
+  onSave(data: Omit<SaveSimulationDTO, 'jsonDataInString'>): Promise<void>;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -38,7 +38,6 @@ const Modal: React.FC<ModalProps> = ({
     await onSave({
       channelId: channel.id,
       simulationName,
-      jsonDataInString: '',
     });
     addToast({
       type: 'success',

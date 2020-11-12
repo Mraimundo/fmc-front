@@ -10,13 +10,17 @@ import {
 } from 'state/modules/points-simulator/selectors';
 import * as actions from 'state/modules/points-simulator/actions';
 import { getCoinQuotations } from 'state/modules/header/selectors';
+import { loadSimulations } from 'services/points-simulator/index';
 
-import LoadSimulationModal from 'components/PointsSimulator/Commom/Modals/LoadSimulation';
+import LoadSimulationModal, {
+  TableData,
+} from 'components/PointsSimulator/Commom/Modals/LoadSimulation';
 import Header, { Tab } from 'components/PointsSimulator/Calculator/Header';
 import Table from 'components/PointsSimulator/Calculator/Table';
 import Footer from 'components/PointsSimulator/Calculator/Footer';
 
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
+import { formatDate } from 'util/datetime';
 import { Container, Content, CustomTableBox, Box } from './styles';
 
 interface Filter {
@@ -28,6 +32,7 @@ const PointsSimulator: React.FC = () => {
   const [isLoadSimulatioModalOpened, setIsLoadSimulatioModalOpened] = useState(
     false,
   );
+  const [savedSimulations, setSavedSimulations] = useState<TableData[]>([]);
   const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
   const channel = useSelector(getChannel);
@@ -37,6 +42,21 @@ const PointsSimulator: React.FC = () => {
   const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
   const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isLoadSimulatioModalOpened) return;
+    loadSimulations().then(data =>
+      setSavedSimulations(
+        data.map(simulation => ({
+          id: simulation.id,
+          clientGroup: simulation.client_group,
+          simulationDate: formatDate(simulation.simulation_date),
+          simulationName: simulation.simulation_name,
+          jsonStateInString: simulation.data_json_in_string,
+        })),
+      ),
+    );
+  }, [isLoadSimulatioModalOpened]);
 
   useEffect(() => {
     dispatch(
@@ -109,6 +129,15 @@ const PointsSimulator: React.FC = () => {
     [dispatch],
   );
 
+  const onLoadState = useCallback(
+    (jsonStateInString: string) => {
+      dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
+    },
+    [dispatch],
+  );
+
+  console.log('a');
+
   return (
     <Container id="calculator">
       <Content>
@@ -145,6 +174,8 @@ const PointsSimulator: React.FC = () => {
       <LoadSimulationModal
         isOpen={isLoadSimulatioModalOpened}
         onRequestClose={() => setIsLoadSimulatioModalOpened(false)}
+        tableData={savedSimulations}
+        onLoadState={onLoadState}
       />
     </Container>
   );

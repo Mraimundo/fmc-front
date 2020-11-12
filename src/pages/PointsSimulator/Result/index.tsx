@@ -8,6 +8,7 @@ import {
   getIndicators,
   getConfiguration,
   getChannel,
+  getPointsSimulatorFullState,
 } from 'state/modules/points-simulator/selectors';
 
 import SaveSimulationModal from 'components/PointsSimulator/Commom/Modals/SaveSimulation';
@@ -26,17 +27,24 @@ const Result: React.FC = () => {
   const indicators = useSelector(getIndicators);
   const { partialDate } = useSelector(getConfiguration);
   const channel = useSelector(getChannel);
+  const pointsSimulatorState = useSelector(getPointsSimulatorFullState);
   const simulatedDate = new Date();
 
   useEffect(() => {
     setIndicatorCards(indicatorsToCards(indicators));
   }, [indicators]);
 
-  const onSaveSimulation = useCallback(async (data: SaveSimulationDTO): Promise<
-    void
-  > => {
-    await saveSimulation(data);
-  }, []);
+  const onSaveSimulation = useCallback(
+    async (
+      data: Omit<SaveSimulationDTO, 'jsonDataInString'>,
+    ): Promise<void> => {
+      await saveSimulation({
+        ...data,
+        jsonDataInString: JSON.stringify(pointsSimulatorState),
+      });
+    },
+    [pointsSimulatorState],
+  );
 
   return (
     <Container id="result">

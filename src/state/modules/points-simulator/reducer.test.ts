@@ -13,14 +13,23 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
     const unitValueInDollarToSet = 12.5;
     const revenuesValueInKilosPerLiterToSet = 80000;
     const pogValueInKilosPerLiterToSet = 800;
+    const pogNetPercentage = 10;
+    const dollarBaseValue = 4.51;
     const expectedRevenuesInDollar = 1000000;
     const expectedPogUnitValue = 11.764705882352942;
-    const expectPogInDollar = 9411.764705882353;
+    const expectedPogInDollar = 9411.764705882353;
+    const expectedPogRealizedNetInDollar = 941.1764705882352;
+    const expectedPogRealizedNetInReal = 4244.7058823529405;
 
     const productId = mockedState.products[productIndex].id;
     const product = { ...mockedState.products[productIndex] };
     const mockedStateWithJustTheFirstProduct: PointsSimulatorState = {
       ...mockedState,
+      dollarBaseValue,
+      configuration: {
+        ...mockedState.configuration,
+        pogRealizedNetPercentage: pogNetPercentage,
+      },
       products: [product],
     };
 
@@ -60,7 +69,9 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
             pogInKilosPerLiter: pogValueInKilosPerLiterToSet,
             revenuesInDollar: expectedRevenuesInDollar,
             pogUnitValueInDollar: expectedPogUnitValue,
-            pogInDollar: expectPogInDollar,
+            pogInDollar: expectedPogInDollar,
+            pogRealizedNetInDollar: expectedPogRealizedNetInDollar,
+            pogRealizedNetInReal: expectedPogRealizedNetInReal,
           },
         },
       ],

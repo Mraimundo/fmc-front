@@ -1,25 +1,11 @@
 import { Reducer } from 'redux';
 import produce from 'immer';
-import { FetchState } from '@types';
 import { emptyFetchState, fetchErrorState, fetchingState } from 'state/utils';
 import { Mode } from './types';
-import { Product, Channel, Indicator, Configuration } from './interfaces';
+import { PointsSimulatorState } from './interfaces';
 import { PointsSimulatorActions } from './actions';
 import * as constants from './constants';
-
-export type PointsSimulatorState = {
-  mode: Mode;
-  fetchChannel: FetchState;
-  channel: Channel | null;
-  fetchProducts: FetchState;
-  products: Product[];
-  dollarBaseValue: number;
-  fetchCalculate: FetchState;
-  fetchIndicators: FetchState;
-  indicators: Indicator[];
-  fetchConfiguration: FetchState;
-  configuration: Configuration;
-};
+import calculateSimulationDataProductValues from './services/get-calculate-simulation-data-product-values';
 
 export const initialState: PointsSimulatorState = {
   mode: Mode.calculator,
@@ -32,7 +18,7 @@ export const initialState: PointsSimulatorState = {
   fetchIndicators: emptyFetchState,
   indicators: [],
   fetchConfiguration: emptyFetchState,
-  configuration: {},
+  configuration: { pogRealizedNetPercentage: 0 },
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -43,25 +29,22 @@ const CampaignsManagerReducer: Reducer<
   action: PointsSimulatorActions,
 ): PointsSimulatorState => {
   switch (action.type) {
+    case constants.SET_PRODUCTS_VALUES:
+      return produce(state, draft => {
+        draft.products = action.payload;
+      });
     case constants.SET_REVENUES_IN_KILOS_PER_LITER:
       return produce(state, draft => {
         const { productId, value: revenuesInKilosPerLiter } = action.payload;
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
             product.simulationData.revenuesInKilosPerLiter = revenuesInKilosPerLiter;
-
-            product.simulationData.revenuesInDollar =
-              revenuesInKilosPerLiter *
-              product.simulationData.unitValueInDollar;
-
-            product.simulationData.pogUnitValueInDollar =
-              (product.stock.inDollar +
-                product.simulationData.revenuesInDollar) /
-              (product.stock.inKilosPerLiter + revenuesInKilosPerLiter);
-
-            product.simulationData.pogInDollar =
-              product.simulationData.pogInKilosPerLiter *
-              product.simulationData.pogUnitValueInDollar;
+            product.simulationData = calculateSimulationDataProductValues(
+              product.simulationData,
+              product,
+              state.configuration,
+              state.dollarBaseValue,
+            );
           }
           return product;
         });
@@ -72,8 +55,12 @@ const CampaignsManagerReducer: Reducer<
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
             product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
-            product.simulationData.pogInDollar =
-              pogInKilosPerLiter * product.simulationData.pogUnitValueInDollar;
+            product.simulationData = calculateSimulationDataProductValues(
+              product.simulationData,
+              product,
+              state.configuration,
+              state.dollarBaseValue,
+            );
           }
           return product;
         });
@@ -84,20 +71,12 @@ const CampaignsManagerReducer: Reducer<
         draft.products = draft.products.map(product => {
           if (product.id === productId) {
             product.simulationData.unitValueInDollar = unitValueInDollar;
-
-            product.simulationData.revenuesInDollar =
-              product.simulationData.revenuesInKilosPerLiter *
-              unitValueInDollar;
-
-            product.simulationData.pogUnitValueInDollar =
-              (product.stock.inDollar +
-                product.simulationData.revenuesInDollar) /
-              (product.stock.inKilosPerLiter +
-                product.simulationData.revenuesInKilosPerLiter);
-
-            product.simulationData.pogInDollar =
-              product.simulationData.pogInKilosPerLiter *
-              product.simulationData.pogUnitValueInDollar;
+            product.simulationData = calculateSimulationDataProductValues(
+              product.simulationData,
+              product,
+              state.configuration,
+              state.dollarBaseValue,
+            );
           }
           return product;
         });
@@ -156,6 +135,10 @@ const CampaignsManagerReducer: Reducer<
         fetchCalculate: emptyFetchState,
         indicators: action.payload.indicators,
       };
+    case constants.FETCH_LOAD_STATE_SUCCESS:
+      return action.payload;
+    case constants.RESET:
+      return initialState;
     default:
       return state;
   }

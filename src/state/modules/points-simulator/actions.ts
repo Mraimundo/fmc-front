@@ -4,7 +4,13 @@ import {
   ActionCreatorFailure,
 } from '@types';
 import { DataValueDTO, Mode, CalcutationDTO } from './types';
-import { Product, Channel, Indicator, Configuration } from './interfaces';
+import {
+  Product,
+  Channel,
+  Indicator,
+  Configuration,
+  PointsSimulatorState,
+} from './interfaces';
 
 import * as constants from './constants';
 
@@ -179,6 +185,38 @@ export const fetchConfigurationSuccess = (
     payload: data,
   };
 
+export const fetchLoadState = (
+  data: PointsSimulatorState,
+): ActionCreatorPayload<
+  typeof constants.FETCH_LOAD_STATE,
+  PointsSimulatorState
+> =>
+  <const>{
+    type: constants.FETCH_LOAD_STATE,
+    payload: data,
+  };
+
+export const fetchLoadStateSuccess = (
+  data: PointsSimulatorState,
+): ActionCreatorPayload<
+  typeof constants.FETCH_LOAD_STATE_SUCCESS,
+  PointsSimulatorState
+> =>
+  <const>{
+    type: constants.FETCH_LOAD_STATE_SUCCESS,
+    payload: data,
+  };
+
+export const reset = (): ActionCreator<typeof constants.RESET> =>
+  <const>{
+    type: constants.RESET,
+  };
+
+export const setProductsValues = (
+  data: Product[],
+): ActionCreatorPayload<typeof constants.SET_PRODUCTS_VALUES, Product[]> =>
+  <const>{ type: constants.SET_PRODUCTS_VALUES, payload: data };
+
 export type PointsSimulatorActions = ReturnType<
   | typeof setUnitValueInDollar
   | typeof setRevenuesValueInKilosPerLiter
@@ -199,4 +237,8 @@ export type PointsSimulatorActions = ReturnType<
   | typeof setMode
   | typeof fetchCalculate
   | typeof fetchCalculateSuccess
+  | typeof fetchLoadState
+  | typeof fetchLoadStateSuccess
+  | typeof reset
+  | typeof setProductsValues
 >;

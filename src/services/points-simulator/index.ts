@@ -14,6 +14,8 @@ import mockedChannels from './mock/channels';
 import mockedConfiguration from './mock/configuration';
 import mockedSimulationData from './mock/simulationData';
 
+const test: SaveSimulationDTO[] = [];
+
 const getChannels = async (): Promise<Channel[]> => {
   return mockedChannels;
 };
@@ -39,11 +41,16 @@ const getConfiguration = async (channelId: number): Promise<Configuration> => {
 };
 
 const saveSimulation = async (data: SaveSimulationDTO): Promise<void> => {
-  console.log('saved');
+  test.push(data);
+  console.log('saved', data);
 };
 
-const loadSimulation = async (simulationId): Promise<SimulationData[]> => {
-  return mockedSimulationData;
+const loadSimulations = async (): Promise<SimulationData[]> => {
+  if (test.length === 0) return [];
+  return mockedSimulationData.map(item => ({
+    ...item,
+    data_json_in_string: test[0]?.jsonDataInString || '',
+  }));
 };
 
 export {
@@ -54,5 +61,5 @@ export {
   getIndicators,
   getConfiguration,
   saveSimulation,
-  loadSimulation,
+  loadSimulations,
 };

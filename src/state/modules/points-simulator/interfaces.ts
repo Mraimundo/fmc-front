@@ -1,12 +1,16 @@
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
+import { FetchState } from '@types';
+import { Mode } from './types';
 
 export interface SimulationData {
   unitValueInDollar: number;
   revenuesInKilosPerLiter: number;
   revenuesInDollar: number;
+  pogInKilosPerLiter: number;
   pogUnitValueInDollar: number;
-  pogInKilosPerLiter: number; // Agora será o dado digitado pelo usuario
-  pogInDollar: number; // unitario * valor de entrada do usuário
+  pogInDollar: number;
+  pogRealizedNetInDollar: number;
+  pogRealizedNetInReal: number;
 }
 
 export interface Stock {
@@ -79,4 +83,19 @@ export interface Indicator {
 
 export interface Configuration {
   partialDate?: Date;
+  pogRealizedNetPercentage: number;
 }
+
+export type PointsSimulatorState = {
+  mode: Mode;
+  fetchChannel: FetchState;
+  channel: Channel | null;
+  fetchProducts: FetchState;
+  products: Product[];
+  dollarBaseValue: number;
+  fetchCalculate: FetchState;
+  fetchIndicators: FetchState;
+  indicators: Indicator[];
+  fetchConfiguration: FetchState;
+  configuration: Configuration;
+};

@@ -1,8 +1,7 @@
 import { EstablishmentCategory, EstablishmentTypes } from 'config/constants';
 import { emptyFetchState } from 'state/utils';
 import { Mode } from './types';
-import { PointsSimulatorState } from './reducer';
-import { IndicatorType, UnitType } from './interfaces';
+import { IndicatorType, UnitType, PointsSimulatorState } from './interfaces';
 
 const mock: PointsSimulatorState = {
   fetchChannel: emptyFetchState,
@@ -11,6 +10,7 @@ const mock: PointsSimulatorState = {
   fetchConfiguration: emptyFetchState,
   configuration: {
     partialDate: new Date(),
+    pogRealizedNetPercentage: 10,
   },
   channel: {
     id: 1,
@@ -54,6 +54,8 @@ const mock: PointsSimulatorState = {
         pogInKilosPerLiter: 0,
         pogInDollar: 0,
         pogUnitValueInDollar: 0,
+        pogRealizedNetInDollar: 0,
+        pogRealizedNetInReal: 0,
       },
     },
   ],

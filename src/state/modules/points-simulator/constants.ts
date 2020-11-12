@@ -1,5 +1,13 @@
 export const SET_MODE = '@fmc/points-simulator/SET_MODE';
 
+export const FETCH_LOAD_STATE = '@fmc/points-simulator/FETCH_LOAD_STATE';
+export const FETCH_LOAD_STATE_SUCCESS =
+  '@fmc/points-simulator/FETCH_LOAD_STATE_SUCCESS';
+
+export const SET_PRODUCTS_VALUES = '@fmc/points-simulator/SET_PRODUCTS_VALUES';
+
+export const RESET = '@fmc/points-simulator/RESET';
+
 export const SET_DOLLAR_BASE_VALUE =
   '@fmc/points-simulator/SET_DOLLAR_BASE_VALUE';
 

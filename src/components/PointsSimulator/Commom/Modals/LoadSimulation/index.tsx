@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ReactSVG } from 'react-svg';
 
 import deleteImg from 'assets/images/points-simulator/delete.svg';
@@ -11,15 +11,30 @@ export interface TableData {
   simulationDate: string;
   clientGroup: string;
   simulationName: string;
+  jsonStateInString: string;
 }
 
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
+  onLoadState(jsonStateInString: string): void;
   tableData: TableData[];
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose, tableData }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onRequestClose,
+  tableData,
+  onLoadState,
+}) => {
+  const handleEditClick = useCallback(
+    (jsonStateInString: string) => {
+      onLoadState(jsonStateInString);
+      onRequestClose();
+    },
+    [onLoadState, onRequestClose],
+  );
+
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
       <Content>
@@ -49,7 +64,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose, tableData }) => {
                 <td>
                   <ActionsContent>
                     <button type="button">
-                      <ReactSVG src={editImg} />
+                      <ReactSVG
+                        src={editImg}
+                        onClick={() => handleEditClick(item.jsonStateInString)}
+                      />
                     </button>
                     <button type="button">
                       <ReactSVG src={deleteImg} />

@@ -10,12 +10,23 @@ import {
 } from 'services/points-simulator/interfaces/api-interface';
 
 import * as services from 'services/points-simulator';
+import { emptyFetchState } from 'state/utils';
 import * as transformers from './transformers';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as constants from './constants';
-import { Product, Indicator, IndicatorType, Channel } from './interfaces';
+import {
+  Product,
+  Indicator,
+  IndicatorType,
+  Channel,
+  PointsSimulatorState,
+  Configuration,
+} from './interfaces';
 import getCalculatedIndicators from './services/get-calculated-indicators';
+import calculateSimulationDataProductValues from './services/get-calculate-simulation-data-product-values';
+import { Mode } from './types';
+import { initialState } from './reducer';
 
 export function* fetchChannel({
   payload,
@@ -116,6 +127,73 @@ export function* calculateSimulation() {
   }
 }
 
+export function* fetchLoadState({
+  payload,
+}: ActionCreatorPayload<
+  typeof constants.FETCH_LOAD_STATE,
+  PointsSimulatorState
+>) {
+  try {
+    yield put(actions.reset());
+
+    const channelId = payload.channel?.id || 0;
+
+    if (!channelId) {
+      throw new Error('Falha ao carregar simulação. Canal não encontrado.');
+    }
+
+    const channelApi: Channel = transformers.channelApiToChannel(
+      yield call(services.getChannel, payload.channel?.id || 0),
+    );
+
+    const productsApi: Product[] = transformers.productsApiToProducts(
+      yield call(services.getProducts, channelId),
+    );
+
+    const indicatorsApi: Indicator[] = transformers.indicatorsApiToIndicators(
+      yield call(services.getIndicators, channelId),
+    );
+
+    const configurationApi: Configuration = transformers.configurationApiToConfiguration(
+      yield call(services.getConfiguration, channelId),
+    );
+
+    const productsToSet = payload.products.map(product => {
+      const productApiFound = productsApi.find(item => item.id === product.id);
+      if (productApiFound) {
+        product.pog = productApiFound.pog;
+        product.revenues = productApiFound.revenues;
+        product.stock = productApiFound.stock;
+        product.simulationData = calculateSimulationDataProductValues(
+          product.simulationData,
+          productApiFound,
+          configurationApi,
+          payload.dollarBaseValue,
+        );
+      }
+      return product;
+    });
+
+    const state: PointsSimulatorState = {
+      channel: channelApi,
+      configuration: configurationApi,
+      dollarBaseValue: payload.dollarBaseValue,
+      fetchCalculate: emptyFetchState,
+      fetchChannel: emptyFetchState,
+      fetchConfiguration: emptyFetchState,
+      fetchIndicators: emptyFetchState,
+      fetchProducts: emptyFetchState,
+      indicators: indicatorsApi,
+      mode: Mode.calculator,
+      products: productsToSet,
+    };
+
+    yield put(actions.fetchLoadStateSuccess(state));
+  } catch (error) {
+    yield put(actions.fetchLoadStateSuccess(initialState));
+  }
+}
+
 export default function* pointsSimulatorSagas() {
   yield all([
     takeEvery(constants.FETCH_CHANNEL_ACTION, fetchChannel),
@@ -123,5 +201,6 @@ export default function* pointsSimulatorSagas() {
     takeEvery(constants.FETCH_INDICATORS_ACTION, fetchIndicators),
     takeEvery(constants.FETCH_CONFIGURATION_ACTION, fetchConfiguration),
     takeEvery(constants.CALCULATE_SIMULATION_ACTION, calculateSimulation),
+    takeEvery(constants.FETCH_LOAD_STATE, fetchLoadState),
   ]);
 }

@@ -56,6 +56,8 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       pogInKilosPerLiter: 0,
       pogInDollar: 0,
       pogUnitValueInDollar: 0,
+      pogRealizedNetInDollar: 0,
+      pogRealizedNetInReal: 0,
     },
   }));
 
@@ -175,6 +177,7 @@ const configurationApiToConfiguration = (
 ): Configuration => {
   return {
     partialDate: configuration.partial_date,
+    pogRealizedNetPercentage: configuration.pog_realized_net_percentage,
   };
 };
 
