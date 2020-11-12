@@ -133,8 +133,8 @@ const FarmDataForm: React.FC<Props> = ({
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Obs>
-        *Somente para produtores que realizam compras usando mais de um
-        CPF/CNPJ.
+        Se você realiza compras com mais de um CPNJ/CPF, cadastre abaixo para
+        que todas as notas do grupo sejam validas.
       </Obs>
 
       <Input
@@ -148,7 +148,7 @@ const FarmDataForm: React.FC<Props> = ({
           onClick={() => setMemberFormIsVisible(true)}
           type="button"
         >
-          - Adicionar CNPJ e/ou CPF cadastrados do grupo
+          - Adicionar CNPJ e/ou CPFdo grupo
         </AddMemberButton>
       </MemberActionContainer>
 

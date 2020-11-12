@@ -91,11 +91,7 @@ const PersonalDataForm: React.FC<Props> = ({
       </BoxPhone>
       {participant.profile === PROFILES.producer && (
         <>
-          <Input
-            name="producer_cpf"
-            label="CPF do produtor (código do produtor agrícola)"
-            inputRole={inputRole}
-          />
+          <Input name="producer_cpf" label="CPF" inputRole={inputRole} />
           <Input
             name="formatted_birth_date"
             label="Data de nascimento"

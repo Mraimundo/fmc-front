@@ -8,7 +8,15 @@ interface Props {
   inputRole?: 'primary' | 'secondary';
 }
 
-const values = ['opt1', 'opt2'];
+const values = [
+  'Por meio da revenda onde compro produtos FMC',
+  'Por meio da cooperativa onde compro produtos FMC',
+  'Por meio de um amigo',
+  'Por meio do site FMC',
+  'Por meio das redes sociais',
+  'Por meio da mídia',
+  'Peças publicitárias',
+];
 
 const ComoFicouConhecendoSelect: React.FC<Props> = ({
   name,
