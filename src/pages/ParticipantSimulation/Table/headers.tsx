@@ -7,6 +7,10 @@ export default [
     dataValue: 'clientCode',
   },
   {
+    column: 'Grupo de Cliente',
+    dataValue: 'clientGroup',
+  },
+  {
     column: 'Nome',
     dataValue: 'name',
   },
