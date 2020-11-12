@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Visible, Hidden } from 'react-grid-system';
 
+import getParticipantAccessPi from 'services/showcase/getParticipantsToAccessPI';
+
 import { PROFILES } from 'config/constants';
 import { useAuth } from 'context/AuthContext';
 import {
@@ -73,6 +75,15 @@ const DefaultHome: React.FC = () => {
     realized: {},
   } as IPerformance);
 
+  const [harvestPoints, setHarvestPoints] = useState(0);
+
+  useEffect(() => {
+    getParticipantAccessPi().then(data => {
+      const foundEstablishment = data.find(item => item.type === 'cnpj');
+      setHarvestPoints(foundEstablishment?.points || 0);
+    });
+  }, []);
+
   useEffect(() => {
     if (!billingPog || !potentializers) return;
     setRealized({
@@ -112,7 +123,10 @@ const DefaultHome: React.FC = () => {
               </PerformanceWrapper>
               <MyPointsWrapper>
                 <Title>Meus pontos</Title>
-                <MyPoints isParticipant={isParticipant} />
+                <MyPoints
+                  isParticipant={isParticipant}
+                  points={harvestPoints}
+                />
               </MyPointsWrapper>
             </>
           )}
