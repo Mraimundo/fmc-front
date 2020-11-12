@@ -6,6 +6,7 @@ export interface Participant {
   clientCode: string;
   name: string;
   email: string;
+  clientGroup: string;
 }
 
 export interface FilterOptions {
@@ -66,6 +67,7 @@ export default async (filters: FilterOptions): Promise<Response> => {
       clientCode: item.client_code,
       name: item.name,
       email: item.email,
+      clientGroup: item.client_group,
     })),
     pagination,
   };
