@@ -67,7 +67,7 @@ export const Content = styled(animated.div)`
 
     button {
       height: 38px;
-      width: 160px;
+      width: auto;
       text-transform: uppercase;
       font-size: 12px;
     }
@@ -245,7 +245,7 @@ export const SingleSignOnButton = styled(Button)`
 `;
 
 export const Modal = styled(DefaultModal)`
-  padding-left:0;
+  padding-left: 0;
   @media screen and (max-width: 720px) {
     ._modalContainer {
       width: 98%;
@@ -265,7 +265,7 @@ export const ContainerModal = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 90%;
-  padding: 60px 35px;
+  padding: 20px 0 60px 0;
   margin: auto;
   @media (min-width: 768px) {
     width: 743px;
@@ -281,15 +281,29 @@ export const ContainerModal = styled.div`
     margin-bottom: 20px;
     font-size: 18px;
     text-align: center;
-    @media (min-width:1024px) {
+    @media (min-width: 1024px) {
       font-size: 24px;
     }
   }
 
   button {
-    width: 160px;
+    width: auto;
     height: 40px;
     text-transform: uppercase;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+`;
+
+export const Close = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  transform: translateX(-4px) translateY(4px);
+  > button {
+    border: none;
+    background: transparent;
+    svg path {
+      fill: ${({ theme }) => theme.font.color.tertiary};
+    }
   }
 `;

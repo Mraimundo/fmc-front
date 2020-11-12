@@ -72,7 +72,7 @@ const ModalPreCadastro: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       try {
         const { message } = await openTicket({
           ...data,
-          subjectId: 20,
+          subjectId: 21,
         });
         addToast({ title: message });
         onRequestClose();

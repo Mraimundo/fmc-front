@@ -30,7 +30,7 @@ const AddNF: React.FC = () => {
           </p>
           <RightSideBox>
             <StatusTable nfListLength={nfListLength} />
-            <Upload onUpdate={() => getNfData()} />
+            <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
           </RightSideBox>
         </div>
       </Content>

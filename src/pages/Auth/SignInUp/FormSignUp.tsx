@@ -4,6 +4,9 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
 
+import { ReactSVG } from 'react-svg';
+import closeIcon from 'assets/images/training/close-icon.svg';
+
 import { Input, Button } from 'components/shared';
 
 import history from 'services/history';
@@ -15,7 +18,7 @@ import {
 import DefaultModal from 'components/shared/Modal';
 import ModalPreCadastro from '../../../components/Contact/Disconnected/ModalPreCadastro';
 
-import { MenuList, ItemList, ContainerModal, InlineLink } from './styles';
+import { MenuList, ItemList, ContainerModal, Close } from './styles';
 
 interface SignUpFormData {
   param_first_access: string;
@@ -86,23 +89,27 @@ const FormSignUp: React.FC = () => {
         type="secondary"
       >
         <ContainerModal>
+          <Close>
+            <button type="button" onClick={onRequestClose}>
+              <ReactSVG src={closeIcon} />
+            </button>
+          </Close>
           <h3> Bem-vindo(a)! </h3>
           <p>
-            Se você é um produtor(a) que compra produtos FMC por meio das
-            revendas ou cooperativas pertencentes ao programa JUNTOS FMC,{' '}
-            <InlineLink onClick={handleOpenPreCadastro}>clique aqui</InlineLink>{' '}
-            para se cadastrar.
+            Caso seja colaborador(a) de um canal Juntos FMC, por favor, solicite
+            sua indicação de acesso diretamente no seu estabelecimento.
           </p>
           <p>
-            Se for colaborador(a) de um canal JUNTOS FMC, por favor, solicite
-            sua indicação de acesso diretamente ao seu estabelecimento.
+            Se você é um Produtor(a) que compra produtos FMC através das
+            Revendas ou Cooperativas pertencentes ao programa Juntos FMC, clique
+            no botão abaixo para se cadastrar.
           </p>
           <Button
             type="submit"
             buttonRole="quaternary"
-            onClick={onRequestClose}
+            onClick={handleOpenPreCadastro}
           >
-            OK
+            SOU PRODUTOR
           </Button>
         </ContainerModal>
       </DefaultModal>
