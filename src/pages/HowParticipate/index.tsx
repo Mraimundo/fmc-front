@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import useDimensions from 'hooks/use-window-dimensions';
+import parser from 'html-react-parser';
 import getData, {
   HowParticipate as IHowParticipate,
 } from 'services/participants/howParticipate';
 
 import { SliderHowParticipate } from 'components/HowParticipate';
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Content,
-  Actions,
-  StepsContainer,
-  StepsContent,
-  StepsTitle,
-} from './styles';
+import { Container, Content, Actions, StepsContainer, Text } from './styles';
 
 interface SlideItem {
   picture: string;
@@ -32,8 +26,9 @@ const DefaultHowParticipate: React.FC = () => {
 
   useEffect(() => {
     if (!data) return;
-
-    setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+    if (data.slider.length > 0) {
+      setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+    }
   }, [data]);
 
   return (
@@ -41,14 +36,12 @@ const DefaultHowParticipate: React.FC = () => {
       <Content>
         <img
           src={width > 500 ? data?.pictureUrl : data?.mobilePictureUrl}
-          alt={data?.description}
+          alt="Como Participar"
         />
+        <Text>{parser(data?.description || '')}</Text>
         {slideItems.length > 0 && (
           <StepsContainer>
-            <StepsContent>
-              <StepsTitle>Veja como é fácil participar</StepsTitle>
-              <SliderHowParticipate items={slideItems} />
-            </StepsContent>
+            <SliderHowParticipate items={slideItems} />
           </StepsContainer>
         )}
         <Actions>

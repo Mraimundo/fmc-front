@@ -27,10 +27,12 @@ const getPublicSubjects = async (): Promise<Subject[]> => {
 
 const getPublicSubjectsForSelect = async (): Promise<Option[]> => {
   const subjects = await getPublicSubjects();
-  return subjects.map(item => ({
+  const subjectsMap = subjects.map(item => ({
     value: item.id,
     title: item.title,
   }));
+
+  return subjectsMap.filter(item => parseInt(item.value, 10) !== 21);
 };
 
 export { getPublicSubjects, getPublicSubjectsForSelect };

@@ -24,6 +24,10 @@ export const Content = styled.div`
   padding: 33px 46px;
   flex: 1;
 
+  ol {
+    list-style-position: inside;
+  }
+
   > a {
     color: ${({ theme }) => theme.font.color.primary};
     font-family: ${({ theme }) => theme.font.fontFamily.bold};

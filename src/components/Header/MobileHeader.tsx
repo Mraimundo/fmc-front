@@ -20,7 +20,7 @@ import {
 const Header: React.FC = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const { participant, signOut } = useAuth();
+  const { participant, signOut, simulating } = useAuth();
   const { menu } = useMenu();
 
   const toggleMenu = useCallback(() => {
@@ -43,7 +43,9 @@ const Header: React.FC = () => {
       <HeaderToggleMenu>
         <img src={menuIcon} alt="" title="" onClick={toggleMenu} />
         <EstablishmentType>
-          {participant.establishment.type_name}
+          {participant.profile === 'PRODUTOR'
+            ? 'PRODUTOR'
+            : participant.establishment.type_name}
         </EstablishmentType>
       </HeaderToggleMenu>
       <MobileNav open={menuIsOpen}>
@@ -59,7 +61,9 @@ const Header: React.FC = () => {
             participant.profile === 'FMC' ? null : participant.establishment
           }
         />
-        {!!menu && <MobileMenu items={menu} signOut={signOut} />}
+        {!!menu && (
+          <MobileMenu items={menu} signOut={signOut} simulating={simulating} />
+        )}
       </MobileNav>
     </>
   );

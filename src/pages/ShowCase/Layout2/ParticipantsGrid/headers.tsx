@@ -22,8 +22,8 @@ export default [
   },
   {
     column: ' ',
-    dataValue: 'urlPi',
-    fn: (urlPi: string) => <Actions name="Acessar" actionUrl={urlPi} />,
+    dataValue: 'id',
+    fn: (id: string) => <Actions establishmentId={id} />,
     className: '_customWidth',
   },
 ];

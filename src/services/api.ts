@@ -18,6 +18,10 @@ const notAllowedReadOnlyMethods: (Method | undefined)[] = [
   'patch',
 ];
 
+let readOnly = false;
+
+type Mode = 'write' | 'readonly';
+
 const pluginApi = axios.create({
   baseURL: `${baseURL}/${plugin}/api/v1`,
   headers,
@@ -43,12 +47,10 @@ const coinQuotationApi = axios.create({
 const setToken = (token: string): void => {
   vendavallApi.defaults.headers.authorization = token;
   pluginApi.defaults.headers.authorization = token;
-};
 
-const setReadOnly = (): void => {
   pluginApi.interceptors.request.use(
     req => {
-      if (notAllowedReadOnlyMethods.includes(req.method)) {
+      if (readOnly && notAllowedReadOnlyMethods.includes(req.method)) {
         throw new ApiError('Operação não permitida');
       }
 
@@ -61,7 +63,7 @@ const setReadOnly = (): void => {
 
   vendavallApi.interceptors.request.use(
     req => {
-      if (notAllowedReadOnlyMethods.includes(req.method)) {
+      if (readOnly && notAllowedReadOnlyMethods.includes(req.method)) {
         throw new ApiError('Operação não permitida');
       }
 
@@ -73,11 +75,15 @@ const setReadOnly = (): void => {
   );
 };
 
+const setApiMode = (mode: Mode): void => {
+  readOnly = mode === 'readonly';
+};
+
 export {
   pluginApi,
   vendavallApi,
   storageApi,
   coinQuotationApi,
   setToken,
-  setReadOnly,
+  setApiMode,
 };

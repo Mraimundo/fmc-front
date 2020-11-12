@@ -73,18 +73,8 @@ export const Actions = styled.div`
 
 export const StepsContainer = styled.div`
   position: relative;
-  padding: 12px;
-  border-radius: 10px;
-  background-size: 100% auto;
-  background-position: center;
-  margin: 45px auto;
+  margin: 0 auto 110px auto;
   width: 100%;
-  background: linear-gradient(
-    rgba(101, 85, 77, 0.17) 0%,
-    rgba(255, 255, 255, 0.18) 47.78%,
-    rgba(101, 85, 77, 0.09) 100%
-  );
-  color: ${({ theme }) => theme.font.color.primary};
 `;
 
 export const StepsContent = styled.div`
@@ -107,5 +97,18 @@ export const StepsTitle = styled.h1`
   }
   @media (min-width: 1024px) {
     margin: auto 20px;
+  }
+`;
+
+export const Text = styled.div`
+  width: 100%;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-size: 16px;
+  margin: 20px auto;
+  strong {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+  p {
+    margin-bottom: 12px;
   }
 `;

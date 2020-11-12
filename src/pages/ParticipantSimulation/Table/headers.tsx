@@ -7,6 +7,10 @@ export default [
     dataValue: 'clientCode',
   },
   {
+    column: 'Grupo de Cliente',
+    dataValue: 'clientGroup',
+  },
+  {
     column: 'Nome',
     dataValue: 'name',
   },
@@ -16,7 +20,7 @@ export default [
   },
   {
     column: '',
-    dataValue: 'activated',
+    dataValue: 'id',
     fn: (id: string) => <SimulateAction id={id} />,
   },
 ];

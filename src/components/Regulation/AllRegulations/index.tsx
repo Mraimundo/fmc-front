@@ -20,7 +20,7 @@ const TITLES = {
 };
 
 const AllRegulations: React.FC = () => {
-  const { refreshParticipant } = useAuth();
+  const { participant, refreshParticipant } = useAuth();
   const { addToast } = useToast();
 
   const [dataRegulations, setDataRegulations] = useState<
@@ -147,12 +147,28 @@ const AllRegulations: React.FC = () => {
           printRegulation(safraRegulations, 'safra_term')}
         {dataRegulations.length > 0 &&
           printRegulation(dataRegulations, 'data_term')}
-        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
-          Download do Termos de Uso
-        </a>
-        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
-          Download da Política de Privacidade
-        </a>
+
+        {participant.profile === 'PRODUTOR' && (
+          <>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://s3.amazonaws.com/vendavall/photos/1604524991.5fa31bbf4f9c19.74793365.pdf">
+              Download do Termos de Uso
+            </a>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://s3.amazonaws.com/vendavall/photos/1604524903.5fa31b6744f8d3.91813222.pdf">
+              Download da Política de Privacidade
+            </a>
+          </>
+        )}
+
+        {participant.profile !== 'PRODUTOR' && (
+          <>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
+              Download do Termos de Uso
+            </a>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
+              Download da Política de Privacidade
+            </a>
+          </>
+        )}
       </Content>
     </Container>
   );

@@ -27,4 +27,16 @@ export const Container = styled.div`
     text-transform: uppercase;
     border-radius: 5px;
   }
+
+  > input[type='text'] {
+    width: 100%;
+    max-width: 600px;
+    height: 44px;
+    margin-top: 8px;
+    padding: 0 12px;
+
+    &::placeholder {
+      color: #c9cacb;
+    }
+  }
 `;

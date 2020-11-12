@@ -34,6 +34,7 @@ const Quiz: React.FC = () => {
     quizAlreadyAnswered,
     training,
     canAnswer,
+    canShowAnsers,
   } = useTraining();
 
   useEffect(() => {
@@ -111,6 +112,7 @@ const Quiz: React.FC = () => {
                   <span>{key + 1}</span>
                   <strong>
                     {quizAlreadyAnswered &&
+                      canShowAnsers &&
                       (item.correct ? (
                         <ReactSVG src={rightIcon} />
                       ) : (
