@@ -36,6 +36,7 @@ export const Header = styled.div`
     background: #fff;
     border: 1px solid #808285;
     font-size: 14px;
+    padding: 15px;
 
     &::placeholder {
       font-size: 14px;

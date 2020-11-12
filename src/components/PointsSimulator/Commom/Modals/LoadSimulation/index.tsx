@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 
 import deleteImg from 'assets/images/points-simulator/delete.svg';
@@ -35,6 +35,26 @@ const Modal: React.FC<ModalProps> = ({
     [onLoadState, onRequestClose],
   );
 
+  const [inputSearchValue, setInputSearchValue] = useState('');
+  const [filteredData, setFilteredData] = useState<TableData[]>([]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setFilteredData(
+        tableData.filter(
+          item =>
+            inputSearchValue === '' ||
+            item.clientGroup.toLowerCase().includes(inputSearchValue) ||
+            item.simulationName.toLowerCase().includes(inputSearchValue),
+        ),
+      );
+    }, 700);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputSearchValue, tableData]);
+
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
       <Content>
@@ -43,6 +63,8 @@ const Modal: React.FC<ModalProps> = ({
           <input
             type="text"
             placeholder="Grupo de cliente ou Nome de simulação"
+            value={inputSearchValue}
+            onChange={e => setInputSearchValue(e.target.value)}
           />
         </Header>
 
@@ -56,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({
             </tr>
           </thead>
           <tbody>
-            {tableData.map(item => (
+            {filteredData.map(item => (
               <tr key={item.id}>
                 <td>{item.simulationDate}</td>
                 <td>{item.clientGroup}</td>
