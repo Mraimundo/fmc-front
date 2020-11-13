@@ -9,9 +9,10 @@ import { Container, MiniBox } from './styles';
 
 interface Props {
   gallery: Media[];
+  simulating: boolean;
 }
 
-const ImagesGrid: React.FC<Props> = ({ gallery }) => {
+const ImagesGrid: React.FC<Props> = ({ gallery, simulating }) => {
   const [data, setData] = useState<Data[]>([]);
   const [modalOpened, setModalOpened] = useState(false);
   const [pictureSelected, setPictureSelected] = useState('');
@@ -38,9 +39,13 @@ const ImagesGrid: React.FC<Props> = ({ gallery }) => {
           <h3>{item.title || 'Título não informado'}</h3>
           <div>
             <span>{`Publicado em ${item.date}`} </span>
-            <a href={item.download_url} download>
-              Download
-            </a>
+            {simulating ? (
+              <span className="link">Download</span>
+            ) : (
+              <a href={item.download_url} download>
+                Download
+              </a>
+            )}
           </div>
         </MiniBox>
       ))}

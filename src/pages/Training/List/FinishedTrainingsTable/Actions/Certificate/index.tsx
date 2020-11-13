@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { getCertificate } from 'services/training';
 import { useToast } from 'context/ToastContext';
 
+import { useAuth } from 'context/AuthContext';
 import { Container } from './style';
 
 interface Props {
@@ -11,8 +12,13 @@ interface Props {
 const Actions: React.FC<Props> = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
+  const { simulating } = useAuth();
 
   const handleClick = useCallback(async () => {
+    if (simulating) {
+      addToast({ type: 'error', title: 'Operação não permitida' });
+      return;
+    }
     setLoading(true);
     const { hasCertificate, url, message } = await getCertificate(id);
     setLoading(false);
@@ -29,7 +35,7 @@ const Actions: React.FC<Props> = ({ id }) => {
       title: message,
       type: 'success',
     });
-  }, [id, addToast]);
+  }, [id, addToast, simulating]);
 
   return (
     <Container onClick={handleClick} disabled={loading}>

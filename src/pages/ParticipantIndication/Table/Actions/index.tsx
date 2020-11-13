@@ -4,6 +4,8 @@ import { Button } from 'components/shared';
 
 import { ACTIVE, INACTIVE, PRECHARGE } from 'config/constants/vendavallStatus';
 
+import { useAuth } from 'context/AuthContext';
+import { useToast } from 'context/ToastContext';
 import { Container, Content, ActionsBox } from './style';
 
 interface Props {
@@ -29,14 +31,20 @@ const Actions: React.FC<Props> = ({
   personalData,
 }) => {
   const [loading, setLoading] = useState(false);
+  const { simulating } = useAuth();
+  const { addToast } = useToast();
 
   const handleAction = useCallback(
     async ({ fn, id: indicationId }: ActionProps): Promise<void> => {
+      if (simulating) {
+        addToast({ type: 'error', title: 'Operação não permitida' });
+        return;
+      }
       setLoading(true);
       await fn(indicationId);
       setLoading(false);
     },
-    [],
+    [simulating, addToast],
   );
 
   return (
