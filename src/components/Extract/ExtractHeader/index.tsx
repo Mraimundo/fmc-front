@@ -4,6 +4,7 @@ import { EstablishmentTypes } from 'config/constants';
 import { ExtractSummary } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
 import { formatPointsExtract } from 'util/points';
+import routeMap from 'routes/route-map';
 import {
   AccumulatedBalance,
   BalanceItem,
@@ -74,7 +75,7 @@ const ExtractHeader: React.FC<Props> = ({
           >
             RESGATAR
           </Button>
-          {pathKey === '/extract' && (
+          {pathKey === routeMap.extract.channel && (
             <p className="shared-actions">
               Saldo Ações Compartilhadas FMC:
               <span>{formatPointsExtract(balance.sharedActions)} pontos</span>
