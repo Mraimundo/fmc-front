@@ -85,7 +85,7 @@ const Extract: React.FC = () => {
     }
   }, [extractDetails]);
 
-  if (!summary || summary.total === 0) {
+  if (!summary) {
     return (
       <Container key={pathKey}>
         <Content>
