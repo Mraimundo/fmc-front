@@ -27,8 +27,11 @@ export default async (contact: Contact): Promise<ContactResponse> => {
   try {
     let request = {};
 
-
-    if (contact.municipio && contact.estado && contact.produtorAgricola?.value) {
+    if (
+      contact.municipio &&
+      contact.estado &&
+      contact.produtorAgricola?.value
+    ) {
       request = {
         cpf_not_registered: contact.cpf,
         email_not_registered: contact.email,
@@ -48,10 +51,10 @@ export default async (contact: Contact): Promise<ContactResponse> => {
                 produtor_agricola: contact.produtorAgricola?.value || '',
               },
             ],
-          }
+          },
         ],
         file: contact.fileUrl || '',
-      }
+      };
     } else {
       request = {
         cpf_not_registered: contact.cpf,
@@ -69,17 +72,16 @@ export default async (contact: Contact): Promise<ContactResponse> => {
       };
     }
 
-    console.log(request);
-
     const { data } = await vendavallApi.post<ContactResponse>(
       'contacts/unlogged',
       request,
     );
 
-    console.log(request);
-
     return {
-      message: data.message,
+      message:
+        data.type === 'success'
+          ? 'Sua mensagem foi enviada e será respondida em até 48 horas'
+          : data.message,
       type: data.type === 'success' ? 'success' : 'error',
     };
   } catch (e) {
