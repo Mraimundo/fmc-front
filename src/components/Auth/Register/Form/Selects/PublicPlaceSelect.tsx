@@ -34,7 +34,7 @@ const PublicPlaceSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Tipo de Logradouro"
+      label="Tipo de Logradouro*"
       loadItems={loadItems}
       className={className}
       disabled={disabled}
