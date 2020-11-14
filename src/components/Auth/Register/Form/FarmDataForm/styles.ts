@@ -113,7 +113,20 @@ export const ListContainer = styled.div`
   }
 `;
 
-export const DeleteLink = styled.span`
+export const ActionsContainer = styled.div`
+  display: flex;
+
+  > span {
+    margin-right: 10px;
+
+    & + span {
+      padding-left: 10px;
+      border-left: 1px solid rgba(0, 0, 0, 0.4);
+    }
+  }
+`;
+
+export const CustomLink = styled.span`
   font-size: 14px;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   text-decoration: underline;

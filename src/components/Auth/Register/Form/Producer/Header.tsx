@@ -40,6 +40,7 @@ const personalDataFields = [
   'rg_emitter_uf_select',
   'pis_nis',
   'role.name',
+  'address',
 ];
 
 const farmDataFields = ['producer_group_name'];
@@ -49,6 +50,8 @@ const securityDataFields = ['password', 'password_confirmation'];
 const Header: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   const [errorsInTab, setErrorsInTab] = useState<Tab[]>([]);
   const { errors } = useFormContext();
+
+  console.log('err', errors);
 
   useEffect(() => {
     const tmpErrors: Tab[] = [];

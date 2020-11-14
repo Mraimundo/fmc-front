@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { useToast } from 'context/ToastContext';
 import {
@@ -19,7 +20,8 @@ import {
   ListContainer,
   Title,
   Separator,
-  DeleteLink,
+  ActionsContainer,
+  CustomLink,
   ButtonContainer,
   NextButton,
 } from './styles';
@@ -42,6 +44,7 @@ const FarmDataForm: React.FC<Props> = ({
   const { addToast } = useToast();
 
   const [memberFormIsVisible, setMemberFormIsVisible] = useState(false);
+  const [alreadyTouched, setAlreadyTouched] = useState(false);
 
   const [memberTypeSelected, setMemberTypeSelected] = useState<Option | null>(
     null,
@@ -55,8 +58,10 @@ const FarmDataForm: React.FC<Props> = ({
   const inputRole = 'secondary';
 
   useEffect(() => {
+    if (alreadyTouched) return;
     setMemberFormIsVisible(participant.members_group?.length > 0);
-  }, [participant]);
+    setAlreadyTouched(true);
+  }, [participant, alreadyTouched]);
 
   const handleCleanForm = useCallback(() => {
     setMemberTypeSelected(null);
@@ -128,6 +133,21 @@ const FarmDataForm: React.FC<Props> = ({
       removeMemberGroup(member);
     },
     [removeMemberGroup],
+  );
+
+  const handleEditClick = useCallback(
+    (member: MemberGroup) => {
+      setMemberFormIsVisible(true);
+      setMemberTypeSelected({ value: member.type, title: member.type });
+      setUfSelected({ value: member.uf, title: member.uf });
+      setCpfCnpjInput(member.cpf_cnpj);
+      setNameInput(member.name);
+      setIeInput(member.ie);
+      setCityInput(member.city);
+      handleRemoveMember(member);
+      scroll.scrollTo(600);
+    },
+    [handleRemoveMember],
   );
 
   return (
@@ -226,9 +246,14 @@ const FarmDataForm: React.FC<Props> = ({
                     <td>{item.city}</td>
                     <td>{item.uf}</td>
                     <td>
-                      <DeleteLink onClick={() => handleRemoveMember(item)}>
-                        excluir
-                      </DeleteLink>
+                      <ActionsContainer>
+                        <CustomLink onClick={() => handleEditClick(item)}>
+                          editar
+                        </CustomLink>
+                        <CustomLink onClick={() => handleRemoveMember(item)}>
+                          excluir
+                        </CustomLink>
+                      </ActionsContainer>
                     </td>
                   </tr>
                 ))}
