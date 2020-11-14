@@ -219,7 +219,6 @@ export const TrainingProvider: React.FC = ({ children }) => {
           'Falha ao responder treinamento. Por favor contate o suporte',
         type: 'error',
       });
-      const r = 'ere';
       if (e?.response?.data?.message.includes('Suas tentativas esgotaram')) {
         history.push(routeMap.training);
       }
