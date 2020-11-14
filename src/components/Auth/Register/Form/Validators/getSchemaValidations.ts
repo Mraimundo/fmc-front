@@ -49,6 +49,13 @@ const cepFields = {
 
 const extraProducerFields = {
   producer_group_name: Yup.string(),
+  formatted_birth_date: Yup.date()
+    .transform((t, v) => {
+      const newValue = v.split('/');
+      return new Date(`${newValue[1]}/${newValue[0]}/${newValue[2]}`);
+    })
+    .typeError('Data inválida')
+    .required(mandatoryMessage),
   members_group: Yup.array().of(
     Yup.object()
       .shape({
