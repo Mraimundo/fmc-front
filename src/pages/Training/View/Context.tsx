@@ -24,6 +24,7 @@ import transformer, {
 import { Question as IQuestion } from 'services/training/interfaces';
 import { useToast } from 'context/ToastContext';
 import history from 'services/history';
+import routeMap from 'routes/route-map';
 
 export interface Question extends IQuestion {
   myAnswerId: number | null;
@@ -81,11 +82,18 @@ export const TrainingProvider: React.FC = ({ children }) => {
     setSuccessModalOpened(false);
     if (spinData?.id) {
       setSpinModalOpened(true);
+      return;
     }
+    setTimeout(() => {
+      history.push(routeMap.training);
+    }, 800);
   }, [spinData]);
 
   const closeSpinModal = useCallback(() => {
     setSpinModalOpened(false);
+    setTimeout(() => {
+      history.push(routeMap.training);
+    }, 800);
   }, []);
 
   const loadTraining = useCallback(
@@ -150,7 +158,7 @@ export const TrainingProvider: React.FC = ({ children }) => {
           title: 'Falha ao carregar o treinamento solicitado',
           type: 'error',
         });
-        history.push('/training');
+        history.push(routeMap.training);
       }
     },
     [addToast],
@@ -211,6 +219,9 @@ export const TrainingProvider: React.FC = ({ children }) => {
           'Falha ao responder treinamento. Por favor contate o suporte',
         type: 'error',
       });
+      if (e?.response?.data?.message.includes('Suas tentativas esgotaram')) {
+        history.push(routeMap.training);
+      }
     }
   }, [questions, addToast, training, loadTraining]);
 

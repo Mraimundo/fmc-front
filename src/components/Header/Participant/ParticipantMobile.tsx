@@ -1,8 +1,12 @@
 import React from 'react';
 
-import { Establishment } from 'services/auth/interfaces/Participant';
+import {
+  Establishment,
+  Participant as IParticipant,
+} from 'services/auth/interfaces/Participant';
 import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
+import { PROFILES } from 'config/constants';
 import {
   Wrapper,
   WrapperInformations,
@@ -16,19 +20,24 @@ interface ParticipantProps {
   name: string;
   establishment: Establishment | null;
   points: number;
+  participant: IParticipant;
 }
 const Participant: React.FC<ParticipantProps> = ({
   picture,
   name,
   establishment,
   points,
+  participant,
 }) => {
   return (
     <Wrapper>
       <Avatar name={name} picture={picture} circleDimension={50} />
       <WrapperInformations>
         <Hello>Olá {getFirstName(name)}!</Hello>
-        <Points>Meus pontos: {points}</Points>
+        {(participant.profile !== PROFILES.focalPoint ||
+          (participant.access_premio_ideall &&
+            participant.establishment.team_receives_points)) &&
+          typeof points === 'number' && <Points>Meus pontos: {points}</Points>}
         {!!establishment && (
           <>
             <EstablishmentRtc>{establishment.name}</EstablishmentRtc>

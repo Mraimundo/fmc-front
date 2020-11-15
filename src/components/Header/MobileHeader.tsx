@@ -57,6 +57,7 @@ const Header: React.FC = () => {
           establishment={
             participant.profile === 'FMC' ? null : participant.establishment
           }
+          participant={participant}
         />
         {!!menu && (
           <MobileMenu items={menu} signOut={signOut} simulating={simulating} />
