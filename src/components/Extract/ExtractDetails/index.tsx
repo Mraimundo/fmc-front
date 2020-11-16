@@ -12,18 +12,16 @@ const ExtractDetails: React.FC<Props> = ({ details }) => {
   return (
     <DetailsContainer>
       <AccordionContainer>
-        {details.map(item => {
-          const { statement } = item;
-          if (statement) {
-            return (
+        {details.map(item => (
+          <>
+            {!!item.statement && (
               <AccordionItem
-                key={statement.campaign.id}
+                key={item.statement.campaign.id}
                 campaignExtract={item}
               />
-            );
-          }
-          return <div />;
-        })}
+            )}
+          </>
+        ))}
       </AccordionContainer>
     </DetailsContainer>
   );

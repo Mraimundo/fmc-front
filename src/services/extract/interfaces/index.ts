@@ -78,7 +78,7 @@ export interface ExtractApi {
   };
 }
 
-interface StatementPoints {
+export interface StatementPoints {
   id: number;
   value: number;
   description: string;
