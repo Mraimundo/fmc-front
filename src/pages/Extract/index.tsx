@@ -115,9 +115,9 @@ const Extract: React.FC = () => {
       </Content>
       {pathKey === routeMap.extract.channel && (
         <ExtractLegend>
-          *Ações Compartilhadas: é a verba reservada para você e seu RTC
+          *Ações de Desenvolvimento: é a verba reservada para você e seu RTC
           definirem juntos quais as melhores ações e práticas para ajudar a
-          prosperar
+          prosperar seu negócio
           {userType === EstablishmentTypes.Resale
             ? ' seu negócio.'
             : ' a sua cooperativa.'}
