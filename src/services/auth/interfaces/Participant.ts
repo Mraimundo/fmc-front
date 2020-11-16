@@ -120,7 +120,6 @@ export interface Participant {
   profile_value: ApproverProfile;
 
   // Producers
-  producer_cpf: string;
   producer_group_name: string;
   members_group: MemberGroup[];
   harvest: Harvest;
