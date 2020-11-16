@@ -59,6 +59,14 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       pogRealizedNetInDollar: 0,
       pogRealizedNetInReal: 0,
     },
+    simulationPoints: {
+      rebateReachedInReal: 0,
+    },
+    percentageAwardToPay: {
+      rebate: product.rebate_percentage_to_pay,
+    },
+    extraPercentageToPayByEnhancerProduct:
+      product.extra_percentage_pay_per_enhancer_product,
   }));
 
 const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
@@ -178,6 +186,8 @@ const configurationApiToConfiguration = (
   return {
     partialDate: configuration.partial_date,
     pogRealizedNetPercentage: configuration.pog_realized_net_percentage,
+    minimumRebatePercentageToMakePoints:
+      configuration.minimum_rebate_percentage_to_participate,
   };
 };
 

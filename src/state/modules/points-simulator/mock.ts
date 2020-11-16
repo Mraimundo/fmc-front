@@ -11,6 +11,7 @@ const mock: PointsSimulatorState = {
   configuration: {
     partialDate: new Date(),
     pogRealizedNetPercentage: 10,
+    minimumRebatePercentageToMakePoints: 70,
   },
   channel: {
     id: 1,
@@ -57,6 +58,13 @@ const mock: PointsSimulatorState = {
         pogRealizedNetInDollar: 0,
         pogRealizedNetInReal: 0,
       },
+      simulationPoints: {
+        rebateReachedInReal: 0,
+      },
+      percentageAwardToPay: {
+        rebate: 3.5,
+      },
+      extraPercentageToPayByEnhancerProduct: 0.5,
     },
   ],
   fetchCalculate: emptyFetchState,

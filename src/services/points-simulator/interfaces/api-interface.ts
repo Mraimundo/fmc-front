@@ -23,6 +23,8 @@ export interface Product {
   pog_realized_in_kilos_by_liter: number;
   stock_in_kg_per_liter: number;
   stock_in_dolar: number;
+  rebate_percentage_to_pay: number;
+  extra_percentage_pay_per_enhancer_product: number;
 }
 
 export interface Channel {
@@ -59,6 +61,7 @@ export interface Indicators {
 export interface Configuration {
   partial_date: Date;
   pog_realized_net_percentage: number;
+  minimum_rebate_percentage_to_participate: number;
 }
 
 export interface SimulationData {

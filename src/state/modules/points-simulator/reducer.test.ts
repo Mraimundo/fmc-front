@@ -8,7 +8,7 @@ import mockedState from './mock';
 import { Mode } from './types';
 
 describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.SET_REVENUES_IN_KILOS_PER_LITER} working togheter`, () => {
-  it('should set the dollar unit and the kilos per liter revenues values, after that recalculate revenues in dollar and pog in kilos by liter', () => {
+  it('should set the dollar unit and the kilos per liter revenues values, after that recalculate Simulation Data', () => {
     const productIndex = 0;
     const unitValueInDollarToSet = 12.5;
     const revenuesValueInKilosPerLiterToSet = 80000;

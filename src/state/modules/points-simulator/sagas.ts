@@ -25,6 +25,7 @@ import {
 } from './interfaces';
 import getCalculatedIndicators from './services/get-calculated-indicators';
 import calculateSimulationDataProductValues from './services/get-calculate-simulation-data-product-values';
+import calculateProductsPoints from './services/get-calculated-products-with-points';
 import { Mode } from './types';
 import { initialState } from './reducer';
 
@@ -113,12 +114,22 @@ export function* calculateSimulation() {
   try {
     const products: Product[] = yield select(selectors.getProducts);
     const indicators: Indicator[] = yield select(selectors.getIndicators);
+    const configuration: Configuration = yield select(
+      selectors.getConfiguration,
+    );
 
     const calculatedIndicators = getCalculatedIndicators(products, indicators);
+
+    const calculatedProducts = calculateProductsPoints({
+      products,
+      indicators: calculatedIndicators,
+      configuration,
+    });
 
     yield put(
       actions.fetchCalculateSuccess({
         indicators: calculatedIndicators,
+        products: calculatedProducts,
       }),
     );
   } catch (error) {

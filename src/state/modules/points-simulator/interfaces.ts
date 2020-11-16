@@ -18,6 +18,10 @@ export interface Stock {
   inDollar: number;
 }
 
+export interface PointsData {
+  rebateReachedInReal: number;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -41,6 +45,11 @@ export interface Product {
   };
   stock: Stock;
   simulationData: SimulationData;
+  simulationPoints: PointsData;
+  percentageAwardToPay: {
+    rebate: number;
+  };
+  extraPercentageToPayByEnhancerProduct: number;
 }
 
 export interface Channel {
@@ -84,6 +93,7 @@ export interface Indicator {
 export interface Configuration {
   partialDate?: Date;
   pogRealizedNetPercentage: number;
+  minimumRebatePercentageToMakePoints: number;
 }
 
 export type PointsSimulatorState = {

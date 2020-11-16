@@ -21,6 +21,8 @@ const products: Product[] = [
     pog_realized_in_kilos_by_liter: 666000,
     stock_in_kg_per_liter: 90000,
     stock_in_dolar: 1000000,
+    rebate_percentage_to_pay: 3.5,
+    extra_percentage_pay_per_enhancer_product: 0.5,
   },
   {
     id: 2,
@@ -39,6 +41,8 @@ const products: Product[] = [
     pog_realized_in_kilos_by_liter: 666000,
     stock_in_kg_per_liter: 90000,
     stock_in_dolar: 1000000,
+    rebate_percentage_to_pay: 3.5,
+    extra_percentage_pay_per_enhancer_product: 0.5,
   },
   {
     id: 3,
@@ -57,6 +61,8 @@ const products: Product[] = [
     pog_realized_in_kilos_by_liter: 666000,
     stock_in_kg_per_liter: 90000,
     stock_in_dolar: 1000000,
+    rebate_percentage_to_pay: 3.5,
+    extra_percentage_pay_per_enhancer_product: 0.5,
   },
   ...productIdsToMock.map(id => ({
     id,
@@ -75,6 +81,8 @@ const products: Product[] = [
     pog_realized_in_kilos_by_liter: 666000,
     stock_in_kg_per_liter: 1333000,
     stock_in_dolar: 666000,
+    rebate_percentage_to_pay: 3.5,
+    extra_percentage_pay_per_enhancer_product: 0.5,
   })),
 ];
 

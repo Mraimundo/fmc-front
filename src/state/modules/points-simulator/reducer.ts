@@ -18,7 +18,10 @@ export const initialState: PointsSimulatorState = {
   fetchIndicators: emptyFetchState,
   indicators: [],
   fetchConfiguration: emptyFetchState,
-  configuration: { pogRealizedNetPercentage: 0 },
+  configuration: {
+    pogRealizedNetPercentage: 0,
+    minimumRebatePercentageToMakePoints: 0,
+  },
 };
 
 const CampaignsManagerReducer: Reducer<
@@ -135,6 +138,7 @@ const CampaignsManagerReducer: Reducer<
         ...state,
         fetchCalculate: emptyFetchState,
         indicators: action.payload.indicators,
+        products: action.payload.products,
       };
     case constants.FETCH_LOAD_STATE_SUCCESS:
       return action.payload;
