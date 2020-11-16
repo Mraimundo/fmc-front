@@ -1,16 +1,50 @@
-import React, { useState } from 'react';
-import { Extract as IExtract } from 'services/extract/interfaces';
-import { Container, Header, Content } from './styles';
+import React, { useEffect, useState } from 'react';
+import {
+  Extract as IExtract,
+  StatementPoints,
+} from 'services/extract/interfaces';
 import { formatPointsExtract } from 'util/points';
+import { Container, Header, Content } from './styles';
 
 interface Props {
   campaignExtract: IExtract;
 }
 
+interface Points extends StatementPoints {
+  order: number;
+}
+
+const pointsOrder = [
+  'rebate',
+  'premiação de vendedores',
+  'ponto extra',
+  'ações de desenvolvimento',
+];
+
 const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { statement } = campaignExtract;
   const handleClick = () => setIsOpen(!isOpen);
+
+  const [points, setPoints] = useState<Points[]>([]);
+
+  useEffect(() => {
+    if (!statement) return;
+
+    const sortedPoints =
+      statement?.points
+        ?.map(item => {
+          let order = pointsOrder.indexOf(item.balanceUnit.name.toLowerCase());
+          if (order === -1) {
+            order = 999;
+          }
+
+          return { ...item, order };
+        })
+        .sort((item1, item2) => (item1.order > item2.order ? 1 : -1)) || [];
+
+    setPoints(sortedPoints);
+  }, [statement]);
 
   if (statement?.campaign.id) {
     return (
@@ -31,26 +65,20 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
         </Header>
         {isOpen && (
           <Content>
-            {statement.points &&
-              statement.points.map(point => (
-                <div className="content-row" key={point.id}>
-                  <div className="row-header">
-                    <div>{point.balanceUnit.name}</div>
-                    <div>{formatPointsExtract(point.value)}</div>
-                  </div>
-                  {!!point?.distributed?.length &&
-                    point?.distributed?.length > 1 &&
-                    point.distributed.map(distributed => (
-                      <div
-                        className="row-details"
-                        key={distributed.balanceUnitId}
-                      >
-                        <div>{distributed.balanceUnitName}</div>
-                        <div>{formatPointsExtract(distributed.value)}</div>
-                      </div>
-                    ))}
+            {points.map(point => (
+              <div className="content-row" key={point.id}>
+                <div className="row-header">
+                  <div>{point.balanceUnit.name}</div>
+                  <div>{formatPointsExtract(point.value)}</div>
                 </div>
-              ))}
+                {point?.distributed?.map(distributed => (
+                  <div className="row-details" key={distributed.balanceUnitId}>
+                    <div>{distributed.balanceUnitName}</div>
+                    <div>{formatPointsExtract(distributed.value)}</div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </Content>
         )}
       </Container>
