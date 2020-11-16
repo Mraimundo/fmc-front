@@ -92,7 +92,7 @@ const Dashboard: React.FC = ({ children }) => {
           <>
             {simulating && (
               <SimulateIndicator>
-                <span>Simulando</span>
+                <span>Visão do Participante</span>
                 <button onClick={signOut} type="button">
                   Sair
                 </button>

@@ -35,7 +35,6 @@ const Charts: React.FC = () => {
   }, [participant]);
 
   useEffect(() => {
-    console.log('oi');
     if (chartsData.length === 0) return;
 
     setLoading(true);

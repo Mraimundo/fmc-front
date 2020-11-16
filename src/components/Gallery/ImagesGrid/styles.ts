@@ -55,7 +55,8 @@ export const MiniBox = styled.div`
       font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     }
 
-    > a {
+    > a,
+    .link {
       font-size: 12px;
       color: ${({ theme }) => theme.font.color.secondary};
       font-family: ${({ theme }) => theme.font.fontFamily.condensed};
@@ -63,6 +64,11 @@ export const MiniBox = styled.div`
       &:hover {
         color: ${({ theme }) => lighten(0.2, theme.font.color.secondary)};
       }
+    }
+
+    .link {
+      cursor: not-allowed;
+      text-decoration: underline;
     }
   }
 

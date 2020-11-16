@@ -5,12 +5,14 @@ import { Media } from 'services/gallery/interfaces';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 
 import { ImagesGrid, VideosGrid, DocumentsGrid } from 'components/Gallery';
+import { useAuth } from 'context/AuthContext';
 import { Container, Content, Separator, Button } from './styles';
 
 const List: React.FC = () => {
   const [images, setImages] = useState<Media[]>([]);
   const [videos, setVideos] = useState<Media[]>([]);
   const [documents, setDocuments] = useState<Media[]>([]);
+  const { simulating } = useAuth();
 
   const [imagesPagination, setImagesPagination] = useState<Pagination>(
     {} as Pagination,
@@ -85,7 +87,7 @@ const List: React.FC = () => {
       <Content>
         <h3>Biblioteca Juntos</h3>
         <h6>Imagens</h6>
-        <ImagesGrid gallery={images} />
+        <ImagesGrid gallery={images} simulating={simulating} />
         {imagesPagination.current_page !== imagesPagination.last_page && (
           <Button
             buttonRole="primary"
@@ -109,7 +111,7 @@ const List: React.FC = () => {
         )}
         <Separator />
         <h6>Documentos</h6>
-        <DocumentsGrid gallery={documents} />
+        <DocumentsGrid gallery={documents} simulating={simulating} />
         {documentsPagination.current_page !== documentsPagination.last_page && (
           <Button
             buttonRole="primary"

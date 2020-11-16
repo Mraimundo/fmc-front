@@ -51,6 +51,7 @@ const Header: React.FC = () => {
           }
           signOut={signOut}
           simulating={simulating}
+          participant={participant}
         />
       </ParticipantWrapper>
     </Nav>

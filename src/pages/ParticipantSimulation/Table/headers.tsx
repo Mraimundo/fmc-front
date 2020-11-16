@@ -3,7 +3,7 @@ import SimulateAction from './Actions/Simulate';
 
 export default [
   {
-    column: 'Código do cliente',
+    column: 'Código do Cliente',
     dataValue: 'clientCode',
   },
   {

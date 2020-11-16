@@ -14,8 +14,9 @@ import {
 
 interface MyPointsProps {
   isParticipant: boolean;
+  points: number;
 }
-const MyPoints: React.FC<MyPointsProps> = ({ isParticipant }) => {
+const MyPoints: React.FC<MyPointsProps> = ({ isParticipant, points }) => {
   const handleClickExtract = useCallback(() => {
     if (isParticipant) {
       return history.push(routeMap.extract.my);
@@ -31,8 +32,8 @@ const MyPoints: React.FC<MyPointsProps> = ({ isParticipant }) => {
         <PeriodText>2020/21</PeriodText>
       </Period>
       <PointsWrapper>
-        <TotalPointsText>Total Pontos</TotalPointsText>
-        <Points>0</Points>
+        <TotalPointsText>Saldo de Pontos</TotalPointsText>
+        <Points>{points}</Points>
       </PointsWrapper>
       <Button type="submit" buttonRole="primary" onClick={handleClickExtract}>
         VER EXTRATO
