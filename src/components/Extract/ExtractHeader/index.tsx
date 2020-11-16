@@ -77,7 +77,7 @@ const ExtractHeader: React.FC<Props> = ({
           </Button>
           {pathKey === routeMap.extract.channel && (
             <p className="shared-actions">
-              Saldo Ações Compartilhadas FMC:
+              Saldo Ações de Desenvolvimento:
               <span>{formatPointsExtract(balance.sharedActions)} pontos</span>
             </p>
           )}

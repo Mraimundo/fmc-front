@@ -106,5 +106,9 @@ export const CalltoActionBox = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 14px;
     padding: 15px;
+
+    > span {
+      text-align: left;
+    }
   }
 `;
