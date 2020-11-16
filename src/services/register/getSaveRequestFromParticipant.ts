@@ -43,7 +43,6 @@ interface SaveRequest {
   access_premio_ideall: boolean;
 
   // Producers
-  producer_cpf: string;
   producer_group_name: string;
   members_group: MemberGroup[];
   harvest: Harvest;
@@ -87,7 +86,6 @@ export default (participant: Participant): SaveRequest => {
         ? participant.access_premio_ideall
         : true,
 
-    producer_cpf: participant.producer_cpf || '',
     producer_group_name: participant.producer_group_name || '',
     members_group: participant.members_group || [],
     harvest: participant.harvest || ({} as Harvest),

@@ -27,7 +27,6 @@ const personalDataFields = [
   'cpf',
   'area_code',
   'cell_phone',
-  'producer_cpf',
   'formatted_birth_date',
   'gender_select',
   'formatted_birth_date',
