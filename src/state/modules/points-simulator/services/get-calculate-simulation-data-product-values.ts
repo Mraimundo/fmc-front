@@ -19,13 +19,14 @@ const calculateSimulationDataProductValues = (
     (stock.inKilosPerLiter + revenuesInKilosPerLiter);
   const pogInDollar = pogInKilosPerLiter * pogUnitValueInDollar;
   const pogRealizedNetInDollar = (pogInDollar * pogRealizedNetPercentage) / 100;
+  const pogRealizedNetInReal = pogRealizedNetInDollar * dollarBaseValue;
   return {
     ...simulatioData,
     revenuesInDollar,
     pogUnitValueInDollar,
     pogInDollar,
     pogRealizedNetInDollar,
-    pogRealizedNetInReal: pogRealizedNetInDollar * dollarBaseValue,
+    pogRealizedNetInReal,
   };
 };
 
