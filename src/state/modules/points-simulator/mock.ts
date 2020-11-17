@@ -12,6 +12,7 @@ const mock: PointsSimulatorState = {
     partialDate: new Date(),
     pogRealizedNetPercentage: 10,
     minimumRebatePercentageToMakePoints: 70,
+    partialRebateReached: 80000,
   },
   channel: {
     id: 1,
@@ -85,6 +86,11 @@ const mock: PointsSimulatorState = {
       },
     },
   ],
+  // MAYCONN VER DEPOIS SE OS VALORES ABAIXO REALMENTE SAO 0
+  award: {
+    totalRebate: 0,
+    simulatedRebate: 0,
+  },
 };
 
 export default mock;

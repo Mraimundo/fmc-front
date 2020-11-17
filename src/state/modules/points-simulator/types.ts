@@ -1,4 +1,4 @@
-import { Indicator, Product } from './interfaces';
+import { Indicator, Product, Award } from './interfaces';
 
 export interface DataValueDTO {
   productId: number;
@@ -13,4 +13,5 @@ export enum Mode {
 export interface CalcutationDTO {
   indicators: Indicator[];
   products: Product[];
+  award: Award;
 }

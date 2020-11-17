@@ -9,6 +9,7 @@ import {
   getConfiguration,
   getChannel,
   getPointsSimulatorFullState,
+  getAward,
 } from 'state/modules/points-simulator/selectors';
 
 import SaveSimulationModal from 'components/PointsSimulator/Commom/Modals/SaveSimulation';
@@ -28,6 +29,7 @@ const Result: React.FC = () => {
   const { partialDate } = useSelector(getConfiguration);
   const channel = useSelector(getChannel);
   const pointsSimulatorState = useSelector(getPointsSimulatorFullState);
+  const award = useSelector(getAward);
   const simulatedDate = new Date();
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const Result: React.FC = () => {
             channelName={channel.groupName}
           />
         )}
-        <Body cards={indicatorCards} />
+        <Body cards={indicatorCards} award={award} />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
         />

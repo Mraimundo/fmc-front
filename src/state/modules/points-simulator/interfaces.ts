@@ -90,10 +90,18 @@ export interface Indicator {
   };
 }
 
+export interface Award {
+  totalRebate: number;
+  simulatedRebate: number;
+}
+
 export interface Configuration {
   partialDate?: Date;
   pogRealizedNetPercentage: number;
   minimumRebatePercentageToMakePoints: number;
+
+  // MAYCONN
+  partialRebateReached: number;
 }
 
 export type PointsSimulatorState = {
@@ -106,6 +114,7 @@ export type PointsSimulatorState = {
   fetchCalculate: FetchState;
   fetchIndicators: FetchState;
   indicators: Indicator[];
+  award: Award;
   fetchConfiguration: FetchState;
   configuration: Configuration;
 };

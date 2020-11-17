@@ -5,6 +5,7 @@ import {
   Indicator,
   Configuration,
   PointsSimulatorState,
+  Award,
 } from './interfaces';
 import { Mode } from './types';
 
@@ -28,3 +29,6 @@ export const getIndicators = (state: StoreState): Indicator[] =>
 
 export const getConfiguration = (state: StoreState): Configuration =>
   state.pointsSimulator.configuration;
+
+export const getAward = (state: StoreState): Award =>
+  state.pointsSimulator.award;

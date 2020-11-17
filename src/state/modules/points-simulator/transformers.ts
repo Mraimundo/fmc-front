@@ -188,6 +188,7 @@ const configurationApiToConfiguration = (
     pogRealizedNetPercentage: configuration.pog_realized_net_percentage,
     minimumRebatePercentageToMakePoints:
       configuration.minimum_rebate_percentage_to_participate,
+    partialRebateReached: configuration.points_rebate_reached,
   };
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Award } from 'state/modules/points-simulator/interfaces';
+import { formatPoints } from 'util/points';
 import MiniBox from '../MiniBox';
 import CardComponent from '../Card';
 import {
@@ -27,9 +29,10 @@ export interface Card {
 
 interface Props {
   cards: Card[];
+  award: Award;
 }
 
-const Body: React.FC<Props> = ({ cards }) => {
+const Body: React.FC<Props> = ({ cards, award }) => {
   return (
     <Container>
       <CustomSimulateContent>
@@ -41,7 +44,10 @@ const Body: React.FC<Props> = ({ cards }) => {
           </span>
         </TitleBox>
         <CustomSimuteBox>
-          <MiniBox title="Pontos do rebate" text="20.000 pontos" />
+          <MiniBox
+            title="Pontos do rebate"
+            text={`${formatPoints(award.simulatedRebate, 0, 0)} pontos`}
+          />
           <MiniBox title="Margem adicional" text="2.000 pontos" />
           <MiniBox title="Premiação de vendedor" text="20.000 pontos" />
         </CustomSimuteBox>
@@ -51,7 +57,10 @@ const Body: React.FC<Props> = ({ cards }) => {
           <h3>Total acumulado</h3>
         </TitleBox>
         <CustomAcumulateBox>
-          <MiniBox title="Pontos do rebate" text="100.000 pontos" />
+          <MiniBox
+            title="Pontos do rebate"
+            text={`${formatPoints(award.totalRebate, 0, 0)} pontos`}
+          />
           <MiniBox title="Margem adicional" text="2.000 pontos" />
           <MiniBox title="Premiação de vendedor" text="10.000 pontos" />
         </CustomAcumulateBox>

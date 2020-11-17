@@ -126,10 +126,21 @@ export function* calculateSimulation() {
       configuration,
     });
 
+    const simulatedRebate = calculatedProducts.reduce(
+      (accumulator, product) =>
+        accumulator + product.simulationPoints.rebateReachedInReal,
+      0,
+    );
+    const totalRebate = configuration.partialRebateReached + simulatedRebate;
+
     yield put(
       actions.fetchCalculateSuccess({
         indicators: calculatedIndicators,
         products: calculatedProducts,
+        award: {
+          totalRebate,
+          simulatedRebate,
+        },
       }),
     );
   } catch (error) {
@@ -197,6 +208,8 @@ export function* fetchLoadState({
       indicators: indicatorsApi,
       mode: Mode.calculator,
       products: productsToSet,
+      // ARRUMAR MAYCONN -> Precisa calcular o award
+      award: payload.award,
     };
 
     yield put(actions.fetchLoadStateSuccess(state));

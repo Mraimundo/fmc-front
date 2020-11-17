@@ -62,6 +62,10 @@ export interface Configuration {
   partial_date: Date;
   pog_realized_net_percentage: number;
   minimum_rebate_percentage_to_participate: number;
+  // MAYCONN
+  points_rebate_reached: number;
+  additional_margin_reached: number;
+  seller_award_reached: number;
 }
 
 export interface SimulationData {
