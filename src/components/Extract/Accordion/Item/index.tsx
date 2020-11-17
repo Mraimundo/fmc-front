@@ -12,6 +12,7 @@ interface Props {
 
 interface Points extends StatementPoints {
   order: number;
+  className: string;
 }
 
 const pointsOrder = [
@@ -35,11 +36,15 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
       statement?.points
         ?.map(item => {
           let order = pointsOrder.indexOf(item.balanceUnit.name.toLowerCase());
+          const className =
+            item.balanceUnit.name.toLowerCase() === 'ações de desenvolvimento'
+              ? 'special'
+              : '';
           if (order === -1) {
             order = 999;
           }
 
-          return { ...item, order };
+          return { ...item, order, className };
         })
         .sort((item1, item2) => (item1.order > item2.order ? 1 : -1)) || [];
 
@@ -68,8 +73,12 @@ const AccordionItem: React.FC<Props> = ({ campaignExtract }) => {
             {points.map(point => (
               <div className="content-row" key={point.id}>
                 <div className="row-header">
-                  <div>{point.balanceUnit.name}</div>
-                  <div>{formatPointsExtract(point.value)}</div>
+                  <div className={point.className}>
+                    {point.balanceUnit.name}
+                  </div>
+                  <div className={point.className}>
+                    {formatPointsExtract(point.value)}
+                  </div>
                 </div>
                 {point?.distributed?.map(distributed => (
                   <div className="row-details" key={distributed.balanceUnitId}>

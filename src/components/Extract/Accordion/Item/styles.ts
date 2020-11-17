@@ -55,4 +55,8 @@ export const Content = styled.div`
     padding: 5px 10px;
     color: ${({ theme }) => theme.font.color.primary};
   }
+
+  .special {
+    color: red;
+  }
 `;
