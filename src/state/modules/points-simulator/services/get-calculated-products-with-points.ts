@@ -86,10 +86,21 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
     const rebatePercentageToPay =
       product.percentageAwardToPay.rebate * decimalToBeMultiplied;
     const percentageTotalToPay = rebatePercentageToPay + extraPercentageToPay;
-    const rebateReachedInReal =
-      (product.simulationData.pogRealizedNetInReal * percentageTotalToPay) /
+    const rebateReachedInRealSimulated =
+      (product.simulationData.pogRealizedNetInRealSimulated *
+        percentageTotalToPay) /
+      100;
+    const rebateReachedInRealAccumulated =
+      (product.simulationData.pogRealizedNetInDollarTotal *
+        percentageTotalToPay) /
       100;
 
-    return { ...product, simulationPoints: { rebateReachedInReal } };
+    return {
+      ...product,
+      simulationPoints: {
+        rebateReachedInRealSimulated,
+        rebateReachedInRealAccumulated,
+      },
+    };
   });
 };

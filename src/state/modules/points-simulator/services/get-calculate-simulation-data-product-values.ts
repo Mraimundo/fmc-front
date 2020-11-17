@@ -18,15 +18,28 @@ const calculateSimulationDataProductValues = (
     (stock.inDollar + revenuesInDollar) /
     (stock.inKilosPerLiter + revenuesInKilosPerLiter);
   const pogInDollar = pogInKilosPerLiter * pogUnitValueInDollar;
-  const pogRealizedNetInDollar = (pogInDollar * pogRealizedNetPercentage) / 100;
-  const pogRealizedNetInReal = pogRealizedNetInDollar * dollarBaseValue;
+  const pogRealizedNetInDollarSimulated =
+    (pogInDollar * pogRealizedNetPercentage) / 100;
+  const pogRealizedNetInRealSimulated =
+    pogRealizedNetInDollarSimulated * dollarBaseValue;
+
+  /* const pogUnitValueInDollarTotal =
+    product.revenues.realizedInDollar / product.revenues.realizedInKilosByLiter; */
+  const pogInDollarTotal = product.pog.realizedInDollar;
+  const pogRealizedNetInDollarTotal =
+    (pogInDollarTotal * pogRealizedNetPercentage) / 100;
+  const pogRealizedNetInRealTotal =
+    pogRealizedNetInDollarTotal * dollarBaseValue;
+
   return {
     ...simulatioData,
     revenuesInDollar,
     pogUnitValueInDollar,
     pogInDollar,
-    pogRealizedNetInDollar,
-    pogRealizedNetInReal,
+    pogRealizedNetInDollarSimulated,
+    pogRealizedNetInRealSimulated,
+    pogRealizedNetInRealTotal,
+    pogRealizedNetInDollarTotal,
   };
 };
 

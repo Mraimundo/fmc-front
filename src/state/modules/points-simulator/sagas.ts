@@ -112,11 +112,22 @@ export function* fetchConfiguration() {
 
 export function* calculateSimulation() {
   try {
-    const products: Product[] = yield select(selectors.getProducts);
+    const dollarBase: number = yield select(selectors.getDollarBaseValue);
+    let products: Product[] = yield select(selectors.getProducts);
     const indicators: Indicator[] = yield select(selectors.getIndicators);
     const configuration: Configuration = yield select(
       selectors.getConfiguration,
     );
+
+    products = products.map(item => ({
+      ...item,
+      simulationData: calculateSimulationDataProductValues(
+        item.simulationData,
+        item,
+        configuration,
+        dollarBase,
+      ),
+    }));
 
     const calculatedIndicators = getCalculatedIndicators(products, indicators);
 
@@ -128,10 +139,17 @@ export function* calculateSimulation() {
 
     const simulatedRebate = calculatedProducts.reduce(
       (accumulator, product) =>
-        accumulator + product.simulationPoints.rebateReachedInReal,
+        accumulator + product.simulationPoints.rebateReachedInRealSimulated,
       0,
     );
-    const totalRebate = configuration.partialRebateReached + simulatedRebate;
+    // const totalRebate = configuration.partialRebateReached + simulatedRebate;
+
+    const totalRebate =
+      calculatedProducts.reduce(
+        (accumulator, product) =>
+          accumulator + product.simulationPoints.rebateReachedInRealAccumulated,
+        0,
+      ) + simulatedRebate;
 
     yield put(
       actions.fetchCalculateSuccess({

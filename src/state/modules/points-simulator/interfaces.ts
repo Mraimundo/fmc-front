@@ -9,8 +9,12 @@ export interface SimulationData {
   pogInKilosPerLiter: number;
   pogUnitValueInDollar: number;
   pogInDollar: number;
-  pogRealizedNetInDollar: number;
-  pogRealizedNetInReal: number;
+  pogRealizedNetInDollarSimulated: number;
+  pogRealizedNetInRealSimulated: number;
+
+  // MAYCONN
+  pogRealizedNetInDollarTotal: number;
+  pogRealizedNetInRealTotal: number;
 }
 
 export interface Stock {
@@ -19,7 +23,8 @@ export interface Stock {
 }
 
 export interface PointsData {
-  rebateReachedInReal: number;
+  rebateReachedInRealSimulated: number;
+  rebateReachedInRealAccumulated: number;
 }
 
 export interface Product {
@@ -99,9 +104,6 @@ export interface Configuration {
   partialDate?: Date;
   pogRealizedNetPercentage: number;
   minimumRebatePercentageToMakePoints: number;
-
-  // MAYCONN
-  partialRebateReached: number;
 }
 
 export type PointsSimulatorState = {
