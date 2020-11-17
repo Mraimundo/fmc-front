@@ -72,7 +72,13 @@ const Extract: React.FC = () => {
 
   useEffect(() => {
     if (extractDetails.length > 0) {
-      const currentHeaderInfo = extractDetails[0];
+      const sortedExtractDetails = extractDetails.sort((item1, item2) =>
+        (item1.statement?.campaign.description || 'a') >
+        (item2.statement?.campaign.description || 'a')
+          ? 1
+          : -1,
+      );
+      const currentHeaderInfo = sortedExtractDetails[0];
       const headerSummary = {
         balance: {
           available: currentHeaderInfo.balance.available,
