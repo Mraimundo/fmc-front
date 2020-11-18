@@ -79,6 +79,7 @@ const DefaultHome: React.FC = () => {
 
   useEffect(() => {
     getParticipantAccessPi().then(data => {
+      console.log('data', data);
       const foundEstablishment = data.find(item => item.type === 'cnpj');
       setHarvestPoints(foundEstablishment?.points || 0);
     });
