@@ -45,7 +45,7 @@ const AddressFields: React.FC<Props> = ({ inputRole }) => {
     <>
       <Input
         name="address.zip_code"
-        label="CEP"
+        label="CEP*"
         inputRole={inputRole}
         onBlur={e => handleCepBlur(numbersOnly(e.target.value))}
         pattern="XXXXX-XXX"
@@ -54,9 +54,9 @@ const AddressFields: React.FC<Props> = ({ inputRole }) => {
 
       <PublicPlaceSelect name="public_place_select" inputRole={inputRole} />
 
-      <Input name="address.street" label="Endereço" inputRole={inputRole} />
+      <Input name="address.street" label="Endereço*" inputRole={inputRole} />
 
-      <Input name="address.number" label="Número" inputRole={inputRole} />
+      <Input name="address.number" label="Número*" inputRole={inputRole} />
 
       <Input
         name="address.complement"
@@ -64,11 +64,15 @@ const AddressFields: React.FC<Props> = ({ inputRole }) => {
         inputRole={inputRole}
       />
 
-      <Input name="address.district" label="Bairro" inputRole={inputRole} />
+      <Input name="address.district" label="Bairro*" inputRole={inputRole} />
 
-      <Input name="address.city" label="Município" inputRole={inputRole} />
+      <Input name="address.city" label="Município*" inputRole={inputRole} />
 
-      <UfSelect name="state_code_select" label="Estado" inputRole={inputRole} />
+      <UfSelect
+        name="state_code_select"
+        label="Estado*"
+        inputRole={inputRole}
+      />
     </>
   );
 };
