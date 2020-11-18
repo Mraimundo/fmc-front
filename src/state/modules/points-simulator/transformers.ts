@@ -66,6 +66,8 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       rebateReachedInRealAccumulated: 0,
       sellerReachedInRealAccumulated: 0,
       sellerReachedInRealSimulated: 0,
+      additionalMarginAccumulated: 0,
+      additionalMarginSimulated: 0,
     },
     awardsParamsToPay: {
       rebatePercentage: product.rebate_percentage_to_pay,

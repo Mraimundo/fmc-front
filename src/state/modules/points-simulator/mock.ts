@@ -66,6 +66,8 @@ const mock: PointsSimulatorState = {
         rebateReachedInRealAccumulated: 0,
         sellerReachedInRealAccumulated: 0,
         sellerReachedInRealSimulated: 0,
+        additionalMarginAccumulated: 0,
+        additionalMarginSimulated: 0,
       },
       awardsParamsToPay: {
         rebatePercentage: 3.5,

@@ -27,6 +27,8 @@ export interface PointsData {
   rebateReachedInRealAccumulated: number;
   sellerReachedInRealSimulated: number;
   sellerReachedInRealAccumulated: number;
+  additionalMarginSimulated: number;
+  additionalMarginAccumulated: number;
 }
 
 export interface Product {

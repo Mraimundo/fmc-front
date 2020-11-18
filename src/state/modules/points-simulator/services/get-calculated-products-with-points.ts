@@ -114,6 +114,8 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
         decimalFinalPay +
       sellerReachedInRealSimulated;
 
+    const additionalMarginSimulated = product.simulationData.revenuesInDollar * 0;
+
     return {
       ...product,
       simulationPoints: {
@@ -121,6 +123,9 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
         rebateReachedInRealAccumulated,
         sellerReachedInRealSimulated,
         sellerReachedInRealAccumulated,
+
+        additionalMarginAccumulated: 0,
+        additionalMarginSimulated: 0,
       },
     };
   });
