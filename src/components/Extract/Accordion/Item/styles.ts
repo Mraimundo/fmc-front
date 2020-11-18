@@ -57,6 +57,6 @@ export const Content = styled.div`
   }
 
   .special {
-    color: red;
+    opacity: 50%;
   }
 `;
