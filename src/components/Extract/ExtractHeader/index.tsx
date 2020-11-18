@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { EstablishmentTypes } from 'config/constants';
-import { ExtractSummary } from 'services/extract/interfaces';
+import { ExtractSummary, Point } from 'services/extract/interfaces';
 import { Button } from 'components/shared';
 import { formatPointsExtract } from 'util/points';
 import routeMap from 'routes/route-map';
@@ -27,7 +27,27 @@ const ExtractHeader: React.FC<Props> = ({
   pathKey,
   piAccess,
 }) => {
-  const { points, balance, total } = summary;
+  const { balance, total } = summary;
+  const [points, setPoints] = useState<Point[]>([]);
+
+  useEffect(() => {
+    if (!summary.points) return;
+
+    const groupPoints: Point[] = [];
+
+    summary.points.forEach(item => {
+      const alreadyAddedPointIndex = groupPoints.findIndex(
+        tmp => tmp.name === item.name,
+      );
+      if (alreadyAddedPointIndex !== -1) {
+        groupPoints[alreadyAddedPointIndex].total += item.total;
+        return;
+      }
+      groupPoints.push(item);
+    });
+
+    setPoints(groupPoints);
+  }, [summary.points]);
 
   const handlePiAccess = useCallback(() => {
     if (!piAccess) return;
@@ -50,15 +70,14 @@ const ExtractHeader: React.FC<Props> = ({
           </h2>
         )}
         <BalanceBoxContainer>
-          {points &&
-            points.map(point => (
-              <BalanceItem key={point.id}>
-                <div className="title">
-                  <span>{point.name}</span>
-                </div>
-                <div className="value">{formatPointsExtract(point.total)} </div>
-              </BalanceItem>
-            ))}
+          {points?.map(point => (
+            <BalanceItem key={point.id}>
+              <div className="title">
+                <span>{point.name}</span>
+              </div>
+              <div className="value">{formatPointsExtract(point.total)} </div>
+            </BalanceItem>
+          ))}
         </BalanceBoxContainer>
       </AccumulatedBalance>
       <CalltoActionContainer>

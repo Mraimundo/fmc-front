@@ -4,7 +4,7 @@ export interface Campaign {
   title: string;
 }
 
-interface Point {
+export interface Point {
   id: number;
   name: string;
   description: string;

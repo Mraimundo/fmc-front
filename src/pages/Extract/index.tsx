@@ -49,30 +49,46 @@ const Extract: React.FC = () => {
 
   useEffect(() => {
     setExtractDetails([]);
-    const { pathname } = location;
-    if (campaigns.length > 0) {
+
+    const load = async () => {
+      const { pathname } = location;
       const { establishment } = participant;
       const extractFn = getExtractFn(pathname);
+
       setUserType(establishment.type_name);
       setPathKey(pathname);
-      campaigns.map(campaign =>
-        extractFn(campaign.id).then(data =>
-          setExtractDetails(currentValues => [...currentValues, data]),
-        ),
+
+      const extractDetailsResponse = await Promise.all(
+        campaigns.map(campaign => extractFn(campaign.id)),
       );
-      getParticipantsToAccessPI().then(data => {
-        if (pathname === MYEXTRACT) {
-          setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
-          return;
-        }
-        setPiAccess(data.find(item => item.type === 'cnpj')?.urlPi || '');
-      });
+      setExtractDetails(extractDetailsResponse);
+    };
+
+    if (campaigns.length > 0) {
+      load();
     }
   }, [campaigns, participant, location]);
 
   useEffect(() => {
+    const { pathname } = location;
+    getParticipantsToAccessPI().then(data => {
+      if (pathname === MYEXTRACT) {
+        setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
+        return;
+      }
+      setPiAccess(data.find(item => item.type === 'cnpj')?.urlPi || '');
+    });
+  }, [location]);
+
+  useEffect(() => {
     if (extractDetails.length > 0) {
-      const currentHeaderInfo = extractDetails[0];
+      const sortedExtractDetails = extractDetails.sort((item1, item2) =>
+        (item1.statement?.campaign.description || 'a') >
+        (item2.statement?.campaign.description || 'a')
+          ? 1
+          : -1,
+      );
+      const currentHeaderInfo = sortedExtractDetails[0];
       const headerSummary = {
         balance: {
           available: currentHeaderInfo.balance.available,
