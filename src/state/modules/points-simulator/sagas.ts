@@ -26,6 +26,7 @@ import {
 import getCalculatedIndicators from './services/get-calculated-indicators';
 import calculateSimulationDataProductValues from './services/get-calculate-simulation-data-product-values';
 import calculateProductsPoints from './services/get-calculated-products-with-points';
+import calculateAwards from './services/get-calculated-awards';
 import { Mode } from './types';
 import { initialState } from './reducer';
 
@@ -137,28 +138,13 @@ export function* calculateSimulation() {
       configuration,
     });
 
-    const simulatedRebate = calculatedProducts.reduce(
-      (accumulator, product) =>
-        accumulator + product.simulationPoints.rebateReachedInRealSimulated,
-      0,
-    );
-    // const totalRebate = configuration.partialRebateReached + simulatedRebate;
-
-    const totalRebate =
-      calculatedProducts.reduce(
-        (accumulator, product) =>
-          accumulator + product.simulationPoints.rebateReachedInRealAccumulated,
-        0,
-      ) + simulatedRebate;
+    const award = calculateAwards(calculatedProducts);
 
     yield put(
       actions.fetchCalculateSuccess({
         indicators: calculatedIndicators,
         products: calculatedProducts,
-        award: {
-          totalRebate,
-          simulatedRebate,
-        },
+        award,
       }),
     );
   } catch (error) {

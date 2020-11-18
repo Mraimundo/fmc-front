@@ -25,6 +25,8 @@ export interface Stock {
 export interface PointsData {
   rebateReachedInRealSimulated: number;
   rebateReachedInRealAccumulated: number;
+  sellerReachedInRealSimulated: number;
+  sellerReachedInRealAccumulated: number;
 }
 
 export interface Product {
@@ -51,8 +53,9 @@ export interface Product {
   stock: Stock;
   simulationData: SimulationData;
   simulationPoints: PointsData;
-  percentageAwardToPay: {
-    rebate: number;
+  awardsParamsToPay: {
+    rebatePercentage: number;
+    sellerValueInReal: number;
   };
   extraPercentageToPayByEnhancerProduct: number;
 }
@@ -98,12 +101,15 @@ export interface Indicator {
 export interface Award {
   totalRebate: number;
   simulatedRebate: number;
+  totalSeller: number;
+  simulatedSeller: number;
 }
 
 export interface Configuration {
   partialDate?: Date;
   pogRealizedNetPercentage: number;
   minimumRebatePercentageToMakePoints: number;
+  minimumSellerPercentageToMakePoints: number;
 }
 
 export type PointsSimulatorState = {

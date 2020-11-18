@@ -64,9 +64,12 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
     simulationPoints: {
       rebateReachedInRealSimulated: 0,
       rebateReachedInRealAccumulated: 0,
+      sellerReachedInRealAccumulated: 0,
+      sellerReachedInRealSimulated: 0,
     },
-    percentageAwardToPay: {
-      rebate: product.rebate_percentage_to_pay,
+    awardsParamsToPay: {
+      rebatePercentage: product.rebate_percentage_to_pay,
+      sellerValueInReal: product.seller_value_in_real_to_pay,
     },
     extraPercentageToPayByEnhancerProduct:
       product.extra_percentage_pay_per_enhancer_product,
@@ -191,6 +194,8 @@ const configurationApiToConfiguration = (
     pogRealizedNetPercentage: configuration.pog_realized_net_percentage,
     minimumRebatePercentageToMakePoints:
       configuration.minimum_rebate_percentage_to_participate,
+    minimumSellerPercentageToMakePoints:
+      configuration.minimum_seller_percentage_to_participate,
   };
 };
 

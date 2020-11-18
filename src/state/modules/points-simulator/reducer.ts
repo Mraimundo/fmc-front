@@ -21,10 +21,13 @@ export const initialState: PointsSimulatorState = {
   configuration: {
     pogRealizedNetPercentage: 0,
     minimumRebatePercentageToMakePoints: 0,
+    minimumSellerPercentageToMakePoints: 0,
   },
   award: {
     totalRebate: 0,
     simulatedRebate: 0,
+    simulatedSeller: 0,
+    totalSeller: 0,
   },
 };
 

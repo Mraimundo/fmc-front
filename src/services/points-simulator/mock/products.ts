@@ -23,6 +23,7 @@ const products: Product[] = [
     stock_in_dolar: 1000000,
     rebate_percentage_to_pay: 3.5,
     extra_percentage_pay_per_enhancer_product: 0.5,
+    seller_value_in_real_to_pay: 18.0,
   },
   {
     id: 2,
@@ -43,6 +44,7 @@ const products: Product[] = [
     stock_in_dolar: 1000000,
     rebate_percentage_to_pay: 3.5,
     extra_percentage_pay_per_enhancer_product: 0.5,
+    seller_value_in_real_to_pay: 2.0,
   },
   {
     id: 3,
@@ -63,6 +65,7 @@ const products: Product[] = [
     stock_in_dolar: 1000000,
     rebate_percentage_to_pay: 3.5,
     extra_percentage_pay_per_enhancer_product: 0.5,
+    seller_value_in_real_to_pay: 18.0,
   },
   ...productIdsToMock.map(id => ({
     id,
@@ -83,6 +86,7 @@ const products: Product[] = [
     stock_in_dolar: 666000,
     rebate_percentage_to_pay: 3.5,
     extra_percentage_pay_per_enhancer_product: 0.5,
+    seller_value_in_real_to_pay: 18.0,
   })),
 ];
 

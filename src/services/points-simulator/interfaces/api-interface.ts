@@ -1,5 +1,4 @@
 import { EstablishmentTypes, EstablishmentCategory } from 'config/constants';
-import { string } from 'yup';
 
 export interface ProductType {
   id: number;
@@ -25,6 +24,7 @@ export interface Product {
   stock_in_dolar: number;
   rebate_percentage_to_pay: number;
   extra_percentage_pay_per_enhancer_product: number;
+  seller_value_in_real_to_pay: number;
 }
 
 export interface Channel {
@@ -62,6 +62,7 @@ export interface Configuration {
   partial_date: Date;
   pog_realized_net_percentage: number;
   minimum_rebate_percentage_to_participate: number;
+  minimum_seller_percentage_to_participate: number;
 }
 
 export interface SimulationData {

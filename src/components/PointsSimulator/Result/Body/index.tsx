@@ -49,7 +49,10 @@ const Body: React.FC<Props> = ({ cards, award }) => {
             text={`${formatPoints(award.simulatedRebate, 0, 0)} pontos`}
           />
           <MiniBox title="Margem adicional" text="2.000 pontos" />
-          <MiniBox title="Premiação de vendedor" text="20.000 pontos" />
+          <MiniBox
+            title="Premiação de vendedor"
+            text={`${formatPoints(award.simulatedSeller, 0, 0)} pontos`}
+          />
         </CustomSimuteBox>
       </CustomSimulateContent>
       <CustomAcumulateContent>
@@ -62,7 +65,10 @@ const Body: React.FC<Props> = ({ cards, award }) => {
             text={`${formatPoints(award.totalRebate, 0, 0)} pontos`}
           />
           <MiniBox title="Margem adicional" text="2.000 pontos" />
-          <MiniBox title="Premiação de vendedor" text="10.000 pontos" />
+          <MiniBox
+            title="Premiação de vendedor"
+            text={`${formatPoints(award.totalSeller, 0, 0)} pontos`}
+          />
         </CustomAcumulateBox>
       </CustomAcumulateContent>
       <CustomIndicatorContainer>

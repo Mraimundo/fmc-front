@@ -46,6 +46,11 @@ const getIndicatorsToPayExtra = (
   };
 };
 
+interface SimulatedRebatePoints {
+  rebateReachedInRealSimulated: number;
+  rebateReachedInRealAccumulated: number;
+}
+
 export default ({ products, indicators, configuration }: Props): Product[] => {
   const {
     shouldPayExtraForHero,
@@ -59,6 +64,7 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
   if (shouldPayExtraForTalisman) numberOfTimesExtraShouldBePaid += 1;
 
   const { minimumRebatePercentageToMakePoints } = configuration;
+
   const pogPercentageRealized =
     indicators.find(item => item.type === IndicatorType.pog)?.simulationData
       .totalPercentageRealized || 0;
@@ -67,16 +73,17 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
       ?.simulationData.totalPercentageRealized || 0;
 
   let decimalToBeMultiplied = 0;
-  if (pogPercentageRealized >= 100 && revenuesPercentageRealized >= 100) {
-    decimalToBeMultiplied = 1;
-  }
+  let decimalFinalPay = 0;
   if (
-    (pogPercentageRealized < 100 &&
-      pogPercentageRealized >= minimumRebatePercentageToMakePoints) ||
-    (revenuesPercentageRealized < 100 &&
-      revenuesPercentageRealized >= minimumRebatePercentageToMakePoints)
+    pogPercentageRealized >= minimumRebatePercentageToMakePoints &&
+    revenuesPercentageRealized >= minimumRebatePercentageToMakePoints
   ) {
     decimalToBeMultiplied = 0.5;
+    decimalFinalPay = 1;
+  }
+  if (pogPercentageRealized >= 100 && revenuesPercentageRealized >= 100) {
+    decimalToBeMultiplied = 1;
+    decimalFinalPay = 1;
   }
 
   return products.map(product => {
@@ -84,22 +91,36 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
       product.extraPercentageToPayByEnhancerProduct *
       numberOfTimesExtraShouldBePaid;
     const rebatePercentageToPay =
-      product.percentageAwardToPay.rebate * decimalToBeMultiplied;
+      product.awardsParamsToPay.rebatePercentage * decimalToBeMultiplied;
     const percentageTotalToPay = rebatePercentageToPay + extraPercentageToPay;
     const rebateReachedInRealSimulated =
-      (product.simulationData.pogRealizedNetInRealSimulated *
+      ((product.simulationData.pogRealizedNetInRealSimulated *
         percentageTotalToPay) /
-      100;
+        100) *
+      decimalFinalPay;
     const rebateReachedInRealAccumulated =
-      (product.simulationData.pogRealizedNetInDollarTotal *
+      ((product.simulationData.pogRealizedNetInDollarTotal *
         percentageTotalToPay) /
-      100;
+        100) *
+      decimalFinalPay;
+
+    const sellerReachedInRealSimulated =
+      product.simulationData.pogInKilosPerLiter *
+      (product.awardsParamsToPay.sellerValueInReal * decimalToBeMultiplied) *
+      decimalFinalPay;
+    const sellerReachedInRealAccumulated =
+      product.pog.realizedInKilosByLiter *
+        (product.awardsParamsToPay.sellerValueInReal * decimalToBeMultiplied) *
+        decimalFinalPay +
+      sellerReachedInRealSimulated;
 
     return {
       ...product,
       simulationPoints: {
         rebateReachedInRealSimulated,
         rebateReachedInRealAccumulated,
+        sellerReachedInRealSimulated,
+        sellerReachedInRealAccumulated,
       },
     };
   });
