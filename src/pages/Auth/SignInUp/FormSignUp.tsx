@@ -30,6 +30,7 @@ type TypeSelect = 'fmc' | 'participant';
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [currentCPF, setCurrentCPF] = useState('');
   const [showFormModal, setShowFormModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
@@ -56,14 +57,9 @@ const FormSignUp: React.FC = () => {
     } catch (e) {
       setLoading(false);
       if (e.response?.data?.message === 'CPF não encontrado') {
-        // setShowModal(true);
         if (validateCpf(param_first_access)) {
-          const participant = {
-            cpf: param_first_access,
-            establishment: { team_receives_points: false },
-            profile: PROFILES.producer,
-          };
-          history.push('/firstAccess', participant);
+          setShowModal(true);
+          setCurrentCPF(param_first_access);
         } else {
           addToast({
             title: 'CPF inválido',
@@ -81,7 +77,13 @@ const FormSignUp: React.FC = () => {
 
   const handleOpenPreCadastro = () => {
     setShowModal(false);
-    setShowFormModal(true);
+    const participant = {
+      cpf: currentCPF,
+      establishment: { team_receives_points: false },
+      role: { id: 26, identifier: 'produtor', name: 'Produtor' },
+      profile: PROFILES.producer,
+    };
+    history.push('/firstAccess', participant);
   };
 
   const handleSelectType = useCallback(

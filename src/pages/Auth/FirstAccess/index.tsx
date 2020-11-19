@@ -73,10 +73,14 @@ const FirstAccess: React.FC = () => {
             },
           ],
         } as Participant;
+        console.log('>>> data.area_code');
+        console.log(request);
 
         await save(request);
         setModalOpened(true);
       } catch (e) {
+        console.log(e);
+
         addToast({
           title:
             e.response?.data?.message ||
