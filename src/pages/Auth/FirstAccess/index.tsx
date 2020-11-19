@@ -46,7 +46,7 @@ const FirstAccess: React.FC = () => {
         if (!state || !state.profile) {
           history.push('/');
         }
-        const regulation = await getDataRegulation();
+        const regulation = await getDataRegulation(state.profile);
         setDataRegulation(regulation);
         setParticipant(state);
       } catch {
