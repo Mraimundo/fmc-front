@@ -96,7 +96,7 @@ const Form: React.FC<Props> = ({
                 : 'Feminino',
           }
         : null,
-      public_place_select: _participant.address.public_place
+      public_place_select: _participant.address?.public_place
         ? {
             title: _participant.address.public_place || '',
             value: _participant.address.public_place || '',

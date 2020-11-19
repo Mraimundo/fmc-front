@@ -43,7 +43,7 @@ const FirstAccess: React.FC = () => {
     async function load(): Promise<void> {
       try {
         const { state } = location;
-        if (!state || !state.id) {
+        if (!state || !state.profile) {
           history.push('/');
         }
         const regulation = await getDataRegulation();
