@@ -72,6 +72,7 @@ const mock: PointsSimulatorState = {
       awardsParamsToPay: {
         rebatePercentage: 3.5,
         sellerValueInReal: 2.0,
+        additionalMarginPercentage: 0.25,
       },
       extraPercentageToPayByEnhancerProduct: 0.5,
     },
@@ -100,6 +101,8 @@ const mock: PointsSimulatorState = {
     simulatedRebate: 0,
     simulatedSeller: 0,
     totalSeller: 0,
+    simulatedAdditionalMargin: 0,
+    totalAdditionalMargin: 0,
   },
 };
 

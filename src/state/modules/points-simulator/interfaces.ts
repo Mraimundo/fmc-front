@@ -58,6 +58,7 @@ export interface Product {
   awardsParamsToPay: {
     rebatePercentage: number;
     sellerValueInReal: number;
+    additionalMarginPercentage: number;
   };
   extraPercentageToPayByEnhancerProduct: number;
 }
@@ -105,6 +106,8 @@ export interface Award {
   simulatedRebate: number;
   totalSeller: number;
   simulatedSeller: number;
+  totalAdditionalMargin: number;
+  simulatedAdditionalMargin: number;
 }
 
 export interface Configuration {

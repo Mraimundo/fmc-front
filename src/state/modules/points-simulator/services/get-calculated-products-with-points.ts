@@ -2,26 +2,28 @@ import {
   Product,
   Indicator,
   IndicatorType,
-  PointsData,
   Configuration,
 } from '../interfaces';
 
-const indicatorsToPayExtra = [
-  IndicatorType.premio,
-  IndicatorType.hero,
-  IndicatorType.talisman,
-];
-
-interface Props {
-  products: Product[];
+interface DefaultProps {
   indicators: Indicator[];
   configuration: Configuration;
+}
+
+interface CustomProps extends DefaultProps {
+  products: Product[];
+  dollarBase: number;
 }
 
 interface CheckIndicatorsToPayExtra {
   shouldPayExtraForHero: boolean;
   shouldPayExtraForTalisman: boolean;
   shouldPayExtraForPremio: boolean;
+}
+
+interface SimulatedRebatePoints {
+  rebateReachedInRealSimulated: number;
+  rebateReachedInRealAccumulated: number;
 }
 
 const getIndicatorsToPayExtra = (
@@ -46,75 +48,199 @@ const getIndicatorsToPayExtra = (
   };
 };
 
-interface SimulatedRebatePoints {
-  rebateReachedInRealSimulated: number;
-  rebateReachedInRealAccumulated: number;
-}
-
-export default ({ products, indicators, configuration }: Props): Product[] => {
+const getHowManyEnhancerProductsReachedTheGoals = (
+  indicators: Indicator[],
+): number => {
   const {
     shouldPayExtraForHero,
     shouldPayExtraForPremio,
     shouldPayExtraForTalisman,
   } = getIndicatorsToPayExtra(indicators);
 
-  let numberOfTimesExtraShouldBePaid = 0;
-  if (shouldPayExtraForHero) numberOfTimesExtraShouldBePaid += 1;
-  if (shouldPayExtraForPremio) numberOfTimesExtraShouldBePaid += 1;
-  if (shouldPayExtraForTalisman) numberOfTimesExtraShouldBePaid += 1;
+  let result = 0;
+  if (shouldPayExtraForHero) result += 1;
+  if (shouldPayExtraForPremio) result += 1;
+  if (shouldPayExtraForTalisman) result += 1;
 
+  return result;
+};
+
+const getIndicatorPercentageRealizedFromIndicators = (
+  indicators: Indicator[],
+  indicatorType: IndicatorType,
+): number => {
+  return (
+    indicators.find(item => item.type === indicatorType)?.simulationData
+      .totalPercentageRealized || 0
+  );
+};
+
+const getFinalMultiplierValue = ({
+  configuration,
+  indicators,
+}: DefaultProps): number => {
   const { minimumRebatePercentageToMakePoints } = configuration;
 
-  const pogPercentageRealized =
-    indicators.find(item => item.type === IndicatorType.pog)?.simulationData
-      .totalPercentageRealized || 0;
-  const revenuesPercentageRealized =
-    indicators.find(item => item.type === IndicatorType.revenues)
-      ?.simulationData.totalPercentageRealized || 0;
+  const pogPercentageRealized = getIndicatorPercentageRealizedFromIndicators(
+    indicators,
+    IndicatorType.pog,
+  );
+  const revenuesPercentageRealized = getIndicatorPercentageRealizedFromIndicators(
+    indicators,
+    IndicatorType.revenues,
+  );
 
-  let decimalToBeMultiplied = 0;
-  let decimalFinalPay = 0;
   if (
     pogPercentageRealized >= minimumRebatePercentageToMakePoints &&
     revenuesPercentageRealized >= minimumRebatePercentageToMakePoints
   ) {
-    decimalToBeMultiplied = 0.5;
-    decimalFinalPay = 1;
+    return 1;
   }
+
+  return 0;
+};
+
+const getPercentageValueToApplyInDecimal = ({
+  configuration,
+  indicators,
+}: DefaultProps): number => {
+  const { minimumRebatePercentageToMakePoints } = configuration;
+
+  const pogPercentageRealized = getIndicatorPercentageRealizedFromIndicators(
+    indicators,
+    IndicatorType.pog,
+  );
+  const revenuesPercentageRealized = getIndicatorPercentageRealizedFromIndicators(
+    indicators,
+    IndicatorType.revenues,
+  );
+
   if (pogPercentageRealized >= 100 && revenuesPercentageRealized >= 100) {
-    decimalToBeMultiplied = 1;
-    decimalFinalPay = 1;
+    return 1;
   }
+
+  if (
+    pogPercentageRealized >= minimumRebatePercentageToMakePoints &&
+    revenuesPercentageRealized >= minimumRebatePercentageToMakePoints
+  ) {
+    return 0.5;
+  }
+
+  return 0;
+};
+
+interface RebateReachedValues {
+  rebateReachedInRealSimulated: number;
+  rebateReachedInRealAccumulated: number;
+}
+
+const getRebateReachedValuesInReal = (
+  product: Product,
+  numberOfTimesExtraShouldBePaid: number,
+  percentageValueToApplyInDecimal: number,
+  finalMultiplierValue: number,
+): RebateReachedValues => {
+  const extraPercentageToPay =
+    product.extraPercentageToPayByEnhancerProduct *
+    numberOfTimesExtraShouldBePaid;
+
+  const rebatePercentageToPay =
+    product.awardsParamsToPay.rebatePercentage *
+    percentageValueToApplyInDecimal;
+
+  const percentageTotalToPay = rebatePercentageToPay + extraPercentageToPay;
+
+  const rebateReachedInRealSimulated =
+    ((product.simulationData.pogRealizedNetInRealSimulated *
+      percentageTotalToPay) /
+      100) *
+    finalMultiplierValue;
+
+  const rebateReachedInRealAccumulated =
+    ((product.simulationData.pogRealizedNetInDollarTotal *
+      percentageTotalToPay) /
+      100) *
+    finalMultiplierValue;
+
+  return { rebateReachedInRealSimulated, rebateReachedInRealAccumulated };
+};
+
+interface SellerReachedValues {
+  sellerReachedInRealSimulated: number;
+  sellerReachedInRealAccumulated: number;
+}
+
+const getSellerReachedValuesInReal = (
+  product: Product,
+  percentageValueToApplyInDecimal: number,
+  finalMultiplierValue: number,
+): SellerReachedValues => {
+  const sellerReachedInRealSimulated =
+    product.simulationData.pogInKilosPerLiter *
+    (product.awardsParamsToPay.sellerValueInReal *
+      percentageValueToApplyInDecimal) *
+    finalMultiplierValue;
+
+  const sellerReachedInRealAccumulated =
+    product.pog.realizedInKilosByLiter *
+      (product.awardsParamsToPay.sellerValueInReal *
+        percentageValueToApplyInDecimal) *
+      finalMultiplierValue +
+    sellerReachedInRealSimulated;
+
+  return { sellerReachedInRealSimulated, sellerReachedInRealAccumulated };
+};
+
+export default ({
+  products,
+  indicators,
+  configuration,
+  dollarBase,
+}: CustomProps): Product[] => {
+  const numberOfTimesExtraShouldBePaid = getHowManyEnhancerProductsReachedTheGoals(
+    indicators,
+  );
+  const finalMultiplierValue = getFinalMultiplierValue({
+    configuration,
+    indicators,
+  });
+  const percentageValueToApplyInDecimal = getPercentageValueToApplyInDecimal({
+    configuration,
+    indicators,
+  });
 
   return products.map(product => {
-    const extraPercentageToPay =
-      product.extraPercentageToPayByEnhancerProduct *
-      numberOfTimesExtraShouldBePaid;
-    const rebatePercentageToPay =
-      product.awardsParamsToPay.rebatePercentage * decimalToBeMultiplied;
-    const percentageTotalToPay = rebatePercentageToPay + extraPercentageToPay;
-    const rebateReachedInRealSimulated =
-      ((product.simulationData.pogRealizedNetInRealSimulated *
-        percentageTotalToPay) /
-        100) *
-      decimalFinalPay;
-    const rebateReachedInRealAccumulated =
-      ((product.simulationData.pogRealizedNetInDollarTotal *
-        percentageTotalToPay) /
-        100) *
-      decimalFinalPay;
+    const {
+      rebateReachedInRealAccumulated,
+      rebateReachedInRealSimulated,
+    } = getRebateReachedValuesInReal(
+      product,
+      numberOfTimesExtraShouldBePaid,
+      percentageValueToApplyInDecimal,
+      finalMultiplierValue,
+    );
 
-    const sellerReachedInRealSimulated =
-      product.simulationData.pogInKilosPerLiter *
-      (product.awardsParamsToPay.sellerValueInReal * decimalToBeMultiplied) *
-      decimalFinalPay;
-    const sellerReachedInRealAccumulated =
-      product.pog.realizedInKilosByLiter *
-        (product.awardsParamsToPay.sellerValueInReal * decimalToBeMultiplied) *
-        decimalFinalPay +
-      sellerReachedInRealSimulated;
+    const {
+      sellerReachedInRealAccumulated,
+      sellerReachedInRealSimulated,
+    } = getSellerReachedValuesInReal(
+      product,
+      percentageValueToApplyInDecimal,
+      finalMultiplierValue,
+    );
 
-    const additionalMarginSimulated = product.simulationData.revenuesInDollar * 0;
+    const additionalMarginSimulated =
+      ((product.simulationData.revenuesInDollar *
+        product.awardsParamsToPay.additionalMarginPercentage) /
+        100) *
+      dollarBase;
+
+    const additionalMarginAccumulated =
+      (((product.revenues.realizedInDollar +
+        product.simulationData.revenuesInDollar) *
+        product.awardsParamsToPay.additionalMarginPercentage) /
+        100) *
+      dollarBase;
 
     return {
       ...product,
@@ -123,9 +249,8 @@ export default ({ products, indicators, configuration }: Props): Product[] => {
         rebateReachedInRealAccumulated,
         sellerReachedInRealSimulated,
         sellerReachedInRealAccumulated,
-
-        additionalMarginAccumulated: 0,
-        additionalMarginSimulated: 0,
+        additionalMarginAccumulated,
+        additionalMarginSimulated,
       },
     };
   });

@@ -72,9 +72,10 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
     awardsParamsToPay: {
       rebatePercentage: product.rebate_percentage_to_pay,
       sellerValueInReal: product.seller_value_in_real_to_pay,
+      additionalMarginPercentage: product.additional_margin_percentage_to_pay,
     },
     extraPercentageToPayByEnhancerProduct:
-      product.extra_percentage_pay_per_enhancer_product,
+      product.extra_percentage_to_pay_per_enhancer_product,
   }));
 
 const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {

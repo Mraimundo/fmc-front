@@ -136,6 +136,7 @@ export function* calculateSimulation() {
       products,
       indicators: calculatedIndicators,
       configuration,
+      dollarBase,
     });
 
     const award = calculateAwards(calculatedProducts);

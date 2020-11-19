@@ -26,11 +26,25 @@ const calculateAwards = (products: Product[]): Award => {
     0,
   );
 
+  const simulatedAdditionalMargin = products.reduce(
+    (accumulator, product) =>
+      accumulator + product.simulationPoints.additionalMarginSimulated,
+    0,
+  );
+
+  const totalAdditionalMargin = products.reduce(
+    (accumulator, product) =>
+      accumulator + product.simulationPoints.additionalMarginAccumulated,
+    0,
+  );
+
   return {
     simulatedRebate,
     simulatedSeller,
+    simulatedAdditionalMargin,
     totalRebate,
     totalSeller,
+    totalAdditionalMargin,
   };
 };
 

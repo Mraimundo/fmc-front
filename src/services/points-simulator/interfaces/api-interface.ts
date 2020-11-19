@@ -23,8 +23,9 @@ export interface Product {
   stock_in_kg_per_liter: number;
   stock_in_dolar: number;
   rebate_percentage_to_pay: number;
-  extra_percentage_pay_per_enhancer_product: number;
+  extra_percentage_to_pay_per_enhancer_product: number;
   seller_value_in_real_to_pay: number;
+  additional_margin_percentage_to_pay: number;
 }
 
 export interface Channel {

@@ -28,6 +28,8 @@ export const initialState: PointsSimulatorState = {
     simulatedRebate: 0,
     simulatedSeller: 0,
     totalSeller: 0,
+    simulatedAdditionalMargin: 0,
+    totalAdditionalMargin: 0,
   },
 };
 
