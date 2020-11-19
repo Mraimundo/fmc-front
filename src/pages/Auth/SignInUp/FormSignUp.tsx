@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-
+import validateCpf from 'util/validations/cpf';
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
@@ -55,7 +55,20 @@ const FormSignUp: React.FC = () => {
     } catch (e) {
       setLoading(false);
       if (e.response?.data?.message === 'CPF não encontrado') {
-        setShowModal(true);
+        // setShowModal(true);
+        if (validateCpf(param_first_access)) {
+          const participant = {
+            cpf: param_first_access,
+            establishment: { team_receives_points: false },
+            profile: 'PRODUTOR',
+          };
+          history.push('/firstAccess', participant);
+        } else {
+          addToast({
+            title: 'CPF inválido',
+            type: 'error',
+          });
+        }
       } else {
         addToast({
           title: e.response?.data?.message || 'Falha ao checar CPF',
