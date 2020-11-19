@@ -3,6 +3,7 @@ import validateCpf from 'util/validations/cpf';
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
+import { PROFILES } from 'config/constants';
 
 import { ReactSVG } from 'react-svg';
 import closeIcon from 'assets/images/training/close-icon.svg';
@@ -60,7 +61,7 @@ const FormSignUp: React.FC = () => {
           const participant = {
             cpf: param_first_access,
             establishment: { team_receives_points: false },
-            profile: 'PRODUTOR',
+            profile: PROFILES.producer,
           };
           history.push('/firstAccess', participant);
         } else {
