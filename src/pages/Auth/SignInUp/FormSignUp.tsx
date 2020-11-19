@@ -52,6 +52,8 @@ const FormSignUp: React.FC = () => {
         typeSelected === 'participant'
           ? await getParticipantByCpf(param_first_access)
           : await getParticipantByUpn(param_first_access);
+      console.log(participant);
+
       history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
@@ -61,6 +63,7 @@ const FormSignUp: React.FC = () => {
           const participant = {
             cpf: param_first_access,
             establishment: { team_receives_points: false },
+            role: { id: 26, identifier: 'produtor', name: 'Produtor' },
             profile: PROFILES.producer,
           };
           history.push('/firstAccess', participant);
