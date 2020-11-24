@@ -15,6 +15,8 @@ import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
+import { formatDate } from 'util/datetime';
+
 import {
   Container,
   Content,
@@ -73,14 +75,10 @@ const FirstAccess: React.FC = () => {
             },
           ],
         } as Participant;
-        console.log('>>> data.area_code');
-        console.log(request);
 
         await save(request);
         setModalOpened(true);
       } catch (e) {
-        console.log(e);
-
         addToast({
           title:
             e.response?.data?.message ||

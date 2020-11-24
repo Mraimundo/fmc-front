@@ -118,6 +118,7 @@ export interface Participant {
   education_level: string;
   regulations_accepted: Regulation[];
   profile_value: ApproverProfile;
+  campaign_id: number;
 
   // Producers
   producer_group_name: string;
