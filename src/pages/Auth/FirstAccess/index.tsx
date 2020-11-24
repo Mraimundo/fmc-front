@@ -15,8 +15,6 @@ import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
 
-import { formatDate } from 'util/datetime';
-
 import {
   Container,
   Content,
