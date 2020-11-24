@@ -202,12 +202,17 @@ const FarmDataForm: React.FC<Props> = ({
             label="Tipo*"
           />
 
-          <BaseInput
+          <Input
+            name="cpf1232"
             label="CPF ou CNPJ*"
+            pattern={
+              cpfCnpjInput.length < 14 ? 'XXX.XXX.XXX-XX' : 'XX.XXX.XXX/XXXX-XX'
+            }
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
+
           <BaseInput
             label="Nome ou Razão Social*"
             value={nameInput}
