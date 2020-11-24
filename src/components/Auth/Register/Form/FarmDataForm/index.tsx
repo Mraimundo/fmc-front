@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
+import numbersOnly from 'util/numbersOnly';
 
 import { useToast } from 'context/ToastContext';
 import {
@@ -105,6 +106,24 @@ const FarmDataForm: React.FC<Props> = ({
       return;
     }
 
+    if (numbersOnly(cpfCnpjInput) === numbersOnly(participant.cpf)) {
+      addToast({ type: 'error', title: 'CPF já utilizado no cadastro!' });
+      return;
+    }
+
+    if (participant.members_group !== undefined) {
+      let registeredDocument = false;
+      participant.members_group.forEach(item => {
+        if (numbersOnly(cpfCnpjInput) === numbersOnly(item.cpf_cnpj)) {
+          addToast({ type: 'error', title: 'CPF ou CNPJ já cadastrados!' });
+          registeredDocument = true;
+        }
+      });
+      if (registeredDocument) {
+        return;
+      }
+    }
+
     addMemberGroup({
       city: cityInput,
       cpf_cnpj: cpfCnpjInput,
@@ -126,6 +145,8 @@ const FarmDataForm: React.FC<Props> = ({
     memberTypeSelected,
     ufSelected,
     addMemberGroup,
+    participant.cpf,
+    participant.members_group,
   ]);
 
   const handleRemoveMember = useCallback(
@@ -180,12 +201,18 @@ const FarmDataForm: React.FC<Props> = ({
             setValue={value => setMemberTypeSelected(value)}
             label="Tipo*"
           />
-          <BaseInput
+
+          <Input
+            name="cpf1232"
             label="CPF ou CNPJ*"
+            pattern={
+              cpfCnpjInput.length < 14 ? 'XXX.XXX.XXX-XX' : 'XX.XXX.XXX/XXXX-XX'
+            }
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
           />
+
           <BaseInput
             label="Nome ou Razão Social*"
             value={nameInput}
@@ -228,13 +255,15 @@ const FarmDataForm: React.FC<Props> = ({
           <ListContainer>
             <table>
               <thead>
-                <th>Tipo</th>
-                <th>Nome ou Razão Social</th>
-                <th>CPF ou CNPJ</th>
-                <th>Inscrição Estadual</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>&nbsp;</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Nome ou Razão Social</th>
+                  <th>CPF ou CNPJ</th>
+                  <th>Inscrição Estadual</th>
+                  <th>Cidade</th>
+                  <th>Estado</th>
+                  <th>&nbsp;</th>
+                </tr>
               </thead>
               <tbody>
                 {participant.members_group.map(item => (

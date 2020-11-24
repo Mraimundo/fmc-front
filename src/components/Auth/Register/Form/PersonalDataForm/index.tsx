@@ -73,6 +73,7 @@ const PersonalDataForm: React.FC<Props> = ({
         inputRole={inputRole}
         disabled={participant.cpf !== ''}
       />
+
       <BoxPhone>
         <Input
           name="area_code"

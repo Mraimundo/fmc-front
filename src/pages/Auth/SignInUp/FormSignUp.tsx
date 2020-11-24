@@ -79,8 +79,9 @@ const FormSignUp: React.FC = () => {
     setShowModal(false);
     const participant = {
       cpf: currentCPF,
-      establishment: { team_receives_points: false },
+      establishment: { id: 1, team_receives_points: false },
       role: { id: 26, identifier: 'produtor', name: 'Produtor' },
+      campaign_id: 1,
       profile: PROFILES.producer,
     };
     history.push('/firstAccess', participant);

@@ -5,6 +5,8 @@ import {
   MemberGroup,
   Harvest,
 } from 'services/auth/interfaces/Participant';
+import { IProfile } from 'config/constants';
+
 import { formatDate } from 'util/datetime';
 
 interface SaveRequest {
@@ -39,6 +41,8 @@ interface SaveRequest {
 
   establishment_id: number;
   role_id: number;
+  campaign_id: number;
+  profile: IProfile;
   regulations_accepted: Regulation[];
   access_premio_ideall: boolean;
 
@@ -46,12 +50,15 @@ interface SaveRequest {
   producer_group_name: string;
   members_group: MemberGroup[];
   harvest: Harvest;
+
+  producer_cpf: string;
 }
 
 export default (participant: Participant): SaveRequest => {
   return {
     birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
+    producer_cpf: numbersOnly(participant.cpf),
     upn: participant.upn,
     nick_name: participant.nick_name,
     name: participant.name,
@@ -81,6 +88,8 @@ export default (participant: Participant): SaveRequest => {
     password_confirmation: participant.password_confirmation,
     education_level: participant.education_level,
     regulations_accepted: participant.regulations_accepted,
+    campaign_id: participant.campaign_id,
+    profile: participant.profile,
     access_premio_ideall:
       participant.profile === 'FOCALPOINT'
         ? participant.access_premio_ideall
