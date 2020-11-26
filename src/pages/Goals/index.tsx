@@ -66,9 +66,11 @@ const Goals: React.FC = () => {
       <Wrapper>
         {!!campaigns && (
           <CampaignsList>
-            {campaigns.map(campaign => (
-              <li key={campaign.title}>{`Safra ${campaign.title}`}</li>
-            ))}
+            {campaigns
+              .filter(item => item.title !== 'Safra 19/20')
+              .map(campaign => (
+                <li key={campaign.title}>{`Safra ${campaign.title}`}</li>
+              ))}
           </CampaignsList>
         )}
         <TabWrapper>

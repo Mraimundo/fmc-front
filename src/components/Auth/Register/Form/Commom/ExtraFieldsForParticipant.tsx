@@ -88,7 +88,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({
             inputRole={inputRole}
           />
 
-          <Input name="rg" label="RG" inputRole={inputRole} maxLength={10} />
+          <Input name="rg" label="RG" inputRole={inputRole} maxLength={13} />
 
           <Input
             name="rg_emitter"
