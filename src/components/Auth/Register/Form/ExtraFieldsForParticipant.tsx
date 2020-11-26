@@ -73,7 +73,7 @@ const ExtraFieldsForParticipant: React.FC<Props> = ({ inputRole }) => {
 
       <MaritalStatusSelect name="marital_status_select" inputRole={inputRole} />
 
-      <Input name="rg" label="RG" inputRole={inputRole} maxLength={10} />
+      <Input name="rg" label="RG" inputRole={inputRole} maxLength={13} />
 
       <Input name="rg_emitter" label="Órgão emissor" inputRole={inputRole} />
 
