@@ -43,46 +43,6 @@ const AddressFields: React.FC<Props> = ({ inputRole }) => {
 
   return (
     <>
-<<<<<<< HEAD:src/components/Auth/Register/Form/Commom/AddressFields.tsx
-=======
-      <Separator />
-
-      <Title>Completar dados - obrigatório para o Catálogo de Prêmios</Title>
-
-      <GenderSelect name="gender_select" inputRole={inputRole} />
-
-      <Input
-        name="formatted_birth_date"
-        label="Data de nascimento"
-        inputRole={inputRole}
-        pattern="XX/XX/XXXX"
-      />
-
-      <GraduationSelect name="education_level_select" inputRole={inputRole} />
-
-      <Input name="place_of_birth" label="Naturalidade" inputRole={inputRole} />
-
-      <Input name="nationality" label="Nacionalidade" inputRole={inputRole} />
-
-      <MaritalStatusSelect name="marital_status_select" inputRole={inputRole} />
-
-      <Input name="rg" label="RG" inputRole={inputRole} maxLength={13} />
-
-      <Input name="rg_emitter" label="Órgão emissor" inputRole={inputRole} />
-
-      <UfSelectRG
-        name="rg_emitter_uf_select"
-        label="UF do Órgão Emissor"
-        inputRole={inputRole}
-      />
-
-      <Input
-        name="pis_nis"
-        label="N° inscrição na Previdência Social (PIS ou NIS)"
-        inputRole={inputRole}
-      />
-
->>>>>>> 9eb83a7e5fb909a91f92aed6f254157bbe5c8aee:src/components/Auth/Register/Form/ExtraFieldsForParticipant.tsx
       <Input
         name="address.zip_code"
         label="CEP*"
