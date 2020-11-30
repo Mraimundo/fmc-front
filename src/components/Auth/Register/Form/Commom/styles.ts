@@ -8,7 +8,12 @@ import DefaultUfSelect from '../Selects/UfsSelect';
 
 export const UfSelect = styled(DefaultUfSelect)`
   margin-top: 15px;
-  max-width: 100px;
+  max-width: 160px;
+
+  .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon
+    .MuiAutocomplete-inputRoot[class*='MuiOutlinedInput-root'] {
+    padding-right: 36px;
+  }
 
   ._inputContainer {
     height: 40px;

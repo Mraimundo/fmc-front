@@ -52,6 +52,8 @@ interface SaveRequest {
   harvest: Harvest;
 
   producer_cpf: string;
+  get_to_know: string;
+  medium: string;
 }
 
 export default (participant: Participant): SaveRequest => {
@@ -59,6 +61,8 @@ export default (participant: Participant): SaveRequest => {
     birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
     producer_cpf: numbersOnly(participant.cpf),
+    get_to_know: participant.get_to_know,
+    medium: participant.medium,
     upn: participant.upn,
     nick_name: participant.nick_name,
     name: participant.name,

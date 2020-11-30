@@ -26,6 +26,7 @@ interface FormData extends Participant {
   formatted_birth_date: string;
   state_code_select: { title: string; value: string } | null;
   rg_emitter_uf_select: { title: string; value: string } | null;
+  get_to_know_select: { title: string; value: string } | null;
 }
 
 const Form: React.FC<Props> = ({
@@ -126,6 +127,12 @@ const Form: React.FC<Props> = ({
             value: _participant.rg_emitter_uf,
           }
         : null,
+      get_to_know_select: _participant.get_to_know
+        ? {
+            title: _participant.get_to_know || '',
+            value: _participant.get_to_know || '',
+          }
+        : null,
     },
   });
 
@@ -143,6 +150,7 @@ const Form: React.FC<Props> = ({
 
     await saveParticipant({
       ...data,
+      get_to_know: data?.get_to_know_select?.value || '',
       members_group: [...(participant.members_group || [])],
       marital_status: data?.marital_status_select?.value || '',
       education_level: data?.education_level_select?.value || '',

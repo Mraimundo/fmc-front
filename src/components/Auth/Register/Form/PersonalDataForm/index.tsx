@@ -17,6 +17,7 @@ import {
   BoxAutoIndication,
   NextButtonContainer,
   NextButton,
+  ComoFicouConhecendoSelectStyled,
 } from './styles';
 
 interface Props {
@@ -90,6 +91,18 @@ const PersonalDataForm: React.FC<Props> = ({
           inputRole={inputRole}
         />
       </BoxPhone>
+
+      <Input
+        name="medium"
+        label="Em qual Canal você compra os produtos FMC?"
+        inputRole={inputRole}
+      />
+
+      <ComoFicouConhecendoSelectStyled
+        name="get_to_know_select"
+        inputRole={inputRole}
+      />
+
       {participant.profile === PROFILES.producer && (
         <>
           <Input
