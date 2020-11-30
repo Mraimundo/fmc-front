@@ -85,8 +85,8 @@ const FarmDataForm: React.FC<Props> = ({
     )
       return false;
 
-    if (cpfCnpjInput.length !== 11 && cpfCnpjInput.length !== 14) {
-      throw new Error('Cpf ou Cnpj inválido');
+    if (numbersOnly(cpfCnpjInput).length !== 14) {
+      throw new Error(`CPF ou CNPJ inválido`);
     }
 
     // MAYCONN
@@ -115,7 +115,7 @@ const FarmDataForm: React.FC<Props> = ({
       let registeredDocument = false;
       participant.members_group.forEach(item => {
         if (numbersOnly(cpfCnpjInput) === numbersOnly(item.cpf_cnpj)) {
-          addToast({ type: 'error', title: 'CPF ou CNPJ já cadastrados!' });
+          addToast({ type: 'error', title: 'CNPJ já cadastrados!' });
           registeredDocument = true;
         }
       });
@@ -204,13 +204,12 @@ const FarmDataForm: React.FC<Props> = ({
 
           <Input
             name="cpf1232"
-            label="CPF ou CNPJ*"
-            pattern={
-              cpfCnpjInput.length < 14 ? 'XXX.XXX.XXX-XX' : 'XX.XXX.XXX/XXXX-XX'
-            }
+            label="CNPJ*"
+            pattern="XX.XXX.XXX/XXXX-XX"
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
+            numbersOnly
           />
 
           <BaseInput

@@ -47,4 +47,8 @@ export const Content = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.font.color.secondary};
   text-align: justify;
+  a {
+    color: rgb(101, 85, 77);
+    text-decoration: underline;
+  }
 `;

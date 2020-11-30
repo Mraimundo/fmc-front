@@ -6,6 +6,8 @@ import {
   Button as DefaultButton,
 } from 'components/shared';
 
+import ComoFicouConhecendoSelect from '../Selects/ComoFicouConhecendoSelect';
+
 export const Title = styled.h3`
   color: ${({ theme }) => theme.font.color.primary};
   margin-bottom: 10px;
@@ -40,6 +42,21 @@ export const Avatar = styled(DefaultAvatar)`
 
 export const Input = styled(DefaultInput)`
   margin-top: 15px;
+  margin-bottom: 15px;
+  max-width: 499px;
+
+  /*@media screen and (max-width: 1368px) {*/
+  ._inputContainer {
+    height: 40px;
+  }
+  /*}*/
+`;
+
+export const ComoFicouConhecendoSelectStyled = styled(
+  ComoFicouConhecendoSelect,
+)`
+  margin-top: 15px;
+  margin-bottom: 15px;
   max-width: 499px;
 
   /*@media screen and (max-width: 1368px) {*/

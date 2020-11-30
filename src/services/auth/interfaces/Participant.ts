@@ -119,6 +119,8 @@ export interface Participant {
   regulations_accepted: Regulation[];
   profile_value: ApproverProfile;
   campaign_id: number;
+  get_to_know: string;
+  medium: string;
 
   // Producers
   producer_group_name: string;
