@@ -19,6 +19,7 @@ interface Props {
   userType: EstablishmentTypes;
   pathKey: string;
   piAccess: string;
+  isSimulating: boolean;
 }
 
 const ExtractHeader: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const ExtractHeader: React.FC<Props> = ({
   userType,
   pathKey,
   piAccess,
+  isSimulating,
 }) => {
   const { balance, total } = summary;
   const [points, setPoints] = useState<Point[]>([]);
@@ -90,7 +92,7 @@ const ExtractHeader: React.FC<Props> = ({
             type="button"
             buttonRole="primary"
             onClick={handlePiAccess}
-            disabled={piAccess === ''}
+            disabled={piAccess === '' || isSimulating}
           >
             RESGATAR
           </Button>
