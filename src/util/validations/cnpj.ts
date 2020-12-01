@@ -1,11 +1,9 @@
-const isRepeatingNumber = (str: string): boolean => /^(\d)(\1){10}$/.test(str);
-
 export default (value: string): boolean => {
   const cnpj = value.replace(/[^\d]+/g, '');
 
   if (cnpj === '') return false;
 
-  if (cnpj.length != 14) return false;
+  if (cnpj.length !== 14) return false;
 
   // Elimina CNPJs invalidos conhecidos
   if (
