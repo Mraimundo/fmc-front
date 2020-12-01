@@ -15,8 +15,8 @@ export default [
     dataValue: 'name',
   },
   {
-    column: 'E-mail',
-    dataValue: 'email',
+    column: 'Perfil',
+    dataValue: 'profile',
   },
   {
     column: '',
