@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 import numbersOnly from 'util/numbersOnly';
+import validateCnpj from 'util/validations/cnpj';
 
 import { useToast } from 'context/ToastContext';
 import {
@@ -86,7 +87,10 @@ const FarmDataForm: React.FC<Props> = ({
       return false;
 
     if (numbersOnly(cpfCnpjInput).length !== 14) {
-      throw new Error(`CPF ou CNPJ inválido`);
+      throw new Error(`CNPJ inválido`);
+    }
+    if (validateCnpj(cpfCnpjInput) === false) {
+      throw new Error(`CNPJ inválido`);
     }
 
     // MAYCONN
@@ -174,8 +178,8 @@ const FarmDataForm: React.FC<Props> = ({
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Obs>
-        Se você realiza compras com mais de um CPNJ/CPF, cadastre abaixo para
-        que todas as notas do grupo sejam validas.
+        Se você realiza compras com mais de um CNPJ, cadastre abaixo para que
+        todas as notas do grupo sejam validas.
       </Obs>
 
       <Input
