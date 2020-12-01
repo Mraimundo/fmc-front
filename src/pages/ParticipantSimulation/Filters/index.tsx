@@ -6,6 +6,7 @@ import { Option } from 'components/shared/Select';
 import DirectorsSelect from 'components/Cockpit/Selects/Directors';
 import RegionalSelect from 'components/Cockpit/Selects/Regional';
 import TypeSelect from 'components/shared/Vendavall/Establishments/TypeSelect';
+import ProfileSelect from 'components/shared/Vendavall/Establishments/ProfileSelect';
 import ChannelsSelect from 'components/Cockpit/Selects/Channels';
 import getRegionals from 'services/cockpit/getRegional';
 import getDirectors from 'services/cockpit/getDirectors';
@@ -21,6 +22,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [typeSelected, setTypeSelected] = useState<Option | null>(null);
+  const [profileSelected, setProfileSelected] = useState<Option | null>(null);
   const [channelSelected, setChannelSelected] = useState<Option | null>(null);
   const [searchInput, setSearchInput] = useState('');
 
@@ -58,12 +60,17 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
         ? parseInt(channelSelected.value, 0)
         : undefined,
       search: searchInput,
+      // MAYCONN
+      isFocalPoint: profileSelected
+        ? parseInt(profileSelected.value, 0)
+        : undefined,
     });
   }, [
     onFilter,
     directorSelected,
     regionalSelected,
     typeSelected,
+    profileSelected,
     channelSelected,
     searchInput,
   ]);
@@ -99,11 +106,16 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
           value={channelSelected}
           placeholder="Canal"
         />
+        <ProfileSelect
+          setValue={value => setProfileSelected(value)}
+          value={profileSelected}
+          placeholder="Perfil"
+        />
         <input
           type="text"
           value={searchInput}
           onChange={e => setSearchInput(e.target.value)}
-          placeholder="Digite o Nome, e-mail, Grupo de cliente ou Código de cliente"
+          placeholder="Digite o Nome, Grupo de cliente ou Código de cliente"
         />
         <Button type="button" buttonRole="primary" onClick={handleFilterClick}>
           Pesquisar
@@ -119,6 +131,7 @@ const Filters: React.FC<Props> = ({ onFilter }) => {
       searchInput,
       showDirectorSelect,
       showRegionalSelect,
+      profileSelected,
     ],
   );
 };

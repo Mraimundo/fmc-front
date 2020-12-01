@@ -4,8 +4,8 @@ import Manutencao from 'assets/images/manutencao.jpg';
 
 import { DefaultTheme, ThemeContext } from 'styled-components';
 import { Visible } from 'react-grid-system';
+import { PROFILES, EstablishmentTypes } from 'config/constants';
 
-import { EstablishmentTypes } from 'config/constants';
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
@@ -25,6 +25,7 @@ const Dashboard: React.FC = ({ children }) => {
     signOut,
   } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
+  const [textSimulating, setTextSimulating] = useState('');
 
   useEffect(() => {
     if (!participant || !participant.id) return;
@@ -45,6 +46,19 @@ const Dashboard: React.FC = ({ children }) => {
       setTheme(cooperativaTheme);
     }
   }, [participant]);
+
+  useEffect(() => {
+    setTextSimulating('');
+    if (!simulating) {
+      setTextSimulating('');
+      return;
+    }
+    if (participant.profile === PROFILES.focalPoint) {
+      setTextSimulating('Visão do Focal Point');
+      return;
+    }
+    setTextSimulating('Visão do Participante');
+  }, [participant, simulating]);
 
   const manutencao = false;
 
@@ -76,7 +90,7 @@ const Dashboard: React.FC = ({ children }) => {
           <>
             {simulating && (
               <SimulateIndicator>
-                <span>Visão do Participante</span>
+                <span>{textSimulating}</span>
                 <button onClick={signOut} type="button">
                   Sair
                 </button>

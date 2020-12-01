@@ -37,7 +37,7 @@ const Extract: React.FC = () => {
     EstablishmentTypes.Resale,
   );
   const [pathKey, setPathKey] = useState('');
-  const { participant } = useAuth();
+  const { participant, simulating } = useAuth();
 
   useEffect(() => {
     getCampaigns().then(data => setCampaigns(data));
@@ -125,6 +125,7 @@ const Extract: React.FC = () => {
             userType={userType}
             pathKey={pathKey}
             piAccess={piAccess}
+            isSimulating={simulating}
           />
         )}
         <ExtractDetails details={extractDetails} />
