@@ -189,7 +189,7 @@ const FarmDataForm: React.FC<Props> = ({
           onClick={() => setMemberFormIsVisible(!memberFormIsVisible)}
           type="button"
         >
-          {memberFormIsVisible ? '-' : '+'} Adicionar CNPJ e/ou CPF do grupo
+          {memberFormIsVisible ? '-' : '+'} Adicionar CNPJ do grupo
         </AddMemberButton>
       </MemberActionContainer>
 
