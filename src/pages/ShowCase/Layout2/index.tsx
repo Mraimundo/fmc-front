@@ -35,12 +35,12 @@ const Layout2: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h3>Vitrine de prêmios</h3>
+        <h3>Vitrine de Prêmios</h3>
         <span>Selecione o cliente que deseja acessar</span>
         <TypesSelect
           value={typeSelected}
           setValue={value => setTypeSelected(value)}
-          placeholder="Tipo de cliente"
+          placeholder="Tipo de Cliente"
         />
         <CategoriesSelect
           value={categorySelected}
@@ -48,7 +48,7 @@ const Layout2: React.FC = () => {
           placeholder="Categoria"
         />
         <Box>
-          <h3>Meus clientes</h3>
+          <h3>Meus Clientes</h3>
           <Grid isFetching={isFetching} tableData={tableData} />
         </Box>
       </Content>

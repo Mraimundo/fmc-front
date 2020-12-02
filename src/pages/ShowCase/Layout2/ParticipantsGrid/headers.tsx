@@ -9,7 +9,7 @@ interface Props {
 
 export default [
   {
-    column: 'Grupo de cliente',
+    column: 'Grupo de Clientes',
     dataValue: 'name',
   },
   {
@@ -17,7 +17,7 @@ export default [
     dataValue: 'category',
   },
   {
-    column: 'Pontos a resgatar',
+    column: 'Pontos a Resgatar',
     dataValue: 'points',
   },
   {
