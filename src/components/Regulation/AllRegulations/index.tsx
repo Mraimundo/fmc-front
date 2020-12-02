@@ -161,6 +161,7 @@ const AllRegulations: React.FC = () => {
               <a
                 href="https://storage.juntosfmc.com.br/regulations/1606905851.5fc76ffb6629d2.17594420.pdf"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Termos de Uso
               </a>
@@ -168,12 +169,15 @@ const AllRegulations: React.FC = () => {
                 href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/regulations/1606905851.5fc76ffb6629d2.17594420.pdf"
                 className="icon-download"
                 download
-              />
+              >
+                Download
+              </a>
             </div>
             <div>
               <a
                 href="https://storage.juntosfmc.com.br/regulations/1606905551.5fc76ecf639a82.03760579.pdf"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Política de Privacidade
               </a>
@@ -181,7 +185,9 @@ const AllRegulations: React.FC = () => {
                 href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POLITICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/regulations/1606905551.5fc76ecf639a82.03760579.pdf"
                 className="icon-download"
                 download
-              />
+              >
+                Download
+              </a>
             </div>
           </LinksRegulation>
         )}
