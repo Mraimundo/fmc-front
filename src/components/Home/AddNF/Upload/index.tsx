@@ -27,7 +27,7 @@ const Upload: React.FC<Props> = Props => {
   const [showModal, setShowModal] = useState(false);
   const [showBlockedUploadModal, setShowBlockedUploadModal] = useState(false);
 
-  const handleAttachFile = useCallback(
+  /* const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e && e.target && e.target.files && e.target.files.length > 0) {
         const { url } = await uploadFileToStorage(e.target.files[0], 'notas');
@@ -40,7 +40,7 @@ const Upload: React.FC<Props> = Props => {
       }
     },
     [Props],
-  );
+  ); */
 
   const onRequestClose = useCallback(() => {
     setShowModal(false);
