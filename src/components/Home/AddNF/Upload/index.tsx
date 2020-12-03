@@ -25,6 +25,7 @@ interface Props {
 const Upload: React.FC<Props> = Props => {
   const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showBlockedUploadModal, setShowBlockedUploadModal] = useState(false);
 
   const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,16 +46,23 @@ const Upload: React.FC<Props> = Props => {
     setShowModal(false);
   }, []);
 
+  const onRequestCloseBlockedUpload = useCallback(() => {
+    setShowBlockedUploadModal(false);
+  }, []);
+  const onRequestOpenBlockedUpload = useCallback(() => {
+    setShowBlockedUploadModal(true);
+  }, []);
+
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>
-      <Button disabled={fileUrl !== ''}>
-        <input
+      <Button onClick={onRequestOpenBlockedUpload} disabled={fileUrl !== ''}>
+        {/*  <input
           type="file"
           id="fileId"
           accept="image/x-png, image/jpg,.pdf"
           onChange={handleAttachFile}
-        />
+        /> */}
         <div>
           <ReactSVG src={uploadIcon} className="icon" />
           <span>Carregar arquivo</span>
@@ -70,6 +78,21 @@ const Upload: React.FC<Props> = Props => {
           <CloseModal onClick={onRequestClose} />
           <h3>Nota fiscal enviada com sucesso!</h3>
           <ButtonModal onClick={onRequestClose}>ok</ButtonModal>
+        </ContainerModal>
+      </Modal>
+
+      <Modal
+        isOpen={showBlockedUploadModal}
+        type="secondary"
+        onRequestClose={onRequestCloseBlockedUpload}
+      >
+        <ContainerModal>
+          <CloseModal onClick={onRequestCloseBlockedUpload} />
+          <p>
+            A partir de Janeiro 2021 as compras dos produtos FMC realizadas nos
+            estabelecimentos parceiros valerão FMC Coins!
+          </p>
+          <ButtonModal onClick={onRequestCloseBlockedUpload}>ok</ButtonModal>
         </ContainerModal>
       </Modal>
     </Container>

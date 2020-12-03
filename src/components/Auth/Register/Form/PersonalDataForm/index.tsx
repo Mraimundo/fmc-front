@@ -110,6 +110,7 @@ const PersonalDataForm: React.FC<Props> = ({
             label="Data de nascimento*"
             inputRole={inputRole}
             pattern="XX/XX/XXXX"
+            numbersOnly
           />
         </>
       )}

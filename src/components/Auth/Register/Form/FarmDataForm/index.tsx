@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 import numbersOnly from 'util/numbersOnly';
 import validateCnpj from 'util/validations/cnpj';
+import validateCpf from 'util/validations/cpf';
 
 import { useToast } from 'context/ToastContext';
 import {
@@ -86,11 +87,22 @@ const FarmDataForm: React.FC<Props> = ({
     )
       return false;
 
-    if (numbersOnly(cpfCnpjInput).length !== 14) {
-      throw new Error(`CNPJ inválido`);
+    if (
+      numbersOnly(cpfCnpjInput).length !== 11 &&
+      numbersOnly(cpfCnpjInput).length !== 14
+    ) {
+      throw new Error('Cpf ou Cnpj inválido');
     }
-    if (validateCnpj(cpfCnpjInput) === false) {
-      throw new Error(`CNPJ inválido`);
+
+    if (numbersOnly(cpfCnpjInput).length === 14) {
+      if (validateCnpj(cpfCnpjInput) === false) {
+        throw new Error(`CNPJ inválido`);
+      }
+    }
+    if (numbersOnly(cpfCnpjInput).length === 11) {
+      if (validateCpf(cpfCnpjInput) === false) {
+        throw new Error(`CPF inválido`);
+      }
     }
 
     // MAYCONN
@@ -119,7 +131,7 @@ const FarmDataForm: React.FC<Props> = ({
       let registeredDocument = false;
       participant.members_group.forEach(item => {
         if (numbersOnly(cpfCnpjInput) === numbersOnly(item.cpf_cnpj)) {
-          addToast({ type: 'error', title: 'CNPJ já cadastrados!' });
+          addToast({ type: 'error', title: 'CPF ou CNPJ já cadastrados!' });
           registeredDocument = true;
         }
       });
@@ -178,8 +190,8 @@ const FarmDataForm: React.FC<Props> = ({
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Obs>
-        Se você realiza compras com mais de um CNPJ, cadastre abaixo para que
-        todas as notas do grupo sejam validas.
+        Se você realiza compras com mais de um CNPJ/CPF, cadastre abaixo para
+        que todas as notas do grupo sejam validas.
       </Obs>
 
       <Input
@@ -193,7 +205,7 @@ const FarmDataForm: React.FC<Props> = ({
           onClick={() => setMemberFormIsVisible(!memberFormIsVisible)}
           type="button"
         >
-          {memberFormIsVisible ? '-' : '+'} Adicionar CNPJ do grupo
+          {memberFormIsVisible ? '-' : '+'} Adicionar CNPJ e/ou CPF do grupo
         </AddMemberButton>
       </MemberActionContainer>
 
@@ -208,12 +220,13 @@ const FarmDataForm: React.FC<Props> = ({
 
           <Input
             name="cpf1232"
-            label="CNPJ*"
-            pattern="XX.XXX.XXX/XXXX-XX"
+            label="CPF ou CNPJ*"
+            pattern={
+              cpfCnpjInput.length < 14 ? 'XXX.XXX.XXX-XX' : 'XX.XXX.XXX/XXXX-XX'
+            }
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
-            numbersOnly
           />
 
           <BaseInput

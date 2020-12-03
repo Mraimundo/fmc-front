@@ -51,4 +51,18 @@ export const Content = styled.div`
     color: rgb(101, 85, 77);
     text-decoration: underline;
   }
+  table {
+    border-collapse: collapse;
+  }
+  td,
+  th {
+    padding: 8px;
+    border: 0;
+  }
+  tr:nth-child(odd) {
+    td,
+    th {
+      background: #eee;
+    }
+  }
 `;

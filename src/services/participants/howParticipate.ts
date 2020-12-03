@@ -6,7 +6,8 @@ export interface HowParticipate {
   description: string;
   pictureUrl: string;
   mobilePictureUrl: string;
-  slider: string,
+  slider: string;
+  slider_mobile: string;
   links: {
     id: number;
     type: 'internal' | 'external' | 'file';
@@ -29,6 +30,7 @@ interface ApiResponse {
   description: string;
   picture: string;
   slider: string;
+  slider_mobile: string;
   video: string;
   sort: string;
   bottom_description: string;
@@ -54,6 +56,7 @@ const transform = (data: ApiResponse): HowParticipate => {
     pictureUrl: data.picture,
     mobilePictureUrl: data.mobile_picture ? data.mobile_picture : data.picture,
     slider: data.slider,
+    slider_mobile: data.slider_mobile,
     links: data.how_participate_buttons.map(item => ({
       id: item.id,
       type: item.type === 'url' ? 'external' : item.type,
