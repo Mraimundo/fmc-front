@@ -54,14 +54,21 @@ interface SaveRequest {
   producer_cpf: string;
   get_to_know: string;
   medium: string;
+  only_farm: boolean;
+  user_farm_agree: boolean;
 }
 
 export default (participant: Participant): SaveRequest => {
+  console.log('>>>>> participant ');
+  console.log(participant);
+
   return {
     birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
     producer_cpf: numbersOnly(participant.cpf),
     get_to_know: participant.get_to_know,
+    only_farm: participant.only_farm,
+    user_farm_agree: participant.user_farm_agree,
     medium: participant.medium,
     upn: participant.upn,
     nick_name: participant.nick_name,

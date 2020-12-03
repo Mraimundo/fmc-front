@@ -147,3 +147,32 @@ export const UfSelect = styled(DefaultUfSelect)`
     height: 40px;
   }
 `;
+
+export const BoxAccept = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  text-align: justify;
+
+  > input {
+    cursor: pointer;
+  }
+
+  > span {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: #808285;
+    font-size: 16px;
+    margin-left: 8px;
+
+    a {
+      color: ${({ theme }) => theme.font.color.primary};
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    > span {
+      font-size: 12px;
+    }
+  }
+`;

@@ -121,6 +121,8 @@ export interface Participant {
   campaign_id: number;
   get_to_know: string;
   medium: string;
+  only_farm: boolean;
+  user_farm_agree: boolean;
 
   // Producers
   producer_group_name: string;
