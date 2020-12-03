@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 
-import uploadFileToStorage from 'services/storage/sendFile';
+// import uploadFileToStorage from 'services/storage/sendFile';
 
 import { ReactSVG } from 'react-svg';
 import uploadIcon from 'assets/images/fmcProdutor/upload-icon.svg';
-import { pluginApi } from 'services/api';
+// import { pluginApi } from 'services/api';
 import {
   Container,
   Button,
@@ -23,9 +23,12 @@ interface Props {
 }
 
 const Upload: React.FC<Props> = Props => {
+  // const [fileUrl, setFileUrl] = useState('');
   const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showBlockedUploadModal, setShowBlockedUploadModal] = useState(false);
+
+  setFileUrl(' ');
 
   /* const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +59,7 @@ const Upload: React.FC<Props> = Props => {
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>
-      <Button onClick={onRequestOpenBlockedUpload} disabled={fileUrl !== ''}>
+      <Button onClick={onRequestOpenBlockedUpload} disabled={fileUrl !== ' '}>
         {/*  <input
           type="file"
           id="fileId"
