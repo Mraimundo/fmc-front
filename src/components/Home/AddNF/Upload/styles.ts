@@ -90,10 +90,22 @@ export const ContainerModal = styled.div`
     margin: 12px auto;
     font-size: 1em;
   }
+  p {
+    margin-top: 18px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+    text-transform: none;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    @media (min-width: 1024px) {
+      font-size: 24px;
+    }
+  }
   @media (min-width: 768px) {
     font-size: 26px;
     height: 340px;
-    h3 {
+    h3,
+    p {
       margin: 114px auto auto;
     }
   }

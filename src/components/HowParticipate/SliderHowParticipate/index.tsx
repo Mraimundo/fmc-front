@@ -1,4 +1,5 @@
 import React from 'react';
+import useDimensions from 'hooks/use-window-dimensions';
 import { CustomArrowProps, Settings } from 'react-slick';
 import { ReactSVG } from 'react-svg';
 
@@ -35,18 +36,37 @@ interface SliderProps {
   items: {
     picture: string;
   }[];
+  itemsMobile: {
+    picture: string;
+  }[];
 }
 
-const SliderHowParticipate: React.FC<SliderProps> = ({ items }) => {
+const SliderHowParticipate: React.FC<SliderProps> = ({
+  items,
+  itemsMobile,
+}) => {
+  const { width } = useDimensions();
+
   return (
     <div data-testid="banners">
-      <Slider {...settings}>
-        {items.map(item => (
-          <Item key={item.picture}>
-            <img src={item.picture} alt="Imagem rotativa" />
-          </Item>
-        ))}
-      </Slider>
+      {width > 500 && (
+        <Slider {...settings}>
+          {items.map(item => (
+            <Item key={item.picture}>
+              <img src={item.picture} alt="Imagem rotativa" />
+            </Item>
+          ))}
+        </Slider>
+      )}
+      {width <= 500 && (
+        <Slider {...settings}>
+          {itemsMobile.map(item => (
+            <Item key={item.picture}>
+              <img src={item.picture} alt="Imagem rotativa" />
+            </Item>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

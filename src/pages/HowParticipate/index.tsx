@@ -17,6 +17,7 @@ const DefaultHowParticipate: React.FC = () => {
   const [data, setData] = useState<IHowParticipate | null>(null);
   const { width } = useDimensions();
   const [slideItems, setSlideItems] = useState<SlideItem[]>([]);
+  const [slideItemsMobile, setSlideItemsMobile] = useState<SlideItem[]>([]);
 
   useEffect(() => {
     getData().then(_data => {
@@ -28,6 +29,15 @@ const DefaultHowParticipate: React.FC = () => {
     if (!data) return;
     if (data.slider.length > 0) {
       setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
+    }
+    if (data.slider_mobile !== null) {
+      setSlideItemsMobile(
+        data.slider_mobile.split(',').map(prop => ({ picture: prop })),
+      );
+    } else {
+      setSlideItemsMobile(
+        data.slider.split(',').map(prop => ({ picture: prop })),
+      );
     }
   }, [data]);
 
@@ -41,7 +51,10 @@ const DefaultHowParticipate: React.FC = () => {
         <Text>{parser(data?.description || '')}</Text>
         {slideItems.length > 0 && (
           <StepsContainer>
-            <SliderHowParticipate items={slideItems} />
+            <SliderHowParticipate
+              items={slideItems}
+              itemsMobile={slideItemsMobile}
+            />
           </StepsContainer>
         )}
         <Actions>
