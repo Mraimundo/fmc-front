@@ -24,11 +24,10 @@ interface Props {
 
 const Upload: React.FC<Props> = Props => {
   // const [fileUrl, setFileUrl] = useState('');
-  const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showBlockedUploadModal, setShowBlockedUploadModal] = useState(false);
 
-  setFileUrl(' ');
+  // setFileUrl(' ');
 
   /* const handleAttachFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +58,7 @@ const Upload: React.FC<Props> = Props => {
   return (
     <Container>
       <h4> Faça o upload aqui! </h4>
-      <Button onClick={onRequestOpenBlockedUpload} disabled={fileUrl !== ' '}>
+      <Button onClick={onRequestOpenBlockedUpload} disabled={false}>
         {/*  <input
           type="file"
           id="fileId"
