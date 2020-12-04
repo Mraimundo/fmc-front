@@ -24,7 +24,6 @@ interface Props {
 
 const Upload: React.FC<Props> = Props => {
   // const [fileUrl, setFileUrl] = useState('');
-  const [fileUrl, setFileUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showBlockedUploadModal, setShowBlockedUploadModal] = useState(false);
 
