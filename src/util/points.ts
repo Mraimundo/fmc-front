@@ -16,6 +16,14 @@ export const formatPointsInput = (value: string | number) => {
   return `${amount}`;
 };
 
+export const formatKglInput = (value: string | number) => {
+  if (!Number(value)) return '';
+
+  const amount = formatPoints(Number(value) / 1, 0, 0);
+
+  return `${amount}`;
+};
+
 export const formatRebatePointsInput = (value: string | number) => {
   if (!Number(value)) return '';
 
@@ -57,8 +65,13 @@ export const fakeFormatDollars = (
   });
 };
 
-export const formatKgl = (value: number) =>
-  new Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(value);
+export const formatKgl = (value: number | string) => {
+  if (!Number(value)) return '';
+  const valueToFormat = typeof value === 'string' ? parseFloat(value) : value;
+  return Intl.NumberFormat('pt-br', { maximumSignificantDigits: 3 }).format(
+    valueToFormat,
+  );
+};
 
 export const formatPercent = (value: number) =>
   value.toLocaleString('pt-br', {
