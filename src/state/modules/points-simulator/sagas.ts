@@ -18,7 +18,6 @@ import * as constants from './constants';
 import {
   Product,
   Indicator,
-  IndicatorType,
   Channel,
   PointsSimulatorState,
   Configuration,

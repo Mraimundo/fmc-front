@@ -23,6 +23,5 @@ export default {
   report: '/relatorios',
   pointsSimulator: {
     calculator: '/simulador',
-    result: '/resultado',
   },
 };
