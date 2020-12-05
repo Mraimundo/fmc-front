@@ -20,6 +20,11 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
     const expectedPogInDollar = 9411.764705882353;
     const expectedPogRealizedNetInDollar = 941.1764705882352;
     const expectedPogRealizedNetInReal = 4244.7058823529405;
+    // Ver depois esses testes -- MAYCONN
+    const expectedPogRealizedNetInDollarSimulated = 941.1764705882352;
+    const expectedPogRealizedNetInDollarTotal = 66600;
+    const expectedPogRealizedNetInRealSimulated = 4244.7058823529405;
+    const expectedPogRealizedNetInRealTotal = 300366;
 
     const productId = mockedState.products[productIndex].id;
     const product = { ...mockedState.products[productIndex] };
@@ -70,8 +75,10 @@ describe(`test reducer - ${constants.SET_UNIT_VALUE_IN_DOLLAR} and ${constants.S
             revenuesInDollar: expectedRevenuesInDollar,
             pogUnitValueInDollar: expectedPogUnitValue,
             pogInDollar: expectedPogInDollar,
-            pogRealizedNetInDollar: expectedPogRealizedNetInDollar,
-            pogRealizedNetInReal: expectedPogRealizedNetInReal,
+            pogRealizedNetInDollarSimulated: expectedPogRealizedNetInDollarSimulated,
+            pogRealizedNetInDollarTotal: expectedPogRealizedNetInDollarTotal,
+            pogRealizedNetInRealSimulated: expectedPogRealizedNetInRealSimulated,
+            pogRealizedNetInRealTotal: expectedPogRealizedNetInRealTotal,
           },
         },
       ],
