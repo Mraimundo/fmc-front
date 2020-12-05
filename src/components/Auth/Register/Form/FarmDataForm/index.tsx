@@ -11,6 +11,7 @@ import {
   MemberType,
 } from 'services/auth/interfaces/Participant';
 import { Option } from 'components/shared/Select';
+import { useFormContext } from 'react-hook-form';
 import {
   UfSelect,
   MemberTypeSelect,
@@ -58,6 +59,8 @@ const FarmDataForm: React.FC<Props> = ({
   const [nameInput, setNameInput] = useState<string>('');
   const [ieInput, setIeInput] = useState<string>('');
   const [cityInput, setCityInput] = useState<string>('');
+
+  const { register } = useFormContext();
 
   const inputRole = 'secondary';
 
@@ -196,7 +199,11 @@ const FarmDataForm: React.FC<Props> = ({
       </Obs>
 
       <BoxAccept>
-        <input type="checkbox" name="only_farm" />
+        <input
+          type="checkbox"
+          name="only_farm"
+          ref={(e: HTMLInputElement) => register(e)}
+        />
         <span>
           <div>Não tenho mais nenhum CNPJ e/ou CPF de compra</div>
         </span>
@@ -220,7 +227,11 @@ const FarmDataForm: React.FC<Props> = ({
       {memberFormIsVisible && (
         <>
           <BoxAccept>
-            <input type="checkbox" name="user_farm_agree" />
+            <input
+              type="checkbox"
+              name="user_farm_agree"
+              ref={(e: HTMLInputElement) => register(e)}
+            />
             <span>
               <div>
                 Estou ciente dos termos da lei de proteção de dados e me

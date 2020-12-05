@@ -59,9 +59,6 @@ interface SaveRequest {
 }
 
 export default (participant: Participant): SaveRequest => {
-  console.log('>>>>> participant ');
-  console.log(participant);
-
   return {
     birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
