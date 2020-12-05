@@ -1,3 +1,4 @@
+import { pluginApi } from 'services/api';
 import {
   Channel,
   Product,
@@ -17,6 +18,15 @@ import mockedSimulationData from './mock/simulationData';
 const test: SaveSimulationDTO[] = [];
 
 const getChannels = async (): Promise<Channel[]> => {
+  try {
+    const data = await pluginApi.get(
+      'simulations/establishments?page=1&limit=15&order=desc',
+    );
+    console.log('data', data);
+  } catch (e) {
+    console.log('err', e);
+  }
+
   return mockedChannels;
 };
 
