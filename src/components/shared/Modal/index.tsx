@@ -5,6 +5,7 @@ import { Container, ReactModal } from './styles';
 
 interface ModalProps extends Props {
   type?: 'primary' | 'secondary';
+  zIndex?: number;
 }
 
 ReactModal.setAppElement('#root');
@@ -15,6 +16,7 @@ const Modal: React.FC<ModalProps> = ({
   onRequestClose,
   type = 'primary',
   shouldCloseOnEsc = false,
+  zIndex,
   ...rest
 }) => {
   const [closing, setClosing] = useState(false);
@@ -80,6 +82,7 @@ const Modal: React.FC<ModalProps> = ({
       style={{
         overlay: {
           animation: closing ? 'lighten 0.4s both' : 'darken 0.4s both',
+          zIndex,
         },
       }}
       {...rest}

@@ -1,37 +1,57 @@
 import React, { useCallback } from 'react';
 import NumberFormat, { NumberFormatValues } from 'react-number-format';
 
-import { formatPointsInput } from 'util/points';
+import { formatPointsInput, formatKglInput } from 'util/points';
+
+type Type = 'money' | 'kilograma';
 
 interface Props {
   component?: React.FunctionComponent;
   placeholder?: string;
-  onChange(v: number): void;
-  value: number;
+  onChange?(v: number): void;
+  value?: number;
+  defaultValue?: number;
   maxLength?: number | null;
   disabled?: boolean;
+  type: Type;
 }
-const PointsInput: React.FC<Props> = ({
+const CustomInput: React.FC<Props> = ({
   component,
   placeholder = '0,00',
   onChange,
   value,
+  defaultValue,
   maxLength = null,
   disabled = false,
+  type,
 }) => {
   const handleChange = useCallback(
     ({ floatValue }: NumberFormatValues) => {
-      onChange(floatValue ? floatValue / 100 : 0);
+      const handler = setTimeout(() => {
+        if (typeof onChange === 'undefined') return;
+        onChange((floatValue || 0) / (type === 'money' ? 100 : 1));
+      }, 700);
+
+      return () => {
+        clearTimeout(handler);
+      };
     },
-    [onChange],
+    [onChange, type],
   );
+
+  const format = type === 'money' ? formatPointsInput : formatKglInput;
 
   return (
     <NumberFormat
       thousandSeparator
       type="tel"
-      value={value * 100}
-      format={formatPointsInput}
+      value={
+        typeof value === 'number'
+          ? (value || 0) * (type === 'money' ? 100 : 1)
+          : undefined
+      }
+      defaultValue={(defaultValue || 0) * (type === 'money' ? 100 : 1)}
+      format={format}
       allowNegative={false}
       placeholder={placeholder}
       customInput={component}
@@ -47,4 +67,4 @@ const PointsInput: React.FC<Props> = ({
   );
 };
 
-export default PointsInput;
+export default CustomInput;

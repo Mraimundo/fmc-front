@@ -29,6 +29,7 @@ interface SelectProps {
   inputRole?: 'primary' | 'secondary';
   placeholder?: string;
   disabled?: boolean;
+  disableClearable?: boolean;
 }
 
 const BaseSelect: React.FC<SelectProps> = ({
@@ -43,6 +44,7 @@ const BaseSelect: React.FC<SelectProps> = ({
   error = '',
   setValue,
   value,
+  disableClearable = false,
 }) => {
   const theme = useContext(ThemeContext);
   const classes = useStyles(theme, inputRole);
@@ -97,9 +99,10 @@ const BaseSelect: React.FC<SelectProps> = ({
           className="_inputContainer"
           inputRole={inputRole}
         >
-          <UiAutocomplete<Option>
+          <UiAutocomplete<Option, false, typeof disableClearable>
             disabled={disabled}
             open={open}
+            disableClearable={disableClearable}
             noOptionsText=""
             loadingText="Carregando"
             getOptionDisabled={option => option.value === '-1'}
@@ -113,7 +116,7 @@ const BaseSelect: React.FC<SelectProps> = ({
             getOptionSelected={(option, v) => option?.value === v?.value}
             options={options}
             loading={loading}
-            onChange={(event, v) => {
+            onChange={(event, v: Option | null) => {
               setValue(v);
               !!error &&
                 typeof triggerValidation === 'function' &&
@@ -185,6 +188,7 @@ const BaseSelect: React.FC<SelectProps> = ({
       setValue,
       triggerValidation,
       value,
+      disableClearable,
     ],
   );
 };

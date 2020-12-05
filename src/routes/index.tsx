@@ -24,6 +24,8 @@ import Training from './modules/training';
 import Goals from './modules/goals';
 import HowParticipate from './modules/how-participate';
 
+import PointsSimulator from './modules/points-simulator';
+
 import Route from './route';
 
 const routesArray: RouteModule[][] = [
@@ -48,6 +50,7 @@ const routesArray: RouteModule[][] = [
   MailManager,
   PowerBi,
   Report,
+  PointsSimulator,
 ];
 
 const Routes: React.FC = () => (
