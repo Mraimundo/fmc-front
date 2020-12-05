@@ -17,8 +17,8 @@ import {
 const channelApiToChannel = (channel: ChannelApi): Channel => ({
   id: channel.id,
   category: channel.category,
-  code: channel.code,
-  groupName: channel.group_name,
+  code: channel.client_code,
+  groupName: channel.client_group,
   name: channel.name,
   type: channel.type,
 });

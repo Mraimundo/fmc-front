@@ -31,8 +31,8 @@ export interface Product {
 export interface Channel {
   id: number;
   name: string;
-  group_name: string;
-  code: string;
+  client_group: string;
+  client_code: string;
   type: EstablishmentTypes;
   category: EstablishmentCategory;
 }
@@ -68,8 +68,9 @@ export interface Configuration {
 
 export interface SimulationData {
   id: number;
-  simulation_date: Date;
+  created: Date;
+  name: string;
+  content: string;
   client_group: string;
-  simulation_name: string;
-  data_json_in_string: string;
+  establishment_id: number;
 }
