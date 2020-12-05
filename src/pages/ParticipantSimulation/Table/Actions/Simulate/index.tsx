@@ -19,7 +19,7 @@ const Simulate: React.FC<Props> = ({ id }) => {
 
   return (
     <Container onClick={handleClick} disabled={loading}>
-      {loading ? 'Carregando...' : 'Simular'}
+      {loading ? 'Carregando...' : 'Acessar'}
     </Container>
   );
 };

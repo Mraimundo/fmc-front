@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { models, Report } from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
-import getConfig, { Response as IConfig } from 'services/powerBi/getToken';
+import getConfig from 'services/powerBi/getToken';
+import { Dashboard as IConfig } from 'services/powerBi/interfaces';
 
 import { Container } from './styles';
 

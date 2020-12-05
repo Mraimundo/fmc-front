@@ -7,6 +7,7 @@ export interface Participant {
   name: string;
   email: string;
   clientGroup: string;
+  profile: 'Participante' | 'Focal Point';
 }
 
 export interface FilterOptions {
@@ -14,6 +15,7 @@ export interface FilterOptions {
   regionalId?: string;
   typeId?: string;
   channelId?: number;
+  isFocalPoint?: number;
   search?: string;
   page?: number;
 }
@@ -25,6 +27,7 @@ interface ApiResponse {
     email: string;
     id: number;
     name: string;
+    focal_point: boolean;
   }[];
   pagination: Pagination;
 }
@@ -39,7 +42,14 @@ export default async (filters: FilterOptions): Promise<Response> => {
 
   let extraSearch = `?limit=20&page=${page}`;
   if (filters) {
-    const { directorId, regionalId, typeId, search, channelId } = filters;
+    const {
+      directorId,
+      regionalId,
+      typeId,
+      search,
+      channelId,
+      isFocalPoint,
+    } = filters;
     if (typeId) {
       extraSearch += `&types[0]=${typeId}`;
     }
@@ -55,6 +65,9 @@ export default async (filters: FilterOptions): Promise<Response> => {
     if (search) {
       extraSearch += `&search=${search}`;
     }
+    if (typeof isFocalPoint !== 'undefined') {
+      extraSearch += `&focal_point=${filters.isFocalPoint}`;
+    }
   }
 
   const {
@@ -68,6 +81,7 @@ export default async (filters: FilterOptions): Promise<Response> => {
       name: item.name,
       email: item.email,
       clientGroup: item.client_group,
+      profile: item.focal_point ? 'Focal Point' : 'Participante',
     })),
     pagination,
   };
