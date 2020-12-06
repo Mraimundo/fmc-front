@@ -7,8 +7,8 @@ const products: Product[] = [
   {
     id: 1,
     name: 'Hero',
-    type_id: 4,
-    type_name: 'Inseticida',
+    segment_id: 4,
+    segment: 'Inseticida',
     is_enhancer: true,
     is_a_participating_product: true,
     revenues_goal_in_dollar: 1333000,
@@ -29,8 +29,8 @@ const products: Product[] = [
   {
     id: 2,
     name: 'Premio',
-    type_id: 4,
-    type_name: 'Inseticida',
+    segment_id: 4,
+    segment: 'Inseticida',
     is_enhancer: true,
     is_a_participating_product: true,
     revenues_goal_in_dollar: 1333000,
@@ -51,8 +51,8 @@ const products: Product[] = [
   {
     id: 3,
     name: 'Talisman',
-    type_id: 4,
-    type_name: 'Inseticida',
+    segment_id: 4,
+    segment: 'Inseticida',
     is_enhancer: true,
     is_a_participating_product: true,
     revenues_goal_in_dollar: 1333000,
@@ -73,8 +73,8 @@ const products: Product[] = [
   ...productIdsToMock.map(id => ({
     id,
     name: `Produto ${id}`,
-    type_id: id % 2 === 0 ? 4 : 5,
-    type_name: id % 2 === 0 ? 'Inseticida' : 'Fungicida',
+    segment_id: id % 2 === 0 ? 4 : 5,
+    segment: id % 2 === 0 ? 'Inseticida' : 'Fungicida',
     is_enhancer: false,
     is_a_participating_product: !notParticipateProductIds.includes(id),
     revenues_goal_in_dollar: 1333000,

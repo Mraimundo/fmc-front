@@ -5,7 +5,14 @@ import deleteImg from 'assets/images/points-simulator/delete.svg';
 import editImg from 'assets/images/points-simulator/edit.svg';
 
 import { useToast } from 'context/ToastContext';
-import { DefaultModal, Header, Table, Content, ActionsContent } from './styles';
+import {
+  DefaultModal,
+  Header,
+  Table,
+  Content,
+  ActionsContent,
+  TableContainer,
+} from './styles';
 
 export interface TableData {
   id: number;
@@ -13,12 +20,13 @@ export interface TableData {
   clientGroup: string;
   simulationName: string;
   jsonStateInString: string;
+  channelId: number;
 }
 
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
-  onLoadState(jsonStateInString: string): void;
+  onLoadState(jsonStateInString: string, channelSelectId: number): void;
   onDeleteSimulation(simulationId: number): void | Promise<void>;
   tableData: TableData[];
 }
@@ -33,8 +41,8 @@ const Modal: React.FC<ModalProps> = ({
   const { addToast } = useToast();
 
   const handleEditClick = useCallback(
-    (jsonStateInString: string) => {
-      onLoadState(jsonStateInString);
+    (jsonStateInString: string, channelSelectId: number) => {
+      onLoadState(jsonStateInString, channelSelectId);
       onRequestClose();
     },
     [onLoadState, onRequestClose],
@@ -83,42 +91,48 @@ const Modal: React.FC<ModalProps> = ({
             onChange={e => setInputSearchValue(e.target.value)}
           />
         </Header>
-
-        <Table>
-          <thead>
-            <tr>
-              <th>Simulado em</th>
-              <th>Grupo de cliente</th>
-              <th>Nome da Simulação</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map(item => (
-              <tr key={item.id}>
-                <td>{item.simulationDate}</td>
-                <td>{item.clientGroup}</td>
-                <td>{item.simulationName}</td>
-                <td>
-                  <ActionsContent>
-                    <button type="button">
-                      <ReactSVG
-                        src={editImg}
-                        onClick={() => handleEditClick(item.jsonStateInString)}
-                      />
-                    </button>
-                    <button type="button">
-                      <ReactSVG
-                        src={deleteImg}
-                        onClick={() => handleDelectClick(item.id)}
-                      />
-                    </button>
-                  </ActionsContent>
-                </td>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <th>Simulado em</th>
+                <th>Grupo de cliente</th>
+                <th>Nome da Simulação</th>
+                <th> </th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {filteredData.map(item => (
+                <tr key={item.id}>
+                  <td>{item.simulationDate}</td>
+                  <td>{item.clientGroup}</td>
+                  <td>{item.simulationName}</td>
+                  <td>
+                    <ActionsContent>
+                      <button type="button">
+                        <ReactSVG
+                          src={editImg}
+                          onClick={() =>
+                            handleEditClick(
+                              item.jsonStateInString,
+                              item.channelId,
+                            )
+                          }
+                        />
+                      </button>
+                      <button type="button">
+                        <ReactSVG
+                          src={deleteImg}
+                          onClick={() => handleDelectClick(item.id)}
+                        />
+                      </button>
+                    </ActionsContent>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </TableContainer>
       </Content>
     </DefaultModal>
   );
