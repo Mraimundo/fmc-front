@@ -3,17 +3,19 @@ import { SimulationData } from '../interfaces/api-interface';
 const simulatioData: SimulationData[] = [
   {
     id: 1,
-    simulation_date: new Date(),
+    created: new Date(),
     client_group: 'AgroAmazônia',
-    simulation_name: 'Título da Simulação',
-    data_json_in_string: '',
+    name: 'Título da Simulação',
+    content: '',
+    establishment_id: 842,
   },
   {
     id: 2,
-    simulation_date: new Date(),
+    created: new Date(),
     client_group: 'AgroAmazônia',
-    simulation_name: 'Título da Simulação 2',
-    data_json_in_string: '',
+    name: 'Título da Simulação 2',
+    content: '',
+    establishment_id: 842,
   },
 ];
 

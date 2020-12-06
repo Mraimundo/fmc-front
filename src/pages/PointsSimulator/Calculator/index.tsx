@@ -53,9 +53,10 @@ const PointsSimulator: React.FC = () => {
         data.map(simulation => ({
           id: simulation.id,
           clientGroup: simulation.client_group,
-          simulationDate: formatDate(simulation.simulation_date),
-          simulationName: simulation.simulation_name,
-          jsonStateInString: simulation.data_json_in_string,
+          simulationDate: formatDate(simulation.created),
+          simulationName: simulation.name,
+          jsonStateInString: simulation.content,
+          channelId: simulation.establishment_id,
         })),
       ),
     );
@@ -133,14 +134,17 @@ const PointsSimulator: React.FC = () => {
   );
 
   const onLoadState = useCallback(
-    (jsonStateInString: string) => {
-      dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
+    (jsonStateInString: string, channelSelectId: number) => {
+      dispatch(actions.fetchChannel(channelSelectId));
+      setTimeout(() => {
+        dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
+      }, 1000);
     },
     [dispatch],
   );
 
   const onDeleteSimulation = useCallback(async (simulationId: number) => {
-    await deleteSimulation(simulationId);
+    deleteSimulation(simulationId);
   }, []);
 
   const quantityItemsAdded = useMemo(

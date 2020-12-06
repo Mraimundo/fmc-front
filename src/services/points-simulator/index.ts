@@ -1,3 +1,4 @@
+import { pluginApi } from 'services/api';
 import {
   Channel,
   Product,
@@ -7,54 +8,104 @@ import {
   SimulationData,
 } from './interfaces/api-interface';
 import { SaveSimulationDTO } from './interfaces/dtos';
-import mockedProducts from './mock/products';
-import mockedProductTypes from './mock/productTypes';
-import mockedIndicators from './mock/indicators';
-import mockedChannels from './mock/channels';
-import mockedConfiguration from './mock/configuration';
-import mockedSimulationData from './mock/simulationData';
 
-const test: SaveSimulationDTO[] = [];
-
+interface ChannelsApiResponse {
+  data: Channel[];
+}
 const getChannels = async (): Promise<Channel[]> => {
-  return mockedChannels;
+  try {
+    const {
+      data: { data },
+    } = await pluginApi.get<ChannelsApiResponse>(
+      'simulations/establishments?page=1&limit=10000&order=desc',
+    );
+    return data;
+  } catch (e) {
+    return [];
+  }
 };
 
+interface ChannelApiResponse {
+  channel: Channel;
+}
 const getChannel = async (channelId: number): Promise<Channel | null> => {
-  return mockedChannels.find(item => item.id === channelId) || null;
+  try {
+    const {
+      data: { channel },
+    } = await pluginApi.get<ChannelApiResponse>(
+      `simulations/establishments/${channelId}`,
+    );
+    return channel;
+  } catch (e) {
+    return null;
+  }
 };
 
-const getProducts = async (channelId: number): Promise<Product[]> => {
-  return mockedProducts;
-};
-
+interface ProductTypesApiResponse {
+  types: ProductType[];
+}
 const getProductTypes = async (): Promise<ProductType[]> => {
-  return mockedProductTypes;
+  try {
+    const {
+      data: { types },
+    } = await pluginApi.get<ProductTypesApiResponse>('fmc-products/types');
+    return types;
+  } catch (e) {
+    return [];
+  }
+};
+
+interface ProductsApiResponse {
+  products: Product[];
+}
+const getProducts = async (channelId: number): Promise<Product[]> => {
+  const {
+    data: { products },
+  } = await pluginApi.get<ProductsApiResponse>(
+    `simulations/products?establishment_id=${channelId}`,
+  );
+  return products;
 };
 
 const getIndicators = async (channelId: number): Promise<Indicators> => {
-  return mockedIndicators;
+  const { data } = await pluginApi.get<Indicators>(
+    `simulations/indicators?establishment_id=${channelId}`,
+  );
+  return data;
 };
 
 const getConfiguration = async (channelId: number): Promise<Configuration> => {
-  return mockedConfiguration;
+  const { data } = await pluginApi.get<Configuration>(
+    `simulations/configuration?establishment_id=${channelId}`,
+  );
+  return data;
 };
 
 const saveSimulation = async (data: SaveSimulationDTO): Promise<void> => {
-  test.push(data);
-  console.log('saved', data);
+  const { channelId, jsonDataInString, simulationName } = data;
+  const request = {
+    establishment_id: channelId,
+    content: jsonDataInString,
+    name: simulationName,
+  };
+
+  await pluginApi.post('simulations/add', request);
 };
 
+interface SimulationDataApiResponse {
+  data: SimulationData[];
+}
 const loadSimulations = async (): Promise<SimulationData[]> => {
-  if (test.length === 0) return [];
-  return mockedSimulationData.map(item => ({
-    ...item,
-    data_json_in_string: test[0]?.jsonDataInString || '',
-  }));
+  const {
+    data: { data },
+  } = await pluginApi.get<SimulationDataApiResponse>(
+    'simulations?limit=15000&order=desc',
+  );
+  return data;
 };
 
-const deleteSimulation = async (simulationId: number): Promise<void> => {
-  console.log('deleted');
+const deleteSimulation = (simulationId: number): void => {
+  pluginApi.delete(`simulations/remove/${simulationId}`);
 };
 
 export {

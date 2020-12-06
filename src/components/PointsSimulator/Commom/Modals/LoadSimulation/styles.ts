@@ -65,7 +65,7 @@ export const ActionsContent = styled.div`
 `;
 
 export const Table = styled.table`
-  margin-top: 35px;
+  margin-top: 17px;
   border-collapse: separate;
   border-spacing: 0 8px;
   width: 100%;
@@ -109,5 +109,17 @@ export const Table = styled.table`
         }
       }
     }
+  }
+`;
+
+export const TableContainer = styled.div`
+  overflow: auto;
+  height: 410px;
+  margin-top: 18px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
