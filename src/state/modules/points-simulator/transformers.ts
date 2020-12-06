@@ -30,8 +30,8 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
     isEnhancer: product.is_enhancer,
     isParticipatingProduct: product.is_a_participating_product,
     type: {
-      id: product.type_id,
-      name: product.type_name,
+      id: product.segment_id,
+      name: product.segment,
     },
     revenues: {
       goalInDollar: product.revenues_goal_in_dollar,

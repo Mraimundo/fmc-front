@@ -8,8 +8,8 @@ export interface ProductType {
 export interface Product {
   id: number;
   name: string;
-  type_id: number;
-  type_name: string;
+  segment_id: number;
+  segment: string;
   is_enhancer: boolean;
   is_a_participating_product: boolean;
   revenues_goal_in_dollar: number;

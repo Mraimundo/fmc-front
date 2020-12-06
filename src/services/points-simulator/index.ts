@@ -8,8 +8,6 @@ import {
   SimulationData,
 } from './interfaces/api-interface';
 import { SaveSimulationDTO } from './interfaces/dtos';
-import mockedProducts from './mock/products';
-import mockedIndicators from './mock/indicators';
 
 interface ChannelsApiResponse {
   data: Channel[];
@@ -57,12 +55,23 @@ const getProductTypes = async (): Promise<ProductType[]> => {
   }
 };
 
+interface ProductsApiResponse {
+  products: Product[];
+}
 const getProducts = async (channelId: number): Promise<Product[]> => {
-  return mockedProducts;
+  const {
+    data: { products },
+  } = await pluginApi.get<ProductsApiResponse>(
+    `simulations/products?establishment_id=${channelId}`,
+  );
+  return products;
 };
 
 const getIndicators = async (channelId: number): Promise<Indicators> => {
-  return mockedIndicators;
+  const { data } = await pluginApi.get<Indicators>(
+    `simulations/indicators?establishment_id=${channelId}`,
+  );
+  return data;
 };
 
 const getConfiguration = async (channelId: number): Promise<Configuration> => {
