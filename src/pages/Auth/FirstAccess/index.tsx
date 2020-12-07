@@ -43,10 +43,10 @@ const FirstAccess: React.FC = () => {
     async function load(): Promise<void> {
       try {
         const { state } = location;
-        if (!state || !state.id) {
+        if (!state || !state.profile) {
           history.push('/');
         }
-        const regulation = await getDataRegulation();
+        const regulation = await getDataRegulation(state.profile);
         setDataRegulation(regulation);
         setParticipant(state);
       } catch {
@@ -104,6 +104,7 @@ const FirstAccess: React.FC = () => {
             <DataRegulation
               onAccept={onAcceptRegulation}
               regulation={dataRegulation}
+              profile={participant?.profile}
             />
           </RegulationContent>
         </RegulationContainer>

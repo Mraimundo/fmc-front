@@ -1,8 +1,12 @@
 import React, { useState, useCallback } from 'react';
-
+import validateCpf from 'util/validations/cpf';
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useToast } from 'context/ToastContext';
+import { PROFILES } from 'config/constants';
+
+import { ReactSVG } from 'react-svg';
+import closeIcon from 'assets/images/training/close-icon.svg';
 
 import { Input, Button } from 'components/shared';
 
@@ -12,7 +16,10 @@ import {
   getParticipantByCpf,
   getParticipantByUpn,
 } from 'services/register/getParticipantData';
-import { MenuList, ItemList } from './styles';
+import DefaultModal from 'components/shared/Modal';
+import ModalPreCadastro from '../../../components/Contact/Disconnected/ModalPreCadastro';
+
+import { MenuList, ItemList, ContainerModal, Close } from './styles';
 
 interface SignUpFormData {
   param_first_access: string;
@@ -22,6 +29,9 @@ type TypeSelect = 'fmc' | 'participant';
 
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [currentCPF, setCurrentCPF] = useState('');
+  const [showFormModal, setShowFormModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
 
@@ -46,12 +56,36 @@ const FormSignUp: React.FC = () => {
       history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
-      addToast({
-        title: e.response?.data?.message || 'Falha ao checar CPF',
-        type: 'error',
-      });
+      if (e.response?.data?.message === 'CPF não encontrado') {
+        if (validateCpf(param_first_access)) {
+          setShowModal(true);
+          setCurrentCPF(param_first_access);
+        } else {
+          addToast({
+            title: 'CPF inválido',
+            type: 'error',
+          });
+        }
+      } else {
+        addToast({
+          title: e.response?.data?.message || 'Falha ao checar CPF',
+          type: 'error',
+        });
+      }
     }
   });
+
+  const handleOpenPreCadastro = () => {
+    setShowModal(false);
+    const participant = {
+      cpf: currentCPF,
+      establishment: { id: 1, team_receives_points: false },
+      role: { id: 26, identifier: 'produtor', name: 'Produtor' },
+      campaign_id: 1,
+      profile: PROFILES.producer,
+    };
+    history.push('/firstAccess', participant);
+  };
 
   const handleSelectType = useCallback(
     (type: TypeSelect) => {
@@ -60,9 +94,43 @@ const FormSignUp: React.FC = () => {
     },
     [setValue],
   );
+  const onRequestClose = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   return (
     <FormContext {...methods}>
+      <DefaultModal
+        isOpen={showModal}
+        onRequestClose={onRequestClose}
+        type="secondary"
+      >
+        <ContainerModal>
+          <Close>
+            <button type="button" onClick={onRequestClose}>
+              <ReactSVG src={closeIcon} />
+            </button>
+          </Close>
+          <h3> Bem-vindo(a)! </h3>
+          <p>
+            Caso seja colaborador(a) de um canal Juntos FMC, por favor, solicite
+            sua indicação de acesso diretamente no seu estabelecimento.
+          </p>
+          <p>
+            Se você é um Produtor(a) que compra produtos FMC através das
+            Revendas ou Cooperativas pertencentes ao programa Juntos FMC, clique
+            no botão abaixo para se cadastrar.
+          </p>
+          <Button
+            type="submit"
+            buttonRole="quaternary"
+            onClick={handleOpenPreCadastro}
+          >
+            SOU PRODUTOR
+          </Button>
+        </ContainerModal>
+      </DefaultModal>
+
       <form onSubmit={onSubmit}>
         <MenuList>
           <ItemList
@@ -92,6 +160,11 @@ const FormSignUp: React.FC = () => {
           Cadastrar
         </Button>
       </form>
+
+      <ModalPreCadastro
+        isOpen={showFormModal}
+        onRequestClose={() => setShowFormModal(false)}
+      />
     </FormContext>
   );
 };

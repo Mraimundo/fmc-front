@@ -1,6 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 import contact from './modules/contact/default';
 import indication from './modules/indication/default';
+import howParticipate from './modules/howParticipate/default';
 import layout from './modules/layout/default';
 import link from './modules/link/default';
 import modal from './modules/modal/default';
@@ -24,6 +25,7 @@ const Theme: DefaultTheme = {
   font,
   footer,
   input,
+  howParticipate,
   layout,
   link,
   menu,

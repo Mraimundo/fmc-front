@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSpring } from 'react-spring';
-
 import FormSignIn from './FormSignIn';
 import FormSignUp from './FormSignUp';
 import Logo from './Logo';
@@ -13,6 +12,7 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Logo />
+
       <Content style={props}>
         <Title>Já sou cadastrado</Title>
         <FormSignIn />

@@ -20,9 +20,10 @@ interface FormData {
 interface Props {
   className?: string;
   openTicket(data: CreateTicketDTO): Promise<{ message: string }>;
+  onReload(): void;
 }
 
-const Form: React.FC<Props> = ({ className, openTicket }) => {
+const Form: React.FC<Props> = ({ className, openTicket, onReload }) => {
   const [loading, setLoading] = useState(false);
   const [attachingFile, setAttachingFile] = useState(false);
   const [fileUrl, setFileUrl] = useState('');
@@ -82,6 +83,7 @@ const Form: React.FC<Props> = ({ className, openTicket }) => {
       });
       reset();
       setFileUrl('');
+      onReload();
     } catch (e) {
       addToast({
         title:

@@ -11,8 +11,13 @@ import { useAuth } from 'context/AuthContext';
 import Header from 'components/Header';
 import MobileHeader from 'components/Header/MobileHeader';
 import Footer from 'components/Footer';
-import Logo from 'components/shared/Logo';
-import { defaultTheme, cooperativaTheme, fmcTeamTheme } from 'styles/theme';
+import Logo, { LogoType } from 'components/shared/Logo';
+import {
+  defaultTheme,
+  cooperativaTheme,
+  fmcTeamTheme,
+  fmcProdutorTheme,
+} from 'styles/theme';
 import Popups from './Popups';
 
 import { Container, SimulateIndicator } from './styles';
@@ -25,18 +30,26 @@ const Dashboard: React.FC = ({ children }) => {
     signOut,
   } = useAuth();
   const [theme, setTheme] = useState<DefaultTheme | null>(null);
+
+  const [logoType, setLogoType] = useState<LogoType | undefined>(undefined);
+
   const [textSimulating, setTextSimulating] = useState('');
 
   useEffect(() => {
-    if (!participant || !participant.id) return;
-
-    if (participant.profile === 'FMC') {
-      setTheme(fmcTeamTheme);
+    if (!participant || !participant.id) {
+      setTheme(null);
       return;
     }
 
-    if (participant.establishment.type_name === EstablishmentTypes.Resale) {
-      setTheme(defaultTheme);
+    if (participant.profile === 'FMC') {
+      setTheme(fmcTeamTheme);
+      setLogoType('fmcTeam');
+      return;
+    }
+
+    if (participant.profile === 'PRODUTOR') {
+      setTheme(fmcProdutorTheme);
+      setLogoType('fmcProdutor');
       return;
     }
 
@@ -44,7 +57,12 @@ const Dashboard: React.FC = ({ children }) => {
       participant.establishment.type_name === EstablishmentTypes.Cooperative
     ) {
       setTheme(cooperativaTheme);
+      setLogoType(EstablishmentTypes.Cooperative);
+      return;
     }
+
+    setLogoType(EstablishmentTypes.Resale);
+    setTheme(defaultTheme);
   }, [participant]);
 
   useEffect(() => {
@@ -97,13 +115,7 @@ const Dashboard: React.FC = ({ children }) => {
               </SimulateIndicator>
             )}
             <Container simulating={simulating}>
-              <Logo
-                logoType={
-                  participant.profile === 'FMC'
-                    ? 'fmcTeam'
-                    : participant.establishment.type_name
-                }
-              />
+              <Logo logoType={logoType} />
               <Visible xl xxl>
                 <Header />
               </Visible>

@@ -25,6 +25,9 @@ export const MiniBox = styled(Link)`
     max-width: 100%;
     height: 175px;
     object-fit: cover;
+    @media (max-width: 767px) {
+      height: 275px;
+    }
   }
 
   span {

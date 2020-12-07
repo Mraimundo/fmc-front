@@ -1,5 +1,12 @@
 import numbersOnly from 'util/numbersOnly';
-import { Participant, Regulation } from 'services/auth/interfaces/Participant';
+import {
+  Participant,
+  Regulation,
+  MemberGroup,
+  Harvest,
+} from 'services/auth/interfaces/Participant';
+import { IProfile } from 'config/constants';
+
 import { formatDate } from 'util/datetime';
 
 interface SaveRequest {
@@ -34,14 +41,32 @@ interface SaveRequest {
 
   establishment_id: number;
   role_id: number;
+  campaign_id: number;
+  profile: IProfile;
   regulations_accepted: Regulation[];
   access_premio_ideall: boolean;
+
+  // Producers
+  producer_group_name: string;
+  members_group: MemberGroup[];
+  harvest: Harvest;
+
+  producer_cpf: string;
+  get_to_know: string;
+  medium: string;
+  only_farm: boolean;
+  user_farm_agree: boolean;
 }
 
 export default (participant: Participant): SaveRequest => {
   return {
     birth_date: formatDate(participant.birth_date),
     cpf: numbersOnly(participant.cpf),
+    producer_cpf: numbersOnly(participant.cpf),
+    get_to_know: participant.get_to_know,
+    only_farm: participant.only_farm,
+    user_farm_agree: participant.user_farm_agree,
+    medium: participant.medium,
     upn: participant.upn,
     nick_name: participant.nick_name,
     name: participant.name,
@@ -71,9 +96,15 @@ export default (participant: Participant): SaveRequest => {
     password_confirmation: participant.password_confirmation,
     education_level: participant.education_level,
     regulations_accepted: participant.regulations_accepted,
+    campaign_id: participant.campaign_id,
+    profile: participant.profile,
     access_premio_ideall:
       participant.profile === 'FOCALPOINT'
         ? participant.access_premio_ideall
         : true,
+
+    producer_group_name: participant.producer_group_name || '',
+    members_group: participant.members_group || [],
+    harvest: participant.harvest || ({} as Harvest),
   };
 };

@@ -11,7 +11,14 @@ import { REGULATIONS_TYPE } from 'config/constants';
 
 import RegulationBox from './RegulationBox';
 
-import { Container, Content, Title, SubTitle, Accordion } from './styles';
+import {
+  Container,
+  Content,
+  Title,
+  SubTitle,
+  Accordion,
+  LinksRegulation,
+} from './styles';
 
 const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos de Proteção de Dados',
@@ -20,7 +27,7 @@ const TITLES = {
 };
 
 const AllRegulations: React.FC = () => {
-  const { refreshParticipant } = useAuth();
+  const { participant, refreshParticipant } = useAuth();
   const { addToast } = useToast();
 
   const [dataRegulations, setDataRegulations] = useState<
@@ -147,12 +154,54 @@ const AllRegulations: React.FC = () => {
           printRegulation(safraRegulations, 'safra_term')}
         {dataRegulations.length > 0 &&
           printRegulation(dataRegulations, 'data_term')}
-        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
-          Download do Termos de Uso
-        </a>
-        <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
-          Download da Política de Privacidade
-        </a>
+
+        {participant.profile === 'PRODUTOR' && (
+          <LinksRegulation>
+            <div>
+              <a
+                href="https://storage.juntosfmc.com.br/regulations/1606905851.5fc76ffb6629d2.17594420.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Termos de Uso
+              </a>
+              <a
+                href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/regulations/1606905851.5fc76ffb6629d2.17594420.pdf"
+                className="icon-download"
+                download
+              >
+                Download
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://storage.juntosfmc.com.br/regulations/1607130761.5fcade89ae73b4.58389042.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de Privacidade
+              </a>
+              <a
+                href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POLITICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/regulations/1607130761.5fcade89ae73b4.58389042.pdf"
+                className="icon-download"
+                download
+              >
+                Download
+              </a>
+            </div>
+          </LinksRegulation>
+        )}
+
+        {participant.profile !== 'PRODUTOR' && (
+          <>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-TERMO_DE_USO.pdf&url=https://storage.juntosfmc.com.br/avatar/1597870012.5f3d8fbc16bc67.86487857.pdf">
+              Download do Termos de Uso
+            </a>
+            <a href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POL%C3%8DTICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/avatar/1598359154.5f450672673807.86869023.pdf">
+              Download da Política de Privacidade
+            </a>
+          </>
+        )}
       </Content>
     </Container>
   );

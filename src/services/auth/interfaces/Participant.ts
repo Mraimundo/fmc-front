@@ -45,6 +45,47 @@ export interface Regulation {
   version: string;
 }
 
+export enum MemberType {
+  farm = 'fazenda',
+  family = 'familia',
+  partner = 'socios',
+  principal = 'matriz',
+  branch = 'filial',
+  agriculture = 'agropecuaria',
+}
+
+export interface MemberGroup {
+  id?: number;
+  type: MemberType;
+  cpf_cnpj: string;
+  name: string;
+  ie: string;
+  city: string;
+  uf: string;
+}
+
+export interface Harvest {
+  algodao: string;
+  arroz_irrigado: string;
+  batata: string;
+  cafe: string;
+  cana: string;
+  cenoura: string;
+  cevada: string;
+  citrus: string;
+  feijao: string;
+  mandioca: string;
+  melao: string;
+  milho: string;
+  outras: string;
+  outras_quais: string;
+  soja: string;
+  tabaco: string;
+  tomate: string;
+  trigo: string;
+  uva: string;
+}
+
 export interface Participant {
   id: number;
   cpf: string;
@@ -77,4 +118,14 @@ export interface Participant {
   education_level: string;
   regulations_accepted: Regulation[];
   profile_value: ApproverProfile;
+  campaign_id: number;
+  get_to_know: string;
+  medium: string;
+  only_farm: boolean;
+  user_farm_agree: boolean;
+
+  // Producers
+  producer_group_name: string;
+  members_group: MemberGroup[];
+  harvest: Harvest;
 }

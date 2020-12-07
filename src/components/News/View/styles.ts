@@ -18,7 +18,6 @@ export const Container = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 5px;
-    margin-left: 25px;
   }
 
   > span {
@@ -47,5 +46,22 @@ export const Container = styled.div`
 export const Content = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.font.color.secondary};
-  text-align: justify;
+  a {
+    color: rgb(101, 85, 77);
+    text-decoration: underline;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  td,
+  th {
+    padding: 8px;
+    border: 0;
+  }
+  tr:nth-child(odd) {
+    td,
+    th {
+      background: #eee;
+    }
+  }
 `;

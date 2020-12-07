@@ -7,9 +7,11 @@ import {
 } from 'services/auth/interfaces/Participant';
 import { getFirstName } from 'util/string';
 import Avatar from 'components/Avatar';
-import { PROFILES } from 'config/constants';
+import { Status } from 'state/modules/header/constants';
+import { IProfile, PROFILES } from 'config/constants';
 import Dropdown from './Dropdown';
 import { Wrapper, WelcomeText, Hello } from './styles';
+import ParticipantStatus from '../ParticipantStatus';
 
 interface ParticipantProps {
   picture: string | null;
@@ -17,6 +19,7 @@ interface ParticipantProps {
   establishment: Establishment | null;
   points?: number;
   signOut(): void;
+  profile: IProfile;
   simulating: boolean;
   participant: IParticipant;
 }
@@ -26,11 +29,13 @@ const Participant: React.FC<ParticipantProps> = ({
   establishment,
   points,
   signOut,
+  profile,
   simulating,
   participant,
 }) => {
   return (
     <Wrapper>
+      {profile === 'PRODUTOR' && <ParticipantStatus status={Status.Parceiro} />}
       <Avatar name={name} picture={picture} circleDimension={40} />
       <WelcomeText>
         <Hello>Olá {getFirstName(name)}!</Hello>
@@ -43,6 +48,7 @@ const Participant: React.FC<ParticipantProps> = ({
       <Dropdown
         establishment={establishment}
         signOut={signOut}
+        profile={profile}
         simulating={simulating}
       />
     </Wrapper>
