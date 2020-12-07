@@ -50,6 +50,7 @@ const FarmDataForm: React.FC<Props> = ({
 
   const [memberFormIsVisible, setMemberFormIsVisible] = useState(false);
   const [alreadyTouched, setAlreadyTouched] = useState(false);
+  const [farmAgree, setFarmAgree] = useState(false);
 
   const [memberTypeSelected, setMemberTypeSelected] = useState<Option | null>(
     null,
@@ -113,9 +114,27 @@ const FarmDataForm: React.FC<Props> = ({
     // Validar CPF e CNPJ
 
     return true;
-  }, [memberTypeSelected, ufSelected, cpfCnpjInput, nameInput, cityInput]);
+  }, [
+    memberTypeSelected,
+    ufSelected,
+    cpfCnpjInput,
+    nameInput,
+    cityInput,
+    farmAgree,
+  ]);
 
   const handleAddMember = useCallback((): void => {
+    console.log(farmAgree);
+
+    if (farmAgree === false) {
+      addToast({
+        type: 'error',
+        title:
+          'Para efetuar o cadastro é necessário aceitar os Termos de lei de proteção de dados.',
+      });
+      return;
+    }
+
     try {
       if (!isMemberFormValid()) {
         addToast({ type: 'error', title: 'Verifique os dados do formulário!' });
@@ -231,6 +250,8 @@ const FarmDataForm: React.FC<Props> = ({
               type="checkbox"
               name="user_farm_agree"
               ref={(e: HTMLInputElement) => register(e)}
+              checked={farmAgree}
+              onChange={() => setFarmAgree(!farmAgree)}
             />
             <span>
               <div>
@@ -257,6 +278,7 @@ const FarmDataForm: React.FC<Props> = ({
             value={cpfCnpjInput}
             onChange={e => setCpfCnpjInput(e.currentTarget.value)}
             inputRole={inputRole}
+            numbersOnly
           />
 
           <BaseInput
