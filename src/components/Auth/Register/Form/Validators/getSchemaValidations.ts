@@ -56,7 +56,7 @@ const extraProducerFields = {
     })
     .typeError('Data inválida')
     .required(mandatoryMessage)
-    .test('age', 'You must be 18 or older', function (birthdate) {
+    .test('age', 'Idade mínima: 18 anos', function (birthdate) {
       const cutoff = new Date();
       cutoff.setFullYear(cutoff.getFullYear() - 18);
       return birthdate <= cutoff;
