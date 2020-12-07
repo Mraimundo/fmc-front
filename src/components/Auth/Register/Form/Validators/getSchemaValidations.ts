@@ -55,7 +55,12 @@ const extraProducerFields = {
       return new Date(`${newValue[1]}/${newValue[0]}/${newValue[2]}`);
     })
     .typeError('Data inválida')
-    .required(mandatoryMessage),
+    .required(mandatoryMessage)
+    .test('age', 'You must be 18 or older', function (birthdate) {
+      const cutoff = new Date();
+      cutoff.setFullYear(cutoff.getFullYear() - 18);
+      return birthdate <= cutoff;
+    }),
   members_group: Yup.array().of(
     Yup.object()
       .shape({
