@@ -152,6 +152,7 @@ export const BoxAccept = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 100%;
   text-align: justify;
 
