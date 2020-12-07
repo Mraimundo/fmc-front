@@ -175,14 +175,14 @@ const AllRegulations: React.FC = () => {
             </div>
             <div>
               <a
-                href="https://storage.juntosfmc.com.br/regulations/1606905551.5fc76ecf639a82.03760579.pdf"
+                href="https://storage.juntosfmc.com.br/regulations/1607130761.5fcade89ae73b4.58389042.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Política de Privacidade
               </a>
               <a
-                href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POLITICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/regulations/1606905551.5fc76ecf639a82.03760579.pdf"
+                href="https://juntosfmc-adm.vendavall.com.br/download?name=Portal_Juntos_FMC-POLITICA_DE_PRIVACIDADE.pdf&url=https://storage.juntosfmc.com.br/regulations/1607130761.5fcade89ae73b4.58389042.pdf"
                 className="icon-download"
                 download
               >
