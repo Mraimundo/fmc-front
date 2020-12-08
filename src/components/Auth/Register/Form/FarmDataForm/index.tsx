@@ -50,7 +50,9 @@ const FarmDataForm: React.FC<Props> = ({
 
   const [memberFormIsVisible, setMemberFormIsVisible] = useState(false);
   const [alreadyTouched, setAlreadyTouched] = useState(false);
-  const [farmAgree, setFarmAgree] = useState(false);
+  const [farmAgree, setFarmAgree] = useState(
+    participant.user_farm_agree ? participant.user_farm_agree : false,
+  );
 
   const [memberTypeSelected, setMemberTypeSelected] = useState<Option | null>(
     null,
@@ -244,7 +246,6 @@ const FarmDataForm: React.FC<Props> = ({
               type="checkbox"
               name="user_farm_agree"
               ref={(e: HTMLInputElement) => register(e)}
-              checked={farmAgree}
               onChange={() => setFarmAgree(!farmAgree)}
             />
             <span>
