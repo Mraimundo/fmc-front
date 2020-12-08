@@ -38,10 +38,6 @@ const FormSignIn: React.FC = () => {
     setLoading(true);
     try {
       await signIn({ cpf, password });
-      addToast({
-        title: 'Login realizado com sucesso!',
-        type: 'success',
-      });
     } catch (e) {
       addToast({
         title: e.response?.data?.message || 'Falha ao fazer login',

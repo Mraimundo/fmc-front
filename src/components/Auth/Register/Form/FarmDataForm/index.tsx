@@ -50,7 +50,9 @@ const FarmDataForm: React.FC<Props> = ({
 
   const [memberFormIsVisible, setMemberFormIsVisible] = useState(false);
   const [alreadyTouched, setAlreadyTouched] = useState(false);
-  const [farmAgree, setFarmAgree] = useState(false);
+  const [farmAgree, setFarmAgree] = useState(
+    participant.user_farm_agree ? participant.user_farm_agree : false,
+  );
 
   const [memberTypeSelected, setMemberTypeSelected] = useState<Option | null>(
     null,
@@ -114,14 +116,7 @@ const FarmDataForm: React.FC<Props> = ({
     // Validar CPF e CNPJ
 
     return true;
-  }, [
-    memberTypeSelected,
-    ufSelected,
-    cpfCnpjInput,
-    nameInput,
-    cityInput,
-    farmAgree,
-  ]);
+  }, [memberTypeSelected, ufSelected, cpfCnpjInput, nameInput, cityInput]);
 
   const handleAddMember = useCallback((): void => {
     console.log(farmAgree);
@@ -186,6 +181,7 @@ const FarmDataForm: React.FC<Props> = ({
     addMemberGroup,
     participant.cpf,
     participant.members_group,
+    farmAgree,
   ]);
 
   const handleRemoveMember = useCallback(
@@ -250,7 +246,6 @@ const FarmDataForm: React.FC<Props> = ({
               type="checkbox"
               name="user_farm_agree"
               ref={(e: HTMLInputElement) => register(e)}
-              checked={farmAgree}
               onChange={() => setFarmAgree(!farmAgree)}
             />
             <span>
