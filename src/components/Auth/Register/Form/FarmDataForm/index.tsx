@@ -114,14 +114,7 @@ const FarmDataForm: React.FC<Props> = ({
     // Validar CPF e CNPJ
 
     return true;
-  }, [
-    memberTypeSelected,
-    ufSelected,
-    cpfCnpjInput,
-    nameInput,
-    cityInput,
-    farmAgree,
-  ]);
+  }, [memberTypeSelected, ufSelected, cpfCnpjInput, nameInput, cityInput]);
 
   const handleAddMember = useCallback((): void => {
     console.log(farmAgree);
@@ -186,6 +179,7 @@ const FarmDataForm: React.FC<Props> = ({
     addMemberGroup,
     participant.cpf,
     participant.members_group,
+    farmAgree,
   ]);
 
   const handleRemoveMember = useCallback(
