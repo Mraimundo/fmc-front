@@ -30,7 +30,7 @@ const DefaultHowParticipate: React.FC = () => {
     if (data.slider.length > 0) {
       setSlideItems(data.slider.split(',').map(prop => ({ picture: prop })));
     }
-    if (data.slider_mobile !== null) {
+    if (data.slider_mobile) {
       setSlideItemsMobile(
         data.slider_mobile.split(',').map(prop => ({ picture: prop })),
       );
