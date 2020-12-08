@@ -107,7 +107,7 @@ const PersonalDataForm: React.FC<Props> = ({
         <>
           <Input
             name="formatted_birth_date"
-            label="Data de nascimento*"
+            label="Data de nascimento* (idade mínima: 18 anos)"
             inputRole={inputRole}
             pattern="XX/XX/XXXX"
             numbersOnly
