@@ -45,6 +45,13 @@ const cepFields = {
     })
     .typeError(mandatoryMessage)
     .required(mandatoryMessage),
+
+  get_to_know_select: Yup.object()
+    .shape({
+      value: Yup.string().required(mandatoryMessage),
+    })
+    .typeError(mandatoryMessage)
+    .required(mandatoryMessage),
 };
 
 const extraProducerFields = {
