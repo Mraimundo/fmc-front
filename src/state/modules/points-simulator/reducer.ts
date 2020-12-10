@@ -137,7 +137,18 @@ const CampaignsManagerReducer: Reducer<
         configuration: action.payload,
       };
     case constants.SET_DOLLAR_BASE_VALUE:
-      return { ...state, dollarBaseValue: action.payload };
+      return produce(state, draft => {
+        draft.dollarBaseValue = action.payload;
+        draft.products = draft.products.map(product => {
+          product.simulationData = calculateSimulationDataProductValues(
+            product.simulationData,
+            product,
+            state.configuration,
+            action.payload,
+          );
+          return product;
+        });
+      });
     case constants.SET_MODE:
       return { ...state, mode: action.payload };
     case constants.CALCULATE_SIMULATION_ACTION:

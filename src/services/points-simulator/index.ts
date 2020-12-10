@@ -9,10 +9,15 @@ import {
 } from './interfaces/api-interface';
 import { SaveSimulationDTO } from './interfaces/dtos';
 
+import mock from './mock';
+
+const useMockState = false;
+
 interface ChannelsApiResponse {
   data: Channel[];
 }
 const getChannels = async (): Promise<Channel[]> => {
+  if (useMockState) return mock.channels;
   try {
     const {
       data: { data },
@@ -29,6 +34,7 @@ interface ChannelApiResponse {
   channel: Channel;
 }
 const getChannel = async (channelId: number): Promise<Channel | null> => {
+  if (useMockState) return mock.channels[0];
   try {
     const {
       data: { channel },
@@ -45,6 +51,7 @@ interface ProductTypesApiResponse {
   types: ProductType[];
 }
 const getProductTypes = async (): Promise<ProductType[]> => {
+  if (useMockState) return mock.productTypes;
   try {
     const {
       data: { types },
@@ -59,6 +66,7 @@ interface ProductsApiResponse {
   products: Product[];
 }
 const getProducts = async (channelId: number): Promise<Product[]> => {
+  if (useMockState) return mock.products;
   const {
     data: { products },
   } = await pluginApi.get<ProductsApiResponse>(
@@ -68,6 +76,7 @@ const getProducts = async (channelId: number): Promise<Product[]> => {
 };
 
 const getIndicators = async (channelId: number): Promise<Indicators> => {
+  if (useMockState) return mock.indicators;
   const { data } = await pluginApi.get<Indicators>(
     `simulations/indicators?establishment_id=${channelId}`,
   );
@@ -75,6 +84,7 @@ const getIndicators = async (channelId: number): Promise<Indicators> => {
 };
 
 const getConfiguration = async (channelId: number): Promise<Configuration> => {
+  if (useMockState) return mock.configuration;
   const { data } = await pluginApi.get<Configuration>(
     `simulations/configuration?establishment_id=${channelId}`,
   );

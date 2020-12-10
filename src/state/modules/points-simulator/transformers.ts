@@ -124,27 +124,6 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
   });
 
   result.push({
-    title: 'Hero',
-    type: IndicatorType.hero,
-    unitType: UnitType.liter,
-    lastRealized: indicators.hero_last_realized_in_Liter,
-    currentRealized: indicators.hero_current_realized_in_Liter,
-    isRegisteredProduct: true,
-    currentGoal: indicators.hero_current_goal_in_Liter,
-    percentageRealized: getPercentage(
-      indicators.hero_current_goal_in_Liter,
-      indicators.hero_current_realized_in_Liter,
-    ),
-    simulationData: {
-      totalPercentageRealized: getPercentage(
-        indicators.hero_current_goal_in_Liter,
-        indicators.hero_current_realized_in_Liter,
-      ),
-      totalRealized: indicators.hero_current_realized_in_Liter,
-    },
-  });
-
-  result.push({
     title: 'Premio',
     type: IndicatorType.premio,
     unitType: UnitType.liter,
@@ -162,6 +141,27 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.premio_current_realized_in_Liter,
       ),
       totalRealized: indicators.premio_current_realized_in_Liter,
+    },
+  });
+
+  result.push({
+    title: 'Hero',
+    type: IndicatorType.hero,
+    unitType: UnitType.liter,
+    lastRealized: indicators.hero_last_realized_in_Liter,
+    currentRealized: indicators.hero_current_realized_in_Liter,
+    isRegisteredProduct: true,
+    currentGoal: indicators.hero_current_goal_in_Liter,
+    percentageRealized: getPercentage(
+      indicators.hero_current_goal_in_Liter,
+      indicators.hero_current_realized_in_Liter,
+    ),
+    simulationData: {
+      totalPercentageRealized: getPercentage(
+        indicators.hero_current_goal_in_Liter,
+        indicators.hero_current_realized_in_Liter,
+      ),
+      totalRealized: indicators.hero_current_realized_in_Liter,
     },
   });
 
