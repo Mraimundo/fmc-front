@@ -158,6 +158,13 @@ const PointsSimulator: React.FC = () => {
     [products],
   );
 
+  const changeDollarValue = useCallback(
+    (dollarValue: number) => {
+      dispatch(actions.setDollarBaseValue(dollarValue));
+    },
+    [dispatch],
+  );
+
   return (
     <Container id="calculator">
       <Content>
@@ -180,6 +187,7 @@ const PointsSimulator: React.FC = () => {
               />
             </Box>
             <Footer
+              changeDollarBaseValue={changeDollarValue}
               dollarBaseValue={dollarBaseValue}
               handleButtonAction={
                 mode === Mode.calculator ? handleCalculate : handleReCalculate

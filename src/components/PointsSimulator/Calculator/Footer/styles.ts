@@ -31,7 +31,7 @@ export const Container = styled.div`
       }
     }
 
-    > strong {
+    > input[type='text'] {
       width: 76px;
       height: 33px;
       border-radius: 5px;
@@ -40,6 +40,13 @@ export const Container = styled.div`
       justify-content: center;
       align-items: center;
       margin-left: 8px;
+      border: none;
+      padding: 0 10px;
+      color: white;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
 `;

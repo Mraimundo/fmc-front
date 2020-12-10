@@ -15,7 +15,7 @@ const indicatorsToCards = (data: Indicator[]): Card[] =>
     (indicator): Card => ({
       title: indicator.title,
       isRegisteredProduct: indicator.isRegisteredProduct,
-      description: `Realizado 19/20 - US$ ${formatValue(
+      description: `Realizado 19/20 - ${formatValue(
         indicator.lastRealized,
         indicator.unitType,
       )}`,
