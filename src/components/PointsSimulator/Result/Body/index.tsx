@@ -32,6 +32,23 @@ interface Props {
   award: Award;
 }
 
+const title = (item: Card) => (
+  <>
+    {item.title}
+    {item.isRegisteredProduct && (
+      <span
+        style={{
+          fontSize: 11,
+          transform: 'translateY(-2px)',
+          display: 'inline-block',
+        }}
+      >
+        ®
+      </span>
+    )}
+  </>
+);
+
 const Body: React.FC<Props> = ({ cards, award }) => {
   return (
     <Container>
@@ -87,7 +104,7 @@ const Body: React.FC<Props> = ({ cards, award }) => {
           {cards.map(item => (
             <CardComponent
               key={item.title}
-              title={item.title}
+              title={title(item)}
               description={item.description}
               tableData={item.tableData}
               percentageCompleted={item.percentageCompleted}
