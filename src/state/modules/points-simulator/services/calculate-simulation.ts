@@ -17,7 +17,7 @@ const calculateSimulatedRevenues = ({
 }: IndicatorDTO): SimulationData => {
   const simulatedProductsValue = products.reduce(
     (accumulator, product) =>
-      accumulator + product.simulationData.revenuesInDollar || 0,
+      accumulator + (product.simulationData.revenuesInDollar || 0),
     0,
   );
 
@@ -37,9 +37,12 @@ const calculateSimulatedPog = ({
 }: IndicatorDTO): SimulationData => {
   const simulatedProductsValue = products.reduce(
     (accumulator, product) =>
-      accumulator + product.simulationData.pogInDollar || 0,
+      accumulator + (product.simulationData.pogInDollar || 0),
     0,
   );
+
+  console.log('products', products);
+  console.log('simulatedProductsValue', simulatedProductsValue);
 
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
