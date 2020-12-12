@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch, Route as RouteDom } from 'react-router-dom';
 import { RouteModule } from './modules/route-module';
 
 import Auth from './modules/auth';
@@ -23,6 +23,7 @@ import Showcase from './modules/showcase';
 import Training from './modules/training';
 import Goals from './modules/goals';
 import HowParticipate from './modules/how-participate';
+import QrCode from './modules/qr-code';
 
 import PointsSimulator from './modules/points-simulator';
 
@@ -51,6 +52,7 @@ const routesArray: RouteModule[][] = [
   PowerBi,
   Report,
   PointsSimulator,
+  QrCode,
 ];
 
 const Routes: React.FC = () => (
@@ -67,6 +69,7 @@ const Routes: React.FC = () => (
         />
       )),
     )}
+    <RouteDom path="*" render={() => <Redirect to="/home" />} />
   </Switch>
 );
 
