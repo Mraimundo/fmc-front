@@ -24,4 +24,5 @@ export default {
   pointsSimulator: {
     calculator: '/simulador',
   },
+  qrCode: '/qr',
 };
