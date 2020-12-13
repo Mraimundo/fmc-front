@@ -41,9 +41,6 @@ const calculateSimulatedPog = ({
     0,
   );
 
-  console.log('products', products);
-  console.log('simulatedProductsValue', simulatedProductsValue);
-
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
   const totalPercentageRealized = getPercentage(

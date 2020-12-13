@@ -8,13 +8,12 @@ const calculateAwards = (products: Product[]): Award => {
     0,
   );
 
-  const totalRebate =
-    products.reduce(
-      (accumulator, product) =>
-        accumulator +
-        (product.simulationPoints.rebateReachedInRealAccumulated || 0),
-      0,
-    ) + simulatedRebate;
+  const totalRebate = products.reduce(
+    (accumulator, product) =>
+      accumulator +
+      (product.simulationPoints.rebateReachedInRealAccumulated || 0),
+    0,
+  );
 
   const simulatedSeller = products.reduce(
     (accumulator, product) =>

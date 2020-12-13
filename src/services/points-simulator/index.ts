@@ -11,7 +11,7 @@ import { SaveSimulationDTO } from './interfaces/dtos';
 
 import mock from './mock';
 
-const useMockState = false;
+const useMockState = true;
 
 interface ChannelsApiResponse {
   data: Channel[];
