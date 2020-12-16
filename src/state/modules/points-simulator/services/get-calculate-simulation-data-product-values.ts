@@ -25,7 +25,11 @@ const calculateSimulationDataProductValues = (
 
   /* const pogUnitValueInDollarTotal =
     product.revenues.realizedInDollar / product.revenues.realizedInKilosByLiter; */
-  const pogInDollarTotal = product.pog.realizedInDollar;
+
+  // Comentado até o Paulo definir ql a regra certa, por hora aplicado a regra abaixo
+  // const pogInDollarTotal = product.pog.realizedInDollar;
+  const pogInDollarTotal =
+    product.pog.realizedInKilosByLiter * pogUnitValueInDollar;
   const pogRealizedNetInDollarTotal =
     (pogInDollarTotal * pogRealizedNetPercentage) / 100;
   const pogRealizedNetInRealTotal =
