@@ -195,11 +195,12 @@ const configurationApiToConfiguration = (
 ): Configuration => {
   return {
     partialDate: configuration.partial_date,
-    pogRealizedNetPercentage: configuration.pog_realized_net_percentage * 100,
+    pogRealizedNetPercentage:
+      100 - configuration.pog_realized_net_percentage * 100,
     minimumRebatePercentageToMakePoints:
-      configuration.minimum_rebate_percentage_to_participate,
+      configuration.minimum_rebate_percentage_to_participate * 100,
     minimumSellerPercentageToMakePoints:
-      configuration.minimum_seller_percentage_to_participate,
+      configuration.minimum_seller_percentage_to_participate * 100,
   };
 };
 
