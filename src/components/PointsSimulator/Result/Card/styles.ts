@@ -58,6 +58,26 @@ interface StyledPercentageBarProps {
   percentageSimulated: number;
 }
 
+const getBorderRadiusByPercentage = (percentage: number): string => {
+  if (percentage < 95) {
+    return '9.5px 0 0 9.5px';
+  }
+  switch (Math.round(percentage)) {
+    case 95:
+      return '9.5px 0.5px 0.5px 9.5px';
+    case 96:
+      return '9.5px 2.5px 2.5px 9.5px';
+    case 97:
+      return '9.5px 3.5px 3.5px 9.5px;';
+    case 98:
+      return '9.5px 4.5px 4.5px 9.5px';
+    case 99:
+      return '9.5px 5.5px 5.5px 9.5px';
+    default:
+      return '9.5px';
+  }
+};
+
 export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
   margin-top: 4px;
   width: 100%;
@@ -89,7 +109,7 @@ export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
     left: 0;
     height: 19px;
     ${({ percentageCompleted, theme }) => css`
-      border-radius: ${percentageCompleted < 100 ? '9.5px 0 0 9.5px' : '9.5px'};
+      border-radius: ${getBorderRadiusByPercentage(percentageCompleted)};
       width: ${percentageCompleted < 100 ? percentageCompleted : 100}%;
       background: ${theme.font.color.primary};
     `}
@@ -102,9 +122,9 @@ export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
     left: 0;
     height: 19px;
     /*background: #ef716c;*/
-    background: #ed342d;
+    background: #f07a89;
     ${({ percentageSimulated }) => css`
-      border-radius: ${percentageSimulated < 100 ? '9.5px 0 0 9.5px' : '9.5px'};
+      border-radius: ${getBorderRadiusByPercentage(percentageSimulated)};
       width: ${percentageSimulated < 100 ? percentageSimulated : 100}%;
     `}
   }
