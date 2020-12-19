@@ -21,14 +21,16 @@ export interface FilterOptions {
   status?: StatusText;
   mechanicId?: number;
   page?: number;
+  limit?: number;
 }
 
 export default async (filters?: FilterOptions): Promise<Response> => {
   /* ?page=1&limit=15&order=desc&status[0]=published&establishments[0]=1&types[0]=1&regional[0]=Arroz&directorships[0]=Sul&participants[0]=1 */
 
   const page = filters?.page || 1;
+  const limit = filters?.limit || 20;
 
-  let extraSearch = `?limit=20&page=${page}`;
+  let extraSearch = `?limit=${limit}&page=${page}`;
   if (filters) {
     const { status, customerId, directorId, mechanicId, regionalId } = filters;
     if (mechanicId) {
