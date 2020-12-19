@@ -194,6 +194,21 @@ const getRebateReachedValuesInReal = ({
     100; // *
   // finalMultiplierValue;
 
+  if (product.id === 7) {
+    console.log('produto7');
+    console.log(
+      'rebatePercentageToPayInTotalAmount',
+      rebatePercentageToPayInTotalAmount,
+    );
+    console.log('extraPercentageToPay', extraPercentageToPay);
+    console.log(
+      'percentageTotalToPayInTotalAmount',
+      percentageTotalToPayInTotalAmount,
+    );
+    console.log('finalMultiplierValue', finalMultiplierValue);
+    console.log('Fim-produto7');
+  }
+
   const rebateReachedInRealAccumulated =
     ((product.simulationData.pogRealizedNetInRealSimulated *
       percentageTotalToPayInTotalAmount) /

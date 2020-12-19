@@ -26,7 +26,7 @@ const Footer: React.FC<Props> = ({
   }, [changeDollarBaseValue, inputValue]);
 
   return (
-    <Container>
+    <Container className="_footer-dolar-container">
       <div>
         <span>Dólar base</span>
         <span>US$</span>
@@ -50,6 +50,7 @@ const Footer: React.FC<Props> = ({
           buttonRole="tertiary"
           type="button"
           onClick={handleButtonAction}
+          className="_calculator-action-button"
         >
           {buttonActionText}
         </Button>

@@ -30,6 +30,7 @@
     "react": "^16.13.1",
     "react-chartjs-2": "^2.10.0",
     "react-circular-progressbar": "^2.0.3",
+    "react-component-export-image": "^1.0.5",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.2",
     "react-email-editor": "0.8.2",
