@@ -92,7 +92,7 @@ export const StyledPercentageBar = styled.div<StyledPercentageBarProps>`
     position: absolute;
     width: 100%;
     font-size: 14px;
-    color: rgba(255, 255, 255, 1);
+    color: silver; //rgba(255, 255, 255, 1);
     display: flex;
     justify-content: center;
     align-items: center;

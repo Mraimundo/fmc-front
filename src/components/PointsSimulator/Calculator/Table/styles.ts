@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
-export const Container = styled.table`
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 1030px;
+  flex-direction: column;
+  max-height: calc(100vh - 557px);
+  height: 100%;
+`;
+
+export const Container2 = styled.table`
   border-collapse: separate;
   border-spacing: 0 8px;
   width: 100%;

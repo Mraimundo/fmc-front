@@ -88,34 +88,34 @@ const Tr: React.FC<TrProps> = ({
 
   return (
     <Container participate={product.isParticipatingProduct}>
-      <td>
+      <div>
         <Checkbox color="default" checked={checked} />
-      </td>
-      <td>
+      </div>
+      <div>
         <ProductBox>
           <span>{product.type.name}</span>
           <span>{product.name}</span>
         </ProductBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>Objetivo: {valuesData?.revenuesGoal || '---'}</span>
           <span>Realizado: {valuesData?.revenuesRealized || '---'}</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>Objetivo: {valuesData?.pogGoal || '---'}</span>
           <span>Realizado: {valuesData?.pogRealized || '---'}</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>{valuesData?.stockInKilosByLiter || '---'} KG/L</span>
           <span>{valuesData?.stockInDollar || '---'} US$</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             type="money"
@@ -128,8 +128,8 @@ const Tr: React.FC<TrProps> = ({
             }
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             placeholder="0"
@@ -143,8 +143,8 @@ const Tr: React.FC<TrProps> = ({
             }
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked>
           <Input
             type="money"
@@ -152,8 +152,8 @@ const Tr: React.FC<TrProps> = ({
             disabled
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             placeholder="0"
@@ -164,7 +164,7 @@ const Tr: React.FC<TrProps> = ({
             }
           />
         </CustomInputBox>
-      </td>
+      </div>
     </Container>
   );
 };

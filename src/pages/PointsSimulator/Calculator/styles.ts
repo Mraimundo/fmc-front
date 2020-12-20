@@ -29,7 +29,6 @@ export const Box = styled.div`
   max-height: calc(100vh - 557px);
   min-height: 350px;
   width: 100%;
-  overflow: auto;
   margin-bottom: 71px;
   margin-top: 15px;
 `;

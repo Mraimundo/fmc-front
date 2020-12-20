@@ -42,7 +42,9 @@ const PointsSimulator: React.FC = () => {
   const dollarBaseValue = useSelector(getDollarBaseValue);
   const mode = useSelector(getMode);
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
-  const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
+  const [tabSelected, setTabSelected] = useState<Tab>(
+    Tab.participateProductsTab,
+  );
   const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
   const dispatch = useDispatch();
 
