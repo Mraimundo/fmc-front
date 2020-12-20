@@ -28,18 +28,30 @@ interface SimulatedRebatePoints {
 
 const getIndicatorsToPayExtra = (
   indicators: Indicator[],
+  type: 'simulated' | 'total',
 ): CheckIndicatorsToPayExtra => {
+  const heroIndicator = indicators.find(
+    item => item.type === IndicatorType.hero,
+  );
+  const talismanIndicator = indicators.find(
+    item => item.type === IndicatorType.talisman,
+  );
+  const premioIndicator = indicators.find(
+    item => item.type === IndicatorType.premio,
+  );
+
   const shouldPayExtraForHero =
-    (indicators.find(item => item.type === IndicatorType.hero)?.simulationData
-      .totalPercentageRealized || 0) >= 100;
-
+    ((heroIndicator?.simulationData.totalPercentageRealized || 0) >= 100 ||
+      type === 'simulated') &&
+    (heroIndicator?.currentGoal || 0) > 0;
   const shouldPayExtraForTalisman =
-    (indicators.find(item => item.type === IndicatorType.talisman)
-      ?.simulationData.totalPercentageRealized || 0) >= 100;
-
+    ((talismanIndicator?.simulationData.totalPercentageRealized || 0) >= 100 ||
+      type === 'simulated') &&
+    (talismanIndicator?.currentGoal || 0) > 0;
   const shouldPayExtraForPremio =
-    (indicators.find(item => item.type === IndicatorType.premio)?.simulationData
-      .totalPercentageRealized || 0) >= 100;
+    ((premioIndicator?.simulationData.totalPercentageRealized || 0) >= 100 ||
+      type === 'simulated') &&
+    (premioIndicator?.currentGoal || 0) > 0;
 
   return {
     shouldPayExtraForHero,
@@ -50,12 +62,13 @@ const getIndicatorsToPayExtra = (
 
 const getHowManyEnhancerProductsReachedTheGoals = (
   indicators: Indicator[],
+  type: 'simulated' | 'total',
 ): number => {
   const {
     shouldPayExtraForHero,
     shouldPayExtraForPremio,
     shouldPayExtraForTalisman,
-  } = getIndicatorsToPayExtra(indicators);
+  } = getIndicatorsToPayExtra(indicators, type);
 
   let result = 0;
   if (shouldPayExtraForHero) result += 1;
@@ -145,7 +158,8 @@ interface RebateReachedValues {
 
 interface RebateReachedValuesProps {
   product: Product;
-  numberOfTimesExtraShouldBePaid: number;
+  numberOfTimesExtraShouldBePaidSimulated: number;
+  numberOfTimesExtraShouldBePaidAccumalated: number;
   percentageValueToApplyInDecimalInTotalAmount: number;
   percentageValueToApplyInDecimalInSimulatedAmount: number;
   finalMultiplierValue: number;
@@ -154,13 +168,18 @@ interface RebateReachedValuesProps {
 const getRebateReachedValuesInReal = ({
   product,
   finalMultiplierValue,
-  numberOfTimesExtraShouldBePaid,
+  numberOfTimesExtraShouldBePaidSimulated,
+  numberOfTimesExtraShouldBePaidAccumalated,
   percentageValueToApplyInDecimalInSimulatedAmount,
   percentageValueToApplyInDecimalInTotalAmount,
 }: RebateReachedValuesProps): RebateReachedValues => {
-  const extraPercentageToPay =
+  const extraPercentageToPaySimulated =
     product.extraPercentageToPayByEnhancerProduct *
-    numberOfTimesExtraShouldBePaid;
+    numberOfTimesExtraShouldBePaidSimulated;
+
+  const extraPercentageToPayAccumulated =
+    product.extraPercentageToPayByEnhancerProduct *
+    numberOfTimesExtraShouldBePaidAccumalated;
 
   const rebatePercentageToPayInTotalAmount =
     product.awardsParamsToPay.rebatePercentage *
@@ -184,30 +203,15 @@ const getRebateReachedValuesInReal = ({
   }
 
   const percentageTotalToPayInTotalAmount =
-    rebatePercentageToPayInTotalAmount + extraPercentageToPay;
+    rebatePercentageToPayInTotalAmount + extraPercentageToPayAccumulated;
   const percentageTotalToPayInSimulatedAmount =
-    rebatePercentageToPayInSimulatedAmount + extraPercentageToPay;
+    rebatePercentageToPayInSimulatedAmount + extraPercentageToPaySimulated;
 
   const rebateReachedInRealSimulated =
     (product.simulationData.pogRealizedNetInRealSimulated *
       percentageTotalToPayInSimulatedAmount) /
     100; // *
   // finalMultiplierValue;
-
-  if (product.id === 7) {
-    console.log('produto7');
-    console.log(
-      'rebatePercentageToPayInTotalAmount',
-      rebatePercentageToPayInTotalAmount,
-    );
-    console.log('extraPercentageToPay', extraPercentageToPay);
-    console.log(
-      'percentageTotalToPayInTotalAmount',
-      percentageTotalToPayInTotalAmount,
-    );
-    console.log('finalMultiplierValue', finalMultiplierValue);
-    console.log('Fim-produto7');
-  }
 
   const rebateReachedInRealAccumulated =
     ((product.simulationData.pogRealizedNetInRealSimulated *
@@ -261,8 +265,13 @@ export default ({
   configuration,
   dollarBase,
 }: CustomProps): Product[] => {
-  const numberOfTimesExtraShouldBePaid = getHowManyEnhancerProductsReachedTheGoals(
+  const numberOfTimesExtraShouldBePaidSimulated = getHowManyEnhancerProductsReachedTheGoals(
     indicators,
+    'simulated',
+  );
+  const numberOfTimesExtraShouldBePaidAccumalated = getHowManyEnhancerProductsReachedTheGoals(
+    indicators,
+    'total',
   );
   const finalMultiplierValue = getFinalMultiplierValue({
     configuration,
@@ -290,7 +299,8 @@ export default ({
       rebateReachedInRealSimulated,
     } = getRebateReachedValuesInReal({
       product,
-      numberOfTimesExtraShouldBePaid,
+      numberOfTimesExtraShouldBePaidSimulated,
+      numberOfTimesExtraShouldBePaidAccumalated,
       percentageValueToApplyInDecimalInSimulatedAmount,
       percentageValueToApplyInDecimalInTotalAmount,
       finalMultiplierValue,
