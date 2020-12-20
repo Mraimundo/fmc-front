@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { scroller, animateScroll } from 'react-scroll';
 
@@ -7,10 +7,10 @@ import { getMode } from 'state/modules/points-simulator/selectors';
 import { setMode } from 'state/modules/points-simulator/actions';
 import { Mode } from 'state/modules/points-simulator/types';
 
-import { exportComponentAsPDF, exportComponentAsJPEG } from 'react-component-export-image';
 import Calculator from './Calculator';
 import Result from './Result';
 import Pdf from './Pdf';
+import html2Pdf from 'html2pdf.js';
 
 const PointsSimulator: React.FC = () => {
   const dispatch = useDispatch();
@@ -49,14 +49,26 @@ const PointsSimulator: React.FC = () => {
 
   const testRef = useRef<HTMLDivElement>(null);
 
+  const testing = useCallback(
+    () => {
+      /*const html = document.querySelector('#_container-pdf');
+      if (!html) return;
+      htmlToCanvas(html as HTMLElement).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+
+
+      });*/
+      const element = document.getElementById('_container-pdf');
+      const t = html2Pdf().from(element).save();
+    },[]
+  );
+
   return (
     <>
-      <button type="button" onClick={() => exportComponentAsJPEG(testRef)}>
-        Export As PDF
-      </button>
       <button type="button" onClick={() => setT(old => !old)}>
         teste
       </button>
+      <button type="button" onClick={testing}>oooo</button>
       {t ? (
         <>
           <Calculator />

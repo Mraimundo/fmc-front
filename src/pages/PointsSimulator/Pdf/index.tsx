@@ -47,7 +47,7 @@ const Pdf = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   const fn = () => {};
   return (
-    <Container ref={ref}>
+    <Container ref={ref} id="_container-pdf">
       <Content>
         <Result />
         <DollarPanel

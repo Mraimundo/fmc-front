@@ -17,7 +17,7 @@ const Header: React.FC<Props> = props => {
   const { simulatedDate, partialDate, channelName } = props;
 
   return (
-    <Container>
+    <Container id="_points-simulator-header">
       <h3>Simulador</h3>
       <div>
         <h3>Resultado da simulação</h3>

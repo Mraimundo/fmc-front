@@ -257,4 +257,4 @@ const newMock: Product[] = [
   },
 ];
 
-export default newMock;
+export default products;

@@ -125,6 +125,7 @@ interface SimulationDataApiResponse {
   data: SimulationData[];
 }
 const loadSimulations = async (): Promise<SimulationData[]> => {
+  if (useMockState) return mock.simulationData;
   const {
     data: { data },
   } = await pluginApi.get<SimulationDataApiResponse>(

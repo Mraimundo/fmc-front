@@ -1,2 +1,2 @@
 export default (goal: number, realized: number): number =>
-  (realized * 100) / goal;
+  (realized * 100) / goal || 0;

@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100%;
   background: #fff;
   min-height: calc(100vh - 380px);
+  padding: 20px;
 `;
 
 export const Content = styled.div`
@@ -31,6 +32,18 @@ export const Content = styled.div`
     z-index: 0;
     align-self: center;
     margin-top: 40px;
+  }
+
+  #_points-simulator-header {
+    > h3 {
+      display: none;
+    }
+
+    > div {
+      > h3 {
+        font-size: 18px;
+      }
+    }
   }
 `;
 

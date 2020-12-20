@@ -30,6 +30,6 @@ export const Box = styled.div`
   min-height: 350px;
   width: 100%;
   overflow: auto;
-  padding-bottom: 63px;
+  margin-bottom: 71px;
   margin-top: 15px;
 `;
