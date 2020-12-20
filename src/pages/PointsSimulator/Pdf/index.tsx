@@ -66,6 +66,7 @@ const Pdf = React.forwardRef<HTMLDivElement>((props, ref) => {
               setUnitValueInDollar={fn}
               setPogInKilosPerLiter={fn}
               tabSelected={Tab.enhancerProductsTab}
+              onCheckUncheckProductHandle={fn}
             />
           </>
         )}
@@ -78,6 +79,7 @@ const Pdf = React.forwardRef<HTMLDivElement>((props, ref) => {
               setUnitValueInDollar={fn}
               setPogInKilosPerLiter={fn}
               tabSelected={Tab.participateProductsTab}
+              onCheckUncheckProductHandle={fn}
             />
           </>
         )}

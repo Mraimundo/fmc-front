@@ -45,6 +45,16 @@ const CampaignsManagerReducer: Reducer<
       return produce(state, draft => {
         draft.products = action.payload;
       });
+    case constants.SET_PRODUCT_CHECK:
+      return produce(state, draft => {
+        const { checked, productId } = action.payload;
+        draft.products.map(product => {
+          if (product.id === productId) {
+            product.checked = checked;
+          }
+          return product;
+        });
+      });
     case constants.SET_REVENUES_IN_KILOS_PER_LITER:
       return produce(state, draft => {
         const { productId, value: revenuesInKilosPerLiter } = action.payload;

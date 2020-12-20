@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Product } from 'state/modules/points-simulator/interfaces';
 import { DataValueDTO } from 'state/modules/points-simulator/types';
@@ -13,6 +13,13 @@ interface TrProps {
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
   setPogInKilosPerLiter(data: DataValueDTO): void;
+  onCheckUncheckProductHandle({
+    id,
+    checked,
+  }: {
+    id: number;
+    checked: boolean;
+  }): void;
 }
 
 interface ValuesData {
@@ -29,16 +36,9 @@ const Tr: React.FC<TrProps> = ({
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
+  onCheckUncheckProductHandle,
 }) => {
   const [valuesData, setValuesData] = useState<ValuesData | null>(null);
-
-  const checked = useMemo(
-    () =>
-      product.simulationData.unitValueInDollar > 0 &&
-      product.simulationData.revenuesInKilosPerLiter > 0 &&
-      product.simulationData.pogInKilosPerLiter > 0,
-    [product.simulationData],
-  );
 
   useEffect(() => {
     if (product.isEnhancer) {
@@ -89,7 +89,16 @@ const Tr: React.FC<TrProps> = ({
   return (
     <Container participate={product.isParticipatingProduct}>
       <div>
-        <Checkbox color="default" checked={checked} />
+        <Checkbox
+          color="default"
+          checked={product.checked}
+          onChange={() =>
+            onCheckUncheckProductHandle({
+              id: product.id,
+              checked: !product.checked,
+            })
+          }
+        />
       </div>
       <div>
         <ProductBox>

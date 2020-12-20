@@ -42,9 +42,7 @@ const PointsSimulator: React.FC = () => {
   const dollarBaseValue = useSelector(getDollarBaseValue);
   const mode = useSelector(getMode);
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
-  const [tabSelected, setTabSelected] = useState<Tab>(
-    Tab.participateProductsTab,
-  );
+  const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
   const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
   const dispatch = useDispatch();
 
@@ -150,19 +148,20 @@ const PointsSimulator: React.FC = () => {
   }, []);
 
   const quantityItemsAdded = useMemo(
-    () =>
-      products?.filter(
-        item =>
-          item.simulationData.unitValueInDollar > 0 &&
-          item.simulationData.revenuesInKilosPerLiter > 0 &&
-          item.simulationData.pogInKilosPerLiter > 0,
-      ).length || 0,
+    () => products?.filter(item => item.checked).length || 0,
     [products],
   );
 
   const changeDollarValue = useCallback(
     (dollarValue: number) => {
       dispatch(actions.setDollarBaseValue(dollarValue));
+    },
+    [dispatch],
+  );
+
+  const onCheckUncheckProductHandle = useCallback(
+    ({ id, checked }: { id: number; checked: boolean }) => {
+      dispatch(actions.setProductCheck({ checked, productId: id }));
     },
     [dispatch],
   );
@@ -186,6 +185,7 @@ const PointsSimulator: React.FC = () => {
                 setUnitValueInDollar={handleUnitValueChange}
                 setPogInKilosPerLiter={handlePogKilosByLiterValueChange}
                 tabSelected={tabSelected}
+                onCheckUncheckProductHandle={onCheckUncheckProductHandle}
               />
             </Box>
             <Footer

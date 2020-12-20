@@ -15,11 +15,13 @@ const calculateSimulatedRevenues = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const simulatedProductsValue = products.reduce(
-    (accumulator, product) =>
-      accumulator + (product.simulationData.revenuesInDollar || 0),
-    0,
-  );
+  const simulatedProductsValue = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator + (product.simulationData.revenuesInDollar || 0),
+      0,
+    );
 
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
@@ -35,11 +37,13 @@ const calculateSimulatedPog = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const simulatedProductsValue = products.reduce(
-    (accumulator, product) =>
-      accumulator + (product.simulationData.pogInDollar || 0),
-    0,
-  );
+  const simulatedProductsValue = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator + (product.simulationData.pogInDollar || 0),
+      0,
+    );
 
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
@@ -55,9 +59,9 @@ const calculateSimulatedProduct = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const product = products.find(
-    item => item.name.toLowerCase() === indicator.type.toLowerCase(),
-  );
+  const product = products
+    .filter(item => item.checked)
+    .find(item => item.name.toLowerCase() === indicator.type.toLowerCase());
 
   const totalRealized =
     indicator.currentRealized +

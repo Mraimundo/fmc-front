@@ -26,6 +26,7 @@ const channelApiToChannel = (channel: ChannelApi): Channel => ({
 const productsApiToProducts = (products: ProductApi[]): Product[] =>
   products.map(product => ({
     id: product.id,
+    checked: false,
     name: product.name,
     isEnhancer: product.is_enhancer,
     isParticipatingProduct: product.is_a_participating_product,

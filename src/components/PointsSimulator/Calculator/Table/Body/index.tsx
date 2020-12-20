@@ -10,6 +10,13 @@ interface HeaderProps {
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
   setPogInKilosPerLiter(data: DataValueDTO): void;
+  onCheckUncheckProductHandle({
+    id,
+    checked,
+  }: {
+    id: number;
+    checked: boolean;
+  }): void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -17,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
+  onCheckUncheckProductHandle,
 }) => {
   return (
     <Container>
@@ -27,6 +35,7 @@ const Header: React.FC<HeaderProps> = ({
           setUnitValueInDollar={setUnitValueInDollar}
           setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
           setPogInKilosPerLiter={setPogInKilosPerLiter}
+          onCheckUncheckProductHandle={onCheckUncheckProductHandle}
         />
       ))}
     </Container>
