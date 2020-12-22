@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Product } from 'state/modules/points-simulator/interfaces';
 import { DataValueDTO } from 'state/modules/points-simulator/types';
@@ -86,6 +86,13 @@ const Tr: React.FC<TrProps> = ({
     });
   }, [product]);
 
+  const handleChangePogValue = useCallback(
+    (currentProduct: Product, value: number) => {
+      setPogInKilosPerLiter({ productId: currentProduct.id, value });
+    },
+    [setPogInKilosPerLiter],
+  );
+
   return (
     <Container participate={product.isParticipatingProduct}>
       <div>
@@ -168,8 +175,12 @@ const Tr: React.FC<TrProps> = ({
             placeholder="0"
             type="kilograma"
             defaultValue={product.simulationData.pogInKilosPerLiter}
-            onChange={value =>
-              setPogInKilosPerLiter({ productId: product.id, value })
+            onChange={value => handleChangePogValue(product, value)}
+            maxLength={
+              (product.stock.inKilosPerLiter +
+                product.simulationData.revenuesInKilosPerLiter +
+                1) /
+              100
             }
           />
         </CustomInputBox>

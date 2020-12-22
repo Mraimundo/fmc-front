@@ -9,7 +9,7 @@ import { Mode } from 'state/modules/points-simulator/types';
 
 import Calculator from './Calculator';
 import Result from './Result';
-import Pdf from './Pdf';
+import Pdf from './Pdf2';
 import html2Pdf from 'html2pdf.js';
 
 const PointsSimulator: React.FC = () => {
@@ -75,7 +75,7 @@ const PointsSimulator: React.FC = () => {
           {internalModeControl === Mode.result && <Result />}
         </>
       ) : (
-        <Pdf ref={testRef}/>
+        <Pdf/>
       )}
     </>
   );
