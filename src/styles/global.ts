@@ -38,4 +38,8 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  ._modal-toast {
+    z-index: 10;
+  }
+
 `;

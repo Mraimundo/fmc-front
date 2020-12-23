@@ -15,6 +15,7 @@ interface Params {
   closeOnClick: boolean;
   pauseOnHover: boolean;
   draggable: boolean;
+  className: string;
 }
 
 interface ToastContextData {
@@ -30,6 +31,7 @@ const params: Params = {
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
+  className: '_modal-toast',
 };
 
 const ToastProvider: React.FC = ({ children }) => {
