@@ -38,7 +38,7 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
-  ._modal-toast {
+  .ReactModal__Overlay--after-open {
     z-index: 10;
   }
 

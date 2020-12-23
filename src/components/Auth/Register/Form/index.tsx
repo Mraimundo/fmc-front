@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { useForm, FormContext } from 'react-hook-form';
 import { PROFILES } from 'config/constants';
-import { Participant } from 'services/auth/interfaces/Participant';
-import PasswordHelp from 'components/shared/PasswordHelp';
-import ComponentsByProfile from './ComponentsByProfile';
-import ExtraFieldsForParticipant from './ExtraFieldsForParticipant';
-import getschemaValidations from './getSchemaValidations';
+import { MemberGroup, Participant } from 'services/auth/interfaces/Participant';
+import getschemaValidations from './Validators/getSchemaValidations';
+import ProducerHeader, { Tab } from './Producer/Header';
+import PersonalDataForm from './PersonalDataForm';
+import FarmDataForm from './FarmDataForm';
+import HarvestDataForm from './HarvestDataForm';
+import SecurityDataForm from './SecurityDataForm';
 
-import {
-  Title,
-  Separator,
-  Avatar,
-  Input,
-  PasswordInput,
-  Button,
-  BoxPhone,
-  BoxAutoIndication,
-} from './styles';
+import { Title } from './styles';
 
 interface Props {
   participant: Participant;
@@ -33,84 +26,111 @@ interface FormData extends Participant {
   formatted_birth_date: string;
   state_code_select: { title: string; value: string } | null;
   rg_emitter_uf_select: { title: string; value: string } | null;
+  get_to_know_select: { title: string; value: string } | null;
 }
 
 const Form: React.FC<Props> = ({
-  participant,
+  participant: _participant,
   saveParticipant,
   editing = false,
 }) => {
   const [loading, setLoading] = useState(false);
   const [autoindicate, setAutoindicate] = useState(false);
+  const [activeTab, setActiveTab] = React.useState<Tab>('PERSONAL_DATA');
+  const [participant, setParticipant] = useState<Participant>(_participant);
   const inputRole = 'secondary';
 
   const schema = getschemaValidations(
-    participant.profile,
+    _participant.profile,
     editing,
     autoindicate,
   );
 
   useEffect(() => {
-    if (participant.profile === PROFILES.focalPoint) {
+    if (_participant.profile === PROFILES.focalPoint) {
       setAutoindicate(
-        participant.access_premio_ideall &&
-          participant.establishment.team_receives_points,
+        _participant.access_premio_ideall &&
+          _participant.establishment.team_receives_points,
       );
     }
   }, [
-    participant.profile,
-    participant.access_premio_ideall,
-    participant.establishment.team_receives_points,
+    _participant.profile,
+    _participant.access_premio_ideall,
+    _participant.establishment.team_receives_points,
   ]);
+
+  const addMemberGroup = useCallback((member: MemberGroup): void => {
+    setParticipant(oldData => ({
+      ...oldData,
+      members_group: [...(oldData.members_group || []), member],
+    }));
+  }, []);
+
+  const removeMemberGroup = useCallback((member: MemberGroup): void => {
+    setParticipant(oldData => ({
+      ...oldData,
+      members_group: [
+        ...oldData.members_group.filter(
+          item => item.cpf_cnpj !== member.cpf_cnpj,
+        ),
+      ],
+    }));
+  }, []);
 
   const methods = useForm<FormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
     defaultValues: {
-      ...participant,
+      ..._participant,
       formatted_birth_date:
-        participant?.birth_date?.replace(
+        _participant?.birth_date?.replace(
           /(\d{4})-(\d{2})-(\d{2}).*/,
           '$3/$2/$1',
         ) || '',
-      gender_select: participant.gender
+      gender_select: _participant.gender
         ? {
-            value: participant.gender,
+            value: _participant.gender,
             title:
-              participant.gender.toLowerCase() === 'm'
+              _participant.gender.toLowerCase() === 'm'
                 ? 'Masculino'
                 : 'Feminino',
           }
         : null,
-      public_place_select: participant.address.public_place
+      public_place_select: _participant.address?.public_place
         ? {
-            title: participant.address.public_place || '',
-            value: participant.address.public_place || '',
+            title: _participant.address.public_place || '',
+            value: _participant.address.public_place || '',
           }
         : null,
-      marital_status_select: participant.marital_status
+      marital_status_select: _participant.marital_status
         ? {
-            title: participant.marital_status || '',
-            value: participant.marital_status || '',
+            title: _participant.marital_status || '',
+            value: _participant.marital_status || '',
           }
         : null,
-      education_level_select: participant.education_level
+      education_level_select: _participant.education_level
         ? {
-            title: participant.education_level || '',
-            value: participant.education_level || '',
+            title: _participant.education_level || '',
+            value: _participant.education_level || '',
           }
         : null,
-      state_code_select: participant.address?.state_code
+      state_code_select: _participant.address?.state_code
         ? {
-            title: participant.address.state_code || '',
-            value: participant.address.state_code || '',
+            title: _participant.address.state_code || '',
+            value: _participant.address.state_code || '',
           }
         : null,
-      rg_emitter_uf_select: participant.rg_emitter_uf
+      rg_emitter_uf_select: _participant.rg_emitter_uf
         ? {
-            title: participant.rg_emitter_uf,
-            value: participant.rg_emitter_uf,
+            title: _participant.rg_emitter_uf,
+            value: _participant.rg_emitter_uf,
+          }
+        : null,
+      get_to_know_select: _participant.get_to_know
+        ? {
+            title: _participant.get_to_know || '',
+            value: _participant.get_to_know || '',
           }
         : null,
     },
@@ -130,6 +150,8 @@ const Form: React.FC<Props> = ({
 
     await saveParticipant({
       ...data,
+      get_to_know: data?.get_to_know_select?.value || '',
+      members_group: [...(participant.members_group || [])],
       marital_status: data?.marital_status_select?.value || '',
       education_level: data?.education_level_select?.value || '',
       gender: data?.gender_select?.value || '',
@@ -141,7 +163,7 @@ const Form: React.FC<Props> = ({
       birth_date: data.formatted_birth_date,
       rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
       access_premio_ideall:
-        participant.profile !== PROFILES.focalPoint || autoindicate,
+        _participant.profile !== PROFILES.focalPoint || autoindicate,
     });
     setLoading(false);
   });
@@ -149,102 +171,49 @@ const Form: React.FC<Props> = ({
   return (
     <FormContext {...methods}>
       <form onSubmit={onSubmit}>
-        <Title>
-          {editing ? 'Editar cadastro' : 'Ativar cadastro'} -{' '}
-          <strong>
-            {participant.profile === 'FMC' && 'Equipe FMC'}
-            {participant.profile === 'FOCALPOINT' && 'Focal Point'}
-            {participant.profile === 'PARTICIPANTE' && 'Participante'}
-          </strong>
-        </Title>
-        <Avatar name="picture" inputRole={inputRole} />
-        <ComponentsByProfile participant={participant} inputRole={inputRole} />
-        <Input
-          name="nick_name"
-          label="Como gostaria de ser chamado*"
-          inputRole={inputRole}
-        />
-        <Input
-          name="name"
-          label="Nome completo*"
-          inputRole={inputRole}
-          disabled={
-            participant.profile === 'FMC' ||
-            participant.profile === 'FOCALPOINT'
-          }
-        />
-        <Input
-          name="email"
-          label="E-mail*"
-          inputRole={inputRole}
-          disabled={
-            participant.profile === 'FMC' ||
-            participant.profile === 'FOCALPOINT'
-          }
-        />
-        <Input
-          name="cpf"
-          label="CPF*"
-          numbersOnly
-          pattern="XXX.XXX.XXX-XX"
-          inputRole={inputRole}
-          disabled={participant.cpf !== ''}
-        />
-        <BoxPhone>
-          <Input
-            name="area_code"
-            numbersOnly
-            pattern="(XX)"
-            label="DDD*"
-            inputRole={inputRole}
-          />
-          <Input
-            name="cell_phone"
-            numbersOnly
-            label="Celular*"
-            pattern="X XXXX-XXXX"
-            inputRole={inputRole}
-          />
-        </BoxPhone>
-
-        {editing &&
-          participant.profile === PROFILES.focalPoint &&
-          participant.establishment.team_receives_points &&
-          !participant.access_premio_ideall && (
-            <BoxAutoIndication>
-              <input
-                type="checkbox"
-                name="test"
-                checked={autoindicate}
-                onChange={() => setAutoindicate(e => !e)}
-              />
-              <span>Participar do Catálogo de Prêmios</span>
-            </BoxAutoIndication>
-          )}
-
-        {(participant.profile === PROFILES.participant ||
-          (editing &&
-            autoindicate &&
-            participant.profile === PROFILES.focalPoint) ||
-          participant.access_premio_ideall) && (
-          <ExtraFieldsForParticipant inputRole={inputRole} />
+        {participant.profile === PROFILES.producer ? (
+          <>
+            <Title>
+              {editing ? 'Editar cadastro' : 'Bem-vindo Produtor(a)'}
+            </Title>
+            <ProducerHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+          </>
+        ) : (
+          <Title>
+            {editing ? 'Editar cadastro' : 'Ativar cadastro'} -{' '}
+            <strong>
+              {participant.profile === 'FMC' && 'Equipe FMC'}
+              {participant.profile === 'FOCALPOINT' && 'Focal Point'}
+              {participant.profile === 'PARTICIPANTE' && 'Participante'}
+            </strong>
+          </Title>
         )}
-        <Separator />
-        <Title>Segurança</Title>
-        <PasswordInput
-          name="password"
-          label="Senha"
+        <PersonalDataForm
+          participant={participant}
+          editing={editing}
           inputRole={inputRole}
-          help={PasswordHelp}
+          autoIndicate={autoindicate}
+          setAutoIndicate={setAutoindicate}
+          loading={loading}
+          handleActionPageButton={() => setActiveTab('FARM_DATA')}
+          actived={activeTab === 'PERSONAL_DATA'}
         />
-        <PasswordInput
-          name="password_confirmation"
-          label="Confirmar Senha"
+        <FarmDataForm
+          participant={participant}
+          addMemberGroup={addMemberGroup}
+          removeMemberGroup={removeMemberGroup}
+          handleActionPageButton={() => setActiveTab('HARVEST_DATA')}
+          actived={activeTab === 'FARM_DATA'}
+        />
+        <HarvestDataForm
+          handleActionPageButton={() => setActiveTab('SECURITY_DATA')}
+          actived={activeTab === 'HARVEST_DATA'}
+        />
+        <SecurityDataForm
           inputRole={inputRole}
+          loading={loading}
+          actived={activeTab === 'SECURITY_DATA'}
         />
-        <Button type="submit" buttonRole="primary" loading={loading}>
-          Confirmar
-        </Button>
       </form>
     </FormContext>
   );

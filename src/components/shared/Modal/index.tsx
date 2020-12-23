@@ -7,8 +7,9 @@ interface ModalProps extends Props {
   type?: 'primary' | 'secondary';
   zIndex?: number;
 }
-
-ReactModal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') {
+  ReactModal.setAppElement('#root');
+}
 
 const Modal: React.FC<ModalProps> = ({
   children,

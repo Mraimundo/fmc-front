@@ -5,7 +5,6 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1030px;
   flex-direction: column;
-  max-height: calc(100vh - 557px);
   height: 100%;
 `;
 

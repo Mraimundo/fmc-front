@@ -4,6 +4,11 @@ export const formatDate = (date: string | Date, formatMask = 'dd/MM/yyyy') => {
   if (!date) return '';
   let dateToFormat = date;
   if (typeof dateToFormat === 'string') {
+    const splitDate = dateToFormat.split('/');
+    if (splitDate.length > 1 && splitDate[2].length === 4) {
+      const [d, m, y] = dateToFormat.split('/');
+      dateToFormat = `${y}-${m}-${d}`;
+    }
     dateToFormat = parseISO(dateToFormat);
   }
 

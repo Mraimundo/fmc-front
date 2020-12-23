@@ -17,6 +17,7 @@ export const Container = styled.div`
   justify-content: center;
   height: 100%;
   background: #e63027;
+  padding: 20px 32px 10px 32px;
 `;
 
 export const Content = styled.div`

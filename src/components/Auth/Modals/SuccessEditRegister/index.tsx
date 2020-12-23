@@ -21,10 +21,7 @@ const SuccessEditRegister: React.FC<Props> = ({ isOpen, onRequestClose }) => {
         </Close>
         <Content>
           <h3>Parabéns!</h3>
-          <h4>
-            Assim que sua alteração for aprovada você receberá a confirmação de
-            alteração em seu email.
-          </h4>
+          <h4>Dados alterados com sucesso</h4>
           <Button
             type="button"
             buttonRole="quaternary"

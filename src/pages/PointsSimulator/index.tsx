@@ -65,10 +65,10 @@ const PointsSimulator: React.FC = () => {
 
   return (
     <>
-      <button type="button" onClick={() => setT(old => !old)}>
+      <button type="button" onClick={() => setT(old => !old)} style={{display: 'none'}}>
         teste
       </button>
-      <button type="button" onClick={testing}>oooo</button>
+      <button type="button" onClick={testing} style={{display: 'none'}}>oooo</button>
       {t ? (
         <>
           <Calculator />

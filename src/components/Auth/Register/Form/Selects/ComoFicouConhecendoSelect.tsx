@@ -9,16 +9,16 @@ interface Props {
 }
 
 const values = [
-  'Avenida',
-  'Estrada',
-  'Lote',
-  'Rodovia',
-  'Rua',
-  'Travessa',
-  'Viela',
+  'Por meio da revenda onde compro produtos FMC',
+  'Por meio da cooperativa onde compro produtos FMC',
+  'Por meio de um amigo',
+  'Por meio do site FMC',
+  'Por meio das redes sociais',
+  'Por meio da mídia',
+  'Por meio da mídia, e peças publicitárias',
 ];
 
-const PublicPlaceSelect: React.FC<Props> = ({
+const ComoFicouConhecendoSelect: React.FC<Props> = ({
   name,
   className,
   disabled = false,
@@ -34,7 +34,7 @@ const PublicPlaceSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Tipo de Logradouro"
+      label="Como ficou conhecendo o Portal Juntos FMC?"
       loadItems={loadItems}
       className={className}
       disabled={disabled}
@@ -43,4 +43,4 @@ const PublicPlaceSelect: React.FC<Props> = ({
   );
 };
 
-export default PublicPlaceSelect;
+export default ComoFicouConhecendoSelect;

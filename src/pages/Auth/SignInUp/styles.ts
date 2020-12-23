@@ -4,6 +4,7 @@ import { animated } from 'react-spring';
 import { shade } from 'polished';
 import { Button } from 'components/shared';
 import background from 'assets/images/background.svg';
+import DefaultModal from 'components/shared/Modal';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -66,7 +67,7 @@ export const Content = styled(animated.div)`
 
     button {
       height: 38px;
-      width: 160px;
+      width: auto;
       text-transform: uppercase;
       font-size: 12px;
     }
@@ -241,4 +242,68 @@ export const SingleSignOnButton = styled(Button)`
   font-size: 12px;
   margin-top: 2px;
   margin-bottom: 30px;
+`;
+
+export const Modal = styled(DefaultModal)`
+  padding-left: 0;
+  @media screen and (max-width: 720px) {
+    ._modalContainer {
+      width: 98%;
+      padding-right: 0;
+    }
+  }
+`;
+
+export const InlineLink = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export const ContainerModal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  padding: 20px 0 60px 0;
+  margin: auto;
+  @media (min-width: 768px) {
+    width: 743px;
+  }
+
+  h3 {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 24px;
+  }
+
+  p {
+    margin-top: 18px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+    @media (min-width: 1024px) {
+      font-size: 24px;
+    }
+  }
+
+  button {
+    width: auto;
+    height: 40px;
+    text-transform: uppercase;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  }
+`;
+
+export const Close = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  transform: translateX(-4px) translateY(4px);
+  > button {
+    border: none;
+    background: transparent;
+    svg path {
+      fill: ${({ theme }) => theme.font.color.tertiary};
+    }
+  }
 `;

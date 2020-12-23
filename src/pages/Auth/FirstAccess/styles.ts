@@ -10,6 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   background: url(${background});
   background-size: cover;
+  min-height: 100vh;
 `;
 
 export const Content = styled(animated.div)`
@@ -17,9 +18,13 @@ export const Content = styled(animated.div)`
   max-width: 997px;
   background: #fff;
   padding: 20px 30px;
+  min-height: calc(100vh - 161px);
 
   @media screen and (max-width: 720px) {
     width: 100%;
+  }
+  @media (min-width: 1024px) {
+    padding: 64px 75px;
   }
 
   form {
