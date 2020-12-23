@@ -6,6 +6,7 @@ import Header from './Header';
 import Prize from './Prize';
 import Product from './Product';
 import Regulation from './Regulation';
+import Result from './Result';
 import { Container, Content } from './styles';
 
 interface Props {
@@ -31,6 +32,7 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
             />
           </>
         )}
+        <Result />
       </Content>
     </Container>
   );

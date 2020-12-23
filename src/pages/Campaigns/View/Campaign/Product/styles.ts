@@ -46,7 +46,8 @@ export const Row = styled.div`
       top: 1px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 12px;
+      font-size: 10px;
+      width: fit-content;
     }
   }
 `;
