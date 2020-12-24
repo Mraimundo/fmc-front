@@ -24,6 +24,7 @@ import Training from './modules/training';
 import Goals from './modules/goals';
 import HowParticipate from './modules/how-participate';
 import QrCode from './modules/qr-code';
+import Receipts from './modules/receipts';
 
 import PointsSimulator from './modules/points-simulator';
 
@@ -53,6 +54,7 @@ const routesArray: RouteModule[][] = [
   Report,
   PointsSimulator,
   QrCode,
+  Receipts,
 ];
 
 const Routes: React.FC = () => (

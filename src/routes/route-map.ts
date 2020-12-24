@@ -25,4 +25,5 @@ export default {
     calculator: '/simulador',
   },
   qrCode: '/qr',
+  receipts: '/receipts',
 };

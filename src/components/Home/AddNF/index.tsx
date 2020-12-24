@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import getNfList from 'services/nf/geNfList';
+import { Link } from 'react-router-dom';
+import routeMap from 'routes/route-map';
+
 import StatusTable from './StatusTable';
 import Upload from './Upload';
 
@@ -27,6 +30,7 @@ const AddNF: React.FC = () => {
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
             PDF. Em caso de JPG e PNG, certifique-se de que a imagem está nítida
             e legível.
+            <Link to={routeMap.receipts}>link teste</Link>
           </p>
           <RightSideBox>
             <StatusTable nfListLength={nfListLength} />
