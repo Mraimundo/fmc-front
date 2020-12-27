@@ -4,7 +4,7 @@ export const Container = styled.div`
   height: 26px;
   display: grid;
   color: ${({ theme }) => theme.font.color.primary};
-  font-size: 10px;
+  font-size: 12px;
   width: calc(100% - 13px);
   grid-template-columns:
     4.75728155339806% 12.9126213592233% 13.9805825242718%
@@ -16,7 +16,7 @@ export const Container2 = styled.thead`
   tr {
     th {
       height: 26px;
-      font-size: 10px;
+      font-size: 12px;
       text-align: left;
       color: ${({ theme }) => theme.font.color.primary};
       vertical-align: bottom;

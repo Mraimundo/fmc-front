@@ -86,12 +86,66 @@ const Tr: React.FC<TrProps> = ({
     });
   }, [product]);
 
-  const handleChangePogValue = useCallback(
-    (currentProduct: Product, value: number) => {
-      setPogInKilosPerLiter({ productId: currentProduct.id, value });
+  const setChecked = useCallback(
+    (currentProduct: Product) => {
+      const shouldCheck =
+        currentProduct.simulationData.unitValueInDollar > 0 &&
+        currentProduct.simulationData.revenuesInKilosPerLiter > 0 &&
+        currentProduct.simulationData.pogInKilosPerLiter > 0;
+      if (
+        (shouldCheck && !currentProduct.checked) ||
+        (!shouldCheck && currentProduct.checked)
+      ) {
+        onCheckUncheckProductHandle({
+          id: currentProduct.id,
+          checked: shouldCheck,
+        });
+      }
     },
-    [setPogInKilosPerLiter],
+    [onCheckUncheckProductHandle],
   );
+
+  const handleChangeFieldValue = useCallback(
+    (
+      fieldName:
+        | 'pogInKilosPerLiter'
+        | 'unitValueInDollar'
+        | 'revenuesInKilosPerLiter',
+      currentProduct: Product,
+      value: number,
+    ) => {
+      switch (fieldName) {
+        case 'pogInKilosPerLiter':
+          setPogInKilosPerLiter({ productId: currentProduct.id, value });
+          break;
+        case 'unitValueInDollar':
+          setUnitValueInDollar({ productId: currentProduct.id, value });
+          break;
+        case 'revenuesInKilosPerLiter':
+          setRevenuesInKilosPerLiter({ productId: currentProduct.id, value });
+          break;
+        default:
+          break;
+      }
+      setChecked({
+        ...currentProduct,
+        simulationData: {
+          ...currentProduct.simulationData,
+          [fieldName]: value,
+        },
+      });
+    },
+    [
+      setPogInKilosPerLiter,
+      setUnitValueInDollar,
+      setRevenuesInKilosPerLiter,
+      setChecked,
+    ],
+  );
+
+  let pogTimeout = 0;
+  let unitDollarValueTimeout = 0;
+  let revenuesTimeout = 0;
 
   return (
     <Container participate={product.isParticipatingProduct}>
@@ -136,12 +190,12 @@ const Tr: React.FC<TrProps> = ({
           <Input
             type="money"
             defaultValue={product.simulationData.unitValueInDollar}
-            onChange={value =>
-              setUnitValueInDollar({
-                productId: product.id,
-                value,
-              })
-            }
+            onChange={value => {
+              clearTimeout(unitDollarValueTimeout);
+              unitDollarValueTimeout = setTimeout(() => {
+                handleChangeFieldValue('unitValueInDollar', product, value);
+              }, 450);
+            }}
           />
         </CustomInputBox>
       </div>
@@ -151,12 +205,16 @@ const Tr: React.FC<TrProps> = ({
             placeholder="0"
             type="kilograma"
             defaultValue={product.simulationData.revenuesInKilosPerLiter}
-            onChange={value =>
-              setRevenuesInKilosPerLiter({
-                productId: product.id,
-                value,
-              })
-            }
+            onChange={value => {
+              clearTimeout(revenuesTimeout);
+              revenuesTimeout = setTimeout(() => {
+                handleChangeFieldValue(
+                  'revenuesInKilosPerLiter',
+                  product,
+                  value,
+                );
+              }, 450);
+            }}
           />
         </CustomInputBox>
       </div>
@@ -175,7 +233,12 @@ const Tr: React.FC<TrProps> = ({
             placeholder="0"
             type="kilograma"
             defaultValue={product.simulationData.pogInKilosPerLiter}
-            onChange={value => handleChangePogValue(product, value)}
+            onChange={value => {
+              clearTimeout(pogTimeout);
+              pogTimeout = setTimeout(() => {
+                handleChangeFieldValue('pogInKilosPerLiter', product, value);
+              }, 450);
+            }}
             maxLength={
               (product.stock.inKilosPerLiter +
                 product.simulationData.revenuesInKilosPerLiter +
