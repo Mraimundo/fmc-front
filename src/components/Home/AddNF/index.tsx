@@ -8,12 +8,17 @@ import Upload from './Upload';
 
 import { Container, Content, Title, RightSideBox } from './styles';
 
-const AddNF: React.FC = () => {
-  const [nfListLength, setNfListLength] = useState(0);
+interface Props {
+  layout?: string;
+}
 
+const AddNF: React.FC<Props> = Props => {
+  const [nfListLength, setNfListLength] = useState(0);
+  const [nfStatus, setNfStatus] = useState<any[]>([]);
   const getNfData = useCallback(() => {
     getNfList().then(data => {
       setNfListLength(data.length);
+      setNfStatus(data);
     });
   }, []);
 
@@ -24,16 +29,17 @@ const AddNF: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+        <Title>
+          Cadastre sua nota fiscal para ganhar pontos {Props.layout}
+        </Title>
         <div>
           <p>
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
             PDF. Em caso de JPG e PNG, certifique-se de que a imagem está nítida
             e legível.
-            <Link to={routeMap.receipts}>link teste</Link>
           </p>
           <RightSideBox>
-            <StatusTable nfListLength={nfListLength} />
+            <StatusTable nfList={nfStatus} />
             <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
           </RightSideBox>
         </div>
