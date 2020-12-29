@@ -9,7 +9,7 @@ export default async (receiptId: number): Promise<any[]> => {
       '/participants/upload-nota/invoice',
       {id: receiptId}
     );
-    return data.notas;
+    return data;
   } catch {
     return [];
   }

@@ -51,6 +51,8 @@ const Receipts: React.FC = () => {
   const [nfList, setNfList] = useState<any[]>([]);
   const [receiptId, setReceiptId] = useState<any>('');
   const [nfListLength, setNfListLength] = useState(0);
+  const [coins, setCoins] = useState(0);
+  const [safra, setSafra] = useState('');
 
   function showReceipt(receiptId: number) {
     setReceiptId(receiptId);
@@ -58,14 +60,25 @@ const Receipts: React.FC = () => {
   }
 
   function handleCloseModal() {
-    console.log('handleCloseModal');
     setModalOpen(false);
+  }
+
+  function transformNfEntry(entries: any) {
+    const transformedEntries: any = [];
+    entries.forEach((entry: any[]) => {
+      transformedEntries.push(entry[1]);
+    });
+    return transformedEntries;
   }
 
   const getNfData = useCallback(() => {
     getNfList().then(data => {
-      setNfListLength(data.length);
-      setNfList(data);
+      const nfListEntries = Object.entries(data.notas);
+      setNfListLength(transformNfEntry(nfListEntries).length);
+      setNfList(transformNfEntry(nfListEntries));
+      console.log(transformNfEntry(nfListEntries));
+      setCoins(data.fmccoins);
+      setSafra(data.safra);
     });
   }, []);
 
@@ -88,7 +101,7 @@ const Receipts: React.FC = () => {
               <StatusTitle>Safra 2021/222???</StatusTitle>
               <StatusBox>
                 <p>Creditado na Safra:</p>
-                <p>??? FMC Coins</p>
+                <p> {coins} FMC Coins</p>
               </StatusBox>
             </StatusItem>
             <StatusItem>
@@ -97,7 +110,7 @@ const Receipts: React.FC = () => {
             <StatusItem>
               <StatusBox>
                 <p>Saldo disponível para resgaste:</p>
-                <h2>???? Coins</h2>
+                <h2> {coins} Coins</h2>
                 <StatusButton>Resgatar ??</StatusButton>
               </StatusBox>
             </StatusItem>
@@ -121,15 +134,17 @@ const Receipts: React.FC = () => {
                 {nfList.map(item => (
                   <tr key={item.id}>
                     <td>
-                      <IconList />
+                      <a href={item.urlnota} target="_blank">
+                        <IconList />
+                      </a>
                     </td>
                     <td>
                       <IconEye onClick={() => showReceipt(item.id)} />
                     </td>
-                    <td>{transformNfStatus(item.status)}</td>
-                    <td>???</td>
-                    <td>R${item.total_value}</td>
-                    <td>???</td>
+                    <td> {item.status} </td>
+                    <td> {item.ondecomprou} </td>
+                    <td>R${item.totalvalue}</td>
+                    <td> {item.FMCCOINS} </td>
                   </tr>
                 ))}
               </tbody>

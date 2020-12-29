@@ -20,6 +20,7 @@ interface AddNota {
 
 interface Props {
   onUpdate: () => void;
+  secondary?: boolean;
 }
 
 const Upload: React.FC<Props> = Props => {
@@ -57,7 +58,8 @@ const Upload: React.FC<Props> = Props => {
 
   return (
     <Container>
-      <h4> Faça o upload aqui! </h4>
+      {!Props.secondary && <h4> Faça o upload aqui! </h4>}
+
       <Button onClick={onRequestOpenBlockedUpload} disabled={false}>
         {/*  <input
           type="file"

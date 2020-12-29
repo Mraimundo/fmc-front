@@ -12,13 +12,22 @@ interface Props {
   layout?: string;
 }
 
+function transformNfEntry(entries: any) {
+  const transformedEntries: any = [];
+  entries.forEach((entry: any[]) => {
+    transformedEntries.push(entry[1]);
+  });
+  return transformedEntries;
+}
+
 const AddNF: React.FC<Props> = Props => {
   const [nfListLength, setNfListLength] = useState(0);
   const [nfStatus, setNfStatus] = useState<any[]>([]);
   const getNfData = useCallback(() => {
     getNfList().then(data => {
-      setNfListLength(data.length);
-      setNfStatus(data);
+      const nfListEntries = Object.entries(data);
+      setNfListLength(transformNfEntry(nfListEntries).length);
+      setNfStatus(transformNfEntry(nfListEntries));
     });
   }, []);
 
@@ -28,22 +37,38 @@ const AddNF: React.FC<Props> = Props => {
 
   return (
     <Container>
-      <Content>
-        <Title>
-          Cadastre sua nota fiscal para ganhar pontos {Props.layout}
-        </Title>
-        <div>
+      {Props.layout !== 'secondary' && (
+        <Content>
+          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+          <div>
+            <p>
+              Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
+              PDF. Em caso de JPG e PNG, certifique-se de que a imagem está
+              nítida e legível.
+            </p>
+            <RightSideBox>
+              <StatusTable nfList={nfStatus} />
+              <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
+            </RightSideBox>
+          </div>
+        </Content>
+      )}
+      {Props.layout === 'secondary' && (
+        <Content secondary>
+          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+
           <p>
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
             PDF. Em caso de JPG e PNG, certifique-se de que a imagem está nítida
             e legível.
           </p>
-          <RightSideBox>
-            <StatusTable nfList={nfStatus} />
-            <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
-          </RightSideBox>
-        </div>
-      </Content>
+
+          <Upload
+            onUpdate={() => setNfListLength(nfListLength + 1)}
+            secondary
+          />
+        </Content>
+      )}
     </Container>
   );
 };

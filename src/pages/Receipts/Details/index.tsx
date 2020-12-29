@@ -36,6 +36,8 @@ const Details: React.FC<Props> = Props => {
       console.log(Props.receiptId);
       getReceipt(Props.receiptId).then(data => {
         setDetails(data);
+        console.log('setDetails');
+        console.log(data);
       });
     }
   }, [Props.receiptId]);
@@ -47,7 +49,7 @@ const Details: React.FC<Props> = Props => {
       ></CloseModalOverlay>
       <Content>
         <PageTitle>
-          Nota enviada em: {formatDate(details?.nota.purchase_date)}
+          Nota enviada em: {formatDate(details?.dadosnota[0].datacompra)}
           <CloseModal onClick={() => Props.closeModalHandler()}>
             <ReactSVG src={closeIcon} />
           </CloseModal>
@@ -61,25 +63,25 @@ const Details: React.FC<Props> = Props => {
                   <td>
                     <strong>Canal:</strong>
                   </td>
-                  <td> ????? </td>
+                  <td> {details?.dadosnota[0].canal} </td>
                 </tr>
                 <tr>
                   <td>
                     <strong>CNPJ:</strong>
                   </td>
-                  <td> {details?.nota.invoice_cnpj} </td>
+                  <td> {details?.dadosnota[0]?.cnpj} </td>
                 </tr>
                 <tr>
                   <td>
                     <strong>Data da compra: </strong>
                   </td>
-                  <td> {formatDate(details?.nota.purchase_date)} </td>
+                  <td> {formatDate(details?.dadosnota[0].datacompra)} </td>
                 </tr>
                 <tr>
                   <td>
                     <strong> Número da nota: </strong>
                   </td>
-                  <td> {details?.nota.num_invoice} </td>
+                  <td> {details?.dadosnota[0].numeronota} </td>
                 </tr>
               </tbody>
             </table>
@@ -92,13 +94,13 @@ const Details: React.FC<Props> = Props => {
                   <td>
                     <strong>CPF/CNPJ:</strong>
                   </td>
-                  <td> 33333333 </td>
+                  <td> {details?.dadosnota[0].cpf} </td>
                 </tr>
                 <tr>
                   <td>
                     <strong>Valor total:</strong>
                   </td>
-                  <td> R${details?.nota.total_value} </td>
+                  <td> R${details?.dadosnota[0].valornota} </td>
                 </tr>
               </tbody>
             </table>
@@ -111,6 +113,7 @@ const Details: React.FC<Props> = Props => {
           {details?.itensNota.map(
             (item: {
               id: number;
+              Categoria: string;
               invoice_id: number;
               product_id: number;
               participant_id: number;
@@ -126,7 +129,7 @@ const Details: React.FC<Props> = Props => {
               <ProductItem key={item.id}>
                 <div>
                   <strong> {item.NomeProduto.toUpperCase()} </strong> <br />
-                  <p> Catalizador </p>
+                  <p> {item.Categoria} </p>
                 </div>
 
                 <div>
