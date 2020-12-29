@@ -194,7 +194,7 @@ const Tr: React.FC<TrProps> = ({
               clearTimeout(unitDollarValueTimeout);
               unitDollarValueTimeout = setTimeout(() => {
                 handleChangeFieldValue('unitValueInDollar', product, value);
-              }, 450);
+              }, 200);
             }}
           />
         </CustomInputBox>
@@ -213,7 +213,7 @@ const Tr: React.FC<TrProps> = ({
                   product,
                   value,
                 );
-              }, 450);
+              }, 400);
             }}
           />
         </CustomInputBox>
@@ -237,7 +237,7 @@ const Tr: React.FC<TrProps> = ({
               clearTimeout(pogTimeout);
               pogTimeout = setTimeout(() => {
                 handleChangeFieldValue('pogInKilosPerLiter', product, value);
-              }, 450);
+              }, 600);
             }}
             maxLength={
               (product.stock.inKilosPerLiter +

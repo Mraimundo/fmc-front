@@ -30,7 +30,7 @@ const CustomInput: React.FC<Props> = ({
       const handler = setTimeout(() => {
         if (typeof onChange === 'undefined') return;
         onChange((floatValue || 0) / (type === 'money' ? 100 : 1));
-      }, 700);
+      }, 100);
 
       return () => {
         clearTimeout(handler);
