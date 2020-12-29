@@ -6,10 +6,10 @@ interface Props {
 }
 
 const StatusTable: React.FC<Props> = Props => {
-  function countNFByStatus(nf: any[], status: string) {
+  function countNFByStatus(nf: any[], status: number) {
     let count = 0;
     nf.forEach(item => {
-      if (item.status === status) {
+      if (item.status_id === status) {
         count += 1;
       }
     });
@@ -21,17 +21,17 @@ const StatusTable: React.FC<Props> = Props => {
         <li>
           <p>Em análise</p>
           <span />
-          <p>{countNFByStatus(Props.nfList, 'Em análise')} </p>
+          <p>{countNFByStatus(Props.nfList, 0)} </p>
         </li>
         <li>
           <p>Liberadas</p>
           <span />
-          <p>{countNFByStatus(Props.nfList, 'Liberadas')} </p>
+          <p>{countNFByStatus(Props.nfList, 1)} </p>
         </li>
         <li>
           <p>Descredenciadas</p>
           <span />
-          <p>{countNFByStatus(Props.nfList, 'Descredenciadas')} </p>
+          <p>{countNFByStatus(Props.nfList, 2)} </p>
         </li>
       </ul>
     </Container>

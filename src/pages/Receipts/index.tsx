@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import getNfList from 'services/nf/getAllNotas';
 import { EstablishmentTypes } from 'config/constants';
@@ -7,7 +6,6 @@ import StatusTable from '../../components/Home/AddNF/StatusTable';
 import Details from './Details';
 import { AddNF } from 'components/Home';
 
-import routeMap from 'routes/route-map';
 import {
   Container,
   Content,
@@ -45,12 +43,8 @@ const Receipts: React.FC = () => {
   }
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [userType, setUserType] = useState<EstablishmentTypes>(
-    EstablishmentTypes.Resale,
-  );
   const [nfList, setNfList] = useState<any[]>([]);
   const [receiptId, setReceiptId] = useState<any>('');
-  const [nfListLength, setNfListLength] = useState(0);
   const [coins, setCoins] = useState(0);
   const [safra, setSafra] = useState('');
 
@@ -74,7 +68,6 @@ const Receipts: React.FC = () => {
   const getNfData = useCallback(() => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data.notas);
-      setNfListLength(transformNfEntry(nfListEntries).length);
       setNfList(transformNfEntry(nfListEntries));
       console.log(transformNfEntry(nfListEntries));
       setCoins(data.fmccoins);
@@ -98,7 +91,7 @@ const Receipts: React.FC = () => {
         <StatusContainer>
           <StatusContent>
             <StatusItem>
-              <StatusTitle>Safra 2021/222???</StatusTitle>
+              <StatusTitle>{safra}</StatusTitle>
               <StatusBox>
                 <p>Creditado na Safra:</p>
                 <p> {coins} FMC Coins</p>
@@ -111,7 +104,7 @@ const Receipts: React.FC = () => {
               <StatusBox>
                 <p>Saldo disponível para resgaste:</p>
                 <h2> {coins} Coins</h2>
-                <StatusButton>Resgatar ??</StatusButton>
+                <StatusButton>Resgatar</StatusButton>
               </StatusBox>
             </StatusItem>
           </StatusContent>
@@ -134,14 +127,18 @@ const Receipts: React.FC = () => {
                 {nfList.map(item => (
                   <tr key={item.id}>
                     <td>
-                      <a href={item.urlnota} target="_blank">
+                      <a
+                        href={item.urlnota}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <IconList />
                       </a>
                     </td>
                     <td>
                       <IconEye onClick={() => showReceipt(item.id)} />
                     </td>
-                    <td> {item.status} </td>
+                    <td> {transformNfStatus(item.status_id)} </td>
                     <td> {item.ondecomprou} </td>
                     <td>R${item.totalvalue}</td>
                     <td> {item.FMCCOINS} </td>

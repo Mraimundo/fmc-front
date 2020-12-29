@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatDate } from 'util/datetime';
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
@@ -8,7 +8,6 @@ import closeIcon from 'assets/images/training/close-icon.svg';
 import getReceipt from 'services/receipts/getReceipt';
 
 import {
-  Container,
   Content,
   DetailsSection,
   DetailsBlock,
@@ -27,8 +26,8 @@ interface Props {
   closeModalHandler: any;
 }
 
-const Details: React.FC<Props> = Props => {
-  const [details, setDetails] = useState<any>();
+const Details: React.FC < Props > = Props => {
+  const [details, setDetails] = useState < any > ();
 
   useEffect(() => {
     if (Props.receiptId !== '') {
@@ -110,7 +109,9 @@ const Details: React.FC<Props> = Props => {
         <h3>Produtos FMC</h3>
 
         <ProductList>
-          {details?.itensNota.map(
+          {
+            details?.itensNota && details?.itensNota.length > 0 &&
+            details?.itensNota.map(
             (item: {
               id: number;
               Categoria: string;
