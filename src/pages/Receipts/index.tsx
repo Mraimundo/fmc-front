@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import getNfList from 'services/nf/getAllNotas';
-import { EstablishmentTypes } from 'config/constants';
 import StatusTable from '../../components/Home/AddNF/StatusTable';
 import Details from './Details';
 import { AddNF } from 'components/Home';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 12px 22px;
+  
   border-radius: 10px;
   background: #f4f4f3;
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
@@ -29,5 +29,10 @@ export const Container = styled.div`
     flex: 1 1 100%;
     border-bottom: 1px dotted;
     align-self: flex-end;
+  }
+
+  > a {
+    display: block;
+    padding: 12px 22px;
   }
 `;

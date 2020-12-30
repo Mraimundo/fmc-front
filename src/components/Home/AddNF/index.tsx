@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import getNfList from 'services/nf/geNfList';
-import { Link } from 'react-router-dom';
-import routeMap from 'routes/route-map';
+
 import StatusTable from './StatusTable';
 import Upload from './Upload';
 
@@ -46,9 +45,8 @@ const AddNF: React.FC<Props> = Props => {
               nítida e legível.
             </p>
             <RightSideBox>
-              <Link to={routeMap.receipts}>
-                <StatusTable nfList={nfStatus} />
-              </Link>
+              <StatusTable nfList={nfStatus} />
+
               <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
             </RightSideBox>
           </div>
