@@ -94,7 +94,7 @@ const products: Product[] = [
   })),
 ];
 
-const newMock: Product[] = [
+export const newMock: Product[] = [
   {
     id: 1,
     name: 'Ally',

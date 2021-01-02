@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PDF, { Text, AddPage, Line, Image, Table, Html } from 'jspdf-react';
+import PDF, { Text, AddPage, Line, Table, Html } from 'jspdf-react';
 
 // import { Container } from './styles';
 

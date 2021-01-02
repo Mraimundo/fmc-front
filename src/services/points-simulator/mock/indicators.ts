@@ -1,6 +1,6 @@
 import { Indicators } from '../interfaces/api-interface';
 
-const indicators: Indicators = {
+export const indicators: Indicators = {
   revenues_last_realized_in_dollar: 1333000,
   revenues_current_goal_in_dollar: 1333666,
   revenues_current_realized_in_dollar: 666000,
