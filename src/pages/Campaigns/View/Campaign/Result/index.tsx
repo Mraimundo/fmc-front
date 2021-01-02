@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { ReactSVG } from 'react-svg';
 import pdfIcon from 'assets/images/pdf.svg';
 

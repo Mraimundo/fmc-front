@@ -16,7 +16,7 @@ const Stock: React.FC<Props> = ({ id }) => {
   const handleClick = useCallback(async () => {
     try {
       setLoading(true);
-      const u = await getUrlDownload(parseInt(id, 0));
+      await getUrlDownload(parseInt(id, 0));
     } catch {
       addToast({ type: 'error', title: 'Arquivo não encontrado' });
     } finally {
