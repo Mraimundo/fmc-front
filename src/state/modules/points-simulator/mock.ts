@@ -26,6 +26,7 @@ const mock: PointsSimulatorState = {
   products: [
     {
       id: 1,
+      checked: false,
       name: 'Produto 1',
       isEnhancer: false,
       isParticipatingProduct: true,

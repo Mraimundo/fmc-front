@@ -45,38 +45,70 @@ const CampaignsManagerReducer: Reducer<
       return produce(state, draft => {
         draft.products = action.payload;
       });
-    case constants.SET_REVENUES_IN_KILOS_PER_LITER:
+    case constants.SET_PRODUCT_CHECK:
       return produce(state, draft => {
-        const { productId, value: revenuesInKilosPerLiter } = action.payload;
-        draft.products = draft.products.map(product => {
+        const { checked, productId } = action.payload;
+        draft.products.map(product => {
           if (product.id === productId) {
-            product.simulationData.revenuesInKilosPerLiter =
-              revenuesInKilosPerLiter || 0;
-            product.simulationData = calculateSimulationDataProductValues(
-              product.simulationData,
-              product,
-              state.configuration,
-              state.dollarBaseValue,
-            );
+            product.checked = checked;
           }
           return product;
         });
       });
+    case constants.SET_REVENUES_IN_KILOS_PER_LITER:
+      return produce(state, draft => {
+        const { productId, value: revenuesInKilosPerLiter } = action.payload;
+        const foundIndex = draft.products.findIndex(
+          item => item.id === productId,
+        );
+        if (foundIndex >= 0) {
+          const product = draft.products[foundIndex];
+          product.simulationData.revenuesInKilosPerLiter =
+            revenuesInKilosPerLiter || 0;
+          product.simulationData = calculateSimulationDataProductValues(
+            product.simulationData,
+            product,
+            state.configuration,
+            state.dollarBaseValue,
+          );
+          draft.products[foundIndex] = product;
+        }
+      });
     case constants.SET_POG_IN_KILOS_PER_LITER:
       return produce(state, draft => {
         const { productId, value: pogInKilosPerLiter } = action.payload;
-        draft.products = draft.products.map(product => {
-          if (product.id === productId) {
+        const foundIndex = draft.products.findIndex(
+          item => item.id === productId,
+        );
+        if (foundIndex >= 0) {
+          const product = draft.products[foundIndex];
+          console.log('pogInKilosPerLiter', pogInKilosPerLiter);
+          console.log(
+            'product.simulationData.revenuesInKilosPerLiter + product.stock.inKilosPerLiter',
+            product.simulationData.revenuesInKilosPerLiter +
+              product.stock.inKilosPerLiter,
+          );
+          if (
+            pogInKilosPerLiter <=
+            product.simulationData.revenuesInKilosPerLiter +
+              product.stock.inKilosPerLiter
+          ) {
+            console.log('oi');
             product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
-            product.simulationData = calculateSimulationDataProductValues(
-              product.simulationData,
-              product,
-              state.configuration,
-              state.dollarBaseValue,
-            );
+          } else {
+            console.log('xau');
+            product.simulationData.pogInKilosPerLiter =
+              product.simulationData.revenuesInKilosPerLiter +
+              product.stock.inKilosPerLiter;
           }
-          return product;
-        });
+          product.simulationData = calculateSimulationDataProductValues(
+            product.simulationData,
+            product,
+            state.configuration,
+            state.dollarBaseValue,
+          );
+          draft.products[foundIndex] = product;
+        }
       });
     case constants.SET_UNIT_VALUE_IN_DOLLAR:
       return produce(state, draft => {

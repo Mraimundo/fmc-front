@@ -5,6 +5,11 @@ export interface DataValueDTO {
   value: number;
 }
 
+export interface DataCheckDTO {
+  productId: number;
+  checked: boolean;
+}
+
 export enum Mode {
   calculator = 'Calculadora',
   result = 'Resultado',

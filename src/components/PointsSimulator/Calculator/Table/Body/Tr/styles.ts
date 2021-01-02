@@ -5,7 +5,17 @@ interface ContainerProps {
   participate: boolean;
 }
 
-export const Container = styled.tr<ContainerProps>`
+export const Container = styled.div<ContainerProps>`
+  display: grid;
+  align-items: center;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-size: 10px;
+  width: 100%;
+  grid-template-columns:
+    4.75728155339806% 12.9126213592233% 13.9805825242718%
+    14.6601941747573% 12.1359223300971% 10.4854368932039% 10.4854368932039%
+    10.4854368932039% 10.0970873786408%;
+
   height: 65px;
   background: #dad8d9;
   margin-bottom: 8px;

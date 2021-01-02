@@ -17,6 +17,7 @@ interface Params {
   closeOnClick: boolean;
   pauseOnHover: boolean;
   draggable: boolean;
+  className: string;
 }
 
 interface ToastContextData {
@@ -32,6 +33,7 @@ const ToastContext = createContext<ToastContextData>({} as ToastContextData);
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
+  className: '_modal-toast',
 }; */
 
 interface Popup {
@@ -68,6 +70,7 @@ const ToastProvider: React.FC = ({ children }) => {
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
         text={text}
+        className="_modal-toast"
       />
     </ToastContext.Provider>
   );

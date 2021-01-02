@@ -15,7 +15,7 @@ const Footer: React.FC<Props> = ({ handleSaveSimulationClick }) => {
         Os resultados acima são meramente uma simulação e não podem ser
         utilizados para qualquer tipo de premiação
       </span>
-      <div>
+      <div className="_actions-container-footer">
         <ReactSVG src={shareImg} />
         <Button
           buttonRole="primary"

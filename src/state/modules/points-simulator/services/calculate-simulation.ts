@@ -1,4 +1,4 @@
-import { Product, Indicator } from '../interfaces';
+import { Product, Indicator, IndicatorType } from '../interfaces';
 import getPercentage from './get-goal-realized-percentage';
 
 interface IndicatorDTO {
@@ -15,11 +15,13 @@ const calculateSimulatedRevenues = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const simulatedProductsValue = products.reduce(
-    (accumulator, product) =>
-      accumulator + (product.simulationData.revenuesInDollar || 0),
-    0,
-  );
+  const simulatedProductsValue = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator + (product.simulationData.revenuesInDollar || 0),
+      0,
+    );
 
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
@@ -35,14 +37,13 @@ const calculateSimulatedPog = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const simulatedProductsValue = products.reduce(
-    (accumulator, product) =>
-      accumulator + (product.simulationData.pogInDollar || 0),
-    0,
-  );
-
-  console.log('products', products);
-  console.log('simulatedProductsValue', simulatedProductsValue);
+  const simulatedProductsValue = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator + (product.simulationData.pogInDollar || 0),
+      0,
+    );
 
   const totalRealized = indicator.currentRealized + simulatedProductsValue;
 
@@ -58,9 +59,9 @@ const calculateSimulatedProduct = ({
   products,
   indicator,
 }: IndicatorDTO): SimulationData => {
-  const product = products.find(
-    item => item.name.toLowerCase() === indicator.type.toLowerCase(),
-  );
+  const product = products
+    .filter(item => item.checked)
+    .find(item => item.name.toLowerCase() === indicator.type.toLowerCase());
 
   const totalRealized =
     indicator.currentRealized +
@@ -70,6 +71,15 @@ const calculateSimulatedProduct = ({
     indicator.currentGoal,
     totalRealized,
   );
+
+  if (indicator.type === IndicatorType.talisman) {
+    console.log('talisman');
+    console.log('totalRealized', totalRealized);
+    console.log('totalPercentageRealized', totalPercentageRealized);
+    console.log('indicator.currentGoal', indicator.currentGoal);
+    console.log('(realized * 100) / goal || 0');
+    console.log('Fimtalisman');
+  }
 
   return { totalRealized, totalPercentageRealized };
 };

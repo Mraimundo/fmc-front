@@ -11,22 +11,19 @@ interface Props {
 const Header: React.FC<Props> = ({ tabSelected }) => {
   return (
     <Container>
-      <tr>
-        <th> </th>
-        <th>Tipo/Produto</th>
-        <th>
-          Faturamento (
-          {tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
-        </th>
-        <th>
-          POG ({tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
-        </th>
-        <th>Estoque</th>
-        <th>Valor unitário (US$)</th>
-        <th>Faturamento (Kg/L)</th>
-        <th>Faturamento (US$)</th>
-        <th>POG (Kg/L)</th>
-      </tr>
+      <div> </div>
+      <div>Tipo/Produto</div>
+      <div>
+        Faturamento ({tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
+      </div>
+      <div>
+        POG ({tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
+      </div>
+      <div>Estoque</div>
+      <div>Valor unitário (US$)</div>
+      <div>Faturamento (Kg/L)</div>
+      <div>Faturamento (US$)</div>
+      <div>POG (Kg/L)</div>
     </Container>
   );
 };

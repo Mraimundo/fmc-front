@@ -26,6 +26,7 @@ const channelApiToChannel = (channel: ChannelApi): Channel => ({
 const productsApiToProducts = (products: ProductApi[]): Product[] =>
   products.map(product => ({
     id: product.id,
+    checked: false,
     name: product.name,
     isEnhancer: product.is_enhancer,
     isParticipatingProduct: product.is_a_participating_product,
@@ -70,12 +71,13 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
       additionalMarginSimulated: 0,
     },
     awardsParamsToPay: {
-      rebatePercentage: product.rebate_percentage_to_pay,
+      rebatePercentage: product.rebate_percentage_to_pay * 100,
       sellerValueInReal: product.seller_value_in_real_to_pay,
-      additionalMarginPercentage: product.additional_margin_percentage_to_pay,
+      additionalMarginPercentage:
+        product.additional_margin_percentage_to_pay * 100,
     },
     extraPercentageToPayByEnhancerProduct:
-      product.extra_percentage_to_pay_per_enhancer_product,
+      product.extra_percentage_to_pay_per_enhancer_product * 100,
   }));
 
 const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
@@ -194,11 +196,12 @@ const configurationApiToConfiguration = (
 ): Configuration => {
   return {
     partialDate: configuration.partial_date,
-    pogRealizedNetPercentage: configuration.pog_realized_net_percentage,
+    pogRealizedNetPercentage:
+      100 - configuration.pog_realized_net_percentage * 100,
     minimumRebatePercentageToMakePoints:
-      configuration.minimum_rebate_percentage_to_participate,
+      configuration.minimum_rebate_percentage_to_participate * 100,
     minimumSellerPercentageToMakePoints:
-      configuration.minimum_seller_percentage_to_participate,
+      configuration.minimum_seller_percentage_to_participate * 100,
   };
 };
 

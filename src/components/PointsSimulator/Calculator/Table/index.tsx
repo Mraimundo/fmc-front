@@ -13,6 +13,13 @@ interface TableProps {
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
   setPogInKilosPerLiter(data: DataValueDTO): void;
   tabSelected: Tab;
+  onCheckUncheckProductHandle({
+    id,
+    checked,
+  }: {
+    id: number;
+    checked: boolean;
+  }): void;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -21,6 +28,7 @@ const Table: React.FC<TableProps> = ({
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
   tabSelected,
+  onCheckUncheckProductHandle,
 }) => {
   return (
     <Container>
@@ -30,6 +38,7 @@ const Table: React.FC<TableProps> = ({
         setUnitValueInDollar={setUnitValueInDollar}
         setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
         setPogInKilosPerLiter={setPogInKilosPerLiter}
+        onCheckUncheckProductHandle={onCheckUncheckProductHandle}
       />
     </Container>
   );

@@ -18,13 +18,17 @@ interface ChannelsApiResponse {
 }
 const getChannels = async (): Promise<Channel[]> => {
   if (useMockState) return mock.channels;
+
+  const orderChannelsByName = (channels: Channel[]): Channel[] => {
+    return channels.sort((itemA, itemB) => (itemA.name > itemB.name ? 1 : -1));
+  };
   try {
     const {
       data: { data },
     } = await pluginApi.get<ChannelsApiResponse>(
       'simulations/establishments?page=1&limit=10000&order=desc',
     );
-    return data;
+    return orderChannelsByName(data);
   } catch (e) {
     return [];
   }
@@ -67,12 +71,27 @@ interface ProductsApiResponse {
 }
 const getProducts = async (channelId: number): Promise<Product[]> => {
   if (useMockState) return mock.products;
+
+  const orderProductsByNameAndByParticipation = (
+    products: Product[],
+  ): Product[] => {
+    const participantProducts = products
+      .filter(item => item.is_a_participating_product)
+      .sort((itemA, itemB) => (itemA.name > itemB.name ? 1 : -1));
+
+    const notParticipantProducts = products
+      .filter(item => !item.is_a_participating_product)
+      .sort((itemA, itemB) => (itemA.name > itemB.name ? 1 : -1));
+
+    return [...participantProducts, ...notParticipantProducts];
+  };
+
   const {
     data: { products },
   } = await pluginApi.get<ProductsApiResponse>(
     `simulations/products?establishment_id=${channelId}`,
   );
-  return products;
+  return orderProductsByNameAndByParticipation(products);
 };
 
 const getIndicators = async (channelId: number): Promise<Indicators> => {
@@ -106,6 +125,7 @@ interface SimulationDataApiResponse {
   data: SimulationData[];
 }
 const loadSimulations = async (): Promise<SimulationData[]> => {
+  if (useMockState) return mock.simulationData;
   const {
     data: { data },
   } = await pluginApi.get<SimulationDataApiResponse>(

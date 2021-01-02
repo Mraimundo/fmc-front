@@ -3,7 +3,7 @@ import {
   ActionCreatorPayload,
   ActionCreatorFailure,
 } from '@types';
-import { DataValueDTO, Mode, CalcutationDTO } from './types';
+import { DataValueDTO, Mode, CalcutationDTO, DataCheckDTO } from './types';
 import {
   Product,
   Channel,
@@ -18,6 +18,14 @@ export const setDollarBaseValue = (
   value: number,
 ): ActionCreatorPayload<typeof constants.SET_DOLLAR_BASE_VALUE, number> =>
   <const>{ type: constants.SET_DOLLAR_BASE_VALUE, payload: value };
+
+export const setProductCheck = (
+  data: DataCheckDTO,
+): ActionCreatorPayload<typeof constants.SET_PRODUCT_CHECK, DataCheckDTO> =>
+  <const>{
+    type: constants.SET_PRODUCT_CHECK,
+    payload: data,
+  };
 
 export const setUnitValueInDollar = (
   data: DataValueDTO,
@@ -241,4 +249,5 @@ export type PointsSimulatorActions = ReturnType<
   | typeof fetchLoadStateSuccess
   | typeof reset
   | typeof setProductsValues
+  | typeof setProductCheck
 >;
