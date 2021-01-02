@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { ReactSVG } from 'react-svg';
 import pdfIcon from 'assets/images/pdf.svg';
 
+import { useToast } from 'context/ToastContext';
 import { Container, Separator } from './styles';
 
 interface Props {
-  handleDownloadPdf(): Promise<void>;
+  pdfFile?: string;
 }
 
-const Result: React.FC<Props> = ({ handleDownloadPdf }) => {
-  const [loading, setLoading] = useState(false);
+const Result: React.FC<Props> = ({ pdfFile }) => {
+  const { addToast } = useToast();
+
+  const handlePdfNotFound = useCallback(() => {
+    addToast({ title: 'Este arquivo ainda não foi carregado!', type: 'error' });
+  }, [addToast]);
+
   return (
     <Container>
       <h4>Resultados</h4>
       <Separator />
       <span>Confira os resultados</span>
-      <button
-        type="submit"
-        onClick={() => {
-          console.log('oi');
-        }}
-      >
-        <ReactSVG src={pdfIcon} />
-        Download Resultados (PDF)
-      </button>
+      {pdfFile ? (
+        <a href={pdfFile}>
+          <ReactSVG src={pdfIcon} />
+          Download Resultados (PDF)
+        </a>
+      ) : (
+        <button type="submit" onClick={handlePdfNotFound}>
+          <ReactSVG src={pdfIcon} />
+          Download Resultados (PDF)
+        </button>
+      )}
     </Container>
   );
 };

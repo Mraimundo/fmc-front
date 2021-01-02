@@ -16,22 +16,52 @@ const Product: React.FC<Props> = ({ data }) => {
         <Row key={`item-${item.id}`}>
           <Box>{item.title}</Box>
           {item.volume && (
-            <span>
-              <span>Volume</span>
-              {item.volume}
-            </span>
+            <>
+              <span>
+                <span>Volume</span>
+                {item.volume}
+              </span>
+              <span>
+                <span>Parcial</span>
+                {item.partialVolume}
+              </span>
+              <span>
+                <span>Porcentagem Realizada</span>
+                {item.partialVolumePercentage}
+              </span>
+            </>
           )}
           {item.sellIn && (
-            <span>
-              <span>Faturamento</span>
-              {item.sellIn}
-            </span>
+            <>
+              <span>
+                <span>Faturamento</span>
+                {item.sellIn}
+              </span>
+              <span>
+                <span>Parcial</span>
+                {item.partialSellIn}
+              </span>
+              <span>
+                <span>Porcentagem Realizada</span>
+                {item.partialSellInPercentage}
+              </span>
+            </>
           )}
           {item.sellOut && (
-            <span>
-              <span>POG</span>
-              {item.sellOut}
-            </span>
+            <>
+              <span>
+                <span>POG</span>
+                {item.sellOut}
+              </span>
+              <span>
+                <span>Parcial</span>
+                {item.partialSellOut}
+              </span>
+              <span>
+                <span>Porcentagem Realizada</span>
+                {item.partialSellOutPercentage}
+              </span>
+            </>
           )}
         </Row>
       ))}

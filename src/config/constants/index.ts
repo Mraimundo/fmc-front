@@ -39,7 +39,7 @@ export const PROFILES = {
 };
 
 export type IProfile =
-  | typeof PROFILES.fmc
+  | typeof PROFILES.focalPoint
   | typeof PROFILES.fmc
   | typeof PROFILES.participant
   | typeof PROFILES.producer;

@@ -24,6 +24,7 @@ export const Container = styled.button<ContainerProps>`
   background-position: center;
   transition: background 0.5s;
   will-change: background-color;
+
   &:hover {
     background: ${({ theme, buttonRole }) =>
         shade(0.2, theme.button[buttonRole].backgroundColor)}
@@ -47,6 +48,7 @@ export const Container = styled.button<ContainerProps>`
   ._loading {
     svg {
       fill: ${({ theme, buttonRole }) => theme.button[buttonRole].fontColor};
+      margin-top: 1px;
     }
   }
 
@@ -58,5 +60,9 @@ export const Container = styled.button<ContainerProps>`
     > * {
       pointer-events: none;
     }
+  }
+
+  > span {
+    margin-right: 3px;
   }
 `;
