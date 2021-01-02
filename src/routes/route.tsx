@@ -8,6 +8,7 @@ import {
 import { RegisterAccessLog } from 'services/registerAccessLog';
 
 import { useAuth } from 'context/AuthContext';
+import useMenu from 'state/hooks/use-menu';
 
 interface RouteProps extends DefaultRouteProps {
   isPrivate?: boolean;
@@ -23,7 +24,10 @@ const Route: React.FC<RouteProps> = ({
   accessPage,
   ...rest
 }) => {
-  const { signed } = useAuth();
+  const { signed, loading } = useAuth();
+  const { menu } = useMenu();
+
+  console.log('signed', signed);
 
   if (accessPage) {
     RegisterAccessLog(accessPage);
@@ -33,7 +37,9 @@ const Route: React.FC<RouteProps> = ({
     return <DefaultRoute {...rest} render={() => <Component />} />;
   }
 
-  /* MAYCONN Layout Temporario para nao private */
+  if (loading === undefined) {
+    return <></>;
+  }
 
   return (
     <DefaultRoute

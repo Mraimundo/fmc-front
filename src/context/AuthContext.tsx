@@ -33,6 +33,7 @@ interface AuthContextState {
   participant: Participant;
   refreshParticipant(): void;
   signed: boolean;
+  loading: boolean | undefined;
   shouldShowRegulationsModal: boolean;
   signIn(credentials: Credentials | CredentialsToken): Promise<void>;
   signOut(): void;
@@ -52,14 +53,17 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [shouldShowRegulationsModal, setShouldShowRegulationsModal] = useState(
     false,
   );
+  const [loading, setLoading] = useState<boolean | undefined>(undefined);
 
   const refreshParticipant = useCallback(async () => {
+    setLoading(true);
     const [data, isThereRegulationsToAccept] = await Promise.all([
       getLoggedParticipant(),
       isThereAnyRegulationToAccept(),
     ]);
     setShouldShowRegulationsModal(isThereRegulationsToAccept);
     setParticipant(data);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -153,21 +157,29 @@ export const AuthProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
-    if (!apiToken) return;
+    setLoading(true);
+    if (!apiToken) {
+      setLoading(false);
+      return;
+    }
     setToken(apiToken);
     setTimeout(() => {
-      isTokenValid().then(isValid => {
-        if (!isValid) {
-          signOut();
-          addToast({
-            title: 'Sua Sessão expirou, por favor refaça seu login',
-            type: 'error',
-          });
-          return;
-        }
-        refreshParticipant();
-        dispatch(fetchMenu());
-      });
+      isTokenValid()
+        .then(isValid => {
+          if (!isValid) {
+            signOut();
+            addToast({
+              title: 'Sua Sessão expirou, por favor refaça seu login',
+              type: 'error',
+            });
+            return;
+          }
+          refreshParticipant();
+          dispatch(fetchMenu());
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }, 300);
   }, [addToast, signOut, apiToken, refreshParticipant, dispatch]);
 
@@ -182,6 +194,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         shouldShowRegulationsModal,
         simulating,
         simulate,
+        loading,
       }}
     >
       {children}
