@@ -1,27 +1,30 @@
 import { Product, Award } from '../interfaces';
 
 const calculateAwards = (products: Product[]): Award => {
-  const simulatedRebate = products.reduce(
-    (accumulator, product) =>
-      accumulator +
-      (product.simulationPoints.rebateReachedInRealSimulated || 0),
-    0,
-  );
-
-  const totalRebate =
-    products.reduce(
+  const simulatedRebate = products
+    .filter(item => item.checked)
+    .reduce(
       (accumulator, product) =>
         accumulator +
-        (product.simulationPoints.rebateReachedInRealAccumulated || 0),
+        (product.simulationPoints.rebateReachedInRealSimulated || 0),
       0,
-    ) + simulatedRebate;
+    );
 
-  const simulatedSeller = products.reduce(
+  const totalRebate = products.reduce(
     (accumulator, product) =>
       accumulator +
-      (product.simulationPoints.sellerReachedInRealSimulated || 0),
+      (product.simulationPoints.rebateReachedInRealAccumulated || 0),
     0,
   );
+
+  const simulatedSeller = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator +
+        (product.simulationPoints.sellerReachedInRealSimulated || 0),
+      0,
+    );
 
   const totalSeller = products.reduce(
     (accumulator, product) =>
@@ -30,11 +33,13 @@ const calculateAwards = (products: Product[]): Award => {
     0,
   );
 
-  const simulatedAdditionalMargin = products.reduce(
-    (accumulator, product) =>
-      accumulator + (product.simulationPoints.additionalMarginSimulated || 0),
-    0,
-  );
+  const simulatedAdditionalMargin = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator + (product.simulationPoints.additionalMarginSimulated || 0),
+      0,
+    );
 
   const totalAdditionalMargin = products.reduce(
     (accumulator, product) =>

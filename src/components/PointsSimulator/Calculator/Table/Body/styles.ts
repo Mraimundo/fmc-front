@@ -1,3 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.tbody``;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+`;

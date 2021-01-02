@@ -11,6 +11,7 @@ export const RESET = '@fmc/points-simulator/RESET';
 export const SET_DOLLAR_BASE_VALUE =
   '@fmc/points-simulator/SET_DOLLAR_BASE_VALUE';
 
+export const SET_PRODUCT_CHECK = '@fmc/points-simulator/SET_PRODUCT_CHECK';
 export const SET_UNIT_VALUE_IN_DOLLAR =
   '@fmc/points-simulator/SET_UNIT_VALUE_IN_DOLAR';
 export const SET_REVENUES_IN_KILOS_PER_LITER =

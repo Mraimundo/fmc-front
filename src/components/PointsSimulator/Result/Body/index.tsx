@@ -67,11 +67,7 @@ const Body: React.FC<Props> = ({ cards, award }) => {
           />
           <MiniBox
             title="Margem adicional"
-            text={`${formatPoints(
-              award.simulatedAdditionalMargin,
-              0,
-              0,
-            )} pontos`}
+            text={`R$ ${formatPoints(award.simulatedAdditionalMargin, 0, 0)}`}
           />
           <MiniBox
             title="Premiação de vendedor"
@@ -90,7 +86,7 @@ const Body: React.FC<Props> = ({ cards, award }) => {
           />
           <MiniBox
             title="Margem adicional"
-            text={`${formatPoints(award.totalAdditionalMargin, 0, 0)} pontos`}
+            text={`R$ ${formatPoints(award.totalAdditionalMargin, 0, 0)}`}
           />
           <MiniBox
             title="Premiação de vendedor"

@@ -9,15 +9,22 @@ interface Props {
   isOpen: boolean;
   onRequestClose(): void;
   text: string | Node;
+  className?: string;
 }
 
 const SuccessEditRegister: React.FC<Props> = ({
   isOpen,
   onRequestClose,
   text,
+  className,
 }) => {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose} type="primary">
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      type="primary"
+      className={className}
+    >
       <Container>
         <Close>
           <button type="button" onClick={onRequestClose}>
