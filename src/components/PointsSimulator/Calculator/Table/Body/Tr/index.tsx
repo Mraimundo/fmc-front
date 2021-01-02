@@ -240,9 +240,8 @@ const Tr: React.FC<TrProps> = ({
               }, 600);
             }}
             maxLength={
-              (product.stock.inKilosPerLiter +
-                product.simulationData.revenuesInKilosPerLiter +
-                1) /
+              ((product.stock.inKilosPerLiter || 0) +
+                (product.simulationData.revenuesInKilosPerLiter || 0)) /
               100
             }
           />
