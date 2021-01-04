@@ -1,6 +1,7 @@
 export default {
   campaign: '/campanhas',
   campaignManagement: '/gerenciamento-de-campanhas',
+  campaignCounting: '/apuracao-de-campanhas',
   contact: '/fale-conosco',
   extract: {
     my: '/myextract',

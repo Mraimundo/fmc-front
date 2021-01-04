@@ -4,6 +4,7 @@ import { RouteModule } from './modules/route-module';
 
 import Auth from './modules/auth';
 import Campaigns from './modules/campaigns';
+import CampaignsCounting from './modules/campaigns-counting';
 import CampaignsManager from './modules/campaigns-manager';
 import Cockpit from './modules/cockpit';
 import Contact from './modules/contact';
@@ -33,6 +34,7 @@ import Route from './route';
 const routesArray: RouteModule[][] = [
   Auth,
   Campaigns,
+  CampaignsCounting,
   CampaignsManager,
   Cockpit,
   Contact,

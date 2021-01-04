@@ -38,4 +38,8 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  .ReactModal__Overlay--after-open {
+    z-index: 10;
+  }
+
 `;

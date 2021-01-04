@@ -18,16 +18,18 @@ export const Container = styled.div`
     margin-top: 12px;
   }
 
-  > button {
+  > button,
+  > a {
     color: #fff;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border: none;
     background: transparent;
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.primary};
     margin-top: 15px;
+    width: 200px;
 
     svg {
       margin-right: 8px;

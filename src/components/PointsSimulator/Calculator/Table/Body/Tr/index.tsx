@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Product } from 'state/modules/points-simulator/interfaces';
 import { DataValueDTO } from 'state/modules/points-simulator/types';
@@ -13,6 +13,13 @@ interface TrProps {
   setUnitValueInDollar(data: DataValueDTO): void;
   setRevenuesInKilosPerLiter(data: DataValueDTO): void;
   setPogInKilosPerLiter(data: DataValueDTO): void;
+  onCheckUncheckProductHandle({
+    id,
+    checked,
+  }: {
+    id: number;
+    checked: boolean;
+  }): void;
 }
 
 interface ValuesData {
@@ -29,16 +36,9 @@ const Tr: React.FC<TrProps> = ({
   setUnitValueInDollar,
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
+  onCheckUncheckProductHandle,
 }) => {
   const [valuesData, setValuesData] = useState<ValuesData | null>(null);
-
-  const checked = useMemo(
-    () =>
-      product.simulationData.unitValueInDollar > 0 &&
-      product.simulationData.revenuesInKilosPerLiter > 0 &&
-      product.simulationData.pogInKilosPerLiter > 0,
-    [product.simulationData],
-  );
 
   useEffect(() => {
     if (product.isEnhancer) {
@@ -86,65 +86,139 @@ const Tr: React.FC<TrProps> = ({
     });
   }, [product]);
 
+  const setChecked = useCallback(
+    (currentProduct: Product) => {
+      const shouldCheck =
+        currentProduct.simulationData.unitValueInDollar > 0 &&
+        currentProduct.simulationData.revenuesInKilosPerLiter > 0 &&
+        currentProduct.simulationData.pogInKilosPerLiter > 0;
+      if (
+        (shouldCheck && !currentProduct.checked) ||
+        (!shouldCheck && currentProduct.checked)
+      ) {
+        onCheckUncheckProductHandle({
+          id: currentProduct.id,
+          checked: shouldCheck,
+        });
+      }
+    },
+    [onCheckUncheckProductHandle],
+  );
+
+  const handleChangeFieldValue = useCallback(
+    (
+      fieldName:
+        | 'pogInKilosPerLiter'
+        | 'unitValueInDollar'
+        | 'revenuesInKilosPerLiter',
+      currentProduct: Product,
+      value: number,
+    ) => {
+      switch (fieldName) {
+        case 'pogInKilosPerLiter':
+          setPogInKilosPerLiter({ productId: currentProduct.id, value });
+          break;
+        case 'unitValueInDollar':
+          setUnitValueInDollar({ productId: currentProduct.id, value });
+          break;
+        case 'revenuesInKilosPerLiter':
+          setRevenuesInKilosPerLiter({ productId: currentProduct.id, value });
+          break;
+        default:
+          break;
+      }
+      setChecked({
+        ...currentProduct,
+        simulationData: {
+          ...currentProduct.simulationData,
+          [fieldName]: value,
+        },
+      });
+    },
+    [
+      setPogInKilosPerLiter,
+      setUnitValueInDollar,
+      setRevenuesInKilosPerLiter,
+      setChecked,
+    ],
+  );
+
+  let pogTimeout = 0;
+  let unitDollarValueTimeout = 0;
+  let revenuesTimeout = 0;
+
   return (
     <Container participate={product.isParticipatingProduct}>
-      <td>
-        <Checkbox color="default" checked={checked} />
-      </td>
-      <td>
+      <div>
+        <Checkbox
+          color="default"
+          checked={product.checked}
+          onChange={() =>
+            onCheckUncheckProductHandle({
+              id: product.id,
+              checked: !product.checked,
+            })
+          }
+        />
+      </div>
+      <div>
         <ProductBox>
           <span>{product.type.name}</span>
           <span>{product.name}</span>
         </ProductBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>Objetivo: {valuesData?.revenuesGoal || '---'}</span>
           <span>Realizado: {valuesData?.revenuesRealized || '---'}</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>Objetivo: {valuesData?.pogGoal || '---'}</span>
           <span>Realizado: {valuesData?.pogRealized || '---'}</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomDataBox>
           <span>{valuesData?.stockInKilosByLiter || '---'} KG/L</span>
           <span>{valuesData?.stockInDollar || '---'} US$</span>
         </CustomDataBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             type="money"
             defaultValue={product.simulationData.unitValueInDollar}
-            onChange={value =>
-              setUnitValueInDollar({
-                productId: product.id,
-                value,
-              })
-            }
+            onChange={value => {
+              clearTimeout(unitDollarValueTimeout);
+              unitDollarValueTimeout = setTimeout(() => {
+                handleChangeFieldValue('unitValueInDollar', product, value);
+              }, 200);
+            }}
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             placeholder="0"
             type="kilograma"
             defaultValue={product.simulationData.revenuesInKilosPerLiter}
-            onChange={value =>
-              setRevenuesInKilosPerLiter({
-                productId: product.id,
-                value,
-              })
-            }
+            onChange={value => {
+              clearTimeout(revenuesTimeout);
+              revenuesTimeout = setTimeout(() => {
+                handleChangeFieldValue(
+                  'revenuesInKilosPerLiter',
+                  product,
+                  value,
+                );
+              }, 400);
+            }}
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked>
           <Input
             type="money"
@@ -152,19 +226,27 @@ const Tr: React.FC<TrProps> = ({
             disabled
           />
         </CustomInputBox>
-      </td>
-      <td>
+      </div>
+      <div>
         <CustomInputBox blocked={false}>
           <Input
             placeholder="0"
             type="kilograma"
             defaultValue={product.simulationData.pogInKilosPerLiter}
-            onChange={value =>
-              setPogInKilosPerLiter({ productId: product.id, value })
+            onChange={value => {
+              clearTimeout(pogTimeout);
+              pogTimeout = setTimeout(() => {
+                handleChangeFieldValue('pogInKilosPerLiter', product, value);
+              }, 600);
+            }}
+            maxLength={
+              ((product.stock.inKilosPerLiter || 0) +
+                (product.simulationData.revenuesInKilosPerLiter || 0)) /
+              100
             }
           />
         </CustomInputBox>
-      </td>
+      </div>
     </Container>
   );
 };

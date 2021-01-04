@@ -7,22 +7,28 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   buttonRole: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
   type: 'button' | 'submit';
+  loadingText?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   loading = false,
+  loadingText = '',
+  type,
   ...rest
 }) => (
-  <Container type="button" {...rest}>
+  <Container type={type} {...rest}>
     {loading ? (
-      <ReactLoading
-        className="_loading"
-        type="bars"
-        height={24}
-        width={24}
-        data-testid="button-loader"
-      />
+      <>
+        {loadingText && <span>{loadingText}</span>}
+        <ReactLoading
+          className="_loading"
+          type="bars"
+          height={24}
+          width={24}
+          data-testid="button-loader"
+        />
+      </>
     ) : (
       <>{children}</>
     )}

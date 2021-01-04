@@ -23,7 +23,7 @@ const Route: React.FC<RouteProps> = ({
   accessPage,
   ...rest
 }) => {
-  const { signed } = useAuth();
+  const { signed, loading } = useAuth();
 
   if (accessPage) {
     RegisterAccessLog(accessPage);
@@ -33,7 +33,9 @@ const Route: React.FC<RouteProps> = ({
     return <DefaultRoute {...rest} render={() => <Component />} />;
   }
 
-  /* MAYCONN Layout Temporario para nao private */
+  if (loading === undefined) {
+    return <></>;
+  }
 
   return (
     <DefaultRoute

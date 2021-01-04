@@ -114,12 +114,12 @@ export const Table = styled.table`
 
 export const TableContainer = styled.div`
   overflow: auto;
-  height: 410px;
+  height: 393px;
   margin-top: 18px;
 
-  -ms-overflow-style: none;
+  /*-ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
-  }
+  }*/
 `;

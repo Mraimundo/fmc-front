@@ -33,6 +33,7 @@ export interface PointsData {
 
 export interface Product {
   id: number;
+  checked: boolean;
   name: string;
   isEnhancer: boolean;
   isParticipatingProduct: boolean;
