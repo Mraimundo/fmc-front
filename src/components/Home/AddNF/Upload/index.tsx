@@ -35,7 +35,9 @@ const Upload: React.FC<Props> = Props => {
         pluginApi.post<AddNota>('participants/UploadNota/add', {
           urlnota: url,
         });
-        Props.onUpdate();
+        setTimeout(() => {
+          Props.onUpdate();
+        }, 400)
         setShowModal(true);
       }
     },

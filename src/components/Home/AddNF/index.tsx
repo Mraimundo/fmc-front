@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import getNfList from 'services/nf/geNfList';
 
 import StatusTable from './StatusTable';
@@ -21,17 +21,17 @@ function transformNfEntry(entries: any) {
 const AddNF: React.FC<Props> = Props => {
   const [nfListLength, setNfListLength] = useState(0);
   const [nfStatus, setNfStatus] = useState<any[]>([]);
-  const getNfData = useCallback(() => {
+  const getNfData = () => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data);
       setNfListLength(transformNfEntry(nfListEntries).length);
       setNfStatus(transformNfEntry(nfListEntries));
     });
-  }, []);
+  };
 
   useEffect(() => {
     getNfData();
-  }, [getNfData]);
+  }, []);
 
   return (
     <Container>
@@ -47,7 +47,7 @@ const AddNF: React.FC<Props> = Props => {
             <RightSideBox>
               <StatusTable nfList={nfStatus} />
 
-              <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
+              <Upload onUpdate={() => getNfData()} />
             </RightSideBox>
           </div>
         </Content>
