@@ -23,7 +23,14 @@ const ChannelsSelect: React.FC<Props> = ({
   useEffect(() => {
     getChannels().then(data =>
       setOptions(
-        data.map(item => ({ title: item.name, value: item.id.toString() })),
+        data
+          .sort((itemA, itemB) =>
+            itemA.client_group > itemB.client_group ? 1 : -1,
+          )
+          .map(item => ({
+            title: item.client_group,
+            value: item.id.toString(),
+          })),
       ),
     );
   }, []);
