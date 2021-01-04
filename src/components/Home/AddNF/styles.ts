@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
 import background from 'assets/images/fmcProdutor/addNF-bg.png';
 import backgroundMobile from 'assets/images/fmcProdutor/addNF-bg--mobile.png';
 
@@ -17,7 +18,13 @@ export const Container = styled.div`
   color: ${({ theme }) => theme.font.color.primary};
 `;
 
-export const Content = styled.div`
+
+interface ContentProps {
+  secondary?: boolean;
+}
+
+
+export const Content = styled.div<ContentProps>`
   position: relative;
 
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
@@ -30,6 +37,9 @@ export const Content = styled.div`
     text-decoration: none;
     color: #181818;
   }
+
+
+ 
 
   @media (max-width: 767px) {
     > * {
@@ -63,7 +73,26 @@ export const Content = styled.div`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+
+    ${({ secondary }) =>
+    secondary &&
+        css`
+          flex-flow: row wrap;
+    `}
   }
+
+  ${({ secondary }) =>
+  secondary &&
+      css`
+        h3 {
+          margin: 0 0 20px 0;
+        }
+        > p {
+          width: 50%;
+          padding-right: 2em;
+        }
+  `}
+
 `;
 export const StyledStatusTable = styled.div`
   padding: 12px 22px;

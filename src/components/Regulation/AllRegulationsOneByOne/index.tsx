@@ -98,6 +98,8 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
       getRegulationById(selectedRegulation.id)
         .then(data => {
           setRegulation(data);
+          console.log('regulation');
+          console.log(data);
           setCanAccept(false);
         })
         .finally(() => {
