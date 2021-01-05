@@ -49,7 +49,7 @@ const FmcProdutorHome: React.FC = () => {
         <AddNF />
       </Wrapper>
       <Wrapper>
-        <Title>Destaques</Title>
+        <Title>Destaques </Title>
         {!!highlights && <Highlights items={highlights} />}
       </Wrapper>
       <ShowCaseWrapper style={{ display: 'none' }}>
