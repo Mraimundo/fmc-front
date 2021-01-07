@@ -68,7 +68,6 @@ const Receipts: React.FC = () => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data.notas);
       setNfList(transformNfEntry(nfListEntries));
-      console.log(transformNfEntry(nfListEntries));
       setCoins(data.fmccoins);
       setSafra(data.safra);
     });
@@ -103,7 +102,9 @@ const Receipts: React.FC = () => {
               <StatusBox>
                 <p>Saldo disponível para resgaste:</p>
                 <h2> {coins} Coins</h2>
-                <StatusButton>Resgatar</StatusButton>
+                <a href="https://catalogo.juntosfmc.com.br/" target="_blank">
+                  <StatusButton>Resgatar</StatusButton>
+                </a>
               </StatusBox>
             </StatusItem>
           </StatusContent>
@@ -118,7 +119,7 @@ const Receipts: React.FC = () => {
                   <th>Detalhes</th>
                   <th>Status</th>
                   <th>Canal onde comprou</th>
-                  <th>Vamos de produtos FMC</th>
+                  <th>Valor de produtos FMC</th>
                   <th>FMC Coins</th>
                 </tr>
               </thead>
@@ -135,7 +136,9 @@ const Receipts: React.FC = () => {
                       </a>
                     </td>
                     <td>
-                      <IconEye onClick={() => showReceipt(item.id)} />
+                      {item.status_id == 1 && (
+                        <IconEye onClick={() => showReceipt(item.id)} />
+                      )}
                     </td>
                     <td> {transformNfStatus(item.status_id)} </td>
                     <td> {item.ondecomprou} </td>

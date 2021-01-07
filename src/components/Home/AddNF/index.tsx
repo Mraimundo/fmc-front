@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import getNfList from 'services/nf/geNfList';
 
 import StatusTable from './StatusTable';
@@ -19,6 +20,7 @@ function transformNfEntry(entries: any) {
 }
 
 const AddNF: React.FC<Props> = Props => {
+  const history = useHistory();
   const [nfListLength, setNfListLength] = useState(0);
   const [nfStatus, setNfStatus] = useState<any[]>([]);
   const getNfData = () => {
@@ -29,6 +31,10 @@ const AddNF: React.FC<Props> = Props => {
     });
   };
 
+  const refreshPage = () => {
+    history.go(0);
+  };
+
   useEffect(() => {
     getNfData();
   }, []);
@@ -37,7 +43,7 @@ const AddNF: React.FC<Props> = Props => {
     <Container>
       {Props.layout !== 'secondary' && (
         <Content>
-          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+          <Title>Cadastre sua nota fiscal para ganhar FMC Coins</Title>
           <div>
             <p>
               Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
@@ -54,7 +60,7 @@ const AddNF: React.FC<Props> = Props => {
       )}
       {Props.layout === 'secondary' && (
         <Content secondary>
-          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+          <Title>Cadastre sua nota fiscal para FMC Coins</Title>
 
           <p>
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
@@ -62,10 +68,7 @@ const AddNF: React.FC<Props> = Props => {
             e legível.
           </p>
 
-          <Upload
-            onUpdate={() => setNfListLength(nfListLength + 1)}
-            secondary
-          />
+          <Upload onUpdate={() => refreshPage()} secondary />
         </Content>
       )}
     </Container>

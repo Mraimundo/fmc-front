@@ -12,8 +12,6 @@ export default async (): Promise<any> => {
     const { data } = await pluginApi.get<any>(
       '/participants/uploadNota',
     );
-    console.log('>>>>> data');
-    console.log(data);
     return data;
   } catch {
     return [];
