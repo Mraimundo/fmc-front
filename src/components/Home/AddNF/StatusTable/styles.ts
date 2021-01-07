@@ -31,7 +31,7 @@ export const Container = styled.div`
     align-self: flex-end;
   }
 
-  > a {
+  > a , > ul {
     display: block;
     padding: 12px 22px;
   }
