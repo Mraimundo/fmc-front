@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import getNfList from 'services/nf/geNfList';
 
 import StatusTable from './StatusTable';
@@ -19,25 +20,29 @@ function transformNfEntry(entries: any) {
 }
 
 const AddNF: React.FC<Props> = Props => {
-  const [nfListLength, setNfListLength] = useState(0);
+  const history = useHistory();
+
   const [nfStatus, setNfStatus] = useState<any[]>([]);
-  const getNfData = useCallback(() => {
+  const getNfData = () => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data);
-      setNfListLength(transformNfEntry(nfListEntries).length);
       setNfStatus(transformNfEntry(nfListEntries));
     });
-  }, []);
+  };
+
+  const refreshPage = () => {
+    history.go(0);
+  };
 
   useEffect(() => {
     getNfData();
-  }, [getNfData]);
+  }, []);
 
   return (
     <Container>
       {Props.layout !== 'secondary' && (
         <Content>
-          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+          <Title>Cadastre sua nota fiscal para ganhar FMC Coins</Title>
           <div>
             <p>
               Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
@@ -47,14 +52,14 @@ const AddNF: React.FC<Props> = Props => {
             <RightSideBox>
               <StatusTable nfList={nfStatus} />
 
-              <Upload onUpdate={() => setNfListLength(nfListLength + 1)} />
+              <Upload onUpdate={() => getNfData()} />
             </RightSideBox>
           </div>
         </Content>
       )}
       {Props.layout === 'secondary' && (
         <Content secondary>
-          <Title>Cadastre sua nota fiscal para ganhar pontos</Title>
+          <Title>Cadastre sua nota fiscal para FMC Coins</Title>
 
           <p>
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
@@ -62,10 +67,7 @@ const AddNF: React.FC<Props> = Props => {
             e legível.
           </p>
 
-          <Upload
-            onUpdate={() => setNfListLength(nfListLength + 1)}
-            secondary
-          />
+          <Upload onUpdate={() => refreshPage()} secondary />
         </Content>
       )}
     </Container>
