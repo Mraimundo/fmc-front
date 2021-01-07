@@ -1,6 +1,7 @@
 import { pluginApi } from 'services/api';
 import { addHours, format } from 'date-fns';
 import { fakeFormatDollars } from 'util/points';
+import { StatusText } from '../campaigns-manager/interfaces/Campaign';
 
 export interface Product {
   id: number;
@@ -34,11 +35,13 @@ export interface Campaign {
   products: Product[];
   acceptedDate: string;
   signed: boolean;
+  status: StatusText;
 }
 
 interface CampaignApi {
   id: number;
   name: string;
+  status_text: StatusText;
   fmc_campaign_type: {
     secondary_picture: string;
     description: string;
@@ -83,6 +86,7 @@ const transformer = (data: CampaignApi): Campaign => {
     id: data.id,
     imageUrl: data.fmc_campaign_type.secondary_picture,
     title: data.name,
+    status: data.status_text,
     startDate: format(addHours(new Date(data.start_date), 3), 'dd/MM/yyyy'),
     endDate: format(addHours(new Date(data.end_date), 3), 'dd/MM/yyyy'),
     description: data.description,
@@ -115,29 +119,37 @@ const transformer = (data: CampaignApi): Campaign => {
           : '',
         sellIn: sellin ? `US$ ${fakeFormatDollars(sellin || 0)}` : '',
         partialSellIn: partial_result?.sellin
-          ? `${fakeFormatDollars(partial_result.sellin, 0, 0)} Kg/L`
+          ? `US$ ${fakeFormatDollars(partial_result.sellin, 0, 0)}`
           : '',
         partialSellInPercentage: partial_result?.sellin_percentage
-          ? `${fakeFormatDollars(partial_result.sellin_percentage, 0, 0)}%`
+          ? `${fakeFormatDollars(
+              partial_result.sellin_percentage * 100,
+              0,
+              0,
+            )}%`
           : '',
         finalSellIn: final_result?.sellin
-          ? `${fakeFormatDollars(final_result.sellin, 0, 0)} Kg/L`
+          ? `US$ ${fakeFormatDollars(final_result.sellin, 0, 0)}`
           : '',
         finalSellInPercentage: final_result?.sellin_percentage
-          ? `${fakeFormatDollars(final_result.sellin_percentage, 0, 0)}%`
+          ? `${fakeFormatDollars(final_result.sellin_percentage * 100, 0, 0)}%`
           : '',
         sellOut: sellout ? `US$ ${fakeFormatDollars(sellout || 0)}` : '',
         partialSellOut: partial_result?.sellout
-          ? `${fakeFormatDollars(partial_result.sellout, 0, 0)} Kg/L`
+          ? `US$ ${fakeFormatDollars(partial_result.sellout, 0, 0)}`
           : '',
         partialSellOutPercentage: partial_result?.sellout_percentage
-          ? `${fakeFormatDollars(partial_result.sellout_percentage, 0, 0)}%`
+          ? `${fakeFormatDollars(
+              partial_result.sellout_percentage * 100,
+              0,
+              0,
+            )}%`
           : '',
         finalSellOut: final_result?.sellout
-          ? `${fakeFormatDollars(final_result.sellout, 0, 0)} Kg/L`
+          ? `US$ ${fakeFormatDollars(final_result.sellout, 0, 0)}`
           : '',
         finalSellOutPercentage: final_result?.sellout_percentage
-          ? `${fakeFormatDollars(final_result.sellout_percentage, 0, 0)}%`
+          ? `${fakeFormatDollars(final_result.sellout_percentage * 100, 0, 0)}%`
           : '',
       }),
     ),

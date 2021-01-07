@@ -23,12 +23,14 @@ import {
   setEndDate,
   setStartDate,
   setMechanic,
+  setCulture,
 } from 'state/modules/campaigns-manager/actions';
 import { EstablishmentTypes, ApproverProfile, CRM } from 'config/constants';
 import {
   Container,
   CustomersSelect,
   MechanicsSelect,
+  CulturesSelect,
   Box,
   CostumerDetails,
   Actions,
@@ -115,6 +117,12 @@ const CampaignForm: React.FC<Props> = ({ profile }) => {
           placeholder="Mecânica"
           error={errors.mechanic}
         />
+        <CulturesSelect
+          setValue={value => dispatch(setCulture(value))}
+          value={campaign.culture}
+          placeholder="Cultura"
+          error={errors.culture}
+        />
         <h4>Título da Campanha</h4>
         <Input
           type="text"
@@ -127,6 +135,7 @@ const CampaignForm: React.FC<Props> = ({ profile }) => {
             )
           }
         />
+
         <h4>Público</h4>
         <CustomersSelect
           setValue={value => setAudienceSelected(value)}
@@ -216,6 +225,7 @@ const CampaignForm: React.FC<Props> = ({ profile }) => {
       loading,
       removeAll,
       profile,
+      campaign.culture,
     ],
   );
 };

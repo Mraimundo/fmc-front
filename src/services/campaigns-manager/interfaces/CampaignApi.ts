@@ -87,4 +87,6 @@ export interface CampaignApi {
   fmc_campaign_type: MechanicApi;
   highlights: Highlight[] | null;
   send_emails: boolean;
+  cultivation_id: number;
+  cultivation_name: string;
 }

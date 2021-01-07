@@ -29,5 +29,6 @@ export default (data: Campaign): CreateNewCampaignDTO => {
       sellin: item.expectedSellIn,
       sellout: item.expectedSellOut,
     })),
+    cultivation_id: data.culture?.id || 0,
   };
 };

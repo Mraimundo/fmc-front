@@ -48,6 +48,11 @@ export interface Mechanic {
   created: Date;
 }
 
+export interface Culture {
+  id: number;
+  name: string;
+}
+
 export interface Regional {
   id: number;
   name: string;
@@ -138,6 +143,7 @@ export interface Campaign {
   title: string;
   description: string;
   mechanic: Mechanic | null;
+  culture: Culture | null;
   audience: Audience[];
   startDate: Date | null;
   endDate: Date | null;

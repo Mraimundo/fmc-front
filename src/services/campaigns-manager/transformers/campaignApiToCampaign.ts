@@ -110,6 +110,10 @@ export default (campaignApi: CampaignApi): Campaign => ({
     description: campaignApi.fmc_campaign_type.description,
     created: campaignApi.fmc_campaign_type.created,
   },
+  culture: {
+    id: campaignApi.cultivation_id,
+    name: campaignApi.cultivation_name,
+  },
   audience: campaignApi.establishments.map(customer => ({
     customer: {
       id: customer.id,

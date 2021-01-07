@@ -1,5 +1,6 @@
 import React from 'react';
 import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
+import { CAMPAIGN_STATUS_TEXT } from 'services/campaigns-manager/interfaces/Campaign';
 import { ModalStatus } from 'hooks/use-modal-status';
 
 import { useAuth } from 'context/AuthContext';
@@ -36,8 +37,14 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
               acceptedDate={campaign.acceptedDate}
               regulationModal={regulationModal}
             />
-            <Result />
-            {profile === PROFILES.focalPoint && <ImportResult />}
+            {campaign.status === CAMPAIGN_STATUS_TEXT.COMPLETED && (
+              <>
+                <Result />
+                {profile === PROFILES.focalPoint && (
+                  <ImportResult campaign={campaign} />
+                )}
+              </>
+            )}
           </>
         )}
       </Content>

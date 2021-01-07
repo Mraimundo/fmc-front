@@ -9,6 +9,7 @@ export const REMOVE_AUDIENCE = '@fmc/campaigns/REMOVE_AUDIENCE';
 export const SET_START_DATE = '@fmc/campaigns/SET_START_DATE';
 export const SET_END_DATE = '@fmc/campaigns/SET_END_DATE';
 export const SET_MECHANIC = '@fmc/campaigns/SET_MECHANIC';
+export const SET_CULTURE = '@fmc/campaigns/SET_CULTURE';
 export const SET_CAMPAIGN = '@fmc/campaigns/SET_CAMPAIGN';
 export const RESET = '@fmc/campaigns/RESET';
 export const SET_ERRORS = '@fmc/campaigns/SET_ERRORS';

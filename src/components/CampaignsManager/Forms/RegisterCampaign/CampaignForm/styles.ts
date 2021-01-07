@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { opacify } from 'polished';
 import DefaultMechanicsSelect from 'components/CampaignsManager/Selects/Mechanics';
 import DefaultCustomersSelect from 'components/CampaignsManager/Selects/Audience';
+import DefaultCulturesSelect from 'components/CampaignsManager/Selects/Culture';
 
 export const Container = styled.div`
   display: flex;
@@ -40,6 +41,16 @@ export const MechanicsSelect = styled(DefaultMechanicsSelect)`
 `;
 
 export const CustomersSelect = styled(DefaultCustomersSelect)`
+  ._inputContainer {
+    width: 100%;
+    max-width: 435px;
+    height: 44px;
+    margin-bottom: 4px;
+  }
+`;
+
+export const CulturesSelect = styled(DefaultCulturesSelect)`
+  margin-top: 20px;
   ._inputContainer {
     width: 100%;
     max-width: 435px;
