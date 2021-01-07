@@ -1,5 +1,10 @@
 image: node:12
 
+definitions:
+  services:
+    docker:
+      memory: 3072
+
 pipelines:
   default:
     - step:
@@ -9,3 +14,5 @@ pipelines:
           - yarn
           - yarn test
           - yarn build
+        services:
+          - docker
