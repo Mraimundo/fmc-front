@@ -21,12 +21,11 @@ function transformNfEntry(entries: any) {
 
 const AddNF: React.FC<Props> = Props => {
   const history = useHistory();
-  const [nfListLength, setNfListLength] = useState(0);
+
   const [nfStatus, setNfStatus] = useState<any[]>([]);
   const getNfData = () => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data);
-      setNfListLength(transformNfEntry(nfListEntries).length);
       setNfStatus(transformNfEntry(nfListEntries));
     });
   };

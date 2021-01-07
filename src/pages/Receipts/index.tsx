@@ -102,7 +102,11 @@ const Receipts: React.FC = () => {
               <StatusBox>
                 <p>Saldo disponível para resgaste:</p>
                 <h2> {coins} Coins</h2>
-                <a href="https://catalogo.juntosfmc.com.br/" target="_blank">
+                <a
+                  href="https://catalogo.juntosfmc.com.br/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <StatusButton>Resgatar</StatusButton>
                 </a>
               </StatusBox>
@@ -136,7 +140,7 @@ const Receipts: React.FC = () => {
                       </a>
                     </td>
                     <td>
-                      {item.status_id == 1 && (
+                      {item.status_id === 1 && (
                         <IconEye onClick={() => showReceipt(item.id)} />
                       )}
                     </td>
