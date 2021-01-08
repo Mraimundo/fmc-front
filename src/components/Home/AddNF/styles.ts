@@ -88,8 +88,11 @@ export const Content = styled.div<ContentProps>`
           margin: 0 0 20px 0;
         }
         > p {
-          width: 50%;
-          padding-right: 2em;
+          @media (min-width: 768px) {
+            width: 50%;
+            padding-right: 2em;
+          }
+         
         }
   `}
 
