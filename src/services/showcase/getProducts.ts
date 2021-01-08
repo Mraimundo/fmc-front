@@ -32,7 +32,7 @@ const getProducts = async ({
   limit = 3,
 }: Request): Promise<Product[]> => {
   const { data } = await pluginApi.get<Response>(
-    `premio-ideall/list-products-pi?id=${id}&type=${type}&limit=${limit}`,
+    `premio-ideall/list-products-pi?id=${id}&type=${type}&limit=${limit}&campaign_id=280`,
   );
   return data.products.map(item => ({
     ...item,

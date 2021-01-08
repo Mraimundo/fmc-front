@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Container } from './styles'; 
+import { Link } from 'react-router-dom';
+import routeMap from 'routes/route-map';
+import { Container } from './styles';
 
 interface Props {
   nfList: any;
@@ -18,7 +20,7 @@ const StatusTable: React.FC<Props> = Props => {
   }
   return (
     <Container>
-      
+      <Link to={routeMap.receipts}>
         <ul>
           <li>
             <p>Em análise</p>
@@ -36,7 +38,7 @@ const StatusTable: React.FC<Props> = Props => {
             <p>{countNFByStatus(Props.nfList, 2)} </p>
           </li>
         </ul>
-   
+      </Link>
     </Container>
   );
 };

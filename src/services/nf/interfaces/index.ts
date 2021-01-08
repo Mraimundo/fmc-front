@@ -4,5 +4,6 @@ export interface Nf {
     participant_id: number;
     urlnota: string;
     status: number;
+    invoice_cnpj: string;
   };
 }
