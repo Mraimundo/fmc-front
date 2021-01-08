@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import getNfList from 'services/nf/geNfList';
 
@@ -20,12 +21,13 @@ function transformNfEntry(entries: any) {
 }
 
 const AddNF: React.FC<Props> = Props => {
+  const [nfListLength, setNfListLength] = useState(0);
   const history = useHistory();
-
   const [nfStatus, setNfStatus] = useState<any[]>([]);
   const getNfData = () => {
     getNfList().then(data => {
       const nfListEntries = Object.entries(data);
+      setNfListLength(transformNfEntry(nfListEntries).length);
       setNfStatus(transformNfEntry(nfListEntries));
     });
   };
@@ -60,13 +62,11 @@ const AddNF: React.FC<Props> = Props => {
       {Props.layout === 'secondary' && (
         <Content secondary>
           <Title>Cadastre sua nota fiscal para FMC Coins</Title>
-
           <p>
             Clique no botão para enviar sua nota fiscal em formato JPG, PNG ou
             PDF. Em caso de JPG e PNG, certifique-se de que a imagem está nítida
             e legível.
           </p>
-
           <Upload onUpdate={() => refreshPage()} secondary />
         </Content>
       )}

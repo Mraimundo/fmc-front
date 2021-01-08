@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container } from './styles';
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
+import { Container } from './styles';
 
 interface Props {
   nfList: any;

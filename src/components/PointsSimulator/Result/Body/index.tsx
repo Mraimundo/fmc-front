@@ -96,7 +96,7 @@ const Body: React.FC<Props> = ({ cards, award }) => {
       </CustomAcumulateContent>
       <CustomIndicatorContainer>
         <h3>Indicadores</h3>
-        <Cards>
+        <Cards className="_indicatorsContainer">
           {cards.map(item => (
             <CardComponent
               key={item.title}
