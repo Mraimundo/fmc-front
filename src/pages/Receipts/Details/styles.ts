@@ -29,7 +29,7 @@ export const ModalContainer = styled(Container) <ModalContainerProps>`
   `;
 
 
-export const PageTitle = styled.p`
+export const PageTitle = styled.div`
   color: ${({ theme }) => theme.font.color.primary};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 24px; 

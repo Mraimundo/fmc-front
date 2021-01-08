@@ -52,7 +52,7 @@ const AddNF: React.FC<Props> = Props => {
               nítida e legível.
             </p>
             <RightSideBox>
-              <StatusTable nfList={nfStatus} />
+              <StatusTable nfList={nfStatus} display="1" />
 
               <Upload onUpdate={() => getNfData()} />
             </RightSideBox>
