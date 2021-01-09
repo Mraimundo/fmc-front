@@ -20,6 +20,7 @@ interface TableProps {
     id: number;
     checked: boolean;
   }): void;
+  channelId: string;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -29,6 +30,7 @@ const Table: React.FC<TableProps> = ({
   setPogInKilosPerLiter,
   tabSelected,
   onCheckUncheckProductHandle,
+  channelId,
 }) => {
   return (
     <Container>
@@ -39,6 +41,7 @@ const Table: React.FC<TableProps> = ({
         setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
         setPogInKilosPerLiter={setPogInKilosPerLiter}
         onCheckUncheckProductHandle={onCheckUncheckProductHandle}
+        channelId={channelId}
       />
     </Container>
   );

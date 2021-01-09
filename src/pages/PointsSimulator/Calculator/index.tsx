@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Option } from 'components/shared/Select';
+
 import { Product } from 'state/modules/points-simulator/interfaces';
 import {
   getProducts,
@@ -44,6 +46,8 @@ const PointsSimulator: React.FC = () => {
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
   const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
   const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
+  const [channelSelected, setChannelSelected] = useState<Option | null>(null);
+  const [shouldUpdateChannel, setShouldUpdateChannel] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -134,11 +138,24 @@ const PointsSimulator: React.FC = () => {
   );
 
   const onLoadState = useCallback(
-    (jsonStateInString: string, channelSelectId: number) => {
-      dispatch(actions.fetchChannel(channelSelectId));
+    (
+      jsonStateInString: string,
+      channelSelectId: number,
+      clientGroup: string,
+    ) => {
+      // dispatch(actions.fetchChannel(channelSelectId));
+      setShouldUpdateChannel(false);
+      setChannelSelected({
+        value: channelSelectId.toString(),
+        title: clientGroup,
+      });
+
+      dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
+
       setTimeout(() => {
-        dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
-      }, 1000);
+        console.log('liberado');
+        setShouldUpdateChannel(true);
+      }, 3500);
     },
     [dispatch],
   );
@@ -166,6 +183,19 @@ const PointsSimulator: React.FC = () => {
     [dispatch],
   );
 
+  useEffect(() => {
+    if (!channelSelected) return;
+    if (shouldUpdateChannel) {
+      console.log('channel', channel);
+      console.log('tem');
+      const channelSelectedId = parseInt(channelSelected.value, 0);
+      if (channel?.id !== channelSelectedId) {
+        console.log('tem2');
+        handleChannelSelect(channelSelectedId);
+      }
+    }
+  }, [channelSelected, handleChannelSelect, shouldUpdateChannel, channel]);
+
   return (
     <Container id="calculator">
       <Content>
@@ -173,8 +203,9 @@ const PointsSimulator: React.FC = () => {
           tabSelected={tabSelected}
           setTabSelected={setTabSelected}
           setProductTypeIdSelected={handleProductTypeSelect}
-          setChannelIdSelected={handleChannelSelect}
           handleLoadSimulationClick={() => setIsLoadSimulatioModalOpened(true)}
+          channelSelected={channelSelected}
+          setChannelSelected={setChannelSelected}
         />
         {channel && (
           <CustomTableBox>
@@ -186,6 +217,7 @@ const PointsSimulator: React.FC = () => {
                 setPogInKilosPerLiter={handlePogKilosByLiterValueChange}
                 tabSelected={tabSelected}
                 onCheckUncheckProductHandle={onCheckUncheckProductHandle}
+                channelId={channelSelected?.value || '0'}
               />
             </Box>
             <Footer
