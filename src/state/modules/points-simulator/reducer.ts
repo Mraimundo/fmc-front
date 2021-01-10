@@ -24,11 +24,14 @@ export const initialState: PointsSimulatorState = {
     minimumSellerPercentageToMakePoints: 0,
   },
   award: {
-    totalRebate: 0,
     simulatedRebate: 0,
+    realizedRebate: 0,
+    totalRebate: 0,
     simulatedSeller: 0,
+    realizedSeller: 0,
     totalSeller: 0,
     simulatedAdditionalMargin: 0,
+    realizedAdditionalMargin: 0,
     totalAdditionalMargin: 0,
   },
 };
