@@ -153,7 +153,6 @@ const PointsSimulator: React.FC = () => {
       dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
 
       setTimeout(() => {
-        console.log('liberado');
         setShouldUpdateChannel(true);
       }, 3500);
     },
@@ -186,11 +185,8 @@ const PointsSimulator: React.FC = () => {
   useEffect(() => {
     if (!channelSelected) return;
     if (shouldUpdateChannel) {
-      console.log('channel', channel);
-      console.log('tem');
       const channelSelectedId = parseInt(channelSelected.value, 0);
       if (channel?.id !== channelSelectedId) {
-        console.log('tem2');
         handleChannelSelect(channelSelectedId);
       }
     }
