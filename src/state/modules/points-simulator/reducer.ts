@@ -85,21 +85,13 @@ const CampaignsManagerReducer: Reducer<
         );
         if (foundIndex >= 0) {
           const product = draft.products[foundIndex];
-          console.log('pogInKilosPerLiter', pogInKilosPerLiter);
-          console.log(
-            'product.simulationData.revenuesInKilosPerLiter + product.stock.inKilosPerLiter',
-            product.simulationData.revenuesInKilosPerLiter +
-              product.stock.inKilosPerLiter,
-          );
           if (
             pogInKilosPerLiter <=
             product.simulationData.revenuesInKilosPerLiter +
               product.stock.inKilosPerLiter
           ) {
-            console.log('oi');
             product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
           } else {
-            console.log('xau');
             product.simulationData.pogInKilosPerLiter =
               product.simulationData.revenuesInKilosPerLiter +
               product.stock.inKilosPerLiter;

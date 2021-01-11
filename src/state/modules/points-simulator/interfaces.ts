@@ -24,9 +24,11 @@ export interface Stock {
 
 export interface PointsData {
   rebateReachedInRealSimulated: number;
+  rebateReachedInRealSimulatedButUsedToGetTotal: number;
   rebateReachedInRealRealized: number;
   rebateReachedInRealTotal: number;
   sellerReachedInRealSimulated: number;
+  sellerReachedInRealSimulatedButUsedToGetTotal: number;
   sellerReachedInRealRealized: number;
   sellerReachedInRealTotal: number;
   additionalMarginSimulated: number;

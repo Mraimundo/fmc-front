@@ -194,6 +194,7 @@ const getPercentageValueToApplyInDecimal = ({
 
 interface RebateReachedValues {
   rebateReachedInRealSimulated: number;
+  rebateReachedInRealSimulatedButUsedToGetTotal: number;
   rebateReachedInRealRealized: number;
   rebateReachedInRealTotal: number;
 }
@@ -231,19 +232,6 @@ const getRebateReachedValuesInReal = ({
     product.awardsParamsToPay.rebatePercentage *
     percentageValueToApplyInDecimalInSimulatedAmount;
 
-  if (product.id === 15) {
-    console.log('loucura');
-    console.log('product', product);
-    console.log(
-      'percentageValueToApplyInDecimalInSimulatedAmount',
-      percentageValueToApplyInDecimalInSimulatedAmount,
-    );
-    console.log(
-      'rebatePercentageToPayInSimulatedAmount',
-      rebatePercentageToPayInSimulatedAmount,
-    );
-  }
-
   const percentageTotalToPayInTotalAmount =
     rebatePercentageToPayInTotalAmount + extraPercentageToPayAccumulated;
   const percentageTotalToPayInSimulatedAmount =
@@ -254,6 +242,17 @@ const getRebateReachedValuesInReal = ({
       percentageTotalToPayInSimulatedAmount) /
     100; // *
   // finalMultiplierValue;
+
+  console.log(
+    'percentageValueToApplyInDecimalInTotalAmount',
+    percentageValueToApplyInDecimalInTotalAmount,
+  );
+
+  const rebateReachedInRealSimulatedButUsedToGetTotal =
+    ((product.simulationData.pogRealizedNetInRealSimulated *
+      percentageTotalToPayInTotalAmount) /
+      100) *
+    finalMultiplierValue;
 
   const rebateReachedInRealRealized =
     ((product.simulationData.pogRealizedNetInRealTotal *
@@ -274,11 +273,13 @@ const getRebateReachedValuesInReal = ({
     rebateReachedInRealSimulated,
     rebateReachedInRealRealized,
     rebateReachedInRealTotal,
+    rebateReachedInRealSimulatedButUsedToGetTotal,
   };
 };
 
 interface SellerReachedValues {
   sellerReachedInRealSimulated: number;
+  sellerReachedInRealSimulatedButUsedToGetTotal: number;
   sellerReachedInRealRealized: number;
   sellerReachedInRealTotal: number;
 }
@@ -300,6 +301,11 @@ const getSellerReachedValuesInReal = ({
     (product.awardsParamsToPay.sellerValueInReal *
       percentageValueToApplyInDecimalInSimulatedAmount);
 
+  const sellerReachedInRealSimulatedButUsedToGetTotal =
+    product.simulationData.pogInKilosPerLiter *
+    (product.awardsParamsToPay.sellerValueInReal *
+      percentageValueToApplyInDecimalInTotalAmount);
+
   const sellerReachedInRealRealized =
     product.pog.realizedInKilosByLiter *
     (product.awardsParamsToPay.sellerValueInReal *
@@ -317,6 +323,7 @@ const getSellerReachedValuesInReal = ({
 
   return {
     sellerReachedInRealSimulated,
+    sellerReachedInRealSimulatedButUsedToGetTotal,
     sellerReachedInRealRealized,
     sellerReachedInRealTotal,
   };
@@ -379,6 +386,7 @@ export default ({
   return products.map(product => {
     const {
       rebateReachedInRealSimulated,
+      rebateReachedInRealSimulatedButUsedToGetTotal,
       rebateReachedInRealRealized,
       rebateReachedInRealTotal,
     } = getRebateReachedValuesInReal({
@@ -392,6 +400,7 @@ export default ({
 
     const {
       sellerReachedInRealSimulated,
+      sellerReachedInRealSimulatedButUsedToGetTotal,
       sellerReachedInRealRealized,
       sellerReachedInRealTotal,
     } = getSellerReachedValuesInReal({
@@ -414,19 +423,17 @@ export default ({
       dollarBase;
 
     const additionalMarginTotal =
-      (((product.revenues.realizedInDollar +
-        product.simulationData.revenuesInDollar) *
-        product.awardsParamsToPay.additionalMarginPercentage) /
-        100) *
-      dollarBase;
+      additionalMarginRealized + additionalMarginSimulated;
 
     const test = {
       ...product,
       simulationPoints: {
         rebateReachedInRealSimulated,
+        rebateReachedInRealSimulatedButUsedToGetTotal,
         rebateReachedInRealRealized,
         rebateReachedInRealTotal,
         sellerReachedInRealSimulated,
+        sellerReachedInRealSimulatedButUsedToGetTotal,
         sellerReachedInRealRealized,
         sellerReachedInRealTotal,
         additionalMarginSimulated,

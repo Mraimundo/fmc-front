@@ -69,14 +69,19 @@ const Body: React.FC<Props> = ({ cards, award, configuration }) => {
     const pog = cards.find(item => item.type === IndicatorType.pog);
     const revenues = cards.find(item => item.type === IndicatorType.revenues);
 
-    const showPoints =
+    setShouldShowTotalSellerPoints(
       (pog?.percentageSimulated || 0) >=
         configuration.minimumSellerPercentageToMakePoints &&
-      (revenues?.percentageSimulated || 0) >=
-        configuration.minimumRebatePercentageToMakePoints;
+        (revenues?.percentageSimulated || 0) >=
+          configuration.minimumSellerPercentageToMakePoints,
+    );
 
-    setShouldShowTotalRebatePoints(showPoints);
-    setShouldShowTotalSellerPoints(showPoints);
+    setShouldShowTotalRebatePoints(
+      (pog?.percentageSimulated || 0) >=
+        configuration.minimumRebatePercentageToMakePoints &&
+        (revenues?.percentageSimulated || 0) >=
+          configuration.minimumRebatePercentageToMakePoints,
+    );
   }, [cards, configuration]);
 
   return (
