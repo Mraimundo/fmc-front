@@ -17,6 +17,7 @@ interface HeaderProps {
     id: number;
     checked: boolean;
   }): void;
+  channelId: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -25,6 +26,7 @@ const Header: React.FC<HeaderProps> = ({
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
   onCheckUncheckProductHandle,
+  channelId,
 }) => {
   return (
     <Container>
@@ -36,6 +38,7 @@ const Header: React.FC<HeaderProps> = ({
           setRevenuesInKilosPerLiter={setRevenuesInKilosPerLiter}
           setPogInKilosPerLiter={setPogInKilosPerLiter}
           onCheckUncheckProductHandle={onCheckUncheckProductHandle}
+          channelId={channelId}
         />
       ))}
     </Container>

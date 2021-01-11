@@ -64,11 +64,14 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
     },
     simulationPoints: {
       rebateReachedInRealSimulated: 0,
-      rebateReachedInRealAccumulated: 0,
-      sellerReachedInRealAccumulated: 0,
+      rebateReachedInRealRealized: 0,
+      rebateReachedInRealTotal: 0,
       sellerReachedInRealSimulated: 0,
-      additionalMarginAccumulated: 0,
+      sellerReachedInRealRealized: 0,
+      sellerReachedInRealTotal: 0,
       additionalMarginSimulated: 0,
+      additionalMarginRealized: 0,
+      additionalMarginTotal: 0,
     },
     awardsParamsToPay: {
       rebatePercentage: product.rebate_percentage_to_pay * 100,

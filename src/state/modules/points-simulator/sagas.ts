@@ -153,6 +153,42 @@ export function* calculateSimulation() {
   }
 }
 
+interface ReturnedValuesForLoadState {
+  channelApi: Channel;
+  productsApi: Product[];
+  indicatorsApi: Indicator[];
+  configurationApi: Configuration;
+}
+
+const getReturnedValuesForLoadState = async (
+  channelId: number,
+): Promise<ReturnedValuesForLoadState> => {
+  const [
+    channelApi,
+    productsApi,
+    indicatorsApi,
+    configurationApi,
+  ] = await Promise.all([
+    services.getChannel(channelId),
+    services.getProducts(channelId),
+    services.getIndicators(channelId),
+    services.getConfiguration(channelId),
+  ]);
+
+  if (!channelApi || !productsApi || !indicatorsApi || !configurationApi) {
+    throw new Error('Falha ao carregar dados');
+  }
+
+  return {
+    channelApi: transformers.channelApiToChannel(channelApi as ChannelApi),
+    productsApi: transformers.productsApiToProducts(productsApi),
+    indicatorsApi: transformers.indicatorsApiToIndicators(indicatorsApi),
+    configurationApi: transformers.configurationApiToConfiguration(
+      configurationApi,
+    ),
+  };
+};
+
 export function* fetchLoadState({
   payload,
 }: ActionCreatorPayload<
@@ -168,24 +204,43 @@ export function* fetchLoadState({
       throw new Error('Falha ao carregar simulação. Canal não encontrado.');
     }
 
-    const channelApi: Channel = transformers.channelApiToChannel(
-      yield call(services.getChannel, payload.channel?.id || 0),
-    );
+    const {
+      channelApi,
+      productsApi,
+      indicatorsApi,
+      configurationApi,
+    } = yield call(getReturnedValuesForLoadState, channelId);
 
-    const productsApi: Product[] = transformers.productsApiToProducts(
-      yield call(services.getProducts, channelId),
-    );
+    const productsToSet = (productsApi as Product[]).map(product => {
+      const productPayloadFound = payload.products.find(
+        item => item.id === product.id,
+      );
 
-    const indicatorsApi: Indicator[] = transformers.indicatorsApiToIndicators(
-      yield call(services.getIndicators, channelId),
-    );
+      if (productPayloadFound) {
+        product.checked = productPayloadFound.checked;
+        product.simulationData = calculateSimulationDataProductValues(
+          {
+            ...product.simulationData,
+            revenuesInKilosPerLiter:
+              productPayloadFound.simulationData.revenuesInKilosPerLiter,
+            unitValueInDollar:
+              productPayloadFound.simulationData.unitValueInDollar,
+            pogInKilosPerLiter:
+              productPayloadFound.simulationData.pogInKilosPerLiter,
+          },
+          product,
+          configurationApi,
+          payload.dollarBaseValue,
+        );
+      }
 
-    const configurationApi: Configuration = transformers.configurationApiToConfiguration(
-      yield call(services.getConfiguration, channelId),
-    );
+      return product;
+    });
 
-    const productsToSet = payload.products.map(product => {
-      const productApiFound = productsApi.find(item => item.id === product.id);
+    /* const productsToSet = payload.products.map(product => {
+      const productApiFound = (productsApi as Product[]).find(
+        item => item.id === product.id,
+      );
       if (productApiFound) {
         product.pog = productApiFound.pog;
         product.revenues = productApiFound.revenues;
@@ -198,7 +253,7 @@ export function* fetchLoadState({
         );
       }
       return product;
-    });
+    }); */
 
     const state: PointsSimulatorState = {
       channel: channelApi,
@@ -215,6 +270,8 @@ export function* fetchLoadState({
       // ARRUMAR MAYCONN -> Precisa calcular o award
       award: payload.award,
     };
+
+    console.log(payload.award);
 
     yield put(actions.fetchLoadStateSuccess(state));
   } catch (error) {
