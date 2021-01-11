@@ -72,15 +72,6 @@ const calculateSimulatedProduct = ({
     totalRealized,
   );
 
-  if (indicator.type === IndicatorType.talisman) {
-    console.log('talisman');
-    console.log('totalRealized', totalRealized);
-    console.log('totalPercentageRealized', totalPercentageRealized);
-    console.log('indicator.currentGoal', indicator.currentGoal);
-    console.log('(realized * 100) / goal || 0');
-    console.log('Fimtalisman');
-  }
-
   return { totalRealized, totalPercentageRealized };
 };
 

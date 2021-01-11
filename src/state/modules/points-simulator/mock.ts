@@ -64,9 +64,11 @@ const mock: PointsSimulatorState = {
       },
       simulationPoints: {
         rebateReachedInRealSimulated: 0,
+        rebateReachedInRealSimulatedButUsedToGetTotal: 0,
         rebateReachedInRealRealized: 0,
         rebateReachedInRealTotal: 0,
         sellerReachedInRealSimulated: 0,
+        sellerReachedInRealSimulatedButUsedToGetTotal: 0,
         sellerReachedInRealRealized: 0,
         sellerReachedInRealTotal: 0,
         additionalMarginSimulated: 0,

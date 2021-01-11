@@ -10,13 +10,24 @@ const calculateAwards = (products: Product[]): Award => {
       0,
     );
 
+  const simulatedRebateToSumWithRealizedToGetTheTotal = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator +
+        (product.simulationPoints
+          .rebateReachedInRealSimulatedButUsedToGetTotal || 0),
+      0,
+    );
+
   const realizedRebate = products.reduce(
     (accumulator, product) =>
       accumulator + (product.simulationPoints.rebateReachedInRealRealized || 0),
     0,
   );
 
-  const totalRebate = realizedRebate + simulatedRebate;
+  const totalRebate =
+    realizedRebate + simulatedRebateToSumWithRealizedToGetTheTotal;
 
   const simulatedSeller = products
     .filter(item => item.checked)
@@ -27,13 +38,24 @@ const calculateAwards = (products: Product[]): Award => {
       0,
     );
 
+  const simulatedSellerToSumWithRealizedToGetTheTotal = products
+    .filter(item => item.checked)
+    .reduce(
+      (accumulator, product) =>
+        accumulator +
+        (product.simulationPoints
+          .sellerReachedInRealSimulatedButUsedToGetTotal || 0),
+      0,
+    );
+
   const realizedSeller = products.reduce(
     (accumulator, product) =>
       accumulator + (product.simulationPoints.sellerReachedInRealRealized || 0),
     0,
   );
 
-  const totalSeller = realizedSeller + simulatedSeller;
+  const totalSeller =
+    realizedSeller + simulatedSellerToSumWithRealizedToGetTheTotal;
 
   const simulatedAdditionalMargin = products
     .filter(item => item.checked)
