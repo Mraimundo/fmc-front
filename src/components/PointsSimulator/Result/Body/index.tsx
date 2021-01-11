@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Award } from 'state/modules/points-simulator/interfaces';
+import {
+  Award,
+  Configuration,
+  IndicatorType,
+} from 'state/modules/points-simulator/interfaces';
 import { formatPoints } from 'util/points';
 import MiniBox from '../MiniBox';
 import CardComponent from '../Card';
@@ -17,6 +21,7 @@ import {
 
 export interface Card {
   title: string;
+  type: IndicatorType;
   isRegisteredProduct?: boolean;
   description: string;
   tableData: {
@@ -30,6 +35,7 @@ export interface Card {
 interface Props {
   cards: Card[];
   award: Award;
+  configuration: Configuration;
 }
 
 const title = (item: Card) => (
@@ -49,7 +55,30 @@ const title = (item: Card) => (
   </>
 );
 
-const Body: React.FC<Props> = ({ cards, award }) => {
+const Body: React.FC<Props> = ({ cards, award, configuration }) => {
+  const [
+    shouldShowTotalRebatePoints,
+    setShouldShowTotalRebatePoints,
+  ] = useState(false);
+  const [
+    shouldShowTotalSellerPoints,
+    setShouldShowTotalSellerPoints,
+  ] = useState(false);
+
+  useEffect(() => {
+    const pog = cards.find(item => item.type === IndicatorType.pog);
+    const revenues = cards.find(item => item.type === IndicatorType.revenues);
+
+    const showPoints =
+      (pog?.percentageSimulated || 0) >=
+        configuration.minimumSellerPercentageToMakePoints &&
+      (revenues?.percentageSimulated || 0) >=
+        configuration.minimumRebatePercentageToMakePoints;
+
+    setShouldShowTotalRebatePoints(showPoints);
+    setShouldShowTotalSellerPoints(showPoints);
+  }, [cards, configuration]);
+
   return (
     <Container>
       <CustomSimulateContent>
@@ -82,7 +111,11 @@ const Body: React.FC<Props> = ({ cards, award }) => {
         <CustomAcumulateBox>
           <MiniBox
             title="Pontos do rebate"
-            text={`${formatPoints(award.totalRebate, 0, 0)} pontos`}
+            text={`${
+              shouldShowTotalRebatePoints
+                ? formatPoints(award.totalRebate, 0, 0)
+                : '0'
+            } pontos`}
           />
           <MiniBox
             title="Margem adicional"
@@ -90,7 +123,11 @@ const Body: React.FC<Props> = ({ cards, award }) => {
           />
           <MiniBox
             title="Premiação de vendedor"
-            text={`${formatPoints(award.totalSeller, 0, 0)} pontos`}
+            text={`${
+              shouldShowTotalSellerPoints
+                ? formatPoints(award.totalSeller, 0, 0)
+                : '0'
+            } pontos`}
           />
         </CustomAcumulateBox>
       </CustomAcumulateContent>

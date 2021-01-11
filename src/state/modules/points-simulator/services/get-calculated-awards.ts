@@ -54,14 +54,14 @@ const calculateAwards = (products: Product[]): Award => {
 
   return {
     simulatedRebate,
-    simulatedSeller,
-    simulatedAdditionalMargin,
-    totalRebate,
-    totalSeller,
-    totalAdditionalMargin,
-    realizedAdditionalMargin,
     realizedRebate,
+    totalRebate,
+    simulatedSeller,
     realizedSeller,
+    totalSeller,
+    simulatedAdditionalMargin,
+    realizedAdditionalMargin,
+    totalAdditionalMargin,
   };
 };
 

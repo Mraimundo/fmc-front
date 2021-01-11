@@ -24,13 +24,13 @@ export const html = `
     vertical-align: top;
   }
 
-  body {
-    color: #000;
-  }
-
   .ie-container .u-row,
   [owa] .u-row {
     width: 760px !important;
+  }
+
+  body {
+    color: #000;
   }
 
   .ie-container .u-col-33p33,
@@ -196,12 +196,117 @@ export const html = `
       <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
         <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:760px;"><tr style="background-color: transparent;"><![endif]-->
 
+  <!--[if (mso)|(IE)]><td align="center" width="380" style="width: 380px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+  <div class="u-col u-col-50" style="max-width: 320px;min-width: 380px;display: table-cell;vertical-align: top;">
+    <div style="width: 100% !important;">
+    <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
+
+  <table id="u_content_image_1" class="u_content_image" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+    <tbody>
+      <tr>
+        <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding-right: 0px;padding-left: 0px;" align="left">
+
+        <img align="left" border="0" src="http://localhost:3000/images/logo-fmc.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 100%;max-width: 298px;" width="298" class="v-src-width v-src-max-width"/>
+
+      </td>
+    </tr>
+  </table>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+    <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
+    </div>
+  </div>
+  <!--[if (mso)|(IE)]></td><![endif]-->
+  <!--[if (mso)|(IE)]><td align="center" width="380" style="width: 380px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+  <div class="u-col u-col-50" style="max-width: 320px;min-width: 380px;display: table-cell;vertical-align: top;">
+    <div style="width: 100% !important;">
+    <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
+
+  <table id="u_content_image_2" class="u_content_image" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+    <tbody>
+      <tr>
+        <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding-right: 0px;padding-left: 0px;" align="right">
+
+        <img align="right" border="0" src="http://localhost:3000/images/logo-equipe.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 100%;max-width: 216px;" width="216" class="v-src-width v-src-max-width"/>
+
+      </td>
+    </tr>
+  </table>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+    <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
+    </div>
+  </div>
+  <!--[if (mso)|(IE)]></td><![endif]-->
+        <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="u-row-container" style="padding: 0px;background-color: transparent">
+    <div style="Margin: 0 auto;min-width: 320px;max-width: 760px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;" class="u-row">
+      <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:760px;"><tr style="background-color: transparent;"><![endif]-->
+
+  <!--[if (mso)|(IE)]><td align="center" width="760" style="width: 760px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+  <div class="u-col u-col-100" style="max-width: 320px;min-width: 760px;display: table-cell;vertical-align: top;">
+    <div style="width: 100% !important;">
+    <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
+
+  <table id="u_content_text_9" class="u_content_text" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+    <tbody>
+      <tr>
+        <td style="overflow-wrap:break-word;word-break:break-word;padding:16px 10px;font-family:arial,helvetica,sans-serif;" align="left">
+
+    <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
+      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span style="line-height: 22.4px; font-size: 16px;">Simula&ccedil;&atilde;o de Pontos</span></strong></span></p>
+    </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+    <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
+    </div>
+  </div>
+  <!--[if (mso)|(IE)]></td><![endif]-->
+        <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="u-row-container" style="padding: 0px;background-color: transparent">
+    <div style="Margin: 0 auto;min-width: 320px;max-width: 760px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;" class="u-row">
+      <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:760px;"><tr style="background-color: transparent;"><![endif]-->
+
   <!--[if (mso)|(IE)]><td align="center" width="507" style="width: 507px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
   <div class="u-col u-col-66p67" style="max-width: 320px;min-width: 507px;display: table-cell;vertical-align: top;">
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
 
-  <table id="u_content_html_3" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <table id="u_content_html_20" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
@@ -226,13 +331,13 @@ export const html = `
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
 
-  <table id="u_content_html_1" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <table id="u_content_html_21" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">ACERO</p>
     <p style="text-align: center; font-weight: bold;">SAFRA 20/21 </p>
   </div>
@@ -308,7 +413,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#f8d3d1; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#f8d3d1; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Pontos de rebate</p>
     <p style="text-align: center; font-weight: bold;">0 pontos</p>
   </div>
@@ -334,7 +439,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#f8d3d1; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#f8d3d1; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Margem adicional</p>
     <p style="text-align: center; font-weight: bold;">R$ 0</p>
   </div>
@@ -360,7 +465,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#f8d3d1; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#f8d3d1; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Pontos de vendedor</p>
     <p style="text-align: center; font-weight: bold;">0 pontos</p>
   </div>
@@ -398,7 +503,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Pontos de rebate</p>
     <p style="text-align: center; font-weight: bold;">0 pontos</p>
   </div>
@@ -424,7 +529,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Margem adicional</p>
     <p style="text-align: center; font-weight: bold;">R$ 0</p>
   </div>
@@ -450,7 +555,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 55px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
     <p style="text-align: center; line-height: 1;">Premiação de vendedor</p>
     <p style="text-align: center; font-weight: bold;">0 pontos</p>
   </div>
@@ -564,7 +669,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 165px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
       <strong>PREMIO</strong>
       <span style="font-size: 10px;">Realizado 19/20 - US$ 724.318</span>
@@ -582,7 +687,13 @@ export const html = `
     <div style="width: 100%;">
       <div style="width: 100%; padding: 4px 0px;">
         <span style="display: inline-block; width: 100%; font-size: 13px; text-align: center;">
-          Parcial: <strong>39%</strong> | Total: <strong>55%</strong>
+          Parcial: <strong>39%</strong>
+        </span>
+        <span style="display: inline-block; width: 100%; font-size: 13px; text-align: center;">
+          Simulado: <strong>16%</strong>
+        </span>
+        <span style="display: inline-block; width: 100%; font-size: 13px; text-align: center;">
+          Total: <strong>55%</strong>
         </span>
       </div>
     </div>
@@ -609,7 +720,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
       <strong>HERO</strong>
       <span style="font-size: 10px;">Realizado 19/20 - US$ 724.318</span>
@@ -654,7 +765,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
       <strong>TALISMAN</strong>
       <span style="font-size: 10px;">Realizado 19/20 - US$ 724.318</span>
@@ -711,7 +822,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
       <strong>FATURAMENTO</strong>
       <span style="font-size: 10px;">Realizado 19/20 - US$ 724.318</span>
@@ -756,7 +867,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="border-radius: 5px; background:#dad8d9; width: 195px; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
+      <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 125px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
       <strong>POG</strong>
       <span style="font-size: 10px;">Realizado 19/20 - US$ 724.318</span>
@@ -816,20 +927,14 @@ export const html = `
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
 
-  <table id="u_content_divider_2" class="u_content_divider" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <table id="u_content_text_2" class="u_content_text" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
-    <table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #BBBBBB;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
-      <tbody>
-        <tr style="vertical-align: top">
-          <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
-            <span>&#160;</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
+      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">Os resultados acima s&atilde;o meramente uma simula&ccedil;&atilde;o e n&atilde;o podem ser utilizados para qualquer tipo de premia&ccedil;&atilde;o</span></p>
+    </div>
 
         </td>
       </tr>
@@ -857,14 +962,20 @@ export const html = `
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
 
-  <table id="u_content_text_2" class="u_content_text" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <table id="u_content_divider_2" class="u_content_divider" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
-    <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
-      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">Os resultados acima s&atilde;o meramente uma simula&ccedil;&atilde;o e n&atilde;o podem ser utilizados para qualquer tipo de premia&ccedil;&atilde;o</span></p>
-    </div>
+    <table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #BBBBBB;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+      <tbody>
+        <tr style="vertical-align: top">
+          <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+            <span>&#160;</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
         </td>
       </tr>
@@ -1035,7 +1146,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <table style="text-align: left; border-collapse: separate; border-spacing: 0 8px; font-size: 10px; width: 100%; border: 1px solid #000;">
+      <table style="text-align: left; border-collapse: separate; border-spacing: 0 8px; font-size: 10px; width: 100%; border: 0px solid #000;">
     <thead>
       <tr style="">
         <th style="padding-left: 4px;">Tipo/Produto</th>
@@ -1216,7 +1327,7 @@ export const html = `
         <td style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <table style="text-align: left; border-collapse: separate; border-spacing: 0 8px; font-size: 10px; width: 100%; border: 1px solid #000;">
+      <table style="text-align: left; border-collapse: separate; border-spacing: 0 8px; font-size: 10px; width: 100%; border: 0px solid #000;">
     <thead>
       <tr style="">
         <th style="padding-left: 4px;">Tipo/Produto</th>

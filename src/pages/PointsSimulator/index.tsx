@@ -13,6 +13,8 @@ import Pdf from './Pdf';
 import html2Pdf from 'html2pdf.js';
 import { html } from './Pdf/html';
 
+import log from 'assets/images/logo.png';
+
 const PointsSimulator: React.FC = () => {
   const dispatch = useDispatch();
   const [internalModeControl, setInternalModeControl] = useState<Mode>(
@@ -72,10 +74,10 @@ const PointsSimulator: React.FC = () => {
 
   return (
     <>
-      <button type="button" style={{display: 'none'}} onClick={() => setT(old => !old)} >
+      <button type="button" style={{ display: 'none'}}onClick={() => setT(old => !old)} >
         teste
       </button>
-      <button type="button" style={{display: 'none'}} onClick={testing} >oooo</button>
+      <button type="button" style={{ display: 'none'}}onClick={testing} >oooo</button>
       {t ? (
         <>
           <Calculator />
