@@ -24,6 +24,7 @@ import Header, { Tab } from 'components/PointsSimulator/Calculator/Header';
 import Table from 'components/PointsSimulator/Calculator/Table';
 import Footer from 'components/PointsSimulator/Calculator/Footer';
 
+import { fixedPrecisionOf } from 'util/numbers';
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
 import { formatDate } from 'util/datetime';
 import { Container, Content, CustomTableBox, Box } from './styles';
@@ -67,12 +68,11 @@ const PointsSimulator: React.FC = () => {
   }, [isLoadSimulatioModalOpened]);
 
   useEffect(() => {
-    dispatch(
-      actions.setDollarBaseValue(
-        coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value ||
-          0,
-      ),
+    const dollarValue = fixedPrecisionOf(
+      coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value || 0,
+      2,
     );
+    dispatch(actions.setDollarBaseValue(dollarValue));
   }, [dispatch, coinsQuotation]);
 
   useEffect(() => {
