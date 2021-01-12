@@ -1,4 +1,4 @@
-import { Product, Indicator, IndicatorType } from '../interfaces';
+import { Product, Indicator } from '../interfaces';
 import getPercentage from './get-goal-realized-percentage';
 
 interface IndicatorDTO {

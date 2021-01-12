@@ -94,10 +94,7 @@ const Tr: React.FC<TrProps> = ({
         currentProduct.simulationData.unitValueInDollar > 0 &&
         currentProduct.simulationData.revenuesInKilosPerLiter > 0 &&
         currentProduct.simulationData.pogInKilosPerLiter > 0;
-      if (
-        (shouldCheck && !currentProduct.checked) ||
-        (!shouldCheck && currentProduct.checked)
-      ) {
+      if (shouldCheck && !currentProduct.checked) {
         onCheckUncheckProductHandle({
           id: currentProduct.id,
           checked: shouldCheck,
