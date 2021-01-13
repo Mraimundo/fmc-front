@@ -135,12 +135,16 @@ const Details: React.FC<Props> = Props => {
 
                   <div>
                     <strong>Volume KG/L:</strong> {item.volume} <br />
-                    <strong>Valor unitário:</strong> R${item.unitary_value}
+                    <strong>Valor unitário:</strong> R${item.unitary_value}{' '}
+                    <br />
+                    <strong>Desconto:</strong>{' '}
+                    {item.desconto === '' ? '-' : 'R$' + item.desconto}
                   </div>
 
                   <div>
                     <strong>Total:</strong> R${item.total_value} <br />
-                    <strong>FMC Coins:</strong> {item.total_points}
+                    <strong>FMC Coins:</strong> {item.total_points} <br />
+                    <strong>Total Net:</strong> {item.valor_net}
                   </div>
                 </ProductItem>
               ),
