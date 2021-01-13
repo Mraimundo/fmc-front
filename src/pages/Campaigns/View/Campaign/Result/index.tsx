@@ -6,7 +6,7 @@ import { useToast } from 'context/ToastContext';
 import { Container, Separator } from './styles';
 
 interface Props {
-  pdfFile?: string;
+  pdfFile: string;
 }
 
 const Result: React.FC<Props> = ({ pdfFile }) => {

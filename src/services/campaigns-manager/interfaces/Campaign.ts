@@ -44,6 +44,7 @@ export interface Mechanic {
   internalImage: string;
   emailImage: string;
   campaignListImage: string;
+  materialLink: string;
   description: string;
   created: Date;
 }
