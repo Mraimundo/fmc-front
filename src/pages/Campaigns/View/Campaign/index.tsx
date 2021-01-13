@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
+import { CAMPAIGN_STATUS_TEXT } from 'services/campaigns-manager/interfaces/Campaign';
 import { ModalStatus } from 'hooks/use-modal-status';
+
+import getUrlToDownloadFinalResults from 'services/campaigns-counting/getUrlToDownloadFinalResults';
 
 import { useAuth } from 'context/AuthContext';
 import { PROFILES } from 'config/constants';
@@ -18,6 +21,16 @@ interface Props {
 }
 
 const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
+  const [finalResultsUrl, setFinalResultsUrl] = useState('');
+
+  useEffect(() => {
+    if (!campaign.id) return;
+
+    getUrlToDownloadFinalResults(campaign.id).then(url => {
+      setFinalResultsUrl(url);
+    });
+  }, [campaign.id]);
+
   const {
     participant: { profile },
   } = useAuth();
@@ -36,8 +49,14 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
               acceptedDate={campaign.acceptedDate}
               regulationModal={regulationModal}
             />
-            <Result />
-            {profile === PROFILES.focalPoint && <ImportResult />}
+            {campaign.status === CAMPAIGN_STATUS_TEXT.COMPLETED && (
+              <>
+                {finalResultsUrl && <Result pdfFile={finalResultsUrl} />}
+                {profile === PROFILES.focalPoint && (
+                  <ImportResult campaign={campaign} />
+                )}
+              </>
+            )}
           </>
         )}
       </Content>

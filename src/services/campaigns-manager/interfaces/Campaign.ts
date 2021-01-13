@@ -44,8 +44,14 @@ export interface Mechanic {
   internalImage: string;
   emailImage: string;
   campaignListImage: string;
+  materialLink: string;
   description: string;
   created: Date;
+}
+
+export interface Culture {
+  id: number;
+  name: string;
 }
 
 export interface Regional {
@@ -138,6 +144,7 @@ export interface Campaign {
   title: string;
   description: string;
   mechanic: Mechanic | null;
+  culture: Culture | null;
   audience: Audience[];
   startDate: Date | null;
   endDate: Date | null;

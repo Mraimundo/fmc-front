@@ -11,6 +11,7 @@ export default (): Campaign => {
     title: '',
     description: '',
     mechanic: null,
+    culture: null,
     audience: [],
     startDate: null,
     endDate: null,
