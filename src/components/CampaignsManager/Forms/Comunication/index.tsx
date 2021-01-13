@@ -7,7 +7,7 @@ import { Button } from 'components/shared';
 import toggleSendMail from 'services/campaigns-manager/toggleSendEmail';
 import { setSendMail } from 'state/modules/campaigns-manager/actions';
 
-import { Container, Content, Box } from './styles';
+import { Container, Content, Box, MaterialLink } from './styles';
 
 export interface Props {
   handleAction(campaign: Campaign): Promise<void>;
@@ -85,6 +85,11 @@ const Comunication: React.FC<Props> = ({ handleAction }) => {
             </Box>
           </div>
         </div>
+        {campaign.mechanic?.materialLink && (
+          <MaterialLink href={campaign.mechanic?.materialLink}>
+            Download do material
+          </MaterialLink>
+        )}
       </Content>
       <Button
         type="button"

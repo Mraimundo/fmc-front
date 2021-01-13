@@ -1,17 +1,6 @@
 import { pluginApi } from 'services/api';
 import { Mechanic } from './interfaces/Campaign';
-
-interface MechanicApi {
-  id: number;
-  name: string;
-  picture: string;
-  secondary_picture: string;
-  third_picture: string;
-  fourth_picture: string;
-  description: string;
-  created: Date;
-  modified: Date;
-}
+import { MechanicApi } from './interfaces/CampaignApi';
 
 interface ApiResponse {
   types: MechanicApi[];
@@ -30,5 +19,6 @@ export default async (): Promise<Mechanic[]> => {
     campaignListImage: item.fourth_picture,
     description: item.description,
     created: item.created,
+    materialLink: item.file || '',
   }));
 };

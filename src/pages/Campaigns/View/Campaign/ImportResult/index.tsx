@@ -1,13 +1,18 @@
 import React, { useCallback, useRef, useState } from 'react';
 import uploadFileToStorage from 'services/storage/sendFile';
-import sendFile from 'services/campaigns-counting/importResults';
+import sendFile from 'services/campaigns-counting/importFinalStock';
 import Button from 'components/shared/Button';
+import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
 
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
 import { Container, Separator } from './styles';
 
-const Result: React.FC = () => {
+interface Props {
+  campaign: ICampaign;
+}
+
+const Result: React.FC<Props> = ({ campaign }) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [attachingFile, setAttachingFile] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,6 +27,14 @@ const Result: React.FC = () => {
       }
       if (e && e.target && e.target.files && e.target.files.length > 0) {
         try {
+          if (e?.target?.files[0].type !== 'application/pdf') {
+            addToast({
+              type: 'error',
+              title: 'Apenas arquivo PDF é permitido',
+            });
+            return;
+          }
+
           setAttachingFile(true);
           const { url } = await uploadFileToStorage(
             e.target.files[0],
@@ -31,7 +44,7 @@ const Result: React.FC = () => {
           setLoading(true);
           const { success, errors } = await sendFile({
             fileUrl: url,
-            type: 'final',
+            campaignId: campaign.id,
           });
 
           if (success) {
@@ -56,7 +69,7 @@ const Result: React.FC = () => {
         }
       }
     },
-    [addToast, simulating],
+    [addToast, simulating, campaign.id],
   );
 
   return (
@@ -66,7 +79,7 @@ const Result: React.FC = () => {
       <input
         type="file"
         id="fileId"
-        accept=".xlsx, .xls"
+        accept=".pdf"
         onChange={handleImportFile}
         ref={inputFileRef}
         style={{ display: 'none' }}

@@ -68,3 +68,8 @@ export const Content = styled.div`
     }
   }
 `;
+
+export const MaterialLink = styled.a`
+  margin-top: 55px;
+  color: ${({ theme }) => theme.link.fontColor};
+`;
