@@ -39,7 +39,6 @@ const PointsSimulator: React.FC = () => {
     false,
   );
   const [savedSimulations, setSavedSimulations] = useState<TableData[]>([]);
-  const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
   const channel = useSelector(getChannel);
   const dollarBaseValue = useSelector(getDollarBaseValue);
