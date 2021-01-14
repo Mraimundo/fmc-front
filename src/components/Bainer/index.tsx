@@ -9,7 +9,7 @@ import imageArrow from '../../assets/images/arrows.svg';
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
 
-  const [initialUrl, setInitialUrl] = useState('http://www.juntosfmc.com.br/');
+  const initialUrl = 'http://www.juntosfmc.com.br/';
 
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
@@ -18,7 +18,7 @@ const Bainer: React.FC = () => {
     async function fetchIndication() {
       const response = await pluginApi.get('participants/profile');
        setIndication(response.data.indicator_code);
-       setInitialUrl('');
+  
        setValue(initialUrl + indication);
     }
 
