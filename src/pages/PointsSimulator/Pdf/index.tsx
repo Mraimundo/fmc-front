@@ -67,6 +67,7 @@ const Pdf = React.forwardRef<HTMLDivElement>((props, ref) => {
               setPogInKilosPerLiter={fn}
               tabSelected={Tab.enhancerProductsTab}
               onCheckUncheckProductHandle={fn}
+              channelId="0"
             />
           </>
         )}
@@ -80,6 +81,7 @@ const Pdf = React.forwardRef<HTMLDivElement>((props, ref) => {
               setPogInKilosPerLiter={fn}
               tabSelected={Tab.participateProductsTab}
               onCheckUncheckProductHandle={fn}
+              channelId="0"
             />
           </>
         )}

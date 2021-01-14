@@ -129,7 +129,7 @@ const loadSimulations = async (): Promise<SimulationData[]> => {
   const {
     data: { data },
   } = await pluginApi.get<SimulationDataApiResponse>(
-    'simulations?limit=15000&order=desc',
+    'simulations?limit=10&order=desc',
   );
   return data;
 };

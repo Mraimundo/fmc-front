@@ -24,11 +24,16 @@ export interface Stock {
 
 export interface PointsData {
   rebateReachedInRealSimulated: number;
-  rebateReachedInRealAccumulated: number;
+  rebateReachedInRealSimulatedButUsedToGetTotal: number;
+  rebateReachedInRealRealized: number;
+  rebateReachedInRealTotal: number;
   sellerReachedInRealSimulated: number;
-  sellerReachedInRealAccumulated: number;
+  sellerReachedInRealSimulatedButUsedToGetTotal: number;
+  sellerReachedInRealRealized: number;
+  sellerReachedInRealTotal: number;
   additionalMarginSimulated: number;
-  additionalMarginAccumulated: number;
+  additionalMarginRealized: number;
+  additionalMarginTotal: number;
 }
 
 export interface Product {
@@ -103,12 +108,15 @@ export interface Indicator {
 }
 
 export interface Award {
-  totalRebate: number;
   simulatedRebate: number;
-  totalSeller: number;
+  realizedRebate: number;
+  totalRebate: number;
   simulatedSeller: number;
-  totalAdditionalMargin: number;
+  realizedSeller: number;
+  totalSeller: number;
   simulatedAdditionalMargin: number;
+  realizedAdditionalMargin: number;
+  totalAdditionalMargin: number;
 }
 
 export interface Configuration {

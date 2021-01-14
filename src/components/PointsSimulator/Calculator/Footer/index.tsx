@@ -22,7 +22,9 @@ const Footer: React.FC<Props> = ({
   const [inputValue, setInputValue] = useState(formatPoints(dollarBaseValue));
 
   const handleDollarChange = useCallback(() => {
-    changeDollarBaseValue(parseFloat(inputValue));
+    changeDollarBaseValue(
+      parseFloat(inputValue.replace(/\./gi, '').replace(/,/gi, '.')),
+    );
   }, [changeDollarBaseValue, inputValue]);
 
   return (

@@ -24,18 +24,21 @@ interface Props {
   tabSelected: Tab;
   setTabSelected(tab: Tab): void;
   setProductTypeIdSelected(productTypeId: number | undefined): void;
-  setChannelIdSelected(channelId: number): void;
+  /* setChannelIdSelected(channelId: number): void; */
   handleLoadSimulationClick(): void;
+  channelSelected: Option | null;
+  setChannelSelected(option: Option | null): void;
 }
 
 const Header: React.FC<Props> = ({
   tabSelected,
   setTabSelected,
   setProductTypeIdSelected,
-  setChannelIdSelected,
+  // setChannelIdSelected,
   handleLoadSimulationClick,
+  channelSelected,
+  setChannelSelected,
 }) => {
-  const [channelSelected, setChannelSelected] = useState<Option | null>(null);
   const [productTypeSelected, setProductTypeSelected] = useState<Option | null>(
     null,
   );
@@ -47,11 +50,11 @@ const Header: React.FC<Props> = ({
     setProductTypeIdSelected(productTypeId);
   }, [productTypeSelected, setProductTypeIdSelected]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!channelSelected) return;
     const channelSelectedId = parseInt(channelSelected.value, 0);
     setChannelIdSelected(channelSelectedId);
-  }, [channelSelected, setChannelIdSelected]);
+  }, [channelSelected, setChannelIdSelected]); */
 
   return (
     <Container>

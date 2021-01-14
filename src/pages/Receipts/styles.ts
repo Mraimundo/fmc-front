@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+ 
 
 export const Container = styled.div`
   display: block;
@@ -111,8 +112,11 @@ export const StatusContent = styled.div`
 `;
 
 export const StatusItem = styled.div`
+> * {
+  width: 100% !important;
+}
   @media (min-width: 768px) {
-    width: 30%
+    width: 30%;
   }
 `;
 export const StatusTitle = styled.div`
@@ -140,32 +144,7 @@ export const StatusButton = styled.div`
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
 `;
 
-export const NFList = styled.div`
-    padding: 12px 22px;
-    background: #efefef;
-    margin: 24px 0;
-    color: ${({ theme }) => theme.font.color.primary};
-     table {
-      width: 100%;
-      font-size: 14px;
-      text-align: left;
-      border-collapse: collapse;
-    }
-    th {
-      font-family: ${({ theme }) => theme.font.fontFamily.bold};
-      font-size: 14px;
-      text-align: left;
-      padding: 7px 10px;
-    }
-    td {
-      background: #fff;
-      padding: 7px 10px;
-      border-top: 3px solid #efefef;
-    }
-`;
-export const NFListInner = styled.div`
-    padding: 12px 0;  
-`;
+ 
 export const Details = styled.div`
     position: fixed; 
     top: 0; left: 0; 
@@ -207,7 +186,21 @@ export const IconList = styled.span`
     background-repeat: no-repeat;
     background-image: url("data:image/svg+xml,%0A%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='list-alt' class='svg-inline--fa fa-list-alt fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='currentColor' d='M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z'%3E%3C/path%3E%3C/svg%3E");
 `;
-
+ 
+export const TotalCoins = styled.div`
+    padding: 15px 0;
+    h3 {
+      font-size: 14px;
+      font-weight: normal;
+      font-family: ${({ theme }) => theme.font.fontFamily.regular};
+      margin-bottom: 12px;
+    }
+    h4 {
+      font-size: 24px;
+      font-family: ${({ theme }) => theme.font.fontFamily.bold}; 
+    }
+`;
+ 
  
 
 

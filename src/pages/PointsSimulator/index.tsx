@@ -9,8 +9,11 @@ import { Mode } from 'state/modules/points-simulator/types';
 
 import Calculator from './Calculator';
 import Result from './Result';
-import Pdf from './Pdf2';
+import Pdf from './Pdf';
 import html2Pdf from 'html2pdf.js';
+import { html } from './Pdf/html';
+
+import log from 'assets/images/logo.png';
 
 const PointsSimulator: React.FC = () => {
   const dispatch = useDispatch();
@@ -58,17 +61,23 @@ const PointsSimulator: React.FC = () => {
 
 
       });*/
-      const element = document.getElementById('_container-pdf');
+      const element = window.document.createElement('div');
+      element.innerHTML = html;
+      /*document.body.appendChild(linkClick);
+      linkClick.click();
+      document.body.removeChild(linkClick);*/
+      const test = document.createElement
+      //const element = document.getElementById('_container-pdf');
       const t = html2Pdf().from(element).save();
     },[]
   );
 
   return (
     <>
-      <button type="button" onClick={() => setT(old => !old)} style={{display: 'none'}}>
+      <button type="button" style={{ display: 'none'}}onClick={() => setT(old => !old)} >
         teste
       </button>
-      <button type="button" onClick={testing} style={{display: 'none'}}>oooo</button>
+      <button type="button" style={{ display: 'none'}}onClick={testing} >oooo</button>
       {t ? (
         <>
           <Calculator />

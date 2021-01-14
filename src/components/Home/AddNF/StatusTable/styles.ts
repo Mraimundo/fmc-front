@@ -1,11 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  display: string;
+}
+export const Container = styled.div<ContainerProps>`
+
+
   
   border-radius: 10px;
   background: #f4f4f3;
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
   margin-top: 10px;
+
+  ${({ display }) =>
+  display === "2" &&
+  css`
+    background: #fff;
+    border-radius:0;
+    margin-top: 0px;
+  `};
 
   @media (min-width: 768px) {
     min-width: 50%;
@@ -31,8 +44,10 @@ export const Container = styled.div`
     align-self: flex-end;
   }
 
-  > a {
+  > a , > ul {
     display: block;
     padding: 12px 22px;
   }
-`;
+
+ 
+  `;
