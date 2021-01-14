@@ -14,7 +14,7 @@ export const Footer = styled.div`
 
 export const Container = styled.div`
   max-width: 1027px;
-  margin: 75px auto;
+  margin: 40px auto;
 
   .nominated .participants-info {
     margin-left: 50px;
@@ -23,14 +23,14 @@ export const Container = styled.div`
   .nominated .participants-info h3{
     font-size: 18px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #2a4207;
+    color: #193B4E;
     margin-bottom: 8px;
   }
 
   .nominated .participants-info h4 {
     font-size: 16px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #2a4207;
+    color: #193B4E;
     margin-bottom: 20px;
   }
 
@@ -42,17 +42,17 @@ export const Container = styled.div`
 
       th {
         height: 29px;
-        padding: 10px;
+        padding: 0 25px;
       }
 
       td {
         height: 29px;
-        padding: 10px;
+        padding: 0 25px;
       }
 
       thead {
         text-align: left;
-        background: #2a4207;
+        background: #193B4E;
         color: #fff;
       }
 
