@@ -11,7 +11,7 @@ import {
   getChannel,
 } from 'state/modules/points-simulator/selectors';
 import * as actions from 'state/modules/points-simulator/actions';
-import { getCoinQuotations } from 'state/modules/header/selectors';
+// import { getCoinQuotations } from 'state/modules/header/selectors';
 import {
   loadSimulations,
   deleteSimulation,
