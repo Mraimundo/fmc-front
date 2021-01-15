@@ -33,6 +33,7 @@ const Result: React.FC = () => {
   const simulatedDate = new Date();
 
   useEffect(() => {
+    console.log('indicators', indicators);
     setIndicatorCards(indicatorsToCards(indicators));
   }, [indicators]);
 
