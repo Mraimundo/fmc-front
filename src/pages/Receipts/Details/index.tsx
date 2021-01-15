@@ -26,8 +26,8 @@ interface Props {
   closeModalHandler: any;
 }
 
-const Details: React.FC < Props > = Props => {
-  const [details, setDetails] = useState < any > ();
+const Details: React.FC<Props> = Props => {
+  const [details, setDetails] = useState<any>();
 
   useEffect(() => {
     if (Props.receiptId !== '') {
@@ -109,42 +109,46 @@ const Details: React.FC < Props > = Props => {
         <h3>Produtos FMC</h3>
 
         <ProductList>
-          {
-            details?.itensNota && details?.itensNota.length > 0 &&
+          {details?.itensNota &&
+            details?.itensNota.length > 0 &&
             details?.itensNota.map(
-            (item: {
-              id: number;
-              Categoria: string;
-              invoice_id: number;
-              product_id: number;
-              participant_id: number;
-              volume: string;
-              unitary_value: string;
-              total_value: string;
-              total_points: string;
-              desconto: string;
-              valor_net: string;
-              unit_points: string;
-              NomeProduto: string;
-            }) => (
-              <ProductItem key={item.id}>
-                <div>
-                  <strong> {item.NomeProduto.toUpperCase()} </strong> <br />
-                  <p> {item.Categoria} </p>
-                </div>
+              (item: {
+                id: number;
+                Categoria: string;
+                invoice_id: number;
+                product_id: number;
+                participant_id: number;
+                volume: string;
+                unitary_value: string;
+                total_value: string;
+                total_points: string;
+                desconto: string;
+                valor_net: string;
+                unit_points: string;
+                NomeProduto: string;
+              }) => (
+                <ProductItem key={item.id}>
+                  <div>
+                    <strong> {item.NomeProduto.toUpperCase()} </strong> <br />
+                    <p> {item.Categoria} </p>
+                  </div>
 
-                <div>
-                  <strong>Volume KG/L:</strong> {item.volume} <br />
-                  <strong>Valor unitário:</strong> R${item.unitary_value}
-                </div>
+                  <div>
+                    <strong>Volume KG/L:</strong> {item.volume} <br />
+                    <strong>Valor unitário:</strong> R${item.unitary_value}{' '}
+                    <br />
+                    <strong>Desconto:</strong>{' '}
+                    {item.desconto === '' ? '-' : 'R$' + item.desconto}
+                  </div>
 
-                <div>
-                  <strong>Total:</strong> R${item.total_value} <br />
-                  <strong>FMC Coins:</strong> {item.total_points}
-                </div>
-              </ProductItem>
-            ),
-          )}
+                  <div>
+                    <strong>Total:</strong> R${item.total_value} <br />
+                    <strong>FMC Coins:</strong> {item.total_points} <br />
+                    <strong>Total Net:</strong> {item.valor_net}
+                  </div>
+                </ProductItem>
+              ),
+            )}
         </ProductList>
 
         <LinkBottom>

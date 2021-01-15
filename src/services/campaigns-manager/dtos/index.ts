@@ -24,6 +24,7 @@ export interface CreateNewCampaignDTO {
   sell_out_result: number;
   establishments: number[];
   products: Product[];
+  cultivation_id: number;
 }
 
 export interface UpdateCampaignDTO extends CreateNewCampaignDTO {

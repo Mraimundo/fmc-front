@@ -4,6 +4,7 @@ import {
   Goal,
   Audience,
   Mechanic,
+  Culture,
 } from 'services/campaigns-manager/interfaces/Campaign';
 import {
   ADD_GOAL,
@@ -17,6 +18,7 @@ import {
   SET_START_DATE,
   SET_END_DATE,
   SET_MECHANIC,
+  SET_CULTURE,
   SET_CAMPAIGN,
   RESET,
   SET_ERRORS,
@@ -142,6 +144,14 @@ export const setSendMail = (
     payload: data,
   };
 
+export const setCulture = (
+  data: Culture | null,
+): ActionCreatorPayload<typeof SET_CULTURE, Culture | null> =>
+  <const>{
+    type: SET_CULTURE,
+    payload: data,
+  };
+
 export type CampaignsManagerActions = ReturnType<
   | typeof addGoal
   | typeof removeGoal
@@ -158,4 +168,5 @@ export type CampaignsManagerActions = ReturnType<
   | typeof reset
   | typeof setErrors
   | typeof setSendMail
+  | typeof setCulture
 >;

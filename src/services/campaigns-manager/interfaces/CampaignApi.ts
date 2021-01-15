@@ -22,7 +22,7 @@ interface ProductApi {
   sellout: number;
 }
 
-interface MechanicApi {
+export interface MechanicApi {
   id: number;
   name: string;
   picture: string;
@@ -32,6 +32,7 @@ interface MechanicApi {
   description: string;
   created: Date;
   modified: Date;
+  file: string;
 }
 
 export interface ApproverApi {
@@ -87,4 +88,8 @@ export interface CampaignApi {
   fmc_campaign_type: MechanicApi;
   highlights: Highlight[] | null;
   send_emails: boolean;
+  cultivation: {
+    id: number;
+    name: string;
+  };
 }

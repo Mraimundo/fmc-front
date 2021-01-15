@@ -109,6 +109,11 @@ export default (campaignApi: CampaignApi): Campaign => ({
     campaignListImage: campaignApi.fmc_campaign_type.fourth_picture,
     description: campaignApi.fmc_campaign_type.description,
     created: campaignApi.fmc_campaign_type.created,
+    materialLink: campaignApi.fmc_campaign_type.file || '',
+  },
+  culture: {
+    id: campaignApi.cultivation?.id || 0,
+    name: campaignApi.cultivation?.name || '',
   },
   audience: campaignApi.establishments.map(customer => ({
     customer: {

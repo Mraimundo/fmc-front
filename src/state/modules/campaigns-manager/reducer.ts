@@ -20,6 +20,7 @@ import {
   SET_END_DATE,
   SET_START_DATE,
   SET_MECHANIC,
+  SET_CULTURE,
   SET_CAMPAIGN,
   RESET,
   SET_ERRORS,
@@ -141,6 +142,10 @@ const CampaignsManagerReducer: Reducer<
     case SET_MECHANIC:
       return produce(state, draft => {
         draft.campaign.mechanic = action.payload;
+      });
+    case SET_CULTURE:
+      return produce(state, draft => {
+        draft.campaign.culture = action.payload;
       });
     case SET_SEND_MAIL:
       return produce(state, draft => {
