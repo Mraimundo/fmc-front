@@ -65,7 +65,7 @@ const calculateSimulatedProduct = ({
 
   const totalRealized =
     indicator.currentRealized +
-    (product?.simulationData.revenuesInKilosPerLiter || 0);
+    (product?.simulationData.pogInKilosPerLiter || 0);
 
   const totalPercentageRealized = getPercentage(
     indicator.currentGoal,
