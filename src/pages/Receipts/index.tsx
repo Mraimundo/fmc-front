@@ -84,7 +84,14 @@ const Receipts: React.FC = () => {
   }, [getNfData]);
 
   useEffect(() => {
-    getCampaigns().then(data => setCampaigns(data));
+    ///getCampaigns().then(data => setCampaigns(data));
+    setCampaigns([
+      {
+        id: 280,
+        description: '',
+        title: '',
+      },
+    ]);
   }, []);
 
   useEffect(() => {
@@ -99,7 +106,7 @@ const Receipts: React.FC = () => {
       setPathKey(pathname);
 
       const extractDetailsResponse = await Promise.all(
-        campaigns.map(campaign => extractFn(campaign.id)),
+        campaigns.map(campaign => getExtract(campaign.id)),
       );
       setExtractDetails(extractDetailsResponse);
     };
