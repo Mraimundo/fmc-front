@@ -14,9 +14,7 @@ import {
   Extract as IExtract,
 } from 'services/extract/interfaces';
 import { getParticipantsToAccessPI } from 'services/showcase';
-import getCampaigns from 'services/extract/getCampaigns';
 import getExtract from 'services/extract/getExtract';
-import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 
 import { useAuth } from 'context/AuthContext';
 
@@ -31,8 +29,6 @@ import {
   StatusBox,
   TotalCoins,
 } from './styles';
-
-const MYEXTRACT = '/myextract';
 
 interface NFData {
   notas: {
@@ -51,10 +47,6 @@ const Receipts: React.FC = () => {
   );
   const [pathKey, setPathKey] = useState('');
   const { participant, simulating } = useAuth();
-
-  const getExtractFn = (typeName: string) => {
-    return typeName === MYEXTRACT ? getExtract : getExtractEstablishment;
-  };
 
   const [nfList, setNfList] = useState<any[]>([]);
   const [coins, setCoins] = useState(0);
@@ -84,7 +76,14 @@ const Receipts: React.FC = () => {
   }, [getNfData]);
 
   useEffect(() => {
-    getCampaigns().then(data => setCampaigns(data));
+    ///getCampaigns().then(data => setCampaigns(data));
+    setCampaigns([
+      {
+        id: 280,
+        description: '',
+        title: '',
+      },
+    ]);
   }, []);
 
   useEffect(() => {
@@ -93,13 +92,12 @@ const Receipts: React.FC = () => {
     const load = async () => {
       const { pathname } = location;
       const { establishment } = participant;
-      const extractFn = getExtractFn(pathname);
 
       setUserType(establishment.type_name);
       setPathKey(pathname);
 
       const extractDetailsResponse = await Promise.all(
-        campaigns.map(campaign => extractFn(campaign.id)),
+        campaigns.map(campaign => getExtract(campaign.id)),
       );
       setExtractDetails(extractDetailsResponse);
     };
