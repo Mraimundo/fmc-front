@@ -1,10 +1,5 @@
 image: node:12
 
-definitions:
-  services:
-    docker:
-      memory: 4096
-
 pipelines:
   default:
     - step:

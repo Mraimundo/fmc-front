@@ -11,7 +11,7 @@ import {
   getChannel,
 } from 'state/modules/points-simulator/selectors';
 import * as actions from 'state/modules/points-simulator/actions';
-import { getCoinQuotations } from 'state/modules/header/selectors';
+// import { getCoinQuotations } from 'state/modules/header/selectors';
 import {
   loadSimulations,
   deleteSimulation,
@@ -24,7 +24,7 @@ import Header, { Tab } from 'components/PointsSimulator/Calculator/Header';
 import Table from 'components/PointsSimulator/Calculator/Table';
 import Footer from 'components/PointsSimulator/Calculator/Footer';
 
-import { fixedPrecisionOf } from 'util/numbers';
+// import { fixedPrecisionOf } from 'util/numbers';
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
 import { formatDate } from 'util/datetime';
 import { Container, Content, CustomTableBox, Box } from './styles';
@@ -39,7 +39,6 @@ const PointsSimulator: React.FC = () => {
     false,
   );
   const [savedSimulations, setSavedSimulations] = useState<TableData[]>([]);
-  const coinsQuotation = useSelector(getCoinQuotations);
   const products = useSelector(getProducts);
   const channel = useSelector(getChannel);
   const dollarBaseValue = useSelector(getDollarBaseValue);
@@ -67,13 +66,13 @@ const PointsSimulator: React.FC = () => {
     );
   }, [isLoadSimulatioModalOpened]);
 
-  useEffect(() => {
-    const dollarValue = fixedPrecisionOf(
-      coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value || 0,
-      2,
-    );
-    dispatch(actions.setDollarBaseValue(dollarValue));
-  }, [dispatch, coinsQuotation]);
+  // useEffect(() => {
+  //   const dollarValue = fixedPrecisionOf(
+  //     coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value || 0,
+  //     2,
+  //   );
+  //   dispatch(actions.setDollarBaseValue(dollarValue));
+  // }, [dispatch, coinsQuotation]);
 
   useEffect(() => {
     setFilter(oldFilter => ({
