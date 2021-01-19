@@ -23,14 +23,14 @@ export const Container = styled.div`
   .nominated .participants-info h3{
     font-size: 18px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #193B4E;
+    color: #2A4207;
     margin-bottom: 8px;
   }
 
   .nominated .participants-info h4 {
     font-size: 16px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #193B4E;
+    color: #2A4207;
     margin-bottom: 20px;
   }
 
@@ -43,6 +43,8 @@ export const Container = styled.div`
       th {
         height: 29px;
         padding: 0 25px;
+        font-family: ${({ theme }) => theme.font.fontFamily.bold};
+
       }
 
       td {
@@ -52,7 +54,7 @@ export const Container = styled.div`
 
       thead {
         text-align: left;
-        background: #193B4E;
+        background: #2A4207;
         color: #fff;
       }
 

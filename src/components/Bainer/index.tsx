@@ -18,7 +18,6 @@ const Bainer: React.FC = () => {
     async function fetchIndication() {
       const response = await pluginApi.get('participants/profile');
        setIndication(response.data.indicator_code);
-  
        setValue(initialUrl + indication);
     }
 
@@ -49,14 +48,13 @@ const Bainer: React.FC = () => {
                 <img src={imageArrow} alt="Arrow" />
                 <h4>
                   Para indicar você precisa copiar o link e enviar pra seu
-                  contato
+                  contato.
                 </h4>
               </div>
               <div className="bainer-guidance">
                 <img src={imageArrow} alt="Arrow" />
                 <h4>
-                  Para indicar você precisa copiar o link e enviar pra seu
-                  contato
+                  Assim que  o seu indicado receber o link ele já poderá se cadastrar.
                 </h4>
               </div>
             </div>
@@ -68,7 +66,7 @@ const Bainer: React.FC = () => {
               <div>
                 <div className="register-group">
                   <h2>Cadastra-se no Juntos FMC usando o link abaixo:</h2>
-                  {<span>{`http://www.juntosfmc.com.br/${indication}`}</span>}
+                  {<span>{`https://www.juntosfmc.com.br/${indication}`}</span>}
                 </div>
                 <CopyToClipboard text={value} onCopy={() => handleCopy()}>
                   <button type="button">Copiar</button>

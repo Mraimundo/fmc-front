@@ -3,6 +3,7 @@ import { pluginApi, vendavallApi } from 'services/api';
 interface SignInParams {
   cpf: string;
   password: string;
+  // indicator_code_used: string;
 }
 
 interface Establishment {
@@ -38,12 +39,14 @@ const signInByToken = async (
 const signIn = async ({
   cpf,
   password,
+  // indicator_code_used,
 }: SignInParams): Promise<SignInResponse> => {
   let {
     data: { token, establishments },
   } = await pluginApi.post<ApiResponse>('participants/login', {
     identifier: cpf,
     password,
+    // indicator_code_used,
   });
 
   if (!token && establishments.length > 0) {
