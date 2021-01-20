@@ -16,6 +16,13 @@ export const Container = styled.div`
     height: 40px;
     border-radius: 4px;
   }
+
+  > span {
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 16px;
+    margin-top: 12px;
+  }
 `;
 
 export const Separator = styled.div`

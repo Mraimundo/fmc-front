@@ -4,7 +4,6 @@ import { CAMPAIGN_STATUS_TEXT } from 'services/campaigns-manager/interfaces/Camp
 import { ModalStatus } from 'hooks/use-modal-status';
 
 import getUrlToDownloadFinalResults from 'services/campaigns-counting/getUrlToDownloadFinalResults';
-import getUrlToDownloadFinalStock from 'services/campaigns-counting/getUrlToStockDownload';
 
 import { useAuth } from 'context/AuthContext';
 import { PROFILES } from 'config/constants';
@@ -23,17 +22,12 @@ interface Props {
 
 const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
   const [finalResultsUrl, setFinalResultsUrl] = useState('');
-  const [showUploadStockButton, setShowUploadStockButton] = useState(false);
 
   useEffect(() => {
     if (!campaign.id) return;
 
     getUrlToDownloadFinalResults(campaign.id).then(url =>
       setFinalResultsUrl(url),
-    );
-
-    getUrlToDownloadFinalStock(campaign.id).then(url =>
-      setShowUploadStockButton(!!url),
     );
   }, [campaign.id]);
 
@@ -57,8 +51,9 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
             />
             {campaign.status === CAMPAIGN_STATUS_TEXT.COMPLETED && (
               <>
+                {console.log(profile)}
                 {finalResultsUrl && <Result pdfFile={finalResultsUrl} />}
-                {profile === PROFILES.focalPoint && showUploadStockButton && (
+                {profile === PROFILES.focalPoint && (
                   <ImportResult campaign={campaign} />
                 )}
               </>

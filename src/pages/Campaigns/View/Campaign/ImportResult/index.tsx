@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import uploadFileToStorage from 'services/storage/sendFile';
 import sendFile from 'services/campaigns-counting/importFinalStock';
 import Button from 'components/shared/Button';
 import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
+import hasStock, { Stock } from 'services/campaigns/hasStock';
 
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
@@ -19,6 +20,14 @@ const Result: React.FC<Props> = ({ campaign }) => {
   const [loading, setLoading] = useState(false);
   const { simulating } = useAuth();
   const { addToast } = useToast();
+  const [stock, setStock] = useState<Stock | null>(null);
+  const [reload, setReload] = useState(1);
+
+  useEffect(() => {
+    if (!campaign.id) return;
+
+    hasStock(campaign.id).then(data => setStock(data));
+  }, [campaign.id, reload]);
 
   const handleImportFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +63,7 @@ const Result: React.FC<Props> = ({ campaign }) => {
               title: 'Arquivo importado com sucesso!',
             });
             setFileAttached(true);
+            setReload(oldValue => oldValue + 1);
             return;
           }
 
@@ -86,20 +96,24 @@ const Result: React.FC<Props> = ({ campaign }) => {
         ref={inputFileRef}
         style={{ display: 'none' }}
       />
-      <Button
-        type="button"
-        onClick={() => inputFileRef.current?.click()}
-        buttonRole="primary"
-        loading={attachingFile || loading}
-        disabled={attachingFile || loading || fileAttached}
-        loadingText={
-          fileAttached
-            ? 'Arquivo enviado'
-            : `${attachingFile ? 'Carregando ' : 'Importando '}`
-        }
-      >
-        Upload
-      </Button>
+      {stock?.hasStock ? (
+        <span>Arquivo enviado em {stock.stockDate}</span>
+      ) : (
+        <Button
+          type="button"
+          onClick={() => inputFileRef.current?.click()}
+          buttonRole="primary"
+          loading={attachingFile || loading}
+          disabled={attachingFile || loading || fileAttached}
+          loadingText={
+            fileAttached
+              ? 'Arquivo enviado'
+              : `${attachingFile ? 'Carregando ' : 'Importando '}`
+          }
+        >
+          Upload
+        </Button>
+      )}
     </Container>
   );
 };
