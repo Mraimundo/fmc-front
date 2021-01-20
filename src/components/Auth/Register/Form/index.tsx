@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { useForm, FormContext } from 'react-hook-form';
+
 import { PROFILES } from 'config/constants';
 import { MemberGroup, Participant } from 'services/auth/interfaces/Participant';
 import getschemaValidations from './Validators/getSchemaValidations';
@@ -36,9 +37,12 @@ const Form: React.FC<Props> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [autoindicate, setAutoindicate] = useState(false);
+  const [indicatorCode, setIndicatorCode] = useState('');
   const [activeTab, setActiveTab] = React.useState<Tab>('PERSONAL_DATA');
   const [participant, setParticipant] = useState<Participant>(_participant);
   const inputRole = 'secondary';
+
+  const location = useLocation();
 
   const schema = getschemaValidations(
     _participant.profile,
@@ -47,6 +51,12 @@ const Form: React.FC<Props> = ({
   );
 
   useEffect(() => {
+    const indicator_code = location.search.replace('?code=', '');
+
+    if(indicator_code){
+      setIndicatorCode(indicator_code);
+    }
+
     if (_participant.profile === PROFILES.focalPoint) {
       setAutoindicate(
         _participant.access_premio_ideall &&
@@ -164,6 +174,7 @@ const Form: React.FC<Props> = ({
       rg_emitter_uf: data.rg_emitter_uf_select?.value || '',
       access_premio_ideall:
         _participant.profile !== PROFILES.focalPoint || autoindicate,
+      indicator_code_used: indicatorCode,
     });
     setLoading(false);
   });

@@ -126,6 +126,7 @@ export interface Participant {
 
   // Producers
   producer_group_name: string;
+  indicator_code_used?: string;
   members_group: MemberGroup[];
   harvest: Harvest;
 }

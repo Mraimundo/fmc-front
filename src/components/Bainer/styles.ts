@@ -107,12 +107,12 @@ export const Container = styled.div`
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
-
+  
   .indicator-code div:nth-child(2) .register-group h2{
     font-size: 14px;
     color: #2A4207;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   .indicator-code div:nth-child(2) .register-group span {
@@ -129,7 +129,13 @@ export const Container = styled.div`
     color: #fff;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
-    margin-top: 18px;
+    margin-top: 12px;
     border: none;
+    transition: 0.5s;
   } 
+
+  .indicator-code div:nth-child(2) button:hover {
+    background: #456c0c;
+    color: #fff;
+  }
 `;
