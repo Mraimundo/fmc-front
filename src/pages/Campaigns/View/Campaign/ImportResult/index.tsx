@@ -15,6 +15,7 @@ interface Props {
 const Result: React.FC<Props> = ({ campaign }) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [attachingFile, setAttachingFile] = useState(false);
+  const [fileAttached, setFileAttached] = useState(false);
   const [loading, setLoading] = useState(false);
   const { simulating } = useAuth();
   const { addToast } = useToast();
@@ -52,6 +53,7 @@ const Result: React.FC<Props> = ({ campaign }) => {
               type: 'success',
               title: 'Arquivo importado com sucesso!',
             });
+            setFileAttached(true);
             return;
           }
 
@@ -86,11 +88,15 @@ const Result: React.FC<Props> = ({ campaign }) => {
       />
       <Button
         type="button"
-        onClick={e => inputFileRef.current?.click()}
+        onClick={() => inputFileRef.current?.click()}
         buttonRole="primary"
         loading={attachingFile || loading}
-        disabled={attachingFile || loading}
-        loadingText={attachingFile ? 'Carregando ' : 'Importando '}
+        disabled={attachingFile || loading || fileAttached}
+        loadingText={
+          fileAttached
+            ? 'Arquivo enviado'
+            : `${attachingFile ? 'Carregando ' : 'Importando '}`
+        }
       >
         Upload
       </Button>
