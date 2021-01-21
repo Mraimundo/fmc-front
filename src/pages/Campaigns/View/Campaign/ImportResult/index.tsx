@@ -4,6 +4,7 @@ import sendFile from 'services/campaigns-counting/importFinalStock';
 import Button from 'components/shared/Button';
 import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
 import hasStock, { Stock } from 'services/campaigns/hasStock';
+import getUrlDownloadStock from 'services/campaigns-counting/getUrlToStockDownload';
 
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
@@ -97,7 +98,9 @@ const Result: React.FC<Props> = ({ campaign }) => {
         style={{ display: 'none' }}
       />
       {stock?.hasStock ? (
-        <span>Arquivo enviado em {stock.stockDate}</span>
+        <span>
+          Arquivo enviado em <a href={stock.stockUrl}>{stock.stockDate}</a>
+        </span>
       ) : (
         <Button
           type="button"

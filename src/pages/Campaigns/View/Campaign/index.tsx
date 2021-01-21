@@ -51,7 +51,6 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
             />
             {campaign.status === CAMPAIGN_STATUS_TEXT.COMPLETED && (
               <>
-                {console.log(profile)}
                 {finalResultsUrl && <Result pdfFile={finalResultsUrl} />}
                 {profile === PROFILES.focalPoint && (
                   <ImportResult campaign={campaign} />

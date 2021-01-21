@@ -22,6 +22,13 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.font.color.primary};
     font-size: 16px;
     margin-top: 12px;
+
+    > a {
+      font-family: ${({ theme }) => theme.font.fontFamily.bold};
+      color: ${({ theme }) => theme.font.color.primary};
+      font-size: 16px;
+      margin-top: 12px;
+    }
   }
 `;
 
