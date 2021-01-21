@@ -26,9 +26,9 @@ const Campaign: React.FC<Props> = ({ campaign, regulationModal }) => {
   useEffect(() => {
     if (!campaign.id) return;
 
-    getUrlToDownloadFinalResults(campaign.id).then(url => {
-      setFinalResultsUrl(url);
-    });
+    getUrlToDownloadFinalResults(campaign.id).then(url =>
+      setFinalResultsUrl(url),
+    );
   }, [campaign.id]);
 
   const {
