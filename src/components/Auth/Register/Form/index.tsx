@@ -67,6 +67,7 @@ const Form: React.FC<Props> = ({
     _participant.profile,
     _participant.access_premio_ideall,
     _participant.establishment.team_receives_points,
+    location.search,
   ]);
 
   const addMemberGroup = useCallback((member: MemberGroup): void => {

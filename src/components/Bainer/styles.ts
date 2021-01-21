@@ -37,19 +37,19 @@ export const Container = styled.div<ColorProps>`
 
   .content-group .title {
     width: 260px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 24px;
     font-weight: 28px;
-    color: ${({ theme }) => theme.footer.background};
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 10px;
   }
 
   .content-group .sub-title {
     width: 472px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 18px;
     font-weight: 21px;
-    color: ${({ theme }) => theme.footer.background};
+    color: ${({ theme }) => theme.font.color.primary};;
   }
 
   main{
@@ -80,7 +80,7 @@ export const Container = styled.div<ColorProps>`
 
   .bainer-guidance h4 {
     width: 283px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     color: #fff;
     font-size: 16px;
     font-style: italic;
@@ -123,14 +123,14 @@ export const Container = styled.div<ColorProps>`
     background-color: #C5CFD4; 
     font-size: 16px;
     font-weight: 18px;
-    color: ${({ theme }) => theme.footer.background};
+    color: ${({ theme }) => theme.font.color.primary};
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
   
   .indicator-code div:nth-child(2) .register-group h2{
     font-size: 14px;
-    color: ${({ theme }) => theme.footer.background};
+    color: ${({ theme }) => theme.font.color.primary};
     align-items: center;
     margin-top: 25px;
   }
@@ -138,7 +138,7 @@ export const Container = styled.div<ColorProps>`
   .indicator-code div:nth-child(2) .register-group span {
     font-size: 14px;
     font-weight: 16px;
-    color: ${({ theme }) => theme.footer.background};
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 18px;
   }
 

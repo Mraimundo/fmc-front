@@ -48,7 +48,7 @@ const FormSignUp: React.FC = () => {
     mode: 'onSubmit',
   });
   
-  useEffect(() =>{
+  useEffect(() => {
     const indicator_code = location.search.replace('?code=', '');
 
     if(indicator_code){
