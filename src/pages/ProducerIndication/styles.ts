@@ -54,7 +54,7 @@ export const Container = styled.div`
 
       thead {
         text-align: left;
-        background: #2A4207;
+        background: ${({ theme }) => theme.footer.background};
         color: #fff;
       }
 

@@ -6,10 +6,14 @@ import { pluginApi } from '../../services/api';
 import { Container } from './styles';
 import imageArrow from '../../assets/images/arrows.svg';
 
+
+
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
 
   const initialUrl = 'http://www.juntosfmc.com.br/';
+
+  const [profileTipe, setProfileType] = useState('');
 
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
@@ -19,10 +23,38 @@ const Bainer: React.FC = () => {
       const response = await pluginApi.get('participants/profile');
        setIndication(response.data.indicator_code);
        setValue(initialUrl + indication);
+
+       setProfileType(response.data.profile);
     }
 
     fetchIndication();
   }, [indication]);
+
+  let colorType = ''; 
+
+  switch(profileTipe) {
+    
+    case 'FOCALPOINT': 
+     colorType = 'verde';
+     break
+    
+    case 'PRODUTOR': 
+      colorType = 'marron';
+      break
+
+    case 'PARTICIPANTE': 
+       colorType = 'azul';
+       break
+
+    case 'FMC': 
+      colorType = 'cinza';
+      break
+
+    default: 
+       colorType = 'verde';
+  }
+
+  // console.log(colorType);
 
   const handleCopy = () => {
     setCopied(true)
@@ -32,9 +64,14 @@ const Bainer: React.FC = () => {
     }, 3000);
   }
 
+  
+
   return (
-    <Container>
+    
+    <Container colorType={colorType}>
+
       <div className="content-bainer">
+    
         <div className="content-group">
           <h1 className="title">Indicação de Produtor</h1>
           <h2 className="sub-title">
@@ -77,6 +114,7 @@ const Bainer: React.FC = () => {
             </div>
         </main>
       </div>
+      
     </Container>
   );
 };
