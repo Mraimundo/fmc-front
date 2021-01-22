@@ -19,6 +19,7 @@ import ParticipantSimulation from './modules/participant-simulation';
 import PointsManagement from './modules/points-management';
 import PowerBi from './modules/power-bi';
 import Products from './modules/products';
+import ProducerIndication from './modules/producer-indication';
 import Report from './modules/report';
 import Showcase from './modules/showcase';
 import Training from './modules/training';
@@ -47,6 +48,7 @@ const routesArray: RouteModule[][] = [
   ParticipantSimulation,
   PointsManagement,
   Products,
+  ProducerIndication,
   Showcase,
   Training,
   Goals,
