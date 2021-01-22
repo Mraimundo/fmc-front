@@ -26,7 +26,11 @@ export interface TableData {
 interface ModalProps {
   isOpen: boolean;
   onRequestClose(): void;
-  onLoadState(jsonStateInString: string, channelSelectId: number): void;
+  onLoadState(
+    jsonStateInString: string,
+    channelSelectId: number,
+    clientGroup: string,
+  ): void;
   onDeleteSimulation(simulationId: number): void | Promise<void>;
   tableData: TableData[];
 }
@@ -41,8 +45,12 @@ const Modal: React.FC<ModalProps> = ({
   const { addToast } = useToast();
 
   const handleEditClick = useCallback(
-    (jsonStateInString: string, channelSelectId: number) => {
-      onLoadState(jsonStateInString, channelSelectId);
+    (
+      jsonStateInString: string,
+      channelSelectId: number,
+      clientGroup: string,
+    ) => {
+      onLoadState(jsonStateInString, channelSelectId, clientGroup);
       onRequestClose();
     },
     [onLoadState, onRequestClose],
@@ -116,6 +124,7 @@ const Modal: React.FC<ModalProps> = ({
                             handleEditClick(
                               item.jsonStateInString,
                               item.channelId,
+                              item.clientGroup,
                             )
                           }
                         />

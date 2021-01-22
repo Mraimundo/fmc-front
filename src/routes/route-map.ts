@@ -16,6 +16,7 @@ export default {
   participantSimulation: '/visao-do-participante',
   pointManagement: '/distribuicao-de-pontos',
   products: '/solucoes',
+  producer: '/indicar-produtor',
   profile: '/editar-perfil',
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',
@@ -26,4 +27,5 @@ export default {
     calculator: '/simulador',
   },
   qrCode: '/qr',
+  receipts: '/receipts',
 };

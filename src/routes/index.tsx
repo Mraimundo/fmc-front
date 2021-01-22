@@ -19,12 +19,14 @@ import ParticipantSimulation from './modules/participant-simulation';
 import PointsManagement from './modules/points-management';
 import PowerBi from './modules/power-bi';
 import Products from './modules/products';
+import ProducerIndication from './modules/producer-indication';
 import Report from './modules/report';
 import Showcase from './modules/showcase';
 import Training from './modules/training';
 import Goals from './modules/goals';
 import HowParticipate from './modules/how-participate';
 import QrCode from './modules/qr-code';
+import Receipts from './modules/receipts';
 
 import PointsSimulator from './modules/points-simulator';
 
@@ -46,6 +48,7 @@ const routesArray: RouteModule[][] = [
   ParticipantSimulation,
   PointsManagement,
   Products,
+  ProducerIndication,
   Showcase,
   Training,
   Goals,
@@ -55,6 +58,7 @@ const routesArray: RouteModule[][] = [
   Report,
   PointsSimulator,
   QrCode,
+  Receipts,
 ];
 
 const Routes: React.FC = () => (

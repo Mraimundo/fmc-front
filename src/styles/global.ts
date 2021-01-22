@@ -42,4 +42,11 @@ export default createGlobalStyle`
     z-index: 10;
   }
 
+  :root {
+    --cooperativa: #2A4207;
+    --revenda: #193B4E;
+    --rtc: #484848;
+    --produtor: #3B302A;
+  }
+
 `;

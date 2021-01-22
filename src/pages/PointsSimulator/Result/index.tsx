@@ -26,13 +26,14 @@ const Result: React.FC = () => {
   );
   const [indicatorCards, setIndicatorCards] = useState<Card[]>([]);
   const indicators = useSelector(getIndicators);
-  const { partialDate } = useSelector(getConfiguration);
+  const configuration = useSelector(getConfiguration);
   const channel = useSelector(getChannel);
   const pointsSimulatorState = useSelector(getPointsSimulatorFullState);
   const award = useSelector(getAward);
   const simulatedDate = new Date();
 
   useEffect(() => {
+    console.log('indicators', indicators);
     setIndicatorCards(indicatorsToCards(indicators));
   }, [indicators]);
 
@@ -51,14 +52,18 @@ const Result: React.FC = () => {
   return (
     <Container id="result">
       <Content>
-        {channel && partialDate && (
+        {channel && configuration.partialDate && (
           <Header
-            partialDate={partialDate}
+            partialDate={configuration.partialDate}
             simulatedDate={simulatedDate}
             channelName={channel.groupName}
           />
         )}
-        <Body cards={indicatorCards} award={award} />
+        <Body
+          cards={indicatorCards}
+          award={award}
+          configuration={configuration}
+        />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
         />

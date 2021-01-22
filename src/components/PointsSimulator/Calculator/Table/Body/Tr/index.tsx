@@ -20,6 +20,7 @@ interface TrProps {
     id: number;
     checked: boolean;
   }): void;
+  channelId: string;
 }
 
 interface ValuesData {
@@ -37,6 +38,7 @@ const Tr: React.FC<TrProps> = ({
   setRevenuesInKilosPerLiter,
   setPogInKilosPerLiter,
   onCheckUncheckProductHandle,
+  channelId,
 }) => {
   const [valuesData, setValuesData] = useState<ValuesData | null>(null);
 
@@ -92,10 +94,7 @@ const Tr: React.FC<TrProps> = ({
         currentProduct.simulationData.unitValueInDollar > 0 &&
         currentProduct.simulationData.revenuesInKilosPerLiter > 0 &&
         currentProduct.simulationData.pogInKilosPerLiter > 0;
-      if (
-        (shouldCheck && !currentProduct.checked) ||
-        (!shouldCheck && currentProduct.checked)
-      ) {
+      if (shouldCheck && !currentProduct.checked) {
         onCheckUncheckProductHandle({
           id: currentProduct.id,
           checked: shouldCheck,
@@ -189,6 +188,7 @@ const Tr: React.FC<TrProps> = ({
         <CustomInputBox blocked={false}>
           <Input
             type="money"
+            key={`input-unit-${channelId}-${product.id}`}
             defaultValue={product.simulationData.unitValueInDollar}
             onChange={value => {
               clearTimeout(unitDollarValueTimeout);

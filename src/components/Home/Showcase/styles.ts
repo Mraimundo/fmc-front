@@ -61,11 +61,14 @@ export const ImageWrapper = styled.div`
   }
 `;
 
-export const SeeCompleteShowcaseText = styled.h1`
+export const SeeCompleteShowcaseText = styled.button`
   color: ${({ theme }) => theme.font.color.primary};
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 1.2em;
   text-align: center;
+  background: transparent;
+  border: 0;
+  appearance: none;
 `;
 
 export const ProductList = styled.ul`

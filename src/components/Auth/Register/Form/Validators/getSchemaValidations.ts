@@ -22,6 +22,7 @@ const commomValidations = {
   cell_phone: Yup.string()
     .required(mandatoryMessage)
     .test('valid-mobile', 'Número inválido', validMobilePhone),
+  medium: Yup.string().required(mandatoryMessage),
 };
 
 const cepFields = {
@@ -46,12 +47,6 @@ const cepFields = {
     .typeError(mandatoryMessage)
     .required(mandatoryMessage),
 
-  get_to_know_select: Yup.object()
-    .shape({
-      value: Yup.string().required(mandatoryMessage),
-    })
-    .typeError(mandatoryMessage)
-    .required(mandatoryMessage),
 };
 
 const extraProducerFields = {
