@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import validateCpf from 'util/validations/cpf';
 import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -29,11 +30,13 @@ type TypeSelect = 'fmc' | 'participant';
 
 const FormSignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [indicatorCode, setIndicatorCode] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentCPF, setCurrentCPF] = useState('');
   const [showFormModal, setShowFormModal] = useState(false);
   const [typeSelected, setTypeSelected] = useState<TypeSelect>('participant');
   const { addToast } = useToast();
+  const location = useLocation();
 
   const schema = Yup.object().shape({
     param_first_access: Yup.string().required('Campo obrigatório'),
@@ -44,6 +47,14 @@ const FormSignUp: React.FC = () => {
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
   });
+  
+  useEffect(() => {
+    const indicator_code = location.search.replace('?code=', '');
+
+    if(indicator_code){
+      setIndicatorCode(indicator_code);
+    }
+  },[location.search]);
 
   const { handleSubmit, setValue } = methods;
   const onSubmit = handleSubmit(async ({ param_first_access }) => {
@@ -53,7 +64,8 @@ const FormSignUp: React.FC = () => {
         typeSelected === 'participant'
           ? await getParticipantByCpf(param_first_access)
           : await getParticipantByUpn(param_first_access);
-      history.push('/firstAccess', participant);
+
+          history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
       if (e.response?.data?.message === 'CPF não encontrado') {
@@ -84,6 +96,7 @@ const FormSignUp: React.FC = () => {
       campaign_id: 1,
       profile: PROFILES.producer,
     };
+    indicatorCode ? history.push(`/firstAccess?code=${indicatorCode}`, participant): 
     history.push('/firstAccess', participant);
   };
 
@@ -153,6 +166,7 @@ const FormSignUp: React.FC = () => {
             numbersOnly
             pattern="XXX.XXX.XXX-XX"
           />
+          
         ) : (
           <Input name="param_first_access" placeholder="Nome de Usuário FMC" />
         )}

@@ -6,10 +6,14 @@ import { pluginApi } from '../../services/api';
 import { Container } from './styles';
 import imageArrow from '../../assets/images/arrows.svg';
 
+
+
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
 
   const initialUrl = 'http://www.juntosfmc.com.br/';
+
+  const [profileTipe, setProfileType] = useState('');
 
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
@@ -18,12 +22,39 @@ const Bainer: React.FC = () => {
     async function fetchIndication() {
       const response = await pluginApi.get('participants/profile');
        setIndication(response.data.indicator_code);
-  
        setValue(initialUrl + indication);
+
+       setProfileType(response.data.profile);
     }
 
     fetchIndication();
   }, [indication]);
+
+  let colorType = ''; 
+
+  switch(profileTipe) {
+    
+    case 'FOCALPOINT': 
+     colorType = 'verde';
+     break
+    
+    case 'PRODUTOR': 
+      colorType = 'marron';
+      break
+
+    case 'PARTICIPANTE': 
+       colorType = 'azul';
+       break
+
+    case 'FMC': 
+      colorType = 'cinza';
+      break
+
+    default: 
+       colorType = 'verde';
+  }
+
+  // console.log(colorType);
 
   const handleCopy = () => {
     setCopied(true)
@@ -33,9 +64,14 @@ const Bainer: React.FC = () => {
     }, 3000);
   }
 
+  
+
   return (
-    <Container>
+    
+    <Container colorType={colorType}>
+
       <div className="content-bainer">
+    
         <div className="content-group">
           <h1 className="title">Indicação de Produtor</h1>
           <h2 className="sub-title">
@@ -49,14 +85,13 @@ const Bainer: React.FC = () => {
                 <img src={imageArrow} alt="Arrow" />
                 <h4>
                   Para indicar você precisa copiar o link e enviar pra seu
-                  contato
+                  contato.
                 </h4>
               </div>
               <div className="bainer-guidance">
                 <img src={imageArrow} alt="Arrow" />
                 <h4>
-                  Para indicar você precisa copiar o link e enviar pra seu
-                  contato
+                  Assim que  o seu indicado receber o link ele já poderá se cadastrar.
                 </h4>
               </div>
             </div>
@@ -68,7 +103,7 @@ const Bainer: React.FC = () => {
               <div>
                 <div className="register-group">
                   <h2>Cadastra-se no Juntos FMC usando o link abaixo:</h2>
-                  {<span>{`http://www.juntosfmc.com.br/${indication}`}</span>}
+                  {<span>{`https://www.juntosfmc.com.br/?code=${indication}`}</span>}
                 </div>
                 <CopyToClipboard text={value} onCopy={() => handleCopy()}>
                   <button type="button">Copiar</button>
@@ -79,6 +114,7 @@ const Bainer: React.FC = () => {
             </div>
         </main>
       </div>
+      
     </Container>
   );
 };

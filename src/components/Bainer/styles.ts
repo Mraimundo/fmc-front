@@ -1,14 +1,34 @@
-import styled from 'styled-components';
-import banner from '../../assets/images/banner.png';
+import styled, { css } from 'styled-components';
+import bannerVerde from '../../assets/images/banner-verde.png';
+import bannerAzul from '../../assets/images/banner-azul.png';
+import bannerMarron from '../../assets/images/banner-marron.png';
+import bannerCinza from '../../assets/images/banner-cinza.png';
 
-export const Container = styled.div`
+interface ColorProps {
+  colorType: string;
+}
+
+
+export const Container = styled.div<ColorProps>`
   width: 100%;
 
   .content-bainer {
-    background-image: url(${banner});
     background-repeat: no-repeat;
     background-position: center;
     height: 463px;
+
+    ${(props) => props.colorType === 'verde' && css`
+      background-image: url(${bannerVerde});
+    `}
+    ${(props) => props.colorType === 'azul' && css`
+      background-image: url(${bannerAzul});
+    `}
+    ${(props) => props.colorType === 'marron' && css`
+      background-image: url(${bannerMarron});
+    `}
+    ${(props) => props.colorType === 'cinza' && css`
+      background-image: url(${bannerCinza});
+    `}
   }
 
   .content-group {
@@ -17,19 +37,19 @@ export const Container = styled.div`
 
   .content-group .title {
     width: 260px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 24px;
     font-weight: 28px;
-    color: #193B4E;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 10px;
   }
 
   .content-group .sub-title {
     width: 472px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     font-size: 18px;
     font-weight: 21px;
-    color: #193B4E;
+    color: ${({ theme }) => theme.font.color.primary};;
   }
 
   main{
@@ -46,17 +66,21 @@ export const Container = styled.div`
     margin-bottom: 16px;
   } 
 
+  
+  .bainer-info__children {
+    margin-top: 24px;
+  }
+
   .bainer-info__children h3 {
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};  
     font-size: 18px;
     color: #fff;
     margin-left: 25px;
-    margin-bottom: 20px;
   }
 
   .bainer-guidance h4 {
     width: 283px;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
     color: #fff;
     font-size: 16px;
     font-style: italic;
@@ -99,32 +123,39 @@ export const Container = styled.div`
     background-color: #C5CFD4; 
     font-size: 16px;
     font-weight: 18px;
-    color: #193B4E;
+    color: ${({ theme }) => theme.font.color.primary};
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
-
+  
   .indicator-code div:nth-child(2) .register-group h2{
     font-size: 14px;
-    color: #193B4E;
+    color: ${({ theme }) => theme.font.color.primary};
     align-items: center;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   .indicator-code div:nth-child(2) .register-group span {
     font-size: 14px;
     font-weight: 16px;
-    color: #193B4E;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 18px;
   }
 
   .indicator-code div:nth-child(2) button {
     width:100%;
     height: 36px;
-    background: #193B4E;
+    background: ${({ theme }) => theme.footer.background};
     color: #fff;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
-    margin-top: 18px;
+    margin-top: 12px;
     border: none;
+    transition: 0.5s;
   } 
+
+  .indicator-code div:nth-child(2) button:hover {
+    opacity: 0.9;
+    color: #fff;
+  }
 `;
