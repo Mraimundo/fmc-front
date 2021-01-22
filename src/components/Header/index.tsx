@@ -43,7 +43,8 @@ const Header: React.FC = () => {
           name={participant.nick_name}
           picture={participant.picture}
           establishment={
-            participant.profile === 'FMC' ? null : participant.establishment
+            /* participant.profile === 'FMC' ? null : participant.establishment */
+            null
           }
           profile={participant.profile}
           points={
