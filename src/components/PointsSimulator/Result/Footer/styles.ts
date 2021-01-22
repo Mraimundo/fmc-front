@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import DefaultButton from 'components/shared/Button';
+import { ReactSVG as DefaultReactSVG } from 'react-svg';
 
 export const Container = styled.div`
   margin-top: 20px;
@@ -30,4 +31,10 @@ export const Button = styled(DefaultButton)`
   height: 33px;
   border-radius: 5px;
   margin-top: 0;
+`;
+
+export const ReactSVG = styled(DefaultReactSVG)`
+  &:hover {
+    cursor: pointer;
+  }
 `;

@@ -1,8 +1,7 @@
 import React from 'react';
-import { ReactSVG } from 'react-svg';
 
 import shareImg from 'assets/images/points-simulator/share.svg';
-import { Container, Button } from './styles';
+import { Container, Button, ReactSVG } from './styles';
 
 interface Props {
   handleSaveSimulationClick(): void;

@@ -60,7 +60,10 @@ export default (props: Props) => {
   <div>
     <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 185px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <strong>PREMIO</strong>
+    <strong>
+      <span>PREMIO</span>
+      <span style="margin-left: 0px; margin-top: -2px; font-size: 12px; display: inline-block;">®</span>
+    </strong>
     <span style="font-size: 10px;">Realizado 19/20 - US$ ${premioLastRealized}</span>
   </div>
   <div style="width: 100%; margin-top: 2px;">
@@ -112,7 +115,10 @@ export default (props: Props) => {
   <div>
     <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 185px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <strong>HERO</strong>
+    <strong>
+      <span>HERO</span>
+      <span style="margin-left: 0px; margin-top: -2px; font-size: 12px; display: inline-block;">®</span>
+    </strong>
     <span style="font-size: 10px;">Realizado 19/20 - US$ ${heroLastRealized}</span>
   </div>
   <div style="width: 100%; margin-top: 2px;">
@@ -164,7 +170,10 @@ export default (props: Props) => {
   <div>
     <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 185px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px;">
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <strong>TALISMAN</strong>
+    <strong>
+      <span>TALISMAN</span>
+      <span style="margin-left: 0px; margin-top: -2px; font-size: 12px; display: inline-block;">®</span>
+    </strong>
     <span style="font-size: 10px;">Realizado 19/20 - US$ ${talismanLastRealized}</span>
   </div>
   <div style="width: 100%; margin-top: 2px;">
