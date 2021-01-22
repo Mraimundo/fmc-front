@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Option } from 'components/shared/Select';
+
 import { Product } from 'state/modules/points-simulator/interfaces';
 import {
   getProducts,
@@ -22,6 +24,7 @@ import Header, { Tab } from 'components/PointsSimulator/Calculator/Header';
 import Table from 'components/PointsSimulator/Calculator/Table';
 import Footer from 'components/PointsSimulator/Calculator/Footer';
 
+import { fixedPrecisionOf } from 'util/numbers';
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
 import { formatDate } from 'util/datetime';
 import { Container, Content, CustomTableBox, Box } from './styles';
@@ -44,6 +47,8 @@ const PointsSimulator: React.FC = () => {
   const [productsTableData, setProductsTableData] = useState<Product[]>([]);
   const [tabSelected, setTabSelected] = useState<Tab>(Tab.enhancerProductsTab);
   const [filter, setFilter] = useState<Filter>({ isEnhancer: true });
+  const [channelSelected, setChannelSelected] = useState<Option | null>(null);
+  const [shouldUpdateChannel, setShouldUpdateChannel] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,12 +68,11 @@ const PointsSimulator: React.FC = () => {
   }, [isLoadSimulatioModalOpened]);
 
   useEffect(() => {
-    dispatch(
-      actions.setDollarBaseValue(
-        coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value ||
-          0,
-      ),
+    const dollarValue = fixedPrecisionOf(
+      coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value || 0,
+      2,
     );
+    dispatch(actions.setDollarBaseValue(dollarValue));
   }, [dispatch, coinsQuotation]);
 
   useEffect(() => {
@@ -134,11 +138,23 @@ const PointsSimulator: React.FC = () => {
   );
 
   const onLoadState = useCallback(
-    (jsonStateInString: string, channelSelectId: number) => {
-      dispatch(actions.fetchChannel(channelSelectId));
+    (
+      jsonStateInString: string,
+      channelSelectId: number,
+      clientGroup: string,
+    ) => {
+      // dispatch(actions.fetchChannel(channelSelectId));
+      setShouldUpdateChannel(false);
+      setChannelSelected({
+        value: channelSelectId.toString(),
+        title: clientGroup,
+      });
+
+      dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
+
       setTimeout(() => {
-        dispatch(actions.fetchLoadState(JSON.parse(jsonStateInString)));
-      }, 1000);
+        setShouldUpdateChannel(true);
+      }, 3500);
     },
     [dispatch],
   );
@@ -166,6 +182,16 @@ const PointsSimulator: React.FC = () => {
     [dispatch],
   );
 
+  useEffect(() => {
+    if (!channelSelected) return;
+    if (shouldUpdateChannel) {
+      const channelSelectedId = parseInt(channelSelected.value, 0);
+      if (channel?.id !== channelSelectedId) {
+        handleChannelSelect(channelSelectedId);
+      }
+    }
+  }, [channelSelected, handleChannelSelect, shouldUpdateChannel, channel]);
+
   return (
     <Container id="calculator">
       <Content>
@@ -173,8 +199,9 @@ const PointsSimulator: React.FC = () => {
           tabSelected={tabSelected}
           setTabSelected={setTabSelected}
           setProductTypeIdSelected={handleProductTypeSelect}
-          setChannelIdSelected={handleChannelSelect}
           handleLoadSimulationClick={() => setIsLoadSimulatioModalOpened(true)}
+          channelSelected={channelSelected}
+          setChannelSelected={setChannelSelected}
         />
         {channel && (
           <CustomTableBox>
@@ -186,6 +213,7 @@ const PointsSimulator: React.FC = () => {
                 setPogInKilosPerLiter={handlePogKilosByLiterValueChange}
                 tabSelected={tabSelected}
                 onCheckUncheckProductHandle={onCheckUncheckProductHandle}
+                channelId={channelSelected?.value || '0'}
               />
             </Box>
             <Footer

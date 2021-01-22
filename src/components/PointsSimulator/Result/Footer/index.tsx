@@ -1,14 +1,17 @@
 import React from 'react';
-import { ReactSVG } from 'react-svg';
 
 import shareImg from 'assets/images/points-simulator/share.svg';
-import { Container, Button } from './styles';
+import { Container, Button, ReactSVG } from './styles';
 
 interface Props {
   handleSaveSimulationClick(): void;
+  handleDownloadPdf(): void;
 }
 
-const Footer: React.FC<Props> = ({ handleSaveSimulationClick }) => {
+const Footer: React.FC<Props> = ({
+  handleSaveSimulationClick,
+  handleDownloadPdf,
+}) => {
   return (
     <Container>
       <span>
@@ -16,7 +19,7 @@ const Footer: React.FC<Props> = ({ handleSaveSimulationClick }) => {
         utilizados para qualquer tipo de premiação
       </span>
       <div className="_actions-container-footer">
-        <ReactSVG src={shareImg} />
+        <ReactSVG src={shareImg} onClick={handleDownloadPdf} />
         <Button
           buttonRole="primary"
           type="button"

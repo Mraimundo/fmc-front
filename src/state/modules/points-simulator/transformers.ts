@@ -64,11 +64,16 @@ const productsApiToProducts = (products: ProductApi[]): Product[] =>
     },
     simulationPoints: {
       rebateReachedInRealSimulated: 0,
-      rebateReachedInRealAccumulated: 0,
-      sellerReachedInRealAccumulated: 0,
+      rebateReachedInRealSimulatedButUsedToGetTotal: 0,
+      rebateReachedInRealRealized: 0,
+      rebateReachedInRealTotal: 0,
       sellerReachedInRealSimulated: 0,
-      additionalMarginAccumulated: 0,
+      sellerReachedInRealSimulatedButUsedToGetTotal: 0,
+      sellerReachedInRealRealized: 0,
+      sellerReachedInRealTotal: 0,
       additionalMarginSimulated: 0,
+      additionalMarginRealized: 0,
+      additionalMarginTotal: 0,
     },
     awardsParamsToPay: {
       rebatePercentage: product.rebate_percentage_to_pay * 100,
@@ -101,6 +106,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.revenues_current_realized_in_dollar,
       ),
       totalRealized: indicators.revenues_current_realized_in_dollar,
+      totalSimulated: 0,
     },
   });
 
@@ -122,6 +128,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.pog_current_realized_in_dollar,
       ),
       totalRealized: indicators.pog_current_realized_in_dollar,
+      totalSimulated: 0,
     },
   });
 
@@ -143,6 +150,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.premio_current_realized_in_Liter,
       ),
       totalRealized: indicators.premio_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 
@@ -164,6 +172,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.hero_current_realized_in_Liter,
       ),
       totalRealized: indicators.hero_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 
@@ -185,6 +194,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.talisman_current_realized_in_Liter,
       ),
       totalRealized: indicators.talisman_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 

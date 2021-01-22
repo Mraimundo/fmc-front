@@ -37,7 +37,7 @@ const Upload: React.FC<Props> = Props => {
         });
         setTimeout(() => {
           Props.onUpdate();
-        }, 400)
+        }, 400);
         setShowModal(true);
       }
     },
@@ -58,14 +58,10 @@ const Upload: React.FC<Props> = Props => {
           accept="image/x-png, image/jpg,.pdf"
           onChange={handleAttachFile}
         />
-        {fileUrl !== '' ? (
-          <span>Nota fiscal enviada Com sucesso!</span>
-        ) : (
-          <div>
-            <ReactSVG src={uploadIcon} className="icon" />
-            <span>Carregar arquivo</span>
-          </div>
-        )}
+        <div>
+          <ReactSVG src={uploadIcon} className="icon" />
+          <span>Carregar arquivo</span>
+        </div>
       </Button>
 
       <Modal

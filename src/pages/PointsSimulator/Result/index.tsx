@@ -16,6 +16,7 @@ import SaveSimulationModal from 'components/PointsSimulator/Commom/Modals/SaveSi
 import Header from 'components/PointsSimulator/Result/Header';
 import Body, { Card } from 'components/PointsSimulator/Result/Body';
 import Footer from 'components/PointsSimulator/Result/Footer';
+import routeMap from 'routes/route-map';
 import { indicatorsToCards } from './transformers';
 
 import { Container, Content } from './styles';
@@ -26,13 +27,14 @@ const Result: React.FC = () => {
   );
   const [indicatorCards, setIndicatorCards] = useState<Card[]>([]);
   const indicators = useSelector(getIndicators);
-  const { partialDate } = useSelector(getConfiguration);
+  const configuration = useSelector(getConfiguration);
   const channel = useSelector(getChannel);
   const pointsSimulatorState = useSelector(getPointsSimulatorFullState);
   const award = useSelector(getAward);
   const simulatedDate = new Date();
 
   useEffect(() => {
+    console.log('indicators', indicators);
     setIndicatorCards(indicatorsToCards(indicators));
   }, [indicators]);
 
@@ -48,19 +50,39 @@ const Result: React.FC = () => {
     [pointsSimulatorState],
   );
 
+  const downloadPdf = useCallback(() => {
+    localStorage.setItem(
+      '@Vendavall:pdfData',
+      JSON.stringify(pointsSimulatorState),
+    );
+
+    const linkClick = document.createElement('a');
+    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorPage}`;
+
+    linkClick.target = '_blank';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [pointsSimulatorState]);
+
   return (
     <Container id="result">
       <Content>
-        {channel && partialDate && (
+        {channel && configuration.partialDate && (
           <Header
-            partialDate={partialDate}
+            partialDate={configuration.partialDate}
             simulatedDate={simulatedDate}
             channelName={channel.groupName}
           />
         )}
-        <Body cards={indicatorCards} award={award} />
+        <Body
+          cards={indicatorCards}
+          award={award}
+          configuration={configuration}
+        />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
+          handleDownloadPdf={downloadPdf}
         />
       </Content>
 

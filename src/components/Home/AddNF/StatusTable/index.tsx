@@ -1,24 +1,29 @@
 import React from 'react';
 
-import { Container } from './styles'; 
+import { Link } from 'react-router-dom';
+import routeMap from 'routes/route-map';
+import { Container } from './styles';
 
 interface Props {
   nfList: any;
+  display: string;
 }
 
 const StatusTable: React.FC<Props> = Props => {
   function countNFByStatus(nf: any[], status: number) {
     let count = 0;
-    nf.forEach(item => {
-      if (item.status_id === status) {
-        count += 1;
-      }
+    nf.forEach(safra => {
+      safra.item.forEach((nota: { status_id: number }) => {
+        if (nota.status_id === status) {
+          count += 1;
+        }
+      });
     });
     return count;
   }
   return (
-    <Container>
-      
+    <Container display={Props.display}>
+      <Link to={routeMap.receipts}>
         <ul>
           <li>
             <p>Em análise</p>
@@ -36,7 +41,7 @@ const StatusTable: React.FC<Props> = Props => {
             <p>{countNFByStatus(Props.nfList, 2)} </p>
           </li>
         </ul>
-   
+      </Link>
     </Container>
   );
 };

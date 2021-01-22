@@ -73,11 +73,17 @@ export const Content = styled.div<ContentProps>`
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    h3 {
+      max-width: 330px;
+    }
 
     ${({ secondary }) =>
     secondary &&
         css`
           flex-flow: row wrap;
+          h3 {
+            max-width: none;
+          }
     `}
   }
 
@@ -88,8 +94,11 @@ export const Content = styled.div<ContentProps>`
           margin: 0 0 20px 0;
         }
         > p {
-          width: 50%;
-          padding-right: 2em;
+          @media (min-width: 768px) {
+            width: 50%;
+            padding-right: 2em;
+          }
+         
         }
   `}
 
@@ -110,6 +119,7 @@ export const Title = styled.h3`
 
   @media (min-width: 1024px) {
     margin: auto 20px;
+    
   }
 
   @media (min-width: 768px) {

@@ -61,6 +61,6 @@ export const Cards = styled.div`
   max-width: 1030px;
   margin-top: 11px;
   display: grid;
-  grid-column-gap: 13px;
+  grid-gap: 13px;
   grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
 `;

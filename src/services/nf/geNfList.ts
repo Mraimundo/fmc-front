@@ -8,7 +8,7 @@ interface ApiResponse {
 export default async (): Promise<Nf[]> => {
   try {
     const { data } = await pluginApi.get<ApiResponse>(
-      '/participants/uploadNota?status=0',
+      '/participants/uploadNota',
     );
     return data.notas;
   } catch {

@@ -1,4 +1,4 @@
-import { Product, Indicator, IndicatorType } from '../interfaces';
+import { Product, Indicator } from '../interfaces';
 import getPercentage from './get-goal-realized-percentage';
 
 interface IndicatorDTO {
@@ -9,6 +9,7 @@ interface IndicatorDTO {
 interface SimulationData {
   totalRealized: number;
   totalPercentageRealized: number;
+  totalSimulated: number;
 }
 
 const calculateSimulatedRevenues = ({
@@ -30,7 +31,9 @@ const calculateSimulatedRevenues = ({
     totalRealized,
   );
 
-  return { totalRealized, totalPercentageRealized };
+  const totalSimulated = simulatedProductsValue;
+
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 const calculateSimulatedPog = ({
@@ -52,7 +55,9 @@ const calculateSimulatedPog = ({
     totalRealized,
   );
 
-  return { totalRealized, totalPercentageRealized };
+  const totalSimulated = simulatedProductsValue;
+
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 const calculateSimulatedProduct = ({
@@ -65,23 +70,16 @@ const calculateSimulatedProduct = ({
 
   const totalRealized =
     indicator.currentRealized +
-    (product?.simulationData.revenuesInKilosPerLiter || 0);
+    (product?.simulationData.pogInKilosPerLiter || 0);
 
   const totalPercentageRealized = getPercentage(
     indicator.currentGoal,
     totalRealized,
   );
 
-  if (indicator.type === IndicatorType.talisman) {
-    console.log('talisman');
-    console.log('totalRealized', totalRealized);
-    console.log('totalPercentageRealized', totalPercentageRealized);
-    console.log('indicator.currentGoal', indicator.currentGoal);
-    console.log('(realized * 100) / goal || 0');
-    console.log('Fimtalisman');
-  }
+  const totalSimulated = product?.simulationData.pogInKilosPerLiter || 0;
 
-  return { totalRealized, totalPercentageRealized };
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 export {

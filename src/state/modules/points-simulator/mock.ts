@@ -64,11 +64,16 @@ const mock: PointsSimulatorState = {
       },
       simulationPoints: {
         rebateReachedInRealSimulated: 0,
-        rebateReachedInRealAccumulated: 0,
-        sellerReachedInRealAccumulated: 0,
+        rebateReachedInRealSimulatedButUsedToGetTotal: 0,
+        rebateReachedInRealRealized: 0,
+        rebateReachedInRealTotal: 0,
         sellerReachedInRealSimulated: 0,
-        additionalMarginAccumulated: 0,
+        sellerReachedInRealSimulatedButUsedToGetTotal: 0,
+        sellerReachedInRealRealized: 0,
+        sellerReachedInRealTotal: 0,
         additionalMarginSimulated: 0,
+        additionalMarginRealized: 0,
+        additionalMarginTotal: 0,
       },
       awardsParamsToPay: {
         rebatePercentage: 3.5,
@@ -93,16 +98,20 @@ const mock: PointsSimulatorState = {
       simulationData: {
         totalPercentageRealized: 50,
         totalRealized: 666000,
+        totalSimulated: 0,
       },
     },
   ],
   // MAYCONN VER DEPOIS SE OS VALORES ABAIXO REALMENTE SAO 0
   award: {
-    totalRebate: 0,
     simulatedRebate: 0,
+    realizedRebate: 0,
+    totalRebate: 0,
     simulatedSeller: 0,
+    realizedSeller: 0,
     totalSeller: 0,
     simulatedAdditionalMargin: 0,
+    realizedAdditionalMargin: 0,
     totalAdditionalMargin: 0,
   },
 };

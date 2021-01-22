@@ -16,6 +16,7 @@ const notAllowedReadOnlyMethods: (Method | undefined)[] = [
   'DELETE',
   'PATCH',
   'patch',
+  'GET',
 ];
 
 let readOnly = false;
