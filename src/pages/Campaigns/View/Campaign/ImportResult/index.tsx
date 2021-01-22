@@ -4,7 +4,6 @@ import sendFile from 'services/campaigns-counting/importFinalStock';
 import Button from 'components/shared/Button';
 import { Campaign as ICampaign } from 'services/campaigns/getCampaign';
 import hasStock, { Stock } from 'services/campaigns/hasStock';
-import getUrlDownloadStock from 'services/campaigns-counting/getUrlToStockDownload';
 
 import { useAuth } from 'context/AuthContext';
 import { useToast } from 'context/ToastContext';
