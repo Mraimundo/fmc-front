@@ -15,7 +15,7 @@ const PointsSimulator: React.FC = () => {
       const file = new Blob([b], { type: 'application/pdf' });
       const tmpUrl = URL.createObjectURL(file);
 
-      window.open(tmpUrl, '_blank');
+      window.open(tmpUrl, '_self');
       setTimeout(() => {
         window.close();
       }, 700);
