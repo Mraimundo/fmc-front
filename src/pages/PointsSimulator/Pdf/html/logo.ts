@@ -27,7 +27,7 @@ export default `
 <tr>
   <td style="padding-right: 0px;padding-left: 0px;" align="left">
 
-    <img align="left" border="0" src="http://localhost:3000/images/logo-fmc.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 47%;max-width: 169.2px;" width="169.2" class="v-src-width v-src-max-width"/>
+    <img align="left" border="0" src="https://juntosfmc.vendavall.com.br/images/logo-fmc.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 47%;max-width: 169.2px;" width="169.2" class="v-src-width v-src-max-width"/>
 
   </td>
 </tr>
@@ -56,7 +56,7 @@ export default `
 <tr>
   <td style="padding-right: 0px;padding-left: 0px;" align="right">
 
-    <img align="right" border="0" src="http://localhost:3000/images/logo-equipe.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 38%;max-width: 136.8px;" width="136.8" class="v-src-width v-src-max-width"/>
+    <img align="right" border="0" src="https://juntosfmc.vendavall.com.br/images/logo-equipe.svg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 38%;max-width: 136.8px;" width="136.8" class="v-src-width v-src-max-width"/>
 
   </td>
 </tr>
