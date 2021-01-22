@@ -1,19 +1,18 @@
-/* eslint-disable */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { scroller, animateScroll } from 'react-scroll';
 
-import { getMode } from 'state/modules/points-simulator/selectors';
+import {
+  getMode,
+  getPointsSimulatorFullState,
+} from 'state/modules/points-simulator/selectors';
 import { setMode } from 'state/modules/points-simulator/actions';
 import { Mode } from 'state/modules/points-simulator/types';
 
+import routeMap from 'routes/route-map';
 import Calculator from './Calculator';
 import Result from './Result';
 import Pdf from './Pdf';
-import html2Pdf from 'html2pdf.js';
-import { html } from './Pdf/html';
-
-import log from 'assets/images/logo.png';
 
 const PointsSimulator: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +20,7 @@ const PointsSimulator: React.FC = () => {
     Mode.calculator,
   );
   const mode = useSelector(getMode);
+  const pointsSimulatorState = useSelector(getPointsSimulatorFullState);
 
   useEffect(() => {
     if (mode === Mode.result) {
@@ -50,41 +50,40 @@ const PointsSimulator: React.FC = () => {
 
   const [t, setT] = useState(true);
 
-  const testRef = useRef<HTMLDivElement>(null);
+  const testPdf = useCallback(() => {
+    localStorage.setItem(
+      '@Vendavall:pdfData',
+      JSON.stringify(pointsSimulatorState),
+    );
 
-  const testing = useCallback(
-    () => {
-      /*const html = document.querySelector('#_container-pdf');
-      if (!html) return;
-      htmlToCanvas(html as HTMLElement).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
+    const linkClick = document.createElement('a');
+    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorPage}`;
 
-
-      });*/
-      const element = window.document.createElement('div');
-      element.innerHTML = html;
-      /*document.body.appendChild(linkClick);
-      linkClick.click();
-      document.body.removeChild(linkClick);*/
-      const test = document.createElement
-      //const element = document.getElementById('_container-pdf');
-      const t = html2Pdf().from(element).save();
-    },[]
-  );
+    linkClick.target = '_blank';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [pointsSimulatorState]);
 
   return (
     <>
-      <button type="button" style={{ display: 'none'}}onClick={() => setT(old => !old)} >
+      <button
+        type="button"
+        style={{ display: 'none' }}
+        onClick={() => setT(old => !old)}
+      >
         teste
       </button>
-      <button type="button" style={{ display: 'none'}}onClick={testing} >oooo</button>
+      <button type="button" style={{ display: 'none' }} onClick={testPdf}>
+        oooo
+      </button>
       {t ? (
         <>
           <Calculator />
           {internalModeControl === Mode.result && <Result />}
         </>
       ) : (
-        <Pdf/>
+        <Pdf />
       )}
     </>
   );

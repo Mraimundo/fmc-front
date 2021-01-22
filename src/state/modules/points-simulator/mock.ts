@@ -98,6 +98,7 @@ const mock: PointsSimulatorState = {
       simulationData: {
         totalPercentageRealized: 50,
         totalRealized: 666000,
+        totalSimulated: 0,
       },
     },
   ],
