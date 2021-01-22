@@ -24,6 +24,7 @@ export default {
   report: '/relatorios',
   pointsSimulator: {
     calculator: '/simulador',
+    pdfGeneratorPage: '/pdfGeneratorPage',
   },
   qrCode: '/qr',
   receipts: '/receipts',
