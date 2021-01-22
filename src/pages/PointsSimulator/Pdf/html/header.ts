@@ -38,7 +38,7 @@ export default (props: Props) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:30px 10px 16px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
-      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span style="line-height: 22.4px; font-size: 16px;">Simula&ccedil;&atilde;o de Pontos no programa de relacionamento JUNTOS</span></strong></span></p>
+      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span style="line-height: 22.4px; font-size: 16px;">Simula&ccedil;&atilde;o de Pontos no Programa de Relacionamento JUNTOS</span></strong></span></p>
     </div>
 
         </td>
