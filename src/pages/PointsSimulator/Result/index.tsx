@@ -16,6 +16,7 @@ import SaveSimulationModal from 'components/PointsSimulator/Commom/Modals/SaveSi
 import Header from 'components/PointsSimulator/Result/Header';
 import Body, { Card } from 'components/PointsSimulator/Result/Body';
 import Footer from 'components/PointsSimulator/Result/Footer';
+import routeMap from 'routes/route-map';
 import { indicatorsToCards } from './transformers';
 
 import { Container, Content } from './styles';
@@ -49,6 +50,21 @@ const Result: React.FC = () => {
     [pointsSimulatorState],
   );
 
+  const downloadPdf = useCallback(() => {
+    localStorage.setItem(
+      '@Vendavall:pdfData',
+      JSON.stringify(pointsSimulatorState),
+    );
+
+    const linkClick = document.createElement('a');
+    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorPage}`;
+
+    linkClick.target = '_blank';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [pointsSimulatorState]);
+
   return (
     <Container id="result">
       <Content>
@@ -66,6 +82,7 @@ const Result: React.FC = () => {
         />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
+          handleDownloadPdf={downloadPdf}
         />
       </Content>
 

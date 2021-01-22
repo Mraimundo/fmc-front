@@ -9,6 +9,7 @@ interface IndicatorDTO {
 interface SimulationData {
   totalRealized: number;
   totalPercentageRealized: number;
+  totalSimulated: number;
 }
 
 const calculateSimulatedRevenues = ({
@@ -30,7 +31,9 @@ const calculateSimulatedRevenues = ({
     totalRealized,
   );
 
-  return { totalRealized, totalPercentageRealized };
+  const totalSimulated = simulatedProductsValue;
+
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 const calculateSimulatedPog = ({
@@ -52,7 +55,9 @@ const calculateSimulatedPog = ({
     totalRealized,
   );
 
-  return { totalRealized, totalPercentageRealized };
+  const totalSimulated = simulatedProductsValue;
+
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 const calculateSimulatedProduct = ({
@@ -72,7 +77,9 @@ const calculateSimulatedProduct = ({
     totalRealized,
   );
 
-  return { totalRealized, totalPercentageRealized };
+  const totalSimulated = product?.simulationData.pogInKilosPerLiter || 0;
+
+  return { totalRealized, totalPercentageRealized, totalSimulated };
 };
 
 export {

@@ -104,6 +104,7 @@ export interface Indicator {
   simulationData: {
     totalRealized: number;
     totalPercentageRealized: number;
+    totalSimulated: number;
   };
 }
 

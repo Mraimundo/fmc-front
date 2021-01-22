@@ -106,6 +106,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.revenues_current_realized_in_dollar,
       ),
       totalRealized: indicators.revenues_current_realized_in_dollar,
+      totalSimulated: 0,
     },
   });
 
@@ -127,6 +128,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.pog_current_realized_in_dollar,
       ),
       totalRealized: indicators.pog_current_realized_in_dollar,
+      totalSimulated: 0,
     },
   });
 
@@ -148,6 +150,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.premio_current_realized_in_Liter,
       ),
       totalRealized: indicators.premio_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 
@@ -169,6 +172,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.hero_current_realized_in_Liter,
       ),
       totalRealized: indicators.hero_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 
@@ -190,6 +194,7 @@ const indicatorsApiToIndicators = (indicators: IndicatorsApi): Indicator[] => {
         indicators.talisman_current_realized_in_Liter,
       ),
       totalRealized: indicators.talisman_current_realized_in_Liter,
+      totalSimulated: 0,
     },
   });
 
