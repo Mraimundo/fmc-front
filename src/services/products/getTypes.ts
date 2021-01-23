@@ -42,7 +42,7 @@ export default async (): Promise<Type[]> => {
   try {
     const {
       data: { types },
-    } = await pluginApi.get<ApiResponse>('fmc-products/types');
+    } = await pluginApi.get<ApiResponse>('fmc-products/types?featured=1');
     return types;
   } catch (e) {
     return [];
