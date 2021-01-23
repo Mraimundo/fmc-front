@@ -240,9 +240,11 @@ const Tr: React.FC<TrProps> = ({
               }, 600);
             }}
             maxLength={
-              ((product.stock.inKilosPerLiter || 0) +
-                (product.simulationData.revenuesInKilosPerLiter || 0)) /
-              100
+              (product.stock.inKilosPerLiter || 0) >= 0
+                ? ((product.stock.inKilosPerLiter || 0) +
+                    (product.simulationData.revenuesInKilosPerLiter || 0)) /
+                  100
+                : null
             }
           />
         </CustomInputBox>
