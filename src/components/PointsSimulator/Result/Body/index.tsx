@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Award,
   Configuration,
+  Indicator,
   IndicatorType,
 } from 'state/modules/points-simulator/interfaces';
 import { formatPoints } from 'util/points';
@@ -36,6 +37,7 @@ interface Props {
   cards: Card[];
   award: Award;
   configuration: Configuration;
+  indicators: Indicator[];
 }
 
 const title = (item: Card) => (
@@ -55,7 +57,7 @@ const title = (item: Card) => (
   </>
 );
 
-const Body: React.FC<Props> = ({ cards, award, configuration }) => {
+const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
   const [
     shouldShowTotalRebatePoints,
     setShouldShowTotalRebatePoints,
@@ -73,21 +75,36 @@ const Body: React.FC<Props> = ({ cards, award, configuration }) => {
     setShouldShowSimulatedSellerPoints,
   ] = useState(false);
 
+  const [pog, setPog] = useState<Indicator | undefined>(undefined);
+  const [revenues, setRevenues] = useState<Indicator | undefined>(undefined);
+
   useEffect(() => {
-    const pog = cards.find(item => item.type === IndicatorType.pog);
-    const revenues = cards.find(item => item.type === IndicatorType.revenues);
+    const foundPog = indicators.find(item => item.type === IndicatorType.pog);
+    const foundRevenues = indicators.find(
+      item => item.type === IndicatorType.revenues,
+    );
+
+    setPog(foundPog);
+    setRevenues(foundRevenues);
+  }, [indicators]);
+
+  useEffect(() => {
+    const foundPog = cards.find(item => item.type === IndicatorType.pog);
+    const foundRevenues = cards.find(
+      item => item.type === IndicatorType.revenues,
+    );
 
     setShouldShowTotalSellerPoints(
-      (pog?.percentageSimulated || 0) >=
+      (foundPog?.percentageSimulated || 0) >=
         configuration.minimumSellerPercentageToMakePoints &&
-        (revenues?.percentageSimulated || 0) >=
+        (foundRevenues?.percentageSimulated || 0) >=
           configuration.minimumSellerPercentageToMakePoints,
     );
 
     setShouldShowTotalRebatePoints(
-      (pog?.percentageSimulated || 0) >=
+      (foundPog?.percentageSimulated || 0) >=
         configuration.minimumRebatePercentageToMakePoints &&
-        (revenues?.percentageSimulated || 0) >=
+        (foundRevenues?.percentageSimulated || 0) >=
           configuration.minimumRebatePercentageToMakePoints,
     );
 
@@ -100,7 +117,30 @@ const Body: React.FC<Props> = ({ cards, award, configuration }) => {
     <Container>
       <CustomSimulateContent>
         <TitleBox>
-          <h3>Venda simulada</h3>
+          <h3>Valor da venda simulada</h3>
+        </TitleBox>
+        <CustomSimuteBox>
+          <MiniBox
+            title="Faturamento"
+            text={`US$ ${formatPoints(
+              revenues?.simulationData.totalSimulated || 0,
+              0,
+              0,
+            )}`}
+          />
+          <MiniBox
+            title="POG"
+            text={`US$ ${formatPoints(
+              pog?.simulationData.totalSimulated || 0,
+              0,
+              0,
+            )}`}
+          />
+        </CustomSimuteBox>
+      </CustomSimulateContent>
+      <CustomSimulateContent>
+        <TitleBox>
+          <h3>Pontos simulados</h3>
           <span>
             (Os pontos referentes a venda simulada assumem o atingimento de 100%
             da meta)

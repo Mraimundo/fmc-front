@@ -79,6 +79,7 @@ const Result: React.FC = () => {
           cards={indicatorCards}
           award={award}
           configuration={configuration}
+          indicators={indicators}
         />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
