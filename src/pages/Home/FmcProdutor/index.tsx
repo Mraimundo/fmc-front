@@ -52,7 +52,7 @@ const FmcProdutorHome: React.FC = () => {
         <Title>Destaques </Title>
         {!!highlights && <Highlights items={highlights} />}
       </Wrapper>
-      <ShowCaseWrapper>
+      <ShowCaseWrapper style={{ display: 'none' }}>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios</Title>
           <Showcase products={products} isSimulating={simulating} />
