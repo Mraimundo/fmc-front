@@ -58,23 +58,6 @@ const title = (item: Card) => (
 );
 
 const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
-  const [
-    shouldShowTotalRebatePoints,
-    setShouldShowTotalRebatePoints,
-  ] = useState(false);
-  const [
-    shouldShowTotalSellerPoints,
-    setShouldShowTotalSellerPoints,
-  ] = useState(false);
-  const [
-    shouldShowSimulatedRebatePoints,
-    setShouldShowSimulatedRebatePoints,
-  ] = useState(false);
-  const [
-    shouldShowSimulatedSellerPoints,
-    setShouldShowSimulatedSellerPoints,
-  ] = useState(false);
-
   const [pog, setPog] = useState<Indicator | undefined>(undefined);
   const [revenues, setRevenues] = useState<Indicator | undefined>(undefined);
 
@@ -87,31 +70,6 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
     setPog(foundPog);
     setRevenues(foundRevenues);
   }, [indicators]);
-
-  useEffect(() => {
-    const foundPog = cards.find(item => item.type === IndicatorType.pog);
-    const foundRevenues = cards.find(
-      item => item.type === IndicatorType.revenues,
-    );
-
-    setShouldShowTotalSellerPoints(
-      (foundPog?.percentageSimulated || 0) >=
-        configuration.minimumSellerPercentageToMakePoints &&
-        (foundRevenues?.percentageSimulated || 0) >=
-          configuration.minimumSellerPercentageToMakePoints,
-    );
-
-    setShouldShowTotalRebatePoints(
-      (foundPog?.percentageSimulated || 0) >=
-        configuration.minimumRebatePercentageToMakePoints &&
-        (foundRevenues?.percentageSimulated || 0) >=
-          configuration.minimumRebatePercentageToMakePoints,
-    );
-
-    setShouldShowSimulatedRebatePoints(award.simulatedRebate >= 0);
-
-    setShouldShowSimulatedSellerPoints(award.simulatedSeller >= 0);
-  }, [cards, configuration, award]);
 
   return (
     <Container>
@@ -149,11 +107,7 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
         <CustomSimuteBox>
           <MiniBox
             title="Pontos do rebate"
-            text={`${
-              shouldShowSimulatedRebatePoints
-                ? formatPoints(award.simulatedRebate, 0, 0)
-                : '0'
-            } pontos`}
+            text={`${formatPoints(award.simulatedRebate, 0, 0)} pontos`}
           />
           <MiniBox
             title="Margem adicional"
@@ -161,11 +115,7 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
           />
           <MiniBox
             title="Premiação de vendedor"
-            text={`${
-              shouldShowSimulatedSellerPoints
-                ? formatPoints(award.simulatedSeller, 0, 0)
-                : '0'
-            } pontos`}
+            text={`${formatPoints(award.simulatedSeller, 0, 0)} pontos`}
           />
         </CustomSimuteBox>
       </CustomSimulateContent>
@@ -176,11 +126,7 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
         <CustomAcumulateBox>
           <MiniBox
             title="Pontos do rebate"
-            text={`${
-              shouldShowTotalRebatePoints
-                ? formatPoints(award.totalRebate, 0, 0)
-                : '0'
-            } pontos`}
+            text={`${formatPoints(award.totalRebate, 0, 0)} pontos`}
           />
           <MiniBox
             title="Margem adicional"
@@ -188,11 +134,7 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
           />
           <MiniBox
             title="Premiação de vendedor"
-            text={`${
-              shouldShowTotalSellerPoints
-                ? formatPoints(award.totalSeller, 0, 0)
-                : '0'
-            } pontos`}
+            text={`${formatPoints(award.totalSeller, 0, 0)} pontos`}
           />
         </CustomAcumulateBox>
       </CustomAcumulateContent>
