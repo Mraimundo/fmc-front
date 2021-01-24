@@ -31,21 +31,15 @@ const Details: React.FC<Props> = Props => {
 
   useEffect(() => {
     if (Props.receiptId !== '') {
-      console.log('>> PROPS');
-      console.log(Props.receiptId);
       getReceipt(Props.receiptId).then(data => {
         setDetails(data);
-        console.log('setDetails');
-        console.log(data);
       });
     }
   }, [Props.receiptId]);
 
   return (
     <ModalContainer modalOpen={Props.modalOpen}>
-      <CloseModalOverlay
-        onClick={() => Props.closeModalHandler()}
-      ></CloseModalOverlay>
+      <CloseModalOverlay onClick={() => Props.closeModalHandler()} />
       <Content>
         <PageTitle>
           Nota enviada em: {formatDate(details?.dadosnota[0].datacompra)}
@@ -138,7 +132,7 @@ const Details: React.FC<Props> = Props => {
                     <strong>Valor unitário:</strong> R${item.unitary_value}{' '}
                     <br />
                     <strong>Desconto:</strong>{' '}
-                    {item.desconto === '' ? '-' : 'R$' + item.desconto}
+                    {item.desconto === '' ? '-' : `R$${item.desconto}`}
                   </div>
 
                   <div>

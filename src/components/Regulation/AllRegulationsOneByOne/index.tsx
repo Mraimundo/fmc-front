@@ -47,9 +47,7 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     getAllRegulations().then(data => {
       const regulationsToAccept = data
         .filter(item => !item.accepted)
-        .sort((itemA, itemB) =>
-          itemA.type === 'regulation_of_campaign' ? -1 : 1,
-        );
+        .sort(itemA => (itemA.type === 'regulation_of_campaign' ? -1 : 1));
       if (regulationsToAccept.length > 0) {
         setRegulations(regulationsToAccept);
         setShowModal(true);
@@ -98,8 +96,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
       getRegulationById(selectedRegulation.id)
         .then(data => {
           setRegulation(data);
-          console.log('regulation');
-          console.log(data);
           setCanAccept(false);
         })
         .finally(() => {
@@ -131,15 +127,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     }
     setAccepting(false);
   }, [regulation, addToast, regulations, refreshParticipant]);
-
-  /* const handleDivScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
-    if (
-      e.currentTarget.scrollHeight - e.currentTarget.scrollTop <=
-      e.currentTarget.clientHeight + 2
-    ) {
-      setCanAccept(true);
-    }
-  }; */
 
   const acceptAction = useMemo(
     () => (
@@ -180,10 +167,6 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
         >
           Aceito participar
         </StyledButtonConfirm>
-        {/* <span>
-          {`O botão "Aceito Participar" será habilitado após a leitura do
-                regulamento na integra.`}
-        </span> */}
       </>
     ),
     [accepting, handleAcceptClick, canAccept, loading, regulation],

@@ -1,14 +1,11 @@
 import ReactGA from 'react-ga';
 
-/**
- * Integração com o google analytics
- */
 const GA_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 const env = process.env.NODE_ENV;
 let gaPageView = (segment: string) => {
+  // eslint-disable-next-line no-console
   console.log(`just homolog console ${segment}`);
 };
-/* console.log(process.env.GOOGLE_ANALYTICS_ID); */
 if (env === 'production' && GA_ID) {
   ReactGA.initialize(GA_ID);
   /**
@@ -20,17 +17,8 @@ if (env === 'production' && GA_ID) {
   };
 }
 
-/**
- * Registrar log de acesso no Vendavall
- * @ param {String} segment pathname acessado
- * /
-const vendavallPageView = segment => {
-  /*console.tron.log(`TODO: Implementar log de acesso no vendavall [${segment}]`);* /
-}; */
-
 const accessLogger = {
   pageView: (segment: string) => {
-    // vendavallPageView(segment);
     gaPageView(segment);
   },
 };
