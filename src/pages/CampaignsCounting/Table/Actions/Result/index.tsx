@@ -18,11 +18,10 @@ const Result: React.FC<Props> = ({ id, status }) => {
 
   const handleClick = useCallback(async () => {
     setLoading(true);
-    console.log('oi', id);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [id]);
+  }, []);
 
   const handleImportResults = useCallback(
     async (

@@ -112,15 +112,10 @@ const FarmDataForm: React.FC<Props> = ({
       }
     }
 
-    // MAYCONN
-    // Validar CPF e CNPJ
-
     return true;
   }, [memberTypeSelected, ufSelected, cpfCnpjInput, nameInput, cityInput]);
 
   const handleAddMember = useCallback((): void => {
-    console.log(farmAgree);
-
     if (farmAgree === false) {
       addToast({
         type: 'error',

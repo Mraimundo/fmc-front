@@ -243,11 +243,6 @@ const getRebateReachedValuesInReal = ({
     100; // *
   // finalMultiplierValue;
 
-  console.log(
-    'percentageValueToApplyInDecimalInTotalAmount',
-    percentageValueToApplyInDecimalInTotalAmount,
-  );
-
   const rebateReachedInRealSimulatedButUsedToGetTotal =
     ((product.simulationData.pogRealizedNetInRealSimulated *
       percentageTotalToPayInTotalAmount) /
@@ -441,8 +436,6 @@ export default ({
         additionalMarginTotal,
       },
     };
-
-    console.log('produto com pontos', test);
 
     return test;
   });
