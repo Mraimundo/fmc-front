@@ -51,8 +51,6 @@ const Header: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   const [errorsInTab, setErrorsInTab] = useState<Tab[]>([]);
   const { errors } = useFormContext();
 
-  console.log('err', errors);
-
   useEffect(() => {
     const tmpErrors: Tab[] = [];
 
