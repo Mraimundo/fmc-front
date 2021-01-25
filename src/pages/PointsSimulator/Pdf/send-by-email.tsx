@@ -16,7 +16,7 @@ const SendByEmail: React.FC = () => {
       const file = new Blob([b], { type: 'application/pdf' });
       const { url } = await sendFile(file, 'test');
 
-      const mailBody = `Baixe agora mesmo o <a href='${url}'>Pdf</a>`;
+      const mailBody = `Baixe agora mesmo o <a href="${url}">Pdf</a>`;
       window.open(`mailto:email@example.com?subject=Subject&body=${mailBody}`);
       setTimeout(() => {
         window.close();
