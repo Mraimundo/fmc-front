@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import useOnClickOutside from 'hooks/use-on-click-outside';
 
 import shareImg from 'assets/images/points-simulator/share.svg';
-import { Container, Button, ReactSVG } from './styles';
+import { Container, Button, ShareContainer, ReactSVG } from './styles';
 
 interface Props {
   handleSaveSimulationClick(): void;
   handleDownloadPdf(): void;
+  handleSendByEmail(): void;
 }
 
 const Footer: React.FC<Props> = ({
   handleSaveSimulationClick,
   handleDownloadPdf,
+  handleSendByEmail,
 }) => {
+  const [visible, isVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useOnClickOutside(dropdownRef, () => isVisible(false));
+
   return (
     <Container>
       <span>
@@ -19,7 +27,22 @@ const Footer: React.FC<Props> = ({
         utilizados para qualquer tipo de premiação
       </span>
       <div className="_actions-container-footer">
-        <ReactSVG src={shareImg} onClick={handleDownloadPdf} />
+        <ShareContainer ref={dropdownRef}>
+          <ReactSVG
+            src={shareImg}
+            onClick={() => isVisible(oldValue => !oldValue)}
+          />
+          {visible && (
+            <div id="share-menu-drop">
+              <button onClick={handleDownloadPdf} type="button">
+                Download
+              </button>
+              <button onClick={handleSendByEmail} type="button">
+                Compartilhar por email
+              </button>
+            </div>
+          )}
+        </ShareContainer>
         <Button
           buttonRole="primary"
           type="button"
