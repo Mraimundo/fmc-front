@@ -26,6 +26,7 @@ export default {
   pointsSimulator: {
     calculator: '/simulador',
     pdfGeneratorPage: '/pdfGeneratorPage',
+    pdfGeneratorEmail: '/pdfGeneratorEmail',
   },
   qrCode: '/qr',
   receipts: '/receipts',
