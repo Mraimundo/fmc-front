@@ -23,14 +23,14 @@ export const Container = styled.div`
   .nominated .participants-info h3{
     font-size: 18px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #2A4207;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 8px;
   }
 
   .nominated .participants-info h4 {
     font-size: 16px;
     font-family: 'Helvetica Neue', sans-serif;
-    color: #2A4207;
+    color: ${({ theme }) => theme.font.color.primary};
     margin-bottom: 20px;
   }
 
@@ -62,6 +62,5 @@ export const Container = styled.div`
         background: #efefef;
         color: #000;
       }
-    }
   }
 `;
