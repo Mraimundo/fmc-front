@@ -135,7 +135,7 @@ const DefaultHome: React.FC = () => {
       {isParticipant && showCatalog && (
         <ShowCaseWrapper>
           <Wrapper>
-            <Title reverse>Vitrine de Prêmios</Title>
+            <Title reverse>Vitrine de Prêmios </Title>
             <Showcase products={products} isSimulating={simulating} />
           </Wrapper>
         </ShowCaseWrapper>
