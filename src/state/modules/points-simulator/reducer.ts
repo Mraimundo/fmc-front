@@ -86,12 +86,15 @@ const CampaignsManagerReducer: Reducer<
         if (foundIndex >= 0) {
           const product = draft.products[foundIndex];
           if (
+            product.stock.inKilosPerLiter < 0 ||
             pogInKilosPerLiter <=
-            product.simulationData.revenuesInKilosPerLiter +
-              product.stock.inKilosPerLiter
+              product.simulationData.revenuesInKilosPerLiter +
+                product.stock.inKilosPerLiter
           ) {
+            console.log('1');
             product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
           } else {
+            console.log('2');
             product.simulationData.pogInKilosPerLiter =
               product.simulationData.revenuesInKilosPerLiter +
               product.stock.inKilosPerLiter;
