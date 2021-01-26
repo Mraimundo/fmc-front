@@ -62,7 +62,7 @@ const List: React.FC<Props> = Props => {
           <span></span>
           <div>
             <h3>Total</h3>
-            <h4> {Props.safra.totalsafra.toFixed(2)} FMC Coins</h4>
+            <h4> {Props.safra.totalsafra} FMC Coins</h4>
           </div>
         </Header>
         {isOpen && (

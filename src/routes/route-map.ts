@@ -29,5 +29,5 @@ export default {
     pdfGeneratorEmail: '/pdfGeneratorEmail',
   },
   qrCode: '/qr',
-  receipts: '/receipts',
+  receipts: '/extrato-notas',
 };

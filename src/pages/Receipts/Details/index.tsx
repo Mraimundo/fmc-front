@@ -147,7 +147,7 @@ const Details: React.FC<Props> = Props => {
 
         <LinkBottom>
           Dúvidas sobre o preenchimento desta nota?
-          <Link to={routeMap.faq}>Clique aqui</Link>
+          <Link to={routeMap.contact}>Clique aqui</Link>
         </LinkBottom>
       </Content>
     </ModalContainer>
