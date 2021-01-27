@@ -5,6 +5,7 @@ import DefaultProductTypeSelect from '../CustomSelects/ProductTypes';
 
 export const Container = styled.div`
   margin-top: 40px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 `;
@@ -46,11 +47,13 @@ export const SecondBox = styled.div`
 `;
 
 export const CustomText = styled.span`
+  font-size: 16px;
+  color: ${({ theme }) => theme.font.color.primary};
   margin-right: 12px;
 `;
 
 export const ChannelSelect = styled(DefaultChannelSelect)`
-  max-width: 267px;
+  max-width: 248px;
   height: 40px;
   margin-right: 34px;
   margin-left: 12px;
@@ -116,4 +119,25 @@ export const Item = styled.div<ItemProps>`
         color: #fff;
       }
     `}
+`;
+
+export const SimulationsContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const CategoryContainer = styled.div`
+  width: 110px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ theme }) => theme.font.color.quartenary};
+
+  > span {
+    font-size: 16px;
+    color: ${({ theme }) => theme.font.color.quartenary};
+  }
 `;
