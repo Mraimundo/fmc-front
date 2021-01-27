@@ -28,7 +28,7 @@ const ChannelsSelect: React.FC<Props> = ({
             itemA.client_group > itemB.client_group ? 1 : -1,
           )
           .map(item => ({
-            title: `${item.client_group} (${item.category})`,
+            title: `${item.client_group}`,
             value: item.id.toString(),
           })),
       ),
