@@ -19,7 +19,6 @@ import {
   NextButton,
   ComoFicouConhecendoSelectStyled,
 } from './styles';
-
 interface Props {
   participant: Participant;
   loading: boolean;
@@ -41,6 +40,7 @@ const PersonalDataForm: React.FC<Props> = ({
   handleActionPageButton,
   actived,
 }) => {
+  console.log("ON MOUNT PERSONAL DATA FORM", participant);
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Avatar name="picture" inputRole={inputRole} />
@@ -92,19 +92,19 @@ const PersonalDataForm: React.FC<Props> = ({
         />
       </BoxPhone>
 
-      <Input
-        name="medium"
-        label="Em qual Canal você compra os produtos FMC?"
-        inputRole={inputRole}
-      />
-
-      <ComoFicouConhecendoSelectStyled
-        name="get_to_know_select"
-        inputRole={inputRole}
-      />
-
       {participant.profile === PROFILES.producer && (
         <>
+          <Input
+            name="medium"
+            label="Em qual Canal você compra os produtos FMC?"
+            inputRole={inputRole}
+          />
+
+          <ComoFicouConhecendoSelectStyled
+            name="get_to_know_select"
+            inputRole={inputRole}
+          />
+
           <Input
             name="formatted_birth_date"
             label="Data de nascimento* (idade mínima: 18 anos)"
