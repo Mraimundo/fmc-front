@@ -9,6 +9,6 @@ export interface MenuItem {
   externalLink: string;
   to: string;
   label: string;
-  type: MenuTypes;
+  type: MenuTypes; 
   children: MenuItem[] | null;
 }

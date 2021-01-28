@@ -89,10 +89,14 @@ export const ProductList = styled.div`
     overflow-y: auto;
 `;
 
+export const ProductItemContainer = styled.div`
+    margin: 24px 0 ;
+`;
+
 export const ProductItem = styled.div`
     padding: 12px 24px;
     background: #efefef;
-    margin: 24px 0 ;
+    margin: 8px 0 24px;
     color: ${({ theme }) => theme.font.color.primary};
     > div {
       margin-bottom: 12px;
@@ -135,6 +139,27 @@ export const LinkBottom = styled.div`
     @media (min-width:768px) {
       font-size: 16px;
     }
+`;
+
+export const SummarySection = styled.div`
+    margin: 0 0 24px 0;
+    @media (min-width:768px) {
+      display: flex; 
+      justify-content: space-between;
+    }
+`;
+export const SummaryItem = styled.div`
+     padding: 12px 8px;
+     background: #efefef;
+     color: ${({ theme }) => theme.font.color.primary};
+     font-family: ${({ theme }) => theme.font.fontFamily.bold};
+     font-size: 16px;  
+
+     @media (min-width:768px) {
+        flex: 1 1 50%;
+        padding:  12px 024px;
+     }
+    
 `;
 
 

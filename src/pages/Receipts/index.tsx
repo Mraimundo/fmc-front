@@ -109,6 +109,8 @@ const Receipts: React.FC = () => {
 
   useEffect(() => {
     getParticipantsToAccessPI().then(data => {
+      console.log('getParticipantsToAccessPI');
+      console.log(data);
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
       return;
     });
