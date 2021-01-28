@@ -9,7 +9,7 @@ import imageArrow from '../../assets/images/arrows.svg';
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
 
-  const initialUrl = 'http://www.juntosfmc.com.br/';
+  const initialUrl = 'https://www.juntosfmc.com.br/?code=';
 
   const [profileTipe, setProfileType] = useState('');
 
