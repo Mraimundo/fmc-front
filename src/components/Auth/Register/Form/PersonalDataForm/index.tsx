@@ -40,7 +40,6 @@ const PersonalDataForm: React.FC<Props> = ({
   handleActionPageButton,
   actived,
 }) => {
-  console.log("ON MOUNT PERSONAL DATA FORM", participant);
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Avatar name="picture" inputRole={inputRole} />
