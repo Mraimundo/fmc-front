@@ -24,6 +24,7 @@ const SuccessEditRegister: React.FC<Props> = ({
       onRequestClose={onRequestClose}
       type="primary"
       className={className}
+      zIndex={100}
     >
       <Container>
         <Close>
