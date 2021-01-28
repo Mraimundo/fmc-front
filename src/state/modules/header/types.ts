@@ -10,5 +10,6 @@ export interface MenuItem {
   to: string;
   label: string;
   type: MenuTypes;
+  siteHref: string;
   children: MenuItem[] | null;
 }

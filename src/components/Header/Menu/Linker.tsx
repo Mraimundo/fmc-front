@@ -10,13 +10,15 @@ interface LinkProps {
   subMenu?: boolean;
 }
 const Linker: React.FC<LinkProps> = ({
-  menuItem: { to, label, type, externalLink },
+  menuItem: { to, label, type, externalLink, siteHref },
   subMenu = false,
 }) =>
   ({
     [MenuTypes.Menu]: (
       <a href={`#${label}`}>
-        <span>{label}</span>
+        <span>
+          {label} {siteHref}
+        </span>
         {subMenu ? <AiFillCaretRight /> : <AiFillCaretDown />}
       </a>
     ),
