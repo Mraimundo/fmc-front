@@ -163,8 +163,15 @@ export default (
   editing = false,
   autoindicate = false,
 ): Yup.ObjectSchema<object> => {
+
+  let regularCommomValidations = { ...commomValidations };
+
+  if (profile !== PROFILES.producer) {
+    delete regularCommomValidations.medium;
+  }
+
   const defaultValidations = {
-    ...commomValidations,
+    ...regularCommomValidations,
     ...passwordFields(editing),
   };
 

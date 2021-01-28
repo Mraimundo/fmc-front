@@ -148,7 +148,7 @@ export function* calculateSimulation() {
       }),
     );
   } catch (error) {
-    console.log('error', error);
+    /* Nothing to do yet */
     /* yield call(handlerErrors, error, actions.fetchChannelFailure); */
   }
 }
@@ -267,11 +267,8 @@ export function* fetchLoadState({
       indicators: indicatorsApi,
       mode: Mode.calculator,
       products: productsToSet,
-      // ARRUMAR MAYCONN -> Precisa calcular o award
       award: payload.award,
     };
-
-    console.log(payload.award);
 
     yield put(actions.fetchLoadStateSuccess(state));
   } catch (error) {

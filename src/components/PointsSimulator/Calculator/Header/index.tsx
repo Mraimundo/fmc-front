@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import listImage from 'assets/images/points-simulator/list.svg';
 import { Option } from 'components/shared/Select';
 
+import { Channel } from 'state/modules/points-simulator/interfaces';
+
 import {
   Container,
   FirstBox,
@@ -13,6 +15,8 @@ import {
   ProductTypeSelect,
   CustomText,
   ReactSVG,
+  SimulationsContainer,
+  CategoryContainer,
 } from './styles';
 
 export enum Tab {
@@ -26,7 +30,8 @@ interface Props {
   setProductTypeIdSelected(productTypeId: number | undefined): void;
   /* setChannelIdSelected(channelId: number): void; */
   handleLoadSimulationClick(): void;
-  channelSelected: Option | null;
+  channelSelectedOption: Option | null;
+  channelSelectedObject: Channel | null;
   setChannelSelected(option: Option | null): void;
 }
 
@@ -36,7 +41,8 @@ const Header: React.FC<Props> = ({
   setProductTypeIdSelected,
   // setChannelIdSelected,
   handleLoadSimulationClick,
-  channelSelected,
+  channelSelectedOption,
+  channelSelectedObject,
   setChannelSelected,
 }) => {
   const [productTypeSelected, setProductTypeSelected] = useState<Option | null>(
@@ -63,11 +69,13 @@ const Header: React.FC<Props> = ({
         <div>
           <span>Simulando em</span>
           <ChannelSelect
-            value={channelSelected}
+            value={channelSelectedOption}
             setValue={setChannelSelected}
           />
-          <CustomText>Minhas simulações</CustomText>
-          <ReactSVG src={listImage} onClick={handleLoadSimulationClick} />
+          <CustomText>Categoria</CustomText>
+          <CategoryContainer>
+            <span>{channelSelectedObject?.category || ''}</span>
+          </CategoryContainer>
         </div>
       </FirstBox>
       <SecondBox>
@@ -90,6 +98,10 @@ const Header: React.FC<Props> = ({
           setValue={setProductTypeSelected}
           placeholder="Tipo de produto"
         />
+        <SimulationsContainer>
+          <CustomText>Minhas simulações</CustomText>
+          <ReactSVG src={listImage} onClick={handleLoadSimulationClick} />
+        </SimulationsContainer>
       </SecondBox>
     </Container>
   );

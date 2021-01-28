@@ -243,11 +243,6 @@ const getRebateReachedValuesInReal = ({
     100; // *
   // finalMultiplierValue;
 
-  console.log(
-    'percentageValueToApplyInDecimalInTotalAmount',
-    percentageValueToApplyInDecimalInTotalAmount,
-  );
-
   const rebateReachedInRealSimulatedButUsedToGetTotal =
     ((product.simulationData.pogRealizedNetInRealSimulated *
       percentageTotalToPayInTotalAmount) /
@@ -296,6 +291,9 @@ const getSellerReachedValuesInReal = ({
   percentageValueToApplyInDecimalInTotalAmount,
   percentageValueToApplyInDecimalInSimulatedAmount,
 }: SellerReachedValuesProps): SellerReachedValues => {
+  if (product.id === 22 || product.id === 15) {
+    console.log('product', product);
+  }
   const sellerReachedInRealSimulated =
     product.simulationData.pogInKilosPerLiter *
     (product.awardsParamsToPay.sellerValueInReal *
@@ -441,8 +439,6 @@ export default ({
         additionalMarginTotal,
       },
     };
-
-    console.log('produto com pontos', test);
 
     return test;
   });

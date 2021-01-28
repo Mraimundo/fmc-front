@@ -14,17 +14,12 @@ interface SeeCompleteShowcaseProps {
   picture: string;
 }
 const SeeCompleteShowcase: React.FC<SeeCompleteShowcaseProps> = ({
-  link,
   picture,
 }) => {
   const [piAccess, setPiAccess] = useState('');
   useEffect(() => {
     getParticipantsToAccessPI().then(data => {
-      console.log('getParticipantsToAccessPI');
-      console.log(data);
-
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
-      return;
     });
   }, []);
 

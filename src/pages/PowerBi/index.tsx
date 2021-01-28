@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { models, Report } from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
 import getConfig from 'services/powerBi/getToken';
@@ -12,6 +12,10 @@ const PowerBi: React.FC = () => {
 
   useEffect(() => {
     getConfig().then(data => setConfig(data));
+  }, []);
+
+  const handleActions = useCallback(() => {
+    /* Nothing to do yet */
   }, []);
 
   return config ? (
@@ -37,29 +41,12 @@ const PowerBi: React.FC = () => {
         // Define event handlers
         eventHandlers={
           new Map([
-            [
-              'loaded',
-              function () {
-                console.log('Report loaded');
-              },
-            ],
-            [
-              'rendered',
-              function () {
-                console.log('Report rendered');
-              },
-            ],
-            [
-              'error',
-              function (event) {
-                console.log(event);
-              },
-            ],
+            ['loaded', handleActions],
+            ['rendered', handleActions],
+            ['error', handleActions],
           ])
         }
-        // Add CSS classes to the div element
         cssClassName="report-style-class"
-        // Get reference to the embedded object
         getEmbeddedComponent={embeddedReport => {
           setReport(embeddedReport as Report);
         }}

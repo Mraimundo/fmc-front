@@ -200,7 +200,8 @@ const PointsSimulator: React.FC = () => {
           setTabSelected={setTabSelected}
           setProductTypeIdSelected={handleProductTypeSelect}
           handleLoadSimulationClick={() => setIsLoadSimulatioModalOpened(true)}
-          channelSelected={channelSelected}
+          channelSelectedOption={channelSelected}
+          channelSelectedObject={channel}
           setChannelSelected={setChannelSelected}
         />
         {channel && (

@@ -5,10 +5,9 @@ interface ApiResponse {
 }
 
 export default async (campaignId: number): Promise<string> => {
-  const data = await pluginApi.get<ApiResponse>(
+  const { data } = await pluginApi.get<ApiResponse>(
     `campaigns/${campaignId}/stock`,
   );
-  console.log(data);
 
-  return '';
+  return data.url;
 };

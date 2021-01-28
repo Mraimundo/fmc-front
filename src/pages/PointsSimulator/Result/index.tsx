@@ -34,7 +34,6 @@ const Result: React.FC = () => {
   const simulatedDate = new Date();
 
   useEffect(() => {
-    console.log('indicators', indicators);
     setIndicatorCards(indicatorsToCards(indicators));
   }, [indicators]);
 
@@ -50,7 +49,7 @@ const Result: React.FC = () => {
     [pointsSimulatorState],
   );
 
-  const downloadPdf = useCallback(() => {
+  const handleDownloadPdf = useCallback(() => {
     localStorage.setItem(
       '@Vendavall:pdfData',
       JSON.stringify(pointsSimulatorState),
@@ -58,6 +57,21 @@ const Result: React.FC = () => {
 
     const linkClick = document.createElement('a');
     linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorPage}`;
+
+    linkClick.target = '_blank';
+    document.body.appendChild(linkClick);
+    linkClick.click();
+    document.body.removeChild(linkClick);
+  }, [pointsSimulatorState]);
+
+  const handleSendByEmail = useCallback(() => {
+    localStorage.setItem(
+      '@Vendavall:pdfData',
+      JSON.stringify(pointsSimulatorState),
+    );
+
+    const linkClick = document.createElement('a');
+    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorEmail}`;
 
     linkClick.target = '_blank';
     document.body.appendChild(linkClick);
@@ -79,10 +93,12 @@ const Result: React.FC = () => {
           cards={indicatorCards}
           award={award}
           configuration={configuration}
+          indicators={indicators}
         />
         <Footer
           handleSaveSimulationClick={() => setIsSaveSimulatioModalOpened(true)}
-          handleDownloadPdf={downloadPdf}
+          handleDownloadPdf={handleDownloadPdf}
+          handleSendByEmail={handleSendByEmail}
         />
       </Content>
 

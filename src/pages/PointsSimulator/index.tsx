@@ -57,7 +57,7 @@ const PointsSimulator: React.FC = () => {
     );
 
     const linkClick = document.createElement('a');
-    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorPage}`;
+    linkClick.href = `${routeMap.pointsSimulator.pdfGeneratorEmail}`;
 
     linkClick.target = '_blank';
     document.body.appendChild(linkClick);
