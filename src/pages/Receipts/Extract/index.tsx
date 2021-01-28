@@ -57,7 +57,7 @@ const Extract: React.FC<Props> = ({
     <div>
       <ExtractHeader>
         <p>Saldo disponível para resgate:</p>
-        <strong>{formatPointsExtract(balance.available)} FMC coins</strong>
+        <strong>{formatPointsExtract(balance.available)} FMC coins </strong>
 
         <ExtractButton
           type="button"

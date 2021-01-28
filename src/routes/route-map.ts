@@ -20,6 +20,7 @@ export default {
   profile: '/editar-perfil',
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',
+  catalogoPi: '/catalogo',
   training: '/treinamentos',
   cockpit: '/cockpit',
   report: '/relatorios',
@@ -29,5 +30,5 @@ export default {
     pdfGeneratorEmail: '/pdfGeneratorEmail',
   },
   qrCode: '/qr',
-  receipts: '/receipts',
+  receipts: '/extrato-notas',
 };

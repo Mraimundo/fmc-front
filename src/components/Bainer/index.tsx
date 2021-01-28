@@ -22,7 +22,7 @@ const Bainer: React.FC = () => {
       setIndication(response.data.indicator_code);
       setValue(initialUrl + indication);
 
-      setProfileType(response.data.profile);
+      setProfileType(response.data.establishment.type_name);
     }
 
     fetchIndication();
@@ -31,19 +31,19 @@ const Bainer: React.FC = () => {
   let colorType = '';
 
   switch (profileTipe) {
-    case 'FOCALPOINT':
+    case 'Cooperativa':
       colorType = 'verde';
       break;
 
-    case 'PRODUTOR':
+    case 'Produtor' || 'produtor':
       colorType = 'marron';
       break;
 
-    case 'PARTICIPANTE':
+    case 'Revenda':
       colorType = 'azul';
       break;
 
-    case 'FMC':
+    case 'RTC' || 'rtc':
       colorType = 'cinza';
       break;
 

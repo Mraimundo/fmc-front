@@ -109,6 +109,8 @@ const Receipts: React.FC = () => {
 
   useEffect(() => {
     getParticipantsToAccessPI().then(data => {
+      console.log('getParticipantsToAccessPI');
+      console.log(data);
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
       return;
     });
@@ -146,7 +148,7 @@ const Receipts: React.FC = () => {
               <StatusBox>
                 <TotalCoins>
                   <h3>Creditado na Safra:</h3>
-                  <h4> {coins.toFixed(2)} FMC Coins</h4>
+                  <h4> {coins} FMC Coins</h4>
                 </TotalCoins>
               </StatusBox>
             </StatusItem>

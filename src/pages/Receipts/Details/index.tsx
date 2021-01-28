@@ -18,6 +18,9 @@ import {
   CloseModalOverlay,
   CloseModal,
   LinkBottom,
+  ProductItemContainer,
+  SummarySection,
+  SummaryItem,
 } from './styles';
 
 interface Props {
@@ -28,6 +31,8 @@ interface Props {
 
 const Details: React.FC<Props> = Props => {
   const [details, setDetails] = useState<any>();
+  const [totalProdutosFmc, setTotalProdutosFmc] = useState<number>(0);
+  const [totalFmcCoins, setTotalFmcCoins] = useState<number>(0);
 
   useEffect(() => {
     if (Props.receiptId !== '') {
@@ -36,6 +41,22 @@ const Details: React.FC<Props> = Props => {
       });
     }
   }, [Props.receiptId]);
+
+  useEffect(() => {
+    if (details) {
+      console.log(details);
+      let sumTotal = 0;
+      let sumCoins = 0;
+      for (let i = 0; i < details.itensNota.length; i++) {
+        sumTotal += parseFloat(details.itensNota[i].total_value);
+        sumCoins += parseFloat(details.itensNota[i].FMCCOINS);
+        //sum += parseFloat( details.itensNota[0] );
+      }
+
+      setTotalProdutosFmc(sumTotal);
+      setTotalFmcCoins(sumCoins);
+    }
+  }, [details]);
 
   return (
     <ModalContainer modalOpen={Props.modalOpen}>
@@ -99,9 +120,14 @@ const Details: React.FC<Props> = Props => {
             </table>
           </DetailsBlock>
         </DetailsSection>
+        <SummarySection>
+          <SummaryItem>
+            Total em Produtos FMC: R${totalProdutosFmc.toFixed(2)}
+          </SummaryItem>
+          <SummaryItem>FMC Coins: {totalFmcCoins.toFixed(2)}</SummaryItem>
+        </SummarySection>
 
         <h3>Produtos FMC</h3>
-
         <ProductList>
           {details?.itensNota &&
             details?.itensNota.length > 0 &&
@@ -109,45 +135,48 @@ const Details: React.FC<Props> = Props => {
               (item: {
                 id: number;
                 Categoria: string;
+                DescricaoProduto: string;
                 invoice_id: number;
                 product_id: number;
                 participant_id: number;
                 volume: string;
                 unitary_value: string;
                 total_value: string;
-                total_points: string;
+                FMCCOINS: string;
                 desconto: string;
                 valor_net: string;
                 unit_points: string;
                 NomeProduto: string;
               }) => (
-                <ProductItem key={item.id}>
-                  <div>
-                    <strong> {item.NomeProduto.toUpperCase()} </strong> <br />
-                    <p> {item.Categoria} </p>
-                  </div>
+                <ProductItemContainer key={item.id}>
+                  <p>{item.Categoria}</p>
+                  <ProductItem>
+                    <div>
+                      <strong> {item.NomeProduto} </strong> <br />
+                      <p> {item.DescricaoProduto} </p>
+                    </div>
 
-                  <div>
-                    <strong>Volume KG/L:</strong> {item.volume} <br />
-                    <strong>Valor unitário:</strong> R${item.unitary_value}{' '}
-                    <br />
-                    <strong>Desconto:</strong>{' '}
-                    {item.desconto === '' ? '-' : `R$${item.desconto}`}
-                  </div>
+                    <div>
+                      <strong>Volume KG/L:</strong> {item.volume} <br />
+                      <strong>Valor unitário:</strong> R${item.unitary_value}{' '}
+                      <br />
+                      <strong>Desconto:</strong>{' '}
+                      {item.desconto === '' ? 'R$0' : `R$${item.desconto}`}
+                    </div>
 
-                  <div>
-                    <strong>Total:</strong> R${item.total_value} <br />
-                    <strong>FMC Coins:</strong> {item.total_points} <br />
-                    <strong>Total Net:</strong> {item.valor_net}
-                  </div>
-                </ProductItem>
+                    <div>
+                      <strong>Total Net:</strong> {item.valor_net} <br />
+                      <strong>Total:</strong> R${item.total_value} <br />
+                      <strong>FMC Coins:</strong> {item.FMCCOINS}
+                    </div>
+                  </ProductItem>
+                </ProductItemContainer>
               ),
             )}
         </ProductList>
-
         <LinkBottom>
-          Dúvidas sobre o preenchimento desta nota?
-          <Link to={routeMap.faq}>Clique aqui</Link>
+          Dúvidas sobre o preenchimento desta nota?&nbsp;
+          <Link to={routeMap.contact}>Clique aqui</Link>
         </LinkBottom>
       </Content>
     </ModalContainer>
