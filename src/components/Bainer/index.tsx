@@ -11,7 +11,9 @@ const Bainer: React.FC = () => {
 
   const initialUrl = 'https://www.juntosfmc.com.br/?code=';
 
-  const [profileTipe, setProfileType] = useState('');
+  const [profileType, setProfileType] = useState('');
+  const [profile, setProfile] = useState('');
+
 
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
@@ -23,6 +25,7 @@ const Bainer: React.FC = () => {
       setValue(initialUrl + indication);
 
       setProfileType(response.data.establishment.type_name);
+      setProfile(response.data.profile);
     }
 
     fetchIndication();
@@ -30,12 +33,12 @@ const Bainer: React.FC = () => {
 
   let colorType = '';
 
-  switch (profileTipe) {
+  switch (profileType) {
     case 'Cooperativa':
       colorType = 'verde';
       break;
 
-    case 'Produtor' || 'produtor':
+    case 'FMC':
       colorType = 'marron';
       break;
 
@@ -43,12 +46,13 @@ const Bainer: React.FC = () => {
       colorType = 'azul';
       break;
 
-    case 'RTC' || 'rtc':
-      colorType = 'cinza';
-      break;
-
     default:
       colorType = 'verde';
+  }
+
+
+  if(profile==='FMC' && profileType==='Revenda'){
+    colorType = 'cinza';
   }
 
   const handleCopy = () => {
