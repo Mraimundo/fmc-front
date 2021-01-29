@@ -40,6 +40,8 @@ const List: React.FC<Props> = Props => {
         return 'Liberadas';
       case 2:
         return 'Descredenciada';
+      case 3:
+        return 'Em análise';
       default:
         return status;
     }
