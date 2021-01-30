@@ -1,4 +1,4 @@
-import React from 'react';
+vtex install vtex.search@2.import React from 'react';
 
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
@@ -28,7 +28,10 @@ const StatusTable: React.FC<Props> = Props => {
           <li>
             <p>Em análise</p>
             <span />
-            <p>{countNFByStatus(Props.nfList, 0)} </p>
+            <p>
+              {countNFByStatus(Props.nfList, 0) +
+                countNFByStatus(Props.nfList, 3)}
+            </p>
           </li>
           <li>
             <p>Liberadas</p>
