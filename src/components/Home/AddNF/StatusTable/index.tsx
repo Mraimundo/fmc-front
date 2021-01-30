@@ -1,4 +1,4 @@
-vtex install vtex.search@2.import React from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
