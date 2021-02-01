@@ -52,7 +52,7 @@ const Bainer: React.FC = () => {
 
 
   if(profile==='FMC' && profileType==='Revenda'){
-    
+    //
     colorType = 'cinza';
   }
 
