@@ -41,7 +41,7 @@ export default (props: Props) => {
     <div style="padding-top: 6px;">
   <p style="font-size:12px;">
     <strong style="font-size:14px;">
-      Valor da venda simulada
+      Valor da venda
     </strong>
   </p>
   </div>

@@ -32,3 +32,10 @@ export const Box = styled.div`
   margin-bottom: 71px;
   margin-top: 15px;
 `;
+
+export const WarningBox = styled.span`
+  padding: 0.5em 1em;
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 14px;
+`;

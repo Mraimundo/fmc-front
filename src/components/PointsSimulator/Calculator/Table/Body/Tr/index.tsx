@@ -8,6 +8,8 @@ import Input from 'components/PointsSimulator/Calculator/CustomInput';
 import { fakeFormatDollars } from 'util/points';
 import { Container, ProductBox, CustomDataBox, CustomInputBox } from './styles';
 
+import { RiRegisteredLine } from "react-icons/ri";
+
 interface TrProps {
   product: Product;
   setUnitValueInDollar(data: DataValueDTO): void;
@@ -163,7 +165,7 @@ const Tr: React.FC<TrProps> = ({
       <div>
         <ProductBox>
           <span>{product.type.name}</span>
-          <span>{product.name}</span>
+          <span>{product.name}{product.isEnhancer && <RiRegisteredLine size={12}/>}</span>
         </ProductBox>
       </div>
       <div>
