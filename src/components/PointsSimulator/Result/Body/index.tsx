@@ -75,7 +75,7 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
     <Container>
       <CustomSimulateContent>
         <TitleBox>
-          <h3>Valor da venda simulada</h3>
+          <h3>Valor da venda</h3>
         </TitleBox>
         <CustomSimuteBox>
           <MiniBox

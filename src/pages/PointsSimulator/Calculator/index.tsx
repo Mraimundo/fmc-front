@@ -27,7 +27,7 @@ import Footer from 'components/PointsSimulator/Calculator/Footer';
 import { fixedPrecisionOf } from 'util/numbers';
 import { DataValueDTO, Mode } from 'state/modules/points-simulator/types';
 import { formatDate } from 'util/datetime';
-import { Container, Content, CustomTableBox, Box } from './styles';
+import { Container, Content, CustomTableBox, Box, WarningBox } from './styles';
 
 interface Filter {
   productTypeId?: number;
@@ -204,6 +204,9 @@ const PointsSimulator: React.FC = () => {
           channelSelectedObject={channel}
           setChannelSelected={setChannelSelected}
         />
+        <WarningBox>
+          Atenção: Caso o Estoque Final do Produto seja menor que 0 (zero), você deverá digitar o Valor Unitário antes de seguir com a simulação!
+        </WarningBox>
         {channel && (
           <CustomTableBox>
             <Box>
