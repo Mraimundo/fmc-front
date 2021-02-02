@@ -63,7 +63,9 @@ export const generateHtml = (pointsSimulatorState: PointsSimulatorState) => {
       ${whiteSpace(35)}
 
       ${separator}
-        ${dollarBase({ dollarValue: dollarBaseValue })}
+      ${dollarBase({
+          dollarValue: dollarBaseValue, itemsCount: products.filter(prod => prod.checked).length
+      })}
       ${separator}
 
       ${whiteSpace(20)}

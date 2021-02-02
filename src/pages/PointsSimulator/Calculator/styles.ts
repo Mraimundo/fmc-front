@@ -31,6 +31,7 @@ export const Box = styled.div`
   width: 100%;
   margin-bottom: 71px;
   margin-top: 15px;
+  overflow-y: hidden;
 `;
 
 export const WarningBox = styled.span`
