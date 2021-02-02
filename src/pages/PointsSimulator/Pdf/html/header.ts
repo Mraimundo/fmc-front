@@ -71,10 +71,10 @@ export default (props: Props) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="padding: 10px; border-radius: 5px; background:#dad8d9; width: 100%; height: 68px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="padding: 10px; border-radius: 5px; background:#dad8d9; width: 100%; height: 80px; display: flex; flex-direction: column; justify-content: center;">
     <p style="line-height: 1; font-weight: bold;">${groupName}</p>
-    <p style="line-height: 1;  font-size: 14px">${category}</p>
-    <p style="margin-top: 5px;font-weight: bold;">SAFRA 20/21 </p>
+    <p style="margin-top: 7px; line-height: 1;  font-size: 16px">Categoria: ${category}</p>
+    <p style="margin-top: 7px; font-weight: bold;">SAFRA 20/21 </p>
   </div>
     </div>
 
