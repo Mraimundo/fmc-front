@@ -22,7 +22,8 @@ const SendByEmail: React.FC = () => {
       const { url } = await sendFile(file, 'simulacao');
 
       const mailBody = `Baixe agora mesmo o <a href="${url}">Pdf</a>`;
-      window.open(`mailto:email@example.com?subject=Subject&body=${mailBody}`);
+      const mailSubject = `Programa de Relacionamento JUNTOS | Simulação de Pontos`;
+      window.open(`mailto:email@example.com?subject=${mailSubject}&body=${mailBody}`);
       setTimeout(() => {
         window.close();
       }, 700);
