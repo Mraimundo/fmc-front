@@ -35,8 +35,9 @@ export const Box = styled.div`
 `;
 
 export const WarningBox = styled.span`
-  padding: 0.5em 1em;
-  color: ${({ theme }) => theme.font.color.primary};
+  padding: 1em 1em;
   font-family: ${({ theme }) => theme.font.fontFamily.bold};
   font-size: 14px;
+  background-color: #808285;
+  border-radius: 0.5rem;
 `;
