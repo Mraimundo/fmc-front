@@ -1,5 +1,12 @@
 import * as Yup from 'yup';
-import { IProfile, PROFILES } from 'config/constants';
+import {
+  ApproverProfile,
+  IProfile,
+  PROFILES,
+  DM,
+  RTC,
+  KAM,
+} from 'config/constants';
 import validateCpf from 'util/validations/cpf';
 import validMobilePhone from 'util/validations/mobilePhone';
 import {
@@ -22,7 +29,6 @@ const commomValidations = {
   cell_phone: Yup.string()
     .required(mandatoryMessage)
     .test('valid-mobile', 'Número inválido', validMobilePhone),
-  medium: Yup.string().required(mandatoryMessage),
 };
 
 const cepFields = {
@@ -46,10 +52,10 @@ const cepFields = {
     })
     .typeError(mandatoryMessage)
     .required(mandatoryMessage),
-
 };
 
 const extraProducerFields = {
+  medium: Yup.string().required(mandatoryMessage),
   producer_group_name: Yup.string(),
   formatted_birth_date: Yup.date()
     .transform((t, v) => {
@@ -163,15 +169,8 @@ export default (
   editing = false,
   autoindicate = false,
 ): Yup.ObjectSchema<object> => {
-
-  let regularCommomValidations = { ...commomValidations };
-
-  if (profile !== PROFILES.producer) {
-    delete regularCommomValidations.medium;
-  }
-
   const defaultValidations = {
-    ...regularCommomValidations,
+    ...commomValidations,
     ...passwordFields(editing),
   };
 
@@ -216,10 +215,18 @@ export default (
     pis_nis: Yup.string().required(mandatoryMessage),
   };
 
-  if (autoindicate) {
-    if (profile !== PROFILES.producer) {
-      return Yup.object().shape({ ...participantValidations });
-    }
+  if (autoindicate && profile !== PROFILES.producer) {
+    return Yup.object().shape({ ...participantValidations });
+  }
+
+  const fmcTeamThatShouldFillMarketPlaceFields: ApproverProfile[] = [
+    DM,
+    RTC,
+    KAM,
+  ];
+
+  if (fmcTeamThatShouldFillMarketPlaceFields) {
+    return Yup.object().shape({ ...participantValidations, ...cepFields });
   }
 
   switch (profile) {
