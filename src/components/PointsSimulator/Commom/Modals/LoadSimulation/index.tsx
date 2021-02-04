@@ -3,6 +3,7 @@ import { ReactSVG } from 'react-svg';
 
 import deleteImg from 'assets/images/points-simulator/delete.svg';
 import editImg from 'assets/images/points-simulator/edit.svg';
+import closeIcon from 'assets/images/training/close-icon.svg';
 
 import { useToast } from 'context/ToastContext';
 import {
@@ -12,6 +13,7 @@ import {
   Content,
   ActionsContent,
   TableContainer,
+  Close,
 } from './styles';
 
 export interface TableData {
@@ -89,6 +91,11 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
+      <Close>
+        <button type="button" onClick={onRequestClose}>
+          <ReactSVG src={closeIcon} />
+        </button>
+      </Close>
       <Content>
         <Header>
           <h3>Minhas Simulações</h3>
