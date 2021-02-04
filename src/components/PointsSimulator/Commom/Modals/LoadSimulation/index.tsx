@@ -91,7 +91,7 @@ const Modal: React.FC<ModalProps> = ({
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
       <Content>
         <Header>
-          <h3>Salvar Simulação</h3>
+          <h3>Minhas Simulações</h3>
           <input
             type="text"
             placeholder="Grupo de cliente ou Nome de simulação"
