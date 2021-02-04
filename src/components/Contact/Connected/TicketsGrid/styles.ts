@@ -109,7 +109,7 @@ export const GridHeader = styled.div`
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: ${({ theme }) => theme.font.color.primary};
+    color: ${({ theme }) => theme.font.color.quintenary};
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     &:nth-child(3) {
       justify-self: center;
@@ -129,7 +129,7 @@ export const Icon = styled(ReactSVG)<IconProps>`
     defaultcolor &&
     css`
       path {
-        fill: ${theme.font.color.primary};
+        fill: ${theme.font.color.quintenary};
       }
     `}
 `;

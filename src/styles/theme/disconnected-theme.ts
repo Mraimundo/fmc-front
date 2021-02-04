@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components';
 import accordion from './modules/accordion/default';
 import footer from './modules/footer/default';
 import indication from './modules/indication/default';
-import howParticipate from './modules/howParticipate/default';
+import howParticipate from './modules/how-participate/default';
 import layout from './modules/layout/default';
 import regulation from './modules/regulation/default';
 import table from './modules/table/default';
@@ -15,7 +15,7 @@ import input from './modules/input/disconnected';
 import link from './modules/link/disconnected';
 import menu from './modules/menu/disconnected';
 import modal from './modules/modal/disconnected';
-import tabMenu from './modules/tabMenu/disconnected';
+import tabMenu from './modules/tab-menu/disconnected';
 
 const Theme: DefaultTheme = {
   accordion,

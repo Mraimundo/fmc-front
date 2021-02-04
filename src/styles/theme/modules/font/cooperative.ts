@@ -2,11 +2,11 @@ import { FONTS } from 'styles/font/globals';
 
 export default {
   color: {
-    primary: '#808285',
-    secondary: '#e63027',
+    primary: '#2a4207',
+    secondary: '#000',
     tertiary: '#fff',
     quartenary: '#808285',
-    quintenary: '#808285',
+    quintenary: '#2a4207',
   },
   fontFamily: { ...FONTS },
 };

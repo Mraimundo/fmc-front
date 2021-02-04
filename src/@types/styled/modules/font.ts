@@ -16,5 +16,6 @@ export default interface Font {
     secondary: string;
     tertiary: string;
     quartenary: string;
+    quintenary: string;
   };
 }
