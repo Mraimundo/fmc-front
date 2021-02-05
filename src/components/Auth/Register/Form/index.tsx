@@ -48,6 +48,7 @@ const Form: React.FC<Props> = ({
     _participant.profile,
     editing,
     autoindicate,
+    _participant.profile_value
   );
 
   useEffect(() => {
@@ -147,7 +148,8 @@ const Form: React.FC<Props> = ({
     },
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, errors } = methods;
+  console.log("ERRORS", errors);
 
   /* Refatorar
     -> Usar um DTO, transformas os dados antes do envio atraves de um serviço que
