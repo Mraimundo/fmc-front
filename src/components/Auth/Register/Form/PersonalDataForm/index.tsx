@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { PROFILES } from 'config/constants';
+import { ApproverProfile, PROFILES, DM, RTC, KAM } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import ComponentsByProfile from '../Commom/ComponentsByProfile';
 import ExtraFieldsForParticipant from '../Commom/ExtraFieldsForParticipant';
@@ -19,6 +19,7 @@ import {
   NextButton,
   ComoFicouConhecendoSelectStyled,
 } from './styles';
+
 interface Props {
   participant: Participant;
   loading: boolean;
@@ -40,6 +41,25 @@ const PersonalDataForm: React.FC<Props> = ({
   handleActionPageButton,
   actived,
 }) => {
+  const profileValuesAllowedToShowMarketPlace: ApproverProfile[] = [
+    DM,
+    RTC,
+    KAM,
+  ];
+
+  const shouldShowMarketPlaceFields =
+    participant.profile === PROFILES.participant ||
+    participant.profile === PROFILES.producer ||
+    profileValuesAllowedToShowMarketPlace.includes(participant.profile_value) ||
+    (editing && autoIndicate && participant.profile === PROFILES.focalPoint) ||
+    participant.access_premio_ideall;
+
+  const shouldShowBoxAutoIndication =
+    editing &&
+    participant.profile === PROFILES.focalPoint &&
+    participant.establishment.team_receives_points &&
+    !participant.access_premio_ideall;
+
   return (
     <div style={{ display: actived ? 'block' : 'none' }}>
       <Avatar name="picture" inputRole={inputRole} />
@@ -113,26 +133,18 @@ const PersonalDataForm: React.FC<Props> = ({
           />
         </>
       )}
-      {editing &&
-        participant.profile === PROFILES.focalPoint &&
-        participant.establishment.team_receives_points &&
-        !participant.access_premio_ideall && (
-          <BoxAutoIndication>
-            <input
-              type="checkbox"
-              name="test"
-              checked={autoIndicate}
-              onChange={() => setAutoIndicate(!autoIndicate)}
-            />
-            <span>Participar do Catálogo de Prêmios</span>
-          </BoxAutoIndication>
-        )}
-      {(participant.profile === PROFILES.participant ||
-        participant.profile === PROFILES.producer ||
-        (editing &&
-          autoIndicate &&
-          participant.profile === PROFILES.focalPoint) ||
-        participant.access_premio_ideall) && (
+      {shouldShowBoxAutoIndication && (
+        <BoxAutoIndication>
+          <input
+            type="checkbox"
+            name="test"
+            checked={autoIndicate}
+            onChange={() => setAutoIndicate(!autoIndicate)}
+          />
+          <span>Participar do Catálogo de Prêmios</span>
+        </BoxAutoIndication>
+      )}
+      {shouldShowMarketPlaceFields && (
         <ExtraFieldsForParticipant
           inputRole={inputRole}
           participant={participant}
