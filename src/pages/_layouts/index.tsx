@@ -4,7 +4,14 @@ import Manutencao from 'assets/images/manutencao.jpg';
 
 import { DefaultTheme, ThemeContext } from 'styled-components';
 import { Visible } from 'react-grid-system';
-import { PROFILES, EstablishmentTypes } from 'config/constants';
+import {
+  PROFILES,
+  EstablishmentTypes,
+  ApproverProfile,
+  DM,
+  RTC,
+  KAM,
+} from 'config/constants';
 
 import ModalRegulations from 'components/Regulation/AllRegulationsOneByOne';
 import { useAuth } from 'context/AuthContext';
@@ -14,9 +21,10 @@ import Footer from 'components/Footer';
 import Logo, { LogoType } from 'components/shared/Logo';
 import {
   defaultTheme,
-  cooperativaTheme,
-  fmcTeamTheme,
-  fmcProdutorTheme,
+  cooperativeTheme,
+  fmcTeamGrayTheme,
+  fmcTeamRedTheme,
+  producerTheme,
 } from 'styles/theme';
 import Popups from './Popups';
 
@@ -36,19 +44,27 @@ const Dashboard: React.FC = ({ children }) => {
   const [textSimulating, setTextSimulating] = useState('');
 
   useEffect(() => {
+    const rtcDmKamProfiles: ApproverProfile[] = [DM, RTC, KAM];
+
     if (!participant || !participant.id) {
       setTheme(null);
       return;
     }
 
+    if (rtcDmKamProfiles.includes(participant.profile_value)) {
+      setTheme(fmcTeamRedTheme);
+      setLogoType('fmcTeam');
+      return;
+    }
+
     if (participant.profile === 'FMC') {
-      setTheme(fmcTeamTheme);
+      setTheme(fmcTeamGrayTheme);
       setLogoType('fmcTeam');
       return;
     }
 
     if (participant.profile === 'PRODUTOR') {
-      setTheme(fmcProdutorTheme);
+      setTheme(producerTheme);
       setLogoType('fmcProdutor');
       return;
     }
@@ -56,7 +72,7 @@ const Dashboard: React.FC = ({ children }) => {
     if (
       participant.establishment.type_name === EstablishmentTypes.Cooperative
     ) {
-      setTheme(cooperativaTheme);
+      setTheme(cooperativeTheme);
       setLogoType(EstablishmentTypes.Cooperative);
       return;
     }
