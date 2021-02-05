@@ -168,6 +168,7 @@ export default (
   profile: IProfile,
   editing = false,
   autoindicate = false,
+  profileValue: ApproverProfile
 ): Yup.ObjectSchema<object> => {
   const defaultValidations = {
     ...commomValidations,
@@ -225,7 +226,7 @@ export default (
     KAM,
   ];
 
-  if (fmcTeamThatShouldFillMarketPlaceFields) {
+  if (fmcTeamThatShouldFillMarketPlaceFields.includes(profileValue)) {
     return Yup.object().shape({ ...participantValidations, ...cepFields });
   }
 
