@@ -31,4 +31,13 @@ export const Box = styled.div`
   width: 100%;
   margin-bottom: 71px;
   margin-top: 15px;
+  overflow-y: hidden;
+`;
+
+export const WarningBox = styled.span`
+  padding: 1em 1em;
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 14px;
+  background-color: #808285;
+  border-radius: 0.5rem;
 `;

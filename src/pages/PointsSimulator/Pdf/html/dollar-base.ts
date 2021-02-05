@@ -2,10 +2,12 @@ import { fakeFormatDollars as format } from 'util/points';
 
 interface Props {
   dollarValue: number;
+  itemsCount?: number;
 }
 
 export default (props: Props) => {
   const dollarValue = format(props.dollarValue);
+  const itemsCount = props.itemsCount ? props.itemsCount : 0;
 
   return `
   <!--[if IE]><div class="ie-container"><![endif]-->
@@ -59,7 +61,7 @@ export default (props: Props) => {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
   <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">Itens adicionados (0)</span></strong></p>
+    <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">Itens adicionados (${itemsCount})</span></strong></p>
   </div>
 
       </td>

@@ -87,6 +87,7 @@ const Result: React.FC = () => {
             partialDate={configuration.partialDate}
             simulatedDate={simulatedDate}
             channelName={channel.groupName}
+            channelCategory={channel.category}
           />
         )}
         <Body

@@ -139,5 +139,7 @@ export const CategoryContainer = styled.div`
   > span {
     font-size: 16px;
     color: ${({ theme }) => theme.font.color.quartenary};
+    text-transform: uppercase;
+    font-weight: 600;
   }
 `;

@@ -6,6 +6,7 @@ export const Container = styled.div`
   max-width: 1030px;
   flex-direction: column;
   height: 100%;
+  position: absolute;
 `;
 
 export const Container2 = styled.table`
