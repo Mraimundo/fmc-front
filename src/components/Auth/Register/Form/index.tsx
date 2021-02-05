@@ -148,8 +148,7 @@ const Form: React.FC<Props> = ({
     },
   });
 
-  const { handleSubmit, errors } = methods;
-  console.log("ERRORS", errors);
+  const { handleSubmit } = methods;
 
   /* Refatorar
     -> Usar um DTO, transformas os dados antes do envio atraves de um serviço que
