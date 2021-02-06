@@ -22,7 +22,7 @@ const BellsCard: React.FC<Props> = ({ items }) => {
       <Subtitle>Realizado/Total</Subtitle>
       <Grid>
         {items.map(item => (
-          <Row reached={item.goal === item.reached}>
+          <Row reached={item.goal === item.reached} key={item.description}>
             <ReactSVG
               src={
                 item.goal === item.reached

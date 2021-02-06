@@ -17,7 +17,6 @@ const MyBells: React.FC<Props> = ({ bells }) => {
     <Container>
       <Content>
         <h3>Safra 20/21</h3>
-
         <SummaryContent>
           {bells.map(bell => (
             <SummaryRow key={bell.description}>
