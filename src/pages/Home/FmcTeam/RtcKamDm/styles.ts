@@ -24,6 +24,7 @@ export const MyPointsWrapper = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
+    margin-left: 0;
   }
 `;
 
@@ -32,6 +33,23 @@ export const PerformanceMyPointsWrapper = styled.div`
 
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
+  }
+`;
+
+export const RankingWrapper = styled(PerformanceMyPointsWrapper)`
+  margin: 30px 0;
+  > div {
+    & + div {
+      margin-left: 20px;
+
+      @media screen and (max-width: 768px) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 

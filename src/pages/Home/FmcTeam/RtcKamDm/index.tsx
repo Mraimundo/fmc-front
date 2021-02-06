@@ -7,7 +7,14 @@ import { fetchBanners, fetchHighlights } from 'state/modules/home/actions';
 import { getBanners, getHighlights } from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { Item as BellCardItem } from 'components/Home/FmcTeam/BellsCard';
-import { Banners, Title, Highlights, BellsCard } from 'components/Home';
+import {
+  Banners,
+  Title,
+  Highlights,
+  BellsCard,
+  Ranking,
+  MyBells,
+} from 'components/Home';
 import Performance, {
   Props as IPerformance,
 } from 'components/Home/FmcTeam/Performance';
@@ -18,6 +25,7 @@ import {
   PerformanceWrapper,
   MyPointsWrapper,
   HomeWrapper,
+  RankingWrapper,
 } from './styles';
 
 const DefaultHome: React.FC = () => {
@@ -104,6 +112,17 @@ const DefaultHome: React.FC = () => {
             <BellsCard items={items} />
           </MyPointsWrapper>
         </PerformanceMyPointsWrapper>
+
+        <RankingWrapper>
+          <PerformanceWrapper>
+            <Title>Ranking</Title>
+            <Ranking />
+          </PerformanceWrapper>
+          <PerformanceWrapper>
+            <Title>Meus Sinos</Title>
+            <MyBells />
+          </PerformanceWrapper>
+        </RankingWrapper>
         <Title>Destaques</Title>
         {!!highlights && <Highlights items={highlights} />}
       </Wrapper>
