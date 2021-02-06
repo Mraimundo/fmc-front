@@ -4,12 +4,14 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
   position: relative;
+  height: 270px;
+  align-items: center;
 
   background: #fff;
   box-shadow: 3px 3px 6px #00000029;
   border-radius: 10px;
 
-  padding: 20px 25px;
+  padding: 0 25px;
 `;
 
 export const Subtitle = styled.span`

@@ -10,6 +10,7 @@ export default {
   faq: '/faq',
   gallery: '/bibliotecas-juntos',
   goal: '/performance',
+  home: '/home',
   howParticipate: '/como-participar',
   news: '/noticias',
   participantsIndication: '/indicacao-de-participantes',

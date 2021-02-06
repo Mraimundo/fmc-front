@@ -1,12 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { Visible, Hidden } from 'react-grid-system';
+import openLinkIcon from 'assets/images/open-link-icon.svg';
+import routeMap from 'routes/route-map';
 
 import { useAuth } from 'context/AuthContext';
-import { fetchBanners, fetchHighlights } from 'state/modules/home/actions';
-import { getBanners, getHighlights } from 'state/modules/home/selectors';
+import {
+  fetchBanners,
+  fetchHighlights,
+  fetchStrategies,
+  fetchEngagements,
+  fetchBells,
+  fetchRanking,
+  fetchPerformance,
+} from 'state/modules/home/actions';
+import {
+  getBanners,
+  getHighlights,
+  getStrategies,
+  getEngagements,
+  getBells,
+  getRanking,
+  getPerformance,
+} from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
-import { Item as BellCardItem } from 'components/Home/FmcTeam/BellsCard';
 import {
   Banners,
   Title,
@@ -15,9 +34,7 @@ import {
   Ranking,
   MyBells,
 } from 'components/Home';
-import Performance, {
-  Props as IPerformance,
-} from 'components/Home/FmcTeam/Performance';
+import Performance from 'components/Home/FmcTeam/Performance';
 import CoinQuotation from 'components/Header/CoinQuotation';
 import {
   Wrapper,
@@ -26,16 +43,30 @@ import {
   MyPointsWrapper,
   HomeWrapper,
   RankingWrapper,
+  CompletePerformanceWrapper,
 } from './styles';
 
 const DefaultHome: React.FC = () => {
   const dispatch = useDispatch();
-  const coinQuotations = useSelector(getCoinQuotations);
   const { participant } = useAuth();
+  const coinQuotations = useSelector(getCoinQuotations);
 
-  const [banners, highlights] = [
+  const [
+    banners,
+    highlights,
+    strategies,
+    engagements,
+    bells,
+    ranking,
+    performance,
+  ] = [
     useSelector(getBanners),
     useSelector(getHighlights),
+    useSelector(getStrategies),
+    useSelector(getEngagements),
+    useSelector(getBells),
+    useSelector(getRanking),
+    useSelector(getPerformance),
   ];
 
   useEffect(() => {
@@ -43,84 +74,52 @@ const DefaultHome: React.FC = () => {
 
     dispatch(fetchBanners());
     dispatch(fetchHighlights());
+    dispatch(fetchStrategies());
+    dispatch(fetchEngagements());
+    dispatch(fetchBells());
+    dispatch(fetchRanking());
+    dispatch(fetchPerformance());
   }, [dispatch, participant.id]);
-
-  const [realized, setRealized] = useState<IPerformance>({
-    realized: {
-      bilingPercent: 0,
-      pogPercent: 0,
-      individualPogPercent: 0,
-    },
-  });
-
-  useEffect(() => {
-    setRealized({
-      realized: {
-        bilingPercent: 25, // ;billingPog.billing.percentage,
-        pogPercent: 25, // billingPog.pog.percentage,
-        individualPogPercent: 50,
-      },
-    });
-  }, []);
-
-  const items: BellCardItem[] = [
-    {
-      description: 'Desenvolvimento de produtos',
-      goal: 5,
-      reached: 5,
-    },
-    {
-      description: 'Desenvolvimento de produtos',
-      goal: 5,
-      reached: 5,
-    },
-    {
-      description: 'Desenvolvimento de produtos',
-      goal: 5,
-      reached: 2,
-    },
-    {
-      description: 'Desenvolvimento de produtos',
-      goal: 5,
-      reached: 0,
-    },
-    {
-      description: 'Desenvolvimento de produtos',
-      goal: 5,
-      reached: 0,
-    },
-  ];
 
   return (
     <HomeWrapper>
       <Visible xs sm>
         {!!coinQuotations && <CoinQuotation quotations={coinQuotations} />}
       </Visible>
-      <Hidden sm>{!!banners && <Banners items={banners} />}</Hidden>
+      <Hidden xs sm>
+        {!!banners && <Banners items={banners} />}
+      </Hidden>
       <Wrapper>
         <PerformanceMyPointsWrapper>
           <PerformanceWrapper>
             <Title>Gestão</Title>
-            {realized && <Performance realized={realized.realized} />}
+            {performance && <Performance realized={performance} />}
           </PerformanceWrapper>
           <MyPointsWrapper>
             <Title>Estratégia</Title>
-            <BellsCard items={items} />
+            <BellsCard items={strategies} />
           </MyPointsWrapper>
           <MyPointsWrapper>
             <Title>Engajamento</Title>
-            <BellsCard items={items} />
+            <BellsCard items={engagements} />
           </MyPointsWrapper>
         </PerformanceMyPointsWrapper>
+
+        <CompletePerformanceWrapper>
+          <Link to={routeMap.home}>
+            CONFIRA SEU DESEMPENHO COMPLETO
+            <ReactSVG src={openLinkIcon} />
+          </Link>
+        </CompletePerformanceWrapper>
 
         <RankingWrapper>
           <PerformanceWrapper>
             <Title>Ranking</Title>
-            <Ranking />
+            {ranking && <Ranking ranking={ranking} />}
           </PerformanceWrapper>
           <PerformanceWrapper>
             <Title>Meus Sinos</Title>
-            <MyBells />
+            <MyBells bells={bells} />
           </PerformanceWrapper>
         </RankingWrapper>
         <Title>Destaques</Title>

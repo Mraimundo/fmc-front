@@ -2,11 +2,18 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Ranking: React.FC = () => {
+interface Props {
+  ranking: {
+    name: string;
+    position: number;
+  };
+}
+
+const Ranking: React.FC<Props> = ({ ranking }) => {
   return (
     <Container>
-      <span>Diretoria Sul</span>
-      <p>80º lugar</p>
+      <span>{ranking.name}</span>
+      <p>{ranking.position}º lugar</p>
     </Container>
   );
 };

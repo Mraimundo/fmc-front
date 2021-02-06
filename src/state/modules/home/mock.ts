@@ -1,3 +1,10 @@
+import {
+  strategies,
+  engagements,
+  bells,
+  ranking,
+  performance,
+} from 'services/home/fmc-team/mock';
 import { HomeState } from './reducer';
 import { HighlightTypes } from './constants';
 import { Banner, Highlight, ShowcaseProduct } from './types';
@@ -87,10 +94,30 @@ const state: HomeState = {
   fetchShowcaseProducts: {
     isFetching: false,
   },
+  fetchStrategies: {
+    isFetching: false,
+  },
+  fetchEngagements: {
+    isFetching: false,
+  },
+  fetchBells: {
+    isFetching: false,
+  },
+  fetchRanking: {
+    isFetching: false,
+  },
+  fetchPerformance: {
+    isFetching: false,
+  },
   banners,
   highlights,
   showcaseProducts: showcase,
   participantId: null,
+  strategies,
+  engagements,
+  bells,
+  ranking,
+  performance,
 };
 
 export default state;

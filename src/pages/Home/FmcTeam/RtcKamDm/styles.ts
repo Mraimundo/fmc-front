@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const PerformanceWrapper = styled.div`
-  width: 75%;
+  width: 65%;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -37,7 +37,7 @@ export const PerformanceMyPointsWrapper = styled.div`
 `;
 
 export const RankingWrapper = styled(PerformanceMyPointsWrapper)`
-  margin: 30px 0;
+  margin: 30px 0 40px 0;
   > div {
     & + div {
       margin-left: 20px;
@@ -58,5 +58,24 @@ export const HomeWrapper = styled.div`
     margin-top: 1em;
     color: ${({ theme }) => theme.font.color.primary};
     font-size: 0.9em;
+  }
+`;
+
+export const CompletePerformanceWrapper = styled.div`
+  margin-top: 1em;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.secondary};
+
+    svg {
+      margin-left: 0.5em;
+      fill: ${({ theme }) => theme.font.color.secondary};
+    }
   }
 `;
