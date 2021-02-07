@@ -40,6 +40,13 @@ export const ProgressWrapper = styled.div<ProgressWrapperProps>`
     }
   }
 
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+
   ${({ borderRight }) =>
     borderRight &&
     css`

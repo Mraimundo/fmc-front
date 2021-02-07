@@ -99,7 +99,7 @@ const DefaultHome: React.FC = () => {
             <Title>Estratégia</Title>
             <BellsCard items={strategies} />
           </MyPointsWrapper>
-          <MyPointsWrapper>
+          <MyPointsWrapper marginTop>
             <Title>Engajamento</Title>
             <BellsCard items={engagements} />
           </MyPointsWrapper>

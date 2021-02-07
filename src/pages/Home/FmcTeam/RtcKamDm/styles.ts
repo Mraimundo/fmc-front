@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 import { QuotationsList } from 'components/Header/CoinQuotation/styles';
 
@@ -14,7 +14,10 @@ export const PerformanceWrapper = styled.div`
   }
 `;
 
-export const MyPointsWrapper = styled.div`
+interface MyPointsWrapperProps {
+  marginTop?: boolean;
+}
+export const MyPointsWrapper = styled.div<MyPointsWrapperProps>`
   width: 25%;
   margin-left: 1em;
 
@@ -25,6 +28,9 @@ export const MyPointsWrapper = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
     margin-left: 0;
+    ${({marginTop}) => marginTop && css`
+      margin-top: 10px;
+    `};
   }
 `;
 
@@ -44,6 +50,7 @@ export const RankingWrapper = styled(PerformanceMyPointsWrapper)`
 
       @media screen and (max-width: 768px) {
         margin-left: 0;
+        margin-top:12px;
       }
     }
   }

@@ -28,6 +28,7 @@ export const Subtitle = styled.span`
 export const Grid = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 interface RowProps {
