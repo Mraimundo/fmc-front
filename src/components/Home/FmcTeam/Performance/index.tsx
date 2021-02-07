@@ -62,7 +62,7 @@ const Performance: React.FC<Props> = ({ realized }) => {
             <CircularProgress color="#25CCE1" percent={pog.percentage || 0} />
           </IndividualProgressWrapper>
           <IndividualProgressWrapper>
-            <Label>POG</Label>
+            <Label>POG Individual</Label>
             <GoalText>Objetivo US$ {individualPog.goal}</GoalText>
             <GoalText>Realizado US$ {individualPog.reached}</GoalText>
             <CircularProgress
