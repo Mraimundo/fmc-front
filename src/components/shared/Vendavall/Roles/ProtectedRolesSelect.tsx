@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   inputRole?: 'primary' | 'secondary';
   disabled?: boolean;
+  excludedRoles?: string[];
 }
 
 const ProtectedRolesSelect: React.FC<Props> = ({
@@ -14,11 +15,12 @@ const ProtectedRolesSelect: React.FC<Props> = ({
   className,
   inputRole = 'primary',
   disabled = false,
+  excludedRoles = []
 }) => {
   const [data, setData] = useState<Option[]>([]);
 
   useEffect(() => {
-    getProtecedRolesForSelect().then(list => setData(list));
+    getProtecedRolesForSelect(excludedRoles).then(list => setData(list));
   }, []);
 
   const loadItems = useCallback((): Option[] => {
