@@ -116,7 +116,7 @@ const Form: React.FC<Props> = ({
               inputRole="secondary"
               establishmentId={establishment.id}
             />
-            <RolesSelect name="role_select" inputRole="secondary" />
+            <RolesSelect name="role_select" inputRole="secondary" excludedRoles={['Produtor']}/>
             <Input name="name" label="Nome completo*" inputRole={inputRole} />
             <Input
               name="cpf"
