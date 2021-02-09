@@ -1,6 +1,9 @@
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, getDay } from 'date-fns';
 
-export const formatDate = (date: string | Date, formatMask = 'dd/MM/yyyy') => {
+export const formatDate = (
+  date: string | Date | number,
+  formatMask = 'dd/MM/yyyy',
+) => {
   if (!date) return '';
   let dateToFormat = date;
   if (typeof dateToFormat === 'string') {
@@ -17,7 +20,7 @@ export const formatDate = (date: string | Date, formatMask = 'dd/MM/yyyy') => {
   // return format(new Date(date), formatMask);
 };
 
-export const extractHourFromDate = (date: string | Date) => {
+export const extractHourFromDate = (date: string | Date | number) => {
   if (!date) return '';
 
   let dateToFormat = date;
@@ -46,4 +49,25 @@ export const ptMonths = [
 export const getMonthName = (monthNumber: number): string => {
   if (monthNumber < 1 || monthNumber > 12) return '';
   return ptMonths[monthNumber - 1];
+};
+
+const ptDays = [
+  'Domingo',
+  'Segunda',
+  'Terça',
+  'Quarta',
+  'Quinta',
+  'Sexta',
+  'Sábado',
+];
+
+export const getDayName = (date: string | Date | number): string => {
+  if (!date) return '';
+
+  let dateToFormat = date;
+  if (typeof dateToFormat === 'string') {
+    dateToFormat = parseISO(dateToFormat);
+  }
+
+  return ptDays[getDay(dateToFormat)] ?? '';
 };

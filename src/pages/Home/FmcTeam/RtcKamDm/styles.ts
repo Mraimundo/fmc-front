@@ -1,4 +1,5 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Title } from 'components/Home';
 
 import { QuotationsList } from 'components/Header/CoinQuotation/styles';
 
@@ -28,9 +29,11 @@ export const MyPointsWrapper = styled.div<MyPointsWrapperProps>`
   @media screen and (max-width: 768px) {
     width: 100%;
     margin-left: 0;
-    ${({marginTop}) => marginTop && css`
-      margin-top: 10px;
-    `};
+    ${({ marginTop }) =>
+      marginTop &&
+      css`
+        margin-top: 10px;
+      `};
   }
 `;
 
@@ -50,7 +53,7 @@ export const RankingWrapper = styled(PerformanceMyPointsWrapper)`
 
       @media screen and (max-width: 768px) {
         margin-left: 0;
-        margin-top:12px;
+        margin-top: 12px;
       }
     }
   }
@@ -86,3 +89,29 @@ export const CompletePerformanceWrapper = styled.div`
     }
   }
 `;
+
+export const WeatherWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0 20px 0;
+`;
+
+export const WeatherTitle = styled(Title)`
+  > img {
+    width: 25px;
+    margin-left: 5px;
+    cursor: pointer;
+    transform: translateY(13px);
+  }
+`;
+
+interface CitySelectProps {
+  show: boolean;
+}
+
+export const CitySelectWrapper = styled.div<CitySelectProps>`
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  margin-bottom: 8px;
+`;
+
+export const Img = styled.img``;
