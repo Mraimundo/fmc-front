@@ -25,8 +25,10 @@ const getProtectedRoles = async (): Promise<Role[]> => {
   }
 };
 
-const getProtecedRolesForSelect = async (): Promise<Option[]> => {
-  const roles = await getProtectedRoles();
+const getProtecedRolesForSelect = async (excludedRoles: string[] = []): Promise<Option[]> => {
+  const result = await getProtectedRoles();
+  const roles = result.filter(role => !excludedRoles.includes(role.name));
+
   return roles.map(item => ({
     value: item.id.toString(),
     title: item.name,
