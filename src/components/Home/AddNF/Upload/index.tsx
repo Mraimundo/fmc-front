@@ -71,7 +71,18 @@ const Upload: React.FC<Props> = Props => {
       >
         <ContainerModal>
           <CloseModal onClick={onRequestClose} />
-          <h3>Nota fiscal enviada com sucesso!</h3>
+          <h3>Parabéns, sua nota fiscal foi cadastrada com sucesso! </h3>
+
+          <p>
+            Se aprovada, seus FMC Coins estarão disponíveis em até 30 dias.
+            <br />
+            Você poderá acompanhar o status detalhado na página Extrato de Notas
+            Fiscais.
+            <br />
+            <br />
+            Equipe JUNTOS FMC
+          </p>
+
           <ButtonModal onClick={onRequestClose}>ok</ButtonModal>
         </ContainerModal>
       </Modal>
