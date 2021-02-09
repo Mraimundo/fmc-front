@@ -21,7 +21,7 @@ const ProtectedRolesSelect: React.FC<Props> = ({
 
   useEffect(() => {
     getProtecedRolesForSelect(excludedRoles).then(list => setData(list));
-  }, []);
+  }, [excludedRoles]);
 
   const loadItems = useCallback((): Option[] => {
     return data;
