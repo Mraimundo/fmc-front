@@ -1,6 +1,4 @@
 import React, { useCallback } from 'react';
-import { ReactSVG } from 'react-svg';
-import pdfIcon from 'assets/images/pdf.svg';
 
 import { useToast } from 'context/ToastContext';
 import { Container, Separator } from './styles';
@@ -23,13 +21,11 @@ const Result: React.FC<Props> = ({ pdfFile }) => {
       <span>Confira os resultados</span>
       {pdfFile ? (
         <a href={pdfFile}>
-          <ReactSVG src={pdfIcon} />
-          Download Resultados (PDF)
+          Download Resultados
         </a>
       ) : (
         <button type="submit" onClick={handlePdfNotFound}>
-          <ReactSVG src={pdfIcon} />
-          Download Resultados (PDF)
+          Download Resultados
         </button>
       )}
     </Container>
