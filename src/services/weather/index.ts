@@ -28,7 +28,7 @@ export const getCityCoordinatesByName = async (
 ): Promise<CityCoordinates | null> => {
   const headers = { Accept: 'application/json' };
   const api = axios.create({
-    baseURL: `http://api.openweathermap.org/geo/1.0`,
+    baseURL: `https://api.openweathermap.org/geo/1.0`,
     headers,
   });
   const apiId = '0e0ce2ccddf6393714475b523de91f3b';
