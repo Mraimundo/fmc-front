@@ -3,37 +3,56 @@ import { Reducer } from 'redux';
 import { FetchState } from '@types';
 import { emptyFetchState, fetchingState, fetchErrorState } from 'state/utils';
 import { HomeActions } from './actions';
+import * as actions from './constants';
 import {
-  FETCH_BANNERS_ACTION,
-  FETCH_BANNERS_FAILURE,
-  FETCH_BANNERS_SUCCESS,
-  FETCH_HIGHLIGHTS_ACTION,
-  FETCH_HIGHLIGHTS_FAILURE,
-  FETCH_HIGHLIGHTS_SUCCESS,
-  FETCH_SHOWCASEPRODUCTS_ACTION,
-  FETCH_SHOWCASEPRODUCTS_FAILURE,
-  FETCH_SHOWCASEPRODUCTS_SUCCESS,
-} from './constants';
-import { Banner, Highlight, ShowcaseProduct } from './types';
+  Banner,
+  Highlight,
+  ShowcaseProduct,
+  Strategy,
+  Engagement,
+  Bell,
+  Ranking,
+  Performance,
+} from './types';
 
 export interface HomeState {
   fetchBanners: FetchState;
   fetchHighlights: FetchState;
   fetchShowcaseProducts: FetchState;
+  fetchStrategies: FetchState;
+  fetchEngagements: FetchState;
+  fetchBells: FetchState;
+  fetchRanking: FetchState;
+  fetchPerformance: FetchState;
   banners: Banner[] | null;
   highlights: Highlight[] | null;
   showcaseProducts: ShowcaseProduct[] | null;
   participantId: number | null;
+  strategies: Strategy[];
+  engagements: Engagement[];
+  bells: Bell[];
+  ranking: Ranking | null;
+  performance: Performance | null;
 }
 
 export const initialState: HomeState = {
   fetchBanners: emptyFetchState,
   fetchHighlights: emptyFetchState,
   fetchShowcaseProducts: emptyFetchState,
+  fetchStrategies: emptyFetchState,
+  fetchEngagements: emptyFetchState,
+  fetchBells: emptyFetchState,
+  fetchRanking: emptyFetchState,
+  fetchPerformance: emptyFetchState,
   banners: null,
   highlights: null,
   showcaseProducts: null,
   participantId: null,
+  strategies: [],
+  engagements: [],
+  bells: [],
+  ranking: null,
+  performance: null,
 };
 
 const homeReducer: Reducer<HomeState, HomeActions> = (
@@ -41,41 +60,96 @@ const homeReducer: Reducer<HomeState, HomeActions> = (
   action: HomeActions,
 ): HomeState => {
   switch (action.type) {
-    case FETCH_BANNERS_ACTION:
+    case actions.FETCH_BANNERS_ACTION:
       return { ...state, fetchBanners: fetchingState };
-    case FETCH_BANNERS_FAILURE:
+    case actions.FETCH_BANNERS_FAILURE:
       return { ...state, fetchBanners: fetchErrorState(action) };
-    case FETCH_BANNERS_SUCCESS:
+    case actions.FETCH_BANNERS_SUCCESS:
       return {
         ...state,
         fetchBanners: emptyFetchState,
         banners: action.payload.banners,
       };
 
-    case FETCH_HIGHLIGHTS_ACTION:
+    case actions.FETCH_HIGHLIGHTS_ACTION:
       return { ...state, fetchHighlights: fetchingState };
-    case FETCH_HIGHLIGHTS_FAILURE:
+    case actions.FETCH_HIGHLIGHTS_FAILURE:
       return { ...state, fetchHighlights: fetchErrorState(action) };
-    case FETCH_HIGHLIGHTS_SUCCESS:
+    case actions.FETCH_HIGHLIGHTS_SUCCESS:
       return {
         ...state,
         fetchHighlights: emptyFetchState,
         highlights: action.payload.highlights,
       };
 
-    case FETCH_SHOWCASEPRODUCTS_ACTION:
+    case actions.FETCH_SHOWCASEPRODUCTS_ACTION:
       return {
         ...state,
         fetchShowcaseProducts: fetchingState,
         participantId: action.payload,
       };
-    case FETCH_SHOWCASEPRODUCTS_FAILURE:
+    case actions.FETCH_SHOWCASEPRODUCTS_FAILURE:
       return { ...state, fetchShowcaseProducts: fetchErrorState(action) };
-    case FETCH_SHOWCASEPRODUCTS_SUCCESS:
+    case actions.FETCH_SHOWCASEPRODUCTS_SUCCESS:
       return {
         ...state,
         fetchShowcaseProducts: emptyFetchState,
         showcaseProducts: action.payload.showcaseProducts,
+      };
+
+    case actions.FETCH_STRATEGIES_ACTION:
+      return { ...state, fetchStrategies: fetchingState };
+    case actions.FETCH_STRATEGIES_FAILURE:
+      return { ...state, fetchStrategies: fetchErrorState(action) };
+    case actions.FETCH_STRATEGIES_SUCCESS:
+      return {
+        ...state,
+        fetchStrategies: emptyFetchState,
+        strategies: action.payload.strategies,
+      };
+
+    case actions.FETCH_ENGAGEMENTS_ACTION:
+      return { ...state, fetchEngagements: fetchingState };
+    case actions.FETCH_ENGAGEMENTS_FAILURE:
+      return { ...state, fetchEngagements: fetchErrorState(action) };
+    case actions.FETCH_ENGAGEMENTS_SUCCESS:
+      return {
+        ...state,
+        fetchEngagements: emptyFetchState,
+        engagements: action.payload.engagements,
+      };
+
+    case actions.FETCH_BELLS_ACTION:
+      return { ...state, fetchBells: fetchingState };
+    case actions.FETCH_BELLS_FAILURE:
+      return { ...state, fetchBells: fetchErrorState(action) };
+    case actions.FETCH_BELLS_SUCCESS:
+      return {
+        ...state,
+        fetchBells: emptyFetchState,
+        bells: action.payload.bells,
+      };
+
+    case actions.FETCH_RANKING_ACTION:
+      return { ...state, fetchRanking: fetchingState };
+    case actions.FETCH_RANKING_FAILURE:
+      return { ...state, fetchRanking: fetchErrorState(action) };
+    case actions.FETCH_RANKING_SUCCESS:
+      return {
+        ...state,
+        fetchRanking: emptyFetchState,
+        ranking: action.payload.ranking,
+      };
+
+    case actions.FETCH_PERFORMANCE_ACTION:
+      return { ...state, fetchPerformance: fetchingState };
+    case actions.FETCH_PERFORMANCE_FAILURE:
+      return { ...state, fetchPerformance: fetchErrorState(action) };
+    case actions.FETCH_PERFORMANCE_SUCCESS:
+      return {
+        ...state,
+        fetchPerformance: emptyFetchState,
+        performance: action.payload.performance,
       };
 
     default:
