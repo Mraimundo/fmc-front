@@ -14,6 +14,7 @@ import SuccessSignUpModal from 'components/Auth/Modals/SuccessSignUp';
 
 import logoImg from 'assets/images/logo.png';
 import Form from 'components/Auth/Register/Form';
+import { PROFILES } from 'config/constants';
 
 import {
   Container,
@@ -123,9 +124,11 @@ const FirstAccess: React.FC = () => {
           </Container>
         )
       )}
+
       <SuccessSignUpModal
         isOpen={modalOpened}
         onRequestClose={handleCloseModal}
+        isProfileProducer={participant?.profile === PROFILES.producer}
       />
     </>
   );
