@@ -25,7 +25,10 @@ interface RadialSeparatorsProps {
   style: object;
 }
 
-const RadialSeparators = ({ count, style }: RadialSeparatorsProps) => {
+const RadialSeparators: React.FC<RadialSeparatorsProps> = ({
+  count,
+  style,
+}) => {
   const turns = 1 / count;
   return (
     <>
