@@ -205,7 +205,7 @@ const PointsSimulator: React.FC = () => {
           setChannelSelected={setChannelSelected}
         />
         <WarningBox>
-          Atenção: Caso o Estoque Final do Produto seja menor que 0 (zero), você deverá digitar o Valor Unitário antes de seguir com a simulação!
+          O preço unitário simulado deve ser o preço Gross negociado com o canal.
         </WarningBox>
         {channel && (
           <CustomTableBox>

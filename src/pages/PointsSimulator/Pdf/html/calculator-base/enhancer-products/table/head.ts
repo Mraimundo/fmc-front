@@ -5,7 +5,7 @@ export default `
   <th>Faturamento(Kg/L)</th>
   <th>POG(Kg/L)</th>
   <th>Estoque</th>
-  <th>Valor Unitário(US$)</th>
+  <th>Preço Gross(US$)</th>
   <th>Faturamento(Kg/L)</th>
   <th>Faturamento(US$)</th>
   <th>POG(Kg/L)</th>
