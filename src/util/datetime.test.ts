@@ -34,8 +34,8 @@ describe('src/utils/datetime', () => {
       expect(formatDate(1612710000000)).toBe('07/02/2021');
     });
 
-    test('extractHourFromDate(1612688890000) should return "06:08"', () => {
-      expect(extractHourFromDate(1612688890000)).toBe('06:08');
+    test('extractHourFromDate(1612688890000) should return "09:08"', () => {
+      expect(extractHourFromDate(1612688890000)).toBe('09:08');
     });
 
     test('getDayName(1612710000000) should return "Domingo"', () => {
