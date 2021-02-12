@@ -1,5 +1,5 @@
 import { addHours } from 'date-fns';
-import { GRV, DN, CRM, MKT } from 'config/constants';
+import { GRV, DN, CRM, MKT, GC } from 'config/constants';
 import {
   Campaign,
   Approver,
@@ -16,7 +16,7 @@ import {
 import getPtStatus from '../util/getPtStatusText';
 
 const extractApprovers = (data: ApproverApi[]): Approver[] => {
-  const approvers: ApproverProfile[] = ['GRV', 'CRM', 'DN', 'MKT'];
+  const approvers: ApproverProfile[] = ['GRV', 'GC', 'CRM', 'DN', 'MKT'];
 
   return approvers.map(item => {
     const filteredData = data.filter(i => i.profile === item && i.status === 1);
@@ -41,7 +41,7 @@ const getProfileTurn = (data: ApproverApi[]): ApproverProfile[] => {
 
   switch (filteredData.length) {
     case 0:
-      return [GRV, CRM];
+      return [GRV, GC, CRM];
     case 1:
       return [CRM];
     case 2:

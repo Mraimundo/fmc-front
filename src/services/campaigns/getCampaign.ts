@@ -109,7 +109,7 @@ const transformer = (data: CampaignApi): Campaign => {
           ? `${fakeFormatDollars(partial_result.volume, 0, 0)} Kg/L`
           : '',
         partialVolumePercentage: partial_result?.volume_percentage
-          ? `${fakeFormatDollars(partial_result.volume, 0, 0)}%`
+          ? `${fakeFormatDollars(partial_result.volume)}%`
           : '',
         finalVolume: final_result?.volume
           ? `${fakeFormatDollars(final_result.volume, 0, 0)} Kg/L`
@@ -123,9 +123,7 @@ const transformer = (data: CampaignApi): Campaign => {
           : '',
         partialSellInPercentage: partial_result?.sellin_percentage
           ? `${fakeFormatDollars(
-              partial_result.sellin_percentage * 100,
-              0,
-              0,
+              partial_result.sellin_percentage * 100
             )}%`
           : '',
         finalSellIn: final_result?.sellin
@@ -140,9 +138,7 @@ const transformer = (data: CampaignApi): Campaign => {
           : '',
         partialSellOutPercentage: partial_result?.sellout_percentage
           ? `${fakeFormatDollars(
-              partial_result.sellout_percentage * 100,
-              0,
-              0,
+              partial_result.sellout_percentage * 100
             )}%`
           : '',
         finalSellOut: final_result?.sellout

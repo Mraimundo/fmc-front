@@ -20,6 +20,7 @@ export const MKT = 'MKT';
 export const RTC = 'RTC';
 export const KAM = 'KAM';
 export const GRM = 'GRM';
+export const GC = 'GC';
 
 export type ApproverProfile =
   | typeof GRV
@@ -29,7 +30,8 @@ export type ApproverProfile =
   | typeof MKT
   | typeof RTC
   | typeof KAM
-  | typeof GRM;
+  | typeof GRM
+  | typeof GC;
 
 export const PROFILES = {
   focalPoint: 'FOCALPOINT',
