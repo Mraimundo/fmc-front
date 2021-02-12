@@ -205,7 +205,7 @@ const PointsSimulator: React.FC = () => {
           setChannelSelected={setChannelSelected}
         />
         <WarningBox>
-          O preço unitário simulado deve ser o preço Gross negociado com o canal.
+          Atenção: O preço unitário simulado deve ser o preço Gross negociado com o canal.
         </WarningBox>
         {channel && (
           <CustomTableBox>
