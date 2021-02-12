@@ -128,10 +128,10 @@ const Body: React.FC<Props> = ({ cards, award, configuration, indicators }) => {
             title="Pontos do rebate"
             text={`${formatPoints(award.totalRebate, 0, 0)} pontos`}
           />
-          <MiniBox
+          {/*<MiniBox
             title="Margem adicional"
             text={`R$ ${formatPoints(award.totalAdditionalMargin, 0, 0)}`}
-          />
+          />*/}
           <MiniBox
             title="Premiação de vendedor"
             text={`${formatPoints(award.totalSeller, 0, 0)} pontos`}
