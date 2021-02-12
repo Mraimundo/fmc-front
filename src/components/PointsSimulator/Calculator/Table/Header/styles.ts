@@ -5,9 +5,9 @@ export const Container = styled.div`
   display: grid;
   color: ${({ theme }) => theme.font.color.primary};
   font-size: 12px;
-  width: calc(100% - 13px);
+  width: calc(100% -13px);
   grid-template-columns:
-    4.75728155339806% 12.9126213592233% 13.9805825242718%
+    4.76728155339806% 12.9126213592233% 13.9805825242718%
     14.6601941747573% 12.1359223300971% 10.4854368932039% 10.4854368932039%
     10.4854368932039% 10.0970873786408%;
 `;
