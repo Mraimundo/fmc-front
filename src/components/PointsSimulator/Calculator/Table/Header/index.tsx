@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ tabSelected }) => {
         POG ({tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
       </div>
       <div>Estoque</div>
-      <div>Valor unitário (US$)</div>
+      <div>Valor Unitário (US$)</div>
       <div>Faturamento (Kg/L)</div>
       <div>Faturamento (US$)</div>
       <div>POG (Kg/L)</div>
