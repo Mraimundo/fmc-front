@@ -9,7 +9,7 @@ import ExtractEf from './ExtractProducer';
 import ListOne from './ListOne';
 import ListTwo from './ListTwo';
 
-import { AddNF } from '../../components/ExtractProducer';
+// import { AddNF } from '../../components/ExtractProducer';
 
 import { EstablishmentTypes } from 'config/constants';
 import {
@@ -183,8 +183,7 @@ const Extract: React.FC = () => {
           <ListTwo safra={safra} key={safra.safra} />
         ))}
 
-
-        <AddNF layout="secondary" />
+        {/* <AddNF layout="secondary" /> */}
       </Content>
     </Container>
   );
