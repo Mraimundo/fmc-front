@@ -8,6 +8,7 @@ import CampaignsCounting from './modules/campaigns-counting';
 import CampaignsManager from './modules/campaigns-manager';
 import Cockpit from './modules/cockpit';
 import Contact from './modules/contact';
+import ProducerExtract from './modules/producer-extract';
 import Extract from './modules/extract';
 import Faq from './modules/faq';
 import Gallery from './modules/gallery';
@@ -40,6 +41,7 @@ const routesArray: RouteModule[][] = [
   CampaignsManager,
   Cockpit,
   Contact,
+  ProducerExtract,
   Extract,
   Faq,
   Gallery,

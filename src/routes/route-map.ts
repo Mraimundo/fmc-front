@@ -3,6 +3,7 @@ export default {
   campaignManagement: '/gerenciamento-de-campanhas',
   campaignCounting: '/apuracao-de-campanhas',
   contact: '/fale-conosco',
+  producerExtract: '/produtor-extrato',
   extract: {
     my: '/myextract',
     channel: '/extrato-canal',
