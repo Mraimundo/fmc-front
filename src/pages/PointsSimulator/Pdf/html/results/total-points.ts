@@ -108,9 +108,9 @@ export default (props: Props) => {
 
     <div>
       <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
-    <p style="text-align: center; line-height: 1;">Margem adicional</p>
-    <p style="text-align: center; font-weight: bold;">R$ ${formattedAdditional}</p>
-  </div>
+        <p style="text-align: center; line-height: 1;">Premiação de vendedor</p>
+        <p style="text-align: center; font-weight: bold;">R$ ${formattedSeller}</p>
+      </div>
     </div>
 
         </td>
@@ -127,22 +127,23 @@ export default (props: Props) => {
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
 
-  <table id="u_content_html_10" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <!--<table id="u_content_html_10" class="u_content_html" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  ocultando Margem adicional temporariamente
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
       <div style="border-radius: 5px; background:#dad8d9; width: 100%; height: 55px; display: flex; flex-direction: column; justify-content: center;">
-    <p style="text-align: center; line-height: 1;">Premiação de vendedor</p>
-    <p style="text-align: center; font-weight: bold;">${formattedSeller} pontos</p>
+    <p style="text-align: center; line-height: 1;">Margem adicional</p>
+    <p style="text-align: center; font-weight: bold;">${formattedAdditional} pontos</p>
   </div>
     </div>
 
         </td>
       </tr>
     </tbody>
-  </table>
+  </table>-->
 
     <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
     </div>
