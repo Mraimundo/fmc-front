@@ -291,8 +291,8 @@ const getSellerReachedValuesInReal = ({
   percentageValueToApplyInDecimalInTotalAmount,
   percentageValueToApplyInDecimalInSimulatedAmount,
 }: SellerReachedValuesProps): SellerReachedValues => {
-  if (product.id === 22 || product.id === 15) {
-  }
+  /*if (product.id === 22 || product.id === 15) {
+  }*/
   const sellerReachedInRealSimulated =
     product.simulationData.pogInKilosPerLiter *
     (product.awardsParamsToPay.sellerValueInReal *
