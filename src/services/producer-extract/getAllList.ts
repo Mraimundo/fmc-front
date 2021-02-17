@@ -1,15 +1,16 @@
 import { pluginApi } from 'services/api';
 import { Nf } from './interfaces';
 
-interface ApiResponse {
+interface getAllListApi {
   fmccoins: number;
-  nota: Nf[];
   safra: string;
+  nota: Nf[];
 }
 
-export default async (): Promise<any> => {
+
+export default async (): Promise<getAllListApi[]> => {
   try {
-    const { data } = await pluginApi.get<any>(
+    const { data } = await pluginApi.get<getAllListApi[]>(
       '/participants/extrato-fmc-coins',
     );
     return data;
