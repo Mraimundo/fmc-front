@@ -31,4 +31,8 @@ export default {
   },
   qrCode: '/qr',
   receipts: '/extrato-notas',
+  flyingHigh: {
+    internal: '/voando-alto',
+    public: '/voando-alto-publico',
+  }
 };
