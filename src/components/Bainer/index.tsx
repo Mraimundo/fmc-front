@@ -51,7 +51,7 @@ const Bainer: React.FC = () => {
   }
 
 
-  if(profile==='FMC' && profileType==='Revenda'){
+  if (profile === 'FMC' && profileType === 'Revenda') {
     //
     colorType = 'cinza';
   }
@@ -70,7 +70,7 @@ const Bainer: React.FC = () => {
         <div className="content-group">
           <h1 className="title">Indicação de Produtor</h1>
           <h2 className="sub-title">
-            Indique produtores para participarem do juntos FMC.
+            Indique seus clientes para participarem do JUNTOS FMC.
           </h2>
         </div>
         <main>
@@ -94,7 +94,7 @@ const Bainer: React.FC = () => {
 
           <div className="indicator-code">
             <div>
-              <h1>Seu codigo de Indicação: {indication}</h1>
+              <h1>Seu Código de Indicação: {indication}</h1>
             </div>
             <div>
               <div className="register-group">
