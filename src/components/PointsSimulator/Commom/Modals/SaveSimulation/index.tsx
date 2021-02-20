@@ -4,7 +4,11 @@ import { Channel } from 'state/modules/points-simulator/interfaces';
 import { formatDate } from 'util/datetime';
 import { SaveSimulationDTO } from 'services/points-simulator/interfaces/dtos';
 
-import { DefaultModal, Table, Button, Content } from './styles';
+import { ReactSVG } from 'react-svg';
+
+import closeIcon from 'assets/images/training/close-icon.svg';
+
+import { DefaultModal, Table, Button, Content, Close } from './styles';
 
 interface ModalProps {
   isOpen: boolean;
@@ -48,6 +52,11 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <DefaultModal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={10}>
+      <Close>
+        <button type="button" onClick={onRequestClose}>
+          <ReactSVG src={closeIcon} />
+        </button>
+      </Close>
       <Content>
         <h3>Salvar Simulação</h3>
         <Table>

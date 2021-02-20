@@ -38,7 +38,7 @@ export default (props: Props) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:30px 10px 16px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div class="v-text-align" style="color: #000000; line-height: 140%; text-align: left; word-wrap: break-word;">
-      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span style="line-height: 22.4px; font-size: 16px;">Simula&ccedil;&atilde;o de Pontos no Programa de Relacionamento JUNTOS</span></strong></span></p>
+      <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span style="line-height: 22.4px; font-size: 16px;">Simula&ccedil;&atilde;o de Pontos no Programa de Relacionamento JUNTOS FMC</span></strong></span></p>
     </div>
 
         </td>
@@ -71,10 +71,10 @@ export default (props: Props) => {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
     <div>
-      <div style="padding: 10px; border-radius: 5px; background:#dad8d9; width: 100%; height: 68px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="padding: 10px; border-radius: 5px; background:#dad8d9; width: 100%; height: 80px; display: flex; flex-direction: column; justify-content: center;">
     <p style="line-height: 1; font-weight: bold;">${groupName}</p>
-    <p style="line-height: 1;  font-size: 11px">${category}</p>
-    <p style="margin-top: 5px;font-weight: bold;">SAFRA 20/21 </p>
+    <p style="margin-top: 7px; line-height: 1;  font-size: 16px">Categoria: ${category}</p>
+    <p style="margin-top: 7px; font-weight: bold;">SAFRA 20/21 </p>
   </div>
     </div>
 
@@ -120,7 +120,7 @@ export default (props: Props) => {
 
     <div>
       <div style="padding-top: 18px;">
-    <p style="font-size:12px;"><strong style="font-size:14px;">Resultado da Simulação</strong> (simulado em ${simulatedDate} com parciais de ${partialDate})</p>
+    <p style="font-size:12px;"><strong style="font-size:14px;">Resultado da Simulação</strong> (em ${simulatedDate} com parciais de ${partialDate})</p>
   </div>
     </div>
 
