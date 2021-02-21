@@ -6,6 +6,7 @@ import { Visible, Hidden } from 'react-grid-system';
 import openLinkIcon from 'assets/images/open-link-icon.svg';
 import configIcon from 'assets/images/weather/config.svg';
 import routeMap from 'routes/route-map';
+import deleteIcon from 'assets/images/campaigns/delete-icon.svg';
 
 import { useAuth } from 'context/AuthContext';
 import {
@@ -17,7 +18,7 @@ import {
   fetchRanking,
   fetchPerformance,
 } from 'state/modules/home/actions';
-import { fetchWeather, clearWeather } from 'state/modules/weather/actions';
+import { fetchWeather } from 'state/modules/weather/actions';
 import {
   getBanners,
   getHighlights,
@@ -44,6 +45,8 @@ import { City } from 'services/weather/interfaces';
 import { getCityCoordinatesByName } from 'services/weather';
 import CitySelect from 'components/Weather/Selects/Cities';
 import WeatherWidget from 'components/Weather/Widget';
+import { useToast } from 'context/ToastContext';
+import { CityCoordinates } from 'state/modules/weather/types';
 import {
   Wrapper,
   PerformanceMyPointsWrapper,
@@ -56,11 +59,15 @@ import {
   WeatherTitle,
   CitySelectWrapper,
   Img,
+  StyledWrapper,
+  WeatherWidgetWrapper,
+  RemoveActionWrapper,
 } from './styles';
 
 const DefaultHome: React.FC = () => {
   const dispatch = useDispatch();
   const { participant } = useAuth();
+  const { addToast } = useToast();
   const coinQuotations = useSelector(getCoinQuotations);
 
   const [
@@ -82,7 +89,8 @@ const DefaultHome: React.FC = () => {
   ];
 
   const weather = useSelector(getWeather);
-  const [city, setCity] = useState<City | null>(null);
+  const [citySelect, setCitySelect] = useState<City | null>(null);
+  const [cities, setCities] = useState<City[]>([]);
 
   useEffect(() => {
     if (!participant.id) return;
@@ -94,25 +102,51 @@ const DefaultHome: React.FC = () => {
     dispatch(fetchBells());
     dispatch(fetchRanking());
     dispatch(fetchPerformance());
-    setCity({ id: 0, name: 'Londrina' });
-    getCityCoordinatesByName('londrina').then(cityCoordinates => {
-      if (cityCoordinates) dispatch(fetchWeather(cityCoordinates));
-    });
+    setCities([{ id: 0, name: 'londrina' }]);
   }, [dispatch, participant.id]);
 
   const handleCitySelect = useCallback(
     async (_city: City) => {
-      setCity(_city);
-      const cityCoordinates = await getCityCoordinatesByName(_city.name);
-      if (!cityCoordinates) {
-        dispatch(clearWeather());
+      if (cities.length >= 2) {
+        addToast({ title: 'Por favor exclua uma cidade antes de continuar' });
+        setTimeout(() => {
+          setCitySelect(null);
+        }, 1500);
         return;
       }
 
-      dispatch(fetchWeather(cityCoordinates));
+      setCitySelect(_city);
+
+      setCities(oldCities => [
+        ...oldCities.filter(item => item.name !== _city.name),
+        _city,
+      ]);
+
+      setTimeout(() => {
+        setCitySelect(null);
+      }, 3000);
     },
-    [dispatch],
+    [cities, addToast],
   );
+
+  useEffect(() => {
+    const load = async () => {
+      const citiesCoordinates = await Promise.all(
+        cities.map(async city => {
+          const cityCoordinates = await getCityCoordinatesByName(city.name);
+          return cityCoordinates as CityCoordinates;
+        }),
+      );
+
+      dispatch(fetchWeather(citiesCoordinates.filter(item => item?.name)));
+    };
+
+    load();
+  }, [dispatch, cities]);
+
+  const handleRemoveCity = useCallback((cityName: string) => {
+    setCities(oldCities => oldCities.filter(item => item.name === cityName));
+  }, []);
 
   const [showCitySelection, setShowCitySelection] = useState(false);
 
@@ -130,14 +164,16 @@ const DefaultHome: React.FC = () => {
             <Title>Gestão</Title>
             {performance && <Performance realized={performance} />}
           </PerformanceWrapper>
-          <MyPointsWrapper>
-            <Title>Estratégia</Title>
-            <BellsCard items={strategies} />
-          </MyPointsWrapper>
-          <MyPointsWrapper marginTop>
-            <Title>Engajamento</Title>
-            <BellsCard items={engagements} />
-          </MyPointsWrapper>
+          <StyledWrapper>
+            <MyPointsWrapper>
+              <Title>Estratégia</Title>
+              <BellsCard items={strategies} />
+            </MyPointsWrapper>
+            <MyPointsWrapper marginTop>
+              <Title>Engajamento</Title>
+              <BellsCard items={engagements} />
+            </MyPointsWrapper>
+          </StyledWrapper>
         </PerformanceMyPointsWrapper>
 
         <CompletePerformanceWrapper>
@@ -146,7 +182,6 @@ const DefaultHome: React.FC = () => {
             <ReactSVG src={openLinkIcon} />
           </Link>
         </CompletePerformanceWrapper>
-
         <RankingWrapper>
           <PerformanceWrapper>
             <Title>Ranking</Title>
@@ -169,9 +204,24 @@ const DefaultHome: React.FC = () => {
             />
           </WeatherTitle>
           <CitySelectWrapper show={showCitySelection}>
-            <CitySelect value={city} setValue={handleCitySelect} />
+            <h3>Você pode escolher até duas cidades</h3>
+            <CitySelect
+              value={citySelect}
+              setValue={handleCitySelect}
+              placeholder="Escolha uma cidade para adicionar"
+            />
           </CitySelectWrapper>
-          {weather && <WeatherWidget weather={weather} />}
+          {weather.map(item => (
+            <WeatherWidgetWrapper>
+              <WeatherWidget weather={item} />
+              <RemoveActionWrapper show={showCitySelection}>
+                <ReactSVG
+                  src={deleteIcon}
+                  onClick={() => handleRemoveCity(item.city.name)}
+                />
+              </RemoveActionWrapper>
+            </WeatherWidgetWrapper>
+          ))}
         </WeatherWrapper>
       </Wrapper>
     </HomeWrapper>

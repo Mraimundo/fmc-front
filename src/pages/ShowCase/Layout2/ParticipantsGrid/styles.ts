@@ -5,7 +5,7 @@ export const Container = styled(Table)`
   margin-top: 20px;
   > thead > tr {
     background: transparent;
-    color: #193f4e;
+    color: ${({ theme }) => theme.font.color.primary};
     font-size: 14px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
   }

@@ -31,7 +31,9 @@ const BellsCard: React.FC<Props> = ({ items }) => {
               }
             />
             <span>{item.description}</span>
-            <strong>{`${item.reached} / ${item.goal}`}</strong>
+            <strong>
+              {item.reached} <b>/</b> {item.goal}
+            </strong>
           </Row>
         ))}
       </Grid>

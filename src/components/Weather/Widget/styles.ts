@@ -8,10 +8,12 @@ export const Container = styled.div`
   border-radius: 10px;
   width: 100%;
   height: 122px;
+  overflow-x: auto;
 `;
 
 export const CityWrapper = styled.div`
   display: flex;
+  min-width: 210px;
 
   > h3 {
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
@@ -50,6 +52,7 @@ export const NextDaysWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  min-width: 460px;
 
   > div {
     display: flex;
@@ -88,6 +91,7 @@ export const ResumeWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 12px;
   grid-row-gap: 4px;
+  min-width: 170px;
 
   > div {
     display: flex;

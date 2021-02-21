@@ -25,7 +25,7 @@ const Avatar: React.FC<SelectProps> = ({
   const inputRef = useRef<HTMLInputElement>();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const [src, setSrc] = useState();
+  const [src, setSrc] = useState('');
 
   const { register, setValue, getValues } = useFormContext();
 

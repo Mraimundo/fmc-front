@@ -13,10 +13,10 @@ export const clearWeather = (): ActionCreator<typeof actions.CLEAR_WEATHER> =>
   };
 
 export const fetchWeather = (
-  cityCoordinates: types.CityCoordinates,
+  cityCoordinates: types.CityCoordinates[],
 ): ActionCreatorPayload<
   typeof actions.FETCH_WEATHER_ACTION,
-  types.CityCoordinates
+  types.CityCoordinates[]
 > =>
   <const>{
     type: actions.FETCH_WEATHER_ACTION,
@@ -34,7 +34,7 @@ export const fetchWeatherFailure = (
   };
 
 export const fetchWeatherSuccess = (
-  weather: types.Weather | null,
+  weather: types.Weather[],
 ): ActionCreatorPayload<
   typeof actions.FETCH_WEATHER_SUCCESS,
   Pick<WeatherState, 'weather'>

@@ -48,7 +48,7 @@ const Form: React.FC<Props> = ({
     _participant.profile,
     editing,
     autoindicate,
-    _participant.profile_value
+    _participant.profile_value,
   );
 
   useEffect(() => {

@@ -8,12 +8,12 @@ import { Weather } from './types';
 
 export interface WeatherState {
   fetchWeather: FetchState;
-  weather: Weather | null;
+  weather: Weather[];
 }
 
 export const initialState: WeatherState = {
   fetchWeather: emptyFetchState,
-  weather: null,
+  weather: [],
 };
 
 const weatherReducer: Reducer<WeatherState, WeatherActions> = (
