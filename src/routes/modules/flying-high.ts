@@ -7,7 +7,7 @@ const routes: RouteModule[] = [
     path: routeMap.flyingHigh.internal,
     component: FlyingHigh,
     accessPage: 'Campanha Voando Alto',
-  }
+  },
 ];
 
 export default routes;

@@ -44,6 +44,7 @@ const FirstAccess: React.FC = () => {
     async function load(): Promise<void> {
       try {
         const { state } = location;
+        console.log('ON LOAD FIRST ACCESS', state);
         if (!state || !state.profile) {
           history.push('/');
         }

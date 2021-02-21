@@ -5,24 +5,24 @@ import Info from 'components/FyingHigh/Info';
 import HowToWin from 'components/FyingHigh/HowToWin';
 import LuckyNumber from 'components/FyingHigh/LuckyNumber';
 
+import getLuckyNumber from 'services/flying-high/getLuckyNumber';
 import { Container, Box, Title } from './styles';
 
-import getLuckyNumber from 'services/flying-high/getLuckyNumber';
-import getLoggedParticipant from 'services/auth/getLoggedParticipant';
+// import getLoggedParticipant from 'services/auth/getLoggedParticipant';
 
 const FlyingHigh: React.FC = () => {
-  const [luckyNumber, setLuckyNumber] = useState(0);
-  const [participantName, setParticipantName] = useState('');
+  const [luckyNumber, setLuckyNumber] = useState('');
+  // const [participantName, setParticipantName] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchLuckyNumber = async () => {
-      const participant = await getLoggedParticipant();
-      const num = await getLuckyNumber(participant.cpf);
+      // const participant = await getLoggedParticipant();
+      const num = await getLuckyNumber();
       setLuckyNumber(num);
-      setParticipantName(participant.name);
+      // setParticipantName(participant.name);
       setLoading(false);
-    }
+    };
     fetchLuckyNumber();
   }, []);
 
@@ -34,14 +34,14 @@ const FlyingHigh: React.FC = () => {
         <h1>AGUARDANDO KV VOANDO ALTO</h1>
       </Box>
       <Info />
-      <LuckyNumber
+      {/* <LuckyNumber
         participantName={participantName}
         luckyNumber={luckyNumber}
         loading={loading}
-      />
+      /> */}
       <HowToWin />
     </Container>
   );
-}
+};
 
 export default FlyingHigh;

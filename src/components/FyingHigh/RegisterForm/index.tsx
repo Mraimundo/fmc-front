@@ -51,6 +51,7 @@ const RegisterForm: React.FC = () => {
         role: { id: 26, identifier: 'produtor', name: 'Produtor' },
         campaign_id: 1,
         profile: PROFILES.producer,
+        registration_origin: 'FLYING_HIGH_ACTION',
       };
 
       history.push('/firstAccess', participant);
@@ -67,21 +68,21 @@ const RegisterForm: React.FC = () => {
     <Container>
       <h2>Você que é Produtor Rural faça seu cadastro</h2>
       <FormContext {...methods}>
-      <form onSubmit={onSubmit}>
-        <Input
-          name="param_first_access"
-          placeholder="CPF"
-          numbersOnly
-          pattern="XXX.XXX.XXX-XX"
-          inputRole="secondary"
-        />
-        <Button type="submit" buttonRole="secondary" loading={loading}>
-          Cadastrar
-        </Button>
-      </form>
+        <form onSubmit={onSubmit}>
+          <Input
+            name="param_first_access"
+            placeholder="CPF"
+            numbersOnly
+            pattern="XXX.XXX.XXX-XX"
+            inputRole="secondary"
+          />
+          <Button type="submit" buttonRole="secondary" loading={loading}>
+            Cadastrar
+          </Button>
+        </form>
       </FormContext>
     </Container>
   );
-}
+};
 
 export default RegisterForm;

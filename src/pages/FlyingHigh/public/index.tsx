@@ -20,6 +20,6 @@ const FlyingHigh: React.FC = () => {
       <HowToWin />
     </Container>
   );
-}
+};
 
 export default FlyingHigh;

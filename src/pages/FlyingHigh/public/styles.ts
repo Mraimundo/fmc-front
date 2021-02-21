@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   position: absolute;
-  background-color: #3B302A;
+  background-color: #3b302a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,15 +17,15 @@ export const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   min-height: 400px;
   width: 80%;
-  color: #65554D;
+  color: #65554d;
   padding: 2rem;
 `;
 
 export const Title = styled.h2`
   text-align: center;
   margin: 2rem 1rem;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.1em;
 `;

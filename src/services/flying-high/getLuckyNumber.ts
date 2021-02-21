@@ -1,8 +1,13 @@
-export default async (cpf: string): Promise<number> => {
-  return new Promise<number>((resolve, reject) => {
-    setTimeout(
-      () => resolve(Math.floor(1 + Math.random()*(99999 + 1 - 1))),
-      2000
-    );
-  });
+import { pluginApi } from '../api';
+import { Coupon } from './interface';
+
+const REQUEST_URL = 'flying-high/lucky-numbers';
+
+export default async (): Promise<string> => {
+  try {
+    const { data } = await pluginApi.get<Coupon>(REQUEST_URL);
+    return data.number;
+  } catch (error) {
+    return '';
+  }
 };
