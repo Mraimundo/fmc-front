@@ -24,6 +24,7 @@ import {
   EstablishmentSelection,
 } from 'components/PointManagement';
 import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 import {
   Wrapper,
   Panel,
@@ -35,7 +36,6 @@ import {
   ResumeCol,
   ParticipantsCol,
 } from './styles';
-import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 
 const PointManagement: React.FC = () => {
   const [

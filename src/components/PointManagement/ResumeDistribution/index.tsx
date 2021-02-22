@@ -11,7 +11,10 @@ import {
   assignPoints,
   removeAllScores,
 } from 'state/modules/point-management/team-awards/actions';
-import { distributePoints } from 'state/modules/point-management/common/actions';
+import {
+  distributePoints,
+  savePartialDistribution,
+} from 'state/modules/point-management/common/actions';
 import {
   getFinishedDistribution,
   getPointsToDistribute as getPointsToDistributeCommon,
@@ -132,14 +135,26 @@ const ResumeDistribution: React.FC = () => {
         </>
       )}
       {!isFinished && (
-        <Button
-          buttonRole="tertiary"
-          type="button"
-          onClick={handleDistributePoints}
-          disabled={!isEnabledToDistributePoints}
-        >
-          DISTRIBUIR PREMIAÇÃO
-        </Button>
+        <>
+          <Button
+            buttonRole="tertiary"
+            type="button"
+            onClick={() => {
+              dispatch(savePartialDistribution());
+            }}
+            disabled={!scoredParticipants}
+          >
+            SALVAR DISTRIBUIÇÃO
+          </Button>
+          <Button
+            buttonRole="tertiary"
+            type="button"
+            onClick={handleDistributePoints}
+            disabled={!isEnabledToDistributePoints}
+          >
+            DISTRIBUIR PREMIAÇÃO
+          </Button>
+        </>
       )}
     </div>
   );

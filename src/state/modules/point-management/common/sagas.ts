@@ -10,6 +10,7 @@ import { transformScoredParticipantsToDataDistribution } from 'services/point-ma
 import {
   distributePointsService,
   fetchTotalPointsToDistributeService,
+  savePartialDistributionService,
 } from 'services/point-management/common';
 import {
   getSelectedEstablishment,
@@ -41,6 +42,7 @@ import {
   SET_FINISHED_DISTRIBUTION,
   SET_SELECTED_ESTABLISHMENT,
   FinishedDistributionPossibilities,
+  SAVE_PARTIAL_DISTRIBUTION_ACTION,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -278,6 +280,26 @@ export function* workerFinishedDistribution() {
   yield call(cleanTeamAwards);
 }
 
+export function* workerSavePartialDistribution() {
+  try {
+    const scoredParticipants: ScoredParticipant[] = yield select(
+      getScoredParticipants,
+    );
+
+    const { generalPointId }: PointsToDistribute = yield select(
+      selectors.getPointsToDistribute,
+    );
+
+    yield call<any>(savePartialDistributionService, generalPointId, {
+      settings: JSON.stringify(scoredParticipants),
+    });
+
+    yield put(actions.savePartialDistributionSuccess());
+  } catch (error) {
+    yield call(handlerErrors, error, actions.savePartialDistributionFailure);
+  }
+}
+
 export default function* commonSagas() {
   yield all([
     takeEvery(FETCH_ESTABLISHMENTS_ACTION, workerFetchEstablishments),
@@ -292,5 +314,6 @@ export default function* commonSagas() {
     ),
     takeEvery(DISTRIBUTE_POINTS_FINALLY_ACTION, workerDistributePoints),
     takeEvery(SET_FINISHED_DISTRIBUTION, workerFinishedDistribution),
+    takeEvery(SAVE_PARTIAL_DISTRIBUTION_ACTION, workerSavePartialDistribution),
   ]);
 }
