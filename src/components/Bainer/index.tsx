@@ -3,7 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { pluginApi } from '../../services/api';
 
-import { Container } from './styles';
+import { Container, TextType } from './styles';
 import imageArrow from '../../assets/images/arrows.svg';
 
 const Bainer: React.FC = () => {
@@ -32,7 +32,6 @@ const Bainer: React.FC = () => {
   }, [indication]);
 
   let colorType = '';
-
   switch (profileType) {
     case 'Cooperativa':
       colorType = 'verde';
@@ -50,10 +49,19 @@ const Bainer: React.FC = () => {
       colorType = 'verde';
   }
 
-
   if (profile === 'FMC' && profileType === 'Revenda') {
     //
     colorType = 'cinza';
+  }
+
+  let textType = '';
+  switch (profileType) {
+    case 'Cooperativa':
+      textType = 'Para indicar você precisa copiar o link e enviar para seus cooperados.';
+      break
+    case 'Revenda':
+      textType = 'Para indicar você precisa copiar o link e enviar para seus clientes.';
+      break
   }
 
   const handleCopy = () => {
@@ -78,10 +86,9 @@ const Bainer: React.FC = () => {
             <h3>Como funciona</h3>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />
-              <h4>
-                Para indicar você precisa copiar o link e enviar pra seu
-                contato.
-              </h4>
+              <TextType textType={textType}>
+                {textType}
+              </TextType>
             </div>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />

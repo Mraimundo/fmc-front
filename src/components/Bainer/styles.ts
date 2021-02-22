@@ -8,6 +8,9 @@ interface ColorProps {
   colorType: string;
 }
 
+interface TextProps {
+  textType: string;
+}
 
 export const Container = styled.div<ColorProps>`
   width: 100%;
@@ -158,4 +161,25 @@ export const Container = styled.div<ColorProps>`
     opacity: 0.9;
     color: #fff;
   }
+`;
+
+export const TextType = styled.h4<TextProps>`
+    ${(props) => props.textType === 'cooperados' && css`
+    width: 283px;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    color: #fff;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 18px;
+    margin-left: 8px;
+    `}
+    ${(props) => props.textType === 'clientes' && css`
+    width: 283px;
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    color: #fff;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 18px;
+    margin-left: 8px;
+    `}  
 `;
