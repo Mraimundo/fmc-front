@@ -24,6 +24,8 @@ const TITLES = {
   [REGULATIONS_TYPE.dataTerm]: 'Termos de Proteção de Dados',
   [REGULATIONS_TYPE.regulationOfCampaign]: 'Regulamento do Programa Juntos',
   [REGULATIONS_TYPE.safraTerm]: 'Termos de Safras',
+  [REGULATIONS_TYPE.safraTerm]: 'Regulamentos ',
+  [REGULATIONS_TYPE.promotionRegulation]: 'Promoções ',
 };
 
 const AllRegulations: React.FC = () => {
@@ -37,6 +39,9 @@ const AllRegulations: React.FC = () => {
     Omit<Regulation, 'content'>[]
   >([]);
   const [safraRegulations, setSafraRegulations] = useState<
+    Omit<Regulation, 'content'>[]
+  >([]);
+  const [promotionRegulations, setPromotionRegulations] = useState<
     Omit<Regulation, 'content'>[]
   >([]);
   const [acceptedIds, setAcceptedIds] = useState<number[]>([]);
@@ -59,6 +64,11 @@ const AllRegulations: React.FC = () => {
       );
       setSafraRegulations(
         regulations.filter(regulation => regulation.type === 'safra_term'),
+      );
+      setPromotionRegulations(
+        regulations.filter(
+          regulation => regulation.type === 'promotion_regulation',
+        ),
       );
       setAcceptedIds(
         regulations
@@ -154,6 +164,8 @@ const AllRegulations: React.FC = () => {
           printRegulation(safraRegulations, 'safra_term')}
         {dataRegulations.length > 0 &&
           printRegulation(dataRegulations, 'data_term')}
+        {promotionRegulations.length > 0 &&
+          printRegulation(promotionRegulations, 'promotion_regulation')}
 
         {participant.profile === 'PRODUTOR' && (
           <LinksRegulation>

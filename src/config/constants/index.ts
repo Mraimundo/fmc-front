@@ -48,6 +48,7 @@ export const REGULATIONS_TYPE = {
   dataTerm: 'data_term',
   regulationOfCampaign: 'regulation_of_campaign',
   safraTerm: 'safra_term',
+  promotionRegulation: 'promotion_regulation',
 };
 
 export const VENDAVALL_PARTICIPANT_STATUS = (statusNumber: number): string => {
