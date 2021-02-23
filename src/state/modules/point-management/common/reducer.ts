@@ -141,7 +141,7 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
     case SAVE_PARTIAL_DISTRIBUTION_ACTION:
       return { ...state, partialDistribution: fetchingState };
     case SAVE_PARTIAL_DISTRIBUTION_SUCCESS:
-      return { ...state, partialDistribution: fetchingState };
+      return { ...state, partialDistribution: emptyFetchState };
     case SAVE_PARTIAL_DISTRIBUTION_FAILURE:
       return { ...state, partialDistribution: fetchErrorState(action) };
 

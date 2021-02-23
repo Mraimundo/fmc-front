@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { formatPoints } from 'util/points';
@@ -10,6 +10,7 @@ import {
   toggleDistributeEqually,
   assignPoints,
   removeAllScores,
+  setWaitingScoredParticipants,
 } from 'state/modules/point-management/team-awards/actions';
 import {
   distributePoints,
@@ -18,6 +19,7 @@ import {
 import {
   getFinishedDistribution,
   getPointsToDistribute as getPointsToDistributeCommon,
+  getSavedSetting as getSavedScoredParticipants,
 } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
@@ -28,6 +30,7 @@ import {
   getSelectedParticipantsWithoutScore,
   getIsEnabledToAssignPoints,
   getIsEnabledToDistributePoints,
+  getWaitingScoredParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
 import ResumeWidget from './ResumeWidget';
 import PointsToDistribute from './PointsToDistribute';
@@ -46,6 +49,8 @@ const ResumeDistribution: React.FC = () => {
     isEnabledToDistributePoints,
     finishedDistribution,
     pointsToDistributeCommon,
+    savedScoredParticipants,
+    waitingScoredParticipants,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -57,6 +62,8 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getIsEnabledToDistributePoints),
     useSelector(getFinishedDistribution),
     useSelector(getPointsToDistributeCommon),
+    useSelector(getSavedScoredParticipants),
+    useSelector(getWaitingScoredParticipants),
   ];
 
   const dispatch = useDispatch();
@@ -92,6 +99,18 @@ const ResumeDistribution: React.FC = () => {
 
   const { Ta, All } = FinishedDistributionPossibilities;
   const isFinished = finishedDistribution === (Ta || All);
+
+  useEffect(() => {
+    if (savedScoredParticipants && !waitingScoredParticipants) {
+      console.log(
+        'ON GET SAVED',
+        savedScoredParticipants,
+        waitingScoredParticipants,
+      );
+      dispatch(setWaitingScoredParticipants(savedScoredParticipants));
+      dispatch(assignPoints());
+    }
+  }, [dispatch, savedScoredParticipants, waitingScoredParticipants]);
 
   return (
     <div>

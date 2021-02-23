@@ -73,3 +73,6 @@ export const getIsAllowedToStartDistribution = createSelector(
     totalPointsTeamAwards + totalPointsResaleCooperative ===
     pointsToDistribute.general,
 );
+
+export const getSavedSetting = (state: StoreState) =>
+  state.pointManagement.common.pointsToDistribute.savedSetting?.data;
