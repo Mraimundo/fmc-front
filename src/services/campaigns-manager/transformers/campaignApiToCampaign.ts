@@ -38,14 +38,13 @@ const extractApprovers = (data: ApproverApi[]): Approver[] => {
 
 const getProfileTurn = (data: ApproverApi[]): ApproverProfile[] => {
   const filteredData = data.filter(i => i.status === 1);
-
   switch (filteredData.length) {
     case 0:
       return [GRV, GC, CRM];
     case 1:
       return [CRM];
     case 2:
-      return [DN, CRM];
+      return [DN, CRM, GC];
     default:
       return [MKT, CRM];
   }

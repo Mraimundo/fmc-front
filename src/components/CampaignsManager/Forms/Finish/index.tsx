@@ -26,6 +26,7 @@ const Finish: React.FC<Props> = ({
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<IComment[]>([]);
   const [actionSelected, setActionSelected] = useState('');
+  console.log('ON FINISH', campaign);
 
   useEffect(() => {
     setMessages(commentsTransformer(campaign.comments));
