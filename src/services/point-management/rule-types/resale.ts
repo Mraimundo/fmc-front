@@ -29,6 +29,10 @@ const getResponse = (
     resaleCooperativePointId: rebatePoints?.point.id || 0,
     resaleCooperativeMaxInvoicePercentage:
       rebatePoints?.establishment.dc_max_percentage || 0,
+    savedSetttig: {
+      data: rebatePoints?.saved_setting.data || '',
+      date: rebatePoints?.saved_setting.date || '',
+    },
   });
 };
 

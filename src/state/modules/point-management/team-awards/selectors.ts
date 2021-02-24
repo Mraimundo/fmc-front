@@ -235,3 +235,14 @@ export const getMissingParticipants = createSelector(
     return totalParticipants - totalScoredParticipants;
   },
 );
+
+export const getHasScoreParticipantsAdded = createSelector(
+  getScoredParticipants,
+  (scored: ScoredParticipant[] | null): boolean => {
+    if (!scored) {
+      return false;
+    }
+
+    return scored.length > 0;
+  },
+);

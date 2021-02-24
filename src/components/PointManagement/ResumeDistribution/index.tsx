@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { formatPoints } from 'util/points';
@@ -11,10 +11,14 @@ import {
   assignPoints,
   removeAllScores,
 } from 'state/modules/point-management/team-awards/actions';
-import { distributePoints } from 'state/modules/point-management/common/actions';
+import {
+  distributePoints,
+  savePartialDistribution,
+} from 'state/modules/point-management/common/actions';
 import {
   getFinishedDistribution,
   getPointsToDistribute as getPointsToDistributeCommon,
+  getPartialDistribution as getPartialDistributionStatus,
 } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
@@ -26,6 +30,7 @@ import {
   getIsEnabledToAssignPoints,
   getIsEnabledToDistributePoints,
 } from 'state/modules/point-management/team-awards/selectors';
+import { useToast } from 'context/ToastContext';
 import ResumeWidget from './ResumeWidget';
 import PointsToDistribute from './PointsToDistribute';
 import RemoveAllScores from '../RemoveAllScores';
@@ -43,6 +48,7 @@ const ResumeDistribution: React.FC = () => {
     isEnabledToDistributePoints,
     finishedDistribution,
     pointsToDistributeCommon,
+    partialDistributionStatus,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -54,13 +60,21 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getIsEnabledToDistributePoints),
     useSelector(getFinishedDistribution),
     useSelector(getPointsToDistributeCommon),
+    useSelector(getPartialDistributionStatus),
   ];
 
   const dispatch = useDispatch();
 
+  const { addToast } = useToast();
+
   const partialDistribution = pointsToDistributeCommon.allowPartialDistribution
     ? FinishedDistributionPossibilities.Rc
     : FinishedDistributionPossibilities.All;
+
+  const {
+    isFetching: isFetchingPartial,
+    error: errorPartial,
+  } = partialDistributionStatus;
 
   const handleChangePointsToDistribute = useCallback(
     (points: number) => {
@@ -89,6 +103,12 @@ const ResumeDistribution: React.FC = () => {
 
   const { Ta, All } = FinishedDistributionPossibilities;
   const isFinished = finishedDistribution === (Ta || All);
+
+  useEffect(() => {
+    if (errorPartial) {
+      addToast({ title: errorPartial, type: 'info' });
+    }
+  }, [addToast, errorPartial]);
 
   return (
     <div>
@@ -132,14 +152,27 @@ const ResumeDistribution: React.FC = () => {
         </>
       )}
       {!isFinished && (
-        <Button
-          buttonRole="tertiary"
-          type="button"
-          onClick={handleDistributePoints}
-          disabled={!isEnabledToDistributePoints}
-        >
-          DISTRIBUIR PREMIAÇÃO
-        </Button>
+        <>
+          <Button
+            buttonRole="tertiary"
+            type="button"
+            onClick={() => {
+              dispatch(savePartialDistribution());
+            }}
+            disabled={!scoredParticipants}
+            loading={isFetchingPartial}
+          >
+            SALVAR DISTRIBUIÇÃO
+          </Button>
+          <Button
+            buttonRole="tertiary"
+            type="button"
+            onClick={handleDistributePoints}
+            disabled={!isEnabledToDistributePoints}
+          >
+            DISTRIBUIR PREMIAÇÃO
+          </Button>
+        </>
       )}
     </div>
   );

@@ -41,3 +41,15 @@ export enum FinishedDistributionPossibilities {
   Ta = 'team-awards-finished',
   All = 'all-finished',
 }
+
+export const SAVE_PARTIAL_DISTRIBUTION_ACTION =
+  '@fmc/point-management/common/SAVE_PARTIAL_DISTRIBUTION_ACTION';
+
+export const SAVE_PARTIAL_DISTRIBUTION_SUCCESS =
+  '@fmc/point-management/common/SAVE_PARTIAL_DISTRIBUTION_SUCCESS';
+
+export const SAVE_PARTIAL_DISTRIBUTION_FAILURE =
+  '@fmc/point-management/common/SAVE_PARTIAL_DISTRIBUTION_FAILURE';
+
+export const SET_DISTRIBUTION_WITH_SAVED_SETTINGS =
+  '@fmc/point-management/common/SET_DISTRIBUTION_WITH_SAVED_SETTINGS';

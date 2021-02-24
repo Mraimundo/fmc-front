@@ -5,7 +5,13 @@ import {
 } from '@types';
 import * as constants from './constants';
 import { TeamAwardsState } from './reducer';
-import { Subsidiary, Role, Participant, ParticipantsList } from './types';
+import {
+  Subsidiary,
+  Role,
+  Participant,
+  ParticipantsList,
+  ScoredParticipant,
+} from './types';
 
 export const fetchSubsidiaries = (): ActionCreator<
   typeof constants.FETCH_SUBSIDIARIES_ACTION
@@ -245,6 +251,17 @@ export const toggleIsOpenModalMissingParticipants = (): ActionCreator<
     type: constants.TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
   };
 
+export const setWaitingScoredParticipants = (
+  waitingScoredParticipants: ScoredParticipant[],
+): ActionCreatorPayload<
+  typeof constants.SET_WAITING_SCORED_PARTICIPANTS,
+  Pick<TeamAwardsState, 'waitingScoredParticipants'>
+> =>
+  <const>{
+    type: constants.SET_WAITING_SCORED_PARTICIPANTS,
+    payload: { waitingScoredParticipants },
+  };
+
 export type TeamAwardsActions = ReturnType<
   | typeof fetchSubsidiaries
   | typeof fetchSubsidiariesFailure
@@ -273,4 +290,5 @@ export type TeamAwardsActions = ReturnType<
   | typeof removeAllScores
   | typeof setTotalParticipants
   | typeof toggleIsOpenModalMissingParticipants
+  | typeof setWaitingScoredParticipants
 >;

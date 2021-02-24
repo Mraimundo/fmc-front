@@ -35,6 +35,10 @@ export type UndistributedPoint = {
     type_name: string;
     dc_max_percentage: number;
   };
+  saved_setting: {
+    data: any;
+    date: string;
+  };
 };
 
 export interface FetchTotalPointsToDistributeRawData {
@@ -57,4 +61,11 @@ export const distributePointsService = async (
   await pluginApi.post<void>(`undistributed-points/distribute`, {
     undistributed_points: dataDistribution,
   });
+};
+
+export const savePartialDistributionService = async (
+  pointId: number,
+  partial: any,
+): Promise<void> => {
+  await pluginApi.post<void>(`undistributed-points/save/${pointId}`, partial);
 };
