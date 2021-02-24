@@ -29,3 +29,11 @@ export const Title = styled.h2`
   margin: 2rem 1rem;
   letter-spacing: 0.1em;
 `;
+
+export const FooterWrapper = styled.div`
+  background-color: #efefef;
+  width: 80%;
+  footer {
+    width: 100%;
+  }
+`;

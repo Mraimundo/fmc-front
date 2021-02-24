@@ -74,9 +74,9 @@ const RegisterForm: React.FC = () => {
             placeholder="CPF"
             numbersOnly
             pattern="XXX.XXX.XXX-XX"
-            inputRole="secondary"
+            inputRole="primary"
           />
-          <Button type="submit" buttonRole="secondary" loading={loading}>
+          <Button type="submit" buttonRole="primary" loading={loading}>
             Cadastrar
           </Button>
         </form>
