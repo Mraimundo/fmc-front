@@ -67,8 +67,5 @@ export const savePartialDistributionService = async (
   pointId: number,
   partial: any,
 ): Promise<void> => {
-  await pluginApi.post<void>(
-    `undistributed-points/save/xyz${pointId}`,
-    partial,
-  );
+  await pluginApi.post<void>(`undistributed-points/save/${pointId}`, partial);
 };

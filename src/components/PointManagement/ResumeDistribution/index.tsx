@@ -10,7 +10,6 @@ import {
   toggleDistributeEqually,
   assignPoints,
   removeAllScores,
-  setWaitingScoredParticipants,
 } from 'state/modules/point-management/team-awards/actions';
 import {
   distributePoints,
@@ -19,7 +18,7 @@ import {
 import {
   getFinishedDistribution,
   getPointsToDistribute as getPointsToDistributeCommon,
-  getSavedSetting as getSavedScoredParticipants,
+  getPartialDistribution as getPartialDistributionStatus,
 } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
@@ -30,8 +29,8 @@ import {
   getSelectedParticipantsWithoutScore,
   getIsEnabledToAssignPoints,
   getIsEnabledToDistributePoints,
-  getWaitingScoredParticipants,
 } from 'state/modules/point-management/team-awards/selectors';
+import { useToast } from 'context/ToastContext';
 import ResumeWidget from './ResumeWidget';
 import PointsToDistribute from './PointsToDistribute';
 import RemoveAllScores from '../RemoveAllScores';
@@ -49,8 +48,7 @@ const ResumeDistribution: React.FC = () => {
     isEnabledToDistributePoints,
     finishedDistribution,
     pointsToDistributeCommon,
-    savedScoredParticipants,
-    waitingScoredParticipants,
+    partialDistributionStatus,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -62,15 +60,21 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getIsEnabledToDistributePoints),
     useSelector(getFinishedDistribution),
     useSelector(getPointsToDistributeCommon),
-    useSelector(getSavedScoredParticipants),
-    useSelector(getWaitingScoredParticipants),
+    useSelector(getPartialDistributionStatus),
   ];
 
   const dispatch = useDispatch();
 
+  const { addToast } = useToast();
+
   const partialDistribution = pointsToDistributeCommon.allowPartialDistribution
     ? FinishedDistributionPossibilities.Rc
     : FinishedDistributionPossibilities.All;
+
+  const {
+    isFetching: isFetchingPartial,
+    error: errorPartial,
+  } = partialDistributionStatus;
 
   const handleChangePointsToDistribute = useCallback(
     (points: number) => {
@@ -101,16 +105,10 @@ const ResumeDistribution: React.FC = () => {
   const isFinished = finishedDistribution === (Ta || All);
 
   useEffect(() => {
-    if (savedScoredParticipants && !waitingScoredParticipants) {
-      console.log(
-        'ON GET SAVED',
-        savedScoredParticipants,
-        waitingScoredParticipants,
-      );
-      dispatch(setWaitingScoredParticipants(savedScoredParticipants));
-      dispatch(assignPoints());
+    if (errorPartial) {
+      addToast({ title: errorPartial, type: 'info' });
     }
-  }, [dispatch, savedScoredParticipants, waitingScoredParticipants]);
+  }, [addToast, errorPartial]);
 
   return (
     <div>
@@ -162,6 +160,7 @@ const ResumeDistribution: React.FC = () => {
               dispatch(savePartialDistribution());
             }}
             disabled={!scoredParticipants}
+            loading={isFetchingPartial}
           >
             SALVAR DISTRIBUIÇÃO
           </Button>
