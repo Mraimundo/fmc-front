@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusText } from 'services/campaigns-manager/interfaces/Campaign';
-import { ApproverProfile, CRM, DN, GRM, GRV, MKT } from 'config/constants';
+import { ApproverProfile, CRM, DN, GC, GRM, GRV, MKT } from 'config/constants';
 import EditAction from './Actions/Edit';
 import StatusAction from './Actions/Status';
 import ApprovalAction from './Actions/Approval';
@@ -104,7 +104,7 @@ export default (profile: ApproverProfile) => {
     case MKT:
       return [...common, ...statusColumn, ...approval];
     case GRV:
-      return [...common, ...statusColumn, ...approval];
+      return [...common, ...view, ...statusColumn, ...approval];
     case CRM:
       return [
         ...common,
@@ -114,6 +114,8 @@ export default (profile: ApproverProfile) => {
         ...highlightColumn,
         ...publish,
       ];
+    case GC:
+      return [...common, ...edit, ...statusColumn, ...approval];
     default:
       return [...common, ...view, ...statusColumn];
   }
