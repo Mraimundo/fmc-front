@@ -311,7 +311,6 @@ export function* workerSetDistributionWithSavedSettings() {
     selectors.getPointsToDistribute,
   );
   const hasScoreParticipantsAdded = yield select(getHasScoreParticipantsAdded);
-  console.log('WORKER', points);
 
   if (!hasScoreParticipantsAdded) {
     const savedSettings = yield select(selectors.getSavedSetting);

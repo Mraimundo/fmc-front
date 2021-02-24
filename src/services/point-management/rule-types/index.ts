@@ -36,7 +36,7 @@ export const constructPointsToDistribute = (
   savedSetting: {
     data: params?.savedSetttig?.data
       ? (JSON.parse(params?.savedSetttig?.data) as ScoredParticipant[])
-      : null,
+      : '',
     date: params?.savedSetttig?.date || '',
   },
 });

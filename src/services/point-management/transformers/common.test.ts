@@ -43,6 +43,10 @@ describe('src/services/point-management/transformers/common', () => {
               type_name: 'Cooperativa',
               dc_max_percentage: 0,
             },
+            saved_setting: {
+              data: '',
+              date: '',
+            },
           },
         ],
       };
@@ -56,6 +60,10 @@ describe('src/services/point-management/transformers/common', () => {
           pointId: 1,
           points: 1200,
           maxInvoicePercentage: 0,
+        },
+        savedSetting: {
+          data: '',
+          date: '',
         },
       });
     });
@@ -80,6 +88,10 @@ describe('src/services/point-management/transformers/common', () => {
               type_name: 'Cooperativa',
               dc_max_percentage: 20,
             },
+            saved_setting: {
+              data: '',
+              date: '',
+            },
           },
         ],
       };
@@ -93,6 +105,10 @@ describe('src/services/point-management/transformers/common', () => {
           points: 0,
           pointId: null,
           maxInvoicePercentage: 20,
+        },
+        savedSetting: {
+          data: '',
+          date: '',
         },
       });
     });
@@ -117,6 +133,10 @@ describe('src/services/point-management/transformers/common', () => {
               type_name: 'Revenda',
               dc_max_percentage: 20,
             },
+            saved_setting: {
+              data: '',
+              date: '',
+            },
           },
           {
             point: {
@@ -135,6 +155,10 @@ describe('src/services/point-management/transformers/common', () => {
               type_name: 'Revenda',
               dc_max_percentage: 20,
             },
+            saved_setting: {
+              data: '',
+              date: '',
+            },
           },
         ],
       };
@@ -151,6 +175,10 @@ describe('src/services/point-management/transformers/common', () => {
           pointId: 1,
           points: 2600,
           maxInvoicePercentage: 20,
+        },
+        savedSetting: {
+          data: '',
+          date: '',
         },
       });
     });

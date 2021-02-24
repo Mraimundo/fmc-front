@@ -24,8 +24,8 @@ const getResponse = (
     resaleCooperativeMaxInvoicePercentage:
       rebateWithoutTeamReceivePointsValues?.establishment.dc_max_percentage,
     savedSetttig: {
-      data: rebateWithoutTeamReceivePointsValues?.saved_setting.data,
-      date: rebateWithoutTeamReceivePointsValues?.saved_setting.date,
+      data: rebateWithoutTeamReceivePointsValues?.saved_setting.data || '',
+      date: rebateWithoutTeamReceivePointsValues?.saved_setting.date || '',
     },
   });
 };
