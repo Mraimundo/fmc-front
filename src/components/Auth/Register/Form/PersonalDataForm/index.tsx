@@ -21,6 +21,7 @@ import {
   NextButton,
   ComoFicouConhecendoSelectStyled,
 } from './styles';
+import { GenderSelect } from '../Commom/styles';
 
 interface Props {
   participant: Participant;
@@ -116,17 +117,16 @@ const PersonalDataForm: React.FC<Props> = ({
 
       {participant.profile === PROFILES.producer && (
         <>
+          <GenderSelect name="gender_select" inputRole={inputRole} />
           <Input
             name="medium"
             label="Em qual Canal você compra os produtos FMC?"
             inputRole={inputRole}
           />
-
           <ComoFicouConhecendoSelectStyled
             name="get_to_know_select"
             inputRole={inputRole}
           />
-
           <Input
             name="formatted_birth_date"
             label="Data de nascimento* (idade mínima: 18 anos)"
