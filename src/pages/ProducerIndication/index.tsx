@@ -32,7 +32,7 @@ const ProducerIndication: React.FC = () => {
 
       <div className="nominated">
         <div className="participants-info">
-          <h3>Participantes indicados</h3>
+          <h3>Participantes Cadastrados</h3>
           <h4>
             Participantes que se cadastraram usando o seu código de indicação
           </h4>
