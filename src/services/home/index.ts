@@ -40,7 +40,7 @@ export interface FetchHighlightsService {
 export const fetchHighlightsService = async (): Promise<Highlight[] | null> => {
   const { data: response } = await pluginApi.get<{
     data: FetchHighlightsService[] | null;
-  }>('highlights?limit=15&order=desc');
+  }>('highlights?limit=5&order=desc');
 
   return transformHighlightsRawData(response.data);
 };
