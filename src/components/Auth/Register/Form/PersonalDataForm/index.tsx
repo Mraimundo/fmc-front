@@ -1,7 +1,9 @@
 import React from 'react';
 
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { ApproverProfile, PROFILES, DM, RTC, KAM } from 'config/constants';
+// retornar para cadastro full Equipe FMC
+// import { ApproverProfile, PROFILES, DM, RTC, KAM } from 'config/constants';
+import { ApproverProfile, PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import ComponentsByProfile from '../Commom/ComponentsByProfile';
 import ExtraFieldsForParticipant from '../Commom/ExtraFieldsForParticipant';
@@ -42,9 +44,10 @@ const PersonalDataForm: React.FC<Props> = ({
   actived,
 }) => {
   const profileValuesAllowedToShowMarketPlace: ApproverProfile[] = [
-    DM,
+    // retornar para cadastro full Equipe FMC
+    /* DM,
     RTC,
-    KAM,
+    KAM, */
   ];
 
   const shouldShowMarketPlaceFields =
