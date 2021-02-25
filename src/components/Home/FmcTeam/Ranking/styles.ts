@@ -27,6 +27,18 @@ export const Container = styled.div`
     text-transform: uppercase;
   }
 
+  @media screen and (max-width: 1050px) {
+    height: 140px;
+
+    > span {
+      font-size: 19px;
+    }
+
+    > p {
+      font-size: 40px;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     height: 120px;
     padding: 25px;

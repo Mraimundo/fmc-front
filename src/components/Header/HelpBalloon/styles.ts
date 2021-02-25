@@ -58,6 +58,10 @@ export const HelpMenu = styled.ul`
       fill: ${({ theme }) => theme.font.color.primary};
     }
 
+    #faq-Ellipse_78 {
+      stroke: ${({ theme }) => theme.font.color.primary};
+    }
+
     &:hover {
       a {
         transform: translateX(3px);

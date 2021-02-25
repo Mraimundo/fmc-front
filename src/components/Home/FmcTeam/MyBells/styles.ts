@@ -14,6 +14,10 @@ export const Container = styled.div`
     height: 100%;
   }
 
+  @media screen and (max-width: 1050px) {
+    height: 140px;
+  }
+
   @media screen and (max-width: 768px) {
     height: auto;
     padding: 25px;
@@ -40,6 +44,10 @@ export const SummaryRow = styled.div`
     flex: 1;
     background: url(${dot}) repeat-x bottom;
     margin: 0 3px;
+  }
+
+  @media screen and (max-width: 1050px) {
+    margin-top: 5px;
   }
 `;
 

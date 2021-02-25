@@ -5,7 +5,7 @@ export default {
     borderRadius: '10px',
   },
   secondary: {
-    backgroundColor: '#193f4e',
+    backgroundColor: '#E63027',
     fontColor: '#fff',
     borderRadius: '7px',
   },

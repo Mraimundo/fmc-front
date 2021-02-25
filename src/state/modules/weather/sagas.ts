@@ -11,17 +11,31 @@ export function* workerFetchWeather({
   payload,
 }: ActionCreatorPayload<
   typeof constants.FETCH_WEATHER_ACTION,
-  CityCoordinates
+  CityCoordinates[]
 >) {
   try {
-    const result: Weather | null = yield call(
-      getWeatherByCityCoordinates,
-      payload,
-    );
+    const citiesWeather: Weather[] = [];
 
-    if (!result) throw new Error('Falha ao buscar a previsão do tempo');
+    if (payload[0]) {
+      const weather: Weather | null = yield call(
+        getWeatherByCityCoordinates,
+        payload[0],
+      );
+      if (weather) citiesWeather.push(weather);
+    }
 
-    yield put(actions.fetchWeatherSuccess(result));
+    if (payload[1]) {
+      const weather: Weather | null = yield call(
+        getWeatherByCityCoordinates,
+        payload[1],
+      );
+      if (weather) citiesWeather.push(weather);
+    }
+
+    if (citiesWeather.length === 0)
+      throw new Error('Falha ao buscar a previsão do tempo');
+
+    yield put(actions.fetchWeatherSuccess(citiesWeather));
   } catch (error) {
     yield call(handlerErrors, error, actions.fetchWeatherFailure);
   }

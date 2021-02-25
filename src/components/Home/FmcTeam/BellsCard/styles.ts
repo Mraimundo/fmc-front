@@ -71,5 +71,9 @@ export const Row = styled.div<RowProps>`
     transform: translateY(-4px);
     margin-left: 12px;
     white-space: nowrap;
+
+    > b {
+      margin: 0 4px;
+    }
   }
 `;
