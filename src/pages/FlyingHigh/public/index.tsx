@@ -15,12 +15,8 @@ const FlyingHigh: React.FC = () => {
     <Container>
       <ThemeContext.Provider value={fmcProdutorTheme}>
         <FmcLogo />
-        <Title>Promoção Juntos Voamos Mais Alto</Title>
-        <Box>
-          <h1>AGUARDANDO KV VOANDO ALTO</h1>
-        </Box>
+        <Box />
         <Info />
-        <RegisterForm />
         <HowToWin />
         <FooterWrapper>
           <Footer />

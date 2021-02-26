@@ -5,10 +5,10 @@ import { Text } from './styles';
 const Info: React.FC = () => {
   return (
     <Text>
-      “Juntos Produtor é um programa que valoriza as suas escolhas e reforça o
+      Juntos Produtor é um programa que valoriza as suas escolhas e reforça o
       nosso compromisso com o sucesso do seu negócio. Para conquistar bens e
       serviços exclusivos, você só precisa adquirir os produtos FMC
-      participantes nos estabelecimentos parceiros.”
+      participantes nos estabelecimentos parceiros.
     </Text>
   );
 };
