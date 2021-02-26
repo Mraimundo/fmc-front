@@ -45,6 +45,8 @@ const getProfileTurn = (data: ApproverApi[]): ApproverProfile[] => {
       return [CRM, GC];
     case 2:
       return [DN, CRM, GC];
+    case 3:
+      return [DN, CRM];
     default:
       return [MKT, CRM];
   }
