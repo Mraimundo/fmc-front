@@ -43,7 +43,7 @@ const ApprovalBoard: React.FC<Props> = ({
   );
   const [approvers, setApprovers] = useState<Approver[]>([]);
   const { addToast } = useToast();
-  console.log('APPROVAL BOARD', profileTurnToApprove);
+
   useEffect(() => {
     if (isOpen) {
       setComment('');
