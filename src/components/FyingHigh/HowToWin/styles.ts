@@ -9,20 +9,20 @@ export const Container = styled.div`
   width: 80%;
 `;
 
-export const Title = styled.h2`
+/* export const Title = styled.h2`
   margin: 2rem 0 0 0;
   padding: 2rem 0;
   text-align: center;
   letter-spacing: 0.1em;
   background-color: #65554d;
   width: 100%;
-`;
+`; */
 
-export const MobileTitle = styled.h2`
+export const Title = styled.h1`
   text-align: center;
   letter-spacing: 0.1em;
   width: 100%;
-  color: #3b302a;
+  color: #65554d;
   margin-bottom: 1rem;
 `;
 
@@ -93,7 +93,7 @@ export const TextRegulationWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: #65554d;
+  background-color: #3b302a;
   min-height: 500px;
 
   div {

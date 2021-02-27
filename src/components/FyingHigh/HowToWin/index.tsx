@@ -10,7 +10,7 @@ import {
   Title,
   Mechanics,
   TextRegulationWrapper,
-  MobileTitle,
+  // MobileTitle,
   MechanicsMobile,
 } from './styles';
 
@@ -44,8 +44,8 @@ const HowToWin: React.FC = () => {
     <Container>
       {width >= 600 && (
         <>
-          <Title>Como eu ganho nos JUNTOS FMC - Produtor?</Title>
           <Mechanics>
+            <Title>Como eu ganho nos JUNTOS FMC - Produtor?</Title>
             {items.map(item => (
               <div key={item.picture}>
                 <div>
@@ -62,7 +62,7 @@ const HowToWin: React.FC = () => {
       {width < 600 && (
         <>
           <MechanicsMobile>
-            <MobileTitle>Como eu ganho nos JUNTOS FMC - Produtor?</MobileTitle>
+            <Title>Como eu ganho nos JUNTOS FMC - Produtor?</Title>
             <SliderHowToWin items={items} />
           </MechanicsMobile>
         </>

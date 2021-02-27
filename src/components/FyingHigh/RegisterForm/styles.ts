@@ -9,10 +9,11 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 2rem;
   margin: 2rem;
-  background-color: #efefef;
+  //background-color: #efefef;
   h2 {
-    margin-bottom: 2rem;
-    color: #3b302a;
+    margin-bottom: 1rem;
+    color: #65554d;
+    text-align: center;
   }
 `;
 
@@ -21,5 +22,5 @@ export const Button = styled(DefaultButton)`
 `;
 
 export const Input = styled(DefaultInput)`
-  font-size: 1.5em;
+  font-size: 0.9em;
 `;
