@@ -1,13 +1,14 @@
 import React from 'react';
-import { /*CustomArrowProps,*/ Settings } from 'react-slick';
+import { /* CustomArrowProps, */ Settings } from 'react-slick';
 import { ReactSVG } from 'react-svg';
+import { HowToWinItem } from '../howToWinItems';
 
-//import arrowLeft from 'assets/images/arrow-left--brown.svg';
-//import arrowRight from 'assets/images/arrow-right--brown.svg';
+// import arrowLeft from 'assets/images/arrow-left--brown.svg';
+// import arrowRight from 'assets/images/arrow-right--brown.svg';
 
-import { /*Prev, Next,*/ Dot, Slider, Item } from './styles';
+import { /* Prev, Next, */ Dot, Slider, Item } from './styles';
 
-/*const PrevSlide = ({ onClick }: CustomArrowProps) => (
+/* const PrevSlide = ({ onClick }: CustomArrowProps) => (
   <Prev onClick={onClick}>
     <ReactSVG src={arrowLeft} />
   </Prev>
@@ -17,7 +18,7 @@ const NextSlide = ({ onClick }: CustomArrowProps) => (
   <Next onClick={onClick}>
     <ReactSVG src={arrowRight} />
   </Next>
-);*/
+); */
 
 const settings: Settings = {
   dots: true,
@@ -26,8 +27,8 @@ const settings: Settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: false,
-  /*nextArrow: <NextSlide />,
-  prevArrow: <PrevSlide />,*/
+  /* nextArrow: <NextSlide />,
+  prevArrow: <PrevSlide />, */
   customPaging: () => <Dot />,
   centerMode: true,
   centerPadding: '0px',
@@ -36,11 +37,7 @@ const settings: Settings = {
 };
 
 interface SliderProps {
-  items: {
-    picture: string;
-    title: string;
-    text: string;
-  }[];
+  items: HowToWinItem[];
 }
 
 const SliderHowParticipate: React.FC<SliderProps> = ({ items }) => {
@@ -48,9 +45,12 @@ const SliderHowParticipate: React.FC<SliderProps> = ({ items }) => {
     <Slider {...settings}>
       {items.map(item => (
         <Item key={item.picture}>
-          <div><ReactSVG src={item.picture}/></div>
+          <div>
+            <ReactSVG src={item.picture} />
+          </div>
           <h4>{item.title}</h4>
           <p>{item.text}</p>
+          {item.note && <span>{item.note}</span>}
         </Item>
       ))}
     </Slider>

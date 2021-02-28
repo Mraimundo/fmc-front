@@ -30,7 +30,7 @@ import Receipts from './modules/receipts';
 import CatalogoPi from './modules/catalogo-pi';
 
 import PointsSimulator from './modules/points-simulator';
-import FlyingHighPublic from './modules/flying-high-public';
+import FlyingHighPublic from './modules/flying-high';
 
 import Route from './route';
 

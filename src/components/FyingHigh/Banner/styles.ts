@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 500px;
-  margin: 1rem 1rem 2rem;
+  min-width: 350px;
 `;
 
-export const LogoWrapper = styled.div`
+export const ImageWrapper = styled.div`
   width: 100%;
   text-align: center;
 

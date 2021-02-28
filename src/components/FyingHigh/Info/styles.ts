@@ -6,6 +6,11 @@ export const Text = styled.p`
   font-size: 1.3em;
   font-family: ${FONTS.regular};
   width: 80%;
-  padding: 2rem 15rem;
+  padding: 2rem 2rem;
   text-align: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    text-align: left;
+  }
 `;

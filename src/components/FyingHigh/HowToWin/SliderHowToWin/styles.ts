@@ -86,7 +86,7 @@ export const Item = styled.div`
   }
 
   h4 {
-    color: #65554D;
+    color: #65554d;
     font-family: ${FONTS.bold};
     font-size: 1.5em;
     margin: 1em;
@@ -94,8 +94,14 @@ export const Item = styled.div`
   }
 
   p {
-    color: #3B302A;
+    color: #3b302a;
     font-family: ${FONTS.italic};
     font-size: 1em;
+  }
+
+  span {
+    color: #3b302a;
+    font-family: ${FONTS.italic};
+    font-size: 0.8em;
   }
 `;

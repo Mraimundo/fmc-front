@@ -8,7 +8,7 @@ import history from 'services/history';
 import { getParticipantByCpf } from 'services/register/getParticipantData';
 import { useToast } from 'context/ToastContext';
 
-import { Container, Input, Button } from './styles';
+import { Container, Input, Button, FormContainer } from './styles';
 
 interface SignUpFormData {
   param_first_access: string;
@@ -66,19 +66,21 @@ const RegisterForm: React.FC = () => {
 
   return (
     <Container>
-      <h2>Você que é Produtor Rural faça seu cadastro</h2>
       <FormContext {...methods}>
         <form onSubmit={onSubmit}>
-          <Input
-            name="param_first_access"
-            placeholder="CPF"
-            numbersOnly
-            pattern="XXX.XXX.XXX-XX"
-            inputRole="primary"
-          />
-          <Button type="submit" buttonRole="primary" loading={loading}>
-            Cadastrar
-          </Button>
+          <FormContainer>
+            <h2>Você que é Produtor Rural faça seu cadastro</h2>
+            <Input
+              name="param_first_access"
+              placeholder="CPF"
+              numbersOnly
+              pattern="XXX.XXX.XXX-XX"
+              inputRole="primary"
+            />
+            <Button type="submit" buttonRole="primary" loading={loading}>
+              Cadastrar
+            </Button>
+          </FormContainer>
         </form>
       </FormContext>
     </Container>

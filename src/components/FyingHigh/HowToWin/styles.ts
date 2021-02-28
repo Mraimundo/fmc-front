@@ -7,6 +7,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 80%;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 /* export const Title = styled.h2`
@@ -70,6 +73,11 @@ export const Mechanics = styled.div`
     font-family: ${FONTS.italic};
     font-size: 1em;
   }
+  span {
+    color: #3b302a;
+    font-family: ${FONTS.italic};
+    font-size: 0.8em;
+  }
 `;
 
 export const MechanicsMobile = styled.div`
@@ -91,7 +99,9 @@ export const MechanicsMobile = styled.div`
 
 export const TextRegulationWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   background-color: #3b302a;
   min-height: 500px;
@@ -115,4 +125,17 @@ export const TextRegulationWrapper = styled.div`
       margin: 1rem 0.5rem 0 0.5rem;
     }
   }
+
+  @media (max-width: 600px) {
+    div {
+      width: 90%;
+      margin: 2em 0;
+    }
+  }
+`;
+
+export const Note = styled.p`
+  margin: 0 2rem 2rem;
+  font-size: 1em;
+  font-family: ${FONTS.regular};
 `;

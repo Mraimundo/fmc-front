@@ -2,9 +2,6 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 
 import useDimensions from 'hooks/use-window-dimensions';
-import ReceiptsImage from 'assets/images/flying-high/receitpts.svg';
-import AppurationImage from 'assets/images/flying-high/appuration.svg';
-import RescuesImage from 'assets/images/flying-high/rescues.svg';
 import {
   Container,
   Title,
@@ -12,30 +9,11 @@ import {
   TextRegulationWrapper,
   // MobileTitle,
   MechanicsMobile,
+  Note,
 } from './styles';
 
 import SliderHowToWin from './SliderHowToWin';
-
-const items = [
-  {
-    picture: ReceiptsImage,
-    title: 'Upload de Notas Fiscais',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac eros odio. Sed sollicitudin a libero varius porttitor. Aliquam sit amet erat quis ipsum luctus.</p>',
-  },
-  {
-    picture: AppurationImage,
-    title: 'Apuração dos dados',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac eros odio. Sed sollicitudin a libero varius porttitor. Aliquam sit amet erat quis ipsum luctus.</p>',
-  },
-  {
-    picture: RescuesImage,
-    title: 'Pontos para resgate',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac eros odio. Sed sollicitudin a libero varius porttitor. Aliquam sit amet erat quis ipsum luctus.</p>',
-  },
-];
+import items from './howToWinItems';
 
 const HowToWin: React.FC = () => {
   const { width } = useDimensions();
@@ -53,6 +31,7 @@ const HowToWin: React.FC = () => {
                 </div>
                 <h4>{item.title}</h4>
                 <p>{item.text}</p>
+                {!!item.note && <span>{item.note}</span>}
               </div>
             ))}
           </Mechanics>
@@ -111,6 +90,10 @@ const HowToWin: React.FC = () => {
             id.
           </p>
         </div>
+        <Note>
+          Somente notas fiscais (NFs) válidas. Confira as regras completas nos
+          regulamentos do JUNTOS FMC e do Programa Juntos Voamos Mais Alto.
+        </Note>
       </TextRegulationWrapper>
     </Container>
   );

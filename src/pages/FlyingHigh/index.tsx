@@ -4,19 +4,22 @@ import FmcLogo from 'components/FyingHigh/FmcLogo';
 import Info from 'components/FyingHigh/Info';
 import HowToWin from 'components/FyingHigh/HowToWin';
 import RegisterForm from 'components/FyingHigh/RegisterForm';
+import FlyingHighBanner from 'components/FyingHigh/Banner';
+import HeaderText from 'components/FyingHigh/Info/HeaderText';
 import { ThemeContext } from 'styled-components';
 import { fmcProdutorTheme } from 'styles/theme';
 import Footer from 'components/Footer';
-import promoImage from 'assets/images/flying-high/flying-high-promo.png';
 
 import {
   Container,
   Header,
-  Title,
   FooterWrapper,
   PromoWrapper,
   ImageWrapper,
   FormWrapper,
+  UpperEllipse,
+  LowerEllipse,
+  Contact,
 } from './styles';
 
 const FlyingHigh: React.FC = () => {
@@ -27,16 +30,14 @@ const FlyingHigh: React.FC = () => {
           <FmcLogo />
           <PromoWrapper>
             <ImageWrapper>
-              <img src={promoImage} alt="Juntos Voamos Mais Alto" />
+              <FlyingHighBanner />
             </ImageWrapper>
             <FormWrapper>
+              <UpperEllipse />
               <RegisterForm />
-              <p>
-                Entre no <b>JUNTOS</b> e cadastre uma nota fiscal para concorrer
-                ao um drone.
-              </p>
-              <p>Participe! Estamos juntos e é para valer.</p>
+              <HeaderText />
             </FormWrapper>
+            <LowerEllipse />
           </PromoWrapper>
         </Header>
         <Info />
@@ -45,6 +46,7 @@ const FlyingHigh: React.FC = () => {
           <Footer />
         </FooterWrapper>
       </ThemeContext.Provider>
+      <Contact initialPosition="right-bottom" />
     </Container>
   );
 };
