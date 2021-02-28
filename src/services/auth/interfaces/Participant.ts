@@ -129,4 +129,5 @@ export interface Participant {
   producer_group_name: string;
   members_group: MemberGroup[];
   harvest: Harvest;
+  registration_origin?: string;
 }

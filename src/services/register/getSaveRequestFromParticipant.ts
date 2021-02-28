@@ -57,6 +57,7 @@ interface SaveRequest {
   medium: string;
   only_farm: boolean;
   user_farm_agree: boolean;
+  registration_origin: string;
 }
 
 export default (participant: Participant): SaveRequest => {
@@ -108,5 +109,6 @@ export default (participant: Participant): SaveRequest => {
     indicator_code_used: participant.indicator_code_used || '',
     members_group: participant.members_group || [],
     harvest: participant.harvest || ({} as Harvest),
+    registration_origin: participant.registration_origin || '',
   };
 };

@@ -31,6 +31,7 @@ import Receipts from './modules/receipts';
 import CatalogoPi from './modules/catalogo-pi';
 
 import PointsSimulator from './modules/points-simulator';
+import FlyingHighPublic from './modules/flying-high';
 
 import Route from './route';
 
@@ -63,6 +64,7 @@ const routesArray: RouteModule[][] = [
   QrCode,
   Receipts,
   CatalogoPi,
+  FlyingHighPublic,
 ];
 
 const Routes: React.FC = () => (

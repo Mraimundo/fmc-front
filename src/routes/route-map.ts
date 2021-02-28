@@ -33,4 +33,5 @@ export default {
   },
   qrCode: '/qr',
   receipts: '/extrato-notas',
+  flyingHigh: '/voando-alto',
 };
