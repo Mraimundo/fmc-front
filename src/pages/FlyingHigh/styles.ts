@@ -10,7 +10,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //padding: 5rem 0 0 0;
   font-family: ${FONTS.medium};
   position: relative;
 `;
@@ -31,7 +30,7 @@ export const Header = styled.div`
     rgba(206, 194, 194, 1) 85%
   );
 
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
@@ -49,7 +48,7 @@ export const FooterWrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
@@ -88,7 +87,6 @@ export const FormWrapper = styled.div`
 `;
 
 export const UpperEllipse = styled.div`
-  //transform: translate(-50%, -50%);
   height: 150px;
   width: 75px;
   border-radius: 150px 0 0 150px;

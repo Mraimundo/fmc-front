@@ -9,8 +9,11 @@ export const Text = styled.p`
   padding: 2rem 2rem;
   text-align: center;
 
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     width: 100%;
+  }
+
+  @media (max-width: 600px) {
     text-align: left;
   }
 `;

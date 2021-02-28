@@ -7,19 +7,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 80%;
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
-
-/* export const Title = styled.h2`
-  margin: 2rem 0 0 0;
-  padding: 2rem 0;
-  text-align: center;
-  letter-spacing: 0.1em;
-  background-color: #65554d;
-  width: 100%;
-`; */
 
 export const Title = styled.h1`
   text-align: center;
@@ -83,8 +74,6 @@ export const Mechanics = styled.div`
 export const MechanicsMobile = styled.div`
   display: flex;
   flex-direction: column;
-  /*justify-content: center;
-  align-items: center;*/
   width: 100%;
   background: linear-gradient(
     132deg,

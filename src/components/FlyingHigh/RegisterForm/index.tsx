@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import validateCpf from 'util/validations/cpf';
 import { useForm, FormContext } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { PROFILES } from 'config/constants';
 import history from 'services/history';
 import { getParticipantByCpf } from 'services/register/getParticipantData';
 import { useToast } from 'context/ToastContext';
+import ConfirmationModal from 'components/FlyingHigh/Modal';
 
 import { Container, Input, Button, FormContainer } from './styles';
 
@@ -16,6 +17,8 @@ interface SignUpFormData {
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentCpf, setCurrentCpf] = useState('');
   const { addToast } = useToast();
 
   const schema = Yup.object().shape({
@@ -23,6 +26,23 @@ const RegisterForm: React.FC = () => {
       .required('Campo obrigatório')
       .test('valid-cpf', 'CPF inválido', validateCpf),
   });
+
+  const handleModalConfirmation = useCallback(() => {
+    const participant = {
+      cpf: currentCpf,
+      establishment: { id: 1, team_receives_points: false },
+      role: { id: 26, identifier: 'produtor', name: 'Produtor' },
+      campaign_id: 1,
+      profile: PROFILES.producer,
+      registration_origin: 'FLYING_HIGH_ACTION',
+    };
+    setIsModalOpen(false);
+    history.push('/firstAccess', participant);
+  }, [currentCpf]);
+
+  const handleModalCloseRequest = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   const methods = useForm<SignUpFormData>({
     validationSchema: schema,
@@ -45,7 +65,9 @@ const RegisterForm: React.FC = () => {
     }
 
     if (message === 'CPF não encontrado') {
-      const participant = {
+      setCurrentCpf(param_first_access);
+      setIsModalOpen(true);
+      /* const participant = {
         cpf: param_first_access,
         establishment: { id: 1, team_receives_points: false },
         role: { id: 26, identifier: 'produtor', name: 'Produtor' },
@@ -54,7 +76,7 @@ const RegisterForm: React.FC = () => {
         registration_origin: 'FLYING_HIGH_ACTION',
       };
 
-      history.push('/firstAccess', participant);
+      history.push('/firstAccess', participant); */
       return;
     }
 
@@ -83,6 +105,11 @@ const RegisterForm: React.FC = () => {
           </FormContainer>
         </form>
       </FormContext>
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onRequestClose={handleModalCloseRequest}
+        onConfirmClick={handleModalConfirmation}
+      />
     </Container>
   );
 };

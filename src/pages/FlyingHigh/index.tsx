@@ -1,11 +1,11 @@
 import React from 'react';
 
-import FmcLogo from 'components/FyingHigh/FmcLogo';
-import Info from 'components/FyingHigh/Info';
-import HowToWin from 'components/FyingHigh/HowToWin';
-import RegisterForm from 'components/FyingHigh/RegisterForm';
-import FlyingHighBanner from 'components/FyingHigh/Banner';
-import HeaderText from 'components/FyingHigh/Info/HeaderText';
+import FmcLogo from 'components/FlyingHigh/FmcLogo';
+import Info from 'components/FlyingHigh/Info';
+import HowToWin from 'components/FlyingHigh/HowToWin';
+import RegisterForm from 'components/FlyingHigh/RegisterForm';
+import FlyingHighBanner from 'components/FlyingHigh/Banner';
+import HeaderText from 'components/FlyingHigh/Info/HeaderText';
 import { ThemeContext } from 'styled-components';
 import { fmcProdutorTheme } from 'styles/theme';
 import Footer from 'components/Footer';
