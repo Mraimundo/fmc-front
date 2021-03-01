@@ -9,9 +9,14 @@ import { ProductList, MobileSeeCompleteShowcase } from './styles';
 interface Props {
   products: ShowcaseProduct[] | null;
   isSimulating: boolean;
+  isProducerProfile?: boolean;
 }
 
-const Showcase: React.FC<Props> = ({ products, isSimulating }) => {
+const Showcase: React.FC<Props> = ({
+  products,
+  isSimulating,
+  isProducerProfile = false,
+}) => {
   return (
     <>
       <ProductList>
@@ -20,6 +25,7 @@ const Showcase: React.FC<Props> = ({ products, isSimulating }) => {
             product={item}
             key={`prod-${item.id}`}
             isSimulating={isSimulating}
+            isProducerProfile={isProducerProfile}
           />
         ))}
         <SeeCompleteShowcase

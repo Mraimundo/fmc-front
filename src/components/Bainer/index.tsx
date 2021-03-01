@@ -14,7 +14,6 @@ const Bainer: React.FC = () => {
   const [profileType, setProfileType] = useState('');
   const [profile, setProfile] = useState('');
 
-
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
 
@@ -54,14 +53,18 @@ const Bainer: React.FC = () => {
     colorType = 'cinza';
   }
 
-  let textType = '';
+  let diminacType = '';
   switch (profileType) {
     case 'Cooperativa':
-      textType = 'Para indicar você precisa copiar o link e enviar para seus cooperados.';
-      break
+      diminacType =
+        'Para indicar você precisa copiar o link e enviar para seus cooperados.';
+      break;
     case 'Revenda':
-      textType = 'Para indicar você precisa copiar o link e enviar para seus clientes.';
-      break
+      diminacType =
+        'Para indicar você precisa copiar o link e enviar para seus clientes.';
+      break;
+    default:
+      break;
   }
 
   const handleCopy = () => {
@@ -86,9 +89,7 @@ const Bainer: React.FC = () => {
             <h3>Como funciona</h3>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />
-              <TextType textType={textType}>
-                {textType}
-              </TextType>
+              <TextType diminacType={diminacType}>{diminacType}</TextType>
             </div>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />
