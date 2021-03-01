@@ -87,7 +87,7 @@ export const ContainerModal = styled.div`
   font-size: 20px;
   text-transform: uppercase;
   h3 {
-    margin: 12px auto;
+    margin: 24px auto 12px auto;
     font-size: 1em;
   }
   p {
@@ -97,16 +97,12 @@ export const ContainerModal = styled.div`
     text-align: center;
     text-transform: none;
     font-family: ${({ theme }) => theme.font.fontFamily.regular};
-    @media (min-width: 1024px) {
-      font-size: 24px;
-    }
   }
   @media (min-width: 768px) {
-    font-size: 26px;
     height: 340px;
     h3,
     p {
-      margin: 114px auto auto;
+      margin: 16px auto auto;
     }
   }
 `;

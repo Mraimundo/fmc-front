@@ -7,7 +7,7 @@ export const Modal = styled(DefaultModal)`
     max-width: 743px;
     width: 100%;
     height: 100%;
-    max-height: 447px;
+    max-height: 460px;
   }
 `;
 
@@ -23,7 +23,8 @@ export const Container = styled.div`
     height: 48px;
     text-transform: uppercase;
     align-self: center;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 16px;
     border-radius: 5px;

@@ -20,6 +20,9 @@ import {
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
   FinishedDistributionPossibilities,
+  SAVE_PARTIAL_DISTRIBUTION_ACTION,
+  SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
+  SAVE_PARTIAL_DISTRIBUTION_FAILURE,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -28,6 +31,10 @@ export const emptyPointsToDistribute: PointsToDistribute = {
   generalPointId: null,
   resaleCooperative: null,
   teamAwards: null,
+  savedSetting: {
+    data: null,
+    date: '',
+  },
 };
 
 export type CommonState = {
@@ -41,6 +48,7 @@ export type CommonState = {
   establishments: Establishment[] | null;
   selectedEstablishment: Establishment | null;
   finishedDistribution: FinishedDistributionPossibilities | null;
+  partialDistribution: FetchState;
 };
 
 export const initialState: CommonState = {
@@ -54,6 +62,7 @@ export const initialState: CommonState = {
   establishments: null,
   selectedEstablishment: null,
   finishedDistribution: null,
+  partialDistribution: emptyFetchState,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -128,6 +137,13 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
         ...state,
         finishedDistribution: action.payload.finishedDistribution,
       };
+
+    case SAVE_PARTIAL_DISTRIBUTION_ACTION:
+      return { ...state, partialDistribution: fetchingState };
+    case SAVE_PARTIAL_DISTRIBUTION_SUCCESS:
+      return { ...state, partialDistribution: emptyFetchState };
+    case SAVE_PARTIAL_DISTRIBUTION_FAILURE:
+      return { ...state, partialDistribution: fetchErrorState(action) };
 
     default:
       return state;

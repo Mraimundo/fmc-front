@@ -11,6 +11,7 @@ import campaignsManager, {
 import goals, { GoalsState } from './modules/goals/reducer';
 import pointsSimulator from './modules/points-simulator/reducer';
 import { PointsSimulatorState } from './modules/points-simulator/interfaces';
+import weather, { WeatherState } from './modules/weather/reducer';
 
 export type StoreState = {
   pointManagement: PointManagementState;
@@ -19,6 +20,7 @@ export type StoreState = {
   home: HomeState;
   goals: GoalsState;
   pointsSimulator: PointsSimulatorState;
+  weather: WeatherState;
 };
 
 export default combineReducers<StoreState>({
@@ -28,4 +30,5 @@ export default combineReducers<StoreState>({
   home,
   goals,
   pointsSimulator,
+  weather,
 });

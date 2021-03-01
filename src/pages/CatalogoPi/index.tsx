@@ -10,18 +10,13 @@ const CatalogoPi: React.FC = () => {
   const handlePiAccess = useCallback(() => {
     if (!piAccess) return;
 
-    console.log('handlePiAccess');
-
     window.location.href = piAccess;
   }, [piAccess]);
 
   useEffect(() => {
-    console.log('useEffect');
     getParticipantsToAccessPI().then(data => {
-      console.log('getParticipantsToAccessPI');
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
       handlePiAccess();
-      return;
     });
   }, [piAccess, handlePiAccess]);
 

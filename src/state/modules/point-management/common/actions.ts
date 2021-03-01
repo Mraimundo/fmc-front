@@ -20,6 +20,10 @@ import {
   DISTRIBUTE_POINTS_SUCCESS,
   SET_FINISHED_DISTRIBUTION,
   FinishedDistributionPossibilities,
+  SAVE_PARTIAL_DISTRIBUTION_ACTION,
+  SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
+  SAVE_PARTIAL_DISTRIBUTION_FAILURE,
+  SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
 } from './constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
@@ -170,6 +174,37 @@ export const setFinishedDistribution = (
     },
   };
 
+export const savePartialDistribution = (): ActionCreator<
+  typeof SAVE_PARTIAL_DISTRIBUTION_ACTION
+> =>
+  <const>{
+    type: SAVE_PARTIAL_DISTRIBUTION_ACTION,
+  };
+
+export const savePartialDistributionFailure = (
+  error: string,
+): ActionCreatorFailure<typeof SAVE_PARTIAL_DISTRIBUTION_FAILURE> =>
+  <const>{
+    type: SAVE_PARTIAL_DISTRIBUTION_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const savePartialDistributionSuccess = (): ActionCreator<
+  typeof SAVE_PARTIAL_DISTRIBUTION_SUCCESS
+> =>
+  <const>{
+    type: SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
+  };
+
+export const setDistributionWithSavedSettings = (): ActionCreator<
+  typeof SET_DISTRIBUTION_WITH_SAVED_SETTINGS
+> =>
+  <const>{
+    type: SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
+  };
+
 export type CommonActions = ReturnType<
   | typeof fetchEstablishments
   | typeof fetchEstablishmentsFailure
@@ -186,4 +221,8 @@ export type CommonActions = ReturnType<
   | typeof distributePointsFailure
   | typeof distributePointsSuccess
   | typeof setFinishedDistribution
+  | typeof savePartialDistribution
+  | typeof savePartialDistributionFailure
+  | typeof savePartialDistributionSuccess
+  | typeof setDistributionWithSavedSettings
 >;

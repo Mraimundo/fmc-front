@@ -1,5 +1,6 @@
 export interface ActionCreator<Type> {
   type: Type;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: any;
 }
 

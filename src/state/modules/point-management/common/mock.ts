@@ -72,6 +72,10 @@ const state: CommonState = {
   establishments,
   selectedEstablishment,
   finishedDistribution: null,
+  partialDistribution: {
+    isFetching: false,
+    error: '',
+  },
 };
 
 export default state;

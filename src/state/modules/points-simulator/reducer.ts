@@ -91,10 +91,8 @@ const CampaignsManagerReducer: Reducer<
               product.simulationData.revenuesInKilosPerLiter +
                 product.stock.inKilosPerLiter
           ) {
-            console.log('1');
             product.simulationData.pogInKilosPerLiter = pogInKilosPerLiter;
           } else {
-            console.log('2');
             product.simulationData.pogInKilosPerLiter =
               product.simulationData.revenuesInKilosPerLiter +
               product.stock.inKilosPerLiter;

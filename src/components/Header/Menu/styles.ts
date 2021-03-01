@@ -100,7 +100,7 @@ export const SubMenuStyle = css`
     position: absolute;
     top: -1px;
     left: 0;
-    background-color: #11252b;
+    background-color: ${({ theme }) => theme.font.color.primary};
     margin: 0 1em;
   }
 `;

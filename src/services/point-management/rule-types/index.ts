@@ -1,4 +1,5 @@
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
+import { ScoredParticipant } from 'state/modules/point-management/team-awards/types';
 import { Points } from 'state/modules/point-management/constants';
 import { UndistributedPoint } from '../common';
 
@@ -10,6 +11,10 @@ interface ConstructPointsToDistribute {
   resaleCooperativePoints?: number;
   resaleCooperativePointId?: number;
   resaleCooperativeMaxInvoicePercentage?: number;
+  savedSetttig?: {
+    data?: any;
+    date?: string;
+  };
 }
 export const constructPointsToDistribute = (
   params: ConstructPointsToDistribute,
@@ -28,6 +33,12 @@ export const constructPointsToDistribute = (
     maxInvoicePercentage: params.resaleCooperativeMaxInvoicePercentage || 0,
   },
   allowPartialDistribution: true,
+  savedSetting: {
+    data: params?.savedSetttig?.data
+      ? (JSON.parse(params?.savedSetttig?.data) as ScoredParticipant[])
+      : '',
+    date: params?.savedSetttig?.date || '',
+  },
 });
 
 export const sellerAward = (

@@ -3,6 +3,7 @@ export default {
   campaignManagement: '/gerenciamento-de-campanhas',
   campaignCounting: '/apuracao-de-campanhas',
   contact: '/fale-conosco',
+  producerExtract: '/produtor-extrato',
   extract: {
     my: '/myextract',
     channel: '/extrato-canal',
@@ -10,6 +11,7 @@ export default {
   faq: '/faq',
   gallery: '/bibliotecas-juntos',
   goal: '/performance',
+  home: '/home',
   howParticipate: '/como-participar',
   news: '/noticias',
   participantsIndication: '/indicacao-de-participantes',
@@ -31,4 +33,5 @@ export default {
   },
   qrCode: '/qr',
   receipts: '/extrato-notas',
+  flyingHigh: '/voando-alto',
 };
