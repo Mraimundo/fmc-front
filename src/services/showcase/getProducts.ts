@@ -31,7 +31,6 @@ const getProducts = async ({
   id,
   limit = 3,
 }: Request): Promise<Product[]> => {
-  console.log('FETCHING SHOWCASE PRODUCTS', type, id);
   const { data } = await pluginApi.get<Response>(
     `premio-ideall/list-products-pi?id=${id}&type=${type}&limit=${limit}`,
   );
