@@ -19,6 +19,8 @@ export default {
   pointManagement: '/distribuicao-de-pontos',
   products: '/solucoes',
   producer: '/indicar-produtor',
+  research: '/pesquisas-produtor',
+  internal: '/resultado-pesquisa',
   profile: '/editar-perfil',
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',

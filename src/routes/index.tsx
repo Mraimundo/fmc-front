@@ -21,6 +21,8 @@ import PointsManagement from './modules/points-management';
 import PowerBi from './modules/power-bi';
 import Products from './modules/products';
 import ProducerIndication from './modules/producer-indication';
+import ProducerResearch from './modules/producer-research';
+import InternalSearch from './modules/internal-search';
 import Report from './modules/report';
 import Showcase from './modules/showcase';
 import Training from './modules/training';
@@ -53,6 +55,8 @@ const routesArray: RouteModule[][] = [
   PointsManagement,
   Products,
   ProducerIndication,
+  ProducerResearch,
+  InternalSearch,
   Showcase,
   Training,
   Goals,
