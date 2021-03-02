@@ -11,5 +11,5 @@ export default [
   COMUNICATION_TAB,
   REGULATION_TAB,
   FINISHED_TAB,
-  RESULTS_TAB,
+  // RESULTS_TAB,
 ];
