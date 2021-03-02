@@ -3,9 +3,10 @@ import {
   ApproverProfile,
   IProfile,
   PROFILES,
-  DM,
+  // retornar para cadastro full Equipe FMC
+  /* DM,
   RTC,
-  KAM,
+  KAM, */
 } from 'config/constants';
 import validateCpf from 'util/validations/cpf';
 import validMobilePhone from 'util/validations/mobilePhone';
@@ -168,7 +169,7 @@ export default (
   profile: IProfile,
   editing = false,
   autoindicate = false,
-  profileValue: ApproverProfile
+  profileValue: ApproverProfile,
 ): Yup.ObjectSchema<object> => {
   const defaultValidations = {
     ...commomValidations,
@@ -221,9 +222,10 @@ export default (
   }
 
   const fmcTeamThatShouldFillMarketPlaceFields: ApproverProfile[] = [
-    DM,
+    // retornar para cadastro full Equipe FMC
+    /* DM,
     RTC,
-    KAM,
+    KAM, */
   ];
 
   if (fmcTeamThatShouldFillMarketPlaceFields.includes(profileValue)) {

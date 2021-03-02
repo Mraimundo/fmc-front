@@ -14,8 +14,13 @@ import {
 interface ProductItemProps {
   product: ShowcaseProduct;
   isSimulating: boolean;
+  isProducerProfile?: boolean;
 }
-const ProductItem: React.FC<ProductItemProps> = ({ product, isSimulating }) => {
+const ProductItem: React.FC<ProductItemProps> = ({
+  product,
+  isSimulating,
+  isProducerProfile = false,
+}) => {
   const { link, picture, name, price } = product;
 
   const handleLinkClick = useCallback(
@@ -39,9 +44,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ product, isSimulating }) => {
           <img src={picture} alt="" title="" />
         </ImageWrapper>
         <NameWrapper>
-          <Name>{name}</Name>
+          <Name>{name} </Name>
           <Price>
-            {formatPoints(price)} <span>pontos</span>
+            {formatPoints(price)}{' '}
+            <span>{!isProducerProfile ? 'pontos' : 'FMC Coins'}</span>
           </Price>
         </NameWrapper>
       </StyledLink>
