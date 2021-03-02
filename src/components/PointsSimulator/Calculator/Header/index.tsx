@@ -96,7 +96,7 @@ const Header: React.FC<Props> = ({
         <ProductTypeSelect
           value={productTypeSelected}
           setValue={setProductTypeSelected}
-          placeholder="Tipo de produto"
+          placeholder="Segmento de Produto"
         />
         <SimulationsContainer>
           <CustomText>Minhas simulações</CustomText>

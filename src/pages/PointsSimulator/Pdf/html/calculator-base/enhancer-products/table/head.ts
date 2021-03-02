@@ -1,7 +1,7 @@
 export default `
 <thead>
 <tr style="">
-  <th style="padding-left: 4px;">Tipo/Produto</th>
+  <th style="padding-left: 4px;">Segmento/Produto</th>
   <th>Faturamento(Kg/L)</th>
   <th>POG(Kg/L)</th>
   <th>Estoque</th>

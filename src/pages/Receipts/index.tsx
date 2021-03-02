@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import getNfList from 'services/nf/getAllNotas';
-import StatusTable from '../../components/Home/AddNF/StatusTable';
 
-import Extract from './Extract';
-import List from './List';
 import { AddNF } from 'components/Home';
 
 import { EstablishmentTypes } from 'config/constants';
@@ -17,6 +14,9 @@ import { getParticipantsToAccessPI } from 'services/showcase';
 import getExtract from 'services/extract/getExtract';
 
 import { useAuth } from 'context/AuthContext';
+import List from './List';
+import Extract from './Extract';
+import StatusTable from '../../components/Home/AddNF/StatusTable';
 
 import {
   Container,
@@ -76,7 +76,7 @@ const Receipts: React.FC = () => {
   }, [getNfData]);
 
   useEffect(() => {
-    ///getCampaigns().then(data => setCampaigns(data));
+    /// getCampaigns().then(data => setCampaigns(data));
     setCampaigns([
       {
         id: 280,
@@ -109,10 +109,7 @@ const Receipts: React.FC = () => {
 
   useEffect(() => {
     getParticipantsToAccessPI().then(data => {
-      console.log('getParticipantsToAccessPI');
-      console.log(data);
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
-      return;
     });
   }, [location]);
 
