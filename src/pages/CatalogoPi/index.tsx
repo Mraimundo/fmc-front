@@ -10,7 +10,7 @@ const CatalogoPi: React.FC = () => {
   const handlePiAccess = useCallback(() => {
     if (!piAccess) return;
 
-    window.location.href = piAccess;
+    window.open(piAccess, '_blank');
   }, [piAccess]);
 
   useEffect(() => {
