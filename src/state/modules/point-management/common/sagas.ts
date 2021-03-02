@@ -292,11 +292,11 @@ export function* workerSavePartialDistribution() {
       getScoredParticipants,
     );
 
-    const { generalPointId }: PointsToDistribute = yield select(
+    const { teamAwards }: PointsToDistribute = yield select(
       selectors.getPointsToDistribute,
     );
 
-    yield call<any>(savePartialDistributionService, generalPointId, {
+    yield call<any>(savePartialDistributionService, teamAwards?.pointId || 0, {
       settings: JSON.stringify(scoredParticipants),
     });
 

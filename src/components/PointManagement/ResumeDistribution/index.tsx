@@ -95,6 +95,10 @@ const ResumeDistribution: React.FC = () => {
     dispatch(distributePoints(partialDistribution));
   }, [dispatch, partialDistribution]);
 
+  const handleSaveDistribution = useCallback(() => {
+    dispatch(savePartialDistribution());
+  }, [dispatch]);
+
   const isDisabledDistributeEqually = useMemo(() => {
     if (distributeEqually) return false;
 
@@ -156,9 +160,7 @@ const ResumeDistribution: React.FC = () => {
           <Button
             buttonRole="tertiary"
             type="button"
-            onClick={() => {
-              dispatch(savePartialDistribution());
-            }}
+            onClick={handleSaveDistribution}
             disabled={!scoredParticipants}
             loading={isFetchingPartial}
           >

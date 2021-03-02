@@ -98,7 +98,7 @@ export const TextDistributeWrapper = styled.div`
   width: 30%;
 
   @media screen and (max-width: 992px) {
-    width 100%;
+    width: 100%;
     text-align: center;
   }
 `;
