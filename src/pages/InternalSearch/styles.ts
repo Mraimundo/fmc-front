@@ -81,6 +81,7 @@ export const Title = styled.div`
 `;
 
 export const FormControlRadio = styled.div`
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
@@ -117,6 +118,7 @@ export const RadioGroup = styled.div`
 `;
 
 export const FormGrupSelect = styled.div`
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
@@ -138,6 +140,7 @@ export const FormGrupSelect = styled.div`
 `;
 
 export const FormControlBanner = styled.div`
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
@@ -156,6 +159,7 @@ export const FormControlBanner = styled.div`
 `;
 
 export const FormControlData = styled.div`
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
@@ -178,6 +182,7 @@ export const KeyboardDate = styled.div`
 `;
 
 export const FormControlHour = styled.div`
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
