@@ -5,7 +5,25 @@ import { setCampaign } from 'state/modules/campaigns-manager/actions';
 import { useParams } from 'react-router-dom';
 import { getCampaign } from 'services/campaigns-manager';
 import history from 'services/history';
-import { RegisterCampaignForm } from 'components/CampaignsManager';
+import {
+  RegisterCampaignForm,
+  ConfigurationForm,
+  ComunicationForm,
+  RegulationForm,
+} from 'components/CampaignsManager';
+import {
+  CampaignsManagerProvider,
+  useCampaignsManager,
+} from '../Manager/Context';
+import Main from '../Manager/Main';
+import TabsNavigation from '../Manager/Main/TabsNavigation';
+
+import {
+  SOLICITATION_TAB,
+  CONFIGURATION_TAB,
+  COMUNICATION_TAB,
+  REGULATION_TAB,
+} from '../Manager/tabs';
 
 import { Container, Content } from './styles';
 
@@ -16,6 +34,7 @@ interface Params {
 const CampaignsManager: React.FC = () => {
   const params = useParams<Params>();
   const dispatch = useDispatch();
+  const { tabSelected, nextTab } = useCampaignsManager();
 
   const {
     participant: { profile_value: profile },
@@ -37,16 +56,40 @@ const CampaignsManager: React.FC = () => {
     history.push('/gerenciamento-de-campanhas/lista');
   }, []);
 
+  const handleNextTab = async (): Promise<void> => {
+    nextTab();
+  };
+
   return (
-    <Container>
-      <Content>
-        <RegisterCampaignForm
-          handleAction={handleAction}
-          actionButtonName="Ok"
-          myProfile={profile}
-        />
-      </Content>
-    </Container>
+    <CampaignsManagerProvider>
+      <Main />
+      {/* <Container>
+        <Content>
+          <RegisterCampaignForm
+            handleAction={handleAction}
+            actionButtonName="Ok"
+            myProfile={profile}
+          />
+          <TabsNavigation />
+          {tabSelected === SOLICITATION_TAB && (
+            <RegisterCampaignForm
+              handleAction={handleNextTab}
+              actionButtonName="Próximo"
+              myProfile={profile}
+            />
+          )}
+          {tabSelected === CONFIGURATION_TAB && (
+            <ConfigurationForm handleAction={handleNextTab} />
+          )}
+          {tabSelected === COMUNICATION_TAB && (
+            <ComunicationForm handleAction={handleNextTab} />
+          )}
+          {tabSelected === REGULATION_TAB && (
+            <RegulationForm handleAction={handleNextTab} />
+          )}
+          </Content>
+          </Container> */}
+    </CampaignsManagerProvider>
   );
 };
 

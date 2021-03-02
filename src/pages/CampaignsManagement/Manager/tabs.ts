@@ -13,3 +13,10 @@ export default [
   FINISHED_TAB,
   // RESULTS_TAB,
 ];
+
+export const viewTabs = [
+  SOLICITATION_TAB,
+  CONFIGURATION_TAB,
+  COMUNICATION_TAB,
+  REGULATION_TAB,
+];
