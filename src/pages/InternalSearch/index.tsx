@@ -70,7 +70,7 @@ const ProducerResearch: React.FC = () => {
       setQuestions(response.data.data.survey_questions[0]);
     }
     fetchSurveys();
-  }, [location]);
+  }, [location.search]);
 
   // const CreatePoint = () => {
   //   const [items, setItems] = useState<Item[]>([]);

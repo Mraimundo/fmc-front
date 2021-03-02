@@ -1,76 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import routeMap from 'routes/route-map';
 
-// import { pluginApi } from '../../services/api';
+import { Surveys } from 'services/surveys/interfaces';
 
-import AnswersOne from 'assets/images/cards/answers-1.png';
-import AnswersTwo from 'assets/images/cards/answers-2.png';
-import AnswersTree from 'assets/images/cards/answers-3.png';
+import { pluginApi } from '../../../services/api';
 
-import { Container, CardContent } from './styles';
+import { Container, MiniBox } from './styles';
 
+interface SurveysData {
+  id: number;
+  title: string;
+  description: string;
+  picture: string;
+  answer_required: boolean;
+  show_answer: boolean;
+  start_datetime: string;
+  end_datetime: string;
+  available_surveys: Surveys[];
+}
 
 const Cards: React.FC = () => {
+  const [answered, setAnsWered] = useState(
+    new Array<SurveysData>(),
+  );
+
+  useEffect(() => {
+    async function fetchSurveys() {
+      const response = await pluginApi.get('participants/surveys/');
+      setAnsWered(response.data.available_surveys);
+    }
+    fetchSurveys();
+  }, []);
 
   return (
-
     <Container>
-      <CardContent>
-        <div className="card__description">
-          <div className="card">
-            <div className="card-image">
-              <img src={AnswersOne} alt="" />
-            </div>
-
-            <div className="body-card">
-              <h1>Nome da pesquisa</h1>
-              <span>De 00/00/2021 até 00/00/2021</span>
-              <p>Lorem ipsum dolor sit amet, consectetue adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut Wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit.
-              </p>
-              <h2>Valor 300 FMC Coins</h2>
-              <button>Responder</button>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-image">
-              <img src={AnswersTwo} alt="" />
-            </div>
-
-            <div className="body-card">
-              <h1>Nome da pesquisa</h1>
-              <span>De 00/00/2021 até 00/00/2021</span>
-              <p>Lorem ipsum dolor sit amet, consectetue adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut Wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit.
-              </p>
-              <h2>Valor 300 FMC Coins</h2>
-              <button>Responder</button>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-image">
-              <img src={AnswersTree} alt="" />
-            </div>
-
-            <div className="body-card">
-              <h1>Nome da pesquisa</h1>
-              <span>De 00/00/2021 até 00/00/2021</span>
-              <p>Lorem ipsum dolor sit amet, consectetue adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut Wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit.
-              </p>
-              <h2>Valor 300 FMC Coins</h2>
-              <button>Responder</button>
-            </div>
-          </div>
-        </div>
-      </CardContent>
+      {answered &&
+        answered.map(answered => (
+          <MiniBox key={`key-cards-${answered.id}`}>
+            <img src={answered.picture} alt={answered.title} />
+            <h1>{answered.title}</h1>
+            <span>{(` De ${answered.start_datetime} até ${answered.end_datetime}`)}</span>
+            <p>{answered.description}</p>
+            <Link to={`${routeMap.internal}?item=${answered.id}`} className="btn">Responder</Link>
+          </MiniBox>
+        ))}
     </Container>
   );
 };

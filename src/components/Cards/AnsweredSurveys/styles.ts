@@ -1,8 +1,19 @@
 import styled from 'styled-components';
-
-
 export const Container = styled.div`
   width: 100%;
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 45px;
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   h1 {
     font-size: 24px;
@@ -11,84 +22,47 @@ export const Container = styled.div`
 
 `;
 
-export const CardContent = styled.div`
-  width: 100%;
+export const MiniBox = styled.div`
+  padding: 10px;
+  border: 1px solid transparent;
+  text-decoration: none;
   display: flex;
-  align-items: center;
   flex-direction: column;
-
-  .card__description {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .card__description .card {
-    background: #EFEFEF;
-    height: 384px;
-  }
-
-  .card__description .card .card-image {
-    width: 100%;
+  img {
+    max-width: 100%;
     height: 175px;
-    padding: 12px;
+    object-fit: cover;
+    @media (max-width: 767px) {
+      height: 275px;
+    }
   }
 
-  .card__description .card .card-image img {
-    width: 100%;
-    height: 100%;
+  span {
+    font-size: 12px;
+    color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    margin-top: 8px;
   }
 
-  .card__description .card .body-card {
-    padding: 12px;
-  }
-
-  .card__description .card .body-card h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: bold;
+  h3 {
     font-size: 16px;
-    line-height: 18px;
-    color: #65554D;
-    margin-bottom: 8px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 8px 0;
   }
 
-  .card__description .card .body-card span {
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: normal;
+  p {
     font-size: 12px;
-    line-height: 14px;
-    color: #000;
-    margin-bottom: 12px;
+    color: ${({ theme }) => theme.font.color.secondary};
+    font-family: ${({ theme }) => theme.font.fontFamily.condensed};
+    margin-top: 6px;
   }
 
-  .card__description .card .body-card p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000;
-    margin-bottom: 5px;
-  }
-
-  .card__description .card .body-card h2{
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 16px;
-    color: #65554D;
-    margin-bottom: 5px;
-  }
-
-  .card__description .card .body-card button {
+  .btn {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
     width: 100px;
     height: 25px;
     padding: 10px 20px;
@@ -99,7 +73,29 @@ export const CardContent = styled.div`
     color: #FFFFFF;
     border: none;
     border-radius: 50px;
+    margin-top: 8px;
+  }
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+    max-width: 500px;
+    justify-content: center;
+    & + div {
+      margin-top: 40px;
+    }
+
+    > span {
+      align-self: flex-start;
+    }
+
+    > img {
+      width: 100%;
+    }
+  }
+
+  transition: background 0.2s;
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
   }
 `;
-
 
