@@ -11,7 +11,6 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({
   isViewing = false,
 }) => {
   const { selectTab, tabSelected, tabs, viewTabs } = useCampaignsManager();
-  console.log(viewTabs);
   return (
     <Container>
       {(!isViewing ? tabs : viewTabs).map(item => (
