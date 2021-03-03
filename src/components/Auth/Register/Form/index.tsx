@@ -2,7 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useForm, FormContext } from 'react-hook-form';
 
-import { PROFILES, ApproverProfile, DM, RTC, KAM } from 'config/constants';
+// retornar para cadastro full Equipe FMC
+// import { PROFILES, ApproverProfile, DM, RTC, KAM } from 'config/constants';
+import { PROFILES } from 'config/constants';
 import { MemberGroup, Participant } from 'services/auth/interfaces/Participant';
 import getschemaValidations from './Validators/getSchemaValidations';
 import ProducerHeader, { Tab } from './Producer/Header';
@@ -182,10 +184,11 @@ const Form: React.FC<Props> = ({
   });
 
   const getTitle = useCallback((): string => {
-    const fmcTeam: ApproverProfile[] = [DM, RTC, KAM];
+    // retornar para cadastro full Equipe FMC
+    /* const fmcTeam: ApproverProfile[] = [DM, RTC, KAM];
     if (fmcTeam.includes(participant.profile_value)) {
       return 'Cadastro Equipe FMC - RTC, KAM e DM';
-    }
+    } */
 
     if (editing) {
       return 'Editar cadastro';
@@ -196,12 +199,13 @@ const Form: React.FC<Props> = ({
     }
 
     return 'Ativar cadastro';
-  }, [editing, participant.profile, participant.profile_value]);
+  }, [editing, participant.profile]);
 
   const getExtraTitle = useCallback((): string => {
-    const fmcTeam: ApproverProfile[] = [DM, RTC, KAM];
+    // retornar para cadastro full Equipe FMC
+    /* const fmcTeam: ApproverProfile[] = [DM, RTC, KAM];
 
-    if (fmcTeam.includes(participant.profile_value)) return '';
+    if (fmcTeam.includes(participant.profile_value)) return ''; */
 
     if (participant.profile === 'FMC') return ' - Equipe FMC';
 
@@ -210,7 +214,7 @@ const Form: React.FC<Props> = ({
     if (participant.profile === 'PARTICIPANTE') return ' - Participante';
 
     return '';
-  }, [participant.profile, participant.profile_value]);
+  }, [participant.profile]);
 
   const title = getTitle();
   const extraTitle = getExtraTitle();

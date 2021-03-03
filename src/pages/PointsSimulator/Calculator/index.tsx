@@ -133,6 +133,7 @@ const PointsSimulator: React.FC = () => {
   const handleChannelSelect = useCallback(
     (channelSelectId: number): void => {
       dispatch(actions.fetchChannel(channelSelectId));
+      dispatch(actions.setMode(Mode.calculator));
     },
     [dispatch],
   );
@@ -205,7 +206,8 @@ const PointsSimulator: React.FC = () => {
           setChannelSelected={setChannelSelected}
         />
         <WarningBox>
-          Atenção: O preço unitário simulado deve ser o preço Gross negociado com o canal.
+          Atenção: O preço unitário simulado deve ser o preço Gross negociado
+          com o canal.
         </WarningBox>
         {channel && (
           <CustomTableBox>

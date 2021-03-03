@@ -47,14 +47,14 @@ const FormSignUp: React.FC = () => {
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
   });
-  
+
   useEffect(() => {
     const indicator_code = location.search.replace('?code=', '');
 
-    if(indicator_code){
+    if (indicator_code) {
       setIndicatorCode(indicator_code);
     }
-  },[location.search]);
+  }, [location.search]);
 
   const { handleSubmit, setValue } = methods;
   const onSubmit = handleSubmit(async ({ param_first_access }) => {
@@ -65,7 +65,7 @@ const FormSignUp: React.FC = () => {
           ? await getParticipantByCpf(param_first_access)
           : await getParticipantByUpn(param_first_access);
 
-          history.push('/firstAccess', participant);
+      history.push('/firstAccess', participant);
     } catch (e) {
       setLoading(false);
       if (e.response?.data?.message === 'CPF não encontrado') {
@@ -96,8 +96,9 @@ const FormSignUp: React.FC = () => {
       campaign_id: 1,
       profile: PROFILES.producer,
     };
-    indicatorCode ? history.push(`/firstAccess?code=${indicatorCode}`, participant): 
-    history.push('/firstAccess', participant);
+    indicatorCode
+      ? history.push(`/firstAccess?code=${indicatorCode}`, participant)
+      : history.push('/firstAccess', participant);
   };
 
   const handleSelectType = useCallback(
@@ -166,7 +167,6 @@ const FormSignUp: React.FC = () => {
             numbersOnly
             pattern="XXX.XXX.XXX-XX"
           />
-          
         ) : (
           <Input name="param_first_access" placeholder="Nome de Usuário FMC" />
         )}

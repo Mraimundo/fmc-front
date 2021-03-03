@@ -12,7 +12,7 @@ const Header: React.FC<Props> = ({ tabSelected }) => {
   return (
     <Container>
       <div> </div>
-      <div>Tipo/Produto</div>
+      <div>Segmento/Produto</div>
       <div>
         Faturamento ({tabSelected === Tab.enhancerProductsTab ? 'Kg/L' : 'US$'})
       </div>
