@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useForm, FormContext } from 'react-hook-form';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import axios from 'axios'
 import { pluginApi } from '../../services/api';
 import 'date-fns';
 
-import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
-import StarButtonColumn from '../../components/SearchForms/StarButtonsColumn';
-import ButtonsSquare from '../../components/SearchForms/ButtonsSquareCheck';
-import ButtonsSquareNumber from '../../components/SearchForms/ButtonsSquareNumber';
-import ButtonsRadios from '../../components/SearchForms/ButtonsRadios';
+// import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
+// import StarButtonColumn from '../../components/SearchForms/StarButtonsColumn';
+// import ButtonsSquare from '../../components/SearchForms/ButtonsSquareCheck';
+// import ButtonsSquareNumber from '../../components/SearchForms/ButtonsSquareNumber';
+// import ButtonsRadios from '../../components/SearchForms/ButtonsRadios';
 
 import {
   Container,
@@ -20,12 +19,12 @@ import {
   Form,
   FormControlRadio,
   RadioGroup,
-  FormControlBanner,
-  FormGrupSelect,
-  FormControlData,
-  KeyboardDate,
-  FormControlHour,
-  KeyboardTime,
+  // FormControlBanner,
+  // FormGrupSelect,
+  // FormControlData,
+  // KeyboardDate,
+  // FormControlHour,
+  // KeyboardTime,
   Button
 } from './styles';
 
@@ -51,14 +50,12 @@ interface QuestionsData {
   survey_question_answers: AnswersData[];
 }
 
-interface SubmitForm {
-
-}
-
 // Component producer Research
 const ProducerResearch: React.FC = () => {
   const location = useLocation();
   const [radio, setRadio] = useState("");
+  const [surveyQuestionId, setSurveyQuestionId] = useState('')
+  const [answersQuestionId, setAnswersQuestionId] = useState(0)
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData>({} as QuestionsData);
 
@@ -68,42 +65,30 @@ const ProducerResearch: React.FC = () => {
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions[0]);
+      setSurveyQuestionId(response.data.data.survey_questions[0].survey_id)
     }
     fetchSurveys();
   }, [location.search]);
 
-  // const CreatePoint = () => {
-  //   const [items, setItems] = useState<Item[]>([]);
-  //   const [ufs, setUfs] = useState<string[]>([]);
-  //   const [selectedUf, setSelectedUf] = useState('0');
-  //   const [cities, setCities] = useState<string[]>([]);
-  //   const [selectedCity, setSelectedCity] = useState('0');
-  //   const [selectedItems, setSelectedItems] = useState<number[]>([]);
-  //   const [formData, setFormData] = useState({
-  //     name: '',
-  //     email: '',
-  //     whatsapp: '',
-  //   });
+  const handleSave = useCallback(async (e) => {
+    e.preventDefault()
+    const list_id = location.search.replace('?item=', '');
+    let formData = new FormData();
+    const token = localStorage.getItem('@Vendavall:token');
 
-  const methods = useForm<SubmitForm>({
-    mode: 'onSubmit'
-  })
+    formData.append('survey_question[0][value]', radio);
+    formData.append('survey_question[0][id]', surveyQuestionId);
+    formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
 
-  const { handleSubmit } = methods;
-  const onSubmit = handleSubmit(() => {
-
-  });
-
-  // function handleSelectItem(id: number) {
-  //   const alreadySelected = selectedItems.includes(id);
-  //   let selectedItemsAux = [...selectedItems];
-  //   if (alreadySelected) {
-  //     selectedItemsAux = selectedItemsAux.filter((item) => item !== id);
-  //     setSelectedItems([...selectedItemsAux]);
-  //   } else {
-  //     setSelectedItems([...selectedItems, id]);
-  //   }
-  // }
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        Authorization: token,
+        Accept: 'application/json'
+      }
+    }
+    await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
+  }, [location.search, radio, surveyQuestionId, answersQuestionId]);
 
   return (
     <Container>
@@ -123,28 +108,30 @@ const ProducerResearch: React.FC = () => {
       <hr />
 
       <Title>Perguntas</Title>
-      <FormContext {...methods}>
-        <Form onSubmit={onSubmit}>
-          <FormControlRadio>
-            <p>{questions.question}</p>
-            {questions && questions.survey_question_answers &&
-              questions.survey_question_answers.map(answer => (
-                <RadioGroup key={answer.id}>
-                  <div>
-                    <strong>
-                      <input
-                        type="radio"
-                        checked={radio === answer.answer}
-                        value={answer.answer}
-                        onChange={(e) => { setRadio(e.target.value) }}
-                      />
-                    </strong>
-                    <span>{answer.answer}</span>
-                  </div>
-                </RadioGroup>
-              ))}
-          </FormControlRadio>
-          <StarButtonLine />
+      <Form onSubmit={handleSave}>
+        <FormControlRadio>
+          <p>{questions.question}</p>
+          {questions && questions.survey_question_answers &&
+            questions.survey_question_answers.map(answer => (
+              <RadioGroup key={answer.id}>
+                <div>
+                  <strong>
+                    <input
+                      type="radio"
+                      checked={radio === answer.answer}
+                      value={answer.answer}
+                      onChange={(e) => {
+                        setRadio(e.target.value)
+                        setAnswersQuestionId(answer.id)
+                      }}
+                    />
+                  </strong>
+                  <span>{answer.answer}</span>
+                </div>
+              </RadioGroup>
+            ))}
+        </FormControlRadio>
+        {/* <StarButtonLine />
           <StarButtonColumn />
           <ButtonsSquare />
           <FormControlBanner>
@@ -189,15 +176,13 @@ const ProducerResearch: React.FC = () => {
                 type="time"
               />
             </KeyboardTime>
-          </FormControlHour>
-          <Button
-            type="submit"
-          // onClick={handleSubmit}
-          >
-            Salvar
+          </FormControlHour> */}
+        <Button
+          type="submit"
+        >
+          Salvar
           </Button>
-        </Form>
-      </FormContext>
+      </Form>
     </Container>
   );
 };
