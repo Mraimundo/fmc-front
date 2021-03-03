@@ -16,6 +16,7 @@ import {
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { Banners, Title, Highlights, Showcase, AddNF } from 'components/Home';
 import CoinQuotation from 'components/Header/CoinQuotation';
+import FlyingHigh from 'components/Home/FlyingHigh';
 import { Wrapper, ShowCaseWrapper, HomeWrapper } from './styles';
 
 const FmcProdutorHome: React.FC = () => {
@@ -45,6 +46,9 @@ const FmcProdutorHome: React.FC = () => {
       <Hidden xs sm>
         {!!banners && <Banners items={banners} />}
       </Hidden>
+      <Wrapper>
+        <FlyingHigh />
+      </Wrapper>
       <Wrapper>
         <AddNF />
       </Wrapper>
