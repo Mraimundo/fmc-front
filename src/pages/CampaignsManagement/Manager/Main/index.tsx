@@ -165,10 +165,10 @@ const Main: React.FC<MainProps> = ({ isViewing = false, leaveAction }) => {
           />
         )}
         {tabSelected === RESULTS_TAB && <ResultForm />}
-        {isViewing && (
+        {isViewing && tabSelected === REGULATION_TAB && (
           <ViewActions>
             <Button buttonRole="primary" type="button" onClick={leaveAction}>
-              VOLTAR
+              OK
             </Button>
           </ViewActions>
         )}
