@@ -3,11 +3,18 @@ import { useCampaignsManager } from '../../Context';
 
 import { Container, Box } from './styles';
 
-const TabsNavigation: React.FC = () => {
-  const { selectTab, tabSelected, tabs } = useCampaignsManager();
+interface TabsNavigationProps {
+  isViewing?: boolean;
+}
+
+const TabsNavigation: React.FC<TabsNavigationProps> = ({
+  isViewing = false,
+}) => {
+  const { selectTab, tabSelected, tabs, viewTabs } = useCampaignsManager();
+  console.log(viewTabs);
   return (
     <Container>
-      {tabs.map(item => (
+      {(!isViewing ? tabs : viewTabs).map(item => (
         <Box
           key={item}
           onClick={() => selectTab(item)}

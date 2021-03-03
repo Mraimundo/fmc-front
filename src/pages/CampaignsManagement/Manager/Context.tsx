@@ -1,11 +1,12 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
-import tabs from './tabs';
+import tabs, { viewTabs } from './tabs';
 
 export interface CampaignsManagerContextState {
   tabs: string[];
   tabSelected: string;
   selectTab(tab: string): void;
   nextTab(): void;
+  viewTabs: string[];
 }
 
 const CampaignsManagerContext = createContext<CampaignsManagerContextState>(
@@ -28,7 +29,7 @@ export const CampaignsManagerProvider: React.FC = ({ children }) => {
 
   return (
     <CampaignsManagerContext.Provider
-      value={{ tabs, tabSelected, selectTab, nextTab }}
+      value={{ tabs, tabSelected, selectTab, nextTab, viewTabs }}
     >
       {children}
     </CampaignsManagerContext.Provider>
