@@ -4,6 +4,7 @@ const GA_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 const env = process.env.NODE_ENV;
 let gaPageView = (segment: string) => {
   // eslint-disable-next-line no-console
+  console.log(`just homolog console ${segment}`);
 };
 if (env === 'production' && GA_ID) {
   ReactGA.initialize(GA_ID);
