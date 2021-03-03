@@ -98,11 +98,11 @@ const view = [
 export default (profile: ApproverProfile) => {
   switch (profile) {
     case DN:
-      return [...common, ...statusColumn, ...approval];
+      return [...common, ...view, ...statusColumn, ...approval];
     case GRM:
       return [...common, ...edit, ...statusColumn];
     case MKT:
-      return [...common, ...statusColumn, ...approval];
+      return [...common, ...view, ...statusColumn, ...approval];
     case GRV:
       return [...common, ...view, ...statusColumn, ...approval];
     case CRM:

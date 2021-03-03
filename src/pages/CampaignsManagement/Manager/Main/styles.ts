@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button as DefaultButton } from 'components/shared';
 
 export const Container = styled.div`
   display: flex;
@@ -17,4 +18,15 @@ export const Content = styled.div`
   flex-direction: column;
   background: #fff;
   padding: 40px 60px;
+`;
+
+export const ViewActions = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const Button = styled(DefaultButton)`
+  max-width: 232px;
+  height: 48px;
 `;
