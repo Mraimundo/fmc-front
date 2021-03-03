@@ -55,7 +55,11 @@ const FmcProdutorHome: React.FC = () => {
       <ShowCaseWrapper>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios </Title>
-          <Showcase products={products} isSimulating={simulating} />
+          <Showcase
+            products={products}
+            isSimulating={simulating}
+            isProducerProfile
+          />
         </Wrapper>
       </ShowCaseWrapper>
     </HomeWrapper>

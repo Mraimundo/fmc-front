@@ -44,13 +44,12 @@ const Details: React.FC<Props> = Props => {
 
   useEffect(() => {
     if (details) {
-      console.log(details);
       let sumTotal = 0;
       let sumCoins = 0;
       for (let i = 0; i < details.itensNota.length; i++) {
         sumTotal += parseFloat(details.itensNota[i].total_value);
         sumCoins += parseFloat(details.itensNota[i].FMCCOINS);
-        //sum += parseFloat( details.itensNota[0] );
+        // sum += parseFloat( details.itensNota[0] );
       }
 
       setTotalProdutosFmc(sumTotal);
