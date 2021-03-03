@@ -5,7 +5,8 @@ import {
   Ranking,
   Performance,
 } from 'state/modules/home/types';
-import { strategies, engagements, bells, ranking, performance } from './mock';
+import { pluginApi } from 'services/api';
+import { strategies, engagements, bells, ranking } from './mock';
 
 export const getStrategies = async (): Promise<Strategy[]> => {
   return strategies;
@@ -24,5 +25,6 @@ export const getRanking = async (): Promise<Ranking> => {
 };
 
 export const getPerformance = async (): Promise<Performance> => {
-  return performance;
+  const { data } = await pluginApi.get<Performance>('cockpit/management');
+  return data;
 };
