@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Surveys } from 'services/surveys/interfaces';
 // import { formatDate } from 'util/datetime';
 
@@ -14,14 +15,7 @@ import {
   // Button
 } from './styles';
 
-import { pluginApi } from '../../../services/api';
-
-// import SearchOne from 'assets/images/cards/search-1.png';
-// import SearchTwo from 'assets/images/cards/search-2.png';
-// import SearchTree from 'assets/images/cards/search-3.png';
-// import SearchFor from 'assets/images/cards/search-4.png';
-// import SearchFive from 'assets/images/cards/search-5.png';
-// import SearchSix from 'assets/images/cards/search-6.png';
+// import { pluginApi } from '../../../services/api';
 
 interface SurveysData {
   id: number,
@@ -54,26 +48,23 @@ const CardList: React.FC = () => {
   const [youropinion, setYourOpinion] = useState(
     new Array<SurveysData>(),
   );
-  // const location = useLocation();
-  // useEffect(() => {
-  //   setData(transformer(surveys));
-  // }, [surveys])
+
+  const token = localStorage.getItem('@Vendavall:token');
+
+  const config = {
+    headers: {
+      Authorization: token,
+      Accept: 'application/json'
+    }
+  }
 
   useEffect(() => {
     async function fetchSurveys() {
-      const response = await pluginApi.get('participants/surveys/');
-      // console.log(response.data.available_surveys);
-      setYourOpinion(response.data.available_surveys);
+      const response = await axios.get('https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys', config);
+      setYourOpinion(response.data.performed_surveys);
     }
     fetchSurveys();
-  }, []);
-
-  // useEffect(() => {
-  //   const list_id = location.search.replace('?item=', '');
-  //   if (list_id) {
-  //     setListId(list_id);
-  //   }
-  // }, [location.search]);
+  }, [config]);
 
   return (
     <Container>

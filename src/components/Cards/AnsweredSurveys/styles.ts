@@ -37,18 +37,18 @@ export const MiniBox = styled.div`
     }
   }
 
+  h1 {
+    font-size: 14px;
+    color: #65554D;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    margin-top: 6px;
+  }
+
   span {
     font-size: 12px;
     color: ${({ theme }) => theme.font.color.secondary};
     font-family: ${({ theme }) => theme.font.fontFamily.condensed};
     margin-top: 8px;
-  }
-
-  h3 {
-    font-size: 16px;
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};
-    color: ${({ theme }) => theme.font.color.primary};
-    margin: 8px 0;
   }
 
   p {
@@ -58,12 +58,26 @@ export const MiniBox = styled.div`
     margin-top: 6px;
   }
 
+  h2 {
+    font-size: 16px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 5px 0;
+  }
+
+  h3 {
+    font-size: 13px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 5px 0;
+  }
+
   .btn {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    width: 100px;
+    width: 120px;
     height: 25px;
     padding: 10px 20px;
     font-size: 12px;
