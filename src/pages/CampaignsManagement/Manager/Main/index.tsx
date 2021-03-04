@@ -21,6 +21,7 @@ import {
   RegulationForm,
 } from 'components/CampaignsManager';
 import useSchema from 'util/validations/useSchema';
+
 import TabsNavigation from './TabsNavigation';
 import schema from '../schemaValidation';
 
@@ -33,9 +34,14 @@ import {
   REGULATION_TAB,
 } from '../tabs';
 import { useCampaignsManager } from '../Context';
-import { Container, Content } from './styles';
+import { Container, Content, Button, ViewActions } from './styles';
 
-const Main: React.FC = () => {
+interface MainProps {
+  isViewing?: boolean;
+  leaveAction?: () => void;
+}
+
+const Main: React.FC<MainProps> = ({ isViewing = false, leaveAction }) => {
   const { tabSelected, nextTab } = useCampaignsManager();
   const { addToast } = useToast();
   const { isValid, getErrors } = useSchema<Campaign>(schema);
@@ -134,7 +140,7 @@ const Main: React.FC = () => {
   return (
     <Container>
       <Content>
-        <TabsNavigation />
+        <TabsNavigation isViewing={isViewing} />
         {tabSelected === SOLICITATION_TAB && (
           <RegisterCampaignForm
             handleAction={handleNextTab}
@@ -149,7 +155,7 @@ const Main: React.FC = () => {
           <ComunicationForm handleAction={handleNextTab} />
         )}
         {tabSelected === REGULATION_TAB && (
-          <RegulationForm handleAction={handleNextTab} />
+          <RegulationForm handleAction={handleNextTab} isViewing={isViewing} />
         )}
         {tabSelected === FINISHED_TAB && (
           <FinishForm
@@ -159,6 +165,13 @@ const Main: React.FC = () => {
           />
         )}
         {tabSelected === RESULTS_TAB && <ResultForm />}
+        {isViewing && tabSelected === REGULATION_TAB && (
+          <ViewActions>
+            <Button buttonRole="primary" type="button" onClick={leaveAction}>
+              OK
+            </Button>
+          </ViewActions>
+        )}
       </Content>
     </Container>
   );

@@ -15,8 +15,9 @@ import { Container, RegulationContent, RegulationDownload } from './styles';
 
 export interface Props {
   handleAction(campaign: Campaign): Promise<void>;
+  isViewing?: boolean;
 }
-const Regulation: React.FC<Props> = ({ handleAction }) => {
+const Regulation: React.FC<Props> = ({ handleAction, isViewing = false }) => {
   const campaign = useSelector(getCampaign);
   const [loading, setLoading] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -66,15 +67,17 @@ const Regulation: React.FC<Props> = ({ handleAction }) => {
         <ReactSVG src={pdfIcon} />
         Download Regulamento (PDF)
       </RegulationDownload>
-      <Button
-        type="button"
-        buttonRole="primary"
-        className="_actionButton"
-        onClick={handleButtonClick}
-        loading={loading}
-      >
-        Próximo
-      </Button>
+      {!isViewing && (
+        <Button
+          type="button"
+          buttonRole="primary"
+          className="_actionButton"
+          onClick={handleButtonClick}
+          loading={loading}
+        >
+          Próximo
+        </Button>
+      )}
     </Container>
   );
 };
