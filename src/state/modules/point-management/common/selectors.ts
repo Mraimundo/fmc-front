@@ -84,3 +84,6 @@ export const getHasSavedSetting = createSelector(
 
 export const getPartialDistribution = (state: StoreState) =>
   state.pointManagement.common.partialDistribution;
+
+export const getIsPartialDistributionFinished = (state: StoreState) =>
+  state.pointManagement.common.partialDistributionFinished;

@@ -23,6 +23,7 @@ import {
   SAVE_PARTIAL_DISTRIBUTION_ACTION,
   SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
   SAVE_PARTIAL_DISTRIBUTION_FAILURE,
+  SAVE_PARTIAL_DISTRIBUTION_FINISH,
   SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
 } from './constants';
 import { CommonState } from './reducer';
@@ -198,6 +199,13 @@ export const savePartialDistributionSuccess = (): ActionCreator<
     type: SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
   };
 
+export const savePartialDistributionFinish = (): ActionCreator<
+  typeof SAVE_PARTIAL_DISTRIBUTION_FINISH
+> =>
+  <const>{
+    type: SAVE_PARTIAL_DISTRIBUTION_FINISH,
+  };
+
 export const setDistributionWithSavedSettings = (): ActionCreator<
   typeof SET_DISTRIBUTION_WITH_SAVED_SETTINGS
 > =>
@@ -225,4 +233,5 @@ export type CommonActions = ReturnType<
   | typeof savePartialDistributionFailure
   | typeof savePartialDistributionSuccess
   | typeof setDistributionWithSavedSettings
+  | typeof savePartialDistributionFinish
 >;

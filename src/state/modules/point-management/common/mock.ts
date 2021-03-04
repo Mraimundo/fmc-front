@@ -76,6 +76,7 @@ const state: CommonState = {
     isFetching: false,
     error: '',
   },
+  partialDistributionFinished: false,
 };
 
 export default state;
