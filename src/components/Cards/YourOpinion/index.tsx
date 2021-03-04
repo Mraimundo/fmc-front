@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Surveys } from 'services/surveys/interfaces';
-// import { formatDate } from 'util/datetime';
+import { formatDate } from 'util/datetime';
 
-// import transformer, {
-//   Response as Data,
-// } from 'services/surveys/transformers/toSurveysList';
 import routeMap from 'routes/route-map';
 
 import {
@@ -36,15 +33,7 @@ interface SurveysData {
   className?: string;
 }
 
-
-// interface SurveysProps {
-//   surveys: Surveys[];
-//   className?: string;
-// }
-
 const CardList: React.FC = () => {
-  // const [listID, setListId] = useState('')
-  // const [data, setData] = useState<Data[]>([]);
   const [youropinion, setYourOpinion] = useState(
     new Array<SurveysData>(),
   );
@@ -61,7 +50,7 @@ const CardList: React.FC = () => {
   useEffect(() => {
     async function fetchSurveys() {
       const response = await axios.get('https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys', config);
-      setYourOpinion(response.data.performed_surveys);
+      setYourOpinion(response.data.available_surveys);
     }
     fetchSurveys();
   }, [config]);
@@ -73,7 +62,12 @@ const CardList: React.FC = () => {
           <MiniBox key={`key-cards-${youropinion.id}`}>
             <img src={youropinion.picture} alt={youropinion.title} />
             <h1>{youropinion.title}</h1>
-            <span>{(` De ${youropinion.start_datetime} até ${youropinion.end_datetime}`)}</span>
+            <span>
+              {(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')}
+               até 
+               ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}
+              `)}
+            </span>
             <p>{youropinion.description}</p>
             <Link to={`${routeMap.internal}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
