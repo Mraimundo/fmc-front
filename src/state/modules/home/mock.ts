@@ -94,6 +94,9 @@ const state: HomeState = {
   fetchShowcaseProducts: {
     isFetching: false,
   },
+  fetchLuckyNumber: {
+    isFetching: false,
+  },
   fetchStrategies: {
     isFetching: false,
   },
@@ -113,6 +116,7 @@ const state: HomeState = {
   highlights,
   showcaseProducts: showcase,
   participantId: null,
+  luckyNumber: null,
   strategies,
   engagements,
   bells,

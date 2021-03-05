@@ -92,6 +92,23 @@ export const fetchShowcaseSuccess = (
     payload: { showcaseProducts },
   };
 
+export const fetchLuckyNumber = (): ActionCreator<
+  typeof actions.FETCH_LUCKYNUMBER_ACTION
+> =>
+  <const>{
+    type: actions.FETCH_LUCKYNUMBER_ACTION,
+  };
+
+export const fetchLuckyNumberFailure = (
+  error: string,
+): ActionCreatorFailure<typeof actions.FETCH_LUCKYNUMBER_FAILURE> =>
+  <const>{
+    type: actions.FETCH_LUCKYNUMBER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
 export const fetchStrategies = (): ActionCreator<
   typeof actions.FETCH_STRATEGIES_ACTION
 > =>
@@ -107,6 +124,17 @@ export const fetchStrategiesFailure = (
     payload: {
       error,
     },
+  };
+
+export const fetchLuckyNumberSuccess = (
+  luckyNumber: string | null,
+): ActionCreatorPayload<
+  typeof actions.FETCH_LUCKYNUMBER_SUCCESS,
+  Pick<HomeState, 'luckyNumber'>
+> =>
+  <const>{
+    type: actions.FETCH_LUCKYNUMBER_SUCCESS,
+    payload: { luckyNumber },
   };
 
 export const fetchStrategiesSuccess = (
@@ -242,6 +270,9 @@ export type HomeActions = ReturnType<
   | typeof fetchShowcase
   | typeof fetchShowcaseFailure
   | typeof fetchShowcaseSuccess
+  | typeof fetchLuckyNumber
+  | typeof fetchLuckyNumberFailure
+  | typeof fetchLuckyNumberSuccess
   | typeof fetchStrategies
   | typeof fetchStrategiesFailure
   | typeof fetchStrategiesSuccess

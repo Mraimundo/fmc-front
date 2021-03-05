@@ -3,11 +3,18 @@ import { Coupon } from './interface';
 
 const REQUEST_URL = 'flying-high/lucky-numbers';
 
-export default async (): Promise<string> => {
+interface ApiResponse {
+  number: Coupon;
+}
+
+export default async (): Promise<string | null> => {
   try {
-    const { data } = await pluginApi.get<Coupon>(REQUEST_URL);
-    return data.number;
+    const {
+      data: { number },
+    } = await pluginApi.get<ApiResponse>(REQUEST_URL);
+    console.log(number.number);
+    return number.number;
   } catch (error) {
-    return '';
+    return null;
   }
 };

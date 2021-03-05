@@ -33,6 +33,10 @@ export const FETCH_SHOWCASEPRODUCTS_FAILURE =
 export const FETCH_SHOWCASEPRODUCTS_SUCCESS =
   '@fmc/home/FETCH_SHOWCASEPRODUCTS_SUCCESS';
 
+export const FETCH_LUCKYNUMBER_ACTION = '@fmc/home/FETCH_LUCKYNUMBER_ACTION';
+export const FETCH_LUCKYNUMBER_FAILURE = '@fmc/home/FETCH_LUCKYNUMBER_FAILURE';
+export const FETCH_LUCKYNUMBER_SUCCESS = '@fmc/home/FETCH_LUCKYNUMBER_SUCCESS';
+
 export enum HighlightTypes {
   Report = 'report',
   Quiz = 'quiz',
