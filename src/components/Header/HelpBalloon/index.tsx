@@ -15,7 +15,7 @@ const HelpBalloon: React.FC = () => {
       <ReactSVG src={helpBalloonIcon} />
       <HelpMenu data-testid="help-balloon-manu">
         <li>
-          <ReactSVG src={interrogationIcon} />
+          <ReactSVG className="faq-in-help-ballon" src={interrogationIcon} />
           <Link to={routeMap.faq}>FAQ</Link>
         </li>
         <li>

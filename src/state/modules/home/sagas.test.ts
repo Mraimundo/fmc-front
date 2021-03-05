@@ -11,7 +11,15 @@ import mainSaga, {
   workerFetchBanners,
   workerFetchHighlights,
   workerFetchShowcaseProducts,
+<<<<<<< HEAD
   workerFetchLuckyNumber,
+=======
+  workerFetchBells,
+  workerFetchEngagements,
+  workerFetchPerformance,
+  workerFetchStrategies,
+  workerFetchRanking,
+>>>>>>> testing
 } from './sagas';
 import { banners, highlights } from './mock';
 
@@ -102,7 +110,15 @@ describe('src/state/modules/home/sagas', () => {
           constants.FETCH_SHOWCASEPRODUCTS_ACTION,
           workerFetchShowcaseProducts,
         ),
+<<<<<<< HEAD
         takeEvery(constants.FETCH_LUCKYNUMBER_ACTION, workerFetchLuckyNumber),
+=======
+        takeEvery(constants.FETCH_STRATEGIES_ACTION, workerFetchStrategies),
+        takeEvery(constants.FETCH_ENGAGEMENTS_ACTION, workerFetchEngagements),
+        takeEvery(constants.FETCH_BELLS_ACTION, workerFetchBells),
+        takeEvery(constants.FETCH_RANKING_ACTION, workerFetchRanking),
+        takeEvery(constants.FETCH_PERFORMANCE_ACTION, workerFetchPerformance),
+>>>>>>> testing
       ])
       .finish()
       .isDone();

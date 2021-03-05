@@ -26,7 +26,7 @@ describe('<Banners />', () => {
   test('should render banners', () => {
     const { container } = render(
       <ThemeContext.Provider value={defaultTheme}>
-        <Banners items={banners} />
+        <Banners items={banners} itemsMobile={banners} />
       </ThemeContext.Provider>,
     );
     expect(getByTestId(container, /banners/)).toBeInTheDocument();

@@ -22,7 +22,7 @@ const Product: React.FC<Props> = ({ data }) => {
                 {item.volume}
               </span>
               <span>
-                <span>Parcial</span>
+                <span>Realizado</span>
                 {item.partialVolume}
               </span>
               <span>
@@ -38,7 +38,7 @@ const Product: React.FC<Props> = ({ data }) => {
                 {item.sellIn}
               </span>
               <span>
-                <span>Parcial</span>
+                <span>Realizado</span>
                 {item.partialSellIn}
               </span>
               <span>
@@ -54,7 +54,7 @@ const Product: React.FC<Props> = ({ data }) => {
                 {item.sellOut}
               </span>
               <span>
-                <span>Parcial</span>
+                <span>Realizado</span>
                 {item.partialSellOut}
               </span>
               <span>

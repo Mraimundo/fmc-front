@@ -3,15 +3,16 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { pluginApi } from '../../services/api';
 
-import { Container } from './styles';
+import { Container, TextType } from './styles';
 import imageArrow from '../../assets/images/arrows.svg';
 
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
 
-  const initialUrl = 'http://www.juntosfmc.com.br/';
+  const initialUrl = 'https://www.juntosfmc.com.br/?code=';
 
-  const [profileTipe, setProfileType] = useState('');
+  const [profileType, setProfileType] = useState('');
+  const [profile, setProfile] = useState('');
 
   const [value, setValue] = useState('');
   const [copied, setCopied] = useState(false);
@@ -23,19 +24,19 @@ const Bainer: React.FC = () => {
       setValue(initialUrl + indication);
 
       setProfileType(response.data.establishment.type_name);
+      setProfile(response.data.profile);
     }
 
     fetchIndication();
   }, [indication]);
 
   let colorType = '';
-
-  switch (profileTipe) {
+  switch (profileType) {
     case 'Cooperativa':
       colorType = 'verde';
       break;
 
-    case 'Produtor' || 'produtor':
+    case 'FMC':
       colorType = 'marron';
       break;
 
@@ -43,12 +44,27 @@ const Bainer: React.FC = () => {
       colorType = 'azul';
       break;
 
-    case 'RTC' || 'rtc':
-      colorType = 'cinza';
-      break;
-
     default:
       colorType = 'verde';
+  }
+
+  if (profile === 'FMC' && profileType === 'Revenda') {
+    //
+    colorType = 'cinza';
+  }
+
+  let diminacType = '';
+  switch (profileType) {
+    case 'Cooperativa':
+      diminacType =
+        'Para indicar você precisa copiar o link e enviar para seus cooperados.';
+      break;
+    case 'Revenda':
+      diminacType =
+        'Para indicar você precisa copiar o link e enviar para seus clientes.';
+      break;
+    default:
+      break;
   }
 
   const handleCopy = () => {
@@ -65,7 +81,7 @@ const Bainer: React.FC = () => {
         <div className="content-group">
           <h1 className="title">Indicação de Produtor</h1>
           <h2 className="sub-title">
-            Indique produtores para participarem do juntos FMC.
+            Indique seus clientes para participarem do JUNTOS FMC.
           </h2>
         </div>
         <main>
@@ -73,10 +89,7 @@ const Bainer: React.FC = () => {
             <h3>Como funciona</h3>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />
-              <h4>
-                Para indicar você precisa copiar o link e enviar pra seu
-                contato.
-              </h4>
+              <TextType diminacType={diminacType}>{diminacType}</TextType>
             </div>
             <div className="bainer-guidance">
               <img src={imageArrow} alt="Arrow" />
@@ -89,7 +102,7 @@ const Bainer: React.FC = () => {
 
           <div className="indicator-code">
             <div>
-              <h1>Seu codigo de Indicação: {indication}</h1>
+              <h1>Seu Código de Indicação: {indication}</h1>
             </div>
             <div>
               <div className="register-group">

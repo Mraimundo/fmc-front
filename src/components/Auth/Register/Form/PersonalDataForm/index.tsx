@@ -1,7 +1,9 @@
 import React from 'react';
 
 import PasswordHelp from 'components/shared/PasswordHelp';
-import { ApproverProfile, PROFILES, DM, RTC, KAM } from 'config/constants';
+// retornar para cadastro full Equipe FMC
+// import { ApproverProfile, PROFILES, DM, RTC, KAM } from 'config/constants';
+import { ApproverProfile, PROFILES } from 'config/constants';
 import { Participant } from 'services/auth/interfaces/Participant';
 import ComponentsByProfile from '../Commom/ComponentsByProfile';
 import ExtraFieldsForParticipant from '../Commom/ExtraFieldsForParticipant';
@@ -19,6 +21,7 @@ import {
   NextButton,
   ComoFicouConhecendoSelectStyled,
 } from './styles';
+import { GenderSelect } from '../Commom/styles';
 
 interface Props {
   participant: Participant;
@@ -42,9 +45,10 @@ const PersonalDataForm: React.FC<Props> = ({
   actived,
 }) => {
   const profileValuesAllowedToShowMarketPlace: ApproverProfile[] = [
-    DM,
+    // retornar para cadastro full Equipe FMC
+    /* DM,
     RTC,
-    KAM,
+    KAM, */
   ];
 
   const shouldShowMarketPlaceFields =
@@ -113,17 +117,16 @@ const PersonalDataForm: React.FC<Props> = ({
 
       {participant.profile === PROFILES.producer && (
         <>
+          <GenderSelect name="gender_select" inputRole={inputRole} />
           <Input
             name="medium"
             label="Em qual Canal você compra os produtos FMC?"
             inputRole={inputRole}
           />
-
           <ComoFicouConhecendoSelectStyled
             name="get_to_know_select"
             inputRole={inputRole}
           />
-
           <Input
             name="formatted_birth_date"
             label="Data de nascimento* (idade mínima: 18 anos)"

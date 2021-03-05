@@ -5,6 +5,7 @@ import home from './home/mock';
 import campaignsManager from './campaigns-manager/mock';
 import goals from './goals/mock';
 import pointsSimulator from './points-simulator/mock';
+import weather from './weather/mock';
 
 const state: StoreState = {
   pointManagement,
@@ -13,6 +14,7 @@ const state: StoreState = {
   home,
   goals,
   pointsSimulator,
+  weather,
 };
 
 export default state;

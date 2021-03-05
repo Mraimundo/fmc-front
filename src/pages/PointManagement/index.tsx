@@ -8,6 +8,7 @@ import {
   fetchEstablishments,
   setSelectedEstablishment,
   distributePointsFinally,
+  setDistributionWithSavedSettings,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
 import {
@@ -24,6 +25,7 @@ import {
   EstablishmentSelection,
 } from 'components/PointManagement';
 import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 import {
   Wrapper,
   Panel,
@@ -35,7 +37,6 @@ import {
   ResumeCol,
   ParticipantsCol,
 } from './styles';
-import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 
 const PointManagement: React.FC = () => {
   const [
@@ -51,6 +52,7 @@ const PointManagement: React.FC = () => {
     isOpenModalMissingParticipants,
     missingParticipants,
     pointsToDistribute,
+    hasSavedSettings,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
@@ -64,6 +66,7 @@ const PointManagement: React.FC = () => {
     useSelector(getIsOpenModalMissingParticipants),
     useSelector(getMissingParticipants),
     useSelector(selectors.getPointsToDistribute),
+    useSelector(selectors.getHasSavedSetting),
   ];
 
   const dispatch = useDispatch();
@@ -91,6 +94,12 @@ const PointManagement: React.FC = () => {
   useEffect(() => {
     dispatch(fetchEstablishments());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (hasSavedSettings) {
+      dispatch(setDistributionWithSavedSettings());
+    }
+  }, [dispatch, hasSavedSettings]);
 
   const handleChangeEstablishment = useCallback(
     (establishment: Establishment) => {

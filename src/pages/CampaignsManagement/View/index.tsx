@@ -1,13 +1,12 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAuth } from 'context/AuthContext';
 import { setCampaign } from 'state/modules/campaigns-manager/actions';
 import { useParams } from 'react-router-dom';
 import { getCampaign } from 'services/campaigns-manager';
 import history from 'services/history';
-import { RegisterCampaignForm } from 'components/CampaignsManager';
 
-import { Container, Content } from './styles';
+import { CampaignsManagerProvider } from '../Manager/Context';
+import Main from '../Manager/Main';
 
 interface Params {
   id: string;
@@ -17,9 +16,9 @@ const CampaignsManager: React.FC = () => {
   const params = useParams<Params>();
   const dispatch = useDispatch();
 
-  const {
+  /* const {
     participant: { profile_value: profile },
-  } = useAuth();
+  } = useAuth(); */
 
   useEffect(() => {
     if (!params.id) {
@@ -33,20 +32,14 @@ const CampaignsManager: React.FC = () => {
       .catch(() => history.push('/'));
   }, [params, dispatch]);
 
-  const handleAction = useCallback(async () => {
+  const onLeave = useCallback(async () => {
     history.push('/gerenciamento-de-campanhas/lista');
   }, []);
 
   return (
-    <Container>
-      <Content>
-        <RegisterCampaignForm
-          handleAction={handleAction}
-          actionButtonName="Ok"
-          myProfile={profile}
-        />
-      </Content>
-    </Container>
+    <CampaignsManagerProvider>
+      <Main isViewing leaveAction={onLeave} />
+    </CampaignsManagerProvider>
   );
 };
 

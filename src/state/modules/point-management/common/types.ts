@@ -1,5 +1,10 @@
 import { EstablishmentTypes } from 'config/constants';
 
+type SavedSetting = {
+  data?: any;
+  date?: string;
+};
+
 export type PointsToDistribute = {
   general: number | null;
   generalPointId: number | null;
@@ -13,6 +18,7 @@ export type PointsToDistribute = {
     maxInvoicePercentage: number;
   } | null;
   allowPartialDistribution?: boolean | null;
+  savedSetting?: SavedSetting;
 };
 
 export type EstablishmentType = 'Revenda' | 'Cooperativa';

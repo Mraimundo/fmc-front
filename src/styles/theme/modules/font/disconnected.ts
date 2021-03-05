@@ -6,6 +6,7 @@ export default {
     secondary: '#e63027',
     tertiary: '#fff',
     quartenary: '#808285',
+    quintenary: '#808285',
   },
   fontFamily: { ...FONTS },
 };

@@ -73,3 +73,14 @@ export const getIsAllowedToStartDistribution = createSelector(
     totalPointsTeamAwards + totalPointsResaleCooperative ===
     pointsToDistribute.general,
 );
+
+export const getSavedSetting = (state: StoreState) =>
+  state.pointManagement.common.pointsToDistribute.savedSetting?.data;
+
+export const getHasSavedSetting = createSelector(
+  getSavedSetting,
+  (data: any): boolean => !!data,
+);
+
+export const getPartialDistribution = (state: StoreState) =>
+  state.pointManagement.common.partialDistribution;

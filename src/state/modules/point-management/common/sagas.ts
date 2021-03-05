@@ -10,6 +10,7 @@ import { transformScoredParticipantsToDataDistribution } from 'services/point-ma
 import {
   distributePointsService,
   fetchTotalPointsToDistributeService,
+  savePartialDistributionService,
 } from 'services/point-management/common';
 import {
   getSelectedEstablishment,
@@ -27,8 +28,13 @@ import {
   getScoredParticipants,
   getIsEnabledToDistributePoints,
   getMissingParticipants,
+  getHasScoreParticipantsAdded,
 } from 'state/modules/point-management/team-awards/selectors';
-import { toggleIsOpenModalMissingParticipants } from 'state/modules/point-management/team-awards/actions';
+import {
+  toggleIsOpenModalMissingParticipants,
+  setWaitingScoredParticipants,
+  assignPoints,
+} from 'state/modules/point-management/team-awards/actions';
 import fetchEstablishmentsService, {
   Establishment as IEstablishment,
 } from 'services/auth/getEstablishments';
@@ -41,6 +47,8 @@ import {
   SET_FINISHED_DISTRIBUTION,
   SET_SELECTED_ESTABLISHMENT,
   FinishedDistributionPossibilities,
+  SAVE_PARTIAL_DISTRIBUTION_ACTION,
+  SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -278,6 +286,41 @@ export function* workerFinishedDistribution() {
   yield call(cleanTeamAwards);
 }
 
+export function* workerSavePartialDistribution() {
+  try {
+    const scoredParticipants: ScoredParticipant[] = yield select(
+      getScoredParticipants,
+    );
+
+    const { generalPointId }: PointsToDistribute = yield select(
+      selectors.getPointsToDistribute,
+    );
+
+    yield call<any>(savePartialDistributionService, generalPointId, {
+      settings: JSON.stringify(scoredParticipants),
+    });
+
+    yield put(actions.savePartialDistributionSuccess());
+  } catch (error) {
+    yield call(handlerErrors, error, actions.savePartialDistributionFailure);
+  }
+}
+
+export function* workerSetDistributionWithSavedSettings() {
+  const points: PointsToDistribute = yield select(
+    selectors.getPointsToDistribute,
+  );
+  const hasScoreParticipantsAdded = yield select(getHasScoreParticipantsAdded);
+
+  if (!hasScoreParticipantsAdded) {
+    const savedSettings = yield select(selectors.getSavedSetting);
+    yield put(actions.setTotalPointsTeamAwards(points.general || 0));
+    yield put(setWaitingScoredParticipants(savedSettings));
+    yield put(assignPoints());
+    yield put(actions.setIsReadyToDistribute(true));
+  }
+}
+
 export default function* commonSagas() {
   yield all([
     takeEvery(FETCH_ESTABLISHMENTS_ACTION, workerFetchEstablishments),
@@ -292,5 +335,10 @@ export default function* commonSagas() {
     ),
     takeEvery(DISTRIBUTE_POINTS_FINALLY_ACTION, workerDistributePoints),
     takeEvery(SET_FINISHED_DISTRIBUTION, workerFinishedDistribution),
+    takeEvery(SAVE_PARTIAL_DISTRIBUTION_ACTION, workerSavePartialDistribution),
+    takeEvery(
+      SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
+      workerSetDistributionWithSavedSettings,
+    ),
   ]);
 }
