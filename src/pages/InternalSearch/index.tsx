@@ -2,6 +2,8 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios'
 import { pluginApi } from '../../services/api';
+import { formatDate } from 'util/datetime';
+
 import 'date-fns';
 
 // import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
@@ -96,11 +98,16 @@ const ProducerResearch: React.FC = () => {
       <MiniBox key={`key-cards-${youropinion.id}`}>
         <Content>
           <h2>{youropinion.title}</h2>
-          <p>{(` De ${youropinion.start_datetime} até ${youropinion.end_datetime}`)}</p>
+          <p>
+            {(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')}
+            até 
+            ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`
+            )}
+          </p>
           <span>Vale 300 FMC Coins</span>
         </Content>
         <ContentInfo>
-          <img src={youropinion.banner_picture} alt={youropinion.title} />
+          <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p>{youropinion.description}</p>
         </ContentInfo>
       </MiniBox>
@@ -108,6 +115,7 @@ const ProducerResearch: React.FC = () => {
       <hr />
 
       <Title>Perguntas</Title>
+
       <Form onSubmit={handleSave}>
         <FormControlRadio>
           <p>{questions.question}</p>

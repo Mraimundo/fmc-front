@@ -11,6 +11,11 @@ export const Container = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 15px; 
   }
+  hr {
+    height: 1px;
+    background-color: #808285;
+    margin-bottom: 35px;
+  }
 `;
 
 export const Form = styled.div`
@@ -63,11 +68,6 @@ export const ContentInfo = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     color: #000;
     margin-bottom: 30px;
-  }
-  hr {
-    height: 1px;
-    background-color: #808285;
-    margin-bottom: 35px;
   }
 `;
 

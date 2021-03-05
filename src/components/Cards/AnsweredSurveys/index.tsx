@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import routeMap from 'routes/route-map';
+import { formatDate } from 'util/datetime';
 
 import { Surveys } from 'services/surveys/interfaces';
 
 import { pluginApi } from '../../../services/api';
 
-import { Container, MiniBox } from './styles';
+import {
+  Container,
+  MiniBox
+} from './styles';
 
 interface SurveysData {
   id: number;
@@ -48,10 +52,15 @@ const Cards: React.FC = () => {
           <MiniBox key={`key-cards-${answered.id}`}>
             <img src={answered.picture} alt={answered.title} />
             <h1>{answered.title}</h1>
-            <span>{(` De ${answered.start_datetime} até ${answered.end_datetime}`)}</span>
-            <p>{answered.description}</p>
+            <span>
+              {(` De ${formatDate(answered.start_datetime, 'dd/MM/yyyy')}
+                até 
+               ${formatDate(answered.end_datetime, 'dd/MM/yyyy')}
+              `)}
+            </span>
+            <p>{answered.description || 'Qual é o seu nível de interesse por produtos de beleza'}</p>
             <h2>Vale 300 FMC Coins</h2>
-            <h3>Respondida em : {answered.modified} </h3>
+            <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
             <Link to={`${routeMap.internal}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>
         ))}
