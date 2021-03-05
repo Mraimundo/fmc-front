@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import getList from 'services/producer-extract/getAllList';
 
-
 import StatusTable from './StatusTable';
 
 import ExtractEf from './ExtractProducer';
 import ListOne from './ListOne';
-import ListTwo from './ListTwo';
 
 // import { AddNF } from '../../components/ExtractProducer';
 
@@ -177,10 +175,6 @@ const Extract: React.FC = () => {
 
         {nfList.map(safra => (
           <ListOne safra={safra} key={safra.safra} />
-        ))}
-
-        {nfList.map(safra => (
-          <ListTwo safra={safra} key={safra.safra} />
         ))}
 
         {/* <AddNF layout="secondary" /> */}
