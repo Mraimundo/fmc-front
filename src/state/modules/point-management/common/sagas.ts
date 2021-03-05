@@ -288,17 +288,34 @@ export function* workerFinishedDistribution() {
 
 export function* workerSavePartialDistribution() {
   try {
-    const scoredParticipants: ScoredParticipant[] = yield select(
-      getScoredParticipants,
+    const scored: ScoredParticipant[] = yield select(getScoredParticipants);
+
+    const pointsResaleCooperative: number = yield select(
+      selectors.getTotalPointsResaleCooperative,
     );
 
-    const { teamAwards }: PointsToDistribute = yield select(
+    const pointsTeamAwards: number = yield select(
+      selectors.getTotalPointsTeamAwards,
+    );
+
+    const pointsToDistribute: PointsToDistribute = yield select(
       selectors.getPointsToDistribute,
     );
 
-    yield call<any>(savePartialDistributionService, teamAwards?.pointId || 0, {
-      settings: JSON.stringify(scoredParticipants),
-    });
+    const payload = {
+      scoredParticipants: scored,
+      totalPointsResaleCooperative: pointsResaleCooperative,
+      totalPointsTeamAwards: pointsTeamAwards,
+    };
+
+    console.log('ON SAVE DISTRIBUTION', pointsToDistribute, payload);
+    yield call<any>(
+      savePartialDistributionService,
+      pointsToDistribute.generalPointId || 0,
+      {
+        settings: JSON.stringify(payload),
+      },
+    );
 
     yield put(actions.savePartialDistributionSuccess());
   } catch (error) {
@@ -310,10 +327,12 @@ export function* workerSetDistributionWithSavedSettings() {
   const points: PointsToDistribute = yield select(
     selectors.getPointsToDistribute,
   );
-  const hasScoreParticipantsAdded = yield select(getHasScoreParticipantsAdded);
+  const hasScoreParticipantsAdded: boolean = yield select(
+    getHasScoreParticipantsAdded,
+  );
 
   if (!hasScoreParticipantsAdded) {
-    const savedSettings = yield select(selectors.getSavedSetting);
+    const savedSettings: any = yield select(selectors.getSavedSetting);
     yield put(actions.setTotalPointsTeamAwards(points.general || 0));
     yield put(setWaitingScoredParticipants(savedSettings));
     yield put(assignPoints());
