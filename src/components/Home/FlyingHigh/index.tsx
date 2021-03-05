@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import getLuckyNumber from 'services/flying-high/getLuckyNumber';
+import { useSelector } from 'react-redux';
+import { getLuckyNumber } from 'state/modules/home/selectors';
 
 import flyingHighImage from 'assets/images/flying-high/flyinghigh-home-banner.png';
 import flyingHighImageMobile from 'assets/images/flying-high/flyinghigh-home-banner-mobile.png';
@@ -19,15 +20,7 @@ import {
 } from './styles';
 
 const FlyingHigh: React.FC = () => {
-  const [luckyNumber, setLuckyNumber] = useState('');
-
-  useEffect(() => {
-    const fetchLuckyNumber = async () => {
-      const num = await getLuckyNumber();
-      setLuckyNumber(num);
-    };
-    fetchLuckyNumber();
-  }, []);
+  const luckyNumber = useSelector(getLuckyNumber);
 
   return (
     <Container>

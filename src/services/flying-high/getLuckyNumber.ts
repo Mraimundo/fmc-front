@@ -7,7 +7,7 @@ interface ApiResponse {
   number: Coupon;
 }
 
-export default async (): Promise<string> => {
+export default async (): Promise<string | null> => {
   try {
     const {
       data: { number },
@@ -15,6 +15,6 @@ export default async (): Promise<string> => {
     console.log(number.number);
     return number.number;
   } catch (error) {
-    return '';
+    return null;
   }
 };
