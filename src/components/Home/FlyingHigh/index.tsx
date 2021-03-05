@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import getLuckyNumber from 'services/flying-high/getLuckyNumber';
 
 import flyingHighImage from 'assets/images/flying-high/flyinghigh-home-banner.png';
+import flyingHighImageMobile from 'assets/images/flying-high/flyinghigh-home-banner-mobile.png';
 import {
   Container,
   BannerWrapper,
@@ -14,6 +15,7 @@ import {
   SeeMoreWrapper,
   SeeMore,
   ImgWrapper,
+  MobileImgWrapper,
 } from './styles';
 
 const FlyingHigh: React.FC = () => {
@@ -33,6 +35,9 @@ const FlyingHigh: React.FC = () => {
         <ImgWrapper>
           <img src={flyingHighImage} alt="Juntos Voamos Mais Alto" />
         </ImgWrapper>
+        <MobileImgWrapper>
+          <img src={flyingHighImageMobile} alt="Juntos Voamos Mais Alto" />
+        </MobileImgWrapper>
       </BannerWrapper>
       <LuckyNumberWrapper>
         <Title>
@@ -45,7 +50,7 @@ const FlyingHigh: React.FC = () => {
         </LuckyNumber>
         <SeeMoreWrapper>
           <SeeMore>
-            <a>Veja mais</a>
+            <a href="/">Veja mais</a>
           </SeeMore>
         </SeeMoreWrapper>
         <UpperEllipse />
