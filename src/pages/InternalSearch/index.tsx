@@ -1,10 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify'
 import axios from 'axios'
 import { pluginApi } from '../../services/api';
 import { formatDate } from 'util/datetime';
 
 import 'date-fns';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
 // import StarButtonColumn from '../../components/SearchForms/StarButtonsColumn';
@@ -52,6 +55,8 @@ interface QuestionsData {
   survey_question_answers: AnswersData[];
 }
 
+toast.configure()
+
 // Component producer Research
 const ProducerResearch: React.FC = () => {
   const location = useLocation();
@@ -92,6 +97,13 @@ const ProducerResearch: React.FC = () => {
     await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
   }, [location.search, radio, surveyQuestionId, answersQuestionId]);
 
+  const notify = () => {
+    toast.success('Obrigado por responder a nossa pesquisa!', {
+      position: toast.POSITION.TOP_RIGHT,
+      // autoClose: false
+    })
+  }
+
   return (
     <Container>
       <h1>Pesquisas</h1>
@@ -108,7 +120,7 @@ const ProducerResearch: React.FC = () => {
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-          <p>{youropinion.description}</p>
+          <p>{(youropinion.description?.replace("<p>", "").replace("</p>", ""))}</p>
         </ContentInfo>
       </MiniBox>
 
@@ -121,7 +133,7 @@ const ProducerResearch: React.FC = () => {
           <p>{questions.question}</p>
           {questions && questions.survey_question_answers &&
             questions.survey_question_answers.map(answer => (
-              <RadioGroup key={answer.id}>
+              <RadioGroup key={`key-answer-${answer.id}`}>
                 <div>
                   <strong>
                     <input
@@ -187,9 +199,10 @@ const ProducerResearch: React.FC = () => {
           </FormControlHour> */}
         <Button
           type="submit"
+          onClick={notify}
         >
           Salvar
-          </Button>
+        </Button>
       </Form>
     </Container>
   );

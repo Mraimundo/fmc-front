@@ -216,6 +216,10 @@ export const Button = styled.button`
   font-size: 16px;
   font-weight: bold;
   margin-top: 40px;
+  
+  &:hover{
+    transform: scale(1.1);
+  }
 `;
 
 
