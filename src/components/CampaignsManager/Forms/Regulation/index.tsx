@@ -36,6 +36,7 @@ const Regulation: React.FC<Props> = ({ handleAction, isViewing = false }) => {
     const url = await getUrlRegulationToDownload(
       regulation.id,
       `${regulation.name}.pdf`,
+      campaign.id ?? 0,
     );
     setDownloading(false);
     const linkClick = document.createElement('a');
@@ -44,7 +45,7 @@ const Regulation: React.FC<Props> = ({ handleAction, isViewing = false }) => {
     document.body.appendChild(linkClick);
     linkClick.click();
     document.body.removeChild(linkClick);
-  }, [regulation]);
+  }, [campaign.id, regulation]);
 
   useEffect(() => {
     if (!campaign?.id) return;
