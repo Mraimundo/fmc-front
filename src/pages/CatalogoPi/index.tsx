@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import history from 'services/history';
 
 import { getParticipantsToAccessPI } from 'services/showcase';
 
@@ -10,7 +11,8 @@ const CatalogoPi: React.FC = () => {
   const handlePiAccess = useCallback(() => {
     if (!piAccess) return;
 
-    window.location.href = piAccess;
+    window.open(piAccess, '_blank');
+    history.push('/home');
   }, [piAccess]);
 
   useEffect(() => {
