@@ -268,7 +268,7 @@ export const selectAllParticipantsByRole = ({
       const hasScore = scoredParticipants.find(
         scoredParticipant => scoredParticipant.id === id,
       );
-      return hasScore ? false : true;
+      return !hasScore;
     })
     .map(({ id }: Participant) => id);
 

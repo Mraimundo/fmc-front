@@ -4,6 +4,7 @@ import { FetchState } from '@types';
 import { StoreState } from 'state/root-reducer';
 import { PointsToDistribute, Establishment } from './types';
 import { FinishedDistributionPossibilities } from './constants';
+import { ScoredParticipant } from '../team-awards/types';
 
 export const getFetchPointsToDistribute = (state: StoreState) =>
   state.pointManagement.common.fetchPointsToDistribute;
@@ -84,6 +85,20 @@ export const getHasSavedSetting = createSelector(
 
 export const getPartialDistribution = (state: StoreState) =>
   state.pointManagement.common.partialDistribution;
+
+export const getTotalSavedSetting = createSelector(
+  getSavedSetting,
+  (data: any): number => {
+    if (data) {
+      const scoredParticipants = JSON.parse(data) as ScoredParticipant[];
+      return scoredParticipants.reduce((accumulatedValue, currentItem) => {
+        return accumulatedValue + currentItem.points;
+      }, 0);
+    }
+
+    return 0;
+  },
+);
 
 export const getIsPartialDistributionFinished = (state: StoreState) =>
   state.pointManagement.common.partialDistributionFinished;

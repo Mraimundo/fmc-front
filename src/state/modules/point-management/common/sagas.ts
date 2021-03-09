@@ -18,6 +18,8 @@ import {
   getIsResaleCooperativePointsOnly,
   getTotalPointsResaleCooperative,
   getTotalPointsTeamAwards,
+  getTotalSavedSetting,
+  getHasSavedSetting,
 } from 'state/modules/point-management/common/selectors';
 import {
   getInvoicePoints,
@@ -331,12 +333,17 @@ export function* workerSetDistributionWithSavedSettings() {
     getHasScoreParticipantsAdded,
   );
 
-  if (!hasScoreParticipantsAdded) {
+  const hasSavedSetting: boolean = yield select(getHasSavedSetting);
+
+  if (!hasScoreParticipantsAdded && hasSavedSetting) {
     const savedSettings: any = yield select(selectors.getSavedSetting);
-    yield put(actions.setTotalPointsTeamAwards(points.general || 0));
+    console.log('TESTE', savedSettings);
+    /* const totalSavedSettings: number = yield select(getTotalSavedSetting);
+    console.log('TOTAL', totalSavedSettings); */
+    /* yield put(actions.setTotalPointsTeamAwards(points.general || 0));
     yield put(setWaitingScoredParticipants(savedSettings));
     yield put(assignPoints());
-    yield put(actions.setIsReadyToDistribute(true));
+    yield put(actions.setIsReadyToDistribute(true)); */
   }
 }
 
