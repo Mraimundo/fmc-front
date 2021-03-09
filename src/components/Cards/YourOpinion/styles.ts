@@ -53,6 +53,13 @@ export const MiniBox = styled.div`
     margin-top: 6px;
   }
 
+  h2 {
+    font-size: 16px;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 5px 0;
+  }
+
   .btn {
     display: flex;
     justify-content: center;
