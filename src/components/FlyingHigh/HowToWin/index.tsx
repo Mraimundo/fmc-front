@@ -90,13 +90,17 @@ const HowToWin: React.FC = () => {
             id.
           </p>
         </div>
-        <Note>
-          Participação válida de 15/03/2021 a 16/05/2021. Certificado de
-          Autorização SECAP/ME Nº 01.011798/2021. Consulte o regulamento com as
-          condições de participação, premiação e o certificado no site
-          www.juntosfmc.com.br/voandoalto.
-        </Note>
       </TextRegulationWrapper>
+      <Note>
+        <p>
+          Participação válida de 15/03/2021 a 16/05/2021. Certificado de
+          Autorização SECAP/ME Nº 01.011798/2021.
+        </p>
+        <p>
+          Consulte o regulamento com as condições de participação, premiação e o
+          certificado no site www.juntosfmc.com.br/voandoalto.
+        </p>
+      </Note>
     </Container>
   );
 };

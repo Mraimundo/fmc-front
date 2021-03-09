@@ -10,3 +10,15 @@ export interface Coupon {
   created: Date;
   modified: Date;
 }
+
+export interface ParticipantDataRaw {
+  id: number;
+  name: string;
+  role_identifier: string;
+}
+
+export interface ParticipantData {
+  id: number;
+  name: string;
+  profile: string;
+}

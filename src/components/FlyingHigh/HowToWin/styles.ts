@@ -123,8 +123,18 @@ export const TextRegulationWrapper = styled.div`
   }
 `;
 
-export const Note = styled.p`
-  margin: 0 2rem 2rem;
-  font-size: 1em;
-  font-family: ${FONTS.regular};
+export const Note = styled.div`
+  width: 100%;
+  padding: 0 3rem 2rem;
+  text-align: center;
+  background-color: #3b302a;
+
+  p {
+    font-size: 1em;
+    font-family: ${FONTS.regular};
+  }
+
+  @media (max-width: 720px) {
+    padding: 0 3rem 2rem;
+  }
 `;

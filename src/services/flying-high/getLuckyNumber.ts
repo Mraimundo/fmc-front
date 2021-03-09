@@ -4,16 +4,16 @@ import { Coupon } from './interface';
 const REQUEST_URL = 'flying-high/lucky-numbers';
 
 interface ApiResponse {
-  number: Coupon;
+  coupon: Coupon;
 }
 
 export default async (): Promise<string | null> => {
   try {
     const {
-      data: { number },
+      data: { coupon },
     } = await pluginApi.get<ApiResponse>(REQUEST_URL);
-    console.log(number.number);
-    return number.number;
+
+    return coupon.number;
   } catch (error) {
     return null;
   }

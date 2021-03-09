@@ -46,6 +46,9 @@ export const FooterWrapper = styled.div`
   width: 80%;
   footer {
     width: 100%;
+    div:nth-child(2) {
+      background-color: #65554d;
+    }
   }
 
   @media (max-width: 1024px) {
