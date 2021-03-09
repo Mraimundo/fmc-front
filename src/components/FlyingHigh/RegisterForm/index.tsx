@@ -5,9 +5,10 @@ import { useForm, FormContext } from 'react-hook-form';
 import * as Yup from 'yup';
 import { PROFILES } from 'config/constants';
 import history from 'services/history';
-import { getParticipantByCpf } from 'services/register/getParticipantData';
+import getParticipantData from 'services/flying-high/getParticipantData';
 import { useToast } from 'context/ToastContext';
 import ConfirmationModal from 'components/FlyingHigh/Modal';
+import InfoMessage from 'components/Modals/InfoMessage';
 
 import { Container, Input, Button, FormContainer } from './styles';
 
@@ -18,6 +19,8 @@ interface SignUpFormData {
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [textInfo, setTextInfo] = useState('');
   const [currentCpf, setCurrentCpf] = useState('');
   const { addToast } = useToast();
 
@@ -44,6 +47,11 @@ const RegisterForm: React.FC = () => {
     setIsModalOpen(false);
   }, []);
 
+  const handleInfoModalClose = useCallback(() => {
+    setIsInfoModalOpen(false);
+    history.push('/', currentCpf);
+  }, [currentCpf]);
+
   const methods = useForm<SignUpFormData>({
     validationSchema: schema,
     reValidateMode: 'onBlur',
@@ -54,36 +62,38 @@ const RegisterForm: React.FC = () => {
 
   const onSubmit = handleSubmit(async ({ param_first_access }) => {
     setLoading(true);
-    let message = '';
 
+    let participant = null;
     try {
-      await getParticipantByCpf(param_first_access);
-    } catch (e) {
-      message = e.response?.data?.message;
+      participant = await getParticipantData(param_first_access);
+    } catch (error) {
+      addToast({
+        title: error.message,
+        type: 'error',
+      });
+      return;
     } finally {
       setLoading(false);
     }
 
-    if (message === 'CPF não encontrado') {
-      setCurrentCpf(param_first_access);
-      setIsModalOpen(true);
-      /* const participant = {
-        cpf: param_first_access,
-        establishment: { id: 1, team_receives_points: false },
-        role: { id: 26, identifier: 'produtor', name: 'Produtor' },
-        campaign_id: 1,
-        profile: PROFILES.producer,
-        registration_origin: 'FLYING_HIGH_ACTION',
-      };
+    setCurrentCpf(param_first_access);
 
-      history.push('/firstAccess', participant); */
+    if (!participant) {
+      setIsModalOpen(true);
       return;
     }
 
-    addToast({
-      title: message || 'Falha ao checar CPF',
-      type: 'error',
-    });
+    if (participant?.profile.toUpperCase() === PROFILES.producer) {
+      setTextInfo(
+        `Produtor já cadastrado no Sistema. Faça seu login no JUNTOS - Produtor e envie sua Nota Fiscal para participar.`,
+      );
+    }
+
+    if (participant?.profile.toUpperCase() !== PROFILES.producer) {
+      setTextInfo(`Promoção exclusiva para o JUNTOS - Produtor!`);
+    }
+
+    setIsInfoModalOpen(true);
   });
 
   return (
@@ -109,6 +119,11 @@ const RegisterForm: React.FC = () => {
         isOpen={isModalOpen}
         onRequestClose={handleModalCloseRequest}
         onConfirmClick={handleModalConfirmation}
+      />
+      <InfoMessage
+        isOpen={isInfoModalOpen}
+        text={textInfo}
+        onRequestClose={handleInfoModalClose}
       />
     </Container>
   );
