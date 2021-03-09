@@ -43,7 +43,9 @@ const FlyingHigh: React.FC = () => {
         </LuckyNumber>
         <SeeMoreWrapper>
           <SeeMore>
-            <a href="/">Veja mais</a>
+            <a href="https://juntosfmc.vendavall.com.br/noticias/38">
+              Veja mais
+            </a>
           </SeeMore>
         </SeeMoreWrapper>
         <UpperEllipse />

@@ -6,8 +6,6 @@ import HowToWin from 'components/FlyingHigh/HowToWin';
 import RegisterForm from 'components/FlyingHigh/RegisterForm';
 import FlyingHighBanner from 'components/FlyingHigh/Banner';
 import HeaderText from 'components/FlyingHigh/Info/HeaderText';
-// import { ThemeContext } from 'styled-components';
-// import { producerTheme as fmcProdutorTheme } from 'styles/theme';
 import Footer from 'components/Footer';
 
 import {
@@ -45,7 +43,6 @@ const FlyingHigh: React.FC = () => {
       <FooterWrapper>
         <Footer />
       </FooterWrapper>
-      {/* </ThemeContext.Provider> */}
       <Contact initialPosition="right-bottom" />
     </Container>
   );
