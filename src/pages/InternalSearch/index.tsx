@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -17,6 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import InputGlobal from '../../components/SearchForms/InputGlobal';
 // import SelectGlobal from '../../components/SearchForms/SelectGlobal';
+import { getValueAnswer } from '../../state/modules/answer/selectors'
+
 
 
 import {
@@ -65,8 +68,8 @@ interface QuestionsData {
 toast.configure()
 // Component producer Research
 const ProducerResearch: React.FC = () => {
+  const value = useSelector(getValueAnswer);
   const location = useLocation();
-  // const [radio, setRadio] = useState("");
   const [surveyQuestionId, setSurveyQuestionId] = useState('')
   // const [answersQuestionId, setAnswersQuestionId] = useState(0)
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
@@ -85,32 +88,36 @@ const ProducerResearch: React.FC = () => {
 
   const handleSave = useCallback(async (e) => {
     e.preventDefault()
-    const list_id = location.search.replace('?item=', '');
-    let formData = new FormData();
-    const token = localStorage.getItem('@Vendavall:token');
+    try {
+      const list_id = location.search.replace('?item=', '');
+      let formData = new FormData();
+      const token = localStorage.getItem('@Vendavall:token');
 
-    // formData.append('survey_question[0][value]', radio);
-    formData.append('survey_question[0][id]', surveyQuestionId);
-    // formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
+      formData.append('survey_question[0][value]', value);
+      formData.append('survey_question[0][id]', surveyQuestionId);
+      // formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
 
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-        Authorization: token,
-        Accept: 'application/json'
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: token,
+          Accept: 'application/json'
+        }
       }
+      await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
+
+      toast.success('Obrigado por responder a nossa pesquisa!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
+
+    } catch (error) {
+
+      toast.error('Essa pesquisa ja foi incerrada!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
+
     }
-    await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-
-  }, [location.search, surveyQuestionId]);
-  // }, [location.search, radio, surveyQuestionId, answersQuestionId]);
-
-  const notify = () => {
-    toast.success('Obrigado por responder a nossa pesquisa!', {
-      position: toast.POSITION.TOP_RIGHT,
-      // autoClose: false
-    })
-  }
+  }, [value, surveyQuestionId, location.search]);
 
   const typeForm = (
     type: number,
@@ -223,7 +230,6 @@ const ProducerResearch: React.FC = () => {
           </FormControlHour> */}
         <Button
           type="submit"
-          onClick={notify}
         >
           Salvar
         </Button>
