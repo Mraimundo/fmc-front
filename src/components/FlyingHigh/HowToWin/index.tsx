@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 
 import useDimensions from 'hooks/use-window-dimensions';
+import RegulationContent from './RegulationContent';
 import {
   Container,
   Title,
@@ -49,7 +50,8 @@ const HowToWin: React.FC = () => {
 
       <TextRegulationWrapper>
         <div>
-          <h1>Promoção Juntos Voamos Mais Alto</h1>
+          <RegulationContent />
+          {/* <h1>Promoção Juntos Voamos Mais Alto</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             sollicitudin cursus ornare. Donec condimentum arcu eget ullamcorper
@@ -89,6 +91,7 @@ const HowToWin: React.FC = () => {
             lorem. Donec dictum ullamcorper neque, congue porta risus tincidunt
             id.
           </p>
+          */}
         </div>
       </TextRegulationWrapper>
       <Note>

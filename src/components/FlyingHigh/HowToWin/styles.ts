@@ -62,12 +62,12 @@ export const Mechanics = styled.div`
   p {
     color: #3b302a;
     font-family: ${FONTS.italic};
-    font-size: 1em;
+    font-size: 1.1em;
   }
   span {
     color: #3b302a;
     font-family: ${FONTS.italic};
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 `;
 
@@ -93,17 +93,21 @@ export const TextRegulationWrapper = styled.div`
   align-items: center;
   width: 100%;
   background-color: #3b302a;
-  min-height: 500px;
+  //min-height: 500px;
 
   div {
     background-color: #efefef;
     width: 80%;
     margin: 3em 0;
     padding: 2em;
+    height: 100%;
+    overflow-y: scroll;
+    height: 500px;
 
-    h1 {
+    h1,
+    h4 {
       color: #3b302a;
-      margin: 2rem 0;
+      margin: 1rem 0;
       text-align: center;
     }
 
@@ -112,6 +116,28 @@ export const TextRegulationWrapper = styled.div`
       font-family: ${FONTS.regular};
       text-align: justify;
       margin: 1rem 0.5rem 0 0.5rem;
+    }
+  }
+
+  table {
+    width: 100%;
+    color: #65554d;
+    font-family: ${FONTS.regular};
+    border: 1px solid #3b302a;
+    border-collapse: collapse;
+
+    th {
+      font-family: ${FONTS.bold};
+      text-align: center;
+      background-color: #3b302a;
+      color: #ffffff;
+      border: 0;
+      padding: 2px;
+    }
+    td {
+      text-align: center;
+      border: 1px solid #3b302a;
+      padding: 2px;
     }
   }
 

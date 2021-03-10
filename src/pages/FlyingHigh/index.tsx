@@ -7,6 +7,7 @@ import RegisterForm from 'components/FlyingHigh/RegisterForm';
 import FlyingHighBanner from 'components/FlyingHigh/Banner';
 import HeaderText from 'components/FlyingHigh/Info/HeaderText';
 import Footer from 'components/Footer';
+import useDimensions from 'hooks/use-window-dimensions';
 
 import {
   Container,
@@ -21,9 +22,9 @@ import {
 } from './styles';
 
 const FlyingHigh: React.FC = () => {
+  const { width } = useDimensions();
   return (
     <Container>
-      {/* <ThemeContext.Provider value={fmcProdutorTheme}> */}
       <Header>
         <FmcLogo />
         <PromoWrapper>
@@ -43,7 +44,7 @@ const FlyingHigh: React.FC = () => {
       <FooterWrapper>
         <Footer />
       </FooterWrapper>
-      <Contact initialPosition="right-bottom" />
+      <Contact initialPosition={width > 720 ? 'right-bottom' : 'right-top'} />
     </Container>
   );
 };
