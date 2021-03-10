@@ -4,6 +4,8 @@ import BaseSelect from 'components/shared/Select/BaseSelect';
 import getData from 'services/products/getCategories';
 import { Category } from 'services/products/interfaces';
 
+import orderBy from 'lodash.orderby';
+
 interface Props {
   className?: string;
   label?: string;
@@ -23,12 +25,14 @@ const CategoriesProductsSelect: React.FC<Props> = ({
 
   const transformer = useCallback((data: Category[]): Option[] => {
     const newData = [{ value: 'todos', title: 'Todos' }];
+
     newData.push(
       ...data.map(item => ({
         value: item.id.toString(),
         title: item.name,
       })),
     );
+
     return newData;
   }, []);
 
@@ -40,10 +44,13 @@ const CategoriesProductsSelect: React.FC<Props> = ({
     if (!options || options.length === 0) return;
 
     setValue(options[0]);
+    // console.log('set', options);
   }, [options, setValue]);
 
   const loadItems = useCallback(() => {
-    return options;
+    const orderByName = orderBy(options, ['title', 'value'], ['asc', 'desc']);
+
+    return orderByName;
   }, [options]);
 
   return (
