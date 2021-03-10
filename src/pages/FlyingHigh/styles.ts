@@ -5,7 +5,7 @@ import ContactBallon from 'components/Contact';
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  position: absolute;
+  //position: absolute;
   background-color: #cdc5c2;
   display: flex;
   flex-direction: column;
@@ -32,6 +32,7 @@ export const Header = styled.div`
 
   @media (max-width: 1024px) {
     width: 100%;
+    padding: 0.5rem 0 0 0;
   }
 `;
 
@@ -117,7 +118,13 @@ export const LowerEllipse = styled.div`
 `;
 
 export const Contact = styled(ContactBallon)`
-  position: absolute;
+  /*position: absolute;
   bottom: 0;
   right: 0;
+
+  @media (max-width: 720px) {
+    right: 0px !important;
+    top: 0px !important;
+    //bottom: 100px !important;
+  }*/
 `;

@@ -6,11 +6,11 @@ const HeaderText: React.FC = () => {
   return (
     <Container>
       <p>
-        Entre no <b>JUNTOS</b> e cadastre uma <br /> nota fiscal para concorrer
-        ao um drone.
+        Entre no <b>JUNTOS</b> e cadastre a sua primeira nota fiscal de compra,
+        para concorrer a um 1 Kit Phantom 4 Pro.
       </p>
       <p>
-        <b>Participe! Estamos juntos e é para valer.</b>
+        <b>Estamos juntos e é pra valer!</b>
       </p>
     </Container>
   );

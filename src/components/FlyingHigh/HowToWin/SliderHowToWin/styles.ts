@@ -41,15 +41,7 @@ export const Dot = styled.div`
 `;
 
 export const Slider = styled(Slick)`
-  //max-width: 300px;
-  //width: 100%;
-  //height: 400px;
   margin-bottom: 1rem;
-
-  /*svg {
-    max-width: 350px;
-    width: 100%;
-  }*/
 
   .slick-dots {
     bottom: -5px;
@@ -66,12 +58,7 @@ export const Slider = styled(Slick)`
 
 export const Item = styled.div`
   cursor: pointer;
-  //margin: 0 2rem;
-  //margin-left: 3rem;
   width: 360px;
-  //display: flex;
-  /*justify-items: center;
-  align-items: center;*/
 
   div {
     display: flex;
@@ -96,12 +83,12 @@ export const Item = styled.div`
   p {
     color: #3b302a;
     font-family: ${FONTS.italic};
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   span {
     color: #3b302a;
     font-family: ${FONTS.italic};
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 `;
