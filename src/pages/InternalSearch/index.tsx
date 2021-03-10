@@ -1,16 +1,26 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify'
 import axios from 'axios'
 import { pluginApi } from '../../services/api';
 import { formatDate } from 'util/datetime';
 
 import 'date-fns';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
 // import StarButtonColumn from '../../components/SearchForms/StarButtonsColumn';
 // import ButtonsSquare from '../../components/SearchForms/ButtonsSquareCheck';
 // import ButtonsSquareNumber from '../../components/SearchForms/ButtonsSquareNumber';
 // import ButtonsRadios from '../../components/SearchForms/ButtonsRadios';
+
+import InputGlobal from '../../components/SearchForms/InputGlobal';
+// import SelectGlobal from '../../components/SearchForms/SelectGlobal';
+import { getValueAnswer } from '../../state/modules/answer/selectors'
+
+
 
 import {
   Container,
@@ -19,8 +29,8 @@ import {
   MiniBox,
   Title,
   Form,
-  FormControlRadio,
-  RadioGroup,
+  // FormControlRadio,
+  // RadioGroup,
   // FormControlBanner,
   // FormGrupSelect,
   // FormControlData,
@@ -43,21 +53,25 @@ interface SurveysDataForm {
 interface AnswersData {
   id: number;
   survey_question_id: number;
+  type: string;
+  scale_type: string;
   answer: string;
 }
 
 interface QuestionsData {
   id: number;
   question: string;
+  type: string;
+  answer: string;
   survey_question_answers: AnswersData[];
 }
-
+toast.configure()
 // Component producer Research
 const ProducerResearch: React.FC = () => {
+  const value = useSelector(getValueAnswer);
   const location = useLocation();
-  const [radio, setRadio] = useState("");
   const [surveyQuestionId, setSurveyQuestionId] = useState('')
-  const [answersQuestionId, setAnswersQuestionId] = useState(0)
+  // const [answersQuestionId, setAnswersQuestionId] = useState(0)
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData>({} as QuestionsData);
 
@@ -74,23 +88,70 @@ const ProducerResearch: React.FC = () => {
 
   const handleSave = useCallback(async (e) => {
     e.preventDefault()
-    const list_id = location.search.replace('?item=', '');
-    let formData = new FormData();
-    const token = localStorage.getItem('@Vendavall:token');
+    try {
+      const list_id = location.search.replace('?item=', '');
+      let formData = new FormData();
+      const token = localStorage.getItem('@Vendavall:token');
 
-    formData.append('survey_question[0][value]', radio);
-    formData.append('survey_question[0][id]', surveyQuestionId);
-    formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
+      formData.append('survey_question[0][value]', value);
+      formData.append('survey_question[0][id]', surveyQuestionId);
+      // formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
 
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-        Authorization: token,
-        Accept: 'application/json'
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: token,
+          Accept: 'application/json'
+        }
       }
+      await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
+
+      toast.success('Obrigado por responder a nossa pesquisa!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
+
+    } catch (error) {
+
+      toast.error('Essa pesquisa ja foi incerrada!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
+
     }
-    await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-  }, [location.search, radio, surveyQuestionId, answersQuestionId]);
+  }, [value, surveyQuestionId, location.search]);
+
+  const typeForm = (
+    type: number,
+    question: string,
+  ) => {
+    switch (type) {
+      case 5: {
+        return (
+          <InputGlobal
+            quetion={question}
+            type="text"
+          />
+        )
+      }
+      case 8: {
+        return (
+          <InputGlobal
+            quetion={question}
+            type="date"
+          />
+        )
+      }
+      case 9: {
+        return (
+          <InputGlobal
+            quetion={question}
+            type="time"
+          />
+        )
+      }
+      default:
+        return ""
+    }
+  }
 
   return (
     <Container>
@@ -108,7 +169,7 @@ const ProducerResearch: React.FC = () => {
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-          <p>{youropinion.description}</p>
+          <p>{(youropinion.description?.replace("<p>", "").replace("</p>", ""))}</p>
         </ContentInfo>
       </MiniBox>
 
@@ -117,28 +178,10 @@ const ProducerResearch: React.FC = () => {
       <Title>Perguntas</Title>
 
       <Form onSubmit={handleSave}>
-        <FormControlRadio>
-          <p>{questions.question}</p>
-          {questions && questions.survey_question_answers &&
-            questions.survey_question_answers.map(answer => (
-              <RadioGroup key={answer.id}>
-                <div>
-                  <strong>
-                    <input
-                      type="radio"
-                      checked={radio === answer.answer}
-                      value={answer.answer}
-                      onChange={(e) => {
-                        setRadio(e.target.value)
-                        setAnswersQuestionId(answer.id)
-                      }}
-                    />
-                  </strong>
-                  <span>{answer.answer}</span>
-                </div>
-              </RadioGroup>
-            ))}
-        </FormControlRadio>
+        {
+          typeForm(Number(questions.type), questions.question)
+        }
+
         {/* <StarButtonLine />
           <StarButtonColumn />
           <ButtonsSquare />
@@ -189,7 +232,7 @@ const ProducerResearch: React.FC = () => {
           type="submit"
         >
           Salvar
-          </Button>
+        </Button>
       </Form>
     </Container>
   );

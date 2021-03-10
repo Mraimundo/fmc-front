@@ -68,7 +68,8 @@ const CardList: React.FC = () => {
                ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}
               `)}
             </span>
-            <p>{youropinion.description}</p>
+            <p>{youropinion.description.replace("<p>", "").replace("</p>", "") || 'somos a maior produtor de soja'}</p>
+            <h2>Vale 300 FMC Coins</h2>
             <Link to={`${routeMap.internal}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}
