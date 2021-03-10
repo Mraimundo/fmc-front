@@ -24,16 +24,15 @@ const CategoriesProductsSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   const transformer = useCallback((data: Category[]): Option[] => {
-    const newData = [{ value: 'todos', title: 'Todos' }];
-
+    const newData = [];
     newData.push(
       ...data.map(item => ({
         value: item.id.toString(),
         title: item.name,
       })),
     );
-
-    return newData;
+    const orderByName = orderBy(newData, ['title'], ['asc', 'desc']);
+    return [{ value: 'todos', title: 'Todos' }, ...orderByName];
   }, []);
 
   useEffect(() => {
@@ -48,9 +47,7 @@ const CategoriesProductsSelect: React.FC<Props> = ({
   }, [options, setValue]);
 
   const loadItems = useCallback(() => {
-    const orderByName = orderBy(options, ['title', 'value'], ['asc', 'desc']);
-
-    return orderByName;
+    return options;
   }, [options]);
 
   return (
