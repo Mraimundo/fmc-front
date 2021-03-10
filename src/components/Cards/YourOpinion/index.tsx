@@ -53,7 +53,7 @@ const CardList: React.FC = () => {
       setYourOpinion(response.data.available_surveys);
     }
     fetchSurveys();
-  }, [config]);
+  });
 
   return (
     <Container>
