@@ -35,7 +35,7 @@ export const constructPointsToDistribute = (
   allowPartialDistribution: true,
   savedSetting: {
     data: params?.savedSetttig?.data
-      ? (JSON.parse(params?.savedSetttig?.data) as ScoredParticipant[])
+      ? JSON.parse(params?.savedSetttig?.data)
       : '',
     date: params?.savedSetttig?.date || '',
   },

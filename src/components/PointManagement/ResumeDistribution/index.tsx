@@ -121,7 +121,7 @@ const ResumeDistribution: React.FC = () => {
   useEffect(() => {
     if (isPartialDistributionFinished) {
       addToast({ title: 'Distribuição salva com sucesso!', type: 'info' });
-      dispatch(savePartialDistributionFinish);
+      dispatch(savePartialDistributionFinish());
     }
   }, [addToast, dispatch, isPartialDistributionFinished]);
 

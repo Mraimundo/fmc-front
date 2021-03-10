@@ -337,7 +337,32 @@ export function* workerSetDistributionWithSavedSettings() {
 
   if (!hasScoreParticipantsAdded && hasSavedSetting) {
     const savedSettings: any = yield select(selectors.getSavedSetting);
-    console.log('TESTE', savedSettings);
+    console.log(
+      'TESTE',
+      savedSettings?.scoredParticipants,
+      savedSettings?.totalPointsResaleCooperative,
+      savedSettings?.totalPointsTeamAwards,
+    );
+
+    yield put(
+      actions.setTotalPointsResaleCooperative(
+        savedSettings?.totalPointsResaleCooperative || 0,
+      ),
+    );
+    yield put(
+      actions.setTotalPointsTeamAwards(
+        savedSettings?.totalPointsTeamAwards || 0,
+      ),
+    );
+
+    if (savedSettings?.scoredParticipants) {
+      yield put(
+        setWaitingScoredParticipants(
+          savedSettings?.scoredParticipants as ScoredParticipant[],
+        ),
+      );
+      yield put(assignPoints());
+    }
     /* const totalSavedSettings: number = yield select(getTotalSavedSetting);
     console.log('TOTAL', totalSavedSettings); */
     /* yield put(actions.setTotalPointsTeamAwards(points.general || 0));
