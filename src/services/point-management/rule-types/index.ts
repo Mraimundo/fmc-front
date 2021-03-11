@@ -1,5 +1,4 @@
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
-import { ScoredParticipant } from 'state/modules/point-management/team-awards/types';
 import { Points } from 'state/modules/point-management/constants';
 import { UndistributedPoint } from '../common';
 

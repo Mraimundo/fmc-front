@@ -18,7 +18,6 @@ import {
   getIsResaleCooperativePointsOnly,
   getTotalPointsResaleCooperative,
   getTotalPointsTeamAwards,
-  getTotalSavedSetting,
   getHasSavedSetting,
 } from 'state/modules/point-management/common/selectors';
 import {
@@ -310,7 +309,6 @@ export function* workerSavePartialDistribution() {
       totalPointsTeamAwards: pointsTeamAwards,
     };
 
-    console.log('ON SAVE DISTRIBUTION', pointsToDistribute, payload);
     yield call<any>(
       savePartialDistributionService,
       pointsToDistribute.generalPointId || 0,
@@ -326,9 +324,6 @@ export function* workerSavePartialDistribution() {
 }
 
 export function* workerSetDistributionWithSavedSettings() {
-  const points: PointsToDistribute = yield select(
-    selectors.getPointsToDistribute,
-  );
   const hasScoreParticipantsAdded: boolean = yield select(
     getHasScoreParticipantsAdded,
   );
@@ -337,12 +332,6 @@ export function* workerSetDistributionWithSavedSettings() {
 
   if (!hasScoreParticipantsAdded && hasSavedSetting) {
     const savedSettings: any = yield select(selectors.getSavedSetting);
-    console.log(
-      'TESTE',
-      savedSettings?.scoredParticipants,
-      savedSettings?.totalPointsResaleCooperative,
-      savedSettings?.totalPointsTeamAwards,
-    );
 
     yield put(
       actions.setTotalPointsResaleCooperative(
@@ -362,13 +351,8 @@ export function* workerSetDistributionWithSavedSettings() {
         ),
       );
       yield put(assignPoints());
+      yield put(actions.setIsReadyToDistribute(true));
     }
-    /* const totalSavedSettings: number = yield select(getTotalSavedSetting);
-    console.log('TOTAL', totalSavedSettings); */
-    /* yield put(actions.setTotalPointsTeamAwards(points.general || 0));
-    yield put(setWaitingScoredParticipants(savedSettings));
-    yield put(assignPoints());
-    yield put(actions.setIsReadyToDistribute(true)); */
   }
 }
 
