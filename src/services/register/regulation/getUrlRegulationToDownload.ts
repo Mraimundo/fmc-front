@@ -5,7 +5,6 @@ interface ApiResponse {
   url: string;
 }
 
-/// add campaingId
 export default async (
   regulationId: number,
   filename = 'regulamento.pdf',
