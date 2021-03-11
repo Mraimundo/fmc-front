@@ -1,5 +1,4 @@
 import { PointsToDistribute } from 'state/modules/point-management/common/types';
-import { ScoredParticipant } from 'state/modules/point-management/team-awards/types';
 import { Points } from 'state/modules/point-management/constants';
 import { UndistributedPoint } from '../common';
 
@@ -35,7 +34,7 @@ export const constructPointsToDistribute = (
   allowPartialDistribution: true,
   savedSetting: {
     data: params?.savedSetttig?.data
-      ? (JSON.parse(params?.savedSetttig?.data) as ScoredParticipant[])
+      ? JSON.parse(params?.savedSetttig?.data)
       : '',
     date: params?.savedSetttig?.date || '',
   },

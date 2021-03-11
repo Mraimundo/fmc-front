@@ -14,11 +14,13 @@ import {
 import {
   distributePoints,
   savePartialDistribution,
+  savePartialDistributionFinish,
 } from 'state/modules/point-management/common/actions';
 import {
   getFinishedDistribution,
   getPointsToDistribute as getPointsToDistributeCommon,
   getPartialDistribution as getPartialDistributionStatus,
+  getIsPartialDistributionFinished,
 } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
@@ -49,6 +51,7 @@ const ResumeDistribution: React.FC = () => {
     finishedDistribution,
     pointsToDistributeCommon,
     partialDistributionStatus,
+    isPartialDistributionFinished,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -61,6 +64,7 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getFinishedDistribution),
     useSelector(getPointsToDistributeCommon),
     useSelector(getPartialDistributionStatus),
+    useSelector(getIsPartialDistributionFinished),
   ];
 
   const dispatch = useDispatch();
@@ -95,6 +99,10 @@ const ResumeDistribution: React.FC = () => {
     dispatch(distributePoints(partialDistribution));
   }, [dispatch, partialDistribution]);
 
+  const handleSaveDistribution = useCallback(() => {
+    dispatch(savePartialDistribution());
+  }, [dispatch]);
+
   const isDisabledDistributeEqually = useMemo(() => {
     if (distributeEqually) return false;
 
@@ -109,6 +117,13 @@ const ResumeDistribution: React.FC = () => {
       addToast({ title: errorPartial, type: 'info' });
     }
   }, [addToast, errorPartial]);
+
+  useEffect(() => {
+    if (isPartialDistributionFinished) {
+      addToast({ title: 'Distribuição salva com sucesso!', type: 'info' });
+      dispatch(savePartialDistributionFinish());
+    }
+  }, [addToast, dispatch, isPartialDistributionFinished]);
 
   return (
     <div>
@@ -156,9 +171,7 @@ const ResumeDistribution: React.FC = () => {
           <Button
             buttonRole="tertiary"
             type="button"
-            onClick={() => {
-              dispatch(savePartialDistribution());
-            }}
+            onClick={handleSaveDistribution}
             disabled={!scoredParticipants}
             loading={isFetchingPartial}
           >

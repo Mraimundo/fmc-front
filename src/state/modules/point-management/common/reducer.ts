@@ -23,6 +23,7 @@ import {
   SAVE_PARTIAL_DISTRIBUTION_ACTION,
   SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
   SAVE_PARTIAL_DISTRIBUTION_FAILURE,
+  SAVE_PARTIAL_DISTRIBUTION_FINISH,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -49,6 +50,7 @@ export type CommonState = {
   selectedEstablishment: Establishment | null;
   finishedDistribution: FinishedDistributionPossibilities | null;
   partialDistribution: FetchState;
+  partialDistributionFinished: boolean;
 };
 
 export const initialState: CommonState = {
@@ -63,6 +65,7 @@ export const initialState: CommonState = {
   selectedEstablishment: null,
   finishedDistribution: null,
   partialDistribution: emptyFetchState,
+  partialDistributionFinished: false,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -141,9 +144,15 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
     case SAVE_PARTIAL_DISTRIBUTION_ACTION:
       return { ...state, partialDistribution: fetchingState };
     case SAVE_PARTIAL_DISTRIBUTION_SUCCESS:
-      return { ...state, partialDistribution: emptyFetchState };
+      return {
+        ...state,
+        partialDistributionFinished: true,
+        partialDistribution: emptyFetchState,
+      };
     case SAVE_PARTIAL_DISTRIBUTION_FAILURE:
       return { ...state, partialDistribution: fetchErrorState(action) };
+    case SAVE_PARTIAL_DISTRIBUTION_FINISH:
+      return { ...state, partialDistributionFinished: false };
 
     default:
       return state;

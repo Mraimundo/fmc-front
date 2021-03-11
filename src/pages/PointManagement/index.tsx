@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from 'react-grid-system';
 import { Tab, TabPanel } from 'react-tabs';
@@ -39,6 +39,7 @@ import {
 } from './styles';
 
 const PointManagement: React.FC = () => {
+  const [tabIndex, setTabIndex] = useState(0);
   const [
     isReadyToDistribute,
     selectedEstablishment,
@@ -121,6 +122,10 @@ const PointManagement: React.FC = () => {
     dispatch(toggleIsOpenModalMissingParticipants());
   }, [dispatch, pointsToDistribute]);
 
+  const handleTabSelect = useCallback((index: number) => {
+    setTabIndex(index);
+  }, []);
+
   return (
     <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
       <Wrapper>
@@ -135,7 +140,11 @@ const PointManagement: React.FC = () => {
           <Header establishmentType={selectedEstablishment.type} />
         )}
         {isReadyToDistribute && (
-          <Tabs defaultIndex={!totalPointsResaleCooperative ? 1 : 0}>
+          <Tabs
+            defaultIndex={!totalPointsResaleCooperative ? 1 : 0}
+            selectedIndex={tabIndex}
+            onSelect={handleTabSelect}
+          >
             <List>
               <Tab
                 disabled={!totalPointsResaleCooperative}
@@ -157,6 +166,7 @@ const PointManagement: React.FC = () => {
               {!!selectedEstablishment && (
                 <ResaleCooperativePointsTabContent
                   establishmentType={selectedEstablishment.type}
+                  onClickRescue={() => handleTabSelect(1)}
                 />
               )}
             </Panel>

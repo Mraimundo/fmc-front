@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     content: '';
     width: 100%;
     height: 15px;
-    background-color ${({ theme }) => theme.font.color.primary};
+    background-color: ${({ theme }) => theme.font.color.primary};
     position: absolute;
     top: 0;
     left: 0;
