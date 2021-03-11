@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify'
-import axios from 'axios'
+import { toast } from 'react-toastify';
+import axios from 'axios';
 import { pluginApi } from '../../services/api';
 import { formatDate } from 'util/datetime';
 
@@ -18,8 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import InputGlobal from '../../components/SearchForms/InputGlobal';
 // import SelectGlobal from '../../components/SearchForms/SelectGlobal';
-import { getValueAnswer } from '../../state/modules/answer/selectors'
-
+import { getValueAnswer } from '../../state/modules/answer/selectors';
 
 
 import {
@@ -47,6 +46,7 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
+  video: string;
   event: Event;
 }
 
@@ -112,7 +112,7 @@ const ProducerResearch: React.FC = () => {
 
     } catch (error) {
 
-      toast.error('Essa pesquisa ja foi incerrada!', {
+      toast.error('Essa pesquisa ja foi respondida!', {
         position: toast.POSITION.TOP_RIGHT,
       })
 
@@ -165,7 +165,7 @@ const ProducerResearch: React.FC = () => {
             ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`
             )}
           </p>
-          <span>Vale 300 FMC Coins</span>
+          {/* <span>Vale 300 FMC Coins</span> */}
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
