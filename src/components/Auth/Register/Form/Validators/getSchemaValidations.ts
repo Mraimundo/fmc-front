@@ -168,7 +168,7 @@ export default (
   profile: IProfile,
   editing = false,
   autoindicate = false,
-  profileValue: ApproverProfile
+  profileValue: ApproverProfile,
 ): Yup.ObjectSchema<object> => {
   const defaultValidations = {
     ...commomValidations,
@@ -232,7 +232,10 @@ export default (
 
   switch (profile) {
     case PROFILES.participant:
-      return Yup.object().shape({ ...participantValidations, ...cepFields });
+      return Yup.object().shape({
+        ...participantValidations,
+        ...cepFields,
+      });
     case PROFILES.producer:
       if (autoindicate) {
         return Yup.object().shape({
@@ -242,6 +245,7 @@ export default (
         });
       }
       return Yup.object().shape({
+        ...participantValidations,
         ...defaultValidations,
         ...extraProducerFields,
         ...cepFields,
