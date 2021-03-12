@@ -1,10 +1,10 @@
 import HarvestTerm from 'pages/HarvestTerm';
-import RouteMap from 'routes/route-map';
+import routeMap from 'routes/route-map';
 import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {
-    path: RouteMap.harvestTerm,
+    path: routeMap.harvestTerm,
     component: HarvestTerm,
     accessPage: 'Termo de Safra',
   },
