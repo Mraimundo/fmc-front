@@ -31,4 +31,5 @@ export default {
   },
   qrCode: '/qr',
   receipts: '/extrato-notas',
+  harvestTerm: '/termo-de-safra',
 };
