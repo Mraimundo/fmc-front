@@ -68,7 +68,7 @@ const RegisterForm: React.FC = () => {
       participant = await getParticipantData(param_first_access);
     } catch (error) {
       addToast({
-        title: error.message,
+        title: error.response?.data?.message,
         type: 'error',
       });
       return;
