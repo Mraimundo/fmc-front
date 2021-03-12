@@ -1,24 +1,24 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify'
+import axios from 'axios'
 import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { pluginApi } from '../../services/api';
 import { formatDate } from 'util/datetime';
 
+import { pluginApi } from '../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-// import StarButtonLine from '../../components/SearchForms/StarButtonsLine';
-// import StarButtonColumn from '../../components/SearchForms/StarButtonsColumn';
-// import ButtonsSquare from '../../components/SearchForms/ButtonsSquareCheck';
-// import ButtonsSquareNumber from '../../components/SearchForms/ButtonsSquareNumber';
-// import ButtonsRadios from '../../components/SearchForms/ButtonsRadios';
-
+import StarButtonLine from '../../components/SearchForms/LinearScale';
+import MultipleLinearScale from '../../components/SearchForms/MultipleLinearScale';
+import InputCheckBox from '../../components/SearchForms/InputCheckBox';
+import InputGridCheckBox from '../../components/SearchForms/InputGridCheckBox';
+import InputGridRadio from '../../components/SearchForms/InputGridRadio';
+import InputRadios from '../../components/SearchForms/InputRadios';
 import InputGlobal from '../../components/SearchForms/InputGlobal';
-// import SelectGlobal from '../../components/SearchForms/SelectGlobal';
-import { getValueAnswer } from '../../state/modules/answer/selectors';
+import DropDownList from '../../components/SearchForms/DropDownList';
+
+import { getValueAnswer } from '../../state/modules/answer/selectors'
 
 
 import {
@@ -28,14 +28,6 @@ import {
   MiniBox,
   Title,
   Form,
-  // FormControlRadio,
-  // RadioGroup,
-  // FormControlBanner,
-  // FormGrupSelect,
-  // FormControlData,
-  // KeyboardDate,
-  // FormControlHour,
-  // KeyboardTime,
   Button
 } from './styles';
 
@@ -46,7 +38,6 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
-  video: string;
   event: Event;
 }
 
@@ -65,26 +56,29 @@ interface QuestionsData {
   answer: string;
   survey_question_answers: AnswersData[];
 }
+
 toast.configure()
-// Component producer Research
+
 const ProducerResearch: React.FC = () => {
   const value = useSelector(getValueAnswer);
   const location = useLocation();
-  const [surveyQuestionId, setSurveyQuestionId] = useState('')
-  // const [answersQuestionId, setAnswersQuestionId] = useState(0)
+  const [surveyQuestionId, setSurveyQuestionId] = useState('');
+  // const [answersQuestionId, setAnswersQuestionId] = useState(0);
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
-  const [questions, setQuestions] = useState<QuestionsData>({} as QuestionsData);
+  const [questions, setQuestions] = useState<QuestionsData[]>([]);
+
 
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
       setYourOpinion(response.data.data);
-      setQuestions(response.data.data.survey_questions[0]);
+      setQuestions(response.data.data.survey_questions);
       setSurveyQuestionId(response.data.data.survey_questions[0].survey_id)
     }
     fetchSurveys();
-  }, [location.search]);
+  }, [location]);
+
 
   const handleSave = useCallback(async (e) => {
     e.preventDefault()
@@ -108,27 +102,85 @@ const ProducerResearch: React.FC = () => {
 
       toast.success('Obrigado por responder a nossa pesquisa!', {
         position: toast.POSITION.TOP_RIGHT,
+        // autoClose: false
       })
 
     } catch (error) {
 
-      toast.error('Essa pesquisa ja foi respondida!', {
+      toast.error('Essa pesquisa já foi respondida!', {
         position: toast.POSITION.TOP_RIGHT,
+        // autoClose: false
       })
 
     }
-  }, [value, surveyQuestionId, location.search]);
+  }, [value, surveyQuestionId]);
+
+  const notify = () => {
+    toast.success('Obrigado por responder a nossa pesquisa!', {
+      position: toast.POSITION.TOP_RIGHT,
+      // autoClose: false
+    })
+  }
 
   const typeForm = (
     type: number,
     question: string,
+    answers: AnswersData[],
   ) => {
     switch (type) {
+      case 2: {
+        return (
+          <MultipleLinearScale
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
+      case 1: {
+        return (
+          <StarButtonLine
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
+      case 3: {
+        return (
+          <InputRadios
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
+      case 4: {
+        return (
+          <InputCheckBox
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
       case 5: {
         return (
           <InputGlobal
             quetion={question}
             type="text"
+          />
+        )
+      }
+      case 6: {
+        return (
+          <InputGridRadio
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
+      case 7: {
+        return (
+          <InputGridCheckBox
+            quetion={question}
+            answers={answers}
           />
         )
       }
@@ -148,9 +200,18 @@ const ProducerResearch: React.FC = () => {
           />
         )
       }
+      case 10: {
+        return (
+          <DropDownList
+            quetion={question}
+            answers={answers}
+          />
+        )
+      }
       default:
         return ""
     }
+
   }
 
   return (
@@ -159,17 +220,12 @@ const ProducerResearch: React.FC = () => {
       <MiniBox key={`key-cards-${youropinion.id}`}>
         <Content>
           <h2>{youropinion.title}</h2>
-          <p>
-            {(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')}
-            até 
-            ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`
-            )}
-          </p>
+          <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
           {/* <span>Vale 300 FMC Coins</span> */}
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-          <p>{(youropinion.description?.replace("<p>", "").replace("</p>", ""))}</p>
+          <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
         </ContentInfo>
       </MiniBox>
 
@@ -179,63 +235,18 @@ const ProducerResearch: React.FC = () => {
 
       <Form onSubmit={handleSave}>
         {
-          typeForm(Number(questions.type), questions.question)
+          questions.map(question => (
+            typeForm(Number(question.type), question.question, question.survey_question_answers)
+          ))
         }
 
-        {/* <StarButtonLine />
-          <StarButtonColumn />
-          <ButtonsSquare />
-          <FormControlBanner>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ex rerum, voluptatem eum a, perferendis, voluptas officia ullam repellendus excepturi
-            necessitatibus iusto labore eos aperiam fugiat ipsam harum! Amet, non mollitia.
-              </p>
-            <div className="banner"></div>
-          </FormControlBanner>
-          <ButtonsSquareNumber />
-          <ButtonsRadios />
-          <FormGrupSelect>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ex rerum, voluptatem eum a, perferendis, voluptas officia ullam repellendus excepturi
-            necessitatibus iusto labore eos aperiam fugiat ipsam harum! Amet, non mollitia.
-              </p>
-            <select name="cars" id="cars">
-              <option value="volvo">Tipo de produto</option>
-              <option value="saab">Tipo de Produto</option>
-              <option value="opel">Tipo de produto</option>
-              <option value="audi">Tipo de produto</option>
-            </select>
-          </FormGrupSelect>
-          <FormControlData>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ex rerum, voluptatem eum a, perferendis, voluptas officia ullam repellendus excepturi
-            necessitatibus iusto labore eos aperiam fugiat ipsam harum! Amet, non mollitia.
-              </p>
-            <KeyboardDate>
-              <input
-                type="date"
-              />
-            </KeyboardDate>
-          </FormControlData>
-          <FormControlHour>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ex rerum, voluptatem eum a, perferendis, voluptas officia ullam repellendus excepturi
-            necessitatibus iusto labore eos aperiam fugiat ipsam harum! Amet, non mollitia.
-              </p>
-            <KeyboardTime>
-              <input
-                type="time"
-              />
-            </KeyboardTime>
-          </FormControlHour> */}
         <Button
           type="submit"
         >
           Salvar
         </Button>
       </Form>
-    </Container>
+    </Container >
   );
 };
-
 export default ProducerResearch;
