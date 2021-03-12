@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -11,41 +11,43 @@ export const Container = styled.div`
 `;
 
 
-export const FormSquare = styled.div`
+export const GridCheckBoxContent = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
   border-right-width: 1px;
   margin-top: 23px;
     p {
-      font-size: 14px;
+      font-size: 16px;
       color: #000;
     }
 `;
 
-export const FormGroupSquare = styled.div`
+export const CheckBoxContentGroup = styled.div`
   width: 40%;
-  
   margin-top: 25px;
-  /* padding: 20px; */
 
-  form {
+  > div {
     display: flex;
     align-items:center;
     justify-content: space-between;
     color: #65554D;
 
-    .square-info {
+    label{
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-left: 50px;
 
       transform: translateY(25px);
-
+      
       span {
-        margin-bottom: 14px; 
-      }
+      width: 207px;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: Regular;
+      line-height: 24px;
+    }
     } 
     .input-group{
       display: flex;
@@ -85,13 +87,7 @@ export const FormGroupSquare = styled.div`
       }
     }
      
-    span {
-      width: 207px;
-      font-size: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: Regular;
-      line-height: 24px;
-    }
+    
     
     svg {
       width: 16px;

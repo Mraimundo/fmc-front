@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../state/modules/answer/actions';
 
-
 // import { pluginApi } from '../../services/api';
 
 import {
@@ -22,13 +21,13 @@ const QuestionGlobal: React.FC<Props> = ({ quetion, type }) => {
       <p>{quetion}</p>
       <input
         type={type}
+        placeholder="Insira os dados necessários"
         onChange={(e) => {
           dispatch(setValueAnswer(e.target.value))
         }}
-      // style={type == "text" ? { width: "300px;" } : { width: "174px;" }}
       />
     </Container>
   );
 };
 
-export default QuestionGlobal;
+export default (QuestionGlobal);
