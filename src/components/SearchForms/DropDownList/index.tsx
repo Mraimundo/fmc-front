@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
+// import { useDispatch } from 'react-redux';
+// import { setValueAnswer } from '../../../state/modules/answer/actions';
 
 // import { pluginApi } from '../../services/api';
 

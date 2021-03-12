@@ -2,18 +2,11 @@ import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
-
 
 // import { pluginApi } from '../../services/api';
 
 import {
   Container,
-  InputStarColumn,
-  InputGroup,
-  PickContainer,
 } from './styles';
 
 interface AnswersData {
@@ -33,7 +26,7 @@ interface props {
 
 const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
 
-  const [selectRating, setSelectRating] = React.useState<number | null>(null)
+  // const [selectRating, setSelectRating] = React.useState<number | null>(null)
 
   return (
     <Container>
@@ -44,10 +37,10 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
             <Typography component="legend">{answer.answer}</Typography>
             <Rating
               name={answer.id.toString()}
-              // value={selectRating}
-              onChange={(event, newValue) => {
-                setSelectRating(newValue);
-              }}
+            // value={selectRating}
+            // onChange={(event, newValue) => {
+            //   setSelectRating(newValue);
+            // }}
             />
           </Box>
         ))

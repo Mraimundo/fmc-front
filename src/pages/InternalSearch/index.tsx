@@ -113,14 +113,7 @@ const ProducerResearch: React.FC = () => {
       })
 
     }
-  }, [value, surveyQuestionId]);
-
-  const notify = () => {
-    toast.success('Obrigado por responder a nossa pesquisa!', {
-      position: toast.POSITION.TOP_RIGHT,
-      // autoClose: false
-    })
-  }
+  }, [location.search, value, surveyQuestionId]);
 
   const typeForm = (
     type: number,

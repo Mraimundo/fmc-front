@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../state/modules/answer/actions';
 
@@ -25,14 +25,6 @@ interface props {
 
 const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
   const dispatch = useDispatch()
-
-  const [checked, setChecked] = useState(false);
-  const [radio, setRadio] = useState("");
-
-  function handleCheckboxChange() {
-    setChecked(!checked);
-  }
-
   return (
     <Container>
       <InputContent>

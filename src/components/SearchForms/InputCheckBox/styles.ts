@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
 `;
-
 
 export const CheckBoxContent = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.12);

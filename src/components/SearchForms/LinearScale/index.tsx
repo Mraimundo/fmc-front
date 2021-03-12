@@ -11,7 +11,6 @@ import {
   InputGroup
 
 } from './styles';
-import { use } from 'chai';
 
 interface AnswersData {
   id: number;

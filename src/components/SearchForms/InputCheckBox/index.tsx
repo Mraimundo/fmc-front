@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../state/modules/answer/actions';
 // import {FiSquare} from 'react-icons/fi';
@@ -27,12 +27,6 @@ interface Props {
 
 
 const InputCheckBox: React.FC<Props> = ({ quetion, answers }) => {
-  const [checked, setChecked] = useState(false);
-
-  function handleCheckboxChange() {
-    setChecked(!checked);
-  }
-
   const dispatch = useDispatch()
 
   return (
