@@ -42,6 +42,15 @@ export default createGlobalStyle`
     z-index: 10;
   }
 
+  .sc-pzMWh  {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .MuiRating-root {
+    color: #65554D !important;
+  }
+
   :root {
     --cooperativa: #2A4207;
     --revenda: #193B4E;
