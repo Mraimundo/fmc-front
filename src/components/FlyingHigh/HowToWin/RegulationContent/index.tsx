@@ -9,7 +9,7 @@ const RegulationContent: React.FC = () => {
       <h4>REGULAMENTO/PLANO DE OPERAÇÃO DA PROMOÇÃO</h4>
       <h4>JUNTOS VOAMOS MAIS ALTO</h4>
       <h4>CERTIFICADO DE AUTORIZAÇÃO SECAP/ME Nº 01.011798/2021</h4>
-      <p>1 - EMPRESAS PROMOTORAS:</p>
+      <p style={{ fontWeight: 'bold' }}>1 - EMPRESAS PROMOTORAS:</p>
       <p>
         1.1 - Empresa Mandatária:
         <br />
@@ -31,23 +31,30 @@ const RegulationContent: React.FC = () => {
         MADALENA Município: CAMPINAS UF: SP CEP:13091- 611 <br />
         CNPJ/MF no:04.136.367/0002-79
       </p>
-      <p style={{ marginTop: '2em' }}>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
         2 - MODALIDADE DA PROMOÇÃO:
-        <br /> Sorteio
       </p>
-      <p style={{ marginTop: '2em' }}>
+      <p style={{ marginTop: 0 }}>Sorteio</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
         3 - ÁREA DE ABRANGÊNCIA:
-        <br /> Todo o território nacional.
       </p>
-      <p style={{ marginTop: '2em' }}>
+      <p style={{ marginTop: 0 }}>Todo o território nacional.</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
         4 - PERÍODO DA PROMOÇÃO:
-        <br /> 15/03/2021 a 28/06/2021
       </p>
-      <p style={{ marginTop: '2em' }}>
-        5 - PERÍODO DE PARTICIPAÇÃO: <br />
-        15/03/2021 a 16/05/2021
+      <p style={{ marginTop: 0 }}>15/03/2021 a 28/06/2021</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        5 - PERÍODO DE PARTICIPAÇÃO:
       </p>
-      <p style={{ marginTop: '2em' }}>6 - CRITÉRIO DE PARTICIPAÇÃO:</p>
+      <p style={{ marginTop: 0 }}>15/03/2021 a 16/05/2021</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        6 - CRITÉRIO DE PARTICIPAÇÃO:
+      </p>
       <p>
         6.1. Serão promocionados nesta Promoção todos os produtos
         comercializados pela empresa Promotora Aderente.
@@ -165,15 +172,20 @@ const RegulationContent: React.FC = () => {
         de memória, 1 case, 1 inversor de tensão e 1 carregador veicular, no
         valor de R$23.970,00 (vinte e três mil, novecentos e setenta reais).
       </p>
-      <p style={{ marginTop: '2em' }}>
-        7 - QUANTIDADE DE SÉRIES: <br />1
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        7 - QUANTIDADE DE SÉRIES:
       </p>
-      <p style={{ marginTop: '2em' }}>
+      <p style={{ marginTop: 0 }}>1</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
         8 - QUANTIDADE DE ELEMENTOS SORTEÁVEIS POR SÉRIE:
-        <br />
-        100.000
       </p>
-      <p style={{ marginTop: '2em' }}>9 - APURAÇÃO E DESCRIÇÃO DE PRÊMIOS:</p>
+      <p style={{ marginTop: 0 }}>100.000</p>
+
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        9 - APURAÇÃO E DESCRIÇÃO DE PRÊMIOS:
+      </p>
       <p>
         DATA: 28/06/2021 09:00
         <br />
@@ -216,7 +228,7 @@ const RegulationContent: React.FC = () => {
           <td>1</td>
         </tr>
       </table>
-      <p style={{ marginTop: '2em', marginBottom: '5px' }}>
+      <p style={{ marginTop: '2em', marginBottom: '5px', fontWeight: 'bold' }}>
         10 - PREMIAÇÃO TOTAL:
       </p>
       <table>
@@ -229,7 +241,9 @@ const RegulationContent: React.FC = () => {
           <td>23.970,00</td>
         </tr>
       </table>
-      <p style={{ marginTop: '2em' }}>11 - FORMA DE APURAÇÃO: </p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        11 - FORMA DE APURAÇÃO:{' '}
+      </p>
       <p>
         11.1. Para a obtenção do NÚMERO DA SORTE que irá identificar o
         participante contemplado nesta Promoção, de acordo com a extração da
@@ -263,7 +277,9 @@ const RegulationContent: React.FC = () => {
         motivo, não seja realizada, será utilizada a extração dessa modalidade
         de Loteria que ocorrer em data posterior.
       </p>
-      <p style={{ marginTop: '2em' }}>12 - CRITÉRIOS DE DESCLASSIFICAÇÃO:</p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        12 - CRITÉRIOS DE DESCLASSIFICAÇÃO:
+      </p>
       <p>
         12.1. Não poderão participar da Promoção os funcionários, distribuidores
         de produtos ou terceirizados/contratados e prestadores de serviços, da
@@ -282,7 +298,9 @@ const RegulationContent: React.FC = () => {
         previstas neste Regulamento, serão automaticamente desclassificados, não
         podendo participar da Promoção.
       </p>
-      <p style={{ marginTop: '2em' }}>13 - FORMA DE DIVULGAÇÃO DO RESULTADO:</p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        13 - FORMA DE DIVULGAÇÃO DO RESULTADO:
+      </p>
       <p>
         13.1. O Interessado participante será avisado da condição de contemplado
         (doravante “Contemplado”) por meio de ligação telefônica e/ou e-mail.
@@ -309,7 +327,9 @@ const RegulationContent: React.FC = () => {
         13.5. O resultado desta promoção será divulgado no hotsite por até 30
         (trinta) dias contados da data do sorteio.
       </p>
-      <p style={{ marginTop: '2em' }}>14 - ENTREGA DOS PRÊMIOS:</p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        14 - ENTREGA DOS PRÊMIOS:
+      </p>
       <p>
         14.1. A Empresa Aderente efetuará a entrega do prêmio em domicílio do
         Contemplado, em até 30 (trinta) dias, contados a partir da data de
@@ -369,7 +389,9 @@ const RegulationContent: React.FC = () => {
         Decreto 70.951/72.
       </p>
 
-      <p style={{ marginTop: '2em' }}>15 - DISPOSIÇÕES GERAIS:</p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        15 - DISPOSIÇÕES GERAIS:
+      </p>
       <p>
         15.1. A Promoção será divulgada através da Internet e de outros meios de
         mídia e comunicação, a critério da Empresa Aderente.
@@ -404,9 +426,11 @@ const RegulationContent: React.FC = () => {
       </p>
       <p>
         15.5. O Regulamento completo desta Promoção estará disponível no site
-        www.juntosfmc.com.br/voandoalto. 15.6. A participação na presente
-        Promoção implica na aceitação automática de todas as disposições do
-        presente Regulamento.
+        www.juntosfmc.com.br/voandoalto.
+      </p>
+      <p>
+        15.6. A participação na presente Promoção implica na aceitação
+        automática de todas as disposições do presente Regulamento.
       </p>
       <p>
         15.7. Os participantes serão excluídos automaticamente, ainda, da
@@ -509,7 +533,9 @@ const RegulationContent: React.FC = () => {
         leia atentamente o rotulo e a bula.
       </p>
 
-      <p style={{ marginTop: '2em' }}>16 - TERMO DE RESPONSABILIDADE</p>
+      <p style={{ marginTop: '2em', fontWeight: 'bold' }}>
+        16 - TERMO DE RESPONSABILIDADE
+      </p>
       <p>
         Poderá participar da promoção qualquer consumidor que preencha os
         requisitos estipulados no regulamento da campanha autorizada;
@@ -603,13 +629,9 @@ const RegulationContent: React.FC = () => {
           }}
         >
           <img
-            src={qrCodeImage}
-            alt="QRCode"
-            style={{
-              width: '120px',
-              height: '100px',
-              marginRight: '20px',
-            }}
+            src={scpcImage}
+            alt="SCPC"
+            style={{ width: '120px', height: '100px', marginRight: '5px' }}
           />
           <div
             style={{
@@ -638,13 +660,16 @@ const RegulationContent: React.FC = () => {
             justifyContent: 'center',
             alignItems: 'center',
             width: '100%',
-            // maxHeight: '250px',
           }}
         >
           <img
-            src={scpcImage}
-            alt="SCPC"
-            style={{ width: '120px', height: '100px', marginRight: '5px' }}
+            src={qrCodeImage}
+            alt="QRCode"
+            style={{
+              width: '120px',
+              height: '100px',
+              marginRight: '20px',
+            }}
           />
           <div
             style={{
