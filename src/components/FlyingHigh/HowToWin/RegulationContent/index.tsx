@@ -2,7 +2,7 @@ import React from 'react';
 
 import qrCodeImage from 'assets/images/flying-high/regulation/qrcode.png';
 import scpcImage from 'assets/images/flying-high/regulation/scpc.png';
-
+//regulation content
 const RegulationContent: React.FC = () => {
   return (
     <>
