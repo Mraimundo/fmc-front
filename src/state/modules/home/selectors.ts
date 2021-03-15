@@ -13,3 +13,6 @@ export const getShowcaseProducts = (
 
 export const getParticipantId = (state: StoreState): number | null =>
   state.home.participantId;
+
+export const getLuckyNumber = (state: StoreState): string | null =>
+  state.home.luckyNumber;

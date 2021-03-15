@@ -7,15 +7,18 @@ import {
   fetchBanners,
   fetchHighlights,
   fetchShowcase,
+  // fetchLuckyNumber,
 } from 'state/modules/home/actions';
 import {
   getBanners,
   getHighlights,
   getShowcaseProducts,
+  // getLuckyNumber,
 } from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { Banners, Title, Highlights, Showcase, AddNF } from 'components/Home';
 import CoinQuotation from 'components/Header/CoinQuotation';
+// import FlyingHigh from 'components/Home/FlyingHigh';
 import { Wrapper, ShowCaseWrapper, HomeWrapper } from './styles';
 
 const FmcProdutorHome: React.FC = () => {
@@ -27,6 +30,7 @@ const FmcProdutorHome: React.FC = () => {
     useSelector(getBanners),
     useSelector(getHighlights),
     useSelector(getShowcaseProducts),
+    // useSelector(getLuckyNumber),
   ];
 
   useEffect(() => {
@@ -35,6 +39,7 @@ const FmcProdutorHome: React.FC = () => {
     dispatch(fetchBanners());
     dispatch(fetchHighlights());
     dispatch(fetchShowcase(participant.id));
+    // dispatch(fetchLuckyNumber());
   }, [dispatch, participant.id]);
 
   return (
@@ -45,6 +50,11 @@ const FmcProdutorHome: React.FC = () => {
       <Hidden xs sm>
         {!!banners && <Banners items={banners} />}
       </Hidden>
+      {/* !!luckyNumber && (
+        <Wrapper>
+          <FlyingHigh />
+        </Wrapper>
+      ) */}
       <Wrapper>
         <AddNF />
       </Wrapper>

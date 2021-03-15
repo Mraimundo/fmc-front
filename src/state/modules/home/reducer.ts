@@ -13,6 +13,9 @@ import {
   FETCH_SHOWCASEPRODUCTS_ACTION,
   FETCH_SHOWCASEPRODUCTS_FAILURE,
   FETCH_SHOWCASEPRODUCTS_SUCCESS,
+  FETCH_LUCKYNUMBER_ACTION,
+  FETCH_LUCKYNUMBER_FAILURE,
+  FETCH_LUCKYNUMBER_SUCCESS,
 } from './constants';
 import { Banner, Highlight, ShowcaseProduct } from './types';
 
@@ -20,20 +23,24 @@ export interface HomeState {
   fetchBanners: FetchState;
   fetchHighlights: FetchState;
   fetchShowcaseProducts: FetchState;
+  fetchLuckyNumber: FetchState;
   banners: Banner[] | null;
   highlights: Highlight[] | null;
   showcaseProducts: ShowcaseProduct[] | null;
   participantId: number | null;
+  luckyNumber: string | null;
 }
 
 export const initialState: HomeState = {
   fetchBanners: emptyFetchState,
   fetchHighlights: emptyFetchState,
   fetchShowcaseProducts: emptyFetchState,
+  fetchLuckyNumber: emptyFetchState,
   banners: null,
   highlights: null,
   showcaseProducts: null,
   participantId: null,
+  luckyNumber: null,
 };
 
 const homeReducer: Reducer<HomeState, HomeActions> = (
@@ -76,6 +83,22 @@ const homeReducer: Reducer<HomeState, HomeActions> = (
         ...state,
         fetchShowcaseProducts: emptyFetchState,
         showcaseProducts: action.payload.showcaseProducts,
+      };
+
+    case FETCH_LUCKYNUMBER_ACTION:
+      return {
+        ...state,
+        fetchLuckyNumber: fetchingState,
+      };
+    case FETCH_LUCKYNUMBER_FAILURE:
+      return {
+        ...state,
+        fetchLuckyNumber: fetchErrorState(action),
+      };
+    case FETCH_LUCKYNUMBER_SUCCESS:
+      return {
+        ...state,
+        luckyNumber: action.payload.luckyNumber,
       };
 
     default:

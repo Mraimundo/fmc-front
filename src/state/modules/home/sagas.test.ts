@@ -11,6 +11,7 @@ import mainSaga, {
   workerFetchBanners,
   workerFetchHighlights,
   workerFetchShowcaseProducts,
+  workerFetchLuckyNumber,
 } from './sagas';
 import { banners, highlights } from './mock';
 
@@ -101,6 +102,7 @@ describe('src/state/modules/home/sagas', () => {
           constants.FETCH_SHOWCASEPRODUCTS_ACTION,
           workerFetchShowcaseProducts,
         ),
+        takeEvery(constants.FETCH_LUCKYNUMBER_ACTION, workerFetchLuckyNumber),
       ])
       .finish()
       .isDone();

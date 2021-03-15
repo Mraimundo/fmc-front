@@ -132,15 +132,17 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
     () => (
       <>
         <BoxAccept>
-          <input
-            type="checkbox"
-            name="test"
-            disabled={loading}
-            checked={canAccept}
-            onChange={() => {
-              setCanAccept(e => !e);
-            }}
-          />
+          {regulation?.type !== 'promotion_regulation' && (
+            <input
+              type="checkbox"
+              name="test"
+              disabled={loading}
+              checked={canAccept}
+              onChange={() => {
+                setCanAccept(e => !e);
+              }}
+            />
+          )}
           {regulation?.type === 'regulation_of_campaign' && (
             <span>
               AO CLICAR NO ITEM “LI E ACEITO OS TERMOS DO REGULAMENTO” IMPLICARÁ
@@ -158,15 +160,28 @@ const AllRegulationsOneByOne: React.FC<Props> = ({ opened }) => {
             </span>
           )}
         </BoxAccept>
-        <StyledButtonConfirm
-          type="button"
-          buttonRole="primary"
-          onClick={handleAcceptClick}
-          loading={accepting}
-          disabled={!canAccept || loading}
-        >
-          Aceito participar
-        </StyledButtonConfirm>
+        {regulation?.type !== 'promotion_regulation' && (
+          <StyledButtonConfirm
+            type="button"
+            buttonRole="primary"
+            onClick={handleAcceptClick}
+            loading={accepting}
+            disabled={!canAccept || loading}
+          >
+            Aceito participar
+          </StyledButtonConfirm>
+        )}
+
+        {regulation?.type === 'promotion_regulation' && (
+          <StyledButtonConfirm
+            type="button"
+            buttonRole="primary"
+            onClick={handleAcceptClick}
+            loading={accepting}
+          >
+            OK
+          </StyledButtonConfirm>
+        )}
       </>
     ),
     [accepting, handleAcceptClick, canAccept, loading, regulation],

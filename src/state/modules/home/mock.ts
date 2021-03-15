@@ -87,10 +87,14 @@ const state: HomeState = {
   fetchShowcaseProducts: {
     isFetching: false,
   },
+  fetchLuckyNumber: {
+    isFetching: false,
+  },
   banners,
   highlights,
   showcaseProducts: showcase,
   participantId: null,
+  luckyNumber: null,
 };
 
 export default state;
