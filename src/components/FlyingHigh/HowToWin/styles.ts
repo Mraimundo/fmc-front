@@ -164,15 +164,3 @@ export const Note = styled.div`
     padding: 0 3rem 2rem;
   }
 `;
-
-export const RegulationFooterText = styled.div`
-  margin: 0;
-  padding: 0;
-  border: 1px solid #3b302a;
-  max-height: 200px;
-  overflow-y: hidden;
-
-  p {
-    text-align: left;
-  }
-`;
