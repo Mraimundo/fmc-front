@@ -49,6 +49,29 @@ export const FooterWrapper = styled.div`
     width: 100%;
     div:nth-child(2) {
       background-color: #65554d;
+
+      div {
+        @media screen and (max-width: 1460px) {
+          width: 55%;
+          div {
+            width: 100%;
+          }
+        }
+
+        @media screen and (max-width: 1290px) {
+          width: 50%;
+          flex-direction: column;
+          div {
+            margin: 0;
+            width: 100%;
+          }
+        }
+
+        @media screen and (max-width: 580px) {
+          border: none;
+          width: 100%;
+        }
+      }
     }
   }
 
