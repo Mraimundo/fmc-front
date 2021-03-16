@@ -120,7 +120,7 @@ const PersonalDataForm: React.FC<Props> = ({
           <GenderSelect name="gender_select" inputRole={inputRole} />
           <Input
             name="medium"
-            label="Em qual Canal você compra os produtos FMC?"
+            label="Em qual Canal você compra os produtos FMC?*"
             inputRole={inputRole}
           />
           <ComoFicouConhecendoSelectStyled
