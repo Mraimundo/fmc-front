@@ -10,7 +10,12 @@ export const Container = styled.div`
     p {
       font-size: 16px;
       color: #000;
+      margin-bottom: 12px;
     }
+  div {
+    align-items: center;
+    color: #000;
+  }  
 `;
 
 

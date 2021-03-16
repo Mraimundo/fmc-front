@@ -1,12 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
-// import { pluginApi } from '../../services/api';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { setValueAnswer } from '../../../state/modules/answer/actions';
 
 import {
   Container,

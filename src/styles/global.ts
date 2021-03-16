@@ -46,16 +46,9 @@ export default createGlobalStyle`
     display: flex !important;
     flex-direction: column !important;
   }
-
+  
   .MuiRating-root {
     color: #65554D !important;
-  }
-
-  :root {
-    --cooperativa: #2A4207;
-    --revenda: #193B4E;
-    --rtc: #484848;
-    --produtor: #3B302A;
   }
 
 `;
