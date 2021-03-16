@@ -129,4 +129,5 @@ export interface Participant {
   indicator_code_used?: string;
   members_group: MemberGroup[];
   harvest: Harvest;
+  registration_origin?: string;
 }

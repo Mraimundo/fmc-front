@@ -6,6 +6,7 @@ import {
   fetchHighlightsService,
   fetchShowcaseProductsService,
 } from 'services/home';
+import getLuckyNumber from 'services/flying-high/getLuckyNumber';
 import * as actions from './actions';
 import * as constants from './constants';
 import * as selectors from './selectors';
@@ -52,6 +53,15 @@ export function* workerFetchShowcaseProducts() {
   }
 }
 
+export function* workerFetchLuckyNumber() {
+  try {
+    const luckyNumber: string = yield call(getLuckyNumber);
+    yield put(actions.fetchLuckyNumberSuccess(luckyNumber));
+  } catch (error) {
+    yield call(handlerErrors, error, actions.fetchLuckyNumberFailure);
+  }
+}
+
 export default function* headerSagas() {
   yield all([
     takeEvery(constants.FETCH_BANNERS_ACTION, workerFetchBanners),
@@ -60,5 +70,6 @@ export default function* headerSagas() {
       constants.FETCH_SHOWCASEPRODUCTS_ACTION,
       workerFetchShowcaseProducts,
     ),
+    takeEvery(constants.FETCH_LUCKYNUMBER_ACTION, workerFetchLuckyNumber),
   ]);
 }

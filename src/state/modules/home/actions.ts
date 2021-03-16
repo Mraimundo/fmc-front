@@ -13,6 +13,9 @@ import {
   FETCH_SHOWCASEPRODUCTS_ACTION,
   FETCH_SHOWCASEPRODUCTS_FAILURE,
   FETCH_SHOWCASEPRODUCTS_SUCCESS,
+  FETCH_LUCKYNUMBER_ACTION,
+  FETCH_LUCKYNUMBER_FAILURE,
+  FETCH_LUCKYNUMBER_SUCCESS,
 } from './constants';
 import { HomeState } from './reducer';
 import { Banner, Highlight, ShowcaseProduct } from './types';
@@ -100,6 +103,34 @@ export const fetchShowcaseSuccess = (
     payload: { showcaseProducts },
   };
 
+export const fetchLuckyNumber = (): ActionCreator<
+  typeof FETCH_LUCKYNUMBER_ACTION
+> =>
+  <const>{
+    type: FETCH_LUCKYNUMBER_ACTION,
+  };
+
+export const fetchLuckyNumberFailure = (
+  error: string,
+): ActionCreatorFailure<typeof FETCH_LUCKYNUMBER_FAILURE> =>
+  <const>{
+    type: FETCH_LUCKYNUMBER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+
+export const fetchLuckyNumberSuccess = (
+  luckyNumber: string | null,
+): ActionCreatorPayload<
+  typeof FETCH_LUCKYNUMBER_SUCCESS,
+  Pick<HomeState, 'luckyNumber'>
+> =>
+  <const>{
+    type: FETCH_LUCKYNUMBER_SUCCESS,
+    payload: { luckyNumber },
+  };
+
 export type HomeActions = ReturnType<
   | typeof fetchBanners
   | typeof fetchBannersFailure
@@ -110,4 +141,7 @@ export type HomeActions = ReturnType<
   | typeof fetchShowcase
   | typeof fetchShowcaseFailure
   | typeof fetchShowcaseSuccess
+  | typeof fetchLuckyNumber
+  | typeof fetchLuckyNumberFailure
+  | typeof fetchLuckyNumberSuccess
 >;
