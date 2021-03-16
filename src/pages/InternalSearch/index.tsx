@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -19,7 +19,6 @@ import InputGlobal from '../../components/SearchForms/InputGlobal';
 import DropDownList from '../../components/SearchForms/DropDownList';
 
 import { getValueAnswer } from '../../state/modules/answer/selectors'
-
 
 import {
   Container,
@@ -60,36 +59,37 @@ interface QuestionsData {
 toast.configure()
 
 const ProducerResearch: React.FC = () => {
-  const value = useSelector(getValueAnswer);
+  const answerList = useSelector(getValueAnswer);
   const location = useLocation();
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
-  // const [answersQuestionId, setAnswersQuestionId] = useState(0);
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
 
-
+  console.log(surveyQuestionId)
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions);
-      setSurveyQuestionId(response.data.data.survey_questions[0].survey_id)
+      setSurveyQuestionId(response.data.data.survey_questions[0].id)
     }
     fetchSurveys();
   }, [location]);
 
 
-  const handleSave = useCallback(async (e) => {
+  const handleSave = useCallback(async (e: any) => {
     e.preventDefault()
     try {
       const list_id = location.search.replace('?item=', '');
       let formData = new FormData();
       const token = localStorage.getItem('@Vendavall:token');
-
-      formData.append('survey_question[0][value]', value);
-      formData.append('survey_question[0][id]', surveyQuestionId);
-      // formData.append('survey_question[0][answer_id]', answersQuestionId.toString());
+      // eslint-disable-next-line
+      Array.from(answerList).map((item: any, index: number) => {
+        formData.append(`survey_question[${index}][value]`, item.value);
+        formData.append(`survey_question[${index}][id]`, surveyQuestionId);
+        formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
+      })
 
       const config = {
         headers: {
@@ -102,23 +102,22 @@ const ProducerResearch: React.FC = () => {
 
       toast.success('Obrigado por responder a nossa pesquisa!', {
         position: toast.POSITION.TOP_RIGHT,
-        // autoClose: false
       })
 
     } catch (error) {
 
       toast.error('Essa pesquisa já foi respondida!', {
         position: toast.POSITION.TOP_RIGHT,
-        // autoClose: false
       })
 
     }
-  }, [location.search, value, surveyQuestionId]);
+  }, [answerList, location.search, surveyQuestionId]);
 
   const typeForm = (
     type: number,
     question: string,
     answers: AnswersData[],
+    id?: number | undefined,
   ) => {
     switch (type) {
       case 2: {
@@ -158,6 +157,8 @@ const ProducerResearch: React.FC = () => {
           <InputGlobal
             quetion={question}
             type="text"
+            id={id}
+
           />
         )
       }
@@ -182,6 +183,7 @@ const ProducerResearch: React.FC = () => {
           <InputGlobal
             quetion={question}
             type="date"
+            id={id}
           />
         )
       }
@@ -190,6 +192,7 @@ const ProducerResearch: React.FC = () => {
           <InputGlobal
             quetion={question}
             type="time"
+            id={id}
           />
         )
       }
@@ -229,10 +232,9 @@ const ProducerResearch: React.FC = () => {
       <Form onSubmit={handleSave}>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers)
+            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id)
           ))
         }
-
         <Button
           type="submit"
         >

@@ -1,3 +1,2 @@
-export const SET_VALUE_ANSWER =
-  '@fmc/answer/SET_VALUE_ANSWER';
-
+export const SET_VALUE_ANSWERS =
+  '@fmc/answer/SET_VALUE_ANSWERS';

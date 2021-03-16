@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../state/modules/answer/actions';
 // import {FiSquare} from 'react-icons/fi';
@@ -24,11 +25,10 @@ interface Props {
   answers: AnswersData[];
 }
 
-
-
 const InputCheckBox: React.FC<Props> = ({ quetion, answers }) => {
+  const location = useLocation();
   const dispatch = useDispatch()
-
+  const survey_question_id = location.search.replace('?item=', '');
   return (
     <Container>
       <CheckBoxContent>
@@ -43,7 +43,11 @@ const InputCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   value={answer.answer}
                   name={`${answer.survey_question_id}`}
                   onChange={(e) => {
-                    dispatch(setValueAnswer(e.target.value))
+                    dispatch(setValueAnswer({
+                      value: (e.target.value),
+                      id: Number(survey_question_id),
+                      answer_id: Number(answer.id),
+                    }));
                   }}
                 />
                 <span>{answer.answer}</span>

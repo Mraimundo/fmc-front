@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../state/modules/answer/actions';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
@@ -27,7 +28,8 @@ interface props {
 
 const LinearScale: React.FC<props> = ({ quetion, answers }) => {
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const survey_question_id = location.search.replace('?item=', '');
   const [pickedUp, setPickedUp] = useState("");
 
   return (
@@ -54,7 +56,11 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
                   id={answer.answer}
                   name={`${answer.survey_question_id}`}
                   onChange={(e) => {
-                    dispatch(setValueAnswer(e.target.value))
+                    dispatch(setValueAnswer({
+                      value: answer.id,
+                      id: Number(survey_question_id),
+                      answer_id: Number(answer.id),
+                    }));
                   }}
                 />
               </label>

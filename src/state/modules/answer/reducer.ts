@@ -1,29 +1,28 @@
-import { Reducer } from 'redux';
-
-import { AnswerActions } from './actions';
+import produce from 'immer'
 import {
-  SET_VALUE_ANSWER,
+  SET_VALUE_ANSWERS,
 } from './constants';
 
-export interface AnswerState {
-  value: string,
-}
+export const initialState = [
 
-export const initialState: AnswerState = {
-  value: "",
-};
+]
 
-const answerReducer: Reducer<AnswerState, AnswerActions> = (
-  state = initialState,
-  action: AnswerActions,
-): AnswerState => {
+const answerReducer = ((state: any = initialState, action: any) => {
   switch (action.type) {
-    case SET_VALUE_ANSWER:
-      return { ...state, value: action.payload };
+    case SET_VALUE_ANSWERS: {
 
+      return produce(state, (draft: { [x: string]: any; }) => {
+        const answerIndex = state.findIndex((item: any) => item.answer_id === action.payload.answer_id)
+        if (answerIndex !== -1) {
+          draft[answerIndex] = action.payload
+          return draft
+        }
+        draft.push(action.payload)
+      })
+    }
     default:
-      return state;
+      return state
   }
-};
+});
 
 export default answerReducer;

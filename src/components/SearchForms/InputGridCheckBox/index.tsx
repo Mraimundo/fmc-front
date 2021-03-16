@@ -1,9 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
-// import {FiSquare} from 'react-icons/fi';
-
-// import { pluginApi } from '../../services/api';
+// import { useDispatch } from 'react-redux';
+// import { setValueAnswer } from '../../../state/modules/answer/actions';
 
 import {
   Container,
@@ -26,9 +23,7 @@ interface Props {
 
 
 const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
-
-  const dispatch = useDispatch()
-
+  // const dispatch = useDispatch()
   return (
     <Container>
       <GridCheckBoxContent>
@@ -44,9 +39,9 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                     id={answer.answer}
                     value={answer.answer}
                     name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer(e.target.value))
-                    }}
+                  // onChange={(e) => {
+                  //   dispatch(setValueAnswer(e.target.value))
+                  // }}
                   />
                   {answer.answer}
                 </label>
