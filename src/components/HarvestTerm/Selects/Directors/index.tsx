@@ -1,38 +1,34 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
-import getData from 'services/cockpit/getRegional';
-import transformer from 'services/cockpit/transformers/regionalToSelectOptions';
+import getData from 'services/cockpit/getDirectors';
+import transformer from 'services/cockpit/transformers/directorsToSelectOptions';
 
-// import { Container } from './styles';
-
-interface RegionalSelectProps {
+interface DirectorsSelectProps {
   className?: string;
   label?: string;
   setValue(value: Option | null): void;
   value: Option | null;
   placeholder?: string;
-  directorName?: string;
 }
 
-const RegionalSelect: React.FC<RegionalSelectProps> = ({
+const DirectorsSelect: React.FC<DirectorsSelectProps> = ({
   className,
-  label,
-  setValue,
   value,
+  setValue,
+  label,
   placeholder,
-  directorName,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getData(directorName);
+    const fetchDirectors = async () => {
+      const result = await getData();
       setOptions(transformer(result));
     };
 
-    fetchData();
-  }, [directorName]);
+    fetchDirectors();
+  }, []);
 
   const loadOptions = useCallback(() => {
     return options;
@@ -51,4 +47,4 @@ const RegionalSelect: React.FC<RegionalSelectProps> = ({
   );
 };
 
-export default RegionalSelect;
+export default DirectorsSelect;
