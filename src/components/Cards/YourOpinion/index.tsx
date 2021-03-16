@@ -9,10 +9,7 @@ import routeMap from 'routes/route-map';
 import {
   Container,
   MiniBox,
-  // Button
 } from './styles';
-
-// import { pluginApi } from '../../../services/api';
 
 interface SurveysData {
   id: number,
@@ -38,22 +35,19 @@ const CardList: React.FC = () => {
     new Array<SurveysData>(),
   );
 
-  const token = localStorage.getItem('@Vendavall:token');
-
-  const config = {
-    headers: {
-      Authorization: token,
-      Accept: 'application/json'
-    }
-  }
 
   useEffect(() => {
     async function fetchSurveys() {
-      const response = await axios.get('https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys', config);
+      const token = localStorage.getItem('@Vendavall:token');
+      const response = await axios.get('https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys', {
+        headers: {
+          Authorization: token,
+        },
+      });
       setYourOpinion(response.data.available_surveys);
     }
     fetchSurveys();
-  });
+  }, []);
 
   return (
     <Container>
@@ -68,8 +62,9 @@ const CardList: React.FC = () => {
                ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}
               `)}
             </span>
-            <p>{youropinion.description.replace("<p>", "").replace("</p>", "") || 'somos a maior produtor de soja'}</p>
-            <h2>Vale 300 FMC Coins</h2>
+            <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
+            {/* <p>{youropinion.description.replace("<p>", "").replace("</p>", "") || 'somos a maior produtor de soja'}</p> */}
+            {/* <h2>Vale 300 FMC Coins</h2> */}
             <Link to={`${routeMap.internal}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}

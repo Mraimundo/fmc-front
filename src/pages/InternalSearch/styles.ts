@@ -18,7 +18,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content:center;
@@ -28,7 +28,6 @@ export const Form = styled.div`
 export const Content = styled.div`
   margin-bottom: 25px;
   h2 {
-    width: 313px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 24px; 
@@ -37,7 +36,6 @@ export const Content = styled.div`
     margin-bottom: 5px;
   }
   p {
-    width: 313px;
     font-weight: normal;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 14px;

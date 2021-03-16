@@ -58,8 +58,9 @@ const Cards: React.FC = () => {
                ${formatDate(answered.end_datetime, 'dd/MM/yyyy')}
               `)}
             </span>
-            <p>{(answered.description.replace("<p>", "").replace("</p>", "")) || 'Qual é o seu nível de interesse por produtos de beleza'}</p>
-            <h2>Vale 300 FMC Coins</h2>
+            <p dangerouslySetInnerHTML={{ __html: answered.description }}></p>
+            {/* <p>{(answered.description.replace("<p>", "").replace("</p>", "")) || 'Qual é o seu nível de interesse por produtos de beleza'}</p> */}
+            {/* <h2>Vale 300 FMC Coins</h2> */}
             <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
             <Link to={`${routeMap.internal}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>

@@ -2,15 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-
-  h1 {
-    font-size: 24px;
-    color: #3B302A;
-  }
-
 `;
 
-export const FormControlStar = styled.div`
+export const InputControlScale = styled.div`
   width: 100%;
   display: flex;
   align-items:center;
@@ -26,31 +20,42 @@ export const FormControlStar = styled.div`
     }
 `;
 
-export const FormGroup = styled.div`
+export const InputGroup = styled.div`
   width: 60%;
   display: flex;
   align-items:center;
   justify-content: space-between;
+  flex-direction: row;
   margin-top: 25px;
   padding: 20px;
+  position: relative;
 
-  div {
+  label {
     display: flex;
     align-items:center;
     flex-direction: column;
     color: #65554D;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: Regular;
+    /* line-height: 24px; */
+    top: 50;
 
-    span {
-      font-size: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: Regular;
-      line-height: 24px;
+    div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
 
     svg {
       margin-top: 10px;
       width: 26px;
       height: 26px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input {
+      display: none;
     }
   }
 `;

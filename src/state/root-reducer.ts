@@ -12,7 +12,8 @@ import goals, { GoalsState } from './modules/goals/reducer';
 import pointsSimulator from './modules/points-simulator/reducer';
 import { PointsSimulatorState } from './modules/points-simulator/interfaces';
 import weather, { WeatherState } from './modules/weather/reducer';
-import answerReducer, { AnswerState } from './modules/answer/reducer';
+import answerReducer from './modules/answer/reducer';
+// import { SurveyQuetionState } from './modules/answer/actions';
 
 export type StoreState = {
   pointManagement: PointManagementState;
@@ -22,7 +23,7 @@ export type StoreState = {
   goals: GoalsState;
   pointsSimulator: PointsSimulatorState;
   weather: WeatherState;
-  answerReducer: AnswerState;
+  answerReducer: any;
 };
 
 export default combineReducers<StoreState>({

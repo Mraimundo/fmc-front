@@ -2,54 +2,46 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-
-  h1 {
-    font-size: 24px;
-    color: #3B302A;
-  }
-
 `;
 
-
-export const FormSquare = styled.div`
+export const CheckBoxContent = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 33px;
   border-left-width: 1px;
   border-right-width: 1px;
   margin-top: 23px;
     p {
-      font-size: 14px;
+      font-size: 16px;
       color: #000;
     }
 `;
 
-export const FormGroupSquare = styled.div`
-  width: 40%;
+export const CheckBoxGroup = styled.div`
+  width: 100%;
   margin-top: 25px;
-  transform: translateX(250px);
+  display: flex;
+  flex-direction: column;
+
+  align-items:center;
   
-  div {
+  label {
     display: flex;
-    align-items:center;
-    justify-content: space-around; 
+    justify-content: space-between;
+    align-items: center;
     color: #65554D;
 
+    input {
+      margin: 0 20px;
+    }
+
     span {
-      width: 207px;
-      font-size: 16px;
+      /* width: 207px;
+      font-size: 16px; */
       font-family: Arial, Helvetica, sans-serif;
       font-weight: Regular;
       line-height: 24px;
     }
 
-    strong {
-      /* margin-left: 10px; */
-    }
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
   }
 `;
 
