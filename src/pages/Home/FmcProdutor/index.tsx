@@ -17,9 +17,13 @@ import {
 } from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { Banners, Title, Highlights, Showcase, AddNF } from 'components/Home';
+import IndicatorProducer from 'components/Home/IndicateProducer';
+import SearchChannels from 'components/Home/SearchChannels';
+
+
 import CoinQuotation from 'components/Header/CoinQuotation';
 // import FlyingHigh from 'components/Home/FlyingHigh';
-import { Wrapper, ShowCaseWrapper, HomeWrapper } from './styles';
+import { Wrapper, IndicateWrapper, IndicateContent, ShowCaseWrapper, HomeWrapper } from './styles';
 
 const FmcProdutorHome: React.FC = () => {
   const dispatch = useDispatch();
@@ -62,6 +66,12 @@ const FmcProdutorHome: React.FC = () => {
         <Title>Destaques </Title>
         {!!highlights && <Highlights items={highlights} />}
       </Wrapper>
+      <IndicateWrapper>
+        <IndicateContent>
+          <IndicatorProducer />
+          <SearchChannels />
+        </IndicateContent>
+      </IndicateWrapper>
       <ShowCaseWrapper>
         <Wrapper>
           <Title reverse>Vitrine de Prêmios </Title>
