@@ -74,8 +74,14 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
   const maxLengthInvoicePoints = useMemo<number>(() => {
     if (!maxInvoicePercentage || !totalPointsResaleCooperative) return 0;
 
-    return totalPointsResaleCooperative * (maxInvoicePercentage / 100);
-  }, [maxInvoicePercentage, totalPointsResaleCooperative]);
+    const maxPercentVaule =
+      totalPointsResaleCooperative * (maxInvoicePercentage / 100);
+    const maxInvoiceValue = totalPointsResaleCooperative - marketplacePoints;
+
+    if (maxInvoiceValue < maxPercentVaule) return maxInvoiceValue;
+
+    return maxPercentVaule;
+  }, [marketplacePoints, maxInvoicePercentage, totalPointsResaleCooperative]);
 
   const partialDistribution = pointsToDistribute.allowPartialDistribution
     ? FinishedDistributionPossibilities.Rc
