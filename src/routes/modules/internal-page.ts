@@ -1,12 +1,12 @@
 import routeMap from 'routes/route-map';
-import InternalSearch from 'pages/InternalPage/InternalSearch';
+import List from 'pages/InternalPage/List';
 import View from 'pages/InternalPage/View';
 import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
   {
     path: routeMap.InternalPage.questions,
-    component: InternalSearch,
+    component: List,
     accessPage: 'Respoder pesquisas',
   },
   {

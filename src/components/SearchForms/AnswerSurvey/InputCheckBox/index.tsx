@@ -2,9 +2,6 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
-// import {FiSquare} from 'react-icons/fi';
-
-// import { pluginApi } from '../../services/api';
 
 import {
   Container,

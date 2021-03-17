@@ -39,7 +39,7 @@ const InputCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   id={answer.answer}
                   value={answer.answer}
                   name={`${answer.survey_question_id}`}
-                  checked={answer.survey_participant_answers.length > 0 ? true : false}
+                  checked={answer.survey_participant_answers ? true : false}
                 />
                 <span>{answer.answer}</span>
               </label>

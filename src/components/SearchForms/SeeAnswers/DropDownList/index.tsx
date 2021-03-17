@@ -17,6 +17,7 @@ interface AnswersData {
   type: string;
   scale_type: string;
   answer: string;
+  survey_participant_answers: any;
 }
 
 interface Props {
@@ -45,7 +46,11 @@ const DropDownList: React.FC<Props> = ({ quetion, answers }) => {
       >
         <option value="" hidden>Selecione uma opção</option>
         {answers.map(item => (
-          <option key={item.id} value={item.id}>{item.answer}
+          <option
+            key={item.id}
+            value={item.id}
+            selected={item.survey_participant_answers}
+          >{item.answer}
 
           </option>
 

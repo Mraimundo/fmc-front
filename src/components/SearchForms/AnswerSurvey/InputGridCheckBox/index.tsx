@@ -1,6 +1,7 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
-// import { setValueAnswer } from '../../../state/modules/answer/actions';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,
@@ -23,7 +24,10 @@ interface Props {
 
 
 const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
-  // const dispatch = useDispatch()
+  const location = useLocation();
+  const dispatch = useDispatch()
+  const survey_question_id = location.search.replace('?item=', '');
+
   return (
     <Container>
       <GridCheckBoxContent>
@@ -39,11 +43,40 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                     id={answer.answer}
                     value={answer.answer}
                     name={`${answer.survey_question_id}`}
-                  // onChange={(e) => {
-                  //   dispatch(setValueAnswer(e.target.value))
-                  // }}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
                   />
-                  {answer.answer}
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
                 </label>
               ))
             }

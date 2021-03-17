@@ -71,9 +71,15 @@ const ProducerResearch: React.FC = () => {
       setYourOpinion(response.data.data);
       setSurveyQuestionId(response.data.data.survey_questions[0].id)
       // eslint-disable-next-line
-      response.data.data.survey_questions.map((element: QuestionsData) => {
-        element.survey_question_answers.map(item => item.survey_participant_answers.length > 0 && setQuestions([...questions, element]))
-      });
+      // response.data.data.survey_questions.map((element: QuestionsData) => {
+      //   console.log(element)
+
+      //   element.survey_question_answers.map(item => {
+      //     // console.log(item)
+      //     item.survey_participant_answers.length > 0 && setQuestions([...questions, element])
+      //   })
+      // });
+      setQuestions(response.data.data.survey_questions)
     }
     fetchSurveys();
     // eslint-disable-next-line
