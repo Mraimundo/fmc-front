@@ -309,13 +309,13 @@ export function* workerSavePartialDistribution() {
       totalPointsTeamAwards: pointsTeamAwards,
     };
 
-    yield call<any>(
-      savePartialDistributionService,
-      pointsToDistribute.generalPointId || 0,
-      {
-        settings: JSON.stringify(payload),
-      },
-    );
+    const pointId = pointsToDistribute.generalPointId
+      ? pointsToDistribute.generalPointId
+      : pointsToDistribute.teamAwards?.pointId;
+
+    yield call<any>(savePartialDistributionService, pointId || 0, {
+      settings: JSON.stringify(payload),
+    });
 
     yield put(actions.savePartialDistributionSuccess());
   } catch (error) {

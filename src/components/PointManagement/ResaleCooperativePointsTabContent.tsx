@@ -85,8 +85,6 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
   const isFinished = finishedDistribution === (Rc || All);
 
   const handleRescueClick = useCallback(() => {
-    console.log('ON CLICK DISTRIBUTION', partialDistribution, availableScore);
-
     if (onClickRescue && availableScore > 0) {
       onClickRescue();
       return;

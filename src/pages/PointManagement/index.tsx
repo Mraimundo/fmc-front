@@ -26,6 +26,7 @@ import {
 } from 'components/PointManagement';
 import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
 import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
+import history from 'services/history';
 import {
   Wrapper,
   Panel,
@@ -85,11 +86,16 @@ const PointManagement: React.FC = () => {
   }, [errorOnDistribute, addToast]);
 
   useEffect(() => {
-    if (finishedDistribution)
+    if (finishedDistribution) {
       addToast({
         title: 'Parabéns, você finalizou a distribuição de pontos!',
         type: 'success',
       });
+
+      setTimeout(() => {
+        history.push('/');
+      }, 3000);
+    }
   }, [finishedDistribution, addToast]);
 
   useEffect(() => {
