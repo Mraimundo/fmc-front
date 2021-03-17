@@ -22,6 +22,8 @@ const getResponse = (
 
   if (!checked) return null;
 
+  const savedSettingPoints = sellerAwardValues || rebatePoints;
+
   return constructPointsToDistribute({
     teamAwardsPoints: sellerAwardValues?.point.value || 0,
     teamAwardsPointId: sellerAwardValues?.point.id || 0,
@@ -30,8 +32,8 @@ const getResponse = (
     resaleCooperativeMaxInvoicePercentage:
       rebatePoints?.establishment.dc_max_percentage || 0,
     savedSetttig: {
-      data: rebatePoints?.saved_setting.data || '',
-      date: rebatePoints?.saved_setting.date || '',
+      data: savedSettingPoints?.saved_setting.data || '',
+      date: savedSettingPoints?.saved_setting.date || '',
     },
   });
 };
