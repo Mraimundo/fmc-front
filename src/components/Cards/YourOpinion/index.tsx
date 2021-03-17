@@ -65,7 +65,7 @@ const CardList: React.FC = () => {
             <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
             {/* <p>{youropinion.description.replace("<p>", "").replace("</p>", "") || 'somos a maior produtor de soja'}</p> */}
             {/* <h2>Vale 300 FMC Coins</h2> */}
-            <Link to={`${routeMap.internal}?item=${youropinion.id}`} className="btn">Responder</Link>
+            <Link to={`${routeMap.InternalPage.questions}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}
     </Container>

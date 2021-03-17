@@ -2,23 +2,23 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
 
-import { pluginApi } from '../../services/api';
+import { pluginApi } from '../../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../components/SearchForms/LinearScale';
-import MultipleLinearScale from '../../components/SearchForms/MultipleLinearScale';
-import InputCheckBox from '../../components/SearchForms/InputCheckBox';
-import InputGridCheckBox from '../../components/SearchForms/InputGridCheckBox';
-import InputGridRadio from '../../components/SearchForms/InputGridRadio';
-import InputRadios from '../../components/SearchForms/InputRadios';
-import InputGlobal from '../../components/SearchForms/InputGlobal';
-import DropDownList from '../../components/SearchForms/DropDownList';
+import StarButtonLine from '../../../components/SearchForms/AnswerSurvey/LinearScale';
+import MultipleLinearScale from '../../../components/SearchForms/AnswerSurvey/MultipleLinearScale';
+import InputCheckBox from '../../../components/SearchForms/AnswerSurvey/InputCheckBox';
+import InputGridCheckBox from '../../../components/SearchForms/AnswerSurvey/InputGridCheckBox';
+import InputGridRadio from '../../../components/SearchForms/AnswerSurvey/InputGridRadio';
+import InputRadios from '../../../components/SearchForms/AnswerSurvey/InputRadios';
+import InputGlobal from '../../../components/SearchForms/AnswerSurvey/InputGlobal';
+import DropDownList from '../../../components/SearchForms/AnswerSurvey/DropDownList';
 
-import { getValueAnswer } from '../../state/modules/answer/selectors'
+import { getValueAnswer } from '../../../state/modules/answer/selectors'
 
 import {
   Container,
@@ -61,11 +61,13 @@ toast.configure()
 const ProducerResearch: React.FC = () => {
   const answerList = useSelector(getValueAnswer);
   const location = useLocation();
+  const history = useHistory();
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
+  // const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
 
-  console.log(surveyQuestionId)
+
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
@@ -77,7 +79,6 @@ const ProducerResearch: React.FC = () => {
     fetchSurveys();
   }, [location]);
 
-
   const handleSave = useCallback(async (e: any) => {
     e.preventDefault()
     try {
@@ -86,6 +87,7 @@ const ProducerResearch: React.FC = () => {
       const token = localStorage.getItem('@Vendavall:token');
       // eslint-disable-next-line
       Array.from(answerList).map((item: any, index: number) => {
+        // console.log(item);
         formData.append(`survey_question[${index}][value]`, item.value);
         formData.append(`survey_question[${index}][id]`, surveyQuestionId);
         formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
@@ -102,15 +104,15 @@ const ProducerResearch: React.FC = () => {
 
       toast.success('Obrigado por responder a nossa pesquisa!', {
         position: toast.POSITION.TOP_RIGHT,
-      })
-
+      });
+      history.push('/pesquisas-produtor');
     } catch (error) {
 
       toast.error('Essa pesquisa já foi respondida!', {
         position: toast.POSITION.TOP_RIGHT,
-      })
-
+      });
     }
+    // eslint-disable-next-line
   }, [answerList, location.search, surveyQuestionId]);
 
   const typeForm = (
@@ -207,7 +209,6 @@ const ProducerResearch: React.FC = () => {
       default:
         return ""
     }
-
   }
 
   return (
@@ -217,7 +218,6 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
-          {/* <span>Vale 300 FMC Coins</span> */}
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />

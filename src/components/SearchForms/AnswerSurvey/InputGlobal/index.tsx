@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { setValueAnswer } from '../../../state/modules/answer/actions';
+import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,

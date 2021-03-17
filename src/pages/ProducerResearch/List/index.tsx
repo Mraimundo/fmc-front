@@ -7,8 +7,6 @@ import {
 }
   from './styles';
 
-// import YourOpinion from '../../components/Cards/YourOpinion';
-// import Answered from '../../components/Cards/AnsweredSurveys';
 
 import YourOpinion from 'components/Cards/YourOpinion';
 // import { Button } from 'components/shared';
@@ -31,20 +29,10 @@ const ProducerResearch: React.FC = () => {
       <CardContentHeader>
         <h2>Sua opinião vale muito</h2>
         <YourOpinion />
-        {/* {pagination.current_page !== pagination.last_page && (
-          <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
-            Carregar mais pesquisas
-          </Button>
-        )} */}
       </CardContentHeader>
       <CardContentFooter>
         <h2>Pesquisas Respondidas</h2>
         <Answered />
-        {/* {pagination.current_page !== pagination.last_page && (
-          <Button buttonRole="primary" type="button" onClick={handleLoadMore}>
-            Carregar mais pesquisas
-          </Button>
-        )} */}
       </CardContentFooter>
     </Container>
   );

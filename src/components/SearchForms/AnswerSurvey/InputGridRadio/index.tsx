@@ -2,7 +2,7 @@ import React from "react";
 import Radio from "@material-ui/core/Radio";
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
+import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,

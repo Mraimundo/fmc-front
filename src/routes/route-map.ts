@@ -20,7 +20,10 @@ export default {
   products: '/solucoes',
   producer: '/indicar-produtor',
   research: '/pesquisas-produtor',
-  internal: '/resultado-pesquisa',
+  InternalPage: {
+    questions: '/responder-pesquisa',
+    answers: '/ver-respostas',
+  },
   profile: '/editar-perfil',
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',
