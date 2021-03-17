@@ -67,7 +67,7 @@ const Cards: React.FC = () => {
             </span>
             <p dangerouslySetInnerHTML={{ __html: answered.description }}></p>
             <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
-            <Link to={`${routeMap.internal}?item=${answered.id}`} className="btn">Ver respostas</Link>
+            <Link to={`${routeMap.InternalPage.answers}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>
         ))}
     </Container>

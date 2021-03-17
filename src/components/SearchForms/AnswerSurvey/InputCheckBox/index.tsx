@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../state/modules/answer/actions';
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { setValueAnswer } from '../../../../state/modules/answer/actions';
+// import {FiSquare} from 'react-icons/fi';
 
 // import { pluginApi } from '../../services/api';
 
 import {
   Container,
-  InputControlScale,
-  InputGroup
-
+  CheckBoxContent,
+  CheckBoxGroup
 } from './styles';
 
 interface AnswersData {
@@ -21,55 +20,44 @@ interface AnswersData {
   answer: string;
 }
 
-interface props {
+interface Props {
   quetion: string;
   answers: AnswersData[];
 }
 
-const LinearScale: React.FC<props> = ({ quetion, answers }) => {
-  const dispatch = useDispatch();
+const InputCheckBox: React.FC<Props> = ({ quetion, answers }) => {
   const location = useLocation();
+  const dispatch = useDispatch()
   const survey_question_id = location.search.replace('?item=', '');
-  const [pickedUp, setPickedUp] = useState("");
-
   return (
     <Container>
-      <InputControlScale>
+      <CheckBoxContent>
         <p>{quetion}</p>
-        <InputGroup>
+        <CheckBoxGroup>
           {
             answers.map(answer => (
-              <label
-                htmlFor={answer.answer}
-                key={answer.id}
-                onClick={() => setPickedUp(answer.answer)}
-              >
-                <div>
-                  {answer.answer}
-                  {pickedUp === "" ? <AiOutlineStar />
-                    : answer.answer <= pickedUp ? <AiFillStar />
-                      : <AiOutlineStar />
-                  }
-                </div>
+              <label htmlFor={answer.answer} key={answer.id}>
                 <input
                   type="checkbox"
                   id={answer.answer}
+                  value={answer.answer}
                   name={`${answer.survey_question_id}`}
                   onChange={(e) => {
                     dispatch(setValueAnswer({
-                      value: answer.id,
+                      value: (e.target.value),
                       id: Number(survey_question_id),
                       answer_id: Number(answer.id),
                     }));
                   }}
                 />
+                <span>{answer.answer}</span>
               </label>
             ))
           }
-        </InputGroup>
-      </InputControlScale>
+        </CheckBoxGroup>
+      </CheckBoxContent>
     </Container>
   );
 };
 
-export default LinearScale;
+export default InputCheckBox;

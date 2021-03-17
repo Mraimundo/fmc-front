@@ -9,14 +9,14 @@ import { pluginApi } from '../../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../../components/SearchForms/LinearScale';
-import MultipleLinearScale from '../../../components/SearchForms/MultipleLinearScale';
-import InputCheckBox from '../../../components/SearchForms/InputCheckBox';
-import InputGridCheckBox from '../../../components/SearchForms/InputGridCheckBox';
-import InputGridRadio from '../../../components/SearchForms/InputGridRadio';
-import InputRadios from '../../../components/SearchForms/InputRadios';
-import InputGlobal from '../../../components/SearchForms/InputGlobal';
-import DropDownList from '../../../components/SearchForms/DropDownList';
+import StarButtonLine from '../../../components/SearchForms/SeeAnswers/LinearScale';
+import MultipleLinearScale from '../../../components/SearchForms/SeeAnswers/MultipleLinearScale';
+import InputCheckBox from '../../../components/SearchForms/SeeAnswers/InputCheckBox';
+import InputGridCheckBox from '../../../components/SearchForms/SeeAnswers/InputGridCheckBox';
+import InputGridRadio from '../../../components/SearchForms/SeeAnswers/InputGridRadio';
+import InputRadios from '../../../components/SearchForms/SeeAnswers/InputRadios';
+import InputGlobal from '../../../components/SearchForms/SeeAnswers/InputGlobal';
+import DropDownList from '../../../components/SearchForms/SeeAnswers/DropDownList';
 
 import { getValueAnswer } from '../../../state/modules/answer/selectors'
 
@@ -80,51 +80,39 @@ const ProducerResearch: React.FC = () => {
     fetchSurveys();
   }, [location]);
 
-  useEffect(() => {
-    async function fetchSurveys() {
-      const list_id = location.search.replace('?item=', '');
-      const response = await axios.get(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`);
-      setSeeAnswers(response.data.data);
+  // const handleSave = useCallback(async (e: any) => {
+  //   e.preventDefault()
+  //   try {
+  //     const list_id = location.search.replace('?item=', '');
+  //     let formData = new FormData();
+  //     const token = localStorage.getItem('@Vendavall:token');
+  //     // eslint-disable-next-line
+  //     Array.from(answerList).map((item: any, index: number) => {
+  //       formData.append(`survey_question[${index}][value]`, item.value);
+  //       formData.append(`survey_question[${index}][id]`, surveyQuestionId);
+  //       formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
+  //     })
 
-      console.log(response.data)
-    }
-    fetchSurveys();
-  }, [location]);
+  //     const config = {
+  //       headers: {
+  //         'content-type': 'multipart/form-data',
+  //         Authorization: token,
+  //         Accept: 'application/json'
+  //       }
+  //     }
+  //     await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
 
+  //     toast.success('Obrigado por responder a nossa pesquisa!', {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     history.push('/pesquisas-produtor');
+  //   } catch (error) {
 
-  const handleSave = useCallback(async (e: any) => {
-    e.preventDefault()
-    try {
-      const list_id = location.search.replace('?item=', '');
-      let formData = new FormData();
-      const token = localStorage.getItem('@Vendavall:token');
-      // eslint-disable-next-line
-      Array.from(answerList).map((item: any, index: number) => {
-        formData.append(`survey_question[${index}][value]`, item.value);
-        formData.append(`survey_question[${index}][id]`, surveyQuestionId);
-        formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
-      })
-
-      const config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-          Authorization: token,
-          Accept: 'application/json'
-        }
-      }
-      await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-
-      toast.success('Obrigado por responder a nossa pesquisa!', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      history.push('/pesquisas-produtor');
-    } catch (error) {
-
-      toast.error('Essa pesquisa já foi respondida!', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
-  }, [answerList, location.search, surveyQuestionId]);
+  //     toast.error('Essa pesquisa já foi respondida!', {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //   }
+  // }, [answerList, location.search, surveyQuestionId]);
 
   const typeForm = (
     type: number,
@@ -239,19 +227,19 @@ const ProducerResearch: React.FC = () => {
 
       <hr />
 
-      <Title>Perguntas</Title>
+      <Title>Respostas</Title>
 
-      <Form onSubmit={handleSave}>
+      <Form>
         {
           questions.map(question => (
             typeForm(Number(question.type), question.question, question.survey_question_answers, question.id)
           ))
         }
-        <Button
+        {/* <Button
           type="submit"
         >
           Salvar
-        </Button>
+        </Button> */}
       </Form>
     </Container >
   );

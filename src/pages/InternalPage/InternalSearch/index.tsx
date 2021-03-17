@@ -9,14 +9,14 @@ import { pluginApi } from '../../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../../components/SearchForms/LinearScale';
-import MultipleLinearScale from '../../../components/SearchForms/MultipleLinearScale';
-import InputCheckBox from '../../../components/SearchForms/InputCheckBox';
-import InputGridCheckBox from '../../../components/SearchForms/InputGridCheckBox';
-import InputGridRadio from '../../../components/SearchForms/InputGridRadio';
-import InputRadios from '../../../components/SearchForms/InputRadios';
-import InputGlobal from '../../../components/SearchForms/InputGlobal';
-import DropDownList from '../../../components/SearchForms/DropDownList';
+import StarButtonLine from '../../../components/SearchForms/AnswerSurvey/LinearScale';
+import MultipleLinearScale from '../../../components/SearchForms/AnswerSurvey/MultipleLinearScale';
+import InputCheckBox from '../../../components/SearchForms/AnswerSurvey/InputCheckBox';
+import InputGridCheckBox from '../../../components/SearchForms/AnswerSurvey/InputGridCheckBox';
+import InputGridRadio from '../../../components/SearchForms/AnswerSurvey/InputGridRadio';
+import InputRadios from '../../../components/SearchForms/AnswerSurvey/InputRadios';
+import InputGlobal from '../../../components/SearchForms/AnswerSurvey/InputGlobal';
+import DropDownList from '../../../components/SearchForms/AnswerSurvey/DropDownList';
 
 import { getValueAnswer } from '../../../state/modules/answer/selectors'
 
