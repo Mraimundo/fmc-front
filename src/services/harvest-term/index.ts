@@ -10,7 +10,7 @@ export interface ApiResponse {
 
 export const getHarvests = async (cpf = ''): Promise<Harvest[]> => {
   const url = cpf ? `${HARVEST_RESOURCE}?cpf=${cpf}` : HARVEST_RESOURCE;
-  const { data } = await vendavallApi.get<ApiResponse>(url);
-  console.log('HARVESTS', data);
-  return transformFromHarvestApi(data.harvests);
+  const { data } = await vendavallApi.get<HarvestApi[]>(url);
+
+  return transformFromHarvestApi(data);
 };
