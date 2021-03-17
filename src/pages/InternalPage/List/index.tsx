@@ -87,7 +87,7 @@ const ProducerResearch: React.FC = () => {
       const token = localStorage.getItem('@Vendavall:token');
       // eslint-disable-next-line
       Array.from(answerList).map((item: any, index: number) => {
-        console.log(item);
+        // console.log(item);
         formData.append(`survey_question[${index}][value]`, item.value);
         formData.append(`survey_question[${index}][id]`, surveyQuestionId);
         formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
