@@ -10,9 +10,15 @@ import {
   Container,
 } from './styles';
 
+interface SurveyAnswer {
+  id: number;
+  answer: string;
+}
+
 interface AnswersData {
   id: number;
   survey_question_id: number;
+  survey_participant_answers: SurveyAnswer[];
   type: string;
   scale_type: string;
   answer: string;
@@ -29,7 +35,6 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const survey_question_id = location.search.replace('?item=', '');
-  // const [selectRating, setSelectRating] = React.useState<number | null>(null)
   return (
     <Container>
       <p>{quetion}</p>

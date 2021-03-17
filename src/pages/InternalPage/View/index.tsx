@@ -1,8 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify'
-import axios from 'axios'
-import { useLocation, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
 
 import { pluginApi } from '../../../services/api';
@@ -18,8 +15,6 @@ import InputRadios from '../../../components/SearchForms/SeeAnswers/InputRadios'
 import InputGlobal from '../../../components/SearchForms/SeeAnswers/InputGlobal';
 import DropDownList from '../../../components/SearchForms/SeeAnswers/DropDownList';
 
-import { getValueAnswer } from '../../../state/modules/answer/selectors'
-
 import {
   Container,
   Content,
@@ -27,7 +22,6 @@ import {
   MiniBox,
   Title,
   Form,
-  Button
 } from './styles';
 
 interface SurveysDataForm {
@@ -40,7 +34,13 @@ interface SurveysDataForm {
   event: Event;
 }
 
+interface SurveyAnswer {
+  id: number;
+  answer: string;
+}
+
 interface AnswersData {
+  survey_participant_answers: SurveyAnswer[];
   id: number;
   survey_question_id: number;
   type: string;
@@ -56,63 +56,28 @@ interface QuestionsData {
   survey_question_answers: AnswersData[];
 }
 
-toast.configure()
-
 const ProducerResearch: React.FC = () => {
-  const answerList = useSelector(getValueAnswer);
   const location = useLocation();
-  const history = useHistory();
+  // eslint-disable-next-line
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
-  const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
 
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
-
 
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
       setYourOpinion(response.data.data);
-      setQuestions(response.data.data.survey_questions);
       setSurveyQuestionId(response.data.data.survey_questions[0].id)
+      // eslint-disable-next-line
+      response.data.data.survey_questions.map((element: QuestionsData) => {
+        element.survey_question_answers.map(item => item.survey_participant_answers.length > 0 && setQuestions([...questions, element]))
+      });
     }
     fetchSurveys();
+    // eslint-disable-next-line
   }, [location]);
-
-  // const handleSave = useCallback(async (e: any) => {
-  //   e.preventDefault()
-  //   try {
-  //     const list_id = location.search.replace('?item=', '');
-  //     let formData = new FormData();
-  //     const token = localStorage.getItem('@Vendavall:token');
-  //     // eslint-disable-next-line
-  //     Array.from(answerList).map((item: any, index: number) => {
-  //       formData.append(`survey_question[${index}][value]`, item.value);
-  //       formData.append(`survey_question[${index}][id]`, surveyQuestionId);
-  //       formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
-  //     })
-
-  //     const config = {
-  //       headers: {
-  //         'content-type': 'multipart/form-data',
-  //         Authorization: token,
-  //         Accept: 'application/json'
-  //       }
-  //     }
-  //     await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-
-  //     toast.success('Obrigado por responder a nossa pesquisa!', {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //     });
-  //     history.push('/pesquisas-produtor');
-  //   } catch (error) {
-
-  //     toast.error('Essa pesquisa já foi respondida!', {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //     });
-  //   }
-  // }, [answerList, location.search, surveyQuestionId]);
 
   const typeForm = (
     type: number,
@@ -217,7 +182,6 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
-          {/* <span>Vale 300 FMC Coins</span> */}
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
@@ -235,11 +199,6 @@ const ProducerResearch: React.FC = () => {
             typeForm(Number(question.type), question.question, question.survey_question_answers, question.id)
           ))
         }
-        {/* <Button
-          type="submit"
-        >
-          Salvar
-        </Button> */}
       </Form>
     </Container >
   );
