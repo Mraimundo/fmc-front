@@ -2,23 +2,23 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
 
-import { pluginApi } from '../../services/api';
+import { pluginApi } from '../../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../components/SearchForms/LinearScale';
-import MultipleLinearScale from '../../components/SearchForms/MultipleLinearScale';
-import InputCheckBox from '../../components/SearchForms/InputCheckBox';
-import InputGridCheckBox from '../../components/SearchForms/InputGridCheckBox';
-import InputGridRadio from '../../components/SearchForms/InputGridRadio';
-import InputRadios from '../../components/SearchForms/InputRadios';
-import InputGlobal from '../../components/SearchForms/InputGlobal';
-import DropDownList from '../../components/SearchForms/DropDownList';
+import StarButtonLine from '../../../components/SearchForms/LinearScale';
+import MultipleLinearScale from '../../../components/SearchForms/MultipleLinearScale';
+import InputCheckBox from '../../../components/SearchForms/InputCheckBox';
+import InputGridCheckBox from '../../../components/SearchForms/InputGridCheckBox';
+import InputGridRadio from '../../../components/SearchForms/InputGridRadio';
+import InputRadios from '../../../components/SearchForms/InputRadios';
+import InputGlobal from '../../../components/SearchForms/InputGlobal';
+import DropDownList from '../../../components/SearchForms/DropDownList';
 
-import { getValueAnswer } from '../../state/modules/answer/selectors'
+import { getValueAnswer } from '../../../state/modules/answer/selectors'
 
 import {
   Container,
@@ -61,11 +61,14 @@ toast.configure()
 const ProducerResearch: React.FC = () => {
   const answerList = useSelector(getValueAnswer);
   const location = useLocation();
+  const history = useHistory();
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
+  const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
+
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
 
-  console.log(surveyQuestionId)
+
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
@@ -73,6 +76,17 @@ const ProducerResearch: React.FC = () => {
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions);
       setSurveyQuestionId(response.data.data.survey_questions[0].id)
+    }
+    fetchSurveys();
+  }, [location]);
+
+  useEffect(() => {
+    async function fetchSurveys() {
+      const list_id = location.search.replace('?item=', '');
+      const response = await axios.get(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`);
+      setSeeAnswers(response.data.data);
+
+      console.log(response.data)
     }
     fetchSurveys();
   }, [location]);
@@ -102,14 +116,13 @@ const ProducerResearch: React.FC = () => {
 
       toast.success('Obrigado por responder a nossa pesquisa!', {
         position: toast.POSITION.TOP_RIGHT,
-      })
-
+      });
+      history.push('/pesquisas-produtor');
     } catch (error) {
 
       toast.error('Essa pesquisa já foi respondida!', {
         position: toast.POSITION.TOP_RIGHT,
-      })
-
+      });
     }
   }, [answerList, location.search, surveyQuestionId]);
 
@@ -207,7 +220,6 @@ const ProducerResearch: React.FC = () => {
       default:
         return ""
     }
-
   }
 
   return (

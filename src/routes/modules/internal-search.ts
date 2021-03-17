@@ -1,5 +1,5 @@
 import routeMap from 'routes/route-map';
-import InternalSearch from 'pages/InternalSearch';
+import InternalSearch from 'pages/InternalPage/InternalSearch';
 import { RouteModule } from './route-module';
 
 const routes: RouteModule[] = [
@@ -8,6 +8,7 @@ const routes: RouteModule[] = [
     component: InternalSearch,
     accessPage: 'Resultado da pesquisa',
   },
+
 ];
 
 export default routes;
