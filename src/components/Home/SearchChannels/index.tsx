@@ -5,7 +5,6 @@ import { pluginApi } from '../../../services/api';
 
 import { Container } from './styles';
 
-import detail from '../../../assets/images/mini-banner-detail.svg';
 
 const Bainer: React.FC = () => {
   const [indication, setIndication] = useState('');
@@ -81,7 +80,6 @@ const Bainer: React.FC = () => {
             </div>
             <div className="color-content" />
           </div>
-          <img src={detail} alt="Detalhe da image" />
         </main>
       </div>
     </Container>
