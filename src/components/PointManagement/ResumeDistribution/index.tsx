@@ -32,7 +32,10 @@ import {
   getIsEnabledToAssignPoints,
   getIsEnabledToDistributePoints,
 } from 'state/modules/point-management/team-awards/selectors';
+import { getIsEnabledToRescue } from 'state/modules/point-management/resale-cooperative/selectors';
 import { useToast } from 'context/ToastContext';
+// import { Tooltip } from 'components/shared';
+import Tooltip from '@material-ui/core/Tooltip';
 import ResumeWidget from './ResumeWidget';
 import PointsToDistribute from './PointsToDistribute';
 import RemoveAllScores from '../RemoveAllScores';
@@ -52,6 +55,7 @@ const ResumeDistribution: React.FC = () => {
     pointsToDistributeCommon,
     partialDistributionStatus,
     isPartialDistributionFinished,
+    isEnableToRescue,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -65,6 +69,7 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getPointsToDistributeCommon),
     useSelector(getPartialDistributionStatus),
     useSelector(getIsPartialDistributionFinished),
+    useSelector(getIsEnabledToRescue),
   ];
 
   const dispatch = useDispatch();
@@ -177,14 +182,31 @@ const ResumeDistribution: React.FC = () => {
           >
             SALVAR DISTRIBUIÇÃO
           </Button>
-          <Button
-            buttonRole="tertiary"
-            type="button"
-            onClick={handleDistributePoints}
-            disabled={!isEnabledToDistributePoints}
-          >
-            DISTRIBUIR PREMIAÇÃO
-          </Button>
+          {!isEnableToRescue && (
+            <Tooltip title="Atribua os Pontos de Revenda para finalizar a distribuição">
+              <span>
+                <Button
+                  buttonRole="tertiary"
+                  type="button"
+                  onClick={handleDistributePoints}
+                  disabled={!isEnabledToDistributePoints || !isEnableToRescue}
+                >
+                  DISTRIBUIR PREMIAÇÃO
+                </Button>
+              </span>
+            </Tooltip>
+          )}
+
+          {isEnableToRescue && (
+            <Button
+              buttonRole="tertiary"
+              type="button"
+              onClick={handleDistributePoints}
+              disabled={!isEnabledToDistributePoints || !isEnableToRescue}
+            >
+              DISTRIBUIR PREMIAÇÃO
+            </Button>
+          )}
         </>
       )}
     </div>
