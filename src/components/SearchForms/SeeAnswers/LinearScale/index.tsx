@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 import {
@@ -28,7 +28,6 @@ interface props {
 }
 
 const LinearScale: React.FC<props> = ({ quetion, answers }) => {
-  const [pickedUp, setPickedUp] = useState("");
 
   return (
     <Container>
@@ -36,24 +35,22 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
         <p>{quetion}</p>
         <InputGroup>
           {
-            answers.map(answer => (
+            answers.map((answer, index, elements) => (
               <label
                 htmlFor={answer.answer}
                 key={answer.id}
-                onClick={() => setPickedUp(answer.answer)}
               >
                 <div>
                   {answer.answer}
-                  {pickedUp === "" ? <AiOutlineStar />
-                    : answer.answer <= pickedUp ? <AiFillStar />
-                      : <AiOutlineStar />
+                  {answer.survey_participant_answers.length >= 0 && index + 1 < elements.length ?
+                    <AiFillStar />
+                    : <AiOutlineStar />
                   }
                 </div>
                 <input
                   type="checkbox"
                   id={answer.answer}
                   name={`${answer.survey_question_id}`}
-                  checked={answer.survey_participant_answers.length > 0 ? true : false}
                 />
               </label>
             ))
