@@ -7,6 +7,20 @@ export const Wrapper = styled.div`
   padding: 1em 1.5em 2em 1.5em;
 `;
 
+export const IndicateWrapper = styled.div`
+  background: #234;
+  width: 100%; 
+`;
+
+export const IndicateContent = styled.div`
+  padding:0 25px 0 23px;
+  width: 100%;
+  /* margin: 30px 0 0; */
+  display: flex;
+  justify-content: space-between;
+`;
+
+
 export const ShowCaseWrapper = styled.div`
   background: linear-gradient(
     to right,
