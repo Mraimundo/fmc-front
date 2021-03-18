@@ -18,3 +18,44 @@ export interface Harvest {
   id: number;
   title: string;
 }
+
+export interface Filters {
+  campaignId: number;
+  approved?: number;
+  regionalId?: number;
+  directorship?: string;
+}
+
+export interface AgreementTermApi {
+  id: number;
+  url: string;
+  participant_id: number;
+  regulation_id: number;
+  approved: boolean;
+  reason: string;
+  approved_by: number;
+  created: string;
+  modified: string;
+  email_sent: boolean;
+  campaign_id: number;
+  campaign: {
+    id: number;
+    title: string;
+  };
+  participant: {
+    id: number;
+    name: string;
+  };
+  regulation: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface AgreementTerm {
+  id: number;
+  groupClient: string;
+  agreement: string;
+  requestedAt: string;
+  aproved: boolean;
+}

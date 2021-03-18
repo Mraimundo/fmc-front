@@ -24,10 +24,10 @@ const Filters: React.FC = () => {
         setValue={value => setDirectorSelected(value)}
         placeholder="Diretoria"
       />
-      <HarvestSelect
-        value={harvestSelected}
-        setValue={value => setHarvestSelected(value)}
-        placeholder="Safra"
+      <RegionalSelect
+        value={regionalSelected}
+        setValue={value => setRegionalSelected(value)}
+        placeholder="Regional"
       />
     </Container>
   );
