@@ -58,7 +58,11 @@ export const ContentInfo = styled.div`
   img {
     width: 100%;
     max-width: 1004;
-    height: 239px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  iframe{
+    width: 100%;
     margin-bottom: 20px;
   }
   p {

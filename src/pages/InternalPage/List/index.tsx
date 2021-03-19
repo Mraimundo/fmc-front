@@ -66,13 +66,14 @@ const ProducerResearch: React.FC = () => {
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   // const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
+  const [videoId, setVideoId] = useState("");
 
 
   useEffect(() => {
     async function fetchSurveys() {
       const list_id = location.search.replace('?item=', '');
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
-
+      setVideoId(response.data.data.video.replace('https://www.youtube.com/watch?v=', ''));
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions);
       setSurveyQuestionId(response.data.data.survey_questions[0].id)
@@ -221,7 +222,20 @@ const ProducerResearch: React.FC = () => {
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
         </Content>
         <ContentInfo>
-          <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
+          {
+            !videoId ?
+              <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
+              :
+              // eslint-disable-next-line
+              <iframe
+                width="560"
+                height="420"
+                src={`https://www.youtube.com/embed/${videoId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen>
+              </iframe>
+          }
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
         </ContentInfo>
       </MiniBox>
