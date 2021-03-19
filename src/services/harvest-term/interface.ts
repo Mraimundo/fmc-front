@@ -54,8 +54,11 @@ export interface AgreementTermApi {
 
 export interface AgreementTerm {
   id: number;
+  harvest: string;
   groupClient: string;
   agreement: string;
   requestedAt: string;
-  aproved: boolean;
+  approved: boolean;
+  reason: string;
+  status?: string;
 }

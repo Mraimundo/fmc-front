@@ -6,7 +6,10 @@ import {
   AgreementTerm,
   AgreementTermApi,
 } from './interface';
-import { transformFromHarvestApi } from './transformers';
+import {
+  transformFromHarvestApi,
+  transformFromAgreementTermsApi,
+} from './transformers';
 
 const HARVEST_RESOURCE = '/campaign';
 const AGREEMENT_TERMS_RESOURCE = '/agreement-terms';
@@ -38,9 +41,9 @@ const buildAgreementTermsUrl = ({
   let url = AGREEMENT_TERMS_RESOURCE;
 
   if (campaignId) url += `?campaign_id=${campaignId}`;
-  if (approved) url += `&aproved=${approved}`;
   if (directorship) url += `&directorship=${directorship}`;
   if (regionalId) url += `&regional_id=${regionalId}`;
+  url += `&approved=${approved || 0}`;
 
   return url;
 };
@@ -59,7 +62,6 @@ export const getAgreemenTerms = async ({
   });
 
   const { data } = await pluginApi.get<ApiResponse>(url);
-  console.log('FETCHING AGREEMENT TERMS', data);
 
-  return [];
+  return transformFromAgreementTermsApi(data.data);
 };

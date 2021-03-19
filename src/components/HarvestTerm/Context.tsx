@@ -21,15 +21,23 @@ const HarvestTermsContext = createContext<HarvestTermContextState>(
 
 export const HarvestTermsProvider: React.FC = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
-  const [agreementTerms, setAgreementTerms] = useState([]);
+  const [agreementTerms, setAgreementTerms] = useState<AgreementTerm[]>([]);
   const [filters, setFilters] = useState<Filters>({
     approved: 0,
     campaignId: 1,
   });
 
   const fetchAgreementTerms = useCallback(async () => {
-    const result = await getAgreemenTerms(filters);
-    console.log('FETCHED FILTERS', result);
+    try {
+      setIsFetching(true);
+      const result = await getAgreemenTerms(filters);
+      console.log('FETCHED FILTERS', result);
+      setAgreementTerms(result);
+    } catch (error) {
+      console.log('ON ERROR FETCHING AGREEMENT TERMS', error.message);
+    } finally {
+      setIsFetching(false);
+    }
   }, [filters]);
 
   return (
