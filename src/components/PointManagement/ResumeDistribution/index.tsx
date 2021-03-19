@@ -21,6 +21,7 @@ import {
   getPointsToDistribute as getPointsToDistributeCommon,
   getPartialDistribution as getPartialDistributionStatus,
   getIsPartialDistributionFinished,
+  getDistributePoints,
 } from 'state/modules/point-management/common/selectors';
 import {
   getPointsToDistribute,
@@ -56,6 +57,7 @@ const ResumeDistribution: React.FC = () => {
     partialDistributionStatus,
     isPartialDistributionFinished,
     isEnableToRescue,
+    distributePointsStatus,
   ] = [
     useSelector(getPointsToDistribute),
     useSelector(getAvailableScore),
@@ -70,6 +72,7 @@ const ResumeDistribution: React.FC = () => {
     useSelector(getPartialDistributionStatus),
     useSelector(getIsPartialDistributionFinished),
     useSelector(getIsEnabledToRescue),
+    useSelector(getDistributePoints),
   ];
 
   const dispatch = useDispatch();
@@ -84,6 +87,8 @@ const ResumeDistribution: React.FC = () => {
     isFetching: isFetchingPartial,
     error: errorPartial,
   } = partialDistributionStatus;
+
+  const { isFetching: isFetchingDistributePoints } = distributePointsStatus;
 
   const handleChangePointsToDistribute = useCallback(
     (points: number) => {
@@ -203,6 +208,7 @@ const ResumeDistribution: React.FC = () => {
               type="button"
               onClick={handleDistributePoints}
               disabled={!isEnabledToDistributePoints || !isEnableToRescue}
+              loading={isFetchingDistributePoints}
             >
               DISTRIBUIR PREMIAÇÃO
             </Button>

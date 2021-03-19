@@ -112,6 +112,7 @@ export function* workerFetchPointsToDistribute() {
     );
 
     if (!pointsToDistribute) {
+      yield put(actions.setDistributionEmptyState());
       throw new Error('Você não possui pontos a serem distribuidos');
     }
 

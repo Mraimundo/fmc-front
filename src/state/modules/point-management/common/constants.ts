@@ -56,3 +56,6 @@ export const SAVE_PARTIAL_DISTRIBUTION_FINISH =
 
 export const SET_DISTRIBUTION_WITH_SAVED_SETTINGS =
   '@fmc/point-management/common/SET_DISTRIBUTION_WITH_SAVED_SETTINGS';
+
+export const SET_DISTRIBUTION_EMPTY_STATE =
+  '@fmc/point-management/common/SET_DISTRIBUTION_EMPTY_STATE';
