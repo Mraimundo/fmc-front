@@ -9,6 +9,7 @@ import {
   setSelectedEstablishment,
   distributePointsFinally,
   setDistributionWithSavedSettings,
+  setDistributionEmptyState,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
 import {
@@ -86,7 +87,7 @@ const PointManagement: React.FC = () => {
   }, [errorOnDistribute, addToast]);
 
   useEffect(() => {
-    if (finishedDistribution) {
+    if (finishedDistribution && !error) {
       addToast({
         title: 'Parabéns, você finalizou a distribuição de pontos!',
         type: 'success',
@@ -94,9 +95,10 @@ const PointManagement: React.FC = () => {
 
       setTimeout(() => {
         history.push('/');
+        dispatch(setDistributionEmptyState());
       }, 3000);
     }
-  }, [finishedDistribution, addToast]);
+  }, [finishedDistribution, addToast, error, dispatch]);
 
   useEffect(() => {
     dispatch(fetchEstablishments());

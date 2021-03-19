@@ -24,6 +24,7 @@ import {
   SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
   SAVE_PARTIAL_DISTRIBUTION_FAILURE,
   SAVE_PARTIAL_DISTRIBUTION_FINISH,
+  SET_DISTRIBUTION_EMPTY_STATE,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -153,6 +154,11 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       return { ...state, partialDistribution: fetchErrorState(action) };
     case SAVE_PARTIAL_DISTRIBUTION_FINISH:
       return { ...state, partialDistributionFinished: false };
+
+    case SET_DISTRIBUTION_EMPTY_STATE:
+      return {
+        ...initialState,
+      };
 
     default:
       return state;
