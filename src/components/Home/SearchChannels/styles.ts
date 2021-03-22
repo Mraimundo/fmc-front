@@ -77,7 +77,6 @@ export const SearchParticipants = styled.div`
 
   a {
     width:100%;
-    /* max-width: 328px; */
     height: 36px;
     text-decoration: none;
     display: flex;
