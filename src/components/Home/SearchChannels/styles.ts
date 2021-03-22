@@ -28,6 +28,10 @@ export const Cover = styled.div`
     @media screen and (max-width: 480px) {
       height: 120px;
     }
+
+    @media screen and (max-width: 320px) {
+      height: 244px;
+    }
   }
 
   &:hover {
@@ -73,7 +77,7 @@ export const SearchParticipants = styled.div`
 
   a {
     width:100%;
-    max-width: 328px;
+    /* max-width: 328px; */
     height: 36px;
     text-decoration: none;
     display: flex;
@@ -101,6 +105,10 @@ export const SearchParticipants = styled.div`
 
   @media screen and (max-width: 768px) {
       left: 40px;
+  }
+
+  @media screen and (max-width: 320px) {
+      left: 4px;
   }
 `;
 

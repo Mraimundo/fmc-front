@@ -6,6 +6,7 @@ export const Container = styled.div`
 
   @media screen and (max-width: 320px) {
       width: 100%;
+      margin-bottom: 21px;
     }
   
 `;
@@ -29,6 +30,10 @@ export const Cover = styled.div`
     width: 100%;
     }
 
+    @media screen and (max-width: 320px) {
+      height: 256px;
+    }
+
     main{
     padding: 0 15px;
     width: 100%;
@@ -43,6 +48,12 @@ export const Cover = styled.div`
         display: none;
       }
     }
+
+    @media screen and (max-width: 320px) {
+      transform: translateY(59px);
+    }
+
+
 
       .indicator-code {
         width: 100%;
@@ -70,6 +81,10 @@ export const Cover = styled.div`
           color: ${({ theme }) => theme.font.color.primary};
           align-items: center;
           margin-top: 25px;
+
+          @media screen and (max-width: 320px) {
+            margin-top: 0px;
+          }
         }
 
         .indicator-code-content div:nth-child(1) span{
