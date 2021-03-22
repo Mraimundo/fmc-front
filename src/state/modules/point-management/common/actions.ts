@@ -26,6 +26,8 @@ import {
   SAVE_PARTIAL_DISTRIBUTION_FINISH,
   SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
   SET_DISTRIBUTION_EMPTY_STATE,
+  CLEAN_DISTRIBUTION_STATE,
+  DISTRIBUTE_POINTS_CANCEL,
 } from './constants';
 import { CommonState } from './reducer';
 import { PointsToDistribute, Establishment } from './types';
@@ -221,6 +223,20 @@ export const setDistributionEmptyState = (): ActionCreator<
     type: SET_DISTRIBUTION_EMPTY_STATE,
   };
 
+export const cleanDistributionState = (): ActionCreator<
+  typeof CLEAN_DISTRIBUTION_STATE
+> =>
+  <const>{
+    type: CLEAN_DISTRIBUTION_STATE,
+  };
+
+export const distributePointsCancel = (): ActionCreator<
+  typeof DISTRIBUTE_POINTS_CANCEL
+> =>
+  <const>{
+    type: DISTRIBUTE_POINTS_CANCEL,
+  };
+
 export type CommonActions = ReturnType<
   | typeof fetchEstablishments
   | typeof fetchEstablishmentsFailure
@@ -243,4 +259,5 @@ export type CommonActions = ReturnType<
   | typeof setDistributionWithSavedSettings
   | typeof savePartialDistributionFinish
   | typeof setDistributionEmptyState
+  | typeof distributePointsCancel
 >;

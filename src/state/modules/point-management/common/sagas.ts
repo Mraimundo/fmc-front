@@ -35,6 +35,7 @@ import {
   toggleIsOpenModalMissingParticipants,
   setWaitingScoredParticipants,
   assignPoints,
+  setTeamAwardsEmptyState,
 } from 'state/modules/point-management/team-awards/actions';
 import fetchEstablishmentsService, {
   Establishment as IEstablishment,
@@ -50,6 +51,7 @@ import {
   FinishedDistributionPossibilities,
   SAVE_PARTIAL_DISTRIBUTION_ACTION,
   SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
+  CLEAN_DISTRIBUTION_STATE,
 } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -357,6 +359,11 @@ export function* workerSetDistributionWithSavedSettings() {
   }
 }
 
+export function* workerCleanDistributionState() {
+  yield put(actions.setDistributionEmptyState());
+  yield put(setTeamAwardsEmptyState());
+}
+
 export default function* commonSagas() {
   yield all([
     takeEvery(FETCH_ESTABLISHMENTS_ACTION, workerFetchEstablishments),
@@ -376,5 +383,7 @@ export default function* commonSagas() {
       SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
       workerSetDistributionWithSavedSettings,
     ),
+
+    takeEvery(CLEAN_DISTRIBUTION_STATE, workerCleanDistributionState),
   ]);
 }

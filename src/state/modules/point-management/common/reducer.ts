@@ -18,6 +18,7 @@ import {
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
+  DISTRIBUTE_POINTS_CANCEL,
   SET_FINISHED_DISTRIBUTION,
   FinishedDistributionPossibilities,
   SAVE_PARTIAL_DISTRIBUTION_ACTION,
@@ -135,6 +136,8 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       return { ...state, distributePoints: fetchErrorState(action) };
     case DISTRIBUTE_POINTS_SUCCESS:
       return { ...state, distributePoints: emptyFetchState };
+    case DISTRIBUTE_POINTS_CANCEL:
+      return { ...state, distributePoints: { isFetching: false } };
 
     case SET_FINISHED_DISTRIBUTION:
       return {
