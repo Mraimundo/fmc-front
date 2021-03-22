@@ -5,6 +5,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 import CloseIcon from 'assets/images/training/close-icon.svg';
 import CommentIcon from 'assets/images/contact/message.svg';
+import TextArea from 'components/shared/TextArea';
 import {
   Container,
   Close,
