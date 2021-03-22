@@ -262,6 +262,13 @@ export const setWaitingScoredParticipants = (
     payload: { waitingScoredParticipants },
   };
 
+export const setTeamAwardsEmptyState = (): ActionCreator<
+  typeof constants.SET_TEAM_AWARDS_EMPTY_STATE
+> =>
+  <const>{
+    type: constants.SET_TEAM_AWARDS_EMPTY_STATE,
+  };
+
 export type TeamAwardsActions = ReturnType<
   | typeof fetchSubsidiaries
   | typeof fetchSubsidiariesFailure
@@ -291,4 +298,5 @@ export type TeamAwardsActions = ReturnType<
   | typeof setTotalParticipants
   | typeof toggleIsOpenModalMissingParticipants
   | typeof setWaitingScoredParticipants
+  | typeof setTeamAwardsEmptyState
 >;

@@ -195,6 +195,7 @@ const ResumeDistribution: React.FC = () => {
                   type="button"
                   onClick={handleDistributePoints}
                   disabled={!isEnabledToDistributePoints || !isEnableToRescue}
+                  loading={isFetchingDistributePoints}
                 >
                   DISTRIBUIR PREMIAÇÃO
                 </Button>

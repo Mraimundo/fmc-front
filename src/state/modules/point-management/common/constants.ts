@@ -59,3 +59,9 @@ export const SET_DISTRIBUTION_WITH_SAVED_SETTINGS =
 
 export const SET_DISTRIBUTION_EMPTY_STATE =
   '@fmc/point-management/common/SET_DISTRIBUTION_EMPTY_STATE';
+
+export const CLEAN_DISTRIBUTION_STATE =
+  '@fmc/point-management/common/CLEAN_DISTRIBUTION_STATE';
+
+export const DISTRIBUTE_POINTS_CANCEL =
+  '@fmc/point-management/common/DISTRIBUTE_POINTS_CANCEL';

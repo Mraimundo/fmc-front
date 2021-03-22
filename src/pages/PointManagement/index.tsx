@@ -9,7 +9,8 @@ import {
   setSelectedEstablishment,
   distributePointsFinally,
   setDistributionWithSavedSettings,
-  setDistributionEmptyState,
+  cleanDistributionState,
+  distributePointsCancel,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
 import {
@@ -95,7 +96,7 @@ const PointManagement: React.FC = () => {
 
       setTimeout(() => {
         history.push('/');
-        dispatch(setDistributionEmptyState());
+        dispatch(cleanDistributionState());
       }, 3000);
     }
   }, [finishedDistribution, addToast, error, dispatch]);
@@ -119,6 +120,7 @@ const PointManagement: React.FC = () => {
 
   const handleCloseMissingModal = useCallback(() => {
     dispatch(toggleIsOpenModalMissingParticipants());
+    dispatch(distributePointsCancel());
   }, [dispatch]);
 
   const handleDistributePoints = useCallback(() => {
