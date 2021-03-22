@@ -19,10 +19,10 @@ export const transformFromAgreementTermsApi = (
   data: AgreementTermApi[],
 ): AgreementTerm[] => {
   return data.map<AgreementTerm>(
-    ({ id, url, campaign, created, approved, reason }) => ({
+    ({ id, url, campaign, created, approved, reason, establishment }) => ({
       id,
       harvest: campaign.title,
-      groupClient: '',
+      clientGroup: establishment.client_group,
       agreement: url,
       requestedAt: formatDate(created),
       approved,

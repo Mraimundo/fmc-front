@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
+
+  > span {
+    margin-left: 6px;
+    color: ${({ theme }) => theme.font.color.primary};
+    transform: translateY(-1px);
+  }
 
   svg {
     cursor: pointer;

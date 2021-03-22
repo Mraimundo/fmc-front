@@ -4,7 +4,7 @@ import HarvestSelect from 'components/HarvestTerm/Selects/Harvest';
 import RegionalSelect from 'components/HarvestTerm/Selects/Regional';
 import DirectorsSelect from 'components/HarvestTerm/Selects/Directors';
 import { Option } from 'components/shared/Select';
-import { Container } from './styles';
+import { Container, SelectContainer } from './styles';
 
 const Filters: React.FC = () => {
   const [harvestSelected, setHarvestSelected] = useState<Option | null>(null);
@@ -14,21 +14,23 @@ const Filters: React.FC = () => {
   return (
     <Container>
       <h2>Filtros</h2>
-      <HarvestSelect
-        value={harvestSelected}
-        setValue={value => setHarvestSelected(value)}
-        placeholder="Safra"
-      />
-      <DirectorsSelect
-        value={directorSelected}
-        setValue={value => setDirectorSelected(value)}
-        placeholder="Diretoria"
-      />
-      <RegionalSelect
-        value={regionalSelected}
-        setValue={value => setRegionalSelected(value)}
-        placeholder="Regional"
-      />
+      <SelectContainer>
+        <HarvestSelect
+          value={harvestSelected}
+          setValue={value => setHarvestSelected(value)}
+          placeholder="Safra"
+        />
+        <DirectorsSelect
+          value={directorSelected}
+          setValue={value => setDirectorSelected(value)}
+          placeholder="Diretoria"
+        />
+        <RegionalSelect
+          value={regionalSelected}
+          setValue={value => setRegionalSelected(value)}
+          placeholder="Regional"
+        />
+      </SelectContainer>
     </Container>
   );
 };

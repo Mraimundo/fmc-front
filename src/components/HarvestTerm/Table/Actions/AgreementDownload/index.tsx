@@ -16,9 +16,7 @@ const AgreementDownload: React.FC<AgreementDownloadProps> = ({ url }) => {
   return (
     <Container>
       <ReactSVG src={DownloadIcon} onClick={handleClick} />
-      <a href="#" onClick={handleClick}>
-        Download
-      </a>
+      <span>Download</span>
     </Container>
   );
 };

@@ -50,12 +50,19 @@ export interface AgreementTermApi {
     id: number;
     name: string;
   };
+  establishment: {
+    id: number;
+    name: string;
+    cnpj: string;
+    client_code: string;
+    client_group: string;
+  };
 }
 
 export interface AgreementTerm {
   id: number;
   harvest: string;
-  groupClient: string;
+  clientGroup: string;
   agreement: string;
   requestedAt: string;
   approved: boolean;
