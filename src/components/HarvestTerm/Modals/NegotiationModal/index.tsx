@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 // import Modal from 'components/shared/Modal';
 
 import { ReactSVG } from 'react-svg';
 import CloseIcon from 'assets/images/training/close-icon.svg';
 import CommentIcon from 'assets/images/contact/message.svg';
-import TextArea from 'components/shared/TextArea';
+import CommentForm from 'components/HarvestTerm/Forms/Comment';
+
 import {
   Container,
   Close,
@@ -42,7 +43,9 @@ const NegotiationModal: React.FC<NegotiationModalProps> = ({
           <p>{agreementTermId}</p>
         </Header>
         <CommentsListWrapper />
-        <CommentWrapper />
+        <CommentWrapper>
+          <CommentForm />
+        </CommentWrapper>
       </Container>
     </Modal>
   );
