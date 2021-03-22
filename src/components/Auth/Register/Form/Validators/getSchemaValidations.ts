@@ -105,7 +105,6 @@ const extraProducerFields = {
   }),
 };
 
-//
 const producerPersonalData = {
   gender_select: Yup.object()
     .shape({
