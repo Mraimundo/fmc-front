@@ -105,6 +105,15 @@ const extraProducerFields = {
   }),
 };
 
+const producerPersonalData = {
+  gender_select: Yup.object()
+    .shape({
+      value: Yup.string().required(mandatoryMessage),
+    })
+    .typeError(mandatoryMessage)
+    .required(mandatoryMessage),
+};
+
 const passwordFields = (editing: boolean) => {
   if (editing) {
     return {
@@ -247,7 +256,7 @@ export default (
         });
       }
       return Yup.object().shape({
-        ...participantValidations,
+        ...producerPersonalData,
         ...defaultValidations,
         ...extraProducerFields,
         ...cepFields,

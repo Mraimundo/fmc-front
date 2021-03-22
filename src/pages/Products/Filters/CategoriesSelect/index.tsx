@@ -43,7 +43,6 @@ const CategoriesProductsSelect: React.FC<Props> = ({
     if (!options || options.length === 0) return;
 
     setValue(options[0]);
-    // console.log('set', options);
   }, [options, setValue]);
 
   const loadItems = useCallback(() => {
