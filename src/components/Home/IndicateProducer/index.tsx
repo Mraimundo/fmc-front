@@ -44,7 +44,7 @@ const Bainer: React.FC = () => {
               <div className="indicator-code-content">
                 <div>
                   <h2>Cadastra-se no Juntos FMC usando o link abaixo:</h2>
-                  <span>{`https://www.juntosfmc.com.br/?code=${indication}`}</span>
+                  <span>{`${process.env.REACT_APP_API_HOST2}/?code=${indication}`}</span>
                 </div>
                 <CopyToClipboard text={value} onCopy={() => handleCopy()}>
                   <button type="button">Copiar</button>

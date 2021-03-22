@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import getNfList from 'services/nf/geNfList';
 
+
 import StatusTable from './StatusTable';
 import Upload from './Upload';
 
