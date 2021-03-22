@@ -8,16 +8,23 @@ export const Wrapper = styled.div`
 `;
 
 export const IndicateWrapper = styled.div`
-  background: #234;
   width: 100%; 
 `;
 
 export const IndicateContent = styled.div`
-  padding:0 25px 0 23px;
+  padding:0 20px 0 20px;
   width: 100%;
-  /* margin: 30px 0 0; */
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 320px) {
+    flex-direction: column;
+  }
+
 `;
 
 
