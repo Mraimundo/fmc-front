@@ -41,6 +41,7 @@ import mainSaga, {
   cleanTeamAwards,
   workerSavePartialDistribution,
   workerSetDistributionWithSavedSettings,
+  workerCleanDistributionState,
 } from './sagas';
 import {
   establishments,
@@ -585,6 +586,10 @@ describe('src/state/modules/point-management/common/sagas', () => {
         takeEvery(
           constants.SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
           workerSetDistributionWithSavedSettings,
+        ),
+        takeEvery(
+          constants.CLEAN_DISTRIBUTION_STATE,
+          workerCleanDistributionState,
         ),
       ])
       .finish()
