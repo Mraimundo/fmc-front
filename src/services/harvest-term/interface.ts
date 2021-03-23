@@ -69,3 +69,23 @@ export interface AgreementTerm {
   reason: string;
   status?: string;
 }
+
+export interface CommentApi {
+  id: number;
+  agreement_term_id: number;
+  participant_id: number;
+  comment: string;
+  created: string;
+  modified: string;
+  participant: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface Comment {
+  id: number;
+  comment: string;
+  dateTime: string;
+  participantName: string;
+}

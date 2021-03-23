@@ -10,6 +10,7 @@ interface HarvestSelectProps {
   setValue(value: Option | null): void;
   value: Option | null;
   placeholder?: string;
+  participantCpf: string;
 }
 
 const HarvestSelect: React.FC<HarvestSelectProps> = ({
@@ -18,21 +19,23 @@ const HarvestSelect: React.FC<HarvestSelectProps> = ({
   setValue,
   value,
   placeholder,
+  participantCpf,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
     const fetchHarvests = async () => {
-      const result = await getHarvests();
+      const result = await getHarvests(participantCpf);
       setOptions(transformToSelectOptions(result));
     };
 
     fetchHarvests();
-  }, []);
+  }, [participantCpf]);
 
   const loadOptions = useCallback(() => {
+    if (options.length > 0) setValue(options[0]);
     return options;
-  }, [options]);
+  }, [options, setValue]);
 
   return (
     <BaseSelect

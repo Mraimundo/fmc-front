@@ -25,7 +25,6 @@ const Negotiation: React.FC<NegotiationProps> = ({ agreementTermId }) => {
       <NegotiationModal
         isOpen={isOpenModal}
         agreementTermId={agreementTermId}
-        confirmRequest={() => {}}
         cancelRequest={() => setIsOpenModal(false)}
       />
     </>

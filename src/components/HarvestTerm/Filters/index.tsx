@@ -4,9 +4,12 @@ import HarvestSelect from 'components/HarvestTerm/Selects/Harvest';
 import RegionalSelect from 'components/HarvestTerm/Selects/Regional';
 import DirectorsSelect from 'components/HarvestTerm/Selects/Directors';
 import { Option } from 'components/shared/Select';
+import { useAuth } from 'context/AuthContext';
 import { Container, SelectContainer } from './styles';
 
 const Filters: React.FC = () => {
+  const { participant } = useAuth();
+
   const [harvestSelected, setHarvestSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
   const [directorSelected, setDirectorSelected] = useState<Option | null>(null);
@@ -19,6 +22,7 @@ const Filters: React.FC = () => {
           value={harvestSelected}
           setValue={value => setHarvestSelected(value)}
           placeholder="Safra"
+          participantCpf={participant.cpf}
         />
         <DirectorsSelect
           value={directorSelected}

@@ -4,8 +4,8 @@ import Modal from 'components/shared/Modal';
 
 export const CustomModal = styled(Modal)`
   ._modalContainer {
-    max-width: 720px;
-    max-height: 500px;
+    max-width: 600px;
+    max-height: 510px;
     width: 100%;
     height: 100%;
     //overflow: hidden;
@@ -48,11 +48,16 @@ export const Close = styled.div`
 export const CommentsListWrapper = styled.div`
   height: 250px;
   width: 100%;
-  background-color: #f1f;
+
+  > p {
+    font-family: ${({ theme }) => theme.font.fontFamily.regular};
+    color: ${({ theme }) => theme.font.color.primary};
+    font-size: 1em;
+  }
 `;
 
 export const CommentWrapper = styled.div`
   height: 100px;
   width: 100%;
-  background-color: #fddd;
+  margin-top: 1rem;
 `;

@@ -5,6 +5,8 @@ import {
   HarvestApi,
   AgreementTerm,
   AgreementTermApi,
+  Comment,
+  CommentApi,
 } from './interface';
 
 export const transformFromHarvestApi = (data: HarvestApi[]): Harvest[] => {
@@ -29,4 +31,13 @@ export const transformFromAgreementTermsApi = (
       reason,
     }),
   );
+};
+
+export const transformFromCommentApi = (data: CommentApi[]): Comment[] => {
+  return data.map<Comment>(({ id, comment, created, participant }) => ({
+    id,
+    comment,
+    dateTime: formatDate(created, 'dd/MM/yyyy - hh:mm'),
+    participantName: participant.name,
+  }));
 };

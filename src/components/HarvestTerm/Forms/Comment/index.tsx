@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import Button from 'components/shared/Button';
 import * as Yup from 'yup';
+import { addComment } from 'services/harvest-term/comments';
 import {
   FormContainer,
   Form,
@@ -15,7 +16,11 @@ interface FormData {
   comment: string;
 }
 
-const CommentForm: React.FC = () => {
+interface CommentFormProps {
+  agreementTermId: string;
+}
+
+const CommentForm: React.FC<CommentFormProps> = ({ agreementTermId }) => {
   const [loading, setLoading] = useState(false);
 
   const methods = useForm<FormData>({
@@ -31,8 +36,10 @@ const CommentForm: React.FC = () => {
   const { handleSubmit, reset } = methods;
 
   const onSubmit = handleSubmit(async ({ comment }) => {
-    alert(comment);
+    setLoading(true);
+    await addComment({ commentId: parseInt(agreementTermId, 10), comment });
     reset();
+    setLoading(false);
   });
 
   return (
@@ -41,7 +48,11 @@ const CommentForm: React.FC = () => {
         <Form onSubmit={onSubmit}>
           <FormContainer>
             <TextAreaWrapper>
-              <TextArea name="comment" inputRole="primary" label="Comentário" />
+              <TextArea
+                name="comment"
+                inputRole="primary"
+                label="Nova Mensagem"
+              />
             </TextAreaWrapper>
             <ActionWrapper>
               <Button type="submit" buttonRole="primary" loading={loading}>
