@@ -1,88 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 
-import { pluginApi } from '../../../services/api';
+import { vendavallApi } from '../../../services/api';
 
-import { Container } from './styles';
+import {
+  SearchCannel,
+  Cover,
+  CoverText,
+  Title,
+  Description,
+  SearchParticipants,
+}
+  from './styles';
 
+interface PropsMiniBanner {
+  id: number;
+  title: string;
+  description: string;
+  params: string;
+  picture: string;
+  mobile_picture: string;
+  type: string;
+  url: string;
+}
 
 const Bainer: React.FC = () => {
-  const [indication, setIndication] = useState('');
-
-  const initialUrl = 'https://www.juntosfmc.com.br/?code=';
-
-  const [profileType, setProfileType] = useState('');
-  const [profile, setProfile] = useState('');
-
-  const [value, setValue] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [minibanner, setMiniBanner] = useState<PropsMiniBanner>({} as PropsMiniBanner);
+  // const history = useHistory();
 
   useEffect(() => {
     async function fetchIndication() {
-      const response = await pluginApi.get('participants/profile');
-      setIndication(response.data.indicator_code);
-      setValue(initialUrl + indication);
-
-      setProfileType(response.data.establishment.type_name);
-      setProfile(response.data.profile);
+      const response = await vendavallApi.get('/mini_banners?slug=banner-home');
+      setMiniBanner(response.data);
     }
-
     fetchIndication();
-  }, [indication]);
+  }, []);
 
-  let colorType = '';
-  switch (profileType) {
-    case 'Cooperativa':
-      colorType = 'verde';
-      break;
-
-    case 'FMC':
-      colorType = 'marron';
-      break;
-
-    case 'Revenda':
-      colorType = 'azul';
-      break;
-
-    default:
-      colorType = 'verde';
-  }
-
-  if (profile === 'FMC' && profileType === 'Revenda') {
-    colorType = 'cinza';
-  }
-
-
-  const handleCopy = () => {
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 3000);
-  };
 
   return (
-    <Container colorType={colorType}>
-      <div className="content-bainer">
-        <h1>Indique um Produtor</h1>
-        <main>
-          <div className="indicator-code">
-            <h1>Seu Código de Indicação: {indication}</h1>
-            <div className="indicator-code-content">
-              <div>
-                <h2>Cadastra-se no Juntos FMC usando o link abaixo:</h2>
-                <span>{`https://www.juntosfmc.com.br/?code=${indication}`}</span>
-              </div>
-              <CopyToClipboard text={value} onCopy={() => handleCopy()}>
-                <button type="button">Copiar</button>
-              </CopyToClipboard>
-              {copied ? <span style={{ color: 'black' }}>Copiado.</span> : null}
-            </div>
-            <div className="color-content" />
-          </div>
-        </main>
-      </div>
-    </Container>
+    <SearchCannel>
+      <Cover key={`key-minibanner-${minibanner.id}`}>
+        <img src={minibanner.mobile_picture} alt="Canais de participantes" />
+        <CoverText>
+          <Title>{minibanner.title}</Title>
+          <Description>{minibanner.description}</Description>
+        </CoverText>
+        <SearchParticipants>
+          <Link
+            to={{ pathname: minibanner.url }}
+            target="blank"
+          >
+            {minibanner.params}
+          </Link>
+          {/* <Button>{minibanner.params}</Button> */}
+        </SearchParticipants>
+      </Cover>
+    </SearchCannel>
   );
 };
 

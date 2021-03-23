@@ -1,60 +1,67 @@
-import styled, { css } from 'styled-components';
-import bannerVerde from '../../../assets/images/banner-verde.png';
-import bannerAzul from '../../../assets/images/banner-azul.png';
-import bannerMarron from '../../../assets/images/mini-banner.svg';
-import bannerCinza from '../../../assets/images/banner-cinza.png';
+import styled from 'styled-components';
+import minibanner from '../../../assets/images/mini-banner.svg';
 
-interface ColorProps {
-  colorType: string;
-}
-
-export const Container = styled.div<ColorProps>`
+export const Container = styled.div`
   width: 50%;
+
+  @media screen and (max-width: 320px) {
+      width: 100%;
+      margin-bottom: 21px;
+    }
+  
+`;
+
+export const Cover = styled.div`
   .content-bainer {
     background-repeat: no-repeat;
     background-position: center;
-    height: 360px;
+    background-image: url(${minibanner});
+    height: 320px;
+    object-fit: cover;
+    filter: brightness(1);
+    transition: filter 150ms ease;
+    cursor: pointer;
 
-    ${props =>
-    props.colorType === 'verde' &&
-    css`
-        background-image: url(${bannerVerde});
-      `}
-    ${props =>
-    props.colorType === 'azul' &&
-    css`
-        background-image: url(${bannerAzul});
-      `}
-    ${props =>
-    props.colorType === 'marron' &&
-    css`
-        background-image: url(${bannerMarron});
-      `}
-    ${props =>
-    props.colorType === 'cinza' &&
-    css`
-        background-image: url(${bannerCinza});
-      `}
-
-    > h1 {
-      font-family: ${({ theme }) => theme.font.fontFamily.regular};
-      font-size: 21px;
-      font-weight: 28px;
-      color: ${({ theme }) => theme.font.color.primary};
-      padding: 0 25px;
+    @media screen and (max-width: 480px) {
+      height: 120px;
     }
+    
+    @media screen and (max-width: 480px) {
+    width: 100%;
+    }
+
+    @media screen and (max-width: 320px) {
+      height: 256px;
+    }
+
     main{
+    padding: 0 15px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 87px;
-    /* padding:0 25px 0 23px; */
+    margin-top: 13px;
+    transform: translateY(90px);
+    
+    @media screen and (max-width: 934px) {
+      flex-direction: column;
+      img {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      transform: translateY(59px);
+    }
+
+
 
       .indicator-code {
         width: 100%;
         max-width: 378px;
         height: 171px;
         background: #fff;
+        padding: 15px 0;
+
         h1 {
         margin-top: 15px;
         font-size: 16px;
@@ -74,6 +81,10 @@ export const Container = styled.div<ColorProps>`
           color: ${({ theme }) => theme.font.color.primary};
           align-items: center;
           margin-top: 25px;
+
+          @media screen and (max-width: 320px) {
+            margin-top: 0px;
+          }
         }
 
         .indicator-code-content div:nth-child(1) span{
@@ -93,11 +104,31 @@ export const Container = styled.div<ColorProps>`
           margin-top: 12px;
           border: none;
           transition: 0.5s;
-        }
-      }
 
+          &:hover {
+            filter: brightness(0.7);
+        }
+        }
+
+        @media screen and (max-width: 934px) {
+          height: 181px;
+        }
+       
+      }
     }
   }
 `;
+
+export const Title = styled.h1`
+  transform: translateY(27px);
+  font-family: ${({ theme }) => theme.font.fontFamily.regular};
+  font-size: 21px;
+  font-weight: 28px;
+  color: ${({ theme }) => theme.font.color.primary};
+  padding: 0 15px;
+`;
+
+
+
 
 

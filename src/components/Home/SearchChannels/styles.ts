@@ -1,103 +1,118 @@
-import styled, { css } from 'styled-components';
-import bannerVerde from '../../../assets/images/banner-verde.png';
-import bannerAzul from '../../../assets/images/banner-azul.png';
-import bannerMarron from '../../../assets/images/mini-banner.svg';
-import bannerCinza from '../../../assets/images/banner-cinza.png';
+import styled from 'styled-components';
 
-interface ColorProps {
-  colorType: string;
-}
+export const SearchCannel = styled.div`
+  width: 48%;
+  border-radius: 10px;
+  box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
+  /* cursor: pointer; */
+  position: relative;
+  margin-bottom: 30px;
 
-export const Container = styled.div<ColorProps>`
-  width: 50%;
-  .content-bainer {
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 360px;
-
-    ${props =>
-    props.colorType === 'verde' &&
-    css`
-        background-image: url(${bannerVerde});
-      `}
-    ${props =>
-    props.colorType === 'azul' &&
-    css`
-        background-image: url(${bannerAzul});
-      `}
-    ${props =>
-    props.colorType === 'marron' &&
-    css`
-        background-image: url(${bannerMarron});
-      `}
-    ${props =>
-    props.colorType === 'cinza' &&
-    css`
-        background-image: url(${bannerCinza});
-      `}
-
-    > h1 {
-      font-family: ${({ theme }) => theme.font.fontFamily.regular};
-      font-size: 21px;
-      font-weight: 28px;
-      color: ${({ theme }) => theme.font.color.primary};
-      padding: 0 25px;
+  @media screen and (max-width: 320px) {
+      width: 100%;
     }
-    main{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 87px;
-    /* padding:0 25px 0 23px; */
+`;
 
-      .indicator-code {
-        width: 100%;
-        max-width: 378px;
-        height: 171px;
-        background: #fff;
-        h1 {
-        margin-top: 15px;
-        font-size: 16px;
-        font-weight: 18px;
-        color: ${({ theme }) => theme.font.color.primary};
-        padding: 0 25px;
-        }
+export const Cover = styled.div`
+  position: relative;
 
-        .indicator-code-content {
-          display: flex;
-          flex-direction: column;
-          padding: 0 25px;
-        }
+  img {
+   width: 100%;
+   height: 328px;
+    object-fit: cover;
+    border-radius: 10px;
+    /* filter: brightness(0.7); */
+    transition: filter 150ms ease;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 14%);
 
-        .indicator-code-content div:nth-child(1) h2{
-          font-size: 12px;
-          color: ${({ theme }) => theme.font.color.primary};
-          align-items: center;
-          margin-top: 25px;
-        }
+    @media screen and (max-width: 480px) {
+      height: 120px;
+    }
 
-        .indicator-code-content div:nth-child(1) span{
-          font-size: 14px;
-          font-weight: 16px;
-          color: ${({ theme }) => theme.font.color.primary};
-          margin-bottom: 18px;
-        }
-
-        .indicator-code-content button {
-          width:100%;
-          height: 36px;
-          background: ${({ theme }) => theme.footer.background};
-          color: #fff;
-          font-family: ${({ theme }) => theme.font.fontFamily.bold};
-          font-size: 16px;
-          margin-top: 12px;
-          border: none;
-          transition: 0.5s;
-        }
-      }
-
+    @media screen and (max-width: 320px) {
+      height: 244px;
     }
   }
+
+  &:hover {
+    img {
+      filter: brightness(1);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
+
+export const CoverText = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+`;
+
+export const Title = styled.h2`
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 1.3em;
+  color: #65554D;
+
+  margin-bottom: 0.3em;
+`;
+
+export const Description = styled.p`
+  font-family: ${({ theme }) => theme.font.fontFamily.medium};
+  font-size: 0.8em;
+  color: #65554D;
+
+`;
+
+export const SearchParticipants = styled.div`
+  position: absolute;
+  bottom: 26px;
+  left: 153px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    width:100%;
+    height: 36px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3B302A;
+    color: #fff;
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
+    font-size: 16px;
+
+    cursor: pointer;
+    padding: 20px;
+
+    border: none;
+    transition: all 0.5s;
+
+    &:hover {
+      filter: brightness(0.7);
+      color: #fff;
+    }
+  }
+  @media screen and (max-width: 934px) {
+      left: 84px;
+  }
+
+  @media screen and (max-width: 768px) {
+      left: 40px;
+  }
+
+  @media screen and (max-width: 320px) {
+      left: 4px;
+  }
+`;
+
+
+
+
 
 
