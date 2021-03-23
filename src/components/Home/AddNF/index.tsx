@@ -29,7 +29,6 @@ const AddNF: React.FC<Props> = Props => {
         const nfListEntries = Object.entries(data);
         setNfStatus(transformNfEntry(nfListEntries));
       }
-
     });
   };
 
