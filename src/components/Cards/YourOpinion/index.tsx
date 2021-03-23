@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Surveys } from 'services/surveys/interfaces';
 import { formatDate } from 'util/datetime';
+// import { isWithinInterval, parseISO, isAfter, isBefore } from 'date-fns';
 
 import routeMap from 'routes/route-map';
 
@@ -10,6 +11,15 @@ import {
   Container,
   MiniBox,
 } from './styles';
+
+interface PointsData {
+  created: string,
+  start_datetime: string,
+  end_datetime: string,
+  id: number,
+  points_count: string,
+  questions_count: string,
+}
 
 interface SurveysData {
   id: number,
@@ -27,6 +37,7 @@ interface SurveysData {
   allow_change_answer: boolean,
   banner_picture: string,
   available_surveys: Surveys[];
+  points: PointsData[];
   className?: string;
 }
 
@@ -63,8 +74,13 @@ const CardList: React.FC = () => {
               `)}
             </span>
             <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
-            {/* <p>{youropinion.description.replace("<p>", "").replace("</p>", "") || 'somos a maior produtor de soja'}</p> */}
-            {/* <h2>Vale 300 FMC Coins</h2> */}
+
+            {/* <h2>
+              {(youropinion.points[0] && (Date.parse(youropinion.points[0].start_datetime) <= Date.now()
+                || Date.parse(youropinion.points[0].end_datetime) <= Date.now() && youropinion.points[0].points_count
+              ))}
+            </h2> */}
+            <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2>
             <Link to={`${routeMap.InternalPage.questions}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}

@@ -30,6 +30,16 @@ import {
   Button
 } from './styles';
 
+interface PointsData {
+  created: string,
+  start_datetime: string,
+  end_datetime: string,
+  id: number,
+  points_count: string,
+  questions_count: string,
+}
+
+
 interface SurveysDataForm {
   id: number;
   title: string;
@@ -37,7 +47,15 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
+  points: PointsData[];
   event: Event;
+}
+
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
 }
 
 interface AnswersData {
@@ -45,6 +63,7 @@ interface AnswersData {
   survey_question_id: number;
   type: string;
   scale_type: string;
+  icon_attributes: IconsProps;
   answer: string;
 }
 
@@ -220,23 +239,20 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
+          {/* <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2> */}
         </Content>
         <ContentInfo>
-          {
-            !videoId ?
-              <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-              :
-              // eslint-disable-next-line
-              <iframe
-                width="560"
-                height="420"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen>
-              </iframe>
-          }
+          <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
+          {/* eslint-disable-next-line  */}
+          <iframe
+            width="560"
+            height="420"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen>
+          </iframe>
         </ContentInfo>
       </MiniBox>
 

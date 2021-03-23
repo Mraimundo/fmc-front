@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { FONTS } from '../../../../styles/font/globals';
+
 
 export const Container = styled.div`
   width: 100%;
@@ -12,6 +14,7 @@ export const CheckBoxContent = styled.div`
   margin-top: 23px;
     p {
       font-size: 16px;
+      font-family: ${FONTS.condensed}, sans-serif;
       color: #000;
     }
 `;
@@ -31,6 +34,8 @@ export const CheckBoxGroup = styled.div`
     color: #65554D;
 
     input {
+      width: 16px;
+      height: 16px;
       margin: 0 20px;
     }
 

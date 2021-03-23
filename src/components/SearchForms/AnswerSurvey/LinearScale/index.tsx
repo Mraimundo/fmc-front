@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 // import { pluginApi } from '../../services/api';
 
@@ -13,10 +12,18 @@ import {
 
 } from './styles';
 
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
+}
+
 interface AnswersData {
   id: number;
   survey_question_id: number;
   type: string;
+  icon_attributes: IconsProps;
   scale_type: string;
   answer: string;
 }
@@ -32,10 +39,12 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
   const survey_question_id = location.search.replace('?item=', '');
   const [pickedUp, setPickedUp] = useState("");
 
+  console.log(JSON.stringify(answers));
   return (
     <Container>
       <InputControlScale>
         <p>{quetion}</p>
+
         <InputGroup>
           {
             answers.map(answer => (
@@ -44,17 +53,18 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
                 key={answer.id}
                 onClick={() => setPickedUp(answer.answer)}
               >
-                <div>
+
+                {<div>
                   {answer.answer}
-                  {pickedUp === "" ? <AiOutlineStar />
-                    : answer.answer <= pickedUp ? <AiFillStar />
-                      : <AiOutlineStar />
-                  }
-                </div>
-                <input
+                  <i className={!pickedUp ? answer.icon_attributes.classes.unpicked
+                    : answer.answer <= pickedUp ? answer.icon_attributes.classes.picked
+                      : answer.icon_attributes.classes.unpicked}></i>
+                </div>}
+
+                < input
                   type="checkbox"
                   id={answer.answer}
-                  name={`${answer.survey_question_id}`}
+                  name={`${answer.survey_question_id}ugkg`}
                   onChange={(e) => {
                     dispatch(setValueAnswer({
                       value: answer.id,

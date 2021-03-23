@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { FONTS } from '../../../../styles/font/globals';
+
 export const Container = styled.div`
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -10,6 +12,7 @@ export const Container = styled.div`
 
     p {
       font-size: 14px;
+      font-family: ${FONTS.condensed}, sans-serif;
       color: #000;
       margin-bottom: 25px;
     }

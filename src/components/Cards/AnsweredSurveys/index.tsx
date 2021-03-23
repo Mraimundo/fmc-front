@@ -14,6 +14,15 @@ import {
   MiniBox
 } from './styles';
 
+interface PointsData {
+  created: string,
+  start_datetime: string,
+  end_datetime: string,
+  id: number,
+  points_count: string,
+  questions_count: string,
+}
+
 interface SurveysData {
   id: number;
   title: string;
@@ -25,6 +34,7 @@ interface SurveysData {
   end_datetime: string;
   modified: string,
   available_surveys: Surveys[];
+  points: PointsData[];
   survey_questions: SurveysQuestion[];
 }
 
@@ -67,6 +77,7 @@ const Cards: React.FC = () => {
             </span>
             <p dangerouslySetInnerHTML={{ __html: answered.description }}></p>
             <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
+            <h2>Vale {(answered.points[0] && answered.points[0].points_count)} Coins</h2>
             <Link to={`${routeMap.InternalPage.answers}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>
         ))}

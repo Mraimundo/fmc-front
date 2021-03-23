@@ -1,11 +1,12 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,
+  RadioContent,
+  RadioContentGroup
 } from './styles';
 
 
@@ -28,56 +29,69 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
 
   return (
     <Container>
-      <p>{quetion}</p>
-      {
-        answers.map(answer => (
-          <div key={answer.id}>
-            {answer.answer}
-            <Radio
-              value={`a${answer.id}`}
-              color="default"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": `a${answer.id}` }}
-              size="small"
-              onChange={(e) => {
-                dispatch(setValueAnswer({
-                  value: (e.target.value),
-                  id: Number(survey_question_id),
-                  answer_id: Number(answer.id),
-                }));
-              }}
-            />
-            <Radio
-              value={`b${answer.id}`}
-              color="default"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": `b${answer.id}` }}
-              size="small"
-              onChange={(e) => {
-                dispatch(setValueAnswer({
-                  value: (e.target.value),
-                  id: Number(survey_question_id),
-                  answer_id: Number(answer.id),
-                }));
-              }}
-            />
-            <Radio
-              value={`c${answer.id}`}
-              color="default"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": `c${answer.id}` }}
-              size="small"
-              onChange={(e) => {
-                dispatch(setValueAnswer({
-                  value: (e.target.value),
-                  id: Number(survey_question_id),
-                  answer_id: Number(answer.id),
-                }));
-              }}
-            />
+      <RadioContent>
+        <p>{quetion}</p>
+        <RadioContentGroup>
+          <div>
+            <label className="label1">Ótimo</label>
+            <label >Bom</label>
+            <label >Ruim</label>
           </div>
-        ))
-      }
+          {
+            answers.map(answer => (
+              <div>
+                <span>{answer.answer}</span>
+
+                <label htmlFor="">
+                  <input
+                    type="radio"
+                    id={answer.answer}
+                    value="Ótimo"
+                    name={`${answer.answer}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                <label htmlFor="">
+                  <input
+                    type="radio"
+                    id={answer.answer}
+                    value="Bom"
+                    name={`${answer.answer}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                <label htmlFor="">
+                  <input
+                    type="radio"
+                    id={answer.answer}
+                    value="Ruim"
+                    name={`${answer.answer}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+              </div>
+            ))
+          }
+        </RadioContentGroup>
+      </RadioContent>
     </Container>
   );
 }
