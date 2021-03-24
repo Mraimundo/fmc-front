@@ -24,6 +24,13 @@ import {
   Form,
 } from './styles';
 
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
+}
+
 interface SurveysDataForm {
   id: number;
   title: string;
@@ -41,6 +48,7 @@ interface SurveyAnswer {
 
 interface AnswersData {
   survey_participant_answers: SurveyAnswer[];
+  icon_attributes: IconsProps;
   id: number;
   survey_question_id: number;
   type: string;

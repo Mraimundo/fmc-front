@@ -35,17 +35,55 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
           <div>
             {
               answers.map(answer => (
-                <label htmlFor={answer.answer} key={answer.id}>
+                <div>
                   <span>{answer.answer}</span>
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value={answer.answer}
-                    name={`${answer.survey_question_id}`}
-                    checked={answer.survey_participant_answers.length > 0 ? true : false}
-                  />
-                  {answer.answer}
-                </label>
+
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      id={answer.answer}
+                      value={answer.answer}
+                      name={`${answer.survey_question_id}`}
+                      checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    />
+                  </label>
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      id={answer.answer}
+                      value={answer.answer}
+                      name={`${answer.survey_question_id}`}
+                      checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    />
+                  </label>
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      id={answer.answer}
+                      value={answer.answer}
+                      name={`${answer.survey_question_id}`}
+                      checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    />
+                  </label>
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      id={answer.answer}
+                      value={answer.answer}
+                      name={`${answer.survey_question_id}`}
+                      checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    />
+                  </label>
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      id={answer.answer}
+                      value={answer.answer}
+                      name={`${answer.survey_question_id}`}
+                      checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    />
+                  </label>
+                </div>
               ))
             }
           </div>

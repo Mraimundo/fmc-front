@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { FONTS } from '../../../../styles/font/globals';
+
 export const Container = styled.div`
   width: 100%;
 
@@ -18,6 +20,7 @@ export const GridCheckBoxContent = styled.div`
   border-right-width: 1px;
   margin-top: 23px;
     p {
+      font-family: ${FONTS.condensed}, sans-serif;
       font-size: 16px;
       color: #000;
     }
@@ -26,73 +29,26 @@ export const GridCheckBoxContent = styled.div`
 export const CheckBoxContentGroup = styled.div`
   width: 40%;
   margin-top: 25px;
+  color: #3B302A;
 
-  > div {
+  div {
+    width: 100%;
     display: flex;
-    align-items:center;
     justify-content: space-between;
-    color: #65554D;
+    align-items: center;
 
     label{
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-left: 50px;
-
-      transform: translateY(25px);
-      
-      span {
-      width: 207px;
-      font-size: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: Regular;
-      line-height: 24px;
-    }
-    } 
-    .input-group{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-left: 60px;
-
-    }
-    .children-one{
-      margin-right: 50px;
-      div{
-        text-align: center;
-        margin-top: 20px;
+      width: 40px;
+            
+      input {
+        margin: 10px 0;
+        width: 16px;
+        height: 16px;
       }
-    }
-    .children-two {
-      div{
-        text-align: center;
-        margin-top: 20px;
-      }
-    }
-    .children-tree {
-      margin-left: 50px;
-
-      div{
-        text-align: center;
-        margin-top: 20px;
-      }
-    }
-
-    .children-for {
-      margin-left: 50px;
-
-      div{
-        text-align: center;
-        margin-top: 20px;
-      }
-    }
-     
-    
-    
-    svg {
-      width: 16px;
-      height: 16px;
-    }
+    }   
   }
 `;
 

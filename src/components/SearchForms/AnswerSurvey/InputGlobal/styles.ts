@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+import { FONTS } from '../../../../styles/font/globals';
 
 interface InputType {
   inputType: string;
@@ -15,6 +16,7 @@ export const Container = styled.div<InputType>`
 
     p {
       font-size: 14px;
+      font-family: ${FONTS.condensed}, sans-serif;
       color: #000;
       margin-bottom: 25px;
     }

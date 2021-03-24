@@ -5,6 +5,7 @@ import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,
+  RadioContent,
   InputGroup
 } from './styles';
 
@@ -27,29 +28,33 @@ const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
   const survey_question_id = location.search.replace('?item=', '');
   return (
     <Container>
-      <p>{quetion}</p>
-      <InputGroup>
-        {
-          answers.map(answer => (
-            <label htmlFor={answer.answer} key={answer.id}>
-              <input
-                type="radio"
-                id={answer.answer}
-                value={answer.answer}
-                name={`${answer.survey_question_id}`}
-                onChange={(e) => {
-                  dispatch(setValueAnswer({
-                    value: (e.target.value),
-                    id: Number(survey_question_id),
-                    answer_id: Number(answer.id),
-                  }));
-                }}
-              />
-              {answer.answer}
-            </label>
-          ))
-        }
-      </InputGroup>
+      <RadioContent>
+        <p>{quetion}</p>
+        <InputGroup>
+          {
+            answers.map(answer => (
+              <div>
+                <label htmlFor="">
+                  <input
+                    type="radio"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                {answer.answer}
+              </div>
+            ))
+          }
+        </InputGroup>
+      </RadioContent>
     </Container>
   );
 };

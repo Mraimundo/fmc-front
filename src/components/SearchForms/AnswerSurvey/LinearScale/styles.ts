@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { FONTS } from '../../../../styles/font/globals';
+
 export const Container = styled.div`
   width: 100%;
 `;
@@ -16,6 +18,7 @@ export const InputControlScale = styled.div`
   margin-top: 23px;
     p {
       font-size: 14px;
+      font-family: ${FONTS.condensed}, sans-serif;
       color: #000;
     }
 `;
@@ -35,10 +38,9 @@ export const InputGroup = styled.div`
     align-items:center;
     flex-direction: column;
     color: #65554D;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-family: Helvetica Neue;
     font-weight: Regular;
-    /* line-height: 24px; */
     top: 50;
 
     div {
@@ -48,7 +50,7 @@ export const InputGroup = styled.div`
     }
 
     svg {
-      margin-top: 10px;
+      margin-top: 14px;
       width: 26px;
       height: 26px;
       transition: all 0.2s ease-in-out;

@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify'
+import { useToast } from 'context/ToastContext';
+
 import axios from 'axios'
 import { useLocation, useHistory } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
@@ -30,6 +31,15 @@ import {
   Button
 } from './styles';
 
+interface PointsData {
+  created: string,
+  start_datetime: string,
+  end_datetime: string,
+  id: number,
+  points_count: string,
+  questions_count: string,
+}
+
 interface SurveysDataForm {
   id: number;
   title: string;
@@ -37,7 +47,15 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
+  points: PointsData[];
   event: Event;
+}
+
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
 }
 
 interface AnswersData {
@@ -45,6 +63,7 @@ interface AnswersData {
   survey_question_id: number;
   type: string;
   scale_type: string;
+  icon_attributes: IconsProps;
   answer: string;
 }
 
@@ -56,18 +75,16 @@ interface QuestionsData {
   survey_question_answers: AnswersData[];
 }
 
-toast.configure()
-
 const ProducerResearch: React.FC = () => {
   const answerList = useSelector(getValueAnswer);
   const location = useLocation();
   const history = useHistory();
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
-  // const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
   const [videoId, setVideoId] = useState("");
 
+  const { addToast } = useToast();
 
   useEffect(() => {
     async function fetchSurveys() {
@@ -103,15 +120,18 @@ const ProducerResearch: React.FC = () => {
         }
       }
       await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-
-      toast.success('Obrigado por responder a nossa pesquisa!', {
-        position: toast.POSITION.TOP_RIGHT,
+      addToast({
+        title:
+          'Obrigado por partipar da pesquisa! Em até 48 horas úteis os FMC Coins estarão disponíveis para utilizar em resgates no Católogo de Prêmios.',
+        type: 'success',
       });
       history.push('/pesquisas-produtor');
-    } catch (error) {
-
-      toast.error('Essa pesquisa já foi respondida!', {
-        position: toast.POSITION.TOP_RIGHT,
+    } catch (e) {
+      addToast({
+        title:
+          e.response?.data?.message ||
+          'Falha ao enviar resostas. Por favor tente novamente',
+        type: 'error',
       });
     }
     // eslint-disable-next-line
@@ -220,23 +240,20 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
+          {/* <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2> */}
         </Content>
         <ContentInfo>
-          {
-            !videoId ?
-              <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-              :
-              // eslint-disable-next-line
-              <iframe
-                width="560"
-                height="420"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen>
-              </iframe>
-          }
+          <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
+          {/* eslint-disable-next-line  */}
+          <iframe
+            width="560"
+            height="420"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen>
+          </iframe>
         </ContentInfo>
       </MiniBox>
 

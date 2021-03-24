@@ -34,36 +34,18 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
         <p>{quetion}</p>
         <CheckBoxContentGroup>
           <div>
-            {
-              answers.map(answer => (
-                <label htmlFor={answer.answer} key={answer.id}>
-                  <span>{answer.answer}</span>
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value={answer.answer}
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(survey_question_id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value={answer.answer}
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(survey_question_id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
+            <label className="label1">1</label>
+            <label >2</label>
+            <label >3</label>
+            <label >4</label>
+            <label >5</label>
+          </div>
+          {
+            answers.map(answer => (
+              <div>
+                <span>{answer.answer}</span>
+
+                <label htmlFor="">
                   <input
                     type="checkbox"
                     id={answer.answer}
@@ -78,9 +60,69 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                     }}
                   />
                 </label>
-              ))
-            }
-          </div>
+                <label htmlFor="">
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                <label htmlFor="">
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                <label htmlFor="">
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+                <label htmlFor="">
+                  <input
+                    type="checkbox"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    onChange={(e) => {
+                      dispatch(setValueAnswer({
+                        value: (e.target.value),
+                        id: Number(survey_question_id),
+                        answer_id: Number(answer.id),
+                      }));
+                    }}
+                  />
+                </label>
+              </div>
+            ))
+          }
         </CheckBoxContentGroup>
       </GridCheckBoxContent>
     </Container>
