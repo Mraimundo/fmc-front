@@ -72,8 +72,8 @@ const reproveddAt = [
 const reproveReason = [
   {
     column: 'Comentário',
-    dataValue: 'id',
-    fn: (id: string) => <ReproveReason agreementTermId={id} />,
+    dataValue: 'reason',
+    fn: (reason: string) => <ReproveReason reason={reason} />,
   },
 ];
 

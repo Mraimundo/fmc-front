@@ -2,15 +2,15 @@ import React, { useCallback, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 
 import CommentIcon from 'assets/images/contact/message.svg';
-import ReproveModal from 'components/HarvestTerm/Modals/ReproveModal';
+import ReasonModal from 'components/HarvestTerm/Modals/ReasonModal';
 
 import { Container } from './styles';
 
 interface NegotiationProps {
-  agreementTermId: string;
+  reason: string;
 }
 
-const Negotiation: React.FC<NegotiationProps> = ({ agreementTermId }) => {
+const Negotiation: React.FC<NegotiationProps> = ({ reason }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleClick = useCallback(() => {
@@ -22,9 +22,9 @@ const Negotiation: React.FC<NegotiationProps> = ({ agreementTermId }) => {
       <Container>
         <ReactSVG src={CommentIcon} onClick={handleClick} />
       </Container>
-      <ReproveModal
+      <ReasonModal
         isOpen={isOpenModal}
-        agreementTermId={agreementTermId}
+        reason={reason}
         cancelRequest={() => setIsOpenModal(false)}
       />
     </>

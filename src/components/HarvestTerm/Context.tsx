@@ -41,31 +41,20 @@ export const HarvestTermsProvider: React.FC = ({ children }) => {
 
   const selectTab = useCallback((tab: string) => {
     setTabSelected(tab);
-    if (tab === tabs[1]) {
-      setFilters(current => ({
-        ...current,
-        approved: 0,
-      }));
-    }
+    let approved: number | undefined;
 
-    if (tab === tabs[2]) {
-      setFilters(current => ({
-        ...current,
-        approved: 1,
-      }));
-    }
+    if (tab === tabs[1]) approved = 1;
 
-    if (tab === tabs[0]) {
-      setFilters(current => ({
-        ...current,
-        approved: undefined,
-      }));
-    }
+    if (tab === tabs[2]) approved = 0;
+
+    setFilters(current => ({
+      ...current,
+      approved,
+    }));
   }, []);
 
   const applyFilters = useCallback((selectedFilters: Filters) => {
     const { campaignId, directorship, regionalId } = selectedFilters;
-    console.log('ON SELECT FILTER', selectedFilters);
     setFilters(current => ({
       ...current,
       campaignId,
