@@ -100,6 +100,7 @@ export default (headerProps: HeaderProps) => {
         ...requestedAt,
         ...reproveddAt,
         ...reproveReason,
+        ...negotiationColumn,
       ];
     default:
       return [

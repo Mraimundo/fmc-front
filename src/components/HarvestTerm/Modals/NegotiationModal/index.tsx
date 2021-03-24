@@ -59,7 +59,7 @@ const NegotiationModal: React.FC<NegotiationModalProps> = ({
           <ReactSVG src={CommentIcon} />
           <h3>Negociação</h3>
         </Header>
-        <CommentsListWrapper>
+        <CommentsListWrapper readOnly={tabSelected !== tabs[0]}>
           <p>Comentário:</p>
           <CommentList comments={comments} />
         </CommentsListWrapper>

@@ -8,7 +8,7 @@ export const CustomModal = styled(Modal)`
     max-height: 510px;
     width: 100%;
     height: 100%;
-    //overflow: hidden;
+    overflow: hidden;
   }
 `;
 
@@ -45,8 +45,8 @@ export const Close = styled.div`
   }
 `;
 
-export const CommentsListWrapper = styled.div`
-  height: 250px;
+export const CommentsListWrapper = styled.div<{ readOnly?: boolean }>`
+  height: ${({ readOnly }) => (readOnly ? '350px' : '250px')};
   width: 100%;
 
   > p {

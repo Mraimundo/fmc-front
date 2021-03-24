@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 
 import { ReactSVG } from 'react-svg';
 import CloseIcon from 'assets/images/training/close-icon.svg';
 import CommentIcon from 'assets/images/contact/message.svg';
 
-import { Container, CustomModal as Modal, Close, Header } from './styles';
+import {
+  Container,
+  CustomModal as Modal,
+  Close,
+  Header,
+  ReasonWrapper,
+} from './styles';
 
 interface ReproveModalProps {
   isOpen: boolean;
@@ -29,7 +35,9 @@ const ReproveModal: React.FC<ReproveModalProps> = ({
           <ReactSVG src={CommentIcon} />
           <h3>Motivo da reprovação</h3>
         </Header>
-        {reason}
+        <ReasonWrapper>
+          <p>{reason}</p>
+        </ReasonWrapper>
       </Container>
     </Modal>
   );

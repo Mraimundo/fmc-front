@@ -25,6 +25,8 @@ export interface Filters {
   regionalId?: number;
   directorship?: string;
   search?: string;
+  page?: number;
+  limit?: number;
 }
 
 export interface AgreementTermApi {

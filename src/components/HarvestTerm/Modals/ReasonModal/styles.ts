@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import Modal from 'components/shared/Modal';
 
-// import BaseTextArea from 'components/shared/TextArea';
-// import DefaultButton from 'components/shared/Button';
-
 export const CustomModal = styled(Modal)`
   ._modalContainer {
     max-width: 500px;
@@ -44,4 +41,15 @@ export const Close = styled.div`
       fill: ${({ theme }) => theme.font.color.primary};
     }
   }
+`;
+
+export const ReasonWrapper = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  height: 200px;
+  width: 100%;
+  border: 2px solid ${({ theme }) => theme.font.color.quartenary};
+  font-size: 0.9em;
+  color: ${({ theme }) => theme.font.color.primary};
+  position: relative;
 `;

@@ -1,4 +1,5 @@
 import { vendavallApi, pluginApi } from 'services/api';
+import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import {
   Harvest,
   HarvestApi,
@@ -17,13 +18,12 @@ const APPROVE_AGREEMENT_TERM_RESOURCE = '/agreement-terms/approve';
 
 export interface ApiResponse {
   data: AgreementTermApi[];
-  pagination: {
-    page_total: number;
-    current_page: number;
-    last_page: number;
-    per_page: number;
-    total: number;
-  };
+  pagination: Pagination;
+}
+
+export interface Response {
+  data: AgreementTerm[];
+  pagination: Pagination;
 }
 
 export const getHarvests = async (cpf = ''): Promise<Harvest[]> => {
@@ -39,15 +39,18 @@ const buildAgreementTermsUrl = ({
   directorship,
   regionalId,
   search,
+  page,
 }: Filters): string => {
   let url = AGREEMENT_TERMS_RESOURCE;
 
-  url += `?campaign_id=${campaignId || 0}`;
+  url += `?campaign_id=${campaignId || 1}`;
 
   if (directorship) url += `&directorship=${directorship}`;
   if (regionalId) url += `&regional_id=${regionalId}`;
   if (approved || approved === 0) url += `&approved=${approved}`;
   if (search) url += `&search=${search}`;
+  if (page) url += `&page=${page}`;
+  url += `&limit=10`;
 
   return url;
 };
@@ -57,17 +60,23 @@ export const getAgreemenTerms = async ({
   approved,
   directorship,
   regionalId,
-}: Filters): Promise<AgreementTerm[]> => {
+  search,
+  page,
+}: Filters): Promise<Response> => {
   const url = buildAgreementTermsUrl({
     campaignId,
     approved,
     directorship,
     regionalId,
+    search,
+    page,
   });
 
   const { data } = await pluginApi.get<ApiResponse>(url);
-
-  return transformFromAgreementTermsApi(data.data);
+  return {
+    data: transformFromAgreementTermsApi(data.data),
+    pagination: data.pagination,
+  };
 };
 
 interface ApproveRequest {
