@@ -33,8 +33,13 @@ const HarvestSelect: React.FC<HarvestSelectProps> = ({
   }, [participantCpf]);
 
   const loadOptions = useCallback(() => {
-    if (options.length > 0) setValue(options[0]);
     return options;
+  }, [options]);
+
+  useEffect(() => {
+    if (options.length > 0) {
+      setValue(options[0]);
+    }
   }, [options, setValue]);
 
   return (

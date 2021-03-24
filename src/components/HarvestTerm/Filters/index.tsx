@@ -14,12 +14,13 @@ import {
   TabsWrapper,
   Input,
   InputWrapper,
+  Button,
 } from './styles';
 import Tabs from './Tabs';
 
 const HarvestFilters: React.FC = () => {
   const { participant } = useAuth();
-  const { applyFilters } = useHarvestTermsContext();
+  const { applyFilters, isFetching } = useHarvestTermsContext();
 
   const [harvestSelected, setHarvestSelected] = useState<Option | null>(null);
   const [regionalSelected, setRegionalSelected] = useState<Option | null>(null);
@@ -54,10 +55,12 @@ const HarvestFilters: React.FC = () => {
   }, [harvestSelected, regionalSelected, directorSelected, applyFilters]);
 
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length >= 3) {
-      setSearchValue(e.target.value);
-    }
+    setSearchValue(e.target.value);
   }, []);
+
+  const onSearchClickHandler = useCallback(() => {
+    applyFilters({ search: searchValue } as Filters);
+  }, [applyFilters, searchValue]);
 
   return (
     <Container>
@@ -65,7 +68,6 @@ const HarvestFilters: React.FC = () => {
         <HarvestSelect
           value={harvestSelected}
           setValue={value => setHarvestSelected(value)}
-          // placeholder="Safra"
           participantCpf={participant.cpf}
           label="Safra"
         />
@@ -85,7 +87,16 @@ const HarvestFilters: React.FC = () => {
           name="search"
           label="Campo de Pesquisa"
           onChange={onChangeHandler}
+          value={searchValue}
         />
+        <Button
+          buttonRole="primary"
+          type="button"
+          onClick={onSearchClickHandler}
+          loading={isFetching}
+        >
+          Buscar
+        </Button>
       </InputWrapper>
       <TabsWrapper>
         <Tabs />

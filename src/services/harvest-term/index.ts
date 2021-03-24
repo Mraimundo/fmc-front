@@ -42,7 +42,6 @@ const buildAgreementTermsUrl = ({
   page,
 }: Filters): string => {
   let url = AGREEMENT_TERMS_RESOURCE;
-
   url += `?campaign_id=${campaignId || 1}`;
 
   if (directorship) url += `&directorship=${directorship}`;

@@ -61,12 +61,13 @@ export const HarvestTermsProvider: React.FC = ({ children }) => {
   }, []);
 
   const applyFilters = useCallback((selectedFilters: Filters) => {
-    const { campaignId, directorship, regionalId } = selectedFilters;
+    const { campaignId, directorship, regionalId, search } = selectedFilters;
     setFilters(current => ({
       ...current,
       campaignId,
       directorship,
       regionalId,
+      search,
       page: 1,
     }));
   }, []);
