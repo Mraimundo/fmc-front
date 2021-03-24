@@ -39,12 +39,10 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
   const survey_question_id = location.search.replace('?item=', '');
   const [pickedUp, setPickedUp] = useState("");
 
-  console.log(JSON.stringify(answers));
   return (
     <Container>
       <InputControlScale>
         <p>{quetion}</p>
-
         <InputGroup>
           {
             answers.map(answer => (

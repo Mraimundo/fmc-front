@@ -19,7 +19,6 @@ export const InputControlScale = styled.div`
     p {
       font-size: 14px;
       font-family: ${FONTS.condensed}, sans-serif;
-      /* font-family: "HelveticaNeue-Condensed; */
       color: #000;
     }
 `;
@@ -42,18 +41,12 @@ export const InputGroup = styled.div`
     font-size: 14px;
     font-family: Helvetica Neue;
     font-weight: Regular;
-    /* line-height: 24px; */
     top: 50;
 
     div {
       display: flex;
       align-items: center;
       flex-direction: column;
-
-      /* i {
-        width: 24px;
-        height: 23px;
-      } */
     }
 
     svg {

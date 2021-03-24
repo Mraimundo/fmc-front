@@ -13,7 +13,7 @@ export const CheckBoxContent = styled.div`
   border-right-width: 1px;
   margin-top: 23px;
     p {
-      font-size: 16px;
+      font-size: 14px;
       font-family: ${FONTS.condensed}, sans-serif;
       color: #000;
     }

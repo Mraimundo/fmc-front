@@ -1,5 +1,7 @@
-import React from 'react';
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
   Container,
@@ -7,6 +9,13 @@ import {
   InputGroup
 
 } from './styles';
+
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
+}
 
 interface SurveyAnswer {
   id: number;
@@ -18,6 +27,7 @@ interface AnswersData {
   survey_question_id: number;
   survey_participant_answers: SurveyAnswer[];
   type: string;
+  icon_attributes: IconsProps;
   scale_type: string;
   answer: string;
 }
@@ -28,6 +38,11 @@ interface props {
 }
 
 const LinearScale: React.FC<props> = ({ quetion, answers }) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const survey_question_id = location.search.replace('?item=', '');
+  // eslint-disable-next-line
+  const [pickedUp, setPickedUp] = useState("");
 
   return (
     <Container>
@@ -39,18 +54,27 @@ const LinearScale: React.FC<props> = ({ quetion, answers }) => {
               <label
                 htmlFor={answer.answer}
                 key={answer.id}
+                onClick={() => setPickedUp(answer.answer)}
               >
-                <div>
+
+                {<div>
                   {answer.answer}
-                  {answer.survey_participant_answers.length >= 0 && index + 1 < elements.length ?
-                    <AiFillStar />
-                    : <AiOutlineStar />
-                  }
-                </div>
-                <input
+                  <i className={answer.survey_participant_answers.length >= 0 && index + 1 < elements.length ?
+                    answer.icon_attributes.classes.picked
+                    : answer.icon_attributes.classes.unpicked}></i>
+                </div>}
+
+                < input
                   type="checkbox"
                   id={answer.answer}
-                  name={`${answer.survey_question_id}`}
+                  name={`${answer.survey_question_id}ugkg`}
+                  onChange={(e) => {
+                    dispatch(setValueAnswer({
+                      value: answer.id,
+                      id: Number(survey_question_id),
+                      answer_id: Number(answer.id),
+                    }));
+                  }}
                 />
               </label>
             ))

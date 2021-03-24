@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify'
+import { useToast } from 'context/ToastContext';
+
 import axios from 'axios'
 import { useLocation, useHistory } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
@@ -39,7 +40,6 @@ interface PointsData {
   questions_count: string,
 }
 
-
 interface SurveysDataForm {
   id: number;
   title: string;
@@ -75,18 +75,16 @@ interface QuestionsData {
   survey_question_answers: AnswersData[];
 }
 
-toast.configure()
-
 const ProducerResearch: React.FC = () => {
   const answerList = useSelector(getValueAnswer);
   const location = useLocation();
   const history = useHistory();
   const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
-  // const [seeAnswers, setSeeAnswers] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
   const [videoId, setVideoId] = useState("");
 
+  const { addToast } = useToast();
 
   useEffect(() => {
     async function fetchSurveys() {
@@ -122,15 +120,18 @@ const ProducerResearch: React.FC = () => {
         }
       }
       await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
-
-      toast.success('Obrigado por responder a nossa pesquisa!', {
-        position: toast.POSITION.TOP_RIGHT,
+      addToast({
+        title:
+          'Obrigado por partipar da pesquisa! Em até 48 horas úteis os FMC Coins estarão disponíveis para utilizar em resgates no Católogo de Prêmios.',
+        type: 'success',
       });
       history.push('/pesquisas-produtor');
-    } catch (error) {
-
-      toast.error('Essa pesquisa já foi respondida!', {
-        position: toast.POSITION.TOP_RIGHT,
+    } catch (e) {
+      addToast({
+        title:
+          e.response?.data?.message ||
+          'Falha ao enviar resostas. Por favor tente novamente',
+        type: 'error',
       });
     }
     // eslint-disable-next-line

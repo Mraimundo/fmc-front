@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Container,
+  RadioContent,
   InputGroup
 } from './styles';
 
@@ -26,23 +27,27 @@ interface Props {
 const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
   return (
     <Container>
-      <p>{quetion}</p>
-      <InputGroup>
-        {
-          answers.map(answer => (
-            <label htmlFor={answer.answer} key={answer.id}>
-              <input
-                type="radio"
-                id={answer.answer}
-                value={answer.answer}
-                name={`${answer.survey_question_id}`}
-                checked={answer.survey_participant_answers.length > 0 ? true : false}
-              />
-              {answer.answer}
-            </label>
-          ))
-        }
-      </InputGroup>
+      <RadioContent>
+        <p>{quetion}</p>
+        <InputGroup>
+          {
+            answers.map(answer => (
+              <div>
+                <label htmlFor="">
+                  <input
+                    type="radio"
+                    id={answer.answer}
+                    value={answer.answer}
+                    name={`${answer.survey_question_id}`}
+                    checked={answer.survey_participant_answers.length > 0 ? true : false}
+                  />
+                </label>
+                {answer.answer}
+              </div>
+            ))
+          }
+        </InputGroup>
+      </RadioContent>
     </Container>
   );
 };
