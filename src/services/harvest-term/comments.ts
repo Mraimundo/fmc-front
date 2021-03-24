@@ -24,7 +24,9 @@ export const addComment = async ({
   commentId,
   comment,
 }: CommentRequest): Promise<void> => {
-  await pluginApi.post<void>(`${COMMENT_RESOURCE}/add/${commentId}`, comment);
+  await pluginApi.post<void>(`${COMMENT_RESOURCE}/add/${commentId}`, {
+    comment,
+  });
 };
 
 export const getComments = async (commentId: number): Promise<Comment[]> => {

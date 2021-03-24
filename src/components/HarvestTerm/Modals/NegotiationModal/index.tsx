@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-// import Modal from 'components/shared/Modal';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ReactSVG } from 'react-svg';
 import CloseIcon from 'assets/images/training/close-icon.svg';
@@ -9,6 +7,7 @@ import CommentForm from 'components/HarvestTerm/Forms/Comment';
 import { getComments } from 'services/harvest-term/comments';
 import { Comment } from 'services/harvest-term/interface';
 import CommentList from 'components/HarvestTerm/Lists/Comments';
+import { useHarvestTermsContext } from 'components/HarvestTerm/Context';
 
 import {
   Container,
@@ -31,16 +30,22 @@ const NegotiationModal: React.FC<NegotiationModalProps> = ({
   cancelRequest,
 }) => {
   const [comments, setComments] = useState<Comment[]>([]);
+  const { tabs, tabSelected } = useHarvestTermsContext();
+
+  const fetchComments = useCallback(async () => {
+    const result = await getComments(parseInt(agreementTermId, 10));
+    setComments(result);
+  }, [agreementTermId]);
+
+  const handleConfirmComment = useCallback(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   useEffect(() => {
-    const fetchComments = async () => {
-      const result = await getComments(parseInt(agreementTermId, 10));
-      setComments(result);
-    };
     if (isOpen) {
       fetchComments();
     }
-  }, [agreementTermId, isOpen]);
+  }, [fetchComments, isOpen]);
 
   return (
     <Modal isOpen={isOpen} onRequestClose={cancelRequest}>
@@ -58,9 +63,14 @@ const NegotiationModal: React.FC<NegotiationModalProps> = ({
           <p>Comentário:</p>
           <CommentList comments={comments} />
         </CommentsListWrapper>
-        <CommentWrapper>
-          <CommentForm agreementTermId={agreementTermId} />
-        </CommentWrapper>
+        {tabSelected === tabs[0] && (
+          <CommentWrapper>
+            <CommentForm
+              agreementTermId={agreementTermId}
+              onConfirmComment={handleConfirmComment}
+            />
+          </CommentWrapper>
+        )}
       </Container>
     </Modal>
   );

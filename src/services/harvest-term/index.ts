@@ -13,6 +13,7 @@ import {
 
 const HARVEST_RESOURCE = '/campaign';
 const AGREEMENT_TERMS_RESOURCE = '/agreement-terms';
+const APPROVE_AGREEMENT_TERM_RESOURCE = '/agreement-terms/approve';
 
 export interface ApiResponse {
   data: AgreementTermApi[];
@@ -37,13 +38,16 @@ const buildAgreementTermsUrl = ({
   approved,
   directorship,
   regionalId,
+  search,
 }: Filters): string => {
   let url = AGREEMENT_TERMS_RESOURCE;
 
-  if (campaignId) url += `?campaign_id=${campaignId}`;
+  url += `?campaign_id=${campaignId || 0}`;
+
   if (directorship) url += `&directorship=${directorship}`;
   if (regionalId) url += `&regional_id=${regionalId}`;
-  url += `&approved=${approved || 0}`;
+  if (approved || approved === 0) url += `&approved=${approved}`;
+  if (search) url += `&search=${search}`;
 
   return url;
 };
@@ -64,4 +68,24 @@ export const getAgreemenTerms = async ({
   const { data } = await pluginApi.get<ApiResponse>(url);
 
   return transformFromAgreementTermsApi(data.data);
+};
+
+interface ApproveRequest {
+  agreementTermId: number;
+  approve: boolean;
+  reason?: string;
+}
+
+export const approveAgreementTerm = async ({
+  agreementTermId,
+  approve,
+  reason,
+}: ApproveRequest): Promise<void> => {
+  await pluginApi.post(
+    `${APPROVE_AGREEMENT_TERM_RESOURCE}/${agreementTermId}`,
+    {
+      approve: approve ? 1 : 0,
+      reason: reason || '',
+    },
+  );
 };

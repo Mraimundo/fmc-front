@@ -3,12 +3,14 @@ import React from 'react';
 import Filters from 'components/HarvestTerm/Filters';
 import Table from 'components/HarvestTerm/Table';
 
-import { Container } from './styles';
+import { Container, Title, TitleWrapper } from './styles';
 
 const Main: React.FC = () => {
   return (
     <Container>
-      <h1>TERMO DE SAFRA</h1>
+      <TitleWrapper>
+        <Title>Aprovação de Acordos de Safra</Title>
+      </TitleWrapper>
       <Filters />
       <Table />
     </Container>

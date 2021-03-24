@@ -24,6 +24,7 @@ export interface Filters {
   approved?: number;
   regionalId?: number;
   directorship?: string;
+  search?: string;
 }
 
 export interface AgreementTermApi {
@@ -68,6 +69,7 @@ export interface AgreementTerm {
   approved: boolean;
   reason: string;
   status?: string;
+  modified: string;
 }
 
 export interface CommentApi {

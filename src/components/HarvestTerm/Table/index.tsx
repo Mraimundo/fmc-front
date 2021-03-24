@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { useHavestTermsContext } from 'components/HarvestTerm/Context';
+import { useHarvestTermsContext } from 'components/HarvestTerm/Context';
 import { Table } from './styles';
 import headers from './headers';
 
@@ -8,8 +8,10 @@ const AgreementTermsTable: React.FC = () => {
   const {
     agreementTerms,
     isFetching,
+    tabSelected,
+    tabs,
     fetchAgreementTerms,
-  } = useHavestTermsContext();
+  } = useHarvestTermsContext();
 
   useEffect(() => {
     fetchAgreementTerms();
@@ -17,7 +19,7 @@ const AgreementTermsTable: React.FC = () => {
 
   return (
     <Table
-      headers={headers()}
+      headers={headers({ tabSelected, tabs })}
       data={agreementTerms}
       isFetching={isFetching}
       noResultText="Nenhuma Pesquisa encontrada"

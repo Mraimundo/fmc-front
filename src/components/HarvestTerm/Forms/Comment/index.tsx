@@ -4,6 +4,7 @@ import { useForm, FormContext } from 'react-hook-form';
 import Button from 'components/shared/Button';
 import * as Yup from 'yup';
 import { addComment } from 'services/harvest-term/comments';
+import { useToast } from 'context/ToastContext';
 import {
   FormContainer,
   Form,
@@ -18,10 +19,15 @@ interface FormData {
 
 interface CommentFormProps {
   agreementTermId: string;
+  onConfirmComment?: () => void;
 }
 
-const CommentForm: React.FC<CommentFormProps> = ({ agreementTermId }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  agreementTermId,
+  onConfirmComment,
+}) => {
   const [loading, setLoading] = useState(false);
+  const { addToast } = useToast();
 
   const methods = useForm<FormData>({
     validationSchema: Yup.object().shape({
@@ -36,10 +42,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ agreementTermId }) => {
   const { handleSubmit, reset } = methods;
 
   const onSubmit = handleSubmit(async ({ comment }) => {
-    setLoading(true);
-    await addComment({ commentId: parseInt(agreementTermId, 10), comment });
-    reset();
-    setLoading(false);
+    try {
+      setLoading(true);
+      await addComment({ commentId: parseInt(agreementTermId, 10), comment });
+      reset();
+
+      if (onConfirmComment) onConfirmComment();
+    } catch (e) {
+      addToast({
+        title:
+          e.response?.data?.message || 'Não foi possível adicionar comentário',
+        type: 'error',
+      });
+    } finally {
+      setLoading(false);
+    }
   });
 
   return (
