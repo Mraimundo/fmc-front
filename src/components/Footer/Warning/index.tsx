@@ -7,7 +7,7 @@ const Warning: React.FC = () => {
     <Wrapper>
       <Rectangle>
         <div>
-          <span>- PRODUTO PERIGOSO DE USO AGRÍCOLA.</span>
+          <span>- PRODUTO PERIGOSO, DE USO AGRÍCOLA.</span>
           <span>- CONSULTE SEMPRE UM ENGENHEIRO AGRÔNOMO.</span>
         </div>
         <div>
