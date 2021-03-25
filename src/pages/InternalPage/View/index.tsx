@@ -204,7 +204,11 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
-          {/* <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2> */}
+          {
+            youropinion?.points?.length ? (
+              <h2>Vale {(youropinion?.points?.length && youropinion?.points[0].points_count)} Coins</h2>
+            ) : null
+          }
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />

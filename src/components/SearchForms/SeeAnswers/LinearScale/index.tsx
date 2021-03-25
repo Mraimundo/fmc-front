@@ -50,6 +50,7 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
     });
   });
 
+
   return (
     <Container>
       <p>{quetion}</p>

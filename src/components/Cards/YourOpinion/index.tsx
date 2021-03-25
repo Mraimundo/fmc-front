@@ -75,12 +75,17 @@ const CardList: React.FC = () => {
             </span>
             <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
 
+            {
+              youropinion.points[0] ? (
+                <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2>
+              ) : null
+            }
+
             {/* <h2>
               {(youropinion.points[0] && (Date.parse(youropinion.points[0].start_datetime) <= Date.now()
                 || Date.parse(youropinion.points[0].end_datetime) <= Date.now() && youropinion.points[0].points_count
               ))}
             </h2> */}
-            <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2>
             <Link to={`${routeMap.InternalPage.questions}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}

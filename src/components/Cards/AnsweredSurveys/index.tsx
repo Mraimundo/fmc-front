@@ -49,11 +49,6 @@ const Cards: React.FC = () => {
     new Array<SurveysData>(),
   );
 
-  // const [seeAnswers, setSeeAnswers] = useState(
-  //   new Array<SurveysData>(),
-  // );
-  // const location = useLocation();
-
   useEffect(() => {
     async function fetchSurveys() {
       const response = await pluginApi.get('participants/surveys/closed');
@@ -77,7 +72,11 @@ const Cards: React.FC = () => {
             </span>
             <p dangerouslySetInnerHTML={{ __html: answered.description }}></p>
             <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
-            <h2>Vale {(answered.points[0] && answered.points[0].points_count)} Coins</h2>
+            {
+              answered.points[0] ? (
+                <h2>Vale {(answered.points[0] && answered.points[0].points_count)} Coins</h2>
+              ) : null
+            }
             <Link to={`${routeMap.InternalPage.answers}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>
         ))}
