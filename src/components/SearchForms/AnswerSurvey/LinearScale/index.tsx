@@ -1,29 +1,18 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
-// import { pluginApi } from '../../services/api';
-
 import {
   Container,
-  InputControlScale,
-  InputGroup
-
 } from './styles';
-
-interface IconsProps {
-  classes: {
-    picked: string,
-    unpicked: string,
-  }
-}
 
 interface AnswersData {
   id: number;
   survey_question_id: number;
   type: string;
-  icon_attributes: IconsProps;
   scale_type: string;
   answer: string;
 }
@@ -31,53 +20,43 @@ interface AnswersData {
 interface props {
   quetion: string;
   answers: AnswersData[];
+  id?: number | undefined,
 }
 
-const LinearScale: React.FC<props> = ({ quetion, answers }) => {
+const MultipleLinearScale: React.FC<props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const survey_question_id = location.search.replace('?item=', '');
-  const [pickedUp, setPickedUp] = useState("");
+  const [currentAnswer, setCurrentAnswer] = useState(0);
 
   return (
     <Container>
-      <InputControlScale>
-        <p>{quetion}</p>
-        <InputGroup>
-          {
-            answers.map(answer => (
-              <label
-                htmlFor={answer.answer}
-                key={answer.id}
-                onClick={() => setPickedUp(answer.answer)}
-              >
+      <p>{quetion}</p>
+      <div>
+        {
+          answers.map((answer, index, elements) => (
+            <Box key={answer.id} component="fieldset" mb={3} borderColor="transparent">
+              <Typography component="legend">{answer.answer}</Typography>
+              <Rating
+                name={answer.id.toString()}
+                max={1}
+                size="large"
+                onMouseOver={() => setCurrentAnswer(index + 1)}
+                onClick={() => {
+                  setCurrentAnswer(index + 1);
 
-                {<div>
-                  {answer.answer}
-                  <i className={!pickedUp ? answer.icon_attributes.classes.unpicked
-                    : answer.answer <= pickedUp ? answer.icon_attributes.classes.picked
-                      : answer.icon_attributes.classes.unpicked}></i>
-                </div>}
-
-                < input
-                  type="checkbox"
-                  id={answer.answer}
-                  name={`${answer.survey_question_id}ugkg`}
-                  onChange={(e) => {
-                    dispatch(setValueAnswer({
-                      value: answer.id,
-                      id: Number(survey_question_id),
-                      answer_id: Number(answer.id),
-                    }));
-                  }}
-                />
-              </label>
-            ))
-          }
-        </InputGroup>
-      </InputControlScale>
+                  dispatch(setValueAnswer({
+                    value: index + 1,
+                    id: Number(id),
+                    answer_id: Number(answer.id),
+                  }));
+                }}
+                value={index < currentAnswer ? 1 : null}
+              />
+            </Box>
+          ))
+        }
+      </div>
     </Container>
   );
 };
 
-export default LinearScale;
+export default MultipleLinearScale;

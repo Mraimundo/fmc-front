@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../../state/modules/answer/actions';
+import React from 'react';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 import {
   Container,
-  InputControlScale,
-  InputGroup
-
 } from './styles';
 
-interface IconsProps {
-  classes: {
-    picked: string,
-    unpicked: string,
-  }
-}
-
-interface SurveyAnswer {
-  id: number;
+interface ParticipantProps {
   answer: string;
 }
 
 interface AnswersData {
   id: number;
   survey_question_id: number;
-  survey_participant_answers: SurveyAnswer[];
   type: string;
-  icon_attributes: IconsProps;
+  survey_participant_answers: ParticipantProps[];
   scale_type: string;
   answer: string;
 }
@@ -35,54 +23,48 @@ interface AnswersData {
 interface props {
   quetion: string;
   answers: AnswersData[];
+  id?: number | undefined,
 }
 
-const LinearScale: React.FC<props> = ({ quetion, answers }) => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const survey_question_id = location.search.replace('?item=', '');
+const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
+  let max = '';
   // eslint-disable-next-line
-  const [pickedUp, setPickedUp] = useState("");
+  answers.map((value, index, elements) => {
+    // eslint-disable-next-line
+    value.survey_participant_answers.map(participant => {
+      if (Number(participant.answer)
+        > Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+        max = participant.answer;
+      } else if (Number(participant.answer)
+        < Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+        max = elements[index + 1]?.survey_participant_answers[0].answer;
+      } else if (Number(participant.answer)
+        === Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+        max = elements[index + 1]?.survey_participant_answers[0].answer;
+      }
+    })
+  });
 
   return (
     <Container>
-      <InputControlScale>
-        <p>{quetion}</p>
-        <InputGroup>
-          {
-            answers.map((answer, index, elements) => (
-              <label
-                htmlFor={answer.answer}
-                key={answer.id}
-                onClick={() => setPickedUp(answer.answer)}
-              >
-
-                {<div>
-                  {answer.answer}
-                  <i className={answer.survey_participant_answers.length >= 0 && index + 1 < elements.length ?
-                    answer.icon_attributes.classes.picked
-                    : answer.icon_attributes.classes.unpicked}></i>
-                </div>}
-
-                < input
-                  type="checkbox"
-                  id={answer.answer}
-                  name={`${answer.survey_question_id}ugkg`}
-                  onChange={(e) => {
-                    dispatch(setValueAnswer({
-                      value: answer.id,
-                      id: Number(survey_question_id),
-                      answer_id: Number(answer.id),
-                    }));
-                  }}
-                />
-              </label>
-            ))
-          }
-        </InputGroup>
-      </InputControlScale>
+      <p>{quetion}</p>
+      <div>
+        {
+          answers.map((answer, index, elements) => (
+            <Box key={answer.id} component="fieldset" mb={3} borderColor="transparent">
+              <Typography component="legend">{answer.answer}</Typography>
+              <Rating
+                name={answer.id.toString()}
+                value={index + 1 <= Number(max) ? 1 : null}
+                max={1}
+                size="large"
+              />
+            </Box>
+          ))
+        }
+      </div>
     </Container>
   );
 };
 
-export default LinearScale;
+export default MultipleLinearScale;

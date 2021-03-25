@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 import { FONTS } from '../../../../styles/font/globals';
 
-
 interface InputType {
   inputType: string;
 }

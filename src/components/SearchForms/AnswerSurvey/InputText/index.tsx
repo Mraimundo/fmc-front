@@ -1,5 +1,4 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
@@ -11,27 +10,29 @@ import {
 interface Props {
   quetion: string;
   id?: number;
+  answer_id?: number;
   type: string;
 }
 
-const QuestionGlobal: React.FC<Props> = ({ quetion, type, id }) => {
-  const location = useLocation();
-  const survey_question_id = location.search.replace('?item=', '');
-  const dispatch = useDispatch()
+const QuestionGlobal: React.FC<Props> = ({ quetion, type, id, answer_id }) => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState('');
+
   return (
     <Container inputType={type}>
       <p>{quetion}</p>
       <input
         type={type}
         placeholder="Insira os dados necessários"
-        onChange={(e) => {
-
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={() =>
           dispatch(setValueAnswer({
-            value: (e.target.value),
-            id: Number(survey_question_id),
-            answer_id: Number(id),
-          }));
-        }}
+            value,
+            id: Number(id),
+            answer_id: Number(answer_id),
+          }))
+        }
       />
     </Container>
   );

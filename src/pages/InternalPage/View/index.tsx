@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
 
@@ -12,8 +13,11 @@ import InputCheckBox from '../../../components/SearchForms/SeeAnswers/InputCheck
 import InputGridCheckBox from '../../../components/SearchForms/SeeAnswers/InputGridCheckBox';
 import InputGridRadio from '../../../components/SearchForms/SeeAnswers/InputGridRadio';
 import InputRadios from '../../../components/SearchForms/SeeAnswers/InputRadios';
-import InputGlobal from '../../../components/SearchForms/SeeAnswers/InputGlobal';
+import InputText from '../../../components/SearchForms/SeeAnswers/InputText';
+import InputDate from '../../../components/SearchForms/SeeAnswers/InputDate';
+import InputTime from '../../../components/SearchForms/SeeAnswers/InputTime';
 import DropDownList from '../../../components/SearchForms/SeeAnswers/DropDownList';
+
 
 import {
   Container,
@@ -24,11 +28,13 @@ import {
   Form,
 } from './styles';
 
-interface IconsProps {
-  classes: {
-    picked: string,
-    unpicked: string,
-  }
+interface PointsData {
+  created: string,
+  start_datetime: string,
+  end_datetime: string,
+  id: number,
+  points_count: string,
+  questions_count: string,
 }
 
 interface SurveysDataForm {
@@ -38,21 +44,28 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
+  points: PointsData[];
   event: Event;
 }
 
-interface SurveyAnswer {
-  id: number;
+interface IconsProps {
+  classes: {
+    picked: string,
+    unpicked: string,
+  }
+}
+
+interface ParticipantProps {
   answer: string;
 }
 
 interface AnswersData {
-  survey_participant_answers: SurveyAnswer[];
-  icon_attributes: IconsProps;
   id: number;
   survey_question_id: number;
   type: string;
   scale_type: string;
+  icon_attributes: IconsProps;
+  survey_participant_answers: ParticipantProps[];
   answer: string;
 }
 
@@ -66,12 +79,9 @@ interface QuestionsData {
 
 const ProducerResearch: React.FC = () => {
   const location = useLocation();
-  // eslint-disable-next-line
-  const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
   const [videoId, setVideoId] = useState("");
-
 
   useEffect(() => {
     async function fetchSurveys() {
@@ -79,18 +89,17 @@ const ProducerResearch: React.FC = () => {
       const response = await pluginApi.get(`participants/surveys/getSurveyById?survey_id=${list_id}`);
       setVideoId(response.data.data.video.replace('https://www.youtube.com/watch?v=', ''));
       setYourOpinion(response.data.data);
-      setSurveyQuestionId(response.data.data.survey_questions[0].id)
-      setQuestions(response.data.data.survey_questions)
+      setQuestions(response.data.data.survey_questions);
     }
     fetchSurveys();
-    // eslint-disable-next-line
   }, [location]);
 
   const typeForm = (
     type: number,
     question: string,
     answers: AnswersData[],
-    id?: number | undefined,
+    id?: number,
+    answer_id?: number,
   ) => {
     switch (type) {
       case 2: {
@@ -98,6 +107,7 @@ const ProducerResearch: React.FC = () => {
           <MultipleLinearScale
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -106,6 +116,7 @@ const ProducerResearch: React.FC = () => {
           <StarButtonLine
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -114,6 +125,7 @@ const ProducerResearch: React.FC = () => {
           <InputRadios
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -122,16 +134,16 @@ const ProducerResearch: React.FC = () => {
           <InputCheckBox
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
       case 5: {
         return (
-          <InputGlobal
+          <InputText
             quetion={question}
-            type="text"
             id={id}
-
+            answers={answers}
           />
         )
       }
@@ -140,6 +152,7 @@ const ProducerResearch: React.FC = () => {
           <InputGridRadio
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -148,24 +161,25 @@ const ProducerResearch: React.FC = () => {
           <InputGridCheckBox
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
       case 8: {
         return (
-          <InputGlobal
+          <InputDate
             quetion={question}
-            type="date"
             id={id}
+            answers={answers}
           />
         )
       }
       case 9: {
         return (
-          <InputGlobal
+          <InputTime
             quetion={question}
-            type="time"
             id={id}
+            answers={answers}
           />
         )
       }
@@ -174,6 +188,7 @@ const ProducerResearch: React.FC = () => {
           <DropDownList
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -189,23 +204,20 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
+          {/* <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2> */}
         </Content>
         <ContentInfo>
-          {
-            !videoId ?
-              <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
-              :
-              // eslint-disable-next-line
-              <iframe
-                width="560"
-                height="420"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen>
-              </iframe>
-          }
+          <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
+          {/* eslint-disable-next-line  */}
+          <iframe
+            width="560"
+            height="420"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen>
+          </iframe>
         </ContentInfo>
       </MiniBox>
 
@@ -216,7 +228,7 @@ const ProducerResearch: React.FC = () => {
       <Form>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id)
+            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id, question.survey_question_answers[0].id)
           ))
         }
       </Form>

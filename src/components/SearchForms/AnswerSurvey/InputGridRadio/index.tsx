@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
@@ -8,7 +7,6 @@ import {
   RadioContent,
   RadioContentGroup
 } from './styles';
-
 
 interface AnswersData {
   id: number;
@@ -21,11 +19,11 @@ interface AnswersData {
 interface props {
   quetion: string;
   answers: AnswersData[];
+  id?: number;
 }
-const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
-  const location = useLocation();
+
+const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch()
-  const survey_question_id = location.search.replace('?item=', '');
 
   return (
     <Container>
@@ -39,7 +37,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
           </div>
           {
             answers.map(answer => (
-              <div>
+              <div key={answer.id}>
                 <span>{answer.answer}</span>
 
                 <label htmlFor="">
@@ -51,7 +49,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -66,7 +64,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -81,7 +79,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers }) => {
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}

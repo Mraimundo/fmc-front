@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
 import {
@@ -20,12 +19,11 @@ interface AnswersData {
 interface Props {
   quetion: string;
   answers: AnswersData[];
+  id?: number;
 }
 
-const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
-  const location = useLocation();
+const InputRadios: React.FC<Props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch()
-  const survey_question_id = location.search.replace('?item=', '');
   return (
     <Container>
       <RadioContent>
@@ -43,7 +41,7 @@ const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}

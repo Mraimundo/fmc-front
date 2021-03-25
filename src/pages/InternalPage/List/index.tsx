@@ -16,7 +16,10 @@ import InputCheckBox from '../../../components/SearchForms/AnswerSurvey/InputChe
 import InputGridCheckBox from '../../../components/SearchForms/AnswerSurvey/InputGridCheckBox';
 import InputGridRadio from '../../../components/SearchForms/AnswerSurvey/InputGridRadio';
 import InputRadios from '../../../components/SearchForms/AnswerSurvey/InputRadios';
-import InputGlobal from '../../../components/SearchForms/AnswerSurvey/InputGlobal';
+import InputText from '../../../components/SearchForms/AnswerSurvey/InputText';
+import InputDate from '../../../components/SearchForms/AnswerSurvey/InputDate';
+import InputTime from '../../../components/SearchForms/AnswerSurvey/InputTime';
+
 import DropDownList from '../../../components/SearchForms/AnswerSurvey/DropDownList';
 
 import { getValueAnswer } from '../../../state/modules/answer/selectors'
@@ -79,7 +82,6 @@ const ProducerResearch: React.FC = () => {
   const answerList = useSelector(getValueAnswer);
   const location = useLocation();
   const history = useHistory();
-  const [surveyQuestionId, setSurveyQuestionId] = useState('');
   const [youropinion, setYourOpinion] = useState<SurveysDataForm>({} as SurveysDataForm);
   const [questions, setQuestions] = useState<QuestionsData[]>([]);
   const [videoId, setVideoId] = useState("");
@@ -93,8 +95,6 @@ const ProducerResearch: React.FC = () => {
       setVideoId(response.data.data.video.replace('https://www.youtube.com/watch?v=', ''));
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions);
-      setSurveyQuestionId(response.data.data.survey_questions[0].id)
-
     }
     fetchSurveys();
   }, [location]);
@@ -105,13 +105,13 @@ const ProducerResearch: React.FC = () => {
       const list_id = location.search.replace('?item=', '');
       let formData = new FormData();
       const token = localStorage.getItem('@Vendavall:token');
+
       // eslint-disable-next-line
       Array.from(answerList).map((item: any, index: number) => {
         formData.append(`survey_question[${index}][value]`, item.value);
-        formData.append(`survey_question[${index}][id]`, surveyQuestionId);
+        formData.append(`survey_question[${index}][id]`, item.id);
         formData.append(`survey_question[${index}][answer_id]`, item.answer_id);
       })
-
       const config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -130,18 +130,19 @@ const ProducerResearch: React.FC = () => {
       addToast({
         title:
           e.response?.data?.message ||
-          'Falha ao enviar resostas. Por favor tente novamente',
+          'Falha ao enviar respostas. Por favor tente novamente',
         type: 'error',
       });
     }
     // eslint-disable-next-line
-  }, [answerList, location.search, surveyQuestionId]);
+  }, [answerList, location.search]);
 
   const typeForm = (
     type: number,
     question: string,
     answers: AnswersData[],
     id?: number | undefined,
+    answer_id?: number | undefined,
   ) => {
     switch (type) {
       case 2: {
@@ -149,6 +150,7 @@ const ProducerResearch: React.FC = () => {
           <MultipleLinearScale
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -157,6 +159,7 @@ const ProducerResearch: React.FC = () => {
           <StarButtonLine
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -165,6 +168,7 @@ const ProducerResearch: React.FC = () => {
           <InputRadios
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -173,16 +177,17 @@ const ProducerResearch: React.FC = () => {
           <InputCheckBox
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
       case 5: {
         return (
-          <InputGlobal
+          <InputText
             quetion={question}
             type="text"
             id={id}
-
+            answer_id={answer_id}
           />
         )
       }
@@ -191,6 +196,7 @@ const ProducerResearch: React.FC = () => {
           <InputGridRadio
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -199,24 +205,27 @@ const ProducerResearch: React.FC = () => {
           <InputGridCheckBox
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
       case 8: {
         return (
-          <InputGlobal
+          <InputDate
             quetion={question}
             type="date"
             id={id}
+            answer_id={answer_id}
           />
         )
       }
       case 9: {
         return (
-          <InputGlobal
+          <InputTime
             quetion={question}
             type="time"
             id={id}
+            answer_id={answer_id}
           />
         )
       }
@@ -225,6 +234,7 @@ const ProducerResearch: React.FC = () => {
           <DropDownList
             quetion={question}
             answers={answers}
+            id={id}
           />
         )
       }
@@ -264,7 +274,7 @@ const ProducerResearch: React.FC = () => {
       <Form onSubmit={handleSave}>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id)
+            typeForm(Number(question.type), question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
           ))
         }
         <Button
