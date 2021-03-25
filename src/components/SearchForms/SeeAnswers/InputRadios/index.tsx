@@ -1,30 +1,32 @@
 import React from 'react';
+
 import {
   Container,
   RadioContent,
   InputGroup
 } from './styles';
 
-interface SurveyAnswer {
-  id: number;
+interface ParticipantProps {
   answer: string;
 }
 
 interface AnswersData {
   id: number;
   survey_question_id: number;
-  survey_participant_answers: SurveyAnswer[];
   type: string;
   scale_type: string;
+  survey_participant_answers: ParticipantProps[];
   answer: string;
 }
 
 interface Props {
   quetion: string;
   answers: AnswersData[];
+  id?: number;
 }
 
-const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
+const InputRadios: React.FC<Props> = ({ quetion, answers, id }) => {
+
   return (
     <Container>
       <RadioContent>
@@ -39,7 +41,7 @@ const InputRadios: React.FC<Props> = ({ quetion, answers }) => {
                     id={answer.answer}
                     value={answer.answer}
                     name={`${answer.survey_question_id}`}
-                    checked={answer.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers.length > 0 && true}
                   />
                 </label>
                 {answer.answer}

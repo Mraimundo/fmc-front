@@ -1,11 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
-
-
-// import { pluginApi } from '../../services/api';
 
 import {
   Container
@@ -22,35 +18,36 @@ interface AnswersData {
 interface Props {
   quetion: string;
   answers: AnswersData[];
+  id?: number | undefined,
 }
 
-const DropDownList: React.FC<Props> = ({ quetion, answers }) => {
-  const location = useLocation();
+const DropDownList: React.FC<Props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch()
-  const survey_question_id = location.search.replace('?item=', '');
-
 
   return (
     <Container>
       <p>{quetion}</p>
-      <select name="droplist" id="droplist"
-
+      <select
+        name="droplist"
         onChange={(e) => {
+          const test = e.target.options;
+          const answer_id = test[test.selectedIndex].id;
+
           dispatch(setValueAnswer({
             value: (e.target.value),
-            id: Number(survey_question_id),
-            answer_id: Number(e.target.value),
+            id: Number(id),
+            answer_id: Number(answer_id),
           }));
         }}
       >
         <option value="" hidden>Selecione uma opção</option>
         {answers.map(item => (
-          <option key={item.id} value={item.id}>{item.answer}
-
+          <option
+            key={item.answer}
+            value={item.answer}
+            id={String(item.id)}>{item.answer}
           </option>
-
-        )
-        )}
+        ))}
       </select>
     </Container>
   );

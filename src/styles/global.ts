@@ -50,5 +50,4 @@ export default createGlobalStyle`
   .MuiRating-root {
     color: #65554D !important;
   }
-
 `;

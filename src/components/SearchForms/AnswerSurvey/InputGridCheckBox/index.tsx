@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
 
@@ -20,13 +19,12 @@ interface AnswersData {
 interface Props {
   quetion: string;
   answers: AnswersData[];
+  id?: number | undefined,
 }
 
 
-const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
-  const location = useLocation();
+const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch()
-  const survey_question_id = location.search.replace('?item=', '');
 
   return (
     <Container>
@@ -42,19 +40,19 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
           </div>
           {
             answers.map(answer => (
-              <div>
+              <div key={answer.id}>
                 <span>{answer.answer}</span>
 
                 <label htmlFor="">
                   <input
                     type="checkbox"
                     id={answer.answer}
-                    value={answer.answer}
+                    value="1"
                     name={`${answer.survey_question_id}`}
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -64,12 +62,12 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   <input
                     type="checkbox"
                     id={answer.answer}
-                    value={answer.answer}
+                    value="2"
                     name={`${answer.survey_question_id}`}
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -79,12 +77,12 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   <input
                     type="checkbox"
                     id={answer.answer}
-                    value={answer.answer}
+                    value="3"
                     name={`${answer.survey_question_id}`}
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -94,12 +92,12 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   <input
                     type="checkbox"
                     id={answer.answer}
-                    value={answer.answer}
+                    value="4"
                     name={`${answer.survey_question_id}`}
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
@@ -109,12 +107,12 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers }) => {
                   <input
                     type="checkbox"
                     id={answer.answer}
-                    value={answer.answer}
+                    value="5"
                     name={`${answer.survey_question_id}`}
                     onChange={(e) => {
                       dispatch(setValueAnswer({
                         value: (e.target.value),
-                        id: Number(survey_question_id),
+                        id: Number(id),
                         answer_id: Number(answer.id),
                       }));
                     }}
