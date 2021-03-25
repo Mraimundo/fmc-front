@@ -32,17 +32,22 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
   answers.map((value, index, elements) => {
     // eslint-disable-next-line
     value.survey_participant_answers.map(participant => {
-      if (Number(participant.answer)
-        > Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
-        max = participant.answer;
-      } else if (Number(participant.answer)
-        < Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
-        max = elements[index + 1]?.survey_participant_answers[0].answer;
-      } else if (Number(participant.answer)
-        === Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
-        max = elements[index + 1]?.survey_participant_answers[0].answer;
+      if (elements[index + 1]?.survey_participant_answers.length > 0) {
+        if (Number(participant.answer)
+          > Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+          max = participant.answer;
+        } else if (Number(participant.answer)
+          < Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+          max = elements[index + 1]?.survey_participant_answers[0].answer;
+        } else if (Number(participant.answer)
+          === Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+          max = elements[index + 1]?.survey_participant_answers[0].answer;
+        }
       }
-    })
+      else {
+        max = participant.answer ? participant.answer : '0';
+      }
+    });
   });
 
   return (

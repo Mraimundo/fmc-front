@@ -228,7 +228,7 @@ const ProducerResearch: React.FC = () => {
       <Form>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id, question.survey_question_answers[0].id)
+            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id, question.survey_question_answers[0]?.id)
           ))
         }
       </Form>
