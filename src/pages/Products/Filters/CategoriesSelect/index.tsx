@@ -4,6 +4,8 @@ import BaseSelect from 'components/shared/Select/BaseSelect';
 import getData from 'services/products/getCategories';
 import { Category } from 'services/products/interfaces';
 
+import orderBy from 'lodash.orderby';
+
 interface Props {
   className?: string;
   label?: string;
@@ -22,14 +24,15 @@ const CategoriesProductsSelect: React.FC<Props> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   const transformer = useCallback((data: Category[]): Option[] => {
-    const newData = [{ value: 'todos', title: 'Todos' }];
+    const newData = [];
     newData.push(
       ...data.map(item => ({
         value: item.id.toString(),
         title: item.name,
       })),
     );
-    return newData;
+    const orderByName = orderBy(newData, ['title'], ['asc', 'desc']);
+    return [{ value: 'todos', title: 'Todos' }, ...orderByName];
   }, []);
 
   useEffect(() => {

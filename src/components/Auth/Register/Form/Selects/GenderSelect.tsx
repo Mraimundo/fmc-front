@@ -26,7 +26,7 @@ const GenderSelect: React.FC<Props> = ({
   return (
     <Select
       name={name}
-      label="Gênero"
+      label="Gênero*"
       loadItems={loadItems}
       className={className}
       disabled={disabled}

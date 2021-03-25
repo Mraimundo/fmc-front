@@ -7,6 +7,7 @@ import { useToast } from 'context/ToastContext';
 import validateCpf from 'util/validations/cpf';
 
 import { Input, Button, PasswordInput } from 'components/shared';
+import { useLocation } from 'react-router-dom';
 import RecoverPasswordButton from './RecoverPassword';
 import { SingleSignOnButton } from './styles';
 
@@ -19,6 +20,7 @@ const FormSignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
   const { addToast } = useToast();
+  const { state: defaultCpf } = useLocation<string>();
 
   const schema = Yup.object().shape({
     cpf: Yup.string()
@@ -31,6 +33,9 @@ const FormSignIn: React.FC = () => {
     validationSchema: schema,
     reValidateMode: 'onBlur',
     mode: 'onSubmit',
+    defaultValues: {
+      cpf: defaultCpf || '',
+    },
   });
 
   const { handleSubmit } = methods;
