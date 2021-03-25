@@ -95,8 +95,6 @@ const ProducerResearch: React.FC = () => {
       setVideoId(response.data.data.video.replace('https://www.youtube.com/watch?v=', ''));
       setYourOpinion(response.data.data);
       setQuestions(response.data.data.survey_questions);
-
-      console.log(response.data.data);
     }
     fetchSurveys();
   }, [location]);

@@ -28,7 +28,7 @@ const DropDownList: React.FC<Props> = ({ quetion, answers, id }) => {
   return (
     <Container>
       <p>{quetion}</p>
-      <select name="droplist" id="droplist" disabled>
+      <select name="droplist" id="droplist">
         {answers.map(item => (
           item.survey_participant_answers.length > 0 && (
             <option
@@ -36,9 +36,9 @@ const DropDownList: React.FC<Props> = ({ quetion, answers, id }) => {
               value={item.answer}
               selected={true}
             >
+              {item.answer}
             </option>
           )
-
         ))}
       </select>
     </Container>
