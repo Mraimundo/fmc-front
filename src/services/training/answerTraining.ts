@@ -1,4 +1,4 @@
-import { vendavallApi } from 'services/api';
+import { pluginApi } from 'services/api';
 import { AnswerTrainingDTO } from './dtos';
 
 interface ApiResponse {
@@ -17,10 +17,11 @@ export default async (request: AnswerTrainingDTO): Promise<ApiResponse> => {
     })),
   };
 
-  const { data } = await vendavallApi.post<ApiResponse>(
+  const { data } = await pluginApi.post<ApiResponse>(
     'quizzes/save-attempt-to-answer',
     tmpRequest,
   );
 
+  console.log('data', data);
   return data;
 };
