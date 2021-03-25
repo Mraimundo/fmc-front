@@ -22,6 +22,5 @@ export default async (request: AnswerTrainingDTO): Promise<ApiResponse> => {
     tmpRequest,
   );
 
-  console.log('data', data);
   return data;
 };
