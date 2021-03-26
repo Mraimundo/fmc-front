@@ -28,6 +28,7 @@ interface Props {
 
 const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
 
+  console.log(answers);
   return (
     <Container>
       <GridCheckBoxContent>
@@ -51,7 +52,7 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="1"
                     name={`${answer.survey_question_id}`}
-                    checked={answer?.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers[0].answer === "1" ? true : false}
                   />
                 </label>
                 <label htmlFor="">
@@ -60,7 +61,7 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="2"
                     name={`${answer.survey_question_id}`}
-                    checked={answer?.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers[0].answer === "2" ? true : false}
                   />
                 </label>
                 <label htmlFor="">
@@ -69,7 +70,7 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="3"
                     name={`${answer.survey_question_id}`}
-                    checked={answer?.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers[0].answer === "3" ? true : false}
                   />
                 </label>
                 <label htmlFor="">
@@ -78,7 +79,7 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="4"
                     name={`${answer.survey_question_id}`}
-                    checked={answer?.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers[0].answer === "4" ? true : false}
                   />
                 </label>
                 <label htmlFor="">
@@ -87,7 +88,7 @@ const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="5"
                     name={`${answer.survey_question_id}`}
-                    checked={answer?.survey_participant_answers.length > 0 ? true : false}
+                    checked={answer?.survey_participant_answers[0].answer === "5" ? true : false}
                   />
                 </label>
               </div>

@@ -24,6 +24,8 @@ interface Props {
 const DropDownList: React.FC<Props> = ({ quetion, answers, id }) => {
   const dispatch = useDispatch()
 
+  console.log(answers, id);
+
   return (
     <Container>
       <p>{quetion}</p>
