@@ -31,6 +31,7 @@ import CatalogoPi from './modules/catalogo-pi';
 
 import PointsSimulator from './modules/points-simulator';
 import FlyingHighPublic from './modules/flying-high';
+import ProducerApproval from './modules/producer-approval';
 
 import Route from './route';
 
@@ -63,6 +64,7 @@ const routesArray: RouteModule[][] = [
   Receipts,
   CatalogoPi,
   FlyingHighPublic,
+  ProducerApproval,
 ];
 
 const Routes: React.FC = () => (

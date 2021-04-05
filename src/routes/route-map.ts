@@ -32,4 +32,5 @@ export default {
   qrCode: '/qr',
   receipts: '/extrato-notas',
   flyingHigh: '/voandoalto',
+  producerApproval: '/aprovacao-de-produtores',
 };
