@@ -39,7 +39,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
     setSelectedTab(tab);
     setFilters(current => ({
       ...current,
-      status: Tab.waiting as string,
+      status: tab as string,
     }));
   }, []);
 
@@ -55,6 +55,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
       setIsFetching(true);
       const result = await getFarmers(filters);
       setFarmers(result);
+      console.log('FETCHING FARMERS', result);
       setIsFetching(false);
     };
 
