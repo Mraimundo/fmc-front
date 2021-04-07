@@ -63,6 +63,10 @@ const Bainer: React.FC = () => {
       diminacType =
         'Para indicar você precisa copiar o link e enviar para seus clientes.';
       break;
+    case 'FMC':
+      diminacType =
+        'Para indicar você precisa copiar o link e enviar pra seu contato.';
+      break;
     default:
       break;
   }
