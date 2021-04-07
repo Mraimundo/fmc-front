@@ -9,7 +9,7 @@ export interface Farmer {
   created: string;
 }
 
-export interface ResumeCount {
+export interface Summary {
   waiting: number;
   approved: number;
   rejected: number;

@@ -6,8 +6,12 @@ import React, {
   useCallback,
 } from 'react';
 
-import { Farmer, FilterOptions } from 'services/producer-approval/interface';
-import { getFarmers } from 'services/producer-approval';
+import {
+  Farmer,
+  FilterOptions,
+  Summary,
+} from 'services/producer-approval/interface';
+import { getFarmers, getSummary } from 'services/producer-approval';
 
 export enum Tab {
   waiting = 'wating',
@@ -17,6 +21,7 @@ export enum Tab {
 
 interface FarmersContextState {
   farmers: Farmer[];
+  summary: Summary | null;
   isFetching: boolean;
   selectedTab: Tab;
   setTab: (tab: Tab) => void;
@@ -34,6 +39,11 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const [filters, setFilters] = useState<FilterOptions>({
     status: Tab.waiting as string,
   });
+  const [summary, setSummary] = useState<Summary | null>({
+    approved: 0,
+    rejected: 0,
+    waiting: 0,
+  });
 
   const setTab = useCallback((tab: Tab): void => {
     setSelectedTab(tab);
@@ -50,22 +60,28 @@ export const FarmersProvider: React.FC = ({ children }) => {
     }));
   }, []);
 
+  const refreshSummary = useCallback(async () => {
+    const result = await getSummary();
+    setSummary(result);
+  }, []);
+
   useEffect(() => {
     const fetchFamers = async () => {
       setIsFetching(true);
       const result = await getFarmers(filters);
       setFarmers(result);
-      console.log('FETCHING FARMERS', result);
+      await refreshSummary();
       setIsFetching(false);
     };
 
     fetchFamers();
-  }, [filters]);
+  }, [filters, refreshSummary]);
 
   return (
     <FarmersContext.Provider
       value={{
         farmers,
+        summary,
         isFetching,
         selectedTab,
         setTab,

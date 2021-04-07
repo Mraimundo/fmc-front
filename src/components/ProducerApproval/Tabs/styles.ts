@@ -2,12 +2,14 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
   height: 50px;
   display: flex;
-  border-radius: 5px;
+  border-radius: 8px;
   background: #efefef;
   margin: 0 1rem 0;
+  border-top: 1px solid ${({ theme }) => theme.font.color.primary};
+  border-bottom: 1px solid ${({ theme }) => theme.font.color.primary};
 `;
 
 interface ItemProps {
@@ -23,16 +25,36 @@ export const Item = styled.div<ItemProps>`
   cursor: pointer;
 
   span {
-    font-size: 1.2em;
     text-align: center;
+  }
+
+  span:first-of-type {
+    font-size: 1.1em;
     color: ${({ theme }) => theme.font.color.primary};
   }
 
+  span:last-of-type {
+    font-size: 1em;
+    color: #fff;
+    background-color: ${({ theme }) => theme.font.color.primary};
+    border-radius: 50%;
+    min-width: 1.3rem;
+    height: 1.3rem;
+    padding: 1px 3px;
+    margin-left: 5px;
+  }
+
   &:first-child {
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 8px 0px 0px 8px;
+    border-left: 1px solid ${({ theme }) => theme.font.color.primary};
   }
   &:last-child {
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 8px 8px 0px;
+    border-right: 1px solid ${({ theme }) => theme.font.color.primary};
+  }
+
+  &:nth-child(1n) {
+    border-left: 1px solid ${({ theme }) => theme.font.color.primary};
   }
 
   ${({ selected, theme }) =>
@@ -40,8 +62,13 @@ export const Item = styled.div<ItemProps>`
     css`
       background: ${theme.font.color.primary};
 
-      > span {
+      span:first-of-type {
         color: #fff;
+      }
+
+      span:last-of-type {
+        color: ${theme.font.color.primary};
+        background-color: #fff;
       }
     `}
 `;

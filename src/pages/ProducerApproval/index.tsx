@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Tabs from 'components/ProducerApproval/Tabs';
-import Filters from 'components/ProducerApproval/Filters';
+import Main from 'components/ProducerApproval/Main';
 import { Container, Title } from './styles';
 import { FarmersProvider } from './Context';
 
@@ -10,8 +9,7 @@ const ProducerApproval: React.FC = () => {
     <Container>
       <Title>Cadastro de Produtores</Title>
       <FarmersProvider>
-        <Tabs />
-        <Filters />
+        <Main />
       </FarmersProvider>
     </Container>
   );

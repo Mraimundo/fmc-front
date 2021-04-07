@@ -1,4 +1,4 @@
-import { Farmer, ResumeCount } from './interface';
+import { Farmer, Summary } from './interface';
 
 export const participants = [
   {
@@ -163,4 +163,4 @@ export const resume = {
   approved: 7,
   waiting: 5,
   rejected: 3,
-} as ResumeCount;
+} as Summary;

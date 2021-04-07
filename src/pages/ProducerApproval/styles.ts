@@ -14,4 +14,5 @@ export const Title = styled.h3`
   width: 100%;
   max-width: 439px;
   margin-bottom: 2rem;
+  padding-left: 2rem;
 `;
