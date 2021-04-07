@@ -168,6 +168,6 @@ export const resume = {
 
 export const getParticipantsList = (page: number): Farmer[] => {
   const start = (page - 1) * 6;
-  const end = page * 6 - 1;
+  const end = page * 6;
   return participants.slice(start, end);
 };

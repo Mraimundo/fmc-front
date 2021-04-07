@@ -24,7 +24,7 @@ const Main: React.FC = () => {
           breakClassName="break-me"
           pageCount={pagination.last_page}
           marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={6}
           onPageChange={({ selected }) => setPage(selected + 1)}
           containerClassName="farmers-pagination"
         />
