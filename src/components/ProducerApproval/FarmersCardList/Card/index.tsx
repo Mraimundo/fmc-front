@@ -1,9 +1,20 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Farmer } from 'services/producer-approval/interface';
 import { formatDate } from 'util/datetime';
-import { Container, Content, Actions, Avatar, Fields, Button } from './styles';
+import { getNameAbbr } from 'util/string';
+
+import {
+  Container,
+  Content,
+  Actions,
+  AvatarWrapper,
+  ImageAvatar,
+  InitialsAvatar,
+  Fields,
+  Button,
+} from './styles';
 
 interface CardProps {
   data: Farmer;
@@ -21,12 +32,17 @@ const Card: React.FC<CardProps> = ({ data }) => {
     picture,
   } = data;
 
+  const approveFarmer = useCallback(() => {
+    alert(`FARMER ID ${id}`);
+  }, [id]);
+
   return (
     <Container>
       <Content>
-        <Avatar>
-          <img src={picture} alt={name} />
-        </Avatar>
+        <AvatarWrapper>
+          {picture && <ImageAvatar src={picture} alt={name} />}
+          {!picture && <InitialsAvatar>{getNameAbbr(name)}</InitialsAvatar>}
+        </AvatarWrapper>
         <Fields>
           <h4>{name}</h4>
           <p>{client_group}</p>
@@ -40,7 +56,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <Button type="button" buttonRole="quaternary">
           Ver Mais
         </Button>
-        <Button type="button" buttonRole="quaternary">
+        <Button type="button" buttonRole="quaternary" onClick={approveFarmer}>
           Aprovar
         </Button>
         <Button type="button" buttonRole="quaternary">

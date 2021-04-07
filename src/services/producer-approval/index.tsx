@@ -17,9 +17,7 @@ export const getFarmers = ({
 }: FilterOptions): Promise<ApiResponse> => {
   return new Promise<ApiResponse>(resolve => {
     let url = `${FARMERS_RESOURCE}?status=${status}`;
-
     if (search) url += `&search=${search}`;
-
     url += `&page=${page}&limit=6`;
 
     const participants = getParticipantsList(page);

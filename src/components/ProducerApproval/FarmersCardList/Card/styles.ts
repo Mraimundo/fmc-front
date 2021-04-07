@@ -50,19 +50,33 @@ export const Actions = styled.div`
   margin-top: 0.5rem;
 `;
 
-export const Avatar = styled.div`
+export const AvatarWrapper = styled.div`
   display: grid;
   place-items: start center;
   margin-right: 1rem;
+`;
 
-  img {
-    vertical-align: text-top;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-top: 5px;
-    border: 3px solid ${({ theme }) => theme.font.color.primary};
-  }
+export const ImageAvatar = styled.img`
+  vertical-align: text-top;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: 5px;
+  border: 3px solid ${({ theme }) => theme.font.color.primary};
+`;
+
+export const InitialsAvatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: 5px;
+  border: 3px solid ${({ theme }) => theme.font.color.primary};
+  color: ${({ theme }) => theme.font.color.primary};
+  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-size: 1.9em;
 `;
 
 export const Button = styled(DefaultButton)`

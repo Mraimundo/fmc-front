@@ -80,7 +80,6 @@ export const FarmersProvider: React.FC = ({ children }) => {
     const fetchFamers = async () => {
       setIsFetching(true);
       const { data, pagination: paginationData } = await getFarmers(filters);
-      console.log('FETCHING FARMERS', paginationData);
       setPagination(paginationData);
       setFarmers(data);
       await refreshSummary();
