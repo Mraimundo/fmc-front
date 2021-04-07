@@ -11,6 +11,7 @@ import {
   FilterOptions,
   Summary,
 } from 'services/producer-approval/interface';
+import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { getFarmers, getSummary } from 'services/producer-approval';
 
 export enum Tab {
@@ -26,6 +27,8 @@ interface FarmersContextState {
   selectedTab: Tab;
   setTab: (tab: Tab) => void;
   applySearch: (search: string) => void;
+  pagination: Pagination | null;
+  setPage: (page: number) => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -44,6 +47,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
     rejected: 0,
     waiting: 0,
   });
+  const [pagination, setPagination] = useState<Pagination | null>(null);
 
   const setTab = useCallback((tab: Tab): void => {
     setSelectedTab(tab);
@@ -65,11 +69,20 @@ export const FarmersProvider: React.FC = ({ children }) => {
     setSummary(result);
   }, []);
 
+  const setPage = useCallback((page: number): void => {
+    setFilters(current => ({
+      ...current,
+      page,
+    }));
+  }, []);
+
   useEffect(() => {
     const fetchFamers = async () => {
       setIsFetching(true);
-      const result = await getFarmers(filters);
-      setFarmers(result);
+      const { data, pagination: paginationData } = await getFarmers(filters);
+      console.log('FETCHING FARMERS', paginationData);
+      setPagination(paginationData);
+      setFarmers(data);
       await refreshSummary();
       setIsFetching(false);
     };
@@ -86,6 +99,8 @@ export const FarmersProvider: React.FC = ({ children }) => {
         selectedTab,
         setTab,
         applySearch,
+        pagination,
+        setPage,
       }}
     >
       {children}

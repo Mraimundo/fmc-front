@@ -18,4 +18,5 @@ export interface Summary {
 export interface FilterOptions {
   status?: string;
   search?: string;
+  page?: number;
 }

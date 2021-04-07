@@ -1,3 +1,4 @@
+import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { Farmer, Summary } from './interface';
 
 export const participants = [
@@ -164,3 +165,9 @@ export const resume = {
   waiting: 5,
   rejected: 3,
 } as Summary;
+
+export const getParticipantsList = (page: number): Farmer[] => {
+  const start = (page - 1) * 6;
+  const end = page * 6 - 1;
+  return participants.slice(start, end);
+};
