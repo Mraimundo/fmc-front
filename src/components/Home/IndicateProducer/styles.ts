@@ -16,11 +16,13 @@ export const Cover = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(${minibanner});
-    height: 320px;
+    height: 350px;
     object-fit: cover;
     filter: brightness(1);
-    transition: filter 150ms ease;
     cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: filter 150ms ease;
 
     @media screen and (max-width: 480px) {
       height: 120px;
@@ -35,12 +37,12 @@ export const Cover = styled.div`
     }
 
     main{
-    padding: 0 15px;
+    padding: 0 25px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 13px;
-    transform: translateY(90px);
+    transform: translateY(107px);
     
     @media screen and (max-width: 934px) {
       flex-direction: column;
@@ -120,12 +122,12 @@ export const Cover = styled.div`
 `;
 
 export const Title = styled.h1`
-  transform: translateY(27px);
+  transform: translateY(53px);
   font-family: ${({ theme }) => theme.font.fontFamily.regular};
   font-size: 21px;
   font-weight: 28px;
   color: ${({ theme }) => theme.font.color.primary};
-  padding: 0 15px;
+  padding: 0 25px;
 `;
 
 

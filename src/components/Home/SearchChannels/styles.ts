@@ -2,11 +2,7 @@ import styled from 'styled-components';
 
 export const SearchCannel = styled.div`
   width: 48%;
-  border-radius: 10px;
-  box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
-  /* cursor: pointer; */
   position: relative;
-  margin-bottom: 30px;
 
   @media screen and (max-width: 320px) {
       width: 100%;
@@ -18,10 +14,9 @@ export const Cover = styled.div`
 
   img {
    width: 100%;
-   height: 328px;
+   height: 347px;
     object-fit: cover;
     border-radius: 10px;
-    /* filter: brightness(0.7); */
     transition: filter 150ms ease;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 14%);
 
@@ -33,13 +28,6 @@ export const Cover = styled.div`
       height: 244px;
     }
   }
-
-  &:hover {
-    img {
-      filter: brightness(1);
-    }
-  }
-
   @media screen and (max-width: 480px) {
     width: 100%;
   }
