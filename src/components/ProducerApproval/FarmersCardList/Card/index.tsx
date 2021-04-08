@@ -4,6 +4,7 @@ import React, { useCallback } from 'react';
 import { Farmer } from 'services/producer-approval/interface';
 import { formatDate } from 'util/datetime';
 import { getNameAbbr } from 'util/string';
+import { useFarmersContext } from 'pages/ProducerApproval/Context';
 
 import {
   Container,
@@ -22,6 +23,12 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   const {
+    setApprovalModalIsOpen,
+    setSelectedFarmerId,
+    setReprovalModalIsOpen,
+  } = useFarmersContext();
+
+  const {
     id,
     name,
     cpf,
@@ -32,9 +39,15 @@ const Card: React.FC<CardProps> = ({ data }) => {
     picture,
   } = data;
 
-  const approveFarmer = useCallback(() => {
-    alert(`FARMER ID ${id}`);
-  }, [id]);
+  const handleApproveFarmer = useCallback(() => {
+    setSelectedFarmerId(id);
+    setApprovalModalIsOpen(true);
+  }, [id, setApprovalModalIsOpen, setSelectedFarmerId]);
+
+  const handleReproveFarmer = useCallback(() => {
+    setSelectedFarmerId(id);
+    setReprovalModalIsOpen(true);
+  }, [id, setReprovalModalIsOpen, setSelectedFarmerId]);
 
   return (
     <Container>
@@ -56,10 +69,18 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <Button type="button" buttonRole="quaternary">
           Ver Mais
         </Button>
-        <Button type="button" buttonRole="quaternary" onClick={approveFarmer}>
+        <Button
+          type="button"
+          buttonRole="quaternary"
+          onClick={handleApproveFarmer}
+        >
           Aprovar
         </Button>
-        <Button type="button" buttonRole="quaternary">
+        <Button
+          type="button"
+          buttonRole="quaternary"
+          onClick={handleReproveFarmer}
+        >
           Reprovar
         </Button>
       </Actions>

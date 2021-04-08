@@ -1,4 +1,3 @@
-import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { Farmer, Summary } from './interface';
 
 export const participants = [

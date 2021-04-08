@@ -29,6 +29,13 @@ interface FarmersContextState {
   applySearch: (search: string) => void;
   pagination: Pagination | null;
   setPage: (page: number) => void;
+  approvalModalIsOpen: boolean;
+  setApprovalModalIsOpen: (value: boolean) => void;
+  setSelectedFarmerId: (farmerId: number) => void;
+  approveFarmer: () => void;
+  reprovalModalIsOpen: boolean;
+  setReprovalModalIsOpen: (value: boolean) => void;
+  reproveFarmer: () => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -48,6 +55,9 @@ export const FarmersProvider: React.FC = ({ children }) => {
     waiting: 0,
   });
   const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [approvalModalIsOpen, setApprovalModalIsOpen] = useState(false);
+  const [reprovalModalIsOpen, setReprovalModalIsOpen] = useState(false);
+  const [selectedFarmerId, setSelectedFarmerId] = useState<number | null>(null);
 
   const setTab = useCallback((tab: Tab): void => {
     setSelectedTab(tab);
@@ -76,6 +86,18 @@ export const FarmersProvider: React.FC = ({ children }) => {
     }));
   }, []);
 
+  const approveFarmer = useCallback((): void => {
+    console.log('APPROVED', selectedFarmerId);
+    setSelectedFarmerId(null);
+    setApprovalModalIsOpen(false);
+  }, [selectedFarmerId]);
+
+  const reproveFarmer = useCallback((): void => {
+    console.log('REPROVED', selectedFarmerId);
+    setSelectedFarmerId(null);
+    setReprovalModalIsOpen(false);
+  }, [selectedFarmerId]);
+
   useEffect(() => {
     const fetchFamers = async () => {
       setIsFetching(true);
@@ -100,6 +122,13 @@ export const FarmersProvider: React.FC = ({ children }) => {
         applySearch,
         pagination,
         setPage,
+        approvalModalIsOpen,
+        setApprovalModalIsOpen,
+        setSelectedFarmerId,
+        approveFarmer,
+        reprovalModalIsOpen,
+        setReprovalModalIsOpen,
+        reproveFarmer,
       }}
     >
       {children}
