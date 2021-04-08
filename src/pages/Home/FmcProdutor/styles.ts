@@ -17,14 +17,11 @@ export const IndicateContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 768px) {
-    flex-wrap: wrap;
-  }
-
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 100%;
     flex-direction: column;
   }
-
 `;
 
 

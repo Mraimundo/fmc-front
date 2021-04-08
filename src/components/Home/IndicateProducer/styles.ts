@@ -1,14 +1,15 @@
 import styled from 'styled-components';
+import { FONTS } from '../../../styles/font/globals';
+
 import minibanner from '../../../assets/images/mini-banner.svg';
 
 export const Container = styled.div`
   width: 50%;
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 768px) {
       width: 100%;
       margin-bottom: 21px;
     }
-  
 `;
 
 export const Cover = styled.div`
@@ -24,8 +25,10 @@ export const Cover = styled.div`
     border-top-right-radius: 5px;
     transition: filter 150ms ease;
 
-    @media screen and (max-width: 480px) {
-      height: 120px;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      height: 256px;
+      margin-bottom: 15px;
     }
     
     @media screen and (max-width: 480px) {
@@ -44,8 +47,9 @@ export const Cover = styled.div`
     margin-top: 13px;
     transform: translateY(107px);
     
-    @media screen and (max-width: 934px) {
+    @media screen and (max-width: 767px) {
       flex-direction: column;
+      transform: translateY(59px);
       img {
         display: none;
       }
@@ -84,6 +88,10 @@ export const Cover = styled.div`
           align-items: center;
           margin-top: 25px;
 
+          @media screen and (max-width: 767px) {
+            margin-top: 0px;
+          }
+
           @media screen and (max-width: 320px) {
             margin-top: 0px;
           }
@@ -112,7 +120,7 @@ export const Cover = styled.div`
         }
         }
 
-        @media screen and (max-width: 934px) {
+        @media screen and (max-width: 767px) {
           height: 181px;
         }
        
@@ -123,11 +131,13 @@ export const Cover = styled.div`
 
 export const Title = styled.h1`
   transform: translateY(53px);
-  font-family: ${({ theme }) => theme.font.fontFamily.regular};
+  font-family: ${FONTS.bold};
   font-size: 21px;
   font-weight: 28px;
   color: ${({ theme }) => theme.font.color.primary};
   padding: 0 25px;
+
+
 `;
 
 

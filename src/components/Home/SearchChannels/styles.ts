@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { FONTS } from '../../../styles/font/globals';
+
 
 export const SearchCannel = styled.div`
   width: 48%;
@@ -6,6 +8,10 @@ export const SearchCannel = styled.div`
 
   @media screen and (max-width: 320px) {
       width: 100%;
+    }
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      margin-bottom: 25px;
     }
 `;
 
@@ -22,6 +28,9 @@ export const Cover = styled.div`
 
     @media screen and (max-width: 480px) {
       height: 120px;
+    }
+    @media screen and (max-width: 767px) {
+      height: 260px;
     }
 
     @media screen and (max-width: 320px) {
@@ -41,27 +50,36 @@ export const CoverText = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-family: ${FONTS.bold};
   font-size: 1.3em;
   color: #65554D;
-
   margin-bottom: 0.3em;
 `;
 
 export const Description = styled.p`
-  font-family: ${({ theme }) => theme.font.fontFamily.medium};
-  font-size: 0.8em;
+  width: 100%;
+  max-width: 500px;
+  font-family: ${FONTS.regular};
+  font-size: 14px;
   color: #65554D;
 
+  @media screen and (max-width: 767px) {
+    max-width: 300px;
+  }
 `;
 
 export const SearchParticipants = styled.div`
   position: absolute;
+  width: 100%;
+  max-width: 328px;
   bottom: 26px;
-  left: 153px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 29%;
+  right: 29%;
+
+  @media screen and (max-width: 767px) {
+    bottom: 18px;
+  }
+  
 
   a {
     width:100%;
@@ -86,17 +104,10 @@ export const SearchParticipants = styled.div`
       color: #fff;
     }
   }
-  @media screen and (max-width: 934px) {
-      left: 84px;
+  @media screen and (max-width: 767px) {
+    left: 20px;
   }
 
-  @media screen and (max-width: 768px) {
-      left: 40px;
-  }
-
-  @media screen and (max-width: 320px) {
-      left: 4px;
-  }
 `;
 
 
