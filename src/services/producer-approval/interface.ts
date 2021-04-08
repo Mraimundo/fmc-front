@@ -7,6 +7,7 @@ export interface Farmer {
   email: string;
   cell_phone: string;
   created: string;
+  request_status: string;
 }
 
 export interface Summary {

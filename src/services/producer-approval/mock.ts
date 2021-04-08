@@ -46,8 +46,9 @@ export const participants = [
     id: 5,
     name: 'Almeta Kopta',
     cpf: '86722807605',
-    picture:
-      'https://robohash.org/praesentiummollitiadolorum.png?size=50x50&set=set1',
+    /* picture:
+      'https://robohash.org/praesentiummollitiadolorum.png?size=50x50&set=set1', */
+    picture: '',
     client_group: 'Mybuzz',
     email: 'akopta4@tripadvisor.com',
     cell_phone: '36-968-6473',
