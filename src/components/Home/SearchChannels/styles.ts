@@ -9,6 +9,10 @@ export const SearchCannel = styled.div`
   @media screen and (max-width: 320px) {
       width: 100%;
     }
+    @media only screen and (max-width: 768px) {
+      width: 48%;
+      margin-bottom: 25px;
+    }
     @media screen and (max-width: 767px) {
       width: 100%;
       margin-bottom: 25px;
@@ -26,27 +30,26 @@ export const Cover = styled.div`
     transition: filter 150ms ease;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 14%);
 
-    @media screen and (max-width: 480px) {
-      height: 120px;
-    }
-    @media screen and (max-width: 767px) {
-      height: 260px;
-    }
-
-    @media screen and (max-width: 320px) {
-      height: 244px;
+    @media screen and (width: 768px) {
+      height: 348px;
     }
   }
-  @media screen and (max-width: 480px) {
-    width: 100%;
-  }
+ 
 `;
 
 export const CoverText = styled.div`
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 30px;
   z-index: 2;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
 `;
 
 export const Title = styled.h2`
@@ -63,23 +66,44 @@ export const Description = styled.p`
   font-size: 14px;
   color: #65554D;
 
-  @media screen and (max-width: 767px) {
+  @media only screen and (max-width: 768px) {
     max-width: 300px;
+    text-align: center;
+  }
+
+  @media only screen and (width: 320px) {
+    text-align: left;
   }
 `;
 
 export const SearchParticipants = styled.div`
   position: absolute;
   width: 100%;
-  max-width: 328px;
   bottom: 26px;
   left: 29%;
   right: 29%;
 
-  @media screen and (max-width: 767px) {
+  @media only screen and (width: 768px) {
+    max-width: 294px;
+    left: 8%;
     bottom: 18px;
   }
-  
+
+  @media only screen and (width: 1024px) {
+    left: 16%;
+    max-width: 318px;
+  }
+
+  @media only screen and (width: 1440px) {
+    width: 380px;
+    left: 21%;
+  }
+
+  @media only screen and (width: 2560px) {
+    width: 380px;
+    left: 21%;
+  }
+
 
   a {
     width:100%;
@@ -99,15 +123,21 @@ export const SearchParticipants = styled.div`
     border: none;
     transition: all 0.5s;
 
+    @media screen and (max-width: 767px) {
+      font-size: 13px;
+    }
+
     &:hover {
       filter: brightness(0.7);
       color: #fff;
     }
   }
   @media screen and (max-width: 767px) {
-    left: 20px;
+      width: 100%;
+      left: 0%;
+      font-size: 13px;
+      padding: 0 20px;
   }
-
 `;
 
 

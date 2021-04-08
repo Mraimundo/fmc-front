@@ -6,10 +6,14 @@ import minibanner from '../../../assets/images/mini-banner.svg';
 export const Container = styled.div`
   width: 50%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
       width: 100%;
       margin-bottom: 21px;
     }
+  @media screen and (min-width: 768px){
+    margin-bottom: 21px;
+    width: 50%;
+  }
 `;
 
 export const Cover = styled.div`
@@ -25,20 +29,16 @@ export const Cover = styled.div`
     border-top-right-radius: 5px;
     transition: filter 150ms ease;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       width: 100%;
       height: 256px;
       margin-bottom: 15px;
     }
+
+    @media screen and (max-width: 450px) {
+      height: 280px;
+    }
     
-    @media screen and (max-width: 480px) {
-    width: 100%;
-    }
-
-    @media screen and (max-width: 320px) {
-      height: 256px;
-    }
-
     main{
     padding: 0 25px;
     width: 100%;
@@ -55,11 +55,16 @@ export const Cover = styled.div`
       }
     }
 
-    @media screen and (max-width: 320px) {
-      transform: translateY(59px);
+    @media screen and (width: 768px){
+      transform: translateY(104px);
+      img {
+        display: none;
+      }   
     }
 
-
+    @media screen and (width: 1024px) {
+      transform: translateY(67px);
+    }
 
       .indicator-code {
         width: 100%;
@@ -67,13 +72,19 @@ export const Cover = styled.div`
         height: 171px;
         background: #fff;
         padding: 15px 0;
-
+          @media screen and (max-width: 1024px) {
+            height: 100%;
+          }
         h1 {
         margin-top: 15px;
         font-size: 16px;
         font-weight: 18px;
         color: ${({ theme }) => theme.font.color.primary};
         padding: 0 25px;
+          @media screen and (width: 320px) {
+            font-size: 13px;
+            margin-top: 4px;
+          }
         }
 
         .indicator-code-content {
@@ -88,7 +99,7 @@ export const Cover = styled.div`
           align-items: center;
           margin-top: 25px;
 
-          @media screen and (max-width: 767px) {
+          @media screen and (max-width: 768px) {
             margin-top: 0px;
           }
 
@@ -102,6 +113,9 @@ export const Cover = styled.div`
           font-weight: 16px;
           color: ${({ theme }) => theme.font.color.primary};
           margin-bottom: 18px;
+          @media screen and (width: 320px) {
+            font-size: 12px;
+          }
         }
 
         .indicator-code-content button {
@@ -120,8 +134,8 @@ export const Cover = styled.div`
         }
         }
 
-        @media screen and (max-width: 767px) {
-          height: 181px;
+        @media screen and (max-width: 768px) {
+          height: 185px;
         }
        
       }
@@ -136,8 +150,6 @@ export const Title = styled.h1`
   font-weight: 28px;
   color: ${({ theme }) => theme.font.color.primary};
   padding: 0 25px;
-
-
 `;
 
 
