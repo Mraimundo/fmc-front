@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 import ReactPaginate from 'react-paginate';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
@@ -18,15 +18,9 @@ const Main: React.FC = () => {
     setPage,
     approvalModalIsOpen,
     setApprovalModalIsOpen,
-    approveFarmer,
     reprovalModalIsOpen,
     setReprovalModalIsOpen,
-    reproveFarmer,
   } = useFarmersContext();
-
-  const confirmApprovalHandler = useCallback(() => {
-    approveFarmer();
-  }, [approveFarmer]);
 
   return (
     <Container>
@@ -49,12 +43,10 @@ const Main: React.FC = () => {
       <ApprovalModal
         isOpen={approvalModalIsOpen}
         onCancelRequest={() => setApprovalModalIsOpen(false)}
-        onConfirmApproval={confirmApprovalHandler}
       />
       <ReprovalModal
         isOpen={reprovalModalIsOpen}
         onCancelRequest={() => setReprovalModalIsOpen(false)}
-        onConfirmReprove={reproveFarmer}
       />
     </Container>
   );

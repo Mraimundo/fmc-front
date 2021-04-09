@@ -35,7 +35,7 @@ interface FarmersContextState {
   approveFarmer: () => void;
   reprovalModalIsOpen: boolean;
   setReprovalModalIsOpen: (value: boolean) => void;
-  reproveFarmer: () => void;
+  reproveFarmer: (reason: string) => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -92,11 +92,14 @@ export const FarmersProvider: React.FC = ({ children }) => {
     setApprovalModalIsOpen(false);
   }, [selectedFarmerId]);
 
-  const reproveFarmer = useCallback((): void => {
-    console.log('REPROVED', selectedFarmerId);
-    setSelectedFarmerId(null);
-    setReprovalModalIsOpen(false);
-  }, [selectedFarmerId]);
+  const reproveFarmer = useCallback(
+    (reason: string): void => {
+      console.log('REPROVED', selectedFarmerId, 'REASON', reason);
+      setSelectedFarmerId(null);
+      setReprovalModalIsOpen(false);
+    },
+    [selectedFarmerId],
+  );
 
   useEffect(() => {
     const fetchFamers = async () => {

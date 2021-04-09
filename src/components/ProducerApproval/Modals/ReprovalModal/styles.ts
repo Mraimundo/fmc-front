@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const Modal = styled(DefaultModal)`
   ._modalContainer {
     max-width: 650px;
-    max-height: 350px;
+    max-height: 450px;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -24,10 +24,15 @@ export const Modal = styled(DefaultModal)`
 
 export const TextArea = styled(BaseTextArea)`
   width: 100%;
-  div {
-    div {
-      height: 400px;
-    }
+  min-height: 250px;
+
+  ._inputContainer {
+    width: 100%;
+    height: 100%;
+  }
+  span {
+    color: ${({ theme }) => theme.font.color.primary};
+    margin: 10px 0 5px;
   }
 `;
 
