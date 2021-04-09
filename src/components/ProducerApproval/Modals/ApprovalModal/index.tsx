@@ -1,10 +1,9 @@
 import React from 'react';
 
-import closeIcon from 'assets/images/training/close-icon.svg';
-import { ReactSVG } from 'react-svg';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 import { Container, Modal } from './styles';
-import { Button, Close, Title, Actions } from '../shared/styles';
+import { Button, Title, Actions } from '../shared/styles';
+import CloseButton from '../shared/CloseButton';
 
 interface ApprovalModalProps {
   isOpen: boolean;
@@ -19,11 +18,7 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onCancelRequest} zIndex={10}>
-      <Close>
-        <button type="button" onClick={onCancelRequest}>
-          <ReactSVG src={closeIcon} />
-        </button>
-      </Close>
+      <CloseButton onClickHandler={onCancelRequest} />
       <Container>
         <Title>Tem certeza que deseja aprovar esse cadastro?</Title>
         <Actions>

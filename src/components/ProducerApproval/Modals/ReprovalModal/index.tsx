@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import closeIcon from 'assets/images/training/close-icon.svg';
-import { ReactSVG } from 'react-svg';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 import { Container, Modal, TextArea, Title } from './styles';
-import { Button, Close, Actions } from '../shared/styles';
+import { Button, Actions } from '../shared/styles';
+import CloseButton from '../shared/CloseButton';
 
 interface ReprovalModalProps {
   isOpen: boolean;
@@ -35,11 +34,7 @@ const ReprovalModal: React.FC<ReprovalModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onCancelRequest}>
-      <Close>
-        <button type="button" onClick={onCancelRequest}>
-          <ReactSVG src={closeIcon} />
-        </button>
-      </Close>
+      <CloseButton onClickHandler={onCancelRequest} />
       <Container>
         <Title>Tem certeza que deseja REPROVAR este cadastro?</Title>
         <TextArea

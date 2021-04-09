@@ -36,6 +36,8 @@ interface FarmersContextState {
   reprovalModalIsOpen: boolean;
   setReprovalModalIsOpen: (value: boolean) => void;
   reproveFarmer: (reason: string) => void;
+  farmerDetailsIsOpen: boolean;
+  setFarmerDetailsIsOpen: (value: boolean) => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -58,6 +60,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const [approvalModalIsOpen, setApprovalModalIsOpen] = useState(false);
   const [reprovalModalIsOpen, setReprovalModalIsOpen] = useState(false);
   const [selectedFarmerId, setSelectedFarmerId] = useState<number | null>(null);
+  const [farmerDetailsIsOpen, setFarmerDetailsIsOpen] = useState(false);
 
   const setTab = useCallback((tab: Tab): void => {
     setSelectedTab(tab);
@@ -132,6 +135,8 @@ export const FarmersProvider: React.FC = ({ children }) => {
         reprovalModalIsOpen,
         setReprovalModalIsOpen,
         reproveFarmer,
+        farmerDetailsIsOpen,
+        setFarmerDetailsIsOpen,
       }}
     >
       {children}

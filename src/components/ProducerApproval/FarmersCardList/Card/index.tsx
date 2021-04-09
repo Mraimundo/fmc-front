@@ -26,6 +26,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     setApprovalModalIsOpen,
     setSelectedFarmerId,
     setReprovalModalIsOpen,
+    setFarmerDetailsIsOpen,
   } = useFarmersContext();
 
   const {
@@ -49,6 +50,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
     setReprovalModalIsOpen(true);
   }, [id, setReprovalModalIsOpen, setSelectedFarmerId]);
 
+  const handleShowFarmerDetails = useCallback(() => {
+    setSelectedFarmerId(id);
+    setFarmerDetailsIsOpen(true);
+  }, [id, setFarmerDetailsIsOpen, setSelectedFarmerId]);
+
   return (
     <Container>
       <Content>
@@ -66,7 +72,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </Fields>
       </Content>
       <Actions>
-        <Button type="button" buttonRole="quaternary">
+        <Button
+          type="button"
+          buttonRole="quaternary"
+          onClick={handleShowFarmerDetails}
+        >
           Ver Mais
         </Button>
         <Button

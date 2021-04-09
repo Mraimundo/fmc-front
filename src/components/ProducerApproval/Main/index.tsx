@@ -8,6 +8,7 @@ import Tabs from '../Tabs';
 import FarmersCardList from '../FarmersCardList';
 import ApprovalModal from '../Modals/ApprovalModal';
 import ReprovalModal from '../Modals/ReprovalModal';
+import FarmerDetailsModal from '../Modals/FarmerDetailsModal';
 
 import { Container } from './styles';
 
@@ -20,6 +21,8 @@ const Main: React.FC = () => {
     setApprovalModalIsOpen,
     reprovalModalIsOpen,
     setReprovalModalIsOpen,
+    farmerDetailsIsOpen,
+    setFarmerDetailsIsOpen,
   } = useFarmersContext();
 
   return (
@@ -47,6 +50,10 @@ const Main: React.FC = () => {
       <ReprovalModal
         isOpen={reprovalModalIsOpen}
         onCancelRequest={() => setReprovalModalIsOpen(false)}
+      />
+      <FarmerDetailsModal
+        isOpen={farmerDetailsIsOpen}
+        onRequestClose={() => setFarmerDetailsIsOpen(false)}
       />
     </Container>
   );
