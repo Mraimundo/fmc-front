@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { approveAgreementTerm } from 'services/harvest-term';
 import ReproveModal from 'components/HarvestTerm/Modals/ReproveModal';
+import ApproveModal from 'components/HarvestTerm/Modals/ApproveModal';
 import { useToast } from 'context/ToastContext';
 import { useHarvestTermsContext } from 'components/HarvestTerm/Context';
 import { Container, ApproveButton, ReproveButton } from './styles';
@@ -11,7 +12,8 @@ interface ManagementProps {
 }
 
 const Management: React.FC<ManagementProps> = ({ agreementTermId }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReproveModalOpen, setIsReproveModalOpen] = useState(false);
+  const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
   const { addToast } = useToast();
   const { fetchAgreementTerms } = useHarvestTermsContext();
 
@@ -24,6 +26,7 @@ const Management: React.FC<ManagementProps> = ({ agreementTermId }) => {
 
       addToast({ title: 'Acordo aprovado com sucesso!', type: 'success' });
       fetchAgreementTerms();
+      setIsApproveModalOpen(false);
     } catch (e) {
       addToast({
         title: e.response?.data?.message || 'Não foi possível aprovar o acordo',
@@ -33,11 +36,19 @@ const Management: React.FC<ManagementProps> = ({ agreementTermId }) => {
   }, [addToast, agreementTermId, fetchAgreementTerms]);
 
   const handleClickReprove = useCallback(async () => {
-    setIsModalOpen(true);
+    setIsReproveModalOpen(true);
   }, []);
 
-  const handleCancelRequest = useCallback(() => {
-    setIsModalOpen(false);
+  const handleCancelReproveRequest = useCallback(() => {
+    setIsReproveModalOpen(false);
+  }, []);
+
+  const handleCancelApproveRequest = useCallback(() => {
+    setIsApproveModalOpen(false);
+  }, []);
+
+  const handleClicklApproveRequest = useCallback(() => {
+    setIsApproveModalOpen(true);
   }, []);
 
   return (
@@ -46,7 +57,7 @@ const Management: React.FC<ManagementProps> = ({ agreementTermId }) => {
         <ApproveButton
           buttonRole="tertiary"
           type="button"
-          onClick={handleClickApprove}
+          onClick={handleClicklApproveRequest}
         >
           Aprovar
         </ApproveButton>
@@ -59,9 +70,14 @@ const Management: React.FC<ManagementProps> = ({ agreementTermId }) => {
         </ReproveButton>
       </Container>
       <ReproveModal
-        isOpen={isModalOpen}
+        isOpen={isReproveModalOpen}
         agreementTermId={agreementTermId}
-        cancelRequest={handleCancelRequest}
+        cancelRequest={handleCancelReproveRequest}
+      />
+      <ApproveModal
+        isOpen={isApproveModalOpen}
+        cancelRequest={handleCancelApproveRequest}
+        confirmRequest={handleClickApprove}
       />
     </>
   );

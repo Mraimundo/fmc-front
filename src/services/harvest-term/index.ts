@@ -92,7 +92,7 @@ export const approveAgreementTerm = async ({
   await pluginApi.post(
     `${APPROVE_AGREEMENT_TERM_RESOURCE}/${agreementTermId}`,
     {
-      approve: approve ? 1 : 0,
+      approved: approve ? 1 : 0,
       reason: reason || '',
     },
   );

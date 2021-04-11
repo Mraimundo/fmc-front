@@ -67,18 +67,18 @@ const HarvestFilters: React.FC = () => {
       <SelectsWrapper>
         <HarvestSelect
           value={harvestSelected}
-          setValue={value => setHarvestSelected(value)}
+          setValue={setHarvestSelected}
           participantCpf={participant.cpf}
           label="Safra"
         />
         <DirectorsSelect
           value={directorSelected}
-          setValue={value => setDirectorSelected(value)}
+          setValue={setDirectorSelected}
           label="Diretoria"
         />
         <RegionalSelect
           value={regionalSelected}
-          setValue={value => setRegionalSelected(value)}
+          setValue={setRegionalSelected}
           label="Regional"
         />
       </SelectsWrapper>
@@ -88,6 +88,7 @@ const HarvestFilters: React.FC = () => {
           label="Campo de Pesquisa"
           onChange={onChangeHandler}
           value={searchValue}
+          inputRole="secondary"
         />
         <Button
           buttonRole="primary"
