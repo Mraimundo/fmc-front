@@ -34,6 +34,7 @@ export const Content = styled.div`
     font-size: 24px;
     color: ${({ theme }) => theme.font.color.tertiary};
     text-align: center;
+    padding: 0 20px;
   }
 
   > button {

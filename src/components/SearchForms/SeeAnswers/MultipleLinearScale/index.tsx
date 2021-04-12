@@ -38,7 +38,7 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers, id }) => {
             <Rating
               name={answer.id.toString()}
               size="large"
-              value={Number(answer?.survey_participant_answers[0].answer)}
+              value={Number(answer?.survey_participant_answers[0]?.answer)}
             />
           </Box>
         ))

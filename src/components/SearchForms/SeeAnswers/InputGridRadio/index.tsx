@@ -48,7 +48,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="Ótimo"
                     name={`${answer.answer}`}
-                    checked={answer?.survey_participant_answers[0].answer === "Ótimo"
+                    checked={answer?.survey_participant_answers[0]?.answer === "Ótimo"
                       ? true : false
                     }
                   />
@@ -59,7 +59,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="Bom"
                     name={`${answer.answer}`}
-                    checked={answer?.survey_participant_answers[0].answer === "Bom"
+                    checked={answer?.survey_participant_answers[0]?.answer === "Bom"
                       ? true : false
                     }
                   />
@@ -70,7 +70,7 @@ const ButtonsSquareNumber: React.FC<props> = ({ quetion, answers, id }) => {
                     id={answer.answer}
                     value="Ruim"
                     name={`${answer.answer}`}
-                    checked={answer?.survey_participant_answers[0].answer === "Ruim"
+                    checked={answer?.survey_participant_answers[0]?.answer === "Ruim"
                       ? true : false
                     }
                   />
