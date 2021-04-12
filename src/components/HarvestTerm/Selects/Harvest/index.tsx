@@ -3,6 +3,7 @@ import { Option } from 'components/shared/Select';
 import BaseSelect from 'components/shared/Select/BaseSelect';
 import { getHarvests } from 'services/harvest-term';
 import { transformToSelectOptions } from 'services/harvest-term/transformers';
+import { formatDate } from 'util/datetime';
 
 interface HarvestSelectProps {
   className?: string;
@@ -26,17 +27,24 @@ const HarvestSelect: React.FC<HarvestSelectProps> = ({
   useEffect(() => {
     const fetchHarvests = async () => {
       const result = await getHarvests(participantCpf);
+      const finded = result.find(
+        harvest =>
+          new Date(formatDate(harvest.startDate, 'yyyy-MM-dd')) <= new Date() &&
+          new Date(formatDate(harvest.endDate, 'yyyy-MM-dd')) >= new Date(),
+      );
+
       setOptions(transformToSelectOptions(result));
+
+      if (finded) {
+        setValue({
+          title: finded.title,
+          value: finded.id.toString(),
+        });
+      }
     };
 
     fetchHarvests();
-  }, [participantCpf]);
-
-  useEffect(() => {
-    if (options.length > 0) {
-      setValue(options[0]);
-    }
-  }, [options, setValue]);
+  }, [participantCpf, setValue]);
 
   const loadOptions = useCallback(() => {
     return options;

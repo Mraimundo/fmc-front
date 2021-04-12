@@ -17,6 +17,8 @@ export interface HarvestApi {
 export interface Harvest {
   id: number;
   title: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Filters {
