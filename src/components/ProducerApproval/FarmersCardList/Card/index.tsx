@@ -24,7 +24,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ data }) => {
   const {
     setApprovalModalIsOpen,
-    setSelectedFarmerId,
+    setSelectedFarmerRequestId,
     setReprovalModalIsOpen,
     setFarmerDetailsIsOpen,
   } = useFarmersContext();
@@ -38,22 +38,24 @@ const Card: React.FC<CardProps> = ({ data }) => {
     created,
     email,
     picture,
+    request_status,
+    request_id,
   } = data;
 
   const handleApproveFarmer = useCallback(() => {
-    setSelectedFarmerId(id);
+    setSelectedFarmerRequestId(request_id);
     setApprovalModalIsOpen(true);
-  }, [id, setApprovalModalIsOpen, setSelectedFarmerId]);
+  }, [request_id, setApprovalModalIsOpen, setSelectedFarmerRequestId]);
 
   const handleReproveFarmer = useCallback(() => {
-    setSelectedFarmerId(id);
+    setSelectedFarmerRequestId(request_id);
     setReprovalModalIsOpen(true);
-  }, [id, setReprovalModalIsOpen, setSelectedFarmerId]);
+  }, [request_id, setReprovalModalIsOpen, setSelectedFarmerRequestId]);
 
   const handleShowFarmerDetails = useCallback(() => {
-    setSelectedFarmerId(id);
+    console.log('SELECTED FARMER', id);
     setFarmerDetailsIsOpen(true);
-  }, [id, setFarmerDetailsIsOpen, setSelectedFarmerId]);
+  }, [id, setFarmerDetailsIsOpen]);
 
   return (
     <Container>
@@ -79,20 +81,24 @@ const Card: React.FC<CardProps> = ({ data }) => {
         >
           Ver Mais
         </Button>
-        <Button
-          type="button"
-          buttonRole="quaternary"
-          onClick={handleApproveFarmer}
-        >
-          Aprovar
-        </Button>
-        <Button
-          type="button"
-          buttonRole="quaternary"
-          onClick={handleReproveFarmer}
-        >
-          Reprovar
-        </Button>
+        {request_status === 'Aguardando' && (
+          <>
+            <Button
+              type="button"
+              buttonRole="quaternary"
+              onClick={handleApproveFarmer}
+            >
+              Aprovar
+            </Button>
+            <Button
+              type="button"
+              buttonRole="quaternary"
+              onClick={handleReproveFarmer}
+            >
+              Reprovar
+            </Button>
+          </>
+        )}
       </Actions>
     </Container>
   );

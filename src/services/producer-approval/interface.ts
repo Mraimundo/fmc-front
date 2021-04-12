@@ -8,6 +8,7 @@ export interface Farmer {
   cell_phone: string;
   created: string;
   request_status: string;
+  request_id: number;
 }
 
 export interface Summary {

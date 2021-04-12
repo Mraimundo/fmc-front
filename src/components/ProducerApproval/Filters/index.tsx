@@ -16,9 +16,7 @@ const Filters: React.FC = () => {
   );
 
   const onClickHandler = useCallback(() => {
-    if (searchValue) {
-      applySearch(searchValue);
-    }
+    applySearch(searchValue);
   }, [applySearch, searchValue]);
 
   return (

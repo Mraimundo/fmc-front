@@ -12,10 +12,17 @@ import {
   Summary,
 } from 'services/producer-approval/interface';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
-import { getFarmers, getSummary } from 'services/producer-approval';
+import {
+  getFarmers,
+  getSummary,
+  approveFarmerRequest,
+  reproveFarmerRequest,
+} from 'services/producer-approval';
+
+import { useToast } from 'context/ToastContext';
 
 export enum Tab {
-  waiting = 'wating',
+  waiting = 'waiting',
   approved = 'approved',
   rejected = 'rejected',
 }
@@ -31,11 +38,11 @@ interface FarmersContextState {
   setPage: (page: number) => void;
   approvalModalIsOpen: boolean;
   setApprovalModalIsOpen: (value: boolean) => void;
-  setSelectedFarmerId: (farmerId: number) => void;
+  setSelectedFarmerRequestId: (farmerId: number) => void;
   approveFarmer: () => void;
   reprovalModalIsOpen: boolean;
   setReprovalModalIsOpen: (value: boolean) => void;
-  reproveFarmer: (reason: string) => void;
+  reproveFarmer: (message: string) => void;
   farmerDetailsIsOpen: boolean;
   setFarmerDetailsIsOpen: (value: boolean) => void;
 }
@@ -59,14 +66,33 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [approvalModalIsOpen, setApprovalModalIsOpen] = useState(false);
   const [reprovalModalIsOpen, setReprovalModalIsOpen] = useState(false);
-  const [selectedFarmerId, setSelectedFarmerId] = useState<number | null>(null);
+  const [selectedFarmerRequestId, setSelectedFarmerRequestId] = useState<
+    number | null
+  >(null);
   const [farmerDetailsIsOpen, setFarmerDetailsIsOpen] = useState(false);
+
+  const { addToast } = useToast();
+
+  const refreshSummary = useCallback(async () => {
+    const result = await getSummary();
+    setSummary(result);
+  }, []);
+
+  const fetchFarmers = useCallback(async (): Promise<void> => {
+    setIsFetching(true);
+    const { data, pagination: paginationData } = await getFarmers(filters);
+    setPagination(paginationData);
+    setFarmers(data);
+    await refreshSummary();
+    setIsFetching(false);
+  }, [filters, refreshSummary]);
 
   const setTab = useCallback((tab: Tab): void => {
     setSelectedTab(tab);
     setFilters(current => ({
       ...current,
       status: tab as string,
+      page: 1,
     }));
   }, []);
 
@@ -77,11 +103,6 @@ export const FarmersProvider: React.FC = ({ children }) => {
     }));
   }, []);
 
-  const refreshSummary = useCallback(async () => {
-    const result = await getSummary();
-    setSummary(result);
-  }, []);
-
   const setPage = useCallback((page: number): void => {
     setFilters(current => ({
       ...current,
@@ -89,33 +110,53 @@ export const FarmersProvider: React.FC = ({ children }) => {
     }));
   }, []);
 
-  const approveFarmer = useCallback((): void => {
-    console.log('APPROVED', selectedFarmerId);
-    setSelectedFarmerId(null);
+  const approveFarmer = useCallback(async (): Promise<void> => {
+    if (selectedFarmerRequestId) {
+      try {
+        await approveFarmerRequest(selectedFarmerRequestId);
+        addToast({ title: 'Cadastro aprovado com sucesso!', type: 'success' });
+        fetchFarmers();
+      } catch (error) {
+        addToast({
+          title: error.response?.data?.message || 'Erro ao aprovar cadastro',
+          type: 'error',
+        });
+      }
+    }
+    setSelectedFarmerRequestId(null);
     setApprovalModalIsOpen(false);
-  }, [selectedFarmerId]);
+  }, [addToast, fetchFarmers, selectedFarmerRequestId]);
 
   const reproveFarmer = useCallback(
-    (reason: string): void => {
-      console.log('REPROVED', selectedFarmerId, 'REASON', reason);
-      setSelectedFarmerId(null);
+    async (message: string): Promise<void> => {
+      if (selectedFarmerRequestId) {
+        try {
+          await reproveFarmerRequest({
+            requestId: selectedFarmerRequestId,
+            message: message || '',
+          });
+          addToast({
+            title: 'Cadastro reprovado com sucesso!',
+            type: 'success',
+          });
+          fetchFarmers();
+        } catch (error) {
+          addToast({
+            title:
+              error.response?.data?.message || 'Erro ao reaprovar cadastro',
+            type: 'error',
+          });
+        }
+      }
+      setSelectedFarmerRequestId(null);
       setReprovalModalIsOpen(false);
     },
-    [selectedFarmerId],
+    [addToast, fetchFarmers, selectedFarmerRequestId],
   );
 
   useEffect(() => {
-    const fetchFamers = async () => {
-      setIsFetching(true);
-      const { data, pagination: paginationData } = await getFarmers(filters);
-      setPagination(paginationData);
-      setFarmers(data);
-      await refreshSummary();
-      setIsFetching(false);
-    };
-
-    fetchFamers();
-  }, [filters, refreshSummary]);
+    fetchFarmers();
+  }, [fetchFarmers]);
 
   return (
     <FarmersContext.Provider
@@ -130,7 +171,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
         setPage,
         approvalModalIsOpen,
         setApprovalModalIsOpen,
-        setSelectedFarmerId,
+        setSelectedFarmerRequestId,
         approveFarmer,
         reprovalModalIsOpen,
         setReprovalModalIsOpen,

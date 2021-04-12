@@ -6,7 +6,6 @@ import { Container, Modal } from './styles';
 import CloseButton from '../shared/CloseButton';
 import PersonalData from './PersonalData';
 import FarmData from './FarmData';
-import Harvest from './HarvestData';
 import HarvestData from './HarvestData';
 
 interface FarmerDetailsModalProps {
