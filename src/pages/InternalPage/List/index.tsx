@@ -75,6 +75,7 @@ interface QuestionsData {
   id: number;
   question: string;
   type: string;
+  name: string;
   answer: string;
   survey_question_answers: AnswersData[];
 }
@@ -141,6 +142,7 @@ const ProducerResearch: React.FC = () => {
 
   const typeForm = (
     type: number,
+    name: string,
     question: string,
     answers: AnswersData[],
     id?: number | undefined,
@@ -188,6 +190,7 @@ const ProducerResearch: React.FC = () => {
           <InputText
             quetion={question}
             type="text"
+            name={name}
             id={id}
             answer_id={answer_id}
           />
@@ -290,7 +293,7 @@ const ProducerResearch: React.FC = () => {
       <Form onSubmit={handleSave}>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
+            typeForm(Number(question.type), question.name, question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
           ))
         }
         <Button

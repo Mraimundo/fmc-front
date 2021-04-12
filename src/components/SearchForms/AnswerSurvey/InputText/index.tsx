@@ -10,11 +10,12 @@ import {
 interface Props {
   quetion: string;
   id?: number;
+  name?: string;
   answer_id?: number;
   type: string;
 }
 
-const QuestionGlobal: React.FC<Props> = ({ quetion, type, id, answer_id }) => {
+const QuestionGlobal: React.FC<Props> = ({ quetion, type, id, answer_id, name }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
 
@@ -23,6 +24,7 @@ const QuestionGlobal: React.FC<Props> = ({ quetion, type, id, answer_id }) => {
       <p>{quetion}</p>
       <input
         type={type}
+        name={name}
         placeholder="Insira os dados necessários"
         value={value}
         onChange={(e) => setValue(e.target.value)}
