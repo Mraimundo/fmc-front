@@ -32,15 +32,15 @@ const HarvestSelect: React.FC<HarvestSelectProps> = ({
     fetchHarvests();
   }, [participantCpf]);
 
-  const loadOptions = useCallback(() => {
-    return options;
-  }, [options]);
-
   useEffect(() => {
     if (options.length > 0) {
       setValue(options[0]);
     }
   }, [options, setValue]);
+
+  const loadOptions = useCallback(() => {
+    return options;
+  }, [options]);
 
   return (
     <BaseSelect
@@ -51,6 +51,7 @@ const HarvestSelect: React.FC<HarvestSelectProps> = ({
       setValue={setValue}
       placeholder={placeholder}
       inputRole="secondary"
+      disableClearable
     />
   );
 };
