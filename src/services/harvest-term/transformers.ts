@@ -10,7 +10,12 @@ import {
 } from './interface';
 
 export const transformFromHarvestApi = (data: HarvestApi[]): Harvest[] => {
-  return data.map<Harvest>(({ id, title }) => ({ id, title }));
+  return data.map<Harvest>(({ id, title, start_date, end_date }) => ({
+    id,
+    title,
+    startDate: start_date,
+    endDate: end_date,
+  }));
 };
 
 export const transformToSelectOptions = (data: Harvest[]): Option[] => {
