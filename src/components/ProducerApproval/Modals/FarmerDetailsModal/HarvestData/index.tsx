@@ -1,11 +1,35 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Participant } from 'services/auth/interfaces/Participant';
+import { getHarvestLabel } from '../shared/utils';
+import HarvestInput from '../shared/HarvestInput';
 
-const HarvestData: React.FC = () => {
+interface HarvestDataProps {
+  participant: Participant;
+}
+
+const HarvestData: React.FC<HarvestDataProps> = ({ participant }) => {
+  const items = [] as any[];
+
+  Object.entries(participant.harvest).forEach(([key, value]) => {
+    const label = getHarvestLabel(key);
+
+    if (label) {
+      items.push(
+        <HarvestInput key={key} name={key} title={label} value={value} />,
+      );
+    }
+  });
+
   return (
-    <div>
-      <h1>Harvest Data</h1>
+    <div style={{ display: 'block' }}>
+      {items}
+      <HarvestInput
+        key="outras"
+        name="outras"
+        value={participant.harvest.outras}
+        title={`${participant.harvest.outras_quais} (Outras)`}
+      />
     </div>
   );
 };

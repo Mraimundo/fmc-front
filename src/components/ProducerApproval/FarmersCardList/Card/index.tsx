@@ -27,6 +27,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     setSelectedFarmerRequestId,
     setReprovalModalIsOpen,
     setFarmerDetailsIsOpen,
+    setShowFarmerDetailActions,
   } = useFarmersContext();
 
   const {
@@ -53,9 +54,21 @@ const Card: React.FC<CardProps> = ({ data }) => {
   }, [request_id, setReprovalModalIsOpen, setSelectedFarmerRequestId]);
 
   const handleShowFarmerDetails = useCallback(() => {
-    console.log('SELECTED FARMER', id);
+    setSelectedFarmerRequestId(request_id);
+    console.log('REQUEST_ID_DETAILS', request_id);
+    setShowFarmerDetailActions(request_status === 'Aguardando');
     setFarmerDetailsIsOpen(true);
-  }, [id, setFarmerDetailsIsOpen]);
+  }, [
+    request_id,
+    request_status,
+    setFarmerDetailsIsOpen,
+    setSelectedFarmerRequestId,
+    setShowFarmerDetailActions,
+  ]);
+
+  const handleReprovedMessage = useCallback(() => {
+    alert('THIS IS THE REPROVAL REASON');
+  }, []);
 
   return (
     <Container>
@@ -98,6 +111,15 @@ const Card: React.FC<CardProps> = ({ data }) => {
               Reprovar
             </Button>
           </>
+        )}
+        {request_status === 'Reprovado' && (
+          <Button
+            type="button"
+            buttonRole="quaternary"
+            onClick={handleReprovedMessage}
+          >
+            Reprovado
+          </Button>
         )}
       </Actions>
     </Container>

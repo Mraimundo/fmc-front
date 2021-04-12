@@ -45,6 +45,8 @@ interface FarmersContextState {
   reproveFarmer: (message: string) => void;
   farmerDetailsIsOpen: boolean;
   setFarmerDetailsIsOpen: (value: boolean) => void;
+  showFarmerDetailActions: boolean;
+  setShowFarmerDetailActions: (value: boolean) => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -70,6 +72,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
     number | null
   >(null);
   const [farmerDetailsIsOpen, setFarmerDetailsIsOpen] = useState(false);
+  const [showFarmerDetailActions, setShowFarmerDetailActions] = useState(false);
 
   const { addToast } = useToast();
 
@@ -178,6 +181,8 @@ export const FarmersProvider: React.FC = ({ children }) => {
         reproveFarmer,
         farmerDetailsIsOpen,
         setFarmerDetailsIsOpen,
+        showFarmerDetailActions,
+        setShowFarmerDetailActions,
       }}
     >
       {children}

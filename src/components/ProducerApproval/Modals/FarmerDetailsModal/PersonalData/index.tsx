@@ -3,7 +3,8 @@ import React from 'react';
 // import { Container } from './styles';
 import { Participant } from 'services/auth/interfaces/Participant';
 import ComponentsByProfile from 'components/Auth/Register/Form/Commom/ComponentsByProfile';
-import { Input, BoxPhone } from '../shared/styles';
+// import Avatar from 'components/Avatar';
+import { Input, BoxPhone, Avatar } from '../shared/styles';
 
 interface PersonalDataProps {
   participant: Participant;
@@ -16,7 +17,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({
 }) => {
   return (
     <div style={{ display: 'block' }}>
-      {/* <Avatar name="picture" inputRole={inputRole} /> */}
+      <Avatar
+        name={participant.name}
+        picture={participant.picture}
+        circleDimension={150}
+      />
       <ComponentsByProfile participant={participant} inputRole={inputRole} />
       <Input
         name="nick_name"
