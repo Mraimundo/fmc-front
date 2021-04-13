@@ -33,7 +33,6 @@ import {
   TotalCoins,
 } from './styles';
 
-const MYEXTRACT = '/myextract';
 
 interface NFData {
   item: {
