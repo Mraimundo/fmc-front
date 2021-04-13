@@ -21,6 +21,7 @@ const Extract: React.FC<Props> = ({
   isSimulating,
 }) => {
   const { balance } = summary;
+  //console.log(balance)
   const [, setPoints] = useState<Point[]>([]);
 
   useEffect(() => {

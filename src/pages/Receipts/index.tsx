@@ -39,6 +39,7 @@ interface NFData {
 const Receipts: React.FC = () => {
   const location = useLocation();
   const [summary, setSummary] = useState<ExtractSummary>();
+  //console.log(summary)
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [extractDetails, setExtractDetails] = useState<IExtract[]>([]);
   const [piAccess, setPiAccess] = useState('');
@@ -117,7 +118,7 @@ const Receipts: React.FC = () => {
     if (extractDetails.length > 0) {
       const sortedExtractDetails = extractDetails.sort((item1, item2) =>
         (item1.statement?.campaign.description || 'a') >
-        (item2.statement?.campaign.description || 'a')
+          (item2.statement?.campaign.description || 'a')
           ? 1
           : -1,
       );

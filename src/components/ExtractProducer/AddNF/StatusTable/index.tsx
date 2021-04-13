@@ -14,7 +14,7 @@ const StatusTable: React.FC<Props> = Props => {
     let count = 0;
     nf.forEach(safra => {
       safra.item.forEach((nota: { status_id: number }) => {
-        if (nota.status_id === status) {
+        if (nota?.status_id === status) {
           count += 1;
         }
       });

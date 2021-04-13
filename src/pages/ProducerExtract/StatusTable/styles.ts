@@ -4,6 +4,9 @@ interface ContainerProps {
   display: string;
 }
 export const Container = styled.div<ContainerProps>`
+
+
+  
   border-radius: 10px;
   background: #f4f4f3;
   border: 1px dashed ${({ theme }) => theme.font.color.secondary};
