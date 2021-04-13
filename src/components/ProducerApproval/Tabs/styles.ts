@@ -7,9 +7,14 @@ export const Container = styled.div`
   display: flex;
   border-radius: 8px;
   background: #efefef;
-  margin: 0 1rem 0;
+  margin: 0 1rem 0 1rem;
   border-top: 1px solid ${({ theme }) => theme.font.color.primary};
   border-bottom: 1px solid ${({ theme }) => theme.font.color.primary};
+
+  @media screen and (max-width: 520px) {
+    margin: 0;
+    width: 100%;
+  }
 `;
 
 interface ItemProps {

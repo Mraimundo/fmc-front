@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { Farmer } from 'services/producer-approval/interface';
 import { formatDate } from 'util/datetime';
 import { getNameAbbr } from 'util/string';
-import { cpfMask } from 'util/masks';
+import { cpfMask, cellPhoneMask } from 'util/masks';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 
 import {
@@ -88,7 +88,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           <p>{client_group}</p>
           <p>{email}</p>
           <p>{cpfMask(cpf)}</p>
-          <p>{cell_phone}</p>
+          <p>{`(11) ${cellPhoneMask(cell_phone)}`}</p>
           <span>Cadastrado em {formatDate(created)}</span>
         </Fields>
       </Content>
