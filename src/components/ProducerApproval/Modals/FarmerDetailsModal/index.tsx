@@ -52,8 +52,10 @@ const FarmerDetailsModal: React.FC<FarmerDetailsModalProps> = ({
 
   useEffect(() => {
     const fetchFarmer = async () => {
-      const data = await getFarmerData(selectedFarmerId ?? 0);
-      setFarmer(data);
+      if (selectedFarmerId) {
+        const data = await getFarmerData(selectedFarmerId);
+        setFarmer(data);
+      }
     };
     fetchFarmer();
     setSelectedTab(Tab.personalData);

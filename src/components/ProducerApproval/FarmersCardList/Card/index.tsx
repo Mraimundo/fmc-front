@@ -29,8 +29,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
     setReprovalModalIsOpen,
     setFarmerDetailsIsOpen,
     setShowFarmerDetailActions,
-    setReproveMessageIsOpen,
     setSelectedFarmerId,
+    showReproveMessage,
   } = useFarmersContext();
 
   const {
@@ -73,8 +73,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
   const handleReprovedMessage = useCallback(() => {
     setSelectedFarmerRequestId(request_id);
-    setReproveMessageIsOpen(true);
-  }, [request_id, setReproveMessageIsOpen, setSelectedFarmerRequestId]);
+    showReproveMessage();
+  }, [request_id, setSelectedFarmerRequestId, showReproveMessage]);
 
   return (
     <Container>
@@ -88,7 +88,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           <p>{client_group}</p>
           <p>{email}</p>
           <p>{cpfMask(cpf)}</p>
-          <p>{`(11) ${cellPhoneMask(cell_phone)}`}</p>
+          <p>{`${cellPhoneMask(cell_phone)}`}</p>
           <span>Cadastrado em {formatDate(created)}</span>
         </Fields>
       </Content>

@@ -10,6 +10,7 @@ import {
   Farmer,
   FilterOptions,
   Summary,
+  ReproveMessage,
 } from 'services/producer-approval/interface';
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import {
@@ -17,6 +18,7 @@ import {
   getSummary,
   approveFarmerRequest,
   reproveFarmerRequest,
+  getReproveMessage as getReproveMotive,
 } from 'services/producer-approval';
 
 import { useToast } from 'context/ToastContext';
@@ -45,6 +47,7 @@ interface FarmersContextState {
   setReprovalModalIsOpen: (value: boolean) => void;
   reproveFarmer: (message: string) => void;
   farmerDetailsIsOpen: boolean;
+  closeFarmerDetailsModal: () => void;
   setFarmerDetailsIsOpen: (value: boolean) => void;
   showFarmerDetailActions: boolean;
   setShowFarmerDetailActions: (value: boolean) => void;
@@ -52,6 +55,8 @@ interface FarmersContextState {
   setReproveMessageIsOpen: (value: boolean) => void;
   selectedFarmerId: number | null;
   setSelectedFarmerId: (id: number) => void;
+  showReproveMessage: () => void;
+  reproveMessage: ReproveMessage | null;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -80,6 +85,9 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const [showFarmerDetailActions, setShowFarmerDetailActions] = useState(false);
   const [reproveMessageIsOpen, setReproveMessageIsOpen] = useState(false);
   const [selectedFarmerId, setSelectedFarmerId] = useState<number | null>(null);
+  const [reproveMessage, setReproveMessage] = useState<ReproveMessage | null>(
+    null,
+  );
 
   const { addToast } = useToast();
 
@@ -164,6 +172,22 @@ export const FarmersProvider: React.FC = ({ children }) => {
     [addToast, fetchFarmers, selectedFarmerRequestId],
   );
 
+  const getReproveMessage = useCallback(async (): Promise<ReproveMessage> => {
+    return getReproveMotive(selectedFarmerRequestId ?? 0);
+  }, [selectedFarmerRequestId]);
+
+  const showReproveMessage = useCallback(async () => {
+    const data = await getReproveMessage();
+    setReproveMessage(data);
+    setReproveMessageIsOpen(true);
+  }, [getReproveMessage]);
+
+  const closeFarmerDetailsModal = useCallback(() => {
+    setFarmerDetailsIsOpen(false);
+    setSelectedFarmerId(null);
+    setSelectedFarmerRequestId(null);
+  }, []);
+
   useEffect(() => {
     fetchFarmers();
   }, [fetchFarmers]);
@@ -189,12 +213,15 @@ export const FarmersProvider: React.FC = ({ children }) => {
         reproveFarmer,
         farmerDetailsIsOpen,
         setFarmerDetailsIsOpen,
+        closeFarmerDetailsModal,
         showFarmerDetailActions,
         setShowFarmerDetailActions,
         reproveMessageIsOpen,
         setReproveMessageIsOpen,
         selectedFarmerId,
         setSelectedFarmerId,
+        showReproveMessage,
+        reproveMessage,
       }}
     >
       {children}

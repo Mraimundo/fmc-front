@@ -28,4 +28,5 @@ export interface FilterOptions {
 export interface ReproveMessage {
   message: string;
   update_date: string;
+  create: string;
 }

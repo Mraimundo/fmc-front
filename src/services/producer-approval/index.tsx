@@ -2,12 +2,12 @@ import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { pluginApi } from 'services/api';
 import { Participant } from 'services/auth/interfaces/Participant';
 import { Farmer, Summary, FilterOptions, ReproveMessage } from './interface';
-import { participantData } from './mock';
 
 const FARMERS_RESOURCE = '/farmer';
 const SUMMARY_RESOURCE = '/farmer/count';
 const FARMER_APPROVE_RESOURCE = '/farmer/approve/';
 const FARMER_REJECT_RESOURCE = '/farmer/reject/';
+const FARMER_REJECT_MESSAGE_RESOURCE = '/farmer/request/id/reject-message';
 
 interface ApiResponse {
   data: Farmer[];
@@ -53,25 +53,21 @@ export const reproveFarmerRequest = async ({
   await pluginApi.post(url, { message });
 };
 
-export const getReproveMessage = (
+export const getReproveMessage = async (
   requestId: number,
 ): Promise<ReproveMessage> => {
-  console.log('TEST', requestId);
-  return new Promise<ReproveMessage>(resolve => {
-    setTimeout(
-      () =>
-        resolve({
-          message: 'Mais uma reprovação teste.',
-          update_date: '2021-04-12T10:38:13-03:00',
-        } as ReproveMessage),
-      2500,
-    );
-  });
+  const url = FARMER_REJECT_MESSAGE_RESOURCE.replace(
+    /id/gi,
+    requestId.toString(),
+  );
+
+  const { data } = await pluginApi.get<ReproveMessage>(url);
+  return data;
 };
 
-export const getFarmerData = (id: number): Promise<Participant> => {
-  console.log('TEST', id);
-  return new Promise<Participant>(resolve => {
-    setTimeout(() => resolve(participantData), 2500);
-  });
+export const getFarmerData = async (id: number): Promise<Participant> => {
+  const url = `${FARMERS_RESOURCE}/${id}`;
+  const { data } = await pluginApi.get<Participant>(url);
+
+  return data;
 };

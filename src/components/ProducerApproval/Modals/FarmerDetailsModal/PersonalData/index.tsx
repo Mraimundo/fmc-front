@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Participant } from 'services/auth/interfaces/Participant';
 // import ComponentsByProfile from 'components/Auth/Register/Form/Commom/ComponentsByProfile';
+import { formatDate } from 'util/datetime';
+import { cpfMask, cellPhoneMask } from 'util/masks';
 import { Input, BoxPhone, Avatar } from '../shared/styles';
 
 interface PersonalDataProps {
@@ -13,6 +15,17 @@ const PersonalData: React.FC<PersonalDataProps> = ({
   participant,
   inputRole = 'primary',
 }) => {
+  const getGenderLabel = useCallback((gender: string): string => {
+    switch (gender.toLowerCase()) {
+      case 'f':
+        return 'Feminino';
+      case 'm':
+        return 'Masculino';
+      default:
+        return '';
+    }
+  }, []);
+
   return (
     <div style={{ display: 'block' }}>
       <Avatar
@@ -47,7 +60,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({
         label="CPF"
         pattern="XXX.XXX.XXX-XX"
         inputRole={inputRole}
-        defaultValue={participant?.cpf}
+        defaultValue={participant?.cpf ? cpfMask(participant.cpf) : ''}
         disabled
       />
 
@@ -65,7 +78,9 @@ const PersonalData: React.FC<PersonalDataProps> = ({
           label="Celular"
           pattern="X XXXX-XXXX"
           inputRole={inputRole}
-          defaultValue={participant?.cell_phone}
+          defaultValue={
+            participant?.cell_phone ? cellPhoneMask(participant.cell_phone) : ''
+          }
           disabled
         />
       </BoxPhone>
@@ -74,7 +89,9 @@ const PersonalData: React.FC<PersonalDataProps> = ({
         name="gender"
         label="Gênero"
         inputRole={inputRole}
-        defaultValue={participant?.gender}
+        defaultValue={
+          participant?.gender ? getGenderLabel(participant.gender) : ''
+        }
         disabled
       />
       <Input
@@ -96,7 +113,9 @@ const PersonalData: React.FC<PersonalDataProps> = ({
         label="Data de nascimento"
         inputRole={inputRole}
         pattern="XX/XX/XXXX"
-        defaultValue={participant?.birth_date}
+        defaultValue={
+          participant?.birth_date ? formatDate(participant.birth_date) : ''
+        }
         disabled
       />
       <Input

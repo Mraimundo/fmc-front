@@ -23,9 +23,9 @@ const Main: React.FC = () => {
     reprovalModalIsOpen,
     setReprovalModalIsOpen,
     farmerDetailsIsOpen,
-    setFarmerDetailsIsOpen,
     reproveMessageIsOpen,
     setReproveMessageIsOpen,
+    closeFarmerDetailsModal,
   } = useFarmersContext();
 
   return (
@@ -56,7 +56,7 @@ const Main: React.FC = () => {
       />
       <FarmerDetailsModal
         isOpen={farmerDetailsIsOpen}
-        onRequestClose={() => setFarmerDetailsIsOpen(false)}
+        onRequestClose={closeFarmerDetailsModal}
       />
       <ReproveMessageModal
         isOpen={reproveMessageIsOpen}
