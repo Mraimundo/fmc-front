@@ -4,7 +4,7 @@ import { Participant } from 'services/auth/interfaces/Participant';
 import { Input, Separator, Title, ListContainer } from '../shared/styles';
 
 interface FarmDataProps {
-  participant: Participant;
+  participant: Participant | null;
   inputRole?: 'primary' | 'secondary';
 }
 
@@ -12,7 +12,6 @@ const FarmData: React.FC<FarmDataProps> = ({
   participant,
   inputRole = 'secondary',
 }) => {
-  console.log(participant);
   return (
     <div style={{ display: 'block' }}>
       <Input
@@ -20,9 +19,9 @@ const FarmData: React.FC<FarmDataProps> = ({
         label="Nome do grupo do produtor"
         inputRole={inputRole}
         disabled
-        value={participant?.producer_group_name || ''}
+        defaultValue={participant?.producer_group_name || ''}
       />
-      {participant.members_group?.length > 0 && (
+      {participant && participant?.members_group?.length > 0 && (
         <>
           <Separator />
           <Title>Razões Sociais do Grupo</Title>

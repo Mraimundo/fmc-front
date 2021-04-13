@@ -38,6 +38,7 @@ interface FarmersContextState {
   setPage: (page: number) => void;
   approvalModalIsOpen: boolean;
   setApprovalModalIsOpen: (value: boolean) => void;
+  selectedFarmerRequestId: number | null;
   setSelectedFarmerRequestId: (farmerId: number) => void;
   approveFarmer: () => void;
   reprovalModalIsOpen: boolean;
@@ -47,6 +48,10 @@ interface FarmersContextState {
   setFarmerDetailsIsOpen: (value: boolean) => void;
   showFarmerDetailActions: boolean;
   setShowFarmerDetailActions: (value: boolean) => void;
+  reproveMessageIsOpen: boolean;
+  setReproveMessageIsOpen: (value: boolean) => void;
+  selectedFarmerId: number | null;
+  setSelectedFarmerId: (id: number) => void;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -73,6 +78,8 @@ export const FarmersProvider: React.FC = ({ children }) => {
   >(null);
   const [farmerDetailsIsOpen, setFarmerDetailsIsOpen] = useState(false);
   const [showFarmerDetailActions, setShowFarmerDetailActions] = useState(false);
+  const [reproveMessageIsOpen, setReproveMessageIsOpen] = useState(false);
+  const [selectedFarmerId, setSelectedFarmerId] = useState<number | null>(null);
 
   const { addToast } = useToast();
 
@@ -119,6 +126,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
         await approveFarmerRequest(selectedFarmerRequestId);
         addToast({ title: 'Cadastro aprovado com sucesso!', type: 'success' });
         fetchFarmers();
+        setFarmerDetailsIsOpen(false);
       } catch (error) {
         addToast({
           title: error.response?.data?.message || 'Erro ao aprovar cadastro',
@@ -145,8 +153,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
           fetchFarmers();
         } catch (error) {
           addToast({
-            title:
-              error.response?.data?.message || 'Erro ao reaprovar cadastro',
+            title: error.response?.data?.message || 'Erro ao reprovar cadastro',
             type: 'error',
           });
         }
@@ -174,6 +181,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
         setPage,
         approvalModalIsOpen,
         setApprovalModalIsOpen,
+        selectedFarmerRequestId,
         setSelectedFarmerRequestId,
         approveFarmer,
         reprovalModalIsOpen,
@@ -183,6 +191,10 @@ export const FarmersProvider: React.FC = ({ children }) => {
         setFarmerDetailsIsOpen,
         showFarmerDetailActions,
         setShowFarmerDetailActions,
+        reproveMessageIsOpen,
+        setReproveMessageIsOpen,
+        selectedFarmerId,
+        setSelectedFarmerId,
       }}
     >
       {children}

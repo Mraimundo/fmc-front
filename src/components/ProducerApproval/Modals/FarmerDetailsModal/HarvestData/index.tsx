@@ -5,13 +5,13 @@ import { getHarvestLabel } from '../shared/utils';
 import HarvestInput from '../shared/HarvestInput';
 
 interface HarvestDataProps {
-  participant: Participant;
+  participant: Participant | null;
 }
 
 const HarvestData: React.FC<HarvestDataProps> = ({ participant }) => {
   const items = [] as any[];
 
-  Object.entries(participant.harvest).forEach(([key, value]) => {
+  Object.entries(participant?.harvest ?? {}).forEach(([key, value]) => {
     const label = getHarvestLabel(key);
 
     if (label) {
@@ -27,8 +27,8 @@ const HarvestData: React.FC<HarvestDataProps> = ({ participant }) => {
       <HarvestInput
         key="outras"
         name="outras"
-        value={participant.harvest.outras}
-        title={`${participant.harvest.outras_quais} (Outras)`}
+        value={participant?.harvest.outras ?? ''}
+        title={`${participant?.harvest.outras_quais ?? ''} (Outras)`}
       />
     </div>
   );

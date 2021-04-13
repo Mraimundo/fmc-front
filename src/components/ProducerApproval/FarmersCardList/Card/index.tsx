@@ -4,6 +4,7 @@ import React, { useCallback } from 'react';
 import { Farmer } from 'services/producer-approval/interface';
 import { formatDate } from 'util/datetime';
 import { getNameAbbr } from 'util/string';
+import { cpfMask } from 'util/masks';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 
 import {
@@ -28,6 +29,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
     setReprovalModalIsOpen,
     setFarmerDetailsIsOpen,
     setShowFarmerDetailActions,
+    setReproveMessageIsOpen,
+    setSelectedFarmerId,
   } = useFarmersContext();
 
   const {
@@ -55,20 +58,23 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
   const handleShowFarmerDetails = useCallback(() => {
     setSelectedFarmerRequestId(request_id);
-    console.log('REQUEST_ID_DETAILS', request_id);
+    setSelectedFarmerId(id);
     setShowFarmerDetailActions(request_status === 'Aguardando');
     setFarmerDetailsIsOpen(true);
   }, [
+    id,
     request_id,
     request_status,
     setFarmerDetailsIsOpen,
+    setSelectedFarmerId,
     setSelectedFarmerRequestId,
     setShowFarmerDetailActions,
   ]);
 
   const handleReprovedMessage = useCallback(() => {
-    alert('THIS IS THE REPROVAL REASON');
-  }, []);
+    setSelectedFarmerRequestId(request_id);
+    setReproveMessageIsOpen(true);
+  }, [request_id, setReproveMessageIsOpen, setSelectedFarmerRequestId]);
 
   return (
     <Container>
@@ -81,7 +87,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           <h4>{name}</h4>
           <p>{client_group}</p>
           <p>{email}</p>
-          <p>{cpf}</p>
+          <p>{cpfMask(cpf)}</p>
           <p>{cell_phone}</p>
           <span>Cadastrado em {formatDate(created)}</span>
         </Fields>
@@ -107,6 +113,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
               type="button"
               buttonRole="quaternary"
               onClick={handleReproveFarmer}
+              reprove
             >
               Reprovar
             </Button>

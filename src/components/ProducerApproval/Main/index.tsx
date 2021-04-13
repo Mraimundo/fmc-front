@@ -9,6 +9,7 @@ import FarmersCardList from '../FarmersCardList';
 import ApprovalModal from '../Modals/ApprovalModal';
 import ReprovalModal from '../Modals/ReprovalModal';
 import FarmerDetailsModal from '../Modals/FarmerDetailsModal';
+import ReproveMessageModal from '../Modals/ReproveMessageModal';
 
 import { Container } from './styles';
 
@@ -23,6 +24,8 @@ const Main: React.FC = () => {
     setReprovalModalIsOpen,
     farmerDetailsIsOpen,
     setFarmerDetailsIsOpen,
+    reproveMessageIsOpen,
+    setReproveMessageIsOpen,
   } = useFarmersContext();
 
   return (
@@ -54,6 +57,10 @@ const Main: React.FC = () => {
       <FarmerDetailsModal
         isOpen={farmerDetailsIsOpen}
         onRequestClose={() => setFarmerDetailsIsOpen(false)}
+      />
+      <ReproveMessageModal
+        isOpen={reproveMessageIsOpen}
+        onCancelRequest={() => setReproveMessageIsOpen(false)}
       />
     </Container>
   );

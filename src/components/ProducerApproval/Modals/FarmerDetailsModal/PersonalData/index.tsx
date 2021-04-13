@@ -1,13 +1,11 @@
 import React from 'react';
 
-// import { Container } from './styles';
 import { Participant } from 'services/auth/interfaces/Participant';
-import ComponentsByProfile from 'components/Auth/Register/Form/Commom/ComponentsByProfile';
-// import Avatar from 'components/Avatar';
+// import ComponentsByProfile from 'components/Auth/Register/Form/Commom/ComponentsByProfile';
 import { Input, BoxPhone, Avatar } from '../shared/styles';
 
 interface PersonalDataProps {
-  participant: Participant;
+  participant: Participant | null;
   inputRole?: 'primary' | 'secondary';
 }
 
@@ -18,35 +16,39 @@ const PersonalData: React.FC<PersonalDataProps> = ({
   return (
     <div style={{ display: 'block' }}>
       <Avatar
-        name={participant.name}
-        picture={participant.picture}
+        name={participant?.name ?? ''}
+        picture={participant?.picture}
         circleDimension={150}
       />
-      <ComponentsByProfile participant={participant} inputRole={inputRole} />
+      {/* <ComponentsByProfile participant={participant} inputRole={inputRole} /> */}
       <Input
         name="nick_name"
         label="Como gostaria de ser chamado"
         inputRole={inputRole}
-        value={participant.nick_name}
+        defaultValue={participant?.nick_name}
+        disabled
       />
       <Input
         name="name"
         label="Nome completo"
         inputRole={inputRole}
-        value={participant.name}
+        defaultValue={participant?.name}
+        disabled
       />
       <Input
         name="email"
         label="E-mail"
         inputRole={inputRole}
-        value={participant.email}
+        defaultValue={participant?.email}
+        disabled
       />
       <Input
         name="cpf"
         label="CPF"
         pattern="XXX.XXX.XXX-XX"
         inputRole={inputRole}
-        value={participant.cpf}
+        defaultValue={participant?.cpf}
+        disabled
       />
 
       <BoxPhone>
@@ -55,14 +57,16 @@ const PersonalData: React.FC<PersonalDataProps> = ({
           pattern="(XX)"
           label="DDD"
           inputRole={inputRole}
-          value={participant.area_code}
+          defaultValue={participant?.area_code}
+          disabled
         />
         <Input
           name="cell_phone"
           label="Celular"
           pattern="X XXXX-XXXX"
           inputRole={inputRole}
-          value={participant.cell_phone}
+          defaultValue={participant?.cell_phone}
+          disabled
         />
       </BoxPhone>
 
@@ -70,62 +74,72 @@ const PersonalData: React.FC<PersonalDataProps> = ({
         name="gender"
         label="Gênero"
         inputRole={inputRole}
-        value={participant.gender}
+        defaultValue={participant?.gender}
+        disabled
       />
       <Input
         name="medium"
         label="Em qual Canal você compra os produtos FMC?"
         inputRole={inputRole}
-        value={participant.medium}
+        defaultValue={participant?.medium}
+        disabled
       />
       <Input
         name="get_to_know"
         label="Como ficou conhecendo o Portal Juntos FMC?"
         inputRole={inputRole}
-        value={participant.get_to_know}
+        defaultValue={participant?.get_to_know}
+        disabled
       />
       <Input
         name="formatted_birth_date"
         label="Data de nascimento"
         inputRole={inputRole}
         pattern="XX/XX/XXXX"
-        value={participant.birth_date}
+        defaultValue={participant?.birth_date}
+        disabled
       />
       <Input
         name="zip_code"
         label="CEP"
         inputRole={inputRole}
-        value={participant.address?.zip_code ?? ''}
+        defaultValue={participant?.address?.zip_code ?? ''}
+        disabled
       />
       <Input
         name="number"
         label="Número"
         inputRole={inputRole}
-        value={participant.address?.number ?? ''}
+        defaultValue={participant?.address?.number ?? ''}
+        disabled
       />
       <Input
         name="complement"
         label="Complemento"
         inputRole={inputRole}
-        value={participant.address?.complement ?? ''}
+        defaultValue={participant?.address?.complement ?? ''}
+        disabled
       />
       <Input
         name="district"
         label="Bairro"
         inputRole={inputRole}
-        value={participant.address?.district ?? ''}
+        defaultValue={participant?.address?.district ?? ''}
+        disabled
       />
       <Input
         name="city"
         label="Cidade"
         inputRole={inputRole}
-        value={participant.address?.city ?? ''}
+        defaultValue={participant?.address?.city ?? ''}
+        disabled
       />
       <Input
         name="state_code"
         label="Estado"
         inputRole={inputRole}
-        value={participant.address?.state_code ?? ''}
+        defaultValue={participant?.address?.state_code ?? ''}
+        disabled
       />
     </div>
   );

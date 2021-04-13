@@ -1,3 +1,5 @@
+import { string } from 'yup';
+
 export interface Farmer {
   id: number;
   name: string;
@@ -21,4 +23,9 @@ export interface FilterOptions {
   status?: string;
   search?: string;
   page?: number;
+}
+
+export interface ReproveMessage {
+  message: string;
+  update_date: string;
 }

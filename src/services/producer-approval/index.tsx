@@ -1,6 +1,8 @@
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { pluginApi } from 'services/api';
-import { Farmer, Summary, FilterOptions } from './interface';
+import { Participant } from 'services/auth/interfaces/Participant';
+import { Farmer, Summary, FilterOptions, ReproveMessage } from './interface';
+import { participantData } from './mock';
 
 const FARMERS_RESOURCE = '/farmer';
 const SUMMARY_RESOURCE = '/farmer/count';
@@ -49,4 +51,27 @@ export const reproveFarmerRequest = async ({
 }: ReproveRequest): Promise<void> => {
   const url = `${FARMER_REJECT_RESOURCE}${requestId}`;
   await pluginApi.post(url, { message });
+};
+
+export const getReproveMessage = (
+  requestId: number,
+): Promise<ReproveMessage> => {
+  console.log('TEST', requestId);
+  return new Promise<ReproveMessage>(resolve => {
+    setTimeout(
+      () =>
+        resolve({
+          message: 'Mais uma reprovação teste.',
+          update_date: '2021-04-12T10:38:13-03:00',
+        } as ReproveMessage),
+      2500,
+    );
+  });
+};
+
+export const getFarmerData = (id: number): Promise<Participant> => {
+  console.log('TEST', id);
+  return new Promise<Participant>(resolve => {
+    setTimeout(() => resolve(participantData), 2500);
+  });
 };

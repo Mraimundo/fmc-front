@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const Modal = styled(DefaultModal)`
   ._modalContainer {
-    max-width: 780px;
+    max-width: 720px;
     width: 100%;
     overflow: scroll;
   }

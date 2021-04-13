@@ -79,10 +79,15 @@ export const InitialsAvatar = styled.div`
   font-size: 1.9em;
 `;
 
-export const Button = styled(DefaultButton)`
+interface ButtonProps {
+  reprove?: boolean;
+}
+
+export const Button = styled(DefaultButton)<ButtonProps>`
   height: 25px;
   width: 100px;
   font-size: 0.9em;
   border-radius: 3px;
-  color: ${({ theme }) => theme.font.color.primary};
+  color: ${({ theme, reprove }) =>
+    !reprove ? theme.font.color.primary : '#e63027'};
 `;
