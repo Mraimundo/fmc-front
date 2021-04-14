@@ -8,16 +8,20 @@ const Filters: React.FC = () => {
   const { applySearch, isFetching } = useFarmersContext();
   const [searchValue, setSearchValue] = useState('');
 
-  const onChangeHandler = useCallback(
+  const searchChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
       setSearchValue(e.target.value);
     },
     [],
   );
 
-  const onClickHandler = useCallback(() => {
+  const searchClickHandler = useCallback(() => {
     applySearch(searchValue);
   }, [applySearch, searchValue]);
+
+  const exportClickHandler = useCallback(() => {
+    alert('Funcionalidade em desenvolvimento!');
+  }, []);
 
   return (
     <Container>
@@ -26,15 +30,18 @@ const Filters: React.FC = () => {
         <Input
           placeholder="Nome, Grupo de Fazenda, E-mail ou CPF"
           inputRole="primary"
-          onChange={onChangeHandler}
+          onChange={searchChangeHandler}
         />
         <Button
           type="button"
           buttonRole="primary"
-          onClick={onClickHandler}
+          onClick={searchClickHandler}
           loading={isFetching}
         >
           Buscar
+        </Button>
+        <Button type="button" buttonRole="primary" onClick={exportClickHandler}>
+          Exportar
         </Button>
       </FiltersBox>
     </Container>

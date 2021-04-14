@@ -12,7 +12,7 @@ export const Container = styled.div`
     padding-right: 1rem;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 1200px) {
     width: 100%;
   }
 `;
@@ -23,8 +23,8 @@ export const Button = styled(DefaultButton)`
   width: 200px;
 
   @media screen and (max-width: 720px) {
-    width: 100%;
-    margin: 1rem 3rem 0 0;
+    width: 70%;
+    margin: 1rem 0 0 0;
   }
 `;
 
@@ -39,7 +39,15 @@ export const FiltersBox = styled.div`
   display: flex;
   width: 100%;
 
+  button:nth-child(3) {
+    margin-left: 15px;
+  }
+
   @media screen and (max-width: 720px) {
     flex-direction: column;
+    align-items: center;
+    button:nth-child(3) {
+      margin-left: 0;
+    }
   }
 `;

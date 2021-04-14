@@ -92,9 +92,9 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   const refreshSummary = useCallback(async () => {
-    const result = await getSummary();
+    const result = await getSummary(filters);
     setSummary(result);
-  }, []);
+  }, [filters]);
 
   const fetchFarmers = useCallback(async (): Promise<void> => {
     setIsFetching(true);

@@ -124,7 +124,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
             buttonRole="quaternary"
             onClick={handleReprovedMessage}
           >
-            Reprovado
+            Comentário
           </Button>
         )}
       </Actions>

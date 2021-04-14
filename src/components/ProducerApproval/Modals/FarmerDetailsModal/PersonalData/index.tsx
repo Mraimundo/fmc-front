@@ -4,7 +4,7 @@ import { Participant } from 'services/auth/interfaces/Participant';
 // import ComponentsByProfile from 'components/Auth/Register/Form/Commom/ComponentsByProfile';
 import { formatDate } from 'util/datetime';
 import { cpfMask, cellPhoneMask } from 'util/masks';
-import { Input, BoxPhone, Avatar } from '../shared/styles';
+import { Input, BoxPhone, Avatar, StateCodeInput } from '../shared/styles';
 
 interface PersonalDataProps {
   participant: Participant | null;
@@ -153,7 +153,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({
         defaultValue={participant?.address?.city ?? ''}
         disabled
       />
-      <Input
+      <StateCodeInput
         name="state_code"
         label="Estado"
         inputRole={inputRole}

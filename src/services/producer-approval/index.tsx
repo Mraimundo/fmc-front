@@ -32,8 +32,13 @@ export const getFarmers = async ({
   return data;
 };
 
-export const getSummary = async (): Promise<Summary> => {
-  const { data } = await pluginApi.get<Summary>(SUMMARY_RESOURCE);
+export const getSummary = async ({
+  search,
+}: FilterOptions): Promise<Summary> => {
+  const url = search
+    ? `${SUMMARY_RESOURCE}?search=${search}`
+    : SUMMARY_RESOURCE;
+  const { data } = await pluginApi.get<Summary>(url);
 
   return data;
 };

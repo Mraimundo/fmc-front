@@ -14,6 +14,12 @@ export const Input = styled(BaseInput)`
   /*}*/
 `;
 
+export const StateCodeInput = styled(Input)`
+  ._inputContainer {
+    width: 120px;
+  }
+`;
+
 export const BoxPhone = styled.div`
   display: flex;
   max-width: 499px;
