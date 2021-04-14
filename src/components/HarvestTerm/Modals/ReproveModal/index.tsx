@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ReactSVG } from 'react-svg';
 import CloseIcon from 'assets/images/training/close-icon.svg';
@@ -37,7 +37,7 @@ const ReproveModal: React.FC<ReproveModalProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
-  const { tabs, tabSelected } = useHarvestTermsContext();
+  const { tabs, tabSelected, fetchAgreementTerms } = useHarvestTermsContext();
 
   const methods = useForm<FormData>({
     validationSchema: Yup.object().shape({
@@ -49,7 +49,7 @@ const ReproveModal: React.FC<ReproveModalProps> = ({
     },
   });
 
-  const { handleSubmit, reset, setValue } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = handleSubmit(async ({ comment }) => {
     try {
@@ -61,6 +61,7 @@ const ReproveModal: React.FC<ReproveModalProps> = ({
       });
       reset();
       cancelRequest();
+      fetchAgreementTerms();
     } catch (e) {
       addToast({
         title:
@@ -71,10 +72,6 @@ const ReproveModal: React.FC<ReproveModalProps> = ({
       setLoading(false);
     }
   });
-
-  useEffect(() => {
-    setValue('comment', 'Teste');
-  }, [setValue, tabSelected]);
 
   return (
     <Modal isOpen={isOpen} onRequestClose={cancelRequest}>
