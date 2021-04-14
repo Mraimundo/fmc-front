@@ -55,7 +55,7 @@ interface FarmersContextState {
   setReproveMessageIsOpen: (value: boolean) => void;
   selectedFarmerId: number | null;
   setSelectedFarmerId: (id: number) => void;
-  showReproveMessage: () => void;
+  showReproveMessage: (requestId: number) => void;
   reproveMessage: ReproveMessage | null;
 }
 
@@ -172,15 +172,13 @@ export const FarmersProvider: React.FC = ({ children }) => {
     [addToast, fetchFarmers, selectedFarmerRequestId],
   );
 
-  const getReproveMessage = useCallback(async (): Promise<ReproveMessage> => {
-    return getReproveMotive(selectedFarmerRequestId ?? 0);
-  }, [selectedFarmerRequestId]);
-
-  const showReproveMessage = useCallback(async () => {
-    const data = await getReproveMessage();
+  const showReproveMessage = useCallback(async (requestId: number): Promise<
+    void
+  > => {
+    const data = await getReproveMotive(requestId);
     setReproveMessage(data);
     setReproveMessageIsOpen(true);
-  }, [getReproveMessage]);
+  }, []);
 
   const closeFarmerDetailsModal = useCallback(() => {
     setFarmerDetailsIsOpen(false);

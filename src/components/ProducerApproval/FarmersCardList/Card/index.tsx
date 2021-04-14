@@ -72,9 +72,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
   ]);
 
   const handleReprovedMessage = useCallback(() => {
-    setSelectedFarmerRequestId(request_id);
-    showReproveMessage();
-  }, [request_id, setSelectedFarmerRequestId, showReproveMessage]);
+    showReproveMessage(request_id);
+  }, [request_id, showReproveMessage]);
 
   return (
     <Container>
