@@ -12,7 +12,6 @@ import { pluginApi } from '../../../services/api';
 import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../../components/SearchForms/AnswerSurvey/LinearScale';
 import MultipleLinearScale from '../../../components/SearchForms/AnswerSurvey/MultipleLinearScale';
 import InputCheckBox from '../../../components/SearchForms/AnswerSurvey/InputCheckBox';
 import InputGridCheckBox from '../../../components/SearchForms/AnswerSurvey/InputGridCheckBox';
@@ -21,8 +20,13 @@ import InputRadios from '../../../components/SearchForms/AnswerSurvey/InputRadio
 import InputText from '../../../components/SearchForms/AnswerSurvey/InputText';
 import InputDate from '../../../components/SearchForms/AnswerSurvey/InputDate';
 import InputTime from '../../../components/SearchForms/AnswerSurvey/InputTime';
-
 import DropDownList from '../../../components/SearchForms/AnswerSurvey/DropDownList';
+
+import TypeStar from '../../../components/SearchForms/AnswerSurvey/LinearScal/TypeStar';
+import TypeCheckBox from '../../../components/SearchForms/AnswerSurvey/LinearScal/TypeCheckBox';
+import TypeRadio from '../../../components/SearchForms/AnswerSurvey/LinearScal/TypeRadio';
+import TypeEmoji from '../../../components/SearchForms/AnswerSurvey/LinearScal/TypeEmoji';
+
 
 import { getValueAnswer } from '../../../state/modules/answer/selectors'
 
@@ -75,6 +79,7 @@ interface QuestionsData {
   id: number;
   question: string;
   type: string;
+  scale_type?: number;
   name: string;
   answer: string;
   survey_question_answers: AnswersData[];
@@ -147,6 +152,7 @@ const ProducerResearch: React.FC = () => {
     answers: AnswersData[],
     id?: number | undefined,
     answer_id?: number | undefined,
+    scale_type?: number | null,
   ) => {
     switch (type) {
       case 2: {
@@ -159,14 +165,44 @@ const ProducerResearch: React.FC = () => {
         )
       }
       case 1: {
-        return (
-          <StarButtonLine
-            quetion={question}
-            answers={answers}
-            id={id}
-          />
-        )
+        if (scale_type === 1) {
+          return (
+            <TypeStar
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 2) {
+          return (
+            <TypeCheckBox
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 3) {
+          return (
+            <TypeRadio
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 4) {
+          return (
+            <TypeEmoji
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
       }
+      // eslint-disable-next-line
       case 3: {
         return (
           <InputRadios
@@ -293,7 +329,7 @@ const ProducerResearch: React.FC = () => {
       <Form onSubmit={handleSave}>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.name, question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
+            typeForm(Number(question.type), question.name, question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id, question.scale_type)
           ))
         }
         <Button
