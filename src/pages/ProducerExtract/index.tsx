@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import getList from 'services/producer-extract/getAllList';
+import getNfList from 'services/nf/getAllNotas';
 
 import StatusTable from './StatusTable';
 
-import ExtractEf from './ExtractProducer';
+import ExtractNf from './Extract';
 import ListOne from './ListOne';
 
 // import { AddNF } from '../../components/ExtractProducer';
@@ -16,9 +17,7 @@ import {
   Extract as IExtract,
 } from 'services/extract/interfaces';
 import { getParticipantsToAccessPI } from 'services/showcase';
-import getCampaigns from 'services/extract/getCampaigns';
 import getExtract from 'services/extract/getExtract';
-import getExtractEstablishment from 'services/extract/getExtractEstablishment';
 
 import { useAuth } from 'context/AuthContext';
 
@@ -34,11 +33,28 @@ import {
   TotalCoins,
 } from './styles';
 
-const MYEXTRACT = '/myextract';
 
 interface NFData {
-  notas: {
+  item: {
     id: number;
+  };
+}
+
+interface Item {
+  FMCCOINS: string;
+  data: string;
+  descricao: string;
+  id: number;
+  status: number;
+  status_text: string;
+  tipoponto: string;
+}
+
+interface SafraProps {
+  safra: {
+    totalsafra: string;
+    safra: string;
+    item: Item[];
   };
 }
 
@@ -54,11 +70,10 @@ const Extract: React.FC = () => {
   const [pathKey, setPathKey] = useState('');
   const { participant, simulating } = useAuth();
 
-  const getExtractFn = (typeName: string) => {
-    return typeName === MYEXTRACT ? getExtract : getExtractEstablishment;
-  };
 
-  const [nfList, setNfList] = useState<any[]>([]);
+  const [List, setList] = useState<any[]>([]);
+  const [nfList, setNfList] = useState<SafraProps[]>([]);
+
   const [coins, setCoins] = useState(0);
   const [safraName, setSafraName] = useState('');
 
@@ -71,22 +86,41 @@ const Extract: React.FC = () => {
   }
 
   useEffect(() => {
-    function getNfData() {
+    function getListData() {
       getList().then(data => {
         const efListEntries = Object.entries(data);
         const trEfListEntries = transformNfEntry(efListEntries);
-        setNfList(trEfListEntries);
+        setList(trEfListEntries);
 
         setSafraName(trEfListEntries[0].safra);
         setCoins(trEfListEntries[0].totalsafra);
       });
     }
+    getListData();
+  }, []);
+
+  useEffect(() => {
+    function getNfData() {
+      getNfList().then(data => {
+        if (data) {
+          const efListEntries = Object.entries(data.notas);
+          const trEfListEntries = transformNfEntry(efListEntries);
+          setNfList(trEfListEntries);
+        }
+      });
+    }
     getNfData();
   }, []);
 
-
   useEffect(() => {
-    getCampaigns().then(data => setCampaigns(data));
+    /// getCampaigns().then(data => setCampaigns(data));
+    setCampaigns([
+      {
+        id: 280,
+        description: '',
+        title: '',
+      },
+    ]);
   }, []);
 
   useEffect(() => {
@@ -95,13 +129,12 @@ const Extract: React.FC = () => {
     const load = async () => {
       const { pathname } = location;
       const { establishment } = participant;
-      const extractFn = getExtractFn(pathname);
 
       setUserType(establishment.type_name);
       setPathKey(pathname);
 
       const extractDetailsResponse = await Promise.all(
-        campaigns.map(campaign => extractFn(campaign.id)),
+        campaigns.map(campaign => getExtract(campaign.id)),
       );
       setExtractDetails(extractDetailsResponse);
     };
@@ -114,7 +147,6 @@ const Extract: React.FC = () => {
   useEffect(() => {
     getParticipantsToAccessPI().then(data => {
       setPiAccess(data.find(item => item.type === 'cpf')?.urlPi || '');
-      return;
     });
   }, [location]);
 
@@ -160,7 +192,7 @@ const Extract: React.FC = () => {
             <StatusItem>
               <StatusBox>
                 {summary && (
-                  <ExtractEf
+                  <ExtractNf
                     summary={summary}
                     userType={userType}
                     pathKey={pathKey}
@@ -173,7 +205,7 @@ const Extract: React.FC = () => {
           </StatusContent>
         </StatusContainer>
 
-        {nfList.map(safra => (
+        {List.map(safra => (
           <ListOne safra={safra} key={safra.safra} />
         ))}
 

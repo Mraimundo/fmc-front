@@ -10,10 +10,11 @@ interface Props {
 }
 
 const StatusTable: React.FC<Props> = Props => {
+  console.log(Props.nfList)
   function countNFByStatus(nf: any[], status: number) {
     let count = 0;
     nf.forEach(safra => {
-      safra.item.forEach((nota: { status_id: number }) => {
+      safra?.item?.forEach((nota: { status_id: number }) => {
         if (nota.status_id === status) {
           count += 1;
         }

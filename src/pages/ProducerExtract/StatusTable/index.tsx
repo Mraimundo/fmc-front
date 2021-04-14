@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container } from './styles';
 
-
-interface NfProps {
-  nfList: any;
+interface Props {
+  nfList: any[];
   display: string;
 }
 
-const StatusTable: React.FC<NfProps> = NfProps => {
+const StatusTable: React.FC<Props> = Props => {
+  //console.log(Props.nfList)
   function countNFByStatus(nf: any[], status: number) {
     let count = 0;
     nf.forEach(safra => {
-      safra.item.forEach((nota: { status_id: number }) => {
+      safra?.item?.forEach((nota: { status_id: number }) => {
         if (nota.status_id === status) {
           count += 1;
         }
@@ -20,22 +20,25 @@ const StatusTable: React.FC<NfProps> = NfProps => {
     return count;
   }
   return (
-    <Container display={NfProps.display}>
+    <Container display={Props.display}>
       <ul>
-        <li>
-          <p>Liberadas</p>
-          <span />
-          <p>{countNFByStatus(NfProps.nfList, 0)} </p>
-        </li>
         <li>
           <p>Em análise</p>
           <span />
-          <p>{countNFByStatus(NfProps.nfList, 1)} </p>
+          <p>
+            {countNFByStatus(Props.nfList, 0) +
+              countNFByStatus(Props.nfList, 3)}
+          </p>
+        </li>
+        <li>
+          <p>Liberadas</p>
+          <span />
+          <p>{countNFByStatus(Props.nfList, 1)} </p>
         </li>
         <li>
           <p>Descredenciadas</p>
           <span />
-          <p>{countNFByStatus(NfProps.nfList, 2)} </p>
+          <p>{countNFByStatus(Props.nfList, 2)} </p>
         </li>
       </ul>
     </Container>

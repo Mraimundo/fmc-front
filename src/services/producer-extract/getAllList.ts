@@ -4,7 +4,7 @@ import { Nf } from './interfaces';
 interface getAllListApi {
   fmccoins: number;
   safra: string;
-  nota: Nf[];
+  item: Nf[];
 }
 
 
