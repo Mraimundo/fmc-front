@@ -40,4 +40,5 @@ export default {
   receipts: '/extrato-notas',
   harvestTerm: '/termo-de-safra',
   flyingHigh: '/voandoalto',
+  producerApproval: '/aprovacao-de-produtores',
 };
