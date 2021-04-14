@@ -32,16 +32,16 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
   answers.map((value, index, elements) => {
     // eslint-disable-next-line
     value.survey_participant_answers.map(participant => {
-      if (elements[index + 1]?.survey_participant_answers.length > 0) {
+      if (elements[index + 1]?.survey_participant_answers?.length > 0) {
         if (Number(participant.answer)
-          > Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
+          > Number(elements[index + 1]?.survey_participant_answers[0]?.answer)) {
           max = participant.answer;
         } else if (Number(participant.answer)
-          < Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
-          max = elements[index + 1]?.survey_participant_answers[0].answer;
+          < Number(elements[index + 1]?.survey_participant_answers[0]?.answer)) {
+          max = elements[index + 1]?.survey_participant_answers[0]?.answer;
         } else if (Number(participant.answer)
-          === Number(elements[index + 1]?.survey_participant_answers[0].answer)) {
-          max = elements[index + 1]?.survey_participant_answers[0].answer;
+          === Number(elements[index + 1]?.survey_participant_answers[0]?.answer)) {
+          max = elements[index + 1]?.survey_participant_answers[0]?.answer;
         }
       }
       else {
@@ -49,7 +49,6 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers }) => {
       }
     });
   });
-
 
   return (
     <Container>
