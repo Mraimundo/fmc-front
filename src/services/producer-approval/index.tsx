@@ -76,3 +76,13 @@ export const getFarmerData = async (id: number): Promise<Participant> => {
 
   return data;
 };
+
+export const getExport = async (): Promise<string> => {
+  return new Promise<string>(resolve => {
+    setTimeout(() => {
+      resolve(
+        'https://storage.juntosfmc.com.br/agreement_term/1597749083.5f3bb75bae8b26.39303140.pdf',
+      );
+    }, 3000);
+  });
+};

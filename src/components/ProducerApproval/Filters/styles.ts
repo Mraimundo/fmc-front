@@ -22,6 +22,10 @@ export const Button = styled(DefaultButton)`
   min-height: 50px;
   width: 200px;
 
+  span {
+    margin-right: 10px;
+  }
+
   @media screen and (max-width: 720px) {
     width: 70%;
     margin: 1rem 0 0 0;
