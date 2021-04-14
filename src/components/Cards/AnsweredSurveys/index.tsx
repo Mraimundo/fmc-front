@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isWithinInterval } from 'date-fns';
 // import { useLocation } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
@@ -15,12 +16,9 @@ import {
 } from './styles';
 
 interface PointsData {
-  created: string,
-  start_datetime: string,
-  end_datetime: string,
-  id: number,
+  start_date: string,
+  end_date: string,
   points_count: string,
-  questions_count: string,
 }
 
 interface SurveysData {
@@ -71,11 +69,13 @@ const Cards: React.FC = () => {
               `)}
             </span>
             <p dangerouslySetInnerHTML={{ __html: answered.description }}></p>
-            <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')} </h3>
+            <h3>Respondida em : {formatDate(answered.modified, 'dd/MM/yyyy')}</h3>
             {
-              answered.points[0] ? (
-                <h2>Vale {(answered.points[0] && answered.points[0].points_count)} Coins</h2>
-              ) : null
+              answered?.points?.map((item: PointsData) => {
+                if (isWithinInterval(new Date(), { start: new Date(item.start_date), end: new Date(item.end_date) })) {
+                  return <h2>Vale {item.points_count} Coins</h2>
+                }
+              })
             }
             <Link to={`${routeMap.InternalPage.answers}?item=${answered.id}`} className="btn">Ver respostas</Link>
           </MiniBox>

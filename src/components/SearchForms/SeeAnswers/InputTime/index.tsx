@@ -33,7 +33,7 @@ const QuestionGlobal: React.FC<Props> = ({ quetion, answers, id }) => {
           <input
             key={answer.id}
             type="time"
-            value={answer?.survey_participant_answers[0].answer}
+            value={answer?.survey_participant_answers[0]?.answer}
             disabled
           />
         ))

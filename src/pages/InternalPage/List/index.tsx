@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { isWithinInterval } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { useToast } from 'context/ToastContext';
 
 import axios from 'axios'
+
 import { useLocation, useHistory } from 'react-router-dom';
 import { formatDate } from 'util/datetime';
 
@@ -35,12 +37,9 @@ import {
 } from './styles';
 
 interface PointsData {
-  created: string,
-  start_datetime: string,
-  end_datetime: string,
-  id: number,
+  start_date: string,
+  end_date: string,
   points_count: string,
-  questions_count: string,
 }
 
 interface SurveysDataForm {
@@ -50,8 +49,10 @@ interface SurveysDataForm {
   start_datetime: string;
   end_datetime: string;
   banner_picture: string;
+  video: string;
   points: PointsData[];
   event: Event;
+  thank_you_message: string;
 }
 
 interface IconsProps {
@@ -74,6 +75,7 @@ interface QuestionsData {
   id: number;
   question: string;
   type: string;
+  name: string;
   answer: string;
   survey_question_answers: AnswersData[];
 }
@@ -122,6 +124,7 @@ const ProducerResearch: React.FC = () => {
       await axios.post(`https://juntosfmc-adm.vendavall.com.br/juntos-fmc/api/v1/participants/surveys/sendAnswers?survey_id=${list_id}`, formData, config);
       addToast({
         title:
+          e.response?.data?.data?.thank_you_message ||
           'Obrigado por partipar da pesquisa! Em até 48 horas úteis os FMC Coins estarão disponíveis para utilizar em resgates no Católogo de Prêmios.',
         type: 'success',
       });
@@ -139,6 +142,7 @@ const ProducerResearch: React.FC = () => {
 
   const typeForm = (
     type: number,
+    name: string,
     question: string,
     answers: AnswersData[],
     id?: number | undefined,
@@ -186,6 +190,7 @@ const ProducerResearch: React.FC = () => {
           <InputText
             quetion={question}
             type="text"
+            name={name}
             id={id}
             answer_id={answer_id}
           />
@@ -243,6 +248,7 @@ const ProducerResearch: React.FC = () => {
     }
   }
 
+
   return (
     <Container>
       <h1>Pesquisas</h1>
@@ -250,24 +256,33 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
+          {/* Adicionar os pontos respeitando o entervalo das datas*/}
           {
-            youropinion?.points?.length ? (
-              <h2>Vale {(youropinion?.points?.length && youropinion?.points[0].points_count)} Coins</h2>
-            ) : null
+            youropinion?.points?.map((item: PointsData) => {
+              if (isWithinInterval(new Date(), { start: new Date(item.start_date), end: new Date(item.end_date) })) {
+                return <h2>Vale {item.points_count} Coins</h2>
+              }
+            })
           }
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
           {/* eslint-disable-next-line  */}
-          <iframe
-            width="560"
-            height="420"
-            src={`https://www.youtube.com/embed/${videoId}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen>
-          </iframe>
+
+          {
+            youropinion?.video ? (
+              // eslint-disable-next-line
+              <iframe
+                width="560"
+                height="420"
+                src={`https://www.youtube.com/embed/${videoId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen>
+              </iframe>
+            ) : null
+          }
         </ContentInfo>
       </MiniBox>
 
@@ -278,7 +293,7 @@ const ProducerResearch: React.FC = () => {
       <Form onSubmit={handleSave}>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
+            typeForm(Number(question.type), question.name, question.question, question.survey_question_answers, question?.id, question?.survey_question_answers[0].id)
           ))
         }
         <Button

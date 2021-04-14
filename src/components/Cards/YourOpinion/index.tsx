@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isWithinInterval } from 'date-fns';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Surveys } from 'services/surveys/interfaces';
@@ -13,12 +14,9 @@ import {
 } from './styles';
 
 interface PointsData {
-  created: string,
-  start_datetime: string,
-  end_datetime: string,
-  id: number,
+  start_date: string,
+  end_date: string,
   points_count: string,
-  questions_count: string,
 }
 
 interface SurveysData {
@@ -60,6 +58,7 @@ const CardList: React.FC = () => {
     fetchSurveys();
   }, []);
 
+
   return (
     <Container>
       {youropinion &&
@@ -74,18 +73,13 @@ const CardList: React.FC = () => {
               `)}
             </span>
             <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
-
             {
-              youropinion.points[0] ? (
-                <h2>Vale {(youropinion.points[0] && youropinion.points[0].points_count)} Coins</h2>
-              ) : null
+              youropinion?.points.map((item: PointsData) => {
+                if (isWithinInterval(new Date(), { start: new Date(item.start_date), end: new Date(item.end_date) })) {
+                  return <h2>Vale {item.points_count} Coins</h2>
+                }
+              })
             }
-
-            {/* <h2>
-              {(youropinion.points[0] && (Date.parse(youropinion.points[0].start_datetime) <= Date.now()
-                || Date.parse(youropinion.points[0].end_datetime) <= Date.now() && youropinion.points[0].points_count
-              ))}
-            </h2> */}
             <Link to={`${routeMap.InternalPage.questions}?item=${youropinion.id}`} className="btn">Responder</Link>
           </MiniBox>
         ))}

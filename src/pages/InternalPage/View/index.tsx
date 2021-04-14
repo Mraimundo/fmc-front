@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
 import { useLocation } from 'react-router-dom';
+import { isWithinInterval } from 'date-fns';
 import { formatDate } from 'util/datetime';
 
 import { pluginApi } from '../../../services/api';
-import 'date-fns';
 import 'react-toastify/dist/ReactToastify.css';
 
 import StarButtonLine from '../../../components/SearchForms/SeeAnswers/LinearScale';
@@ -29,12 +28,9 @@ import {
 } from './styles';
 
 interface PointsData {
-  created: string,
-  start_datetime: string,
-  end_datetime: string,
-  id: number,
+  start_date: string,
+  end_date: string,
   points_count: string,
-  questions_count: string,
 }
 
 interface SurveysDataForm {
@@ -42,6 +38,7 @@ interface SurveysDataForm {
   title: string;
   description: string;
   start_datetime: string;
+  video: string;
   end_datetime: string;
   banner_picture: string;
   points: PointsData[];
@@ -204,24 +201,33 @@ const ProducerResearch: React.FC = () => {
         <Content>
           <h2>{youropinion.title}</h2>
           <p>{(` De ${formatDate(youropinion.start_datetime, 'dd/MM/yyyy')} até ${formatDate(youropinion.end_datetime, 'dd/MM/yyyy')}`)}</p>
+          {/* Adicionar os pontos respeitando o entervalo das datas*/}
           {
-            youropinion?.points?.length ? (
-              <h2>Vale {(youropinion?.points?.length && youropinion?.points[0].points_count)} Coins</h2>
-            ) : null
+            youropinion?.points?.map((item: PointsData) => {
+              if (isWithinInterval(new Date(), { start: new Date(item.start_date), end: new Date(item.end_date) })) {
+                return <h2>Vale {item.points_count} Coins</h2>
+              }
+            })
           }
         </Content>
         <ContentInfo>
           <img src={youropinion.banner_picture || 'https://www2.safras.com.br/sf-conteudo/uploads/2020/05/FMC.jpg'} alt={youropinion.title} />
           <p dangerouslySetInnerHTML={{ __html: youropinion.description }}></p>
           {/* eslint-disable-next-line  */}
-          <iframe
-            width="560"
-            height="420"
-            src={`https://www.youtube.com/embed/${videoId}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen>
-          </iframe>
+
+          {
+            youropinion?.video ? (
+              // eslint-disable-next-line
+              <iframe
+                width="560"
+                height="420"
+                src={`https://www.youtube.com/embed/${videoId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen>
+              </iframe>
+            ) : null
+          }
         </ContentInfo>
       </MiniBox>
 
