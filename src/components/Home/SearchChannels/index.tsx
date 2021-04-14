@@ -52,7 +52,6 @@ const Bainer: React.FC = () => {
           >
             {minibanner.params}
           </Link>
-          {/* <Button>{minibanner.params}</Button> */}
         </SearchParticipants>
       </Cover>
     </SearchCannel>

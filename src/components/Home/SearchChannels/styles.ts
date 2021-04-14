@@ -1,15 +1,21 @@
 import styled from 'styled-components';
+import { FONTS } from '../../../styles/font/globals';
+
 
 export const SearchCannel = styled.div`
   width: 48%;
-  border-radius: 10px;
-  box-shadow: 2px 3px 10px rgb(0 0 0 / 13%);
-  /* cursor: pointer; */
   position: relative;
-  margin-bottom: 30px;
 
   @media screen and (max-width: 320px) {
       width: 100%;
+    }
+    @media only screen and (max-width: 768px) {
+      width: 48%;
+      margin-bottom: 25px;
+    }
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      margin-bottom: 25px;
     }
 `;
 
@@ -18,62 +24,86 @@ export const Cover = styled.div`
 
   img {
    width: 100%;
-   height: 328px;
+   height: 347px;
     object-fit: cover;
     border-radius: 10px;
-    /* filter: brightness(0.7); */
     transition: filter 150ms ease;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 14%);
 
-    @media screen and (max-width: 480px) {
-      height: 120px;
-    }
-
-    @media screen and (max-width: 320px) {
-      height: 244px;
+    @media screen and (width: 768px) {
+      height: 348px;
     }
   }
-
-  &:hover {
-    img {
-      filter: brightness(1);
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    width: 100%;
-  }
+ 
 `;
 
 export const CoverText = styled.div`
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 30px;
   z-index: 2;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
 `;
 
 export const Title = styled.h2`
-  font-family: ${({ theme }) => theme.font.fontFamily.bold};
+  font-family: ${FONTS.bold};
   font-size: 1.3em;
   color: #65554D;
-
   margin-bottom: 0.3em;
 `;
 
 export const Description = styled.p`
-  font-family: ${({ theme }) => theme.font.fontFamily.medium};
-  font-size: 0.8em;
+  width: 100%;
+  max-width: 500px;
+  font-family: ${FONTS.regular};
+  font-size: 14px;
   color: #65554D;
 
+  @media only screen and (max-width: 768px) {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  @media only screen and (width: 320px) {
+    text-align: left;
+  }
 `;
 
 export const SearchParticipants = styled.div`
   position: absolute;
+  width: 100%;
   bottom: 26px;
-  left: 153px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 29%;
+  right: 29%;
+
+  @media only screen and (width: 768px) {
+    max-width: 294px;
+    left: 8%;
+    bottom: 18px;
+  }
+
+  @media only screen and (width: 1024px) {
+    left: 16%;
+    max-width: 318px;
+  }
+
+  @media only screen and (width: 1440px) {
+    width: 380px;
+    left: 21%;
+  }
+
+  @media only screen and (width: 2560px) {
+    width: 380px;
+    left: 21%;
+  }
+
 
   a {
     width:100%;
@@ -93,21 +123,20 @@ export const SearchParticipants = styled.div`
     border: none;
     transition: all 0.5s;
 
+    @media screen and (max-width: 767px) {
+      font-size: 13px;
+    }
+
     &:hover {
       filter: brightness(0.7);
       color: #fff;
     }
   }
-  @media screen and (max-width: 934px) {
-      left: 84px;
-  }
-
-  @media screen and (max-width: 768px) {
-      left: 40px;
-  }
-
-  @media screen and (max-width: 320px) {
-      left: 4px;
+  @media screen and (max-width: 767px) {
+      width: 100%;
+      left: 0%;
+      font-size: 13px;
+      padding: 0 20px;
   }
 `;
 
