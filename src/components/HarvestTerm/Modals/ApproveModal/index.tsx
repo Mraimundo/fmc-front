@@ -23,7 +23,10 @@ const ApprovalModal: React.FC<ApprovalModalProps> = ({
         </button>
       </Close>
       <Container>
-        <Title>Tem certeza que deseja aprovar esse Acordo?</Title>
+        <Title>
+          Tem certeza que deseja APROVAR <br />
+          este Termo de Safra?
+        </Title>
         <Actions>
           <Button type="button" buttonRole="primary" onClick={cancelRequest}>
             Cancelar
