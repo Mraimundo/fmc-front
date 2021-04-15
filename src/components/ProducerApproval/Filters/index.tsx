@@ -2,10 +2,16 @@ import React, { useCallback, useState } from 'react';
 
 import Input from 'components/shared/Input/BaseInput';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
+import { RiFileExcel2Line as ExcelIcon } from 'react-icons/ri';
 import { Container, Button, Title, FiltersBox } from './styles';
 
 const Filters: React.FC = () => {
-  const { applySearch, isFetching } = useFarmersContext();
+  const {
+    applySearch,
+    isFetching,
+    getExportFile,
+    exportIsFetching,
+  } = useFarmersContext();
   const [searchValue, setSearchValue] = useState('');
 
   const searchChangeHandler = useCallback(
@@ -19,9 +25,13 @@ const Filters: React.FC = () => {
     applySearch(searchValue);
   }, [applySearch, searchValue]);
 
-  const exportClickHandler = useCallback(() => {
-    alert('Funcionalidade em desenvolvimento!');
-  }, []);
+  const exportClickHandler = useCallback(async () => {
+    const url = await getExportFile();
+
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }, [getExportFile]);
 
   return (
     <Container>
@@ -40,8 +50,14 @@ const Filters: React.FC = () => {
         >
           Buscar
         </Button>
-        <Button type="button" buttonRole="primary" onClick={exportClickHandler}>
-          Exportar
+        <Button
+          type="button"
+          buttonRole="primary"
+          onClick={exportClickHandler}
+          loading={exportIsFetching}
+        >
+          <ExcelIcon color="#fff" size={36} />
+          <span>Exportar</span>
         </Button>
       </FiltersBox>
     </Container>

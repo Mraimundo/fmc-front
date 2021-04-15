@@ -57,6 +57,7 @@ const FarmerDetailsModal: React.FC<FarmerDetailsModalProps> = ({
         setFarmer(data);
       }
     };
+    setFarmer(null);
     fetchFarmer();
     setSelectedTab(Tab.personalData);
   }, [selectedFarmerId]);

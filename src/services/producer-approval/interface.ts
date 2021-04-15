@@ -1,5 +1,3 @@
-import { string } from 'yup';
-
 export interface Farmer {
   id: number;
   name: string;
@@ -7,6 +5,7 @@ export interface Farmer {
   picture: string;
   client_group: string;
   email: string;
+  area_code: string;
   cell_phone: string;
   created: string;
   request_status: string;
@@ -29,4 +28,17 @@ export interface ReproveMessage {
   message: string;
   update_date: string;
   create: string;
+}
+
+export interface Export {
+  id: number;
+  originalName: string;
+  extension: string;
+  mimeType: string;
+  path: string;
+  size: string;
+  url: string;
+  storageDisk: string;
+  hash: string;
+  dateTime: string;
 }
