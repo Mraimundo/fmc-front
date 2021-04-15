@@ -78,37 +78,21 @@ export const Description = styled.p`
 
 export const SearchParticipants = styled.div`
   position: absolute;
-  width: 100%;
+  max-width: 380px;
   bottom: 26px;
-  left: 20%;
+  left: 30%;
 
   @media only screen and (width: 768px) {
     max-width: 294px;
-    left: 8%;
+    left: 11%;
     bottom: 18px;
   }
 
-  @media  screen and (width: 1023px) {
-    left: 16%;
-    max-width: 318px;
+  @media  screen and (width: 1024px) {
+    max-width: 380px;
+    left: 22%;
   }
-
-  @media only  screen and (width: 1024px) {
-    max-width: 318px;
-    left: 16.9%;
-  }
-
-  @media only screen and (max-width: 1440px) {
-    width: 380px;
-    left: 18.7%;
-  }
-
-  @media only screen and (width: 2560px) {
-    width: 380px;
-    left: 21%;
-  }
-
-
+  
   a {
     width:100%;
     height: 36px;
@@ -143,10 +127,6 @@ export const SearchParticipants = styled.div`
       padding: 0 20px;
   }
 
-  @media screen and (width: 1414px) {
-    width: 100%;
-    left: 21%;
-  }
 `;
 
 
