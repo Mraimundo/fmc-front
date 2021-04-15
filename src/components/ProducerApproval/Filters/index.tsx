@@ -3,13 +3,16 @@ import React, { useCallback, useState } from 'react';
 import Input from 'components/shared/Input/BaseInput';
 import { useFarmersContext } from 'pages/ProducerApproval/Context';
 import { RiFileExcel2Line as ExcelIcon } from 'react-icons/ri';
-import { getExport } from 'services/producer-approval';
 import { Container, Button, Title, FiltersBox } from './styles';
 
 const Filters: React.FC = () => {
-  const { applySearch, isFetching } = useFarmersContext();
+  const {
+    applySearch,
+    isFetching,
+    getExportFile,
+    exportIsFetching,
+  } = useFarmersContext();
   const [searchValue, setSearchValue] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const searchChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,11 +26,12 @@ const Filters: React.FC = () => {
   }, [applySearch, searchValue]);
 
   const exportClickHandler = useCallback(async () => {
-    setLoading(true);
-    const url = await getExport();
-    window.open(url, '_blank');
-    setLoading(false);
-  }, []);
+    const url = await getExportFile();
+
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }, [getExportFile]);
 
   return (
     <Container>
@@ -50,7 +54,7 @@ const Filters: React.FC = () => {
           type="button"
           buttonRole="primary"
           onClick={exportClickHandler}
-          loading={loading}
+          loading={exportIsFetching}
         >
           <ExcelIcon color="#fff" size={36} />
           <span>Exportar</span>

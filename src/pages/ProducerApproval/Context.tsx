@@ -19,6 +19,7 @@ import {
   approveFarmerRequest,
   reproveFarmerRequest,
   getReproveMessage as getReproveMotive,
+  getExport,
 } from 'services/producer-approval';
 
 import { useToast } from 'context/ToastContext';
@@ -57,6 +58,8 @@ interface FarmersContextState {
   setSelectedFarmerId: (id: number) => void;
   showReproveMessage: (requestId: number) => void;
   reproveMessage: ReproveMessage | null;
+  exportIsFetching: boolean;
+  getExportFile: () => Promise<string | undefined>;
 }
 
 const FarmersContext = createContext<FarmersContextState>(
@@ -88,6 +91,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
   const [reproveMessage, setReproveMessage] = useState<ReproveMessage | null>(
     null,
   );
+  const [exportIsFetching, setExportIsFetching] = useState(false);
 
   const { addToast } = useToast();
 
@@ -118,6 +122,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
     setFilters(current => ({
       ...current,
       search,
+      page: 1,
     }));
   }, []);
 
@@ -186,6 +191,22 @@ export const FarmersProvider: React.FC = ({ children }) => {
     setSelectedFarmerRequestId(null);
   }, []);
 
+  const getExportFile = useCallback(async (): Promise<string | undefined> => {
+    try {
+      setExportIsFetching(true);
+      return await getExport(filters);
+    } catch (error) {
+      addToast({
+        title:
+          error.response?.data?.message ||
+          'Não foi posspivel baixar o relatório!',
+        type: 'error',
+      });
+    } finally {
+      setExportIsFetching(false);
+    }
+  }, [addToast, filters]);
+
   useEffect(() => {
     fetchFarmers();
   }, [fetchFarmers]);
@@ -220,6 +241,8 @@ export const FarmersProvider: React.FC = ({ children }) => {
         setSelectedFarmerId,
         showReproveMessage,
         reproveMessage,
+        exportIsFetching,
+        getExportFile,
       }}
     >
       {children}

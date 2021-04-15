@@ -37,6 +37,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     id,
     name,
     cpf,
+    area_code,
     cell_phone,
     client_group,
     created,
@@ -87,7 +88,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           <p>{client_group}</p>
           <p>{email}</p>
           <p>{cpfMask(cpf)}</p>
-          <p>{`${cellPhoneMask(cell_phone)}`}</p>
+          <p>{`(${area_code}) ${cellPhoneMask(cell_phone)}`}</p>
           <span>Cadastrado em {formatDate(created)}</span>
         </Fields>
       </Content>

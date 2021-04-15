@@ -1,13 +1,20 @@
 import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { pluginApi } from 'services/api';
 import { Participant } from 'services/auth/interfaces/Participant';
-import { Farmer, Summary, FilterOptions, ReproveMessage } from './interface';
+import {
+  Farmer,
+  Summary,
+  FilterOptions,
+  ReproveMessage,
+  Export,
+} from './interface';
 
 const FARMERS_RESOURCE = '/farmer';
 const SUMMARY_RESOURCE = '/farmer/count';
 const FARMER_APPROVE_RESOURCE = '/farmer/approve/';
 const FARMER_REJECT_RESOURCE = '/farmer/reject/';
 const FARMER_REJECT_MESSAGE_RESOURCE = '/farmer/request/id/reject-message';
+const EXPORT_RESOURCE = '/farmer/export';
 
 interface ApiResponse {
   data: Farmer[];
@@ -77,12 +84,13 @@ export const getFarmerData = async (id: number): Promise<Participant> => {
   return data;
 };
 
-export const getExport = async (): Promise<string> => {
-  return new Promise<string>(resolve => {
-    setTimeout(() => {
-      resolve(
-        'https://storage.juntosfmc.com.br/agreement_term/1597749083.5f3bb75bae8b26.39303140.pdf',
-      );
-    }, 3000);
-  });
+export const getExport = async ({
+  search,
+  status = 'waiting',
+}: FilterOptions): Promise<string> => {
+  let url = `${EXPORT_RESOURCE}?status=${status}`;
+  if (search) url += `&search=${search}`;
+  const { data } = await pluginApi.get<Export>(url);
+
+  return data.url;
 };

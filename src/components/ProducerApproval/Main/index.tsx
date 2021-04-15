@@ -40,10 +40,11 @@ const Main: React.FC = () => {
           breakLabel="..."
           breakClassName="break-me"
           pageCount={pagination.last_page}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={6}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={5}
           onPageChange={({ selected }) => setPage(selected + 1)}
           containerClassName="farmers-pagination"
+          forcePage={pagination.current_page - 1}
         />
       )}
       <ApprovalModal
