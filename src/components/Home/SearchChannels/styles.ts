@@ -80,8 +80,7 @@ export const SearchParticipants = styled.div`
   position: absolute;
   width: 100%;
   bottom: 26px;
-  left: 29%;
-  right: 29%;
+  left: 20%;
 
   @media only screen and (width: 768px) {
     max-width: 294px;
@@ -89,14 +88,19 @@ export const SearchParticipants = styled.div`
     bottom: 18px;
   }
 
-  @media only screen and (width: 1024px) {
+  @media  screen and (width: 1023px) {
     left: 16%;
     max-width: 318px;
   }
 
-  @media only screen and (width: 1440px) {
+  @media only  screen and (width: 1024px) {
+    max-width: 318px;
+    left: 16.9%;
+  }
+
+  @media only screen and (max-width: 1440px) {
     width: 380px;
-    left: 21%;
+    left: 18.7%;
   }
 
   @media only screen and (width: 2560px) {
@@ -137,6 +141,11 @@ export const SearchParticipants = styled.div`
       left: 0%;
       font-size: 13px;
       padding: 0 20px;
+  }
+
+  @media screen and (width: 1414px) {
+    width: 100%;
+    left: 21%;
   }
 `;
 
