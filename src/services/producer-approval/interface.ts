@@ -1,5 +1,3 @@
-import { number, string } from 'yup';
-
 export interface Farmer {
   id: number;
   name: string;
