@@ -62,6 +62,18 @@ const FarmerDetailsModal: React.FC<FarmerDetailsModalProps> = ({
     setSelectedTab(Tab.personalData);
   }, [selectedFarmerId]);
 
+  const nextHandleClick = useCallback(() => {
+    const currentTab = Object.keys(Tab).indexOf(selectedTab);
+    const nextTab = Object.values(Tab)[currentTab + 1];
+    setSelectedTab(nextTab);
+  }, [selectedTab]);
+
+  const previousHandleClick = useCallback(() => {
+    const currentTab = Object.keys(Tab).indexOf(selectedTab);
+    const nextTab = Object.values(Tab)[currentTab - 1];
+    setSelectedTab(nextTab);
+  }, [selectedTab]);
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} zIndex={1}>
       <CloseButton onClickHandler={onRequestClose} />
@@ -112,6 +124,26 @@ const FarmerDetailsModal: React.FC<FarmerDetailsModalProps> = ({
         {selectedTab === Tab.harvestData && (
           <HarvestData participant={farmer} />
         )}
+        <Actions>
+          {selectedTab !== Tab.personalData && (
+            <Button
+              type="button"
+              buttonRole="primary"
+              onClick={previousHandleClick}
+            >
+              Anterior
+            </Button>
+          )}
+          {selectedTab !== Tab.harvestData && (
+            <Button
+              type="button"
+              buttonRole="primary"
+              onClick={nextHandleClick}
+            >
+              Próximo
+            </Button>
+          )}
+        </Actions>
       </Container>
     </Modal>
   );
