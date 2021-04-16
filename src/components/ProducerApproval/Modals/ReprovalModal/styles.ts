@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import DefaultModal from 'components/shared/Modal';
-import BaseTextArea from 'components/shared/TextArea/BaseTextArea';
+import BaseTextArea from 'components/shared/TextArea';
 import { Title as DefaultTitle } from '../shared/styles';
 
 export const Container = styled.div`
@@ -28,7 +28,7 @@ export const TextArea = styled(BaseTextArea)`
 
   ._inputContainer {
     width: 100%;
-    height: 100%;
+    min-height: 230px;
   }
   span {
     color: ${({ theme }) => theme.font.color.primary};

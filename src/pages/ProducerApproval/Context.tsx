@@ -192,9 +192,10 @@ export const FarmersProvider: React.FC = ({ children }) => {
   }, []);
 
   const getExportFile = useCallback(async (): Promise<string | undefined> => {
+    let result: string | undefined;
     try {
       setExportIsFetching(true);
-      return await getExport(filters);
+      result = await getExport(filters);
     } catch (error) {
       addToast({
         title:
@@ -205,6 +206,7 @@ export const FarmersProvider: React.FC = ({ children }) => {
     } finally {
       setExportIsFetching(false);
     }
+    return result;
   }, [addToast, filters]);
 
   useEffect(() => {
