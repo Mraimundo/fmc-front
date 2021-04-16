@@ -68,7 +68,6 @@ const PointsSimulator: React.FC = () => {
   }, [isLoadSimulatioModalOpened]);
 
   useEffect(() => {
-    console.log('MOUNT SIMULATOR', coinsQuotation);
     const dollarValue = fixedPrecisionOf(
       coinsQuotation?.find(
         item => item.name === 'Dólar Americano/Real Brasileiro',
