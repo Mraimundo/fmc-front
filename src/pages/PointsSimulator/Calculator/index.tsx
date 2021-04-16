@@ -69,7 +69,9 @@ const PointsSimulator: React.FC = () => {
 
   useEffect(() => {
     const dollarValue = fixedPrecisionOf(
-      coinsQuotation?.find(item => item.name === 'Dólar Comercial')?.value || 0,
+      coinsQuotation?.find(
+        item => item.name === 'Dólar Americano/Real Brasileiro',
+      )?.value || 0,
       2,
     );
     dispatch(actions.setDollarBaseValue(dollarValue));
