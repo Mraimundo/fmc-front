@@ -6,7 +6,6 @@ import { formatDate } from 'util/datetime';
 import { pluginApi } from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-import StarButtonLine from '../../../components/SearchForms/SeeAnswers/LinearScale';
 import MultipleLinearScale from '../../../components/SearchForms/SeeAnswers/MultipleLinearScale';
 import InputCheckBox from '../../../components/SearchForms/SeeAnswers/InputCheckBox';
 import InputGridCheckBox from '../../../components/SearchForms/SeeAnswers/InputGridCheckBox';
@@ -17,6 +16,10 @@ import InputDate from '../../../components/SearchForms/SeeAnswers/InputDate';
 import InputTime from '../../../components/SearchForms/SeeAnswers/InputTime';
 import DropDownList from '../../../components/SearchForms/SeeAnswers/DropDownList';
 
+import TipeStar from '../../../components/SearchForms/AnswerSurvey/LinearScal/TypeStar';
+import TypeCheckBox from '../../../components/SearchForms/SeeAnswers/LinearScal/TypeCheckBox';
+import TypeRadio from '../../../components/SearchForms/SeeAnswers/LinearScal/TypeRadio';
+import TypeEmoji from '../../../components/SearchForms/SeeAnswers/LinearScal/TypeEmoji';
 
 import {
   Container,
@@ -70,6 +73,7 @@ interface QuestionsData {
   id: number;
   question: string;
   type: string;
+  scale_type?: number;
   answer: string;
   survey_question_answers: AnswersData[];
 }
@@ -97,6 +101,7 @@ const ProducerResearch: React.FC = () => {
     answers: AnswersData[],
     id?: number,
     answer_id?: number,
+    scale_type?: number | null,
   ) => {
     switch (type) {
       case 2: {
@@ -109,14 +114,44 @@ const ProducerResearch: React.FC = () => {
         )
       }
       case 1: {
-        return (
-          <StarButtonLine
-            quetion={question}
-            answers={answers}
-            id={id}
-          />
-        )
+        if (scale_type === 1) {
+          return (
+            <TipeStar
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 2) {
+          return (
+            <TypeCheckBox
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 3) {
+          return (
+            <TypeRadio
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
+        if (scale_type === 4) {
+          return (
+            <TypeEmoji
+              quetion={question}
+              answers={answers}
+              id={id}
+            />
+          )
+        }
       }
+      // eslint-disable-next-line
       case 3: {
         return (
           <InputRadios
@@ -238,7 +273,7 @@ const ProducerResearch: React.FC = () => {
       <Form>
         {
           questions.map(question => (
-            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id, question.survey_question_answers[0]?.id)
+            typeForm(Number(question.type), question.question, question.survey_question_answers, question.id, question.survey_question_answers[0]?.id, question.scale_type)
           ))
         }
       </Form>

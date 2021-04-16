@@ -3,7 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
-import { setValueAnswer } from '../../../../state/modules/answer/actions';
+import { setValueAnswer } from '../../../../../state/modules/answer/actions';
 
 import {
   Container,
@@ -21,9 +21,10 @@ interface props {
   quetion: string;
   answers: AnswersData[];
   id?: number | undefined,
+  scale_type?: number | null;
 }
 
-const MultipleLinearScale: React.FC<props> = ({ quetion, answers, id }) => {
+const LinearScale: React.FC<props> = ({ quetion, answers, id, }) => {
   const dispatch = useDispatch();
   const [currentAnswer, setCurrentAnswer] = useState(0);
 
@@ -33,16 +34,16 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers, id }) => {
       <div>
         {
           answers.map((answer, index, elements) => (
+
             <Box key={answer.id} component="fieldset" mb={3} borderColor="transparent">
               <Typography component="legend">{answer.answer}</Typography>
               <Rating
                 name={answer.id.toString()}
+                onMouseOver={() => setCurrentAnswer(index + 1)}
                 max={1}
                 size="large"
-                onMouseOver={() => setCurrentAnswer(index + 1)}
                 onClick={() => {
                   setCurrentAnswer(index + 1);
-
                   dispatch(setValueAnswer({
                     value: index + 1,
                     id: Number(id),
@@ -59,4 +60,4 @@ const MultipleLinearScale: React.FC<props> = ({ quetion, answers, id }) => {
   );
 };
 
-export default MultipleLinearScale;
+export default LinearScale;
