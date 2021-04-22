@@ -11,7 +11,7 @@ export const getHarvestLabel = (key: string): string => {
     case 'batata':
       return 'Batata';
     case 'cafe':
-      return 'Cafe';
+      return 'Café';
     case 'cana':
       return 'Cana';
     case 'cenoura':
