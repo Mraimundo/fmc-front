@@ -29,7 +29,9 @@ const Filters: React.FC = () => {
     const url = await getExportFile();
 
     if (url) {
-      window.open(url, '_blank');
+      const link = document.createElement('a');
+      link.href = url;
+      link.click();
     }
   }, [getExportFile]);
 
