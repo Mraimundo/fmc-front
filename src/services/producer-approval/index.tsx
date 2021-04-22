@@ -2,7 +2,6 @@ import { Pagination } from 'config/constants/vendavallPaginationInterface';
 import { pluginApi } from 'services/api';
 import { Participant } from 'services/auth/interfaces/Participant';
 import forceDownload from 'services/storage/getUrlToForceDownload';
-import { formatDate } from 'util/datetime';
 import {
   Farmer,
   Summary,
@@ -10,6 +9,7 @@ import {
   ReproveMessage,
   Export,
 } from './interface';
+import { buildFileName } from './utils';
 
 const FARMERS_RESOURCE = '/farmer';
 const SUMMARY_RESOURCE = '/farmer/count';
@@ -17,7 +17,6 @@ const FARMER_APPROVE_RESOURCE = '/farmer/approve/';
 const FARMER_REJECT_RESOURCE = '/farmer/reject/';
 const FARMER_REJECT_MESSAGE_RESOURCE = '/farmer/request/id/reject-message';
 const EXPORT_RESOURCE = '/farmer/export';
-const EXPORT_FILE_NAME = 'aprovacao-de-cadastros';
 
 interface ApiResponse {
   data: Farmer[];
@@ -93,13 +92,12 @@ export const getExport = async ({
 }: FilterOptions): Promise<string> => {
   let apiUrl = `${EXPORT_RESOURCE}?status=${status}`;
   if (search) apiUrl += `&search=${search}`;
+
   const {
     data: { url },
   } = await pluginApi.get<Export>(apiUrl);
 
-  const filename = `${EXPORT_FILE_NAME}-${formatDate(
-    new Date(),
-    'yyyy-MM-dd-HH:mm:ss',
-  )}.xlsx`;
+  const filename = buildFileName(status);
+
   return forceDownload({ filename, url });
 };
