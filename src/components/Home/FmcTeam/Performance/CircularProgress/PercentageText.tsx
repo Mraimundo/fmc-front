@@ -14,7 +14,7 @@ const PercentageText: React.FC<PercentageTextProps> = ({ percent }) => {
     <PercentTextStyledWrapper>
       <div>
         <RealizedText>Realizado:</RealizedText>
-        <PercentageNumber>{percent}%</PercentageNumber>
+        <PercentageNumber>{percent.toFixed(0)}%</PercentageNumber>
       </div>
     </PercentTextStyledWrapper>
   );

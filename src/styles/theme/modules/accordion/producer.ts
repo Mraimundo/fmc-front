@@ -8,7 +8,7 @@ export default {
     borderColor: '#312e38',
   },
   secondary: {
-    fontColor: '#3B302A',
+    fontColor: '#808285',
     closeIconColor: '#fff',
     openIconColor: '#65554D',
     backgroundOpenIconColor: '#D0CBC9',

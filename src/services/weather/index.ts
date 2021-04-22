@@ -2,6 +2,7 @@ import axios from 'axios';
 import { formatDate, extractHourFromDate, getDayName } from 'util/datetime';
 import { formatPoints } from 'util/points';
 import { CityCoordinates, Weather } from 'state/modules/weather/types';
+import { pluginApi } from 'services/api';
 import { City, CityApi, CityCoordinatesApi, WeatherApi } from './interfaces';
 
 export const getCitiesByName = async (containName: string): Promise<City[]> => {
@@ -102,4 +103,50 @@ export const getWeatherByCityCoordinates = async (
       }))
       .slice(1),
   };
+};
+
+export const saveCity = async (city: CityCoordinatesApi): Promise<boolean> => {
+  const request = {
+    city: city.name,
+    latitude: city.lat,
+    longitude: city.lon,
+  };
+
+  try {
+    await pluginApi.post('custom-climate-locations/add', request);
+  } catch {
+    return false;
+  }
+
+  return true;
+};
+
+interface CitiesResponse {
+  data: {
+    city: string;
+    id: number;
+    latitude: number;
+    longitude: number;
+  }[];
+}
+
+export const loadCities = async (): Promise<CityCoordinatesApi[]> => {
+  const {
+    data: { data },
+  } = await pluginApi.get<CitiesResponse>('custom-climate-locations');
+  return data.map(item => ({
+    id: item.id,
+    lat: item.latitude,
+    lon: item.longitude,
+    name: item.city,
+  }));
+};
+
+export const removeCity = async (id: number): Promise<boolean> => {
+  try {
+    await pluginApi.delete(`custom-climate-locations/remove/${id}`);
+  } catch {
+    return false;
+  }
+  return true;
 };

@@ -8,11 +8,11 @@ export default {
     borderColor: '#312e38',
   },
   secondary: {
-    fontColor: '#312e38',
+    fontColor: '#808285',
     closeIconColor: '#d7d8da',
-    openIconColor: '#2a4207',
+    openIconColor: '#821C0E',
     backgroundOpenIconColor: '#d7d8da',
-    backgroundCloseIconColor: '#2a4207',
+    backgroundCloseIconColor: '#821C0E',
     borderColor: '#312e38',
   },
 };
