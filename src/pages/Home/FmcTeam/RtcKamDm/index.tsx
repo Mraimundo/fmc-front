@@ -42,7 +42,12 @@ import Performance from 'components/Home/FmcTeam/Performance';
 import CoinQuotation from 'components/Header/CoinQuotation';
 
 import { City } from 'services/weather/interfaces';
-import { getCityCoordinatesByName } from 'services/weather';
+import {
+  getCityCoordinatesByName,
+  loadCities,
+  removeCity,
+  saveCity,
+} from 'services/weather';
 import CitySelect from 'components/Weather/Selects/Cities';
 import WeatherWidget from 'components/Weather/Widget';
 import { useToast } from 'context/ToastContext';
@@ -102,7 +107,16 @@ const DefaultHome: React.FC = () => {
     dispatch(fetchBells());
     dispatch(fetchRanking());
     dispatch(fetchPerformance());
-    setCities([{ id: 0, name: 'londrina' }]);
+    loadCities().then(data => {
+      setCities(
+        data
+          .filter(item => item.id)
+          .map(item => ({
+            id: item.id as number,
+            name: item.name,
+          })),
+      );
+    });
   }, [dispatch, participant.id]);
 
   const handleCitySelect = useCallback(
@@ -121,6 +135,8 @@ const DefaultHome: React.FC = () => {
         ...oldCities.filter(item => item.name !== _city.name),
         _city,
       ]);
+
+      saveCity({ name: _city.name, lat: -1, lon: -1 });
 
       setTimeout(() => {
         setCitySelect(null);
@@ -145,7 +161,13 @@ const DefaultHome: React.FC = () => {
   }, [dispatch, cities]);
 
   const handleRemoveCity = useCallback((cityName: string) => {
-    setCities(oldCities => oldCities.filter(item => item.name === cityName));
+    setCities(oldCities => {
+      const internalCity = oldCities.find(item => item.name === cityName);
+      if (internalCity) {
+        removeCity(internalCity.id);
+      }
+      return oldCities.filter(item => item.name !== cityName);
+    });
   }, []);
 
   const [showCitySelection, setShowCitySelection] = useState(false);
