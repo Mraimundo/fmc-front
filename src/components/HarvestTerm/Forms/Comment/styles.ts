@@ -19,7 +19,6 @@ export const TextArea = styled(BaseTextArea)`
   width: 100%;
   ._inputContainer {
     width: 100%;
-    //max-width: 500px;
     height: 100px;
   }
 `;

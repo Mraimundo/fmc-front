@@ -15,7 +15,7 @@ export const Box = styled.div<BoxProps>`
   width: calc(100% / 6);
   height: 40px;
   border: 2px solid ${({ theme }) => theme.font.color.quartenary};
-  opacity: 0.30;
+  opacity: 0.3;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -26,42 +26,7 @@ export const Box = styled.div<BoxProps>`
 
   & + div {
     margin-left: 7px;
-    //border-left-color: transparent;
   }
-
-  /*&::before {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 2px solid ${({ theme }) => theme.font.color.quartenary};
-    top: 50%;
-    transform: translateY(-50%) rotateZ(45deg);
-    right: -9px;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    height: 17px;
-    border-right: 2px solid #fff;
-    top: 50%;
-    right: -2px;
-    transform: translateY(-50%);
-  }*/
-
-  /*&:last-child {
-    &::after {
-      display: none;
-    }
-
-    &::before {
-      display: none;
-    }
-  }*/
 
   ${({ selected, theme }) =>
     selected &&
