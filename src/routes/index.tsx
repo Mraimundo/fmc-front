@@ -30,6 +30,7 @@ import Receipts from './modules/receipts';
 import CatalogoPi from './modules/catalogo-pi';
 
 import PointsSimulator from './modules/points-simulator';
+import HarvestTerm from './modules/harvest-term';
 import FlyingHighPublic from './modules/flying-high';
 
 import Route from './route';
@@ -62,6 +63,7 @@ const routesArray: RouteModule[][] = [
   QrCode,
   Receipts,
   CatalogoPi,
+  HarvestTerm,
   FlyingHighPublic,
 ];
 
