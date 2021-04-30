@@ -7,34 +7,39 @@ import {
   fetchBanners,
   fetchHighlights,
   fetchShowcase,
-  // fetchLuckyNumber,
+  fetchLuckyNumber,
 } from 'state/modules/home/actions';
 import {
   getBanners,
   getHighlights,
   getShowcaseProducts,
-  // getLuckyNumber,
+  getLuckyNumber,
 } from 'state/modules/home/selectors';
 import { getCoinQuotations } from 'state/modules/header/selectors';
 import { Banners, Title, Highlights, Showcase, AddNF } from 'components/Home';
 import IndicatorProducer from 'components/Home/IndicateProducer';
 import SearchChannels from 'components/Home/SearchChannels';
 
-
 import CoinQuotation from 'components/Header/CoinQuotation';
-// import FlyingHigh from 'components/Home/FlyingHigh';
-import { Wrapper, IndicateWrapper, IndicateContent, ShowCaseWrapper, HomeWrapper } from './styles';
+import FlyingHigh from 'components/Home/FlyingHigh';
+import {
+  Wrapper,
+  IndicateWrapper,
+  IndicateContent,
+  ShowCaseWrapper,
+  HomeWrapper,
+} from './styles';
 
 const FmcProdutorHome: React.FC = () => {
   const dispatch = useDispatch();
   const coinQuotations = useSelector(getCoinQuotations);
   const { participant, simulating } = useAuth();
 
-  const [banners, highlights, products] = [
+  const [banners, highlights, products, luckyNumber] = [
     useSelector(getBanners),
     useSelector(getHighlights),
     useSelector(getShowcaseProducts),
-    // useSelector(getLuckyNumber),
+    useSelector(getLuckyNumber),
   ];
 
   useEffect(() => {
@@ -43,7 +48,7 @@ const FmcProdutorHome: React.FC = () => {
     dispatch(fetchBanners());
     dispatch(fetchHighlights());
     dispatch(fetchShowcase(participant.id));
-    // dispatch(fetchLuckyNumber());
+    dispatch(fetchLuckyNumber());
   }, [dispatch, participant.id]);
 
   return (
@@ -54,11 +59,11 @@ const FmcProdutorHome: React.FC = () => {
       <Hidden xs sm>
         {!!banners && <Banners items={banners} />}
       </Hidden>
-      {/* !!luckyNumber && (
+      {luckyNumber && (
         <Wrapper>
           <FlyingHigh />
         </Wrapper>
-      ) */}
+      )}
       <Wrapper>
         <AddNF />
       </Wrapper>
