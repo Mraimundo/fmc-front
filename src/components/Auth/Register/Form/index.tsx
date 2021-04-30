@@ -55,7 +55,6 @@ const Form: React.FC<Props> = ({
 
   useEffect(() => {
     const indicatorCodeFromUrl = location.search.replace('?code=', '');
-
     if (indicatorCodeFromUrl) {
       setIndicatorCode(indicatorCodeFromUrl);
     }
@@ -161,7 +160,6 @@ const Form: React.FC<Props> = ({
   */
   const onSubmit = handleSubmit(async data => {
     setLoading(true);
-
     await saveParticipant({
       ...data,
       get_to_know: data?.get_to_know_select?.value || '',

@@ -3,6 +3,7 @@ export default {
   campaignManagement: '/gerenciamento-de-campanhas',
   campaignCounting: '/apuracao-de-campanhas',
   contact: '/fale-conosco',
+  producerExtract: '/produtor-extrato',
   extract: {
     my: '/myextract',
     channel: '/extrato-canal',
@@ -10,6 +11,7 @@ export default {
   faq: '/faq',
   gallery: '/bibliotecas-juntos',
   goal: '/performance',
+  home: '/home',
   howParticipate: '/como-participar',
   news: '/noticias',
   participantsIndication: '/indicacao-de-participantes',
@@ -17,6 +19,11 @@ export default {
   pointManagement: '/distribuicao-de-pontos',
   products: '/solucoes',
   producer: '/indicar-produtor',
+  research: '/pesquisas-produtor',
+  InternalPage: {
+    questions: '/responder-pesquisa',
+    answers: '/ver-respostas',
+  },
   profile: '/editar-perfil',
   regulation: '/regulamentos-e-termos',
   showcase: '/catalogo-de-premios',
@@ -33,4 +40,5 @@ export default {
   receipts: '/extrato-notas',
   harvestTerm: '/termo-de-safra',
   flyingHigh: '/voandoalto',
+  producerApproval: '/aprovacao-de-produtores',
 };

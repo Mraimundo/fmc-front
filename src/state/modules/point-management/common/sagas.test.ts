@@ -39,6 +39,9 @@ import mainSaga, {
   workerFinishedDistribution,
   cleanResaleCooperative,
   cleanTeamAwards,
+  workerSavePartialDistribution,
+  workerSetDistributionWithSavedSettings,
+  workerCleanDistributionState,
 } from './sagas';
 import {
   establishments,
@@ -575,6 +578,18 @@ describe('src/state/modules/point-management/common/sagas', () => {
         takeEvery(
           constants.SET_FINISHED_DISTRIBUTION,
           workerFinishedDistribution,
+        ),
+        takeEvery(
+          constants.SAVE_PARTIAL_DISTRIBUTION_ACTION,
+          workerSavePartialDistribution,
+        ),
+        takeEvery(
+          constants.SET_DISTRIBUTION_WITH_SAVED_SETTINGS,
+          workerSetDistributionWithSavedSettings,
+        ),
+        takeEvery(
+          constants.CLEAN_DISTRIBUTION_STATE,
+          workerCleanDistributionState,
         ),
       ])
       .finish()

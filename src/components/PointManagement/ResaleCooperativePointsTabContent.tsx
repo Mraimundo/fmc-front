@@ -19,6 +19,7 @@ import {
   setMarketplacePoints,
   setInvoicePoints,
 } from 'state/modules/point-management/resale-cooperative/actions';
+import { getAvailableScore } from 'state/modules/point-management/team-awards/selectors';
 
 import ResaleCooperativeResume from './ResaleCooperativeResume';
 import Congrats from './ResaleCooperativeResume/Congrats';
@@ -28,9 +29,11 @@ import { WrapperPoints, RescueResaleCooperativeButton } from './styles';
 
 interface ResaleCooperativePointsTabContentProps {
   establishmentType: EstablishmentTypes;
+  onClickRescue?: () => void;
 }
 const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabContentProps> = ({
   establishmentType,
+  onClickRescue,
 }) => {
   const [
     totalPointsResaleCooperative,
@@ -40,6 +43,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     isEnabledToRescue,
     finishedDistribution,
     pointsToDistribute,
+    availableScore,
   ] = [
     useSelector(getTotalPointsResaleCooperative),
     useSelector(getMarketplacePoints),
@@ -48,6 +52,7 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
     useSelector(getIsEnabledToRescue),
     useSelector(getFinishedDistribution),
     useSelector(getPointsToDistribute),
+    useSelector(getAvailableScore),
   ];
 
   const dispatch = useDispatch();
@@ -69,8 +74,14 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
   const maxLengthInvoicePoints = useMemo<number>(() => {
     if (!maxInvoicePercentage || !totalPointsResaleCooperative) return 0;
 
-    return totalPointsResaleCooperative * (maxInvoicePercentage / 100);
-  }, [maxInvoicePercentage, totalPointsResaleCooperative]);
+    const maxPercentVaule =
+      totalPointsResaleCooperative * (maxInvoicePercentage / 100);
+    const maxInvoiceValue = totalPointsResaleCooperative - marketplacePoints;
+
+    if (maxInvoiceValue < maxPercentVaule) return maxInvoiceValue;
+
+    return maxPercentVaule;
+  }, [marketplacePoints, maxInvoicePercentage, totalPointsResaleCooperative]);
 
   const partialDistribution = pointsToDistribute.allowPartialDistribution
     ? FinishedDistributionPossibilities.Rc
@@ -78,6 +89,15 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
 
   const { Rc, All } = FinishedDistributionPossibilities;
   const isFinished = finishedDistribution === (Rc || All);
+
+  const handleRescueClick = useCallback(() => {
+    if (onClickRescue && availableScore > 0) {
+      onClickRescue();
+      return;
+    }
+
+    dispatch(distributePoints(partialDistribution));
+  }, [availableScore, dispatch, onClickRescue, partialDistribution]);
 
   return (
     <div>
@@ -121,9 +141,9 @@ const ResaleCooperativePointsTabContent: React.FC<ResaleCooperativePointsTabCont
           buttonRole="tertiary"
           type="button"
           disabled={!isEnabledToRescue}
-          onClick={() => dispatch(distributePoints(partialDistribution))}
+          onClick={handleRescueClick}
         >
-          RESGATAR PREMIAÇÃO
+          {availableScore > 0 ? 'CONTINUAR DISTRIBUIÇÃO' : 'RESGATAR PREMIAÇÃO'}
         </RescueResaleCooperativeButton>
       )}
     </div>

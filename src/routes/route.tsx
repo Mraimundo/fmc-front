@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from 'pages/_layouts';
 import {
   RouteProps as DefaultRouteProps,
@@ -25,9 +25,11 @@ const Route: React.FC<RouteProps> = ({
 }) => {
   const { signed, loading } = useAuth();
 
-  if (accessPage) {
-    RegisterAccessLog(accessPage);
-  }
+  useEffect(() => {
+    if (accessPage) {
+      RegisterAccessLog(accessPage);
+    }
+  }, [accessPage]);
 
   if (special) {
     return <DefaultRoute {...rest} render={() => <Component />} />;

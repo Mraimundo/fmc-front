@@ -10,6 +10,10 @@ interface ConstructPointsToDistribute {
   resaleCooperativePoints?: number;
   resaleCooperativePointId?: number;
   resaleCooperativeMaxInvoicePercentage?: number;
+  savedSetttig?: {
+    data?: any;
+    date?: string;
+  };
 }
 export const constructPointsToDistribute = (
   params: ConstructPointsToDistribute,
@@ -28,6 +32,12 @@ export const constructPointsToDistribute = (
     maxInvoicePercentage: params.resaleCooperativeMaxInvoicePercentage || 0,
   },
   allowPartialDistribution: true,
+  savedSetting: {
+    data: params?.savedSetttig?.data
+      ? JSON.parse(params?.savedSetttig?.data)
+      : '',
+    date: params?.savedSetttig?.date || '',
+  },
 });
 
 export const sellerAward = (

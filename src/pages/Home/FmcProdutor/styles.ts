@@ -7,6 +7,24 @@ export const Wrapper = styled.div`
   padding: 1em 1.5em 2em 1.5em;
 `;
 
+export const IndicateWrapper = styled.div`
+  width: 100%; 
+`;
+
+export const IndicateContent = styled.div`
+  padding:0 20px 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+`;
+
+
 export const ShowCaseWrapper = styled.div`
   background: linear-gradient(
     to right,

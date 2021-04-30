@@ -12,7 +12,6 @@ interface TextProps {
   diminacType: string;
 }
 
-
 export const Container = styled.div<ColorProps>`
   width: 100%;
 
@@ -21,18 +20,26 @@ export const Container = styled.div<ColorProps>`
     background-position: center;
     height: 463px;
 
-    ${(props) => props.colorType === 'verde' && css`
-      background-image: url(${bannerVerde});
-    `}
-    ${(props) => props.colorType === 'azul' && css`
-      background-image: url(${bannerAzul});
-    `}
-    ${(props) => props.colorType === 'marron' && css`
-      background-image: url(${bannerMarron});
-    `}
-    ${(props) => props.colorType === 'cinza' && css`
-      background-image: url(${bannerCinza});
-    `}
+    ${props =>
+      props.colorType === 'verde' &&
+      css`
+        background-image: url(${bannerVerde});
+      `}
+    ${props =>
+      props.colorType === 'azul' &&
+      css`
+        background-image: url(${bannerAzul});
+      `}
+    ${props =>
+      props.colorType === 'marron' &&
+      css`
+        background-image: url(${bannerMarron});
+      `}
+    ${props =>
+      props.colorType === 'cinza' &&
+      css`
+        background-image: url(${bannerCinza});
+      `}
   }
 
   .content-group {
@@ -58,25 +65,25 @@ export const Container = styled.div<ColorProps>`
 
   main{
     width: 100%;
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     margin-top:160px;
     padding:0 150px 0 120px;
-  } 
+  }
 
   .bainer-guidance {
-    display: flex; 
+    display: flex;
     align-items: flex-start;
     margin-bottom: 16px;
-  } 
+  }
 
-  
+
   .bainer-info__children {
     margin-top: 24px;
   }
 
   .bainer-info__children h3 {
-    font-family: ${({ theme }) => theme.font.fontFamily.bold};  
+    font-family: ${({ theme }) => theme.font.fontFamily.bold};
     font-size: 18px;
     color: #fff;
     margin-left: 25px;
@@ -107,7 +114,7 @@ export const Container = styled.div<ColorProps>`
 
   .color-content {
     position: absolute;
-    background-color: #C5CFD4; 
+    background-color: #C5CFD4;
     width: 380px;
     height: 12px;
     bottom: 0;
@@ -120,18 +127,18 @@ export const Container = styled.div<ColorProps>`
     position: absolute;
     top: 0;
     right: 0;
-    width: 380px; 
+    width: 380px;
     height: 30px;
     padding: 10px 10px;
     text-align: center;
-    background-color: #C5CFD4; 
+    background-color: #C5CFD4;
     font-size: 16px;
     font-weight: 18px;
     color: ${({ theme }) => theme.font.color.primary};
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
-  
+
   .indicator-code div:nth-child(2) .register-group h2{
     font-size: 14px;
     color: ${({ theme }) => theme.font.color.primary};
@@ -156,7 +163,7 @@ export const Container = styled.div<ColorProps>`
     margin-top: 12px;
     border: none;
     transition: 0.5s;
-  } 
+  }
 
   .indicator-code div:nth-child(2) button:hover {
     opacity: 0.9;
@@ -165,22 +172,26 @@ export const Container = styled.div<ColorProps>`
 `;
 
 export const TextType = styled.h4<TextProps>`
-    ${(props) => props.diminacType === 'cooperados' && css`
-    width: 283px;
-    font-family: ${({ theme }) => theme.font.fontFamily.regular};
-    color: #fff;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 18px;
-    margin-left: 8px;
+  ${props =>
+    props.diminacType === 'cooperados' &&
+    css`
+      width: 283px;
+      font-family: ${({ theme }) => theme.font.fontFamily.regular};
+      color: #fff;
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 18px;
+      margin-left: 8px;
     `}
-    ${(props) => props.diminacType === 'clientes' && css`
-    width: 283px;
-    font-family: ${({ theme }) => theme.font.fontFamily.regular};
-    color: #fff;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 18px;
-    margin-left: 8px;
-    `}  
+  ${props =>
+    props.diminacType === 'clientes' &&
+    css`
+      width: 283px;
+      font-family: ${({ theme }) => theme.font.fontFamily.regular};
+      color: #fff;
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 18px;
+      margin-left: 8px;
+    `}
 `;

@@ -1,4 +1,5 @@
-import { createStore, compose, applyMiddleware, Middleware } from 'redux';
+import { createStore, applyMiddleware, Middleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
 
@@ -23,7 +24,8 @@ if (env.loggerDebug) {
 
 const store = createStore(
   rootReducer,
-  compose(applyMiddleware(...middlewares)),
+  composeWithDevTools(applyMiddleware(...middlewares)),
+  // compose(applyMiddleware(...middlewares)),
 );
 
 sagaMiddleware.run(rootSaga);

@@ -18,8 +18,14 @@ import {
   DISTRIBUTE_POINTS_FINALLY_ACTION,
   DISTRIBUTE_POINTS_FAILURE,
   DISTRIBUTE_POINTS_SUCCESS,
+  DISTRIBUTE_POINTS_CANCEL,
   SET_FINISHED_DISTRIBUTION,
   FinishedDistributionPossibilities,
+  SAVE_PARTIAL_DISTRIBUTION_ACTION,
+  SAVE_PARTIAL_DISTRIBUTION_SUCCESS,
+  SAVE_PARTIAL_DISTRIBUTION_FAILURE,
+  SAVE_PARTIAL_DISTRIBUTION_FINISH,
+  SET_DISTRIBUTION_EMPTY_STATE,
 } from './constants';
 import { PointsToDistribute, Establishment } from './types';
 
@@ -28,6 +34,10 @@ export const emptyPointsToDistribute: PointsToDistribute = {
   generalPointId: null,
   resaleCooperative: null,
   teamAwards: null,
+  savedSetting: {
+    data: null,
+    date: '',
+  },
 };
 
 export type CommonState = {
@@ -41,6 +51,8 @@ export type CommonState = {
   establishments: Establishment[] | null;
   selectedEstablishment: Establishment | null;
   finishedDistribution: FinishedDistributionPossibilities | null;
+  partialDistribution: FetchState;
+  partialDistributionFinished: boolean;
 };
 
 export const initialState: CommonState = {
@@ -54,6 +66,8 @@ export const initialState: CommonState = {
   establishments: null,
   selectedEstablishment: null,
   finishedDistribution: null,
+  partialDistribution: emptyFetchState,
+  partialDistributionFinished: false,
 };
 
 const commonReducer: Reducer<CommonState, CommonActions> = (
@@ -122,11 +136,31 @@ const commonReducer: Reducer<CommonState, CommonActions> = (
       return { ...state, distributePoints: fetchErrorState(action) };
     case DISTRIBUTE_POINTS_SUCCESS:
       return { ...state, distributePoints: emptyFetchState };
+    case DISTRIBUTE_POINTS_CANCEL:
+      return { ...state, distributePoints: { isFetching: false } };
 
     case SET_FINISHED_DISTRIBUTION:
       return {
         ...state,
         finishedDistribution: action.payload.finishedDistribution,
+      };
+
+    case SAVE_PARTIAL_DISTRIBUTION_ACTION:
+      return { ...state, partialDistribution: fetchingState };
+    case SAVE_PARTIAL_DISTRIBUTION_SUCCESS:
+      return {
+        ...state,
+        partialDistributionFinished: true,
+        partialDistribution: emptyFetchState,
+      };
+    case SAVE_PARTIAL_DISTRIBUTION_FAILURE:
+      return { ...state, partialDistribution: fetchErrorState(action) };
+    case SAVE_PARTIAL_DISTRIBUTION_FINISH:
+      return { ...state, partialDistributionFinished: false };
+
+    case SET_DISTRIBUTION_EMPTY_STATE:
+      return {
+        ...initialState,
       };
 
     default:

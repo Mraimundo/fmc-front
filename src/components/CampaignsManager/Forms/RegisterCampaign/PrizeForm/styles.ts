@@ -20,6 +20,10 @@ export const Header = styled.div`
   width: 100%;
   align-items: center;
 
+  svg path {
+    fill: ${({ theme }) => theme.font.color.primary};
+  }
+
   > h4 {
     font-size: 21px;
     font-family: ${({ theme }) => theme.font.fontFamily.bold};

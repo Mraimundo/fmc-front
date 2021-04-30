@@ -38,6 +38,8 @@ import {
   REMOVE_ALL_SCORES,
   SET_TOTAL_PARTICIPANTS,
   TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS,
+  SET_WAITING_SCORED_PARTICIPANTS,
+  SET_TEAM_AWARDS_EMPTY_STATE,
 } from './constants';
 import {
   toggleRoleSelection,
@@ -282,6 +284,17 @@ const teamAwardsReducer: Reducer<TeamAwardsState, TeamAwardsActions> = (
       return {
         ...state,
         isOpenModalMissingParticipants: !state.isOpenModalMissingParticipants,
+      };
+
+    case SET_WAITING_SCORED_PARTICIPANTS:
+      return {
+        ...state,
+        waitingScoredParticipants: action.payload.waitingScoredParticipants,
+      };
+
+    case SET_TEAM_AWARDS_EMPTY_STATE:
+      return {
+        ...initialState,
       };
 
     default:

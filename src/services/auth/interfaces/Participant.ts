@@ -123,10 +123,10 @@ export interface Participant {
   medium: string;
   only_farm: boolean;
   user_farm_agree: boolean;
+  indicator_code_used: string;
 
   // Producers
   producer_group_name: string;
-  indicator_code_used?: string;
   members_group: MemberGroup[];
   harvest: Harvest;
   registration_origin?: string;

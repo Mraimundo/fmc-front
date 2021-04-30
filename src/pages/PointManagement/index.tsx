@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from 'react-grid-system';
 import { Tab, TabPanel } from 'react-tabs';
@@ -8,6 +8,9 @@ import {
   fetchEstablishments,
   setSelectedEstablishment,
   distributePointsFinally,
+  setDistributionWithSavedSettings,
+  cleanDistributionState,
+  distributePointsCancel,
 } from 'state/modules/point-management/common/actions';
 import * as selectors from 'state/modules/point-management/common/selectors';
 import {
@@ -24,6 +27,8 @@ import {
   EstablishmentSelection,
 } from 'components/PointManagement';
 import ModalMissingParticipants from 'components/PointManagement/ModalMissingParticipants';
+import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
+import history from 'services/history';
 import {
   Wrapper,
   Panel,
@@ -35,9 +40,9 @@ import {
   ResumeCol,
   ParticipantsCol,
 } from './styles';
-import { FinishedDistributionPossibilities } from 'state/modules/point-management/common/constants';
 
 const PointManagement: React.FC = () => {
+  const [tabIndex, setTabIndex] = useState(0);
   const [
     isReadyToDistribute,
     selectedEstablishment,
@@ -51,6 +56,7 @@ const PointManagement: React.FC = () => {
     isOpenModalMissingParticipants,
     missingParticipants,
     pointsToDistribute,
+    hasSavedSettings,
   ] = [
     useSelector(selectors.getIsReadyToDistribute),
     useSelector(selectors.getSelectedEstablishment),
@@ -64,6 +70,7 @@ const PointManagement: React.FC = () => {
     useSelector(getIsOpenModalMissingParticipants),
     useSelector(getMissingParticipants),
     useSelector(selectors.getPointsToDistribute),
+    useSelector(selectors.getHasSavedSetting),
   ];
 
   const dispatch = useDispatch();
@@ -81,16 +88,28 @@ const PointManagement: React.FC = () => {
   }, [errorOnDistribute, addToast]);
 
   useEffect(() => {
-    if (finishedDistribution)
+    if (finishedDistribution && !error) {
       addToast({
         title: 'Parabéns, você finalizou a distribuição de pontos!',
         type: 'success',
       });
-  }, [finishedDistribution, addToast]);
+
+      setTimeout(() => {
+        history.push('/');
+        dispatch(cleanDistributionState());
+      }, 3000);
+    }
+  }, [finishedDistribution, addToast, error, dispatch]);
 
   useEffect(() => {
     dispatch(fetchEstablishments());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (hasSavedSettings) {
+      dispatch(setDistributionWithSavedSettings());
+    }
+  }, [dispatch, hasSavedSettings]);
 
   const handleChangeEstablishment = useCallback(
     (establishment: Establishment) => {
@@ -101,6 +120,7 @@ const PointManagement: React.FC = () => {
 
   const handleCloseMissingModal = useCallback(() => {
     dispatch(toggleIsOpenModalMissingParticipants());
+    dispatch(distributePointsCancel());
   }, [dispatch]);
 
   const handleDistributePoints = useCallback(() => {
@@ -111,6 +131,10 @@ const PointManagement: React.FC = () => {
     dispatch(distributePointsFinally(allowPartialDistribution ? Ta : All));
     dispatch(toggleIsOpenModalMissingParticipants());
   }, [dispatch, pointsToDistribute]);
+
+  const handleTabSelect = useCallback((index: number) => {
+    setTabIndex(index);
+  }, []);
 
   return (
     <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
@@ -126,7 +150,11 @@ const PointManagement: React.FC = () => {
           <Header establishmentType={selectedEstablishment.type} />
         )}
         {isReadyToDistribute && (
-          <Tabs defaultIndex={!totalPointsResaleCooperative ? 1 : 0}>
+          <Tabs
+            defaultIndex={!totalPointsResaleCooperative ? 1 : 0}
+            selectedIndex={tabIndex}
+            onSelect={handleTabSelect}
+          >
             <List>
               <Tab
                 disabled={!totalPointsResaleCooperative}
@@ -148,6 +176,7 @@ const PointManagement: React.FC = () => {
               {!!selectedEstablishment && (
                 <ResaleCooperativePointsTabContent
                   establishmentType={selectedEstablishment.type}
+                  onClickRescue={() => handleTabSelect(1)}
                 />
               )}
             </Panel>

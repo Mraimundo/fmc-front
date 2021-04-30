@@ -69,3 +69,9 @@ export const SET_TOTAL_PARTICIPANTS =
 
 export const TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS =
   '@fmc/point-management/team-awards/TOGGLE_IS_OPEN_MODAL_MISSING_PARTICIPANTS';
+
+export const SET_WAITING_SCORED_PARTICIPANTS =
+  '@fmc/point-management/team-awards/SET_WAITING_SCORED_PARTICIPANTS';
+
+export const SET_TEAM_AWARDS_EMPTY_STATE =
+  '@fmc/point-management/team-awards/SET_TEAM_AWARDS_EMPTY_STATE';
