@@ -1,12 +1,10 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/camelcase */
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { setValueAnswer } from '../../../../state/modules/answer/actions';
+import CheckboxList from './CheckBoxList';
 
-import {
-  Container,
-  GridCheckBoxContent,
-  CheckBoxContentGroup
-} from './styles';
+import { Container, GridCheckBoxContent, CheckBoxContentGroup } from './styles';
 
 interface AnswersData {
   id: number;
@@ -17,110 +15,55 @@ interface AnswersData {
 }
 
 interface Props {
-  quetion: string;
+  question: string;
   answers: AnswersData[];
-  id?: number | undefined,
+  id?: number | undefined;
+  topics: string[];
 }
 
+const InputGridCheckBox: React.FC<Props> = ({
+  question,
+  answers,
+  id,
+  topics,
+}) => {
+  const dispatch = useDispatch();
 
-const InputGridCheckBox: React.FC<Props> = ({ quetion, answers, id }) => {
-  const dispatch = useDispatch()
+  const changeHandler = useCallback(
+    (value: string, answer_id: number) => {
+      dispatch(
+        setValueAnswer({
+          value,
+          id,
+          answer_id,
+        }),
+      );
+    },
+    [dispatch, id],
+  );
 
   return (
     <Container>
       <GridCheckBoxContent>
-        <p>{quetion}</p>
+        <p>{question}</p>
         <CheckBoxContentGroup>
           <div>
-            <label className="label1">1</label>
-            <label >2</label>
-            <label >3</label>
-            <label >4</label>
-            <label >5</label>
+            {topics.map(item => (
+              <span key={item}>{item}</span>
+            ))}
           </div>
-          {
-            answers.map(answer => (
-              <div key={answer.id}>
-                <span>{answer.answer}</span>
-
-                <label htmlFor="">
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value="1"
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value="2"
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value="3"
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value="4"
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    type="checkbox"
-                    id={answer.answer}
-                    value="5"
-                    name={`${answer.survey_question_id}`}
-                    onChange={(e) => {
-                      dispatch(setValueAnswer({
-                        value: (e.target.value),
-                        id: Number(id),
-                        answer_id: Number(answer.id),
-                      }));
-                    }}
-                  />
-                </label>
-              </div>
-            ))
-          }
+          {answers.map(answer => (
+            <div key={answer.id}>
+              <span>{answer.answer}</span>
+              <CheckboxList
+                answer={answer.answer}
+                topics={topics}
+                onChangeHandler={(value: string) => {
+                  changeHandler(value, answer.id);
+                }}
+              />
+            </div>
+          ))}
         </CheckBoxContentGroup>
       </GridCheckBoxContent>
     </Container>
