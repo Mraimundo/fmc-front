@@ -27,7 +27,7 @@ const RadioList: React.FC<RadioListProps> = ({
             type="radio"
             id={`id-${topic}-${answer}`}
             value={`${topic}, ${answer}`}
-            name={`radio-${topic}-${answer}`}
+            name={`radio-${answer}`}
             onChange={changeHandler}
           />
         </label>
