@@ -92,8 +92,8 @@ const Extract: React.FC = () => {
         const trEfListEntries = transformNfEntry(efListEntries);
         setList(trEfListEntries);
 
-        setSafraName(trEfListEntries[0].safra);
-        setCoins(trEfListEntries[0].totalsafra);
+        setSafraName(trEfListEntries[0]?.safra);
+        setCoins(trEfListEntries[0]?.totalsafra);
       });
     }
     getListData();
