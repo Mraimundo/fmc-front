@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import getList from 'services/producer-extract/getAllList';
-import getNfList from 'services/nf/getAllNotas';
+import getCampaigns from 'services/producer-extract/getCampaigns';
+// import getCampaignsList from 'services/producer-extract/getCampaignById';
+// import getNfList from 'services/nf/getAllNotas';
+
 
 import StatusTable from './StatusTable';
 
@@ -40,21 +42,24 @@ interface NFData {
   };
 }
 
-interface Item {
-  FMCCOINS: string;
-  data: string;
-  descricao: string;
+interface CampaignProps {
   id: number;
-  status: number;
-  status_text: string;
-  tipoponto: string;
-}
-
-interface SafraProps {
-  safra: {
-    totalsafra: string;
-    safra: string;
-    item: Item[];
+  value: string;
+  category: string;
+  description: string;
+  point_date: string;
+  created: string;
+  campaigns: {
+    id: number;
+    title: string;
+  };
+  status: {
+    id: number;
+    name: string;
+  };
+  type: {
+    id: number;
+    name: string;
   };
 }
 
@@ -70,9 +75,10 @@ const Extract: React.FC = () => {
   const [pathKey, setPathKey] = useState('');
   const { participant, simulating } = useAuth();
 
-
-  const [List, setList] = useState<any[]>([]);
-  const [nfList, setNfList] = useState<SafraProps[]>([]);
+  // eslint-disable-next-line
+  const [List, setList] = useState<CampaignProps>({} as CampaignProps);
+  // eslint-disable-next-line
+  const [nfList, setNfList] = useState<CampaignProps[]>([]);
 
   const [coins, setCoins] = useState(0);
   const [safraName, setSafraName] = useState('');
@@ -87,30 +93,32 @@ const Extract: React.FC = () => {
 
   useEffect(() => {
     function getListData() {
-      getList().then(data => {
+      getCampaigns().then(data => {
         const efListEntries = Object.entries(data);
         const trEfListEntries = transformNfEntry(efListEntries);
         setList(trEfListEntries);
 
-        setSafraName(trEfListEntries[0]?.safra);
-        setCoins(trEfListEntries[0]?.totalsafra);
+        setSafraName(trEfListEntries[1]?.title);
+        setCoins(trEfListEntries[1]?.total);
       });
     }
     getListData();
   }, []);
 
-  useEffect(() => {
-    function getNfData() {
-      getNfList().then(data => {
-        if (data) {
-          const efListEntries = Object.entries(data.notas);
-          const trEfListEntries = transformNfEntry(efListEntries);
-          setNfList(trEfListEntries);
-        }
-      });
-    }
-    getNfData();
-  }, []);
+  // useEffect(() => {
+  //   function getCampaignData() {
+  //     getCampaignsList().then(data => {
+  //       if (data) {
+  //         const efListEntries = Object.entries(data);
+  //         const trEfListEntries = transformNfEntry(efListEntries);
+  //         setNfList(trEfListEntries);
+  //       }
+  //     });
+  //   }
+  //   getCampaignData();
+  // }, []);
+
+
 
   useEffect(() => {
     /// getCampaigns().then(data => setCampaigns(data));
@@ -205,9 +213,11 @@ const Extract: React.FC = () => {
           </StatusContent>
         </StatusContainer>
 
-        {List.map(safra => (
+        <ListOne />
+
+        {/* {List.map(safra => (
           <ListOne safra={safra} key={safra.safra} />
-        ))}
+        ))} */}
 
         {/* <AddNF layout="secondary" /> */}
       </Content>

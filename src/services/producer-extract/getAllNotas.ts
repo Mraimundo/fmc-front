@@ -1,11 +1,11 @@
 import { pluginApi } from 'services/api';
-import { Nf } from './interfaces';
+// import { Nf } from './interfaces';
 
-interface ApiResponse {
-  fmccoins: number;
-  notas: Nf[];
-  safra: string;
-}
+// interface ApiResponse {
+//   fmccoins: number;
+//   notas: Nf[];
+//   safra: string;
+// }
 
 export default async (): Promise<any> => {
   try {
